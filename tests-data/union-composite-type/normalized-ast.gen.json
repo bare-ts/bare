@@ -1,0 +1,119 @@
+[
+  {
+    "alias": "Composite",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "0"
+              }
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "1"
+              }
+            }
+          },
+          {
+            "tagVal": 2,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "0",
+    "exported": false,
+    "type": {
+      "tag": "map",
+      "props": {
+        "mutable": false,
+        "keyType": {
+          "tag": "string",
+          "props": {}
+        },
+        "valType": {
+          "tag": "alias",
+          "props": {
+            "alias": "3"
+          }
+        }
+      }
+    }
+  },
+  {
+    "alias": "1",
+    "exported": false,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": 4,
+        "mutable": false,
+        "valType": {
+          "tag": "alias",
+          "props": {
+            "alias": "4"
+          }
+        }
+      }
+    }
+  },
+  {
+    "alias": "2",
+    "exported": false,
+    "type": {
+      "tag": "typedArray",
+      "props": {
+        "len": 4,
+        "valTypeName": "u8"
+      }
+    }
+  },
+  {
+    "alias": "3",
+    "exported": false,
+    "type": {
+      "tag": "optional",
+      "props": {
+        "permissive": false,
+        "null": false,
+        "type": {
+          "tag": "string",
+          "props": {}
+        }
+      }
+    }
+  },
+  {
+    "alias": "4",
+    "exported": false,
+    "type": {
+      "tag": "optional",
+      "props": {
+        "permissive": false,
+        "null": false,
+        "type": {
+          "tag": "string",
+          "props": {}
+        }
+      }
+    }
+  }
+]

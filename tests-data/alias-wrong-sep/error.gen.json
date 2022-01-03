@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "alias-wrong-sep/schema.bare",
+    "offset": 12,
+    "line": 1,
+    "col": 12
+  },
+  "message": "(alias-wrong-sep/schema.bare:1:12) a type definition and its body cannot be separated by '='."
+}

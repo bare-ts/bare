@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-lowercase/schema.bare",
+    "offset": 14,
+    "line": 2,
+    "col": 13
+  },
+  "message": "(struct-lowercase/schema.bare:2:13) a user-defined type name must be in UpperCamelCase."
+}

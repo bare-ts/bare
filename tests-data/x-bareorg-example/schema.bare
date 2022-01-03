@@ -1,0 +1,44 @@
+type PublicKey data<128>
+type Time string # ISO 8601
+
+enum Department {
+  ACCOUNTING
+  ADMINISTRATION
+  CUSTOMER_SERVICE
+  DEVELOPMENT
+
+  # Reserved for the CEO
+  JSMITH = 99
+}
+
+struct Customer {
+  ame: string
+  email: string
+  address: Address
+  orders: []{
+    orderId: i64
+    quantity: i32
+  }
+  metadata: map[string]data
+}
+
+struct Employee {
+  name: string
+  email: string
+  address: Address
+  department: Department
+  hireDate: Time
+  publicKey: optional<PublicKey>
+  metadata: map[string]data
+}
+
+type Person (Customer | Employee)
+
+struct Address {
+  address: [4]string
+  city: string
+  state: string
+  country: string
+}
+
+type Message (Person = 0)

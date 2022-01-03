@@ -1,0 +1,7 @@
+struct Operation {
+    type: string
+    struct: string
+    enum: string
+    const: bool
+    bc: u8
+}

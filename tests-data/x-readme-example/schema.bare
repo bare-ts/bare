@@ -1,0 +1,20 @@
+enum Gender {
+    FEMALE
+    FLUID
+    MALE
+}
+
+struct Person {
+    name: string
+    email: string
+    gender: optional<Gender>
+}
+
+struct Organization {
+    name: string
+    email: string
+}
+
+type Contact (Person | Organization)
+
+type Message []Contact

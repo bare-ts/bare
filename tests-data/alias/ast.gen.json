@@ -1,0 +1,10 @@
+[
+  {
+    "alias": "U8Alias",
+    "exported": true,
+    "type": {
+      "tag": "u8",
+      "props": {}
+    }
+  }
+]

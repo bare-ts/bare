@@ -1,0 +1,10 @@
+[
+  {
+    "alias": "Message",
+    "exported": true,
+    "type": {
+      "tag": "u8",
+      "props": {}
+    }
+  }
+]

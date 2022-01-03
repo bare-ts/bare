@@ -1,0 +1,26 @@
+[
+  {
+    "alias": "Gender",
+    "exported": true,
+    "type": {
+      "tag": "enum",
+      "props": {
+        "useName": true,
+        "vals": [
+          {
+            "name": "FLUID",
+            "val": 0
+          },
+          {
+            "name": "MALE",
+            "val": 1
+          },
+          {
+            "name": "FEMALE",
+            "val": 2
+          }
+        ]
+      }
+    }
+  }
+]

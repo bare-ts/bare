@@ -1,0 +1,154 @@
+[
+  {
+    "alias": "Gender",
+    "exported": true,
+    "type": {
+      "tag": "enum",
+      "props": {
+        "useName": true,
+        "vals": [
+          {
+            "name": "FEMALE",
+            "val": 0
+          },
+          {
+            "name": "FLUID",
+            "val": 1
+          },
+          {
+            "name": "MALE",
+            "val": 2
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Person",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "name",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "email",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "gender",
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "0"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Organization",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "name",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "email",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Contact",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Person"
+              }
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Organization"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Message",
+    "exported": true,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": null,
+        "mutable": false,
+        "valType": {
+          "tag": "alias",
+          "props": {
+            "alias": "Contact"
+          }
+        }
+      }
+    }
+  },
+  {
+    "alias": "0",
+    "exported": false,
+    "type": {
+      "tag": "optional",
+      "props": {
+        "permissive": false,
+        "null": false,
+        "type": {
+          "tag": "alias",
+          "props": {
+            "alias": "Gender"
+          }
+        }
+      }
+    }
+  }
+]

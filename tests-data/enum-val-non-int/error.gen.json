@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-val-non-int/schema.bare",
+    "offset": 28,
+    "line": 3,
+    "col": 13
+  },
+  "message": "(enum-val-non-int/schema.bare:3:13) A enum value must be an integer >= 0."
+}

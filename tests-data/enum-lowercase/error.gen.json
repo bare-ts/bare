@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-lowercase/schema.bare",
+    "offset": 12,
+    "line": 2,
+    "col": 11
+  },
+  "message": "(enum-lowercase/schema.bare:2:11) a user-defined type name must be in UpperCamelCase."
+}

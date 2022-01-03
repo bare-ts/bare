@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "union-tag-unsorted/schema.bare",
+    "offset": 44,
+    "line": 1,
+    "col": 44
+  },
+  "message": "(union-tag-unsorted/schema.bare:1:44) A union tag must be greater than the previous one."
+}

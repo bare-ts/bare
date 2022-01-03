@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-prop-uppercase/schema.bare",
+    "offset": 25,
+    "line": 3,
+    "col": 8
+  },
+  "message": "(struct-prop-uppercase/schema.bare:3:8) a field name must be in lowerCamelCase."
+}

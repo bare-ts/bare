@@ -1,0 +1,51 @@
+[
+  {
+    "alias": "MultiArray",
+    "exported": true,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": null,
+        "mutable": false,
+        "valType": {
+          "tag": "alias",
+          "props": {
+            "alias": "0"
+          }
+        }
+      }
+    }
+  },
+  {
+    "alias": "0",
+    "exported": false,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": null,
+        "mutable": false,
+        "valType": {
+          "tag": "alias",
+          "props": {
+            "alias": "1"
+          }
+        }
+      }
+    }
+  },
+  {
+    "alias": "1",
+    "exported": false,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": null,
+        "mutable": false,
+        "valType": {
+          "tag": "string",
+          "props": {}
+        }
+      }
+    }
+  }
+]

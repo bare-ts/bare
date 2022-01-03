@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "union-tag-hex/schema.bare",
+    "offset": 26,
+    "line": 1,
+    "col": 26
+  },
+  "message": "(union-tag-hex/schema.bare:1:26) A union tag must be an integer >= 0."
+}

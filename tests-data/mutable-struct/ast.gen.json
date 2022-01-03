@@ -1,0 +1,29 @@
+[
+  {
+    "alias": "Person",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": true,
+            "name": "name",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": true,
+            "name": "age",
+            "type": {
+              "tag": "u8",
+              "props": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+]

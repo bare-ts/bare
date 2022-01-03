@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-empty/schema.bare",
+    "offset": 17,
+    "line": 2,
+    "col": 16
+  },
+  "message": "(struct-empty/schema.bare:2:16) Declaration of a struct must include at least one member."
+}

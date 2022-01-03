@@ -1,0 +1,18 @@
+[
+  {
+    "alias": "I64",
+    "exported": true,
+    "type": {
+      "tag": "i64Safe",
+      "props": {}
+    }
+  },
+  {
+    "alias": "U64",
+    "exported": true,
+    "type": {
+      "tag": "u64Safe",
+      "props": {}
+    }
+  }
+]

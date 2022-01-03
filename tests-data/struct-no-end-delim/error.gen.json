@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-no-end-delim/schema.bare",
+    "offset": 46,
+    "line": 5,
+    "col": 0
+  },
+  "message": "(struct-no-end-delim/schema.bare:5:0) Declaration of a struct body must end with '}'."
+}

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-val-lowercase/schema.bare",
+    "offset": 24,
+    "line": 3,
+    "col": 9
+  },
+  "message": "(enum-val-lowercase/schema.bare:3:9) An enum member name must be in UPPER_SNAKE_CASE."
+}

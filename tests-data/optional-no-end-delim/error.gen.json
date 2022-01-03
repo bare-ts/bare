@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "optional-no-end-delim/schema.bare",
+    "offset": 30,
+    "line": 3,
+    "col": 0
+  },
+  "message": "(optional-no-end-delim/schema.bare:3:0) 'optional' must end with '>'."
+}

@@ -1,0 +1,338 @@
+[
+  {
+    "alias": "PublicKey",
+    "exported": true,
+    "type": {
+      "tag": "data",
+      "props": {
+        "len": 128
+      }
+    }
+  },
+  {
+    "alias": "Time",
+    "exported": true,
+    "type": {
+      "tag": "string",
+      "props": {}
+    }
+  },
+  {
+    "alias": "Department",
+    "exported": true,
+    "type": {
+      "tag": "enum",
+      "props": {
+        "useName": true,
+        "vals": [
+          {
+            "name": "ACCOUNTING",
+            "val": 0
+          },
+          {
+            "name": "ADMINISTRATION",
+            "val": 1
+          },
+          {
+            "name": "CUSTOMER_SERVICE",
+            "val": 2
+          },
+          {
+            "name": "DEVELOPMENT",
+            "val": 3
+          },
+          {
+            "name": "JSMITH",
+            "val": 99
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Customer",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "ame",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "email",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "address",
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Address"
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "orders",
+            "type": {
+              "tag": "array",
+              "props": {
+                "len": null,
+                "mutable": false,
+                "valType": {
+                  "tag": "struct",
+                  "props": {
+                    "fields": [
+                      {
+                        "mutable": false,
+                        "name": "orderId",
+                        "type": {
+                          "tag": "i64",
+                          "props": {}
+                        }
+                      },
+                      {
+                        "mutable": false,
+                        "name": "quantity",
+                        "type": {
+                          "tag": "i32",
+                          "props": {}
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "metadata",
+            "type": {
+              "tag": "map",
+              "props": {
+                "keyType": {
+                  "tag": "string",
+                  "props": {}
+                },
+                "mutable": false,
+                "valType": {
+                  "tag": "data",
+                  "props": {
+                    "len": null
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Employee",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "name",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "email",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "address",
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Address"
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "department",
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Department"
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "hireDate",
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Time"
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "publicKey",
+            "type": {
+              "tag": "optional",
+              "props": {
+                "permissive": false,
+                "null": false,
+                "type": {
+                  "tag": "alias",
+                  "props": {
+                    "alias": "PublicKey"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "metadata",
+            "type": {
+              "tag": "map",
+              "props": {
+                "keyType": {
+                  "tag": "string",
+                  "props": {}
+                },
+                "mutable": false,
+                "valType": {
+                  "tag": "data",
+                  "props": {
+                    "len": null
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Person",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Customer"
+              }
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Employee"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Address",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "address",
+            "type": {
+              "tag": "array",
+              "props": {
+                "len": 4,
+                "mutable": false,
+                "valType": {
+                  "tag": "string",
+                  "props": {}
+                }
+              }
+            }
+          },
+          {
+            "mutable": false,
+            "name": "city",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "state",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "country",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "alias": "Message",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Person"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+]

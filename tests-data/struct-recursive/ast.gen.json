@@ -1,0 +1,37 @@
+[
+  {
+    "alias": "Node",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "children",
+            "type": {
+              "tag": "optional",
+              "props": {
+                "permissive": false,
+                "null": false,
+                "type": {
+                  "tag": "array",
+                  "props": {
+                    "len": null,
+                    "mutable": false,
+                    "valType": {
+                      "tag": "alias",
+                      "props": {
+                        "alias": "Node"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+]

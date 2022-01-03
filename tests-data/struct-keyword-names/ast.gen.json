@@ -1,0 +1,53 @@
+[
+  {
+    "alias": "Operation",
+    "exported": true,
+    "type": {
+      "tag": "struct",
+      "props": {
+        "fields": [
+          {
+            "mutable": false,
+            "name": "type",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "struct",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "enum",
+            "type": {
+              "tag": "string",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "const",
+            "type": {
+              "tag": "bool",
+              "props": {}
+            }
+          },
+          {
+            "mutable": false,
+            "name": "bc",
+            "type": {
+              "tag": "u8",
+              "props": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+]

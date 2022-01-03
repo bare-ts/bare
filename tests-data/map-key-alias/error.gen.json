@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "map-key-alias/schema.bare",
+    "offset": 43,
+    "line": 3,
+    "col": 22
+  },
+  "message": "(map-key-alias/schema.bare:3:22) The key type of a map type must be a type among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint."
+}

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "fixed-data-no-end-delim/schema.bare",
+    "offset": 20,
+    "line": 2,
+    "col": 0
+  },
+  "message": "(fixed-data-no-end-delim/schema.bare:2:0) Data length must be enclosed by '<>'."
+}

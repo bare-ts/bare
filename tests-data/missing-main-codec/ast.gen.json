@@ -1,0 +1,10 @@
+[
+  {
+    "alias": "Other",
+    "exported": true,
+    "type": {
+      "tag": "string",
+      "props": {}
+    }
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-no-end-delim/schema.bare",
+    "offset": 45,
+    "line": 6,
+    "col": 0
+  },
+  "message": "(enum-no-end-delim/schema.bare:6:0) Declaration of an enum body must end with '}'."
+}

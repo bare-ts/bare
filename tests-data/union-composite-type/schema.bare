@@ -1,0 +1,1 @@
+type Composite (map[string]optional<string> | [4]optional<string> | [4]u8)

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "map-no-end-key-delim/schema.bare",
+    "offset": 27,
+    "line": 1,
+    "col": 27
+  },
+  "message": "(map-no-end-key-delim/schema.bare:1:27) The key type of a map type must be enclosed by '[]'."
+}

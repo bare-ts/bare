@@ -1,0 +1,20 @@
+[
+  {
+    "alias": "Dict",
+    "exported": true,
+    "type": {
+      "tag": "map",
+      "props": {
+        "keyType": {
+          "tag": "string",
+          "props": {}
+        },
+        "mutable": true,
+        "valType": {
+          "tag": "string",
+          "props": {}
+        }
+      }
+    }
+  }
+]

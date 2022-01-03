@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // https://node.green/#ES2019
+    // https://kangax.github.io/compat-table/es2016plus
+    "lib": ["ES2019"],
+    "moduleResolution": "node",
+    "module": "ES2020",
+    "target": "ES2019",
+
+    "noEmit": true,
+
+    "sourceMap": true,
+
+    "importHelpers": true,
+    "newLine": "lf",
+    "stripInternal": true,
+    "useDefineForClassFields": true,
+    "resolveJsonModule": true,
+
+    "esModuleInterop": true,
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "preserveValueImports": true,
+
+    "allowUnreachableCode": false,
+    "checkJs": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "strict": true
+  }
+}

@@ -1,0 +1,6 @@
+
+enum Gender {
+    fluid
+    male
+    female
+}

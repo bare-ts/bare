@@ -1,0 +1,69 @@
+[
+  {
+    "alias": "Composite",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "map",
+              "props": {
+                "keyType": {
+                  "tag": "string",
+                  "props": {}
+                },
+                "mutable": false,
+                "valType": {
+                  "tag": "optional",
+                  "props": {
+                    "permissive": false,
+                    "null": false,
+                    "type": {
+                      "tag": "string",
+                      "props": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "array",
+              "props": {
+                "len": 4,
+                "mutable": false,
+                "valType": {
+                  "tag": "optional",
+                  "props": {
+                    "permissive": false,
+                    "null": false,
+                    "type": {
+                      "tag": "string",
+                      "props": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "tagVal": 2,
+            "type": {
+              "tag": "typedArray",
+              "props": {
+                "len": 4,
+                "valTypeName": "u8"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+]

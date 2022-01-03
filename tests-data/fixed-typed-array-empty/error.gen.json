@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "fixed-typed-array-empty/schema.bare",
+    "offset": 18,
+    "line": 1,
+    "col": 18
+  },
+  "message": "(fixed-typed-array-empty/schema.bare:1:18) Array length must be an integer > 0."
+}

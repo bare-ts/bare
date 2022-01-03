@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-unsorted-implicit/schema.bare",
+    "offset": 48,
+    "line": 5,
+    "col": 14
+  },
+  "message": "(enum-unsorted-implicit/schema.bare:5:14) A enum value must be greater than the previous one."
+}

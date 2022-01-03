@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "empty-schema/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 0
+  },
+  "message": "(empty-schema/schema.bare:1:0) A schema cannot be empty."
+}

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "alias-missing-type/schema.bare",
+    "offset": 10,
+    "line": 1,
+    "col": 10
+  },
+  "message": "(alias-missing-type/schema.bare:1:10) A type is expected."
+}

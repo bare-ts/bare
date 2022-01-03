@@ -1,0 +1,17 @@
+[
+  {
+    "alias": "U64Array",
+    "exported": true,
+    "type": {
+      "tag": "array",
+      "props": {
+        "len": null,
+        "mutable": false,
+        "valType": {
+          "tag": "u64Safe",
+          "props": {}
+        }
+      }
+    }
+  }
+]

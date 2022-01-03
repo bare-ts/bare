@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "duplicated-alias/schema.bare",
+    "offset": 23,
+    "line": 2,
+    "col": 4
+  },
+  "message": "(duplicated-alias/schema.bare:2:4) Alias 'Duplicated' is already used."
+}

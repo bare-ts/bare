@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "union-missing-type/schema.bare",
+    "offset": 27,
+    "line": 1,
+    "col": 27
+  },
+  "message": "(union-missing-type/schema.bare:1:27) A type delimiter '|' must be followed by a type."
+}

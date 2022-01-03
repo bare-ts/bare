@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-no-prop-type-sep/schema.bare",
+    "offset": 32,
+    "line": 3,
+    "col": 15
+  },
+  "message": "(struct-no-prop-type-sep/schema.bare:3:15) field name and field type must be separated by ':'."
+}

@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "union-empty/schema.bare",
+    "offset": 18,
+    "line": 1,
+    "col": 18
+  },
+  "message": "(union-empty/schema.bare:1:18) Declaration of a union type must include at least one type."
+}

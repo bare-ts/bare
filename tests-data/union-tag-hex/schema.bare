@@ -1,0 +1,1 @@
+type UnsignedInt (u8 = 0x0 | u16 = 0x1 | u32 = 0x2 | u64 = 0x3)

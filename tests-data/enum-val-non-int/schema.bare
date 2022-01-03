@@ -1,0 +1,6 @@
+
+enum Gender {
+    FLUID = F
+    MALE = M
+    FEMALE = F
+}

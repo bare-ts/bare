@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "alias-wrong-keyword/schema.bare",
+    "offset": 9,
+    "line": 1,
+    "col": 9
+  },
+  "message": "(alias-wrong-keyword/schema.bare:1:9) a type definition must start with keyword 'enum', 'struct', or 'type'."
+}

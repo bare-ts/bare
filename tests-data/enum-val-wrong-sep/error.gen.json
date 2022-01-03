@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-val-wrong-sep/schema.bare",
+    "offset": 25,
+    "line": 3,
+    "col": 10
+  },
+  "message": "(enum-val-wrong-sep/schema.bare:3:10) enum value cannot be separated by ','."
+}

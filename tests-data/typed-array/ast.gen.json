@@ -1,0 +1,13 @@
+[
+  {
+    "alias": "U8Array",
+    "exported": true,
+    "type": {
+      "tag": "typedArray",
+      "props": {
+        "len": null,
+        "valTypeName": "u8"
+      }
+    }
+  }
+]

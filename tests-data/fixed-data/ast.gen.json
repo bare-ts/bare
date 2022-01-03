@@ -1,0 +1,12 @@
+[
+  {
+    "alias": "U8Alias",
+    "exported": true,
+    "type": {
+      "tag": "data",
+      "props": {
+        "len": 4
+      }
+    }
+  }
+]

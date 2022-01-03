@@ -1,0 +1,17 @@
+[
+  {
+    "alias": "MaybeBool",
+    "exported": true,
+    "type": {
+      "tag": "optional",
+      "props": {
+        "permissive": true,
+        "null": false,
+        "type": {
+          "tag": "bool",
+          "props": {}
+        }
+      }
+    }
+  }
+]
