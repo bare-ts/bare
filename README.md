@@ -1,8 +1,8 @@
 # bare-ts
 
 [![CI status][ci-img]][ci-url]
-[![NPM version][coveralls-img]][coveralls-url]
-[![minified and gzipped size][bundlephobia-img]][bundlephobia-url]
+[![Coverage percentage][coveralls-img]][coveralls-url]
+[![minified and zipped size][bundlephobia-img]][bundlephobia-url]
 [![NPM version][npm-img]][npm-url]
 
 [BARE][bare] (Binary Application Record Encoding) is a schema-based binary format that favors compactness and simplicity.
@@ -95,9 +95,6 @@ Bare propose a simple way to support backward compatibility: the root type of a 
 
 
 ## Why bare-ts?
-
-The compact size of messages and the simplicity of the binary format makes BARE a perfect fit for data exchange over Internet.
-[bare-ts](#) provides a TypeScript implementation of the BARE specification.
 
 **Pragmatic error reporting**: [bare-ts](#) distinguishes errors that can be recovered and errors that signal the misuse of the API (violation of preconditions).
 Only the decoders may emit recoverable errors (`BareError`) and provide enough information to understand why the message is malformed.
