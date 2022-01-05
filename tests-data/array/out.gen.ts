@@ -1,4 +1,3 @@
-import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
 export type f32 = number
@@ -21,7 +20,8 @@ export type uintSafe = number
 export type U8Array = readonly (u8)[]
 
 export function decodeU8Array(bc: bare.ByteCursor): U8Array {
-    const len = 4
+    const len = bare.decodeUintSafe(bc)
+    if (len === 0) return []
     const valDecoder = bare.decodeU8
     const result = [valDecoder(bc)]
     for (let i = 1; i < len; i++) {
@@ -31,8 +31,8 @@ export function decodeU8Array(bc: bare.ByteCursor): U8Array {
 }
 
 export function encodeU8Array(bc: bare.ByteCursor, x: U8Array): void {
-    assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    bare.encodeUintSafe(bc, x.length)
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeU8)(bc, x[i])
     }
 }

@@ -291,7 +291,7 @@ function encode0(bc: bare.ByteCursor, x: readonly ({
     readonly quantity: i32
 })[]): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode5)(bc, x[i])
     }
 }
@@ -367,7 +367,7 @@ function decode4(bc: bare.ByteCursor): readonly (string)[] {
 
 function encode4(bc: bare.ByteCursor, x: readonly (string)[]): void {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeString)(bc, x[i])
     }
 }

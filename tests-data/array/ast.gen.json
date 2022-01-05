@@ -5,7 +5,7 @@
     "type": {
       "tag": "array",
       "props": {
-        "len": 4,
+        "len": null,
         "mutable": false,
         "valType": {
           "tag": "u8",

@@ -152,7 +152,7 @@ export function decodeMessage(bc: bare.ByteCursor): Message {
 
 export function encodeMessage(bc: bare.ByteCursor, x: Message): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encodeContact)(bc, x[i])
     }
 }

@@ -14,7 +14,7 @@ export function decodeU64Array(bc) {
 
 export function encodeU64Array(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeU64Safe)(bc, x[i])
     }
 }

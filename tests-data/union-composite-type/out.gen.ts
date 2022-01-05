@@ -97,7 +97,7 @@ function decode1(bc: bare.ByteCursor): readonly (string | undefined)[] {
 
 function encode1(bc: bare.ByteCursor, x: readonly (string | undefined)[]): void {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode4)(bc, x[i])
     }
 }

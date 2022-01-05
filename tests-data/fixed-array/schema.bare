@@ -1,1 +1,1 @@
-type U8Array []u8
+type U8Array [4]u8

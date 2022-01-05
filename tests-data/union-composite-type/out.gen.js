@@ -76,7 +76,7 @@ function decode1(bc) {
 
 function encode1(bc, x) {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode4)(bc, x[i])
     }
 }

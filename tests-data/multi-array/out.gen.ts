@@ -32,7 +32,7 @@ export function decodeMultiArray(bc: bare.ByteCursor): MultiArray {
 
 export function encodeMultiArray(bc: bare.ByteCursor, x: MultiArray): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode0)(bc, x[i])
     }
 }
@@ -50,7 +50,7 @@ function decode0(bc: bare.ByteCursor): readonly (readonly (string)[])[] {
 
 function encode0(bc: bare.ByteCursor, x: readonly (readonly (string)[])[]): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode1)(bc, x[i])
     }
 }
@@ -68,7 +68,7 @@ function decode1(bc: bare.ByteCursor): readonly (string)[] {
 
 function encode1(bc: bare.ByteCursor, x: readonly (string)[]): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeString)(bc, x[i])
     }
 }

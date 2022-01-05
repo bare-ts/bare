@@ -14,7 +14,7 @@ export function decodeMultiArray(bc) {
 
 export function encodeMultiArray(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode0)(bc, x[i])
     }
 }
@@ -32,7 +32,7 @@ function decode0(bc) {
 
 function encode0(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode1)(bc, x[i])
     }
 }
@@ -50,7 +50,7 @@ function decode1(bc) {
 
 function encode1(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeString)(bc, x[i])
     }
 }

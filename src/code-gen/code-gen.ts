@@ -728,7 +728,7 @@ function genArrayEncoder(g: CodeGen, type: BareArray, id: string): string {
             : `bare.encodeUintSafe(bc, x.length)`
     return unindent(`${indent(genEncoderHead(g, type, id))} {
         ${lenEncoding}
-        for (let i = 1; i < x.length; i++) {
+        for (let i = 0; i < x.length; i++) {
             (${indent(genEncoder(g, type.props.valType), 2)})(bc, x[i])
         }
     }`)

@@ -14,7 +14,7 @@ export function decodeU8Array(bc) {
 
 export function encodeU8Array(bc, x) {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeU8)(bc, x[i])
     }
 }

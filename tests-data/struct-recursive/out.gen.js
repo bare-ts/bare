@@ -38,7 +38,7 @@ function decode1(bc) {
 
 function encode1(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encodeNode)(bc, x[i])
     }
 }

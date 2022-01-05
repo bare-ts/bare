@@ -119,7 +119,7 @@ export function decodeMessage(bc) {
 
 export function encodeMessage(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encodeContact)(bc, x[i])
     }
 }

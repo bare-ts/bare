@@ -32,7 +32,7 @@ export function decodeU8Array(bc: bare.ByteCursor): U8Array {
 
 export function encodeU8Array(bc: bare.ByteCursor, x: U8Array): void {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeU8)(bc, x[i])
     }
 }

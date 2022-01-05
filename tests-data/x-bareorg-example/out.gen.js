@@ -230,7 +230,7 @@ function decode0(bc) {
 
 function encode0(bc, x) {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encode5)(bc, x[i])
     }
 }
@@ -306,7 +306,7 @@ function decode4(bc) {
 
 function encode4(bc, x) {
     assert(x.length === 4, "Unmatched length")
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (bare.encodeString)(bc, x[i])
     }
 }

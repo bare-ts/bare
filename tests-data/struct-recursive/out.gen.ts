@@ -58,7 +58,7 @@ function decode1(bc: bare.ByteCursor): readonly (Node)[] {
 
 function encode1(bc: bare.ByteCursor, x: readonly (Node)[]): void {
     bare.encodeUintSafe(bc, x.length)
-    for (let i = 1; i < x.length; i++) {
+    for (let i = 0; i < x.length; i++) {
         (encodeNode)(bc, x[i])
     }
 }
