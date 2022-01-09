@@ -1,5 +1,9 @@
 # Changelog
 
+This project adheres to [Semantic Versioning][semver].
+
+## Unreleased
+
 ## 0.1.1 (2020-01-05)
 
 * Fix array encoders
@@ -9,3 +13,6 @@
 ## 0.1.0 (2020-01-03)
 
 * BARE schema compiler supports all types
+
+
+[semver]: https://semver.org/spec/v2.0.0.html
