@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Forbid bare schema in which an enum have several members with the same name
+
+    The following schema is now invalid:
+
+    ```bare
+    enum Gender {
+        FLUID
+        FEMALE
+        MALE
+        FLUID
+    }
+    ```
+
 * Forbid bare schema in which a struct have several fields with the same name
 
     The following schema is now invalid:

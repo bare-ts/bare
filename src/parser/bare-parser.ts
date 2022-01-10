@@ -341,6 +341,7 @@ function parseEnumBody(p: BareParser): BareType {
     }
     p.lex.forth()
     const vals: EnumVal[] = []
+    const names = new Set()
     let val = 0
     while (ALL_CASE_PATTERN.test(p.lex.token())) {
         const name = p.lex.token()
@@ -350,6 +351,13 @@ function parseEnumBody(p: BareParser): BareType {
                 p.lex.location()
             )
         }
+        if (names.has(name)) {
+            throw new BareParserError(
+                "An enum member name must be unique.",
+                p.lex.location()
+            )
+        }
+        names.add(name)
         p.lex.forth()
         if (p.lex.token() === "=") {
             p.lex.forth()
