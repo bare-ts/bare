@@ -28,6 +28,9 @@ This project adheres to [Semantic Versioning][semver].
     }
     ```
 
+* Better diagnostics when semicolons are used to separate enum or
+    struct members
+
 ## 0.1.1 (2020-01-05)
 
 * Fix array encoders

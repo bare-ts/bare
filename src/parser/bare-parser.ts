@@ -379,9 +379,9 @@ function parseEnumBody(p: BareParser): BareType {
         }
         vals.push({ name, val })
         val++
-        if (p.lex.token() === ",") {
+        if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new BareParserError(
-                "enum value cannot be separated by ','.",
+                `enum value cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }
@@ -437,9 +437,9 @@ function parseStructBody(p: BareParser): BareType {
         p.lex.forth()
         const type = parseTypeCheckUnion(p)
         fields.push({ mutable: p.config.useMutable, name, type })
-        if (p.lex.token() === ",") {
+        if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new BareParserError(
-                "struct fields cannot be separated by ','.",
+                `struct fields cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }

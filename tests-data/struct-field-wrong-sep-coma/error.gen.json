@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "struct-field-wrong-sep-coma/schema.bare",
+    "offset": 34,
+    "line": 3,
+    "col": 17
+  },
+  "message": "(struct-field-wrong-sep-coma/schema.bare:3:17) struct fields cannot be separated by ','."
+}
