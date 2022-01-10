@@ -403,6 +403,7 @@ function parseStructBody(p: BareParser): BareType {
     }
     p.lex.forth()
     const fields: StructField[] = []
+    const names = new Set()
     while (ALL_CASE_PATTERN.test(p.lex.token())) {
         const name = p.lex.token()
         if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
@@ -411,6 +412,13 @@ function parseStructBody(p: BareParser): BareType {
                 p.lex.location()
             )
         }
+        if (names.has(name)) {
+            throw new BareParserError(
+                "a field name must be unique.",
+                p.lex.location()
+            )
+        }
+        names.add(name)
         p.lex.forth()
         if (p.lex.token() !== ":") {
             throw new BareParserError(

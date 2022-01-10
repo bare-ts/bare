@@ -4,6 +4,17 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Forbid bare schema in which a struct have several fields with the same name
+
+    The following schema is now invalid:
+
+    ```bare
+    struct Person {
+        name: string
+        name: string
+    }
+    ```
+
 ## 0.1.1 (2020-01-05)
 
 * Fix array encoders
