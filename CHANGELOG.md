@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Add @bare-ts/lib as peer dependency
+
+    This enables to inform the user of @bare-ts/tools which version of
+    @bare-ts/lib is expected.
+
 * Forbid bare schema in which an enum have several members with the same name
 
     The following schema is now invalid:

@@ -70,5 +70,8 @@
   },
   "dependencies": {
     "commander": "^8.3.0"
+  },
+  "peerDependencies": {
+    "@bare-ts/lib": "~0.2.0"
   }
 }
