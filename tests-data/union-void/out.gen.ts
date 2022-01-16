@@ -24,28 +24,28 @@ export type UnsignedInt =
     | { readonly tag: 3; readonly val: u64Safe }
     | { readonly tag: 4; readonly val: undefined }
 
-export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
+export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (bare.decodeU8)(bc)
+            const val = (bare.readU8)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (bare.decodeU16)(bc)
+            const val = (bare.readU16)(bc)
             return { tag, val }
         }
         case 2: {
-            const val = (bare.decodeU32)(bc)
+            const val = (bare.readU32)(bc)
             return { tag, val }
         }
         case 3: {
-            const val = (bare.decodeU64Safe)(bc)
+            const val = (bare.readU64Safe)(bc)
             return { tag, val }
         }
         case 4: {
-            const val = (bare.decodeVoid)(bc)
+            const val = (bare.readVoid)(bc)
             return { tag, val }
         }
         default: {
@@ -55,24 +55,24 @@ export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     }
 }
 
-export function encodeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
+export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (bare.encodeU8)(bc, x.val)
+            (bare.writeU8)(bc, x.val)
             break
         case 1:
-            (bare.encodeU16)(bc, x.val)
+            (bare.writeU16)(bc, x.val)
             break
         case 2:
-            (bare.encodeU32)(bc, x.val)
+            (bare.writeU32)(bc, x.val)
             break
         case 3:
-            (bare.encodeU64Safe)(bc, x.val)
+            (bare.writeU64Safe)(bc, x.val)
             break
         case 4:
-            (bare.encodeVoid)(bc, x.val)
+            (bare.writeVoid)(bc, x.val)
             break
     }
 }

@@ -8,7 +8,7 @@ import {
     parse,
 } from "@bare-ts/tools"
 import { Argument, Command } from "commander"
-import fs from "node:fs"
+import * as fs from "node:fs"
 import { relative, resolve } from "node:path"
 
 const program = new Command().name("bare-ast").version("1.0.0")

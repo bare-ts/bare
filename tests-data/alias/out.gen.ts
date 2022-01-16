@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type U8Alias = u8
 
-export const decodeU8Alias = bare.decodeU8
+export const readU8Alias = bare.readU8
 
-export const encodeU8Alias = bare.encodeU8
+export const writeU8Alias = bare.writeU8

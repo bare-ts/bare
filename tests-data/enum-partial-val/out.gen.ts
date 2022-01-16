@@ -23,9 +23,9 @@ export enum Gender {
     FEMALE = "FEMALE",
 }
 
-export function decodeGender(bc: bare.ByteCursor): Gender {
+export function readGender(bc: bare.ByteCursor): Gender {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Gender.FLUID
@@ -40,18 +40,18 @@ export function decodeGender(bc: bare.ByteCursor): Gender {
     }
 }
 
-export function encodeGender(bc: bare.ByteCursor, x: Gender): void {
+export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
         case Gender.FLUID: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Gender.MALE: {
-            bare.encodeU8(bc, 3)
+            bare.writeU8(bc, 3)
             break
         }
         case Gender.FEMALE: {
-            bare.encodeU8(bc, 4)
+            bare.writeU8(bc, 4)
             break
         }
     }

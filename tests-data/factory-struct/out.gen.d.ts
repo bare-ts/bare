@@ -20,6 +20,6 @@ export type uintSafe = number
 
 export type Person = ReturnType<typeof ext.Person>
 
-export function decodePerson(bc: bare.ByteCursor): Person
+export function readPerson(bc: bare.ByteCursor): Person
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void
+export function writePerson(bc: bare.ByteCursor, x: Person): void

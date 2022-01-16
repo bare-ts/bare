@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type U8Alias = ArrayBuffer
 
-export function decodeU8Alias(bc: bare.ByteCursor): U8Alias
+export function readU8Alias(bc: bare.ByteCursor): U8Alias
 
-export function encodeU8Alias(bc: bare.ByteCursor, x: U8Alias): void
+export function writeU8Alias(bc: bare.ByteCursor, x: U8Alias): void

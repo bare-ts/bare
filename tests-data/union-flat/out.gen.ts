@@ -24,18 +24,18 @@ export type UnsignedInt =
     | u32
     | u64
 
-export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
+export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return (bare.decodeU8)(bc)
+            return (bare.readU8)(bc)
         case 1:
-            return (bare.decodeU16)(bc)
+            return (bare.readU16)(bc)
         case 2:
-            return (bare.decodeU32)(bc)
+            return (bare.readU32)(bc)
         case 3:
-            return (bare.decodeU64)(bc)
+            return (bare.readU64)(bc)
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -43,21 +43,21 @@ export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     }
 }
 
-export function encodeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
+export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
     const tag = ext.tagUnsignedInt(x);
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (bare.encodeU8)(bc, x as any)
+            (bare.writeU8)(bc, x as any)
             break
         case 1:
-            (bare.encodeU16)(bc, x as any)
+            (bare.writeU16)(bc, x as any)
             break
         case 2:
-            (bare.encodeU32)(bc, x as any)
+            (bare.writeU32)(bc, x as any)
             break
         case 3:
-            (bare.encodeU64)(bc, x as any)
+            (bare.writeU64)(bc, x as any)
             break
     }
 }

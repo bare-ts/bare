@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Argument, Command, Option } from "commander"
-import fs from "node:fs"
+import * as fs from "node:fs"
 import {
     type BareParserConfig,
     type CodeGenConfig,
@@ -77,7 +77,7 @@ program
     )
     .option(
         "--main <aliases...>",
-        "space-separated list of types used to pack and unpack messages"
+        "space-separated list of types used to encode and decode messages"
     )
     .option("--import-config", "import custom runtime config")
     .option("--import-factory", "import custom struct factory")

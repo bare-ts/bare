@@ -2,18 +2,18 @@ import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
 
-export function decodeUnsignedInt(bc) {
+export function readUnsignedInt(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return (bare.decodeU8)(bc)
+            return (bare.readU8)(bc)
         case 1:
-            return (bare.decodeU16)(bc)
+            return (bare.readU16)(bc)
         case 2:
-            return (bare.decodeU32)(bc)
+            return (bare.readU32)(bc)
         case 3:
-            return (bare.decodeU64)(bc)
+            return (bare.readU64)(bc)
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -21,21 +21,21 @@ export function decodeUnsignedInt(bc) {
     }
 }
 
-export function encodeUnsignedInt(bc, x) {
+export function writeUnsignedInt(bc, x) {
     const tag = ext.tagUnsignedInt(x);
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (bare.encodeU8)(bc, x)
+            (bare.writeU8)(bc, x)
             break
         case 1:
-            (bare.encodeU16)(bc, x)
+            (bare.writeU16)(bc, x)
             break
         case 2:
-            (bare.encodeU32)(bc, x)
+            (bare.writeU32)(bc, x)
             break
         case 3:
-            (bare.encodeU64)(bc, x)
+            (bare.writeU64)(bc, x)
             break
     }
 }

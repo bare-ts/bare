@@ -1,10 +1,12 @@
+import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeU8Alias(bc) {
-    return bare.decodeFixedData(bc, 4)
+export function readU8Alias(bc) {
+    return bare.readFixedData(bc, 4)
 }
 
-export function encodeU8Alias(bc, x) {
-    bare.encodeFixedData(bc, x, 4)
+export function writeU8Alias(bc, x) {
+    assert(x.byteLength === 4)
+    bare.writeFixedData(bc, x)
 }

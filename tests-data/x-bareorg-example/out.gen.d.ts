@@ -19,15 +19,15 @@ export type uintSafe = number
 
 export type PublicKey = ArrayBuffer
 
-export function decodePublicKey(bc: bare.ByteCursor): PublicKey
+export function readPublicKey(bc: bare.ByteCursor): PublicKey
 
-export function encodePublicKey(bc: bare.ByteCursor, x: PublicKey): void
+export function writePublicKey(bc: bare.ByteCursor, x: PublicKey): void
 
 export type Time = string
 
-export function decodeTime(bc: bare.ByteCursor): Time
+export function readTime(bc: bare.ByteCursor): Time
 
-export function encodeTime(bc: bare.ByteCursor, x: Time): void
+export function writeTime(bc: bare.ByteCursor, x: Time): void
 
 export enum Department {
     ACCOUNTING = "ACCOUNTING",
@@ -37,9 +37,9 @@ export enum Department {
     JSMITH = "JSMITH",
 }
 
-export function decodeDepartment(bc: bare.ByteCursor): Department
+export function readDepartment(bc: bare.ByteCursor): Department
 
-export function encodeDepartment(bc: bare.ByteCursor, x: Department): void
+export function writeDepartment(bc: bare.ByteCursor, x: Department): void
 
 export interface Customer {
     readonly ame: string
@@ -52,9 +52,9 @@ export interface Customer {
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
-export function decodeCustomer(bc: bare.ByteCursor): Customer
+export function readCustomer(bc: bare.ByteCursor): Customer
 
-export function encodeCustomer(bc: bare.ByteCursor, x: Customer): void
+export function writeCustomer(bc: bare.ByteCursor, x: Customer): void
 
 export interface Employee {
     readonly name: string
@@ -66,17 +66,17 @@ export interface Employee {
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
-export function decodeEmployee(bc: bare.ByteCursor): Employee
+export function readEmployee(bc: bare.ByteCursor): Employee
 
-export function encodeEmployee(bc: bare.ByteCursor, x: Employee): void
+export function writeEmployee(bc: bare.ByteCursor, x: Employee): void
 
 export type Person = 
     | { readonly tag: 0; readonly val: Customer }
     | { readonly tag: 1; readonly val: Employee }
 
-export function decodePerson(bc: bare.ByteCursor): Person
+export function readPerson(bc: bare.ByteCursor): Person
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void
+export function writePerson(bc: bare.ByteCursor, x: Person): void
 
 export interface Address {
     readonly address: readonly (string)[]
@@ -85,17 +85,17 @@ export interface Address {
     readonly country: string
 }
 
-export function decodeAddress(bc: bare.ByteCursor): Address
+export function readAddress(bc: bare.ByteCursor): Address
 
-export function encodeAddress(bc: bare.ByteCursor, x: Address): void
+export function writeAddress(bc: bare.ByteCursor, x: Address): void
 
 export type Message = 
     | { readonly tag: 0; readonly val: Person }
 
-export function decodeMessage(bc: bare.ByteCursor): Message
+export function readMessage(bc: bare.ByteCursor): Message
 
-export function encodeMessage(bc: bare.ByteCursor, x: Message): void
+export function writeMessage(bc: bare.ByteCursor, x: Message): void
 
-export function packMessage(x: Message): Uint8Array
+export function encodeMessage(x: Message): Uint8Array
 
-export function unpackMessage(bytes: ArrayBuffer | Uint8Array): Message
+export function decodeMessage(bytes: Uint8Array): Message

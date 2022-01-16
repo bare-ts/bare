@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type U8Array = readonly (u8)[]
 
-export function decodeU8Array(bc: bare.ByteCursor): U8Array
+export function readU8Array(bc: bare.ByteCursor): U8Array
 
-export function encodeU8Array(bc: bare.ByteCursor, x: U8Array): void
+export function writeU8Array(bc: bare.ByteCursor, x: U8Array): void

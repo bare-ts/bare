@@ -7,9 +7,9 @@ export const Gender = {
     FEMALE: "FEMALE"
 }
 
-export function decodeGender(bc) {
+export function readGender(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Gender.FLUID
@@ -24,18 +24,18 @@ export function decodeGender(bc) {
     }
 }
 
-export function encodeGender(bc, x) {
+export function writeGender(bc, x) {
     switch (x) {
         case Gender.FLUID: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Gender.MALE: {
-            bare.encodeU8(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Gender.FEMALE: {
-            bare.encodeU8(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
     }

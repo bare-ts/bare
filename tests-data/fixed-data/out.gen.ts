@@ -1,3 +1,4 @@
+import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
 export type f32 = number
@@ -19,10 +20,11 @@ export type uintSafe = number
 
 export type U8Alias = ArrayBuffer
 
-export function decodeU8Alias(bc: bare.ByteCursor): U8Alias {
-    return bare.decodeFixedData(bc, 4)
+export function readU8Alias(bc: bare.ByteCursor): U8Alias {
+    return bare.readFixedData(bc, 4)
 }
 
-export function encodeU8Alias(bc: bare.ByteCursor, x: U8Alias): void {
-    bare.encodeFixedData(bc, x, 4)
+export function writeU8Alias(bc: bare.ByteCursor, x: U8Alias): void {
+    assert(x.byteLength === 4)
+    bare.writeFixedData(bc, x)
 }

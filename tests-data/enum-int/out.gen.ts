@@ -23,9 +23,9 @@ export enum Gender {
     FEMALE,
 }
 
-export function decodeGender(bc: bare.ByteCursor): Gender {
+export function readGender(bc: bare.ByteCursor): Gender {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     if (tag > 2) {
         bc.offset = offset
         throw new bare.BareError(offset, "invalid tag")
@@ -33,6 +33,6 @@ export function decodeGender(bc: bare.ByteCursor): Gender {
     return tag as Gender
 }
 
-export function encodeGender(bc: bare.ByteCursor, x: Gender): void {
-    bare.encodeU8(bc, x)
+export function writeGender(bc: bare.ByteCursor, x: Gender): void {
+    bare.writeU8(bc, x)
 }

@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type U8Array = Uint8Array
 
-export const decodeU8Array = bare.decodeU8Array
+export const readU8Array = bare.readU8Array
 
-export const encodeU8Array = bare.encodeU8Array
+export const writeU8Array = bare.writeU8Array

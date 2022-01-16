@@ -1,56 +1,56 @@
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeMultiArray(bc) {
-    const len = bare.decodeUintSafe(bc)
+export function readMultiArray(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decode0
-    const result = [valDecoder(bc)]
+    const valReader = read0
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-export function encodeMultiArray(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+export function writeMultiArray(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encode0)(bc, x[i])
+        (write0)(bc, x[i])
     }
 }
 
-function decode0(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read0(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decode1
-    const result = [valDecoder(bc)]
+    const valReader = read1
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode0(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+function write0(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encode1)(bc, x[i])
+        (write1)(bc, x[i])
     }
 }
 
-function decode1(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read1(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = bare.decodeString
-    const result = [valDecoder(bc)]
+    const valReader = bare.readString
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode1(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+function write1(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (bare.encodeString)(bc, x[i])
+        (bare.writeString)(bc, x[i])
     }
 }

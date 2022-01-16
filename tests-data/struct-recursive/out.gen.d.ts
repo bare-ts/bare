@@ -21,6 +21,6 @@ export interface Node {
     readonly children: readonly (Node)[] | undefined
 }
 
-export function decodeNode(bc: bare.ByteCursor): Node
+export function readNode(bc: bare.ByteCursor): Node
 
-export function encodeNode(bc: bare.ByteCursor, x: Node): void
+export function writeNode(bc: bare.ByteCursor, x: Node): void

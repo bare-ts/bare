@@ -19,12 +19,12 @@ export type uintSafe = number
 
 export type I64 = i64
 
-export const decodeI64 = bare.decodeI64
+export const readI64 = bare.readI64
 
-export const encodeI64 = bare.encodeI64
+export const writeI64 = bare.writeI64
 
 export type U64 = u64
 
-export const decodeU64 = bare.decodeU64
+export const readU64 = bare.readU64
 
-export const encodeU64 = bare.encodeU64
+export const writeU64 = bare.writeU64

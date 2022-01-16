@@ -2,20 +2,20 @@ import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeComposite(bc) {
+export function readComposite(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decode0)(bc)
+            const val = (read0)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (decode1)(bc)
+            const val = (read1)(bc)
             return { tag, val }
         }
         case 2: {
-            const val = (decode2)(bc)
+            const val = (read2)(bc)
             return { tag, val }
         }
         default: {
@@ -25,92 +25,93 @@ export function decodeComposite(bc) {
     }
 }
 
-export function encodeComposite(bc, x) {
+export function writeComposite(bc, x) {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encode0)(bc, x.val)
+            (write0)(bc, x.val)
             break
         case 1:
-            (encode1)(bc, x.val)
+            (write1)(bc, x.val)
             break
         case 2:
-            (encode2)(bc, x.val)
+            (write2)(bc, x.val)
             break
     }
 }
 
-function decode0(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read0(bc) {
+    const len = bare.readUintSafe(bc)
     const result = new Map()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (decode3)(bc))
+        result.set(key, (read3)(bc))
     }
     return result
 }
 
-function encode0(bc, x) {
-    bare.encodeUintSafe(bc, x.size)
+function write0(bc, x) {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (encode3)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (write3)(bc, kv[1])
     }
 }
 
-function decode1(bc) {
+function read1(bc) {
     const len = 4
-    const valDecoder = decode4
-    const result = [valDecoder(bc)]
+    const valReader = read4
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode1(bc, x) {
+function write1(bc, x) {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (encode4)(bc, x[i])
+        (write4)(bc, x[i])
     }
 }
 
-function decode2(bc) {
-    return bare.decodeU8FixedArray(bc, 4)
+function read2(bc) {
+    return bare.readU8FixedArray(bc, 4)
 }
 
-function encode2(bc, x) {
-    return bare.encodeU8FixedArray(bc, x, 4)
+function write2(bc, x) {
+    assert(x.length === 4)
+    return bare.writeU8FixedArray(bc, x)
 }
 
-function decode3(bc) {
-    return bare.decodeBool(bc)
-        ? (bare.decodeString)(bc)
+function read3(bc) {
+    return bare.readBool(bc)
+        ? (bare.readString)(bc)
         : undefined
 }
 
-function encode3(bc, x) {
-    bare.encodeBool(bc, x != null)
+function write3(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (bare.encodeString)(bc, x)
+        (bare.writeString)(bc, x)
     }
 }
 
-function decode4(bc) {
-    return bare.decodeBool(bc)
-        ? (bare.decodeString)(bc)
+function read4(bc) {
+    return bare.readBool(bc)
+        ? (bare.readString)(bc)
         : undefined
 }
 
-function encode4(bc, x) {
-    bare.encodeBool(bc, x != null)
+function write4(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (bare.encodeString)(bc, x)
+        (bare.writeString)(bc, x)
     }
 }

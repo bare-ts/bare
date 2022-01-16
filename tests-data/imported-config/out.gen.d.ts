@@ -19,10 +19,10 @@ export type uintSafe = number
 
 export type Message = u8
 
-export function decodeMessage(bc: bare.ByteCursor): Message
+export function readMessage(bc: bare.ByteCursor): Message
 
-export function encodeMessage(bc: bare.ByteCursor, x: Message): void
+export function writeMessage(bc: bare.ByteCursor, x: Message): void
 
-export function packMessage(x: Message): Uint8Array
+export function encodeMessage(x: Message): Uint8Array
 
-export function unpackMessage(bytes: ArrayBuffer | Uint8Array): Message
+export function decodeMessage(bytes: Uint8Array): Message

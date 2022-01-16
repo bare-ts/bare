@@ -20,13 +20,13 @@ export type uintSafe = number
 
 export type Person = ReturnType<typeof ext.Person>
 
-export function decodePerson(bc: bare.ByteCursor): Person {
-    const name = (bare.decodeString)(bc)
-    const age = (bare.decodeU8)(bc)
+export function readPerson(bc: bare.ByteCursor): Person {
+    const name = (bare.readString)(bc)
+    const age = (bare.readU8)(bc)
     return ext.Person(name,age)
 }
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeU8)(bc, x.age);
+export function writePerson(bc: bare.ByteCursor, x: Person): void {
+    (bare.writeString)(bc, x.name);
+    (bare.writeU8)(bc, x.age);
 }

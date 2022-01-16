@@ -22,6 +22,6 @@ export type Composite =
     | { readonly tag: 1; readonly val: readonly (string | undefined)[] }
     | { readonly tag: 2; readonly val: Uint8Array }
 
-export function decodeComposite(bc: bare.ByteCursor): Composite
+export function readComposite(bc: bare.ByteCursor): Composite
 
-export function encodeComposite(bc: bare.ByteCursor, x: Composite): void
+export function writeComposite(bc: bare.ByteCursor, x: Composite): void

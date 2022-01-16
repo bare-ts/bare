@@ -1,44 +1,44 @@
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeNode(bc) {
-    const children = (decode0)(bc)
+export function readNode(bc) {
+    const children = (read0)(bc)
     return {
         children,
     }
 }
 
-export function encodeNode(bc, x) {
-    (encode0)(bc, x.children);
+export function writeNode(bc, x) {
+    (write0)(bc, x.children);
 }
 
-function decode0(bc) {
-    return bare.decodeBool(bc)
-        ? (decode1)(bc)
+function read0(bc) {
+    return bare.readBool(bc)
+        ? (read1)(bc)
         : undefined
 }
 
-function encode0(bc, x) {
-    bare.encodeBool(bc, x != null)
+function write0(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (encode1)(bc, x)
+        (write1)(bc, x)
     }
 }
 
-function decode1(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read1(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decodeNode
-    const result = [valDecoder(bc)]
+    const valReader = readNode
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode1(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+function write1(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encodeNode)(bc, x[i])
+        (writeNode)(bc, x[i])
     }
 }

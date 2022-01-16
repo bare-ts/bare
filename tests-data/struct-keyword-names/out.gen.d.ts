@@ -25,6 +25,6 @@ export interface Operation {
     readonly bc: u8
 }
 
-export function decodeOperation(bc: bare.ByteCursor): Operation
+export function readOperation(bc: bare.ByteCursor): Operation
 
-export function encodeOperation(bc: bare.ByteCursor, x: Operation): void
+export function writeOperation(bc: bare.ByteCursor, x: Operation): void

@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type MaybeBool = boolean | undefined
 
-export function decodeMaybeBool(bc: bare.ByteCursor): MaybeBool
+export function readMaybeBool(bc: bare.ByteCursor): MaybeBool
 
-export function encodeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void
+export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void

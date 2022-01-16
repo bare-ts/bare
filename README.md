@@ -58,12 +58,12 @@ Next, you have to compile your schema into code:
 bare-ts compile schema.bare -o code.ts --main Contacts
 ```
 
-The option `--main` specifies which type is used to pack and unpack messages.
+The option `--main` specifies which type is used to encode and decode messages.
 
-Once the code generated, you can pack and unpack messages:
+Once the code generated, you can encode and decode messages:
 
 ```ts
-import { packContacts, unpackContacts, Gender } from "./out.gen.js"
+import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
 import { strict } from "assert"
 
 const contacts = [
@@ -74,8 +74,8 @@ const contacts = [
     } },
 ]
 
-const buffer = packContacts(contacts)
-const contacts2 = unpackContacts(buffer)
+const payload = encodeContacts(contacts)
+const contacts2 = decodeContacts(payload)
 
 strict.deepEqual(contacts, contacts2)
 ```

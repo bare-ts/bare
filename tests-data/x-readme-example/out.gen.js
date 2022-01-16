@@ -9,9 +9,9 @@ export const Gender = {
     MALE: "MALE"
 }
 
-export function decodeGender(bc) {
+export function readGender(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Gender.FEMALE
@@ -26,27 +26,27 @@ export function decodeGender(bc) {
     }
 }
 
-export function encodeGender(bc, x) {
+export function writeGender(bc, x) {
     switch (x) {
         case Gender.FEMALE: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Gender.FLUID: {
-            bare.encodeU8(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Gender.MALE: {
-            bare.encodeU8(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
     }
 }
 
-export function decodePerson(bc) {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const gender = (decode0)(bc)
+export function readPerson(bc) {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const gender = (read0)(bc)
     return {
         name,
         email,
@@ -54,36 +54,36 @@ export function decodePerson(bc) {
     }
 }
 
-export function encodePerson(bc, x) {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
-    (encode0)(bc, x.gender);
+export function writePerson(bc, x) {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
+    (write0)(bc, x.gender);
 }
 
-export function decodeOrganization(bc) {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
+export function readOrganization(bc) {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
     return {
         name,
         email,
     }
 }
 
-export function encodeOrganization(bc, x) {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
+export function writeOrganization(bc, x) {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
 }
 
-export function decodeContact(bc) {
+export function readContact(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodePerson)(bc)
+            const val = (readPerson)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (decodeOrganization)(bc)
+            const val = (readOrganization)(bc)
             return { tag, val }
         }
         default: {
@@ -93,64 +93,64 @@ export function decodeContact(bc) {
     }
 }
 
-export function encodeContact(bc, x) {
+export function writeContact(bc, x) {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodePerson)(bc, x.val)
+            (writePerson)(bc, x.val)
             break
         case 1:
-            (encodeOrganization)(bc, x.val)
+            (writeOrganization)(bc, x.val)
             break
     }
 }
 
-export function decodeMessage(bc) {
-    const len = bare.decodeUintSafe(bc)
+export function readMessage(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decodeContact
-    const result = [valDecoder(bc)]
+    const valReader = readContact
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-export function encodeMessage(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+export function writeMessage(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encodeContact)(bc, x[i])
+        (writeContact)(bc, x[i])
     }
 }
 
-export function packMessage(x) {
+export function encodeMessage(x) {
     const bc = new bare.ByteCursor(
-        new ArrayBuffer(config.initialBufferLength),
+        new Uint8Array(config.initialBufferLength),
         config
     )
-    encodeMessage(bc, x)
+    writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function unpackMessage(bytes) {
+export function decodeMessage(bytes) {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = decodeMessage(bc)
+    const result = readMessage(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
 }
 
-function decode0(bc) {
-    return bare.decodeBool(bc)
-        ? (decodeGender)(bc)
+function read0(bc) {
+    return bare.readBool(bc)
+        ? (readGender)(bc)
         : undefined
 }
 
-function encode0(bc, x) {
-    bare.encodeBool(bc, x != null)
+function write0(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (encodeGender)(bc, x)
+        (writeGender)(bc, x)
     }
 }

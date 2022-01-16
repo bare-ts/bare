@@ -23,6 +23,6 @@ export type UnsignedInt =
     | u32
     | u64
 
-export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt
+export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt
 
-export function encodeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void
+export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void

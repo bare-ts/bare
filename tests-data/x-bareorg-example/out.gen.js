@@ -4,17 +4,18 @@ import * as bare from "@bare-ts/lib"
 const config = bare.Config({})
 
 
-export function decodePublicKey(bc) {
-    return bare.decodeFixedData(bc, 128)
+export function readPublicKey(bc) {
+    return bare.readFixedData(bc, 128)
 }
 
-export function encodePublicKey(bc, x) {
-    bare.encodeFixedData(bc, x, 128)
+export function writePublicKey(bc, x) {
+    assert(x.byteLength === 128)
+    bare.writeFixedData(bc, x)
 }
 
-export const decodeTime = bare.decodeString
+export const readTime = bare.readString
 
-export const encodeTime = bare.encodeString
+export const writeTime = bare.writeString
 
 export const Department = {
     ACCOUNTING: "ACCOUNTING",
@@ -24,9 +25,9 @@ export const Department = {
     JSMITH: "JSMITH"
 }
 
-export function decodeDepartment(bc) {
+export function readDepartment(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Department.ACCOUNTING
@@ -45,37 +46,37 @@ export function decodeDepartment(bc) {
     }
 }
 
-export function encodeDepartment(bc, x) {
+export function writeDepartment(bc, x) {
     switch (x) {
         case Department.ACCOUNTING: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Department.ADMINISTRATION: {
-            bare.encodeU8(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Department.CUSTOMER_SERVICE: {
-            bare.encodeU8(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
         case Department.DEVELOPMENT: {
-            bare.encodeU8(bc, 3)
+            bare.writeU8(bc, 3)
             break
         }
         case Department.JSMITH: {
-            bare.encodeU8(bc, 99)
+            bare.writeU8(bc, 99)
             break
         }
     }
 }
 
-export function decodeCustomer(bc) {
-    const ame = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const address = (decodeAddress)(bc)
-    const orders = (decode0)(bc)
-    const metadata = (decode1)(bc)
+export function readCustomer(bc) {
+    const ame = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const address = (readAddress)(bc)
+    const orders = (read0)(bc)
+    const metadata = (read1)(bc)
     return {
         ame,
         email,
@@ -85,22 +86,22 @@ export function decodeCustomer(bc) {
     }
 }
 
-export function encodeCustomer(bc, x) {
-    (bare.encodeString)(bc, x.ame);
-    (bare.encodeString)(bc, x.email);
-    (encodeAddress)(bc, x.address);
-    (encode0)(bc, x.orders);
-    (encode1)(bc, x.metadata);
+export function writeCustomer(bc, x) {
+    (bare.writeString)(bc, x.ame);
+    (bare.writeString)(bc, x.email);
+    (writeAddress)(bc, x.address);
+    (write0)(bc, x.orders);
+    (write1)(bc, x.metadata);
 }
 
-export function decodeEmployee(bc) {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const address = (decodeAddress)(bc)
-    const department = (decodeDepartment)(bc)
-    const hireDate = (decodeTime)(bc)
-    const publicKey = (decode2)(bc)
-    const metadata = (decode3)(bc)
+export function readEmployee(bc) {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const address = (readAddress)(bc)
+    const department = (readDepartment)(bc)
+    const hireDate = (readTime)(bc)
+    const publicKey = (read2)(bc)
+    const metadata = (read3)(bc)
     return {
         name,
         email,
@@ -112,26 +113,26 @@ export function decodeEmployee(bc) {
     }
 }
 
-export function encodeEmployee(bc, x) {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
-    (encodeAddress)(bc, x.address);
-    (encodeDepartment)(bc, x.department);
-    (encodeTime)(bc, x.hireDate);
-    (encode2)(bc, x.publicKey);
-    (encode3)(bc, x.metadata);
+export function writeEmployee(bc, x) {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
+    (writeAddress)(bc, x.address);
+    (writeDepartment)(bc, x.department);
+    (writeTime)(bc, x.hireDate);
+    (write2)(bc, x.publicKey);
+    (write3)(bc, x.metadata);
 }
 
-export function decodePerson(bc) {
+export function readPerson(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodeCustomer)(bc)
+            const val = (readCustomer)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (decodeEmployee)(bc)
+            const val = (readEmployee)(bc)
             return { tag, val }
         }
         default: {
@@ -141,24 +142,24 @@ export function decodePerson(bc) {
     }
 }
 
-export function encodePerson(bc, x) {
+export function writePerson(bc, x) {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodeCustomer)(bc, x.val)
+            (writeCustomer)(bc, x.val)
             break
         case 1:
-            (encodeEmployee)(bc, x.val)
+            (writeEmployee)(bc, x.val)
             break
     }
 }
 
-export function decodeAddress(bc) {
-    const address = (decode4)(bc)
-    const city = (bare.decodeString)(bc)
-    const state = (bare.decodeString)(bc)
-    const country = (bare.decodeString)(bc)
+export function readAddress(bc) {
+    const address = (read4)(bc)
+    const city = (bare.readString)(bc)
+    const state = (bare.readString)(bc)
+    const country = (bare.readString)(bc)
     return {
         address,
         city,
@@ -167,19 +168,19 @@ export function decodeAddress(bc) {
     }
 }
 
-export function encodeAddress(bc, x) {
-    (encode4)(bc, x.address);
-    (bare.encodeString)(bc, x.city);
-    (bare.encodeString)(bc, x.state);
-    (bare.encodeString)(bc, x.country);
+export function writeAddress(bc, x) {
+    (write4)(bc, x.address);
+    (bare.writeString)(bc, x.city);
+    (bare.writeString)(bc, x.state);
+    (bare.writeString)(bc, x.country);
 }
 
-export function decodeMessage(bc) {
+export function readMessage(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodePerson)(bc)
+            const val = (readPerson)(bc)
             return { tag, val }
         }
         default: {
@@ -189,138 +190,138 @@ export function decodeMessage(bc) {
     }
 }
 
-export function encodeMessage(bc, x) {
+export function writeMessage(bc, x) {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodePerson)(bc, x.val)
+            (writePerson)(bc, x.val)
             break
     }
 }
 
-export function packMessage(x) {
+export function encodeMessage(x) {
     const bc = new bare.ByteCursor(
-        new ArrayBuffer(config.initialBufferLength),
+        new Uint8Array(config.initialBufferLength),
         config
     )
-    encodeMessage(bc, x)
+    writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function unpackMessage(bytes) {
+export function decodeMessage(bytes) {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = decodeMessage(bc)
+    const result = readMessage(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
 }
 
-function decode0(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read0(bc) {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decode5
-    const result = [valDecoder(bc)]
+    const valReader = read5
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode0(bc, x) {
-    bare.encodeUintSafe(bc, x.length)
+function write0(bc, x) {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encode5)(bc, x[i])
+        (write5)(bc, x[i])
     }
 }
 
-function decode1(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read1(bc) {
+    const len = bare.readUintSafe(bc)
     const result = new Map()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.decodeData)(bc))
+        result.set(key, (bare.readData)(bc))
     }
     return result
 }
 
-function encode1(bc, x) {
-    bare.encodeUintSafe(bc, x.size)
+function write1(bc, x) {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (bare.encodeData)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (bare.writeData)(bc, kv[1])
     }
 }
 
-function decode2(bc) {
-    return bare.decodeBool(bc)
-        ? (decodePublicKey)(bc)
+function read2(bc) {
+    return bare.readBool(bc)
+        ? (readPublicKey)(bc)
         : undefined
 }
 
-function encode2(bc, x) {
-    bare.encodeBool(bc, x != null)
+function write2(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (encodePublicKey)(bc, x)
+        (writePublicKey)(bc, x)
     }
 }
 
-function decode3(bc) {
-    const len = bare.decodeUintSafe(bc)
+function read3(bc) {
+    const len = bare.readUintSafe(bc)
     const result = new Map()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.decodeData)(bc))
+        result.set(key, (bare.readData)(bc))
     }
     return result
 }
 
-function encode3(bc, x) {
-    bare.encodeUintSafe(bc, x.size)
+function write3(bc, x) {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (bare.encodeData)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (bare.writeData)(bc, kv[1])
     }
 }
 
-function decode4(bc) {
+function read4(bc) {
     const len = 4
-    const valDecoder = bare.decodeString
-    const result = [valDecoder(bc)]
+    const valReader = bare.readString
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode4(bc, x) {
+function write4(bc, x) {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (bare.encodeString)(bc, x[i])
+        (bare.writeString)(bc, x[i])
     }
 }
 
-function decode5(bc) {
-    const orderId = (bare.decodeI64)(bc)
-    const quantity = (bare.decodeI32)(bc)
+function read5(bc) {
+    const orderId = (bare.readI64)(bc)
+    const quantity = (bare.readI32)(bc)
     return {
         orderId,
         quantity,
     }
 }
 
-function encode5(bc, x) {
-    (bare.encodeI64)(bc, x.orderId);
-    (bare.encodeI32)(bc, x.quantity);
+function write5(bc, x) {
+    (bare.writeI64)(bc, x.orderId);
+    (bare.writeI32)(bc, x.quantity);
 }

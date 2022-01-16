@@ -19,15 +19,15 @@ export type uintSafe = number
 
 export type MaybeBool = boolean | null
 
-export function decodeMaybeBool(bc: bare.ByteCursor): MaybeBool {
-    return bare.decodeBool(bc)
-        ? (bare.decodeBool)(bc)
+export function readMaybeBool(bc: bare.ByteCursor): MaybeBool {
+    return bare.readBool(bc)
+        ? (bare.readBool)(bc)
         : null
 }
 
-export function encodeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {
-    bare.encodeBool(bc, x != null)
+export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (bare.encodeBool)(bc, x)
+        (bare.writeBool)(bc, x)
     }
 }

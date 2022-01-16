@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type U64Array = readonly (u64Safe)[]
 
-export function decodeU64Array(bc: bare.ByteCursor): U64Array
+export function readU64Array(bc: bare.ByteCursor): U64Array
 
-export function encodeU64Array(bc: bare.ByteCursor, x: U64Array): void
+export function writeU64Array(bc: bare.ByteCursor, x: U64Array): void

@@ -22,19 +22,20 @@ export type uintSafe = number
 
 export type PublicKey = ArrayBuffer
 
-export function decodePublicKey(bc: bare.ByteCursor): PublicKey {
-    return bare.decodeFixedData(bc, 128)
+export function readPublicKey(bc: bare.ByteCursor): PublicKey {
+    return bare.readFixedData(bc, 128)
 }
 
-export function encodePublicKey(bc: bare.ByteCursor, x: PublicKey): void {
-    bare.encodeFixedData(bc, x, 128)
+export function writePublicKey(bc: bare.ByteCursor, x: PublicKey): void {
+    assert(x.byteLength === 128)
+    bare.writeFixedData(bc, x)
 }
 
 export type Time = string
 
-export const decodeTime = bare.decodeString
+export const readTime = bare.readString
 
-export const encodeTime = bare.encodeString
+export const writeTime = bare.writeString
 
 export enum Department {
     ACCOUNTING = "ACCOUNTING",
@@ -44,9 +45,9 @@ export enum Department {
     JSMITH = "JSMITH",
 }
 
-export function decodeDepartment(bc: bare.ByteCursor): Department {
+export function readDepartment(bc: bare.ByteCursor): Department {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Department.ACCOUNTING
@@ -65,26 +66,26 @@ export function decodeDepartment(bc: bare.ByteCursor): Department {
     }
 }
 
-export function encodeDepartment(bc: bare.ByteCursor, x: Department): void {
+export function writeDepartment(bc: bare.ByteCursor, x: Department): void {
     switch (x) {
         case Department.ACCOUNTING: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Department.ADMINISTRATION: {
-            bare.encodeU8(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Department.CUSTOMER_SERVICE: {
-            bare.encodeU8(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
         case Department.DEVELOPMENT: {
-            bare.encodeU8(bc, 3)
+            bare.writeU8(bc, 3)
             break
         }
         case Department.JSMITH: {
-            bare.encodeU8(bc, 99)
+            bare.writeU8(bc, 99)
             break
         }
     }
@@ -101,12 +102,12 @@ export interface Customer {
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
-export function decodeCustomer(bc: bare.ByteCursor): Customer {
-    const ame = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const address = (decodeAddress)(bc)
-    const orders = (decode0)(bc)
-    const metadata = (decode1)(bc)
+export function readCustomer(bc: bare.ByteCursor): Customer {
+    const ame = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const address = (readAddress)(bc)
+    const orders = (read0)(bc)
+    const metadata = (read1)(bc)
     return {
         ame,
         email,
@@ -116,12 +117,12 @@ export function decodeCustomer(bc: bare.ByteCursor): Customer {
     }
 }
 
-export function encodeCustomer(bc: bare.ByteCursor, x: Customer): void {
-    (bare.encodeString)(bc, x.ame);
-    (bare.encodeString)(bc, x.email);
-    (encodeAddress)(bc, x.address);
-    (encode0)(bc, x.orders);
-    (encode1)(bc, x.metadata);
+export function writeCustomer(bc: bare.ByteCursor, x: Customer): void {
+    (bare.writeString)(bc, x.ame);
+    (bare.writeString)(bc, x.email);
+    (writeAddress)(bc, x.address);
+    (write0)(bc, x.orders);
+    (write1)(bc, x.metadata);
 }
 
 export interface Employee {
@@ -134,14 +135,14 @@ export interface Employee {
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
-export function decodeEmployee(bc: bare.ByteCursor): Employee {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const address = (decodeAddress)(bc)
-    const department = (decodeDepartment)(bc)
-    const hireDate = (decodeTime)(bc)
-    const publicKey = (decode2)(bc)
-    const metadata = (decode3)(bc)
+export function readEmployee(bc: bare.ByteCursor): Employee {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const address = (readAddress)(bc)
+    const department = (readDepartment)(bc)
+    const hireDate = (readTime)(bc)
+    const publicKey = (read2)(bc)
+    const metadata = (read3)(bc)
     return {
         name,
         email,
@@ -153,30 +154,30 @@ export function decodeEmployee(bc: bare.ByteCursor): Employee {
     }
 }
 
-export function encodeEmployee(bc: bare.ByteCursor, x: Employee): void {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
-    (encodeAddress)(bc, x.address);
-    (encodeDepartment)(bc, x.department);
-    (encodeTime)(bc, x.hireDate);
-    (encode2)(bc, x.publicKey);
-    (encode3)(bc, x.metadata);
+export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
+    (writeAddress)(bc, x.address);
+    (writeDepartment)(bc, x.department);
+    (writeTime)(bc, x.hireDate);
+    (write2)(bc, x.publicKey);
+    (write3)(bc, x.metadata);
 }
 
 export type Person = 
     | { readonly tag: 0; readonly val: Customer }
     | { readonly tag: 1; readonly val: Employee }
 
-export function decodePerson(bc: bare.ByteCursor): Person {
+export function readPerson(bc: bare.ByteCursor): Person {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodeCustomer)(bc)
+            const val = (readCustomer)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (decodeEmployee)(bc)
+            const val = (readEmployee)(bc)
             return { tag, val }
         }
         default: {
@@ -186,15 +187,15 @@ export function decodePerson(bc: bare.ByteCursor): Person {
     }
 }
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void {
+export function writePerson(bc: bare.ByteCursor, x: Person): void {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodeCustomer)(bc, x.val)
+            (writeCustomer)(bc, x.val)
             break
         case 1:
-            (encodeEmployee)(bc, x.val)
+            (writeEmployee)(bc, x.val)
             break
     }
 }
@@ -206,11 +207,11 @@ export interface Address {
     readonly country: string
 }
 
-export function decodeAddress(bc: bare.ByteCursor): Address {
-    const address = (decode4)(bc)
-    const city = (bare.decodeString)(bc)
-    const state = (bare.decodeString)(bc)
-    const country = (bare.decodeString)(bc)
+export function readAddress(bc: bare.ByteCursor): Address {
+    const address = (read4)(bc)
+    const city = (bare.readString)(bc)
+    const state = (bare.readString)(bc)
+    const country = (bare.readString)(bc)
     return {
         address,
         city,
@@ -219,22 +220,22 @@ export function decodeAddress(bc: bare.ByteCursor): Address {
     }
 }
 
-export function encodeAddress(bc: bare.ByteCursor, x: Address): void {
-    (encode4)(bc, x.address);
-    (bare.encodeString)(bc, x.city);
-    (bare.encodeString)(bc, x.state);
-    (bare.encodeString)(bc, x.country);
+export function writeAddress(bc: bare.ByteCursor, x: Address): void {
+    (write4)(bc, x.address);
+    (bare.writeString)(bc, x.city);
+    (bare.writeString)(bc, x.state);
+    (bare.writeString)(bc, x.country);
 }
 
 export type Message = 
     | { readonly tag: 0; readonly val: Person }
 
-export function decodeMessage(bc: bare.ByteCursor): Message {
+export function readMessage(bc: bare.ByteCursor): Message {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodePerson)(bc)
+            const val = (readPerson)(bc)
             return { tag, val }
         }
         default: {
@@ -244,150 +245,150 @@ export function decodeMessage(bc: bare.ByteCursor): Message {
     }
 }
 
-export function encodeMessage(bc: bare.ByteCursor, x: Message): void {
+export function writeMessage(bc: bare.ByteCursor, x: Message): void {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodePerson)(bc, x.val)
+            (writePerson)(bc, x.val)
             break
     }
 }
 
-export function packMessage(x: Message): Uint8Array {
+export function encodeMessage(x: Message): Uint8Array {
     const bc = new bare.ByteCursor(
-        new ArrayBuffer(config.initialBufferLength),
+        new Uint8Array(config.initialBufferLength),
         config
     )
-    encodeMessage(bc, x)
+    writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function unpackMessage(bytes: ArrayBuffer | Uint8Array): Message {
+export function decodeMessage(bytes: Uint8Array): Message {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = decodeMessage(bc)
+    const result = readMessage(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
 }
 
-function decode0(bc: bare.ByteCursor): readonly ({
+function read0(bc: bare.ByteCursor): readonly ({
     readonly orderId: i64
     readonly quantity: i32
 })[] {
-    const len = bare.decodeUintSafe(bc)
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decode5
-    const result = [valDecoder(bc)]
+    const valReader = read5
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode0(bc: bare.ByteCursor, x: readonly ({
+function write0(bc: bare.ByteCursor, x: readonly ({
     readonly orderId: i64
     readonly quantity: i32
 })[]): void {
-    bare.encodeUintSafe(bc, x.length)
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encode5)(bc, x[i])
+        (write5)(bc, x[i])
     }
 }
 
-function decode1(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
-    const len = bare.decodeUintSafe(bc)
+function read1(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
+    const len = bare.readUintSafe(bc)
     const result = new Map<string, ArrayBuffer>()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.decodeData)(bc))
+        result.set(key, (bare.readData)(bc))
     }
     return result
 }
 
-function encode1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
-    bare.encodeUintSafe(bc, x.size)
+function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (bare.encodeData)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (bare.writeData)(bc, kv[1])
     }
 }
 
-function decode2(bc: bare.ByteCursor): PublicKey | undefined {
-    return bare.decodeBool(bc)
-        ? (decodePublicKey)(bc)
+function read2(bc: bare.ByteCursor): PublicKey | undefined {
+    return bare.readBool(bc)
+        ? (readPublicKey)(bc)
         : undefined
 }
 
-function encode2(bc: bare.ByteCursor, x: PublicKey | undefined): void {
-    bare.encodeBool(bc, x != null)
+function write2(bc: bare.ByteCursor, x: PublicKey | undefined): void {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (encodePublicKey)(bc, x)
+        (writePublicKey)(bc, x)
     }
 }
 
-function decode3(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
-    const len = bare.decodeUintSafe(bc)
+function read3(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
+    const len = bare.readUintSafe(bc)
     const result = new Map<string, ArrayBuffer>()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.decodeData)(bc))
+        result.set(key, (bare.readData)(bc))
     }
     return result
 }
 
-function encode3(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
-    bare.encodeUintSafe(bc, x.size)
+function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (bare.encodeData)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (bare.writeData)(bc, kv[1])
     }
 }
 
-function decode4(bc: bare.ByteCursor): readonly (string)[] {
+function read4(bc: bare.ByteCursor): readonly (string)[] {
     const len = 4
-    const valDecoder = bare.decodeString
-    const result = [valDecoder(bc)]
+    const valReader = bare.readString
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-function encode4(bc: bare.ByteCursor, x: readonly (string)[]): void {
+function write4(bc: bare.ByteCursor, x: readonly (string)[]): void {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (bare.encodeString)(bc, x[i])
+        (bare.writeString)(bc, x[i])
     }
 }
 
-function decode5(bc: bare.ByteCursor): {
+function read5(bc: bare.ByteCursor): {
     readonly orderId: i64
     readonly quantity: i32
 } {
-    const orderId = (bare.decodeI64)(bc)
-    const quantity = (bare.decodeI32)(bc)
+    const orderId = (bare.readI64)(bc)
+    const quantity = (bare.readI32)(bc)
     return {
         orderId,
         quantity,
     }
 }
 
-function encode5(bc: bare.ByteCursor, x: {
+function write5(bc: bare.ByteCursor, x: {
     readonly orderId: i64
     readonly quantity: i32
 }): void {
-    (bare.encodeI64)(bc, x.orderId);
-    (bare.encodeI32)(bc, x.quantity);
+    (bare.writeI64)(bc, x.orderId);
+    (bare.writeI32)(bc, x.quantity);
 }

@@ -1,15 +1,15 @@
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeMaybeBool(bc) {
-    return bare.decodeBool(bc)
-        ? (bare.decodeBool)(bc)
+export function readMaybeBool(bc) {
+    return bare.readBool(bc)
+        ? (bare.readBool)(bc)
         : undefined
 }
 
-export function encodeMaybeBool(bc, x) {
-    bare.encodeBool(bc, x != null)
+export function writeMaybeBool(bc, x) {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (bare.encodeBool)(bc, x)
+        (bare.writeBool)(bc, x)
     }
 }

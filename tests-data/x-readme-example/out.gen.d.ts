@@ -23,9 +23,9 @@ export enum Gender {
     MALE = "MALE",
 }
 
-export function decodeGender(bc: bare.ByteCursor): Gender
+export function readGender(bc: bare.ByteCursor): Gender
 
-export function encodeGender(bc: bare.ByteCursor, x: Gender): void
+export function writeGender(bc: bare.ByteCursor, x: Gender): void
 
 export interface Person {
     readonly name: string
@@ -33,33 +33,33 @@ export interface Person {
     readonly gender: Gender | undefined
 }
 
-export function decodePerson(bc: bare.ByteCursor): Person
+export function readPerson(bc: bare.ByteCursor): Person
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void
+export function writePerson(bc: bare.ByteCursor, x: Person): void
 
 export interface Organization {
     readonly name: string
     readonly email: string
 }
 
-export function decodeOrganization(bc: bare.ByteCursor): Organization
+export function readOrganization(bc: bare.ByteCursor): Organization
 
-export function encodeOrganization(bc: bare.ByteCursor, x: Organization): void
+export function writeOrganization(bc: bare.ByteCursor, x: Organization): void
 
 export type Contact = 
     | { readonly tag: 0; readonly val: Person }
     | { readonly tag: 1; readonly val: Organization }
 
-export function decodeContact(bc: bare.ByteCursor): Contact
+export function readContact(bc: bare.ByteCursor): Contact
 
-export function encodeContact(bc: bare.ByteCursor, x: Contact): void
+export function writeContact(bc: bare.ByteCursor, x: Contact): void
 
 export type Message = readonly (Contact)[]
 
-export function decodeMessage(bc: bare.ByteCursor): Message
+export function readMessage(bc: bare.ByteCursor): Message
 
-export function encodeMessage(bc: bare.ByteCursor, x: Message): void
+export function writeMessage(bc: bare.ByteCursor, x: Message): void
 
-export function packMessage(x: Message): Uint8Array
+export function encodeMessage(x: Message): Uint8Array
 
-export function unpackMessage(bytes: ArrayBuffer | Uint8Array): Message
+export function decodeMessage(bytes: Uint8Array): Message

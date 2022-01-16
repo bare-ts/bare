@@ -23,6 +23,6 @@ export enum Gender {
     FEMALE,
 }
 
-export function decodeGender(bc: bare.ByteCursor): Gender
+export function readGender(bc: bare.ByteCursor): Gender
 
-export function encodeGender(bc: bare.ByteCursor, x: Gender): void
+export function writeGender(bc: bare.ByteCursor, x: Gender): void

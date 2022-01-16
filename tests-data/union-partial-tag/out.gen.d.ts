@@ -23,6 +23,6 @@ export type UnsignedInt =
     | { readonly tag: 6; readonly val: u32 }
     | { readonly tag: 7; readonly val: u64 }
 
-export function decodeUnsignedInt(bc: bare.ByteCursor): UnsignedInt
+export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt
 
-export function encodeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void
+export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void

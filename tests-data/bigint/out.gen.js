@@ -1,10 +1,10 @@
 import * as bare from "@bare-ts/lib"
 
 
-export const decodeI64 = bare.decodeI64
+export const readI64 = bare.readI64
 
-export const encodeI64 = bare.encodeI64
+export const writeI64 = bare.writeI64
 
-export const decodeU64 = bare.decodeU64
+export const readU64 = bare.readU64
 
-export const encodeU64 = bare.encodeU64
+export const writeU64 = bare.writeU64

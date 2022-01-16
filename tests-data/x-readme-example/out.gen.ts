@@ -25,9 +25,9 @@ export enum Gender {
     MALE = "MALE",
 }
 
-export function decodeGender(bc: bare.ByteCursor): Gender {
+export function readGender(bc: bare.ByteCursor): Gender {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
             return Gender.FEMALE
@@ -42,18 +42,18 @@ export function decodeGender(bc: bare.ByteCursor): Gender {
     }
 }
 
-export function encodeGender(bc: bare.ByteCursor, x: Gender): void {
+export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
         case Gender.FEMALE: {
-            bare.encodeU8(bc, 0)
+            bare.writeU8(bc, 0)
             break
         }
         case Gender.FLUID: {
-            bare.encodeU8(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Gender.MALE: {
-            bare.encodeU8(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
     }
@@ -65,10 +65,10 @@ export interface Person {
     readonly gender: Gender | undefined
 }
 
-export function decodePerson(bc: bare.ByteCursor): Person {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
-    const gender = (decode0)(bc)
+export function readPerson(bc: bare.ByteCursor): Person {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
+    const gender = (read0)(bc)
     return {
         name,
         email,
@@ -76,10 +76,10 @@ export function decodePerson(bc: bare.ByteCursor): Person {
     }
 }
 
-export function encodePerson(bc: bare.ByteCursor, x: Person): void {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
-    (encode0)(bc, x.gender);
+export function writePerson(bc: bare.ByteCursor, x: Person): void {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
+    (write0)(bc, x.gender);
 }
 
 export interface Organization {
@@ -87,34 +87,34 @@ export interface Organization {
     readonly email: string
 }
 
-export function decodeOrganization(bc: bare.ByteCursor): Organization {
-    const name = (bare.decodeString)(bc)
-    const email = (bare.decodeString)(bc)
+export function readOrganization(bc: bare.ByteCursor): Organization {
+    const name = (bare.readString)(bc)
+    const email = (bare.readString)(bc)
     return {
         name,
         email,
     }
 }
 
-export function encodeOrganization(bc: bare.ByteCursor, x: Organization): void {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeString)(bc, x.email);
+export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
+    (bare.writeString)(bc, x.name);
+    (bare.writeString)(bc, x.email);
 }
 
 export type Contact = 
     | { readonly tag: 0; readonly val: Person }
     | { readonly tag: 1; readonly val: Organization }
 
-export function decodeContact(bc: bare.ByteCursor): Contact {
+export function readContact(bc: bare.ByteCursor): Contact {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (decodePerson)(bc)
+            const val = (readPerson)(bc)
             return { tag, val }
         }
         case 1: {
-            const val = (decodeOrganization)(bc)
+            const val = (readOrganization)(bc)
             return { tag, val }
         }
         default: {
@@ -124,66 +124,66 @@ export function decodeContact(bc: bare.ByteCursor): Contact {
     }
 }
 
-export function encodeContact(bc: bare.ByteCursor, x: Contact): void {
+export function writeContact(bc: bare.ByteCursor, x: Contact): void {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (encodePerson)(bc, x.val)
+            (writePerson)(bc, x.val)
             break
         case 1:
-            (encodeOrganization)(bc, x.val)
+            (writeOrganization)(bc, x.val)
             break
     }
 }
 
 export type Message = readonly (Contact)[]
 
-export function decodeMessage(bc: bare.ByteCursor): Message {
-    const len = bare.decodeUintSafe(bc)
+export function readMessage(bc: bare.ByteCursor): Message {
+    const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valDecoder = decodeContact
-    const result = [valDecoder(bc)]
+    const valReader = readContact
+    const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valDecoder(bc)
+        result[i] = valReader(bc)
     }
     return result
 }
 
-export function encodeMessage(bc: bare.ByteCursor, x: Message): void {
-    bare.encodeUintSafe(bc, x.length)
+export function writeMessage(bc: bare.ByteCursor, x: Message): void {
+    bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (encodeContact)(bc, x[i])
+        (writeContact)(bc, x[i])
     }
 }
 
-export function packMessage(x: Message): Uint8Array {
+export function encodeMessage(x: Message): Uint8Array {
     const bc = new bare.ByteCursor(
-        new ArrayBuffer(config.initialBufferLength),
+        new Uint8Array(config.initialBufferLength),
         config
     )
-    encodeMessage(bc, x)
+    writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function unpackMessage(bytes: ArrayBuffer | Uint8Array): Message {
+export function decodeMessage(bytes: Uint8Array): Message {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = decodeMessage(bc)
+    const result = readMessage(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
 }
 
-function decode0(bc: bare.ByteCursor): Gender | undefined {
-    return bare.decodeBool(bc)
-        ? (decodeGender)(bc)
+function read0(bc: bare.ByteCursor): Gender | undefined {
+    return bare.readBool(bc)
+        ? (readGender)(bc)
         : undefined
 }
 
-function encode0(bc: bare.ByteCursor, x: Gender | undefined): void {
-    bare.encodeBool(bc, x != null)
+function write0(bc: bare.ByteCursor, x: Gender | undefined): void {
+    bare.writeBool(bc, x != null)
     if (x != null) {
-        (encodeGender)(bc, x)
+        (writeGender)(bc, x)
     }
 }

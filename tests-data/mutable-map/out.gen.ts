@@ -19,25 +19,25 @@ export type uintSafe = number
 
 export type Dict = Map<string, string>
 
-export function decodeDict(bc: bare.ByteCursor): Dict {
-    const len = bare.decodeUintSafe(bc)
+export function readDict(bc: bare.ByteCursor): Dict {
+    const len = bare.readUintSafe(bc)
     const result = new Map<string, string>()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.decodeString)(bc)
+        const key = (bare.readString)(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.decodeString)(bc))
+        result.set(key, (bare.readString)(bc))
     }
     return result
 }
 
-export function encodeDict(bc: bare.ByteCursor, x: Dict): void {
-    bare.encodeUintSafe(bc, x.size)
+export function writeDict(bc: bare.ByteCursor, x: Dict): void {
+    bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.encodeString)(bc, kv[0]);
-        (bare.encodeString)(bc, kv[1])
+        (bare.writeString)(bc, kv[0]);
+        (bare.writeString)(bc, kv[1])
     }
 }

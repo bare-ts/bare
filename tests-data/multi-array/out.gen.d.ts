@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type MultiArray = readonly (readonly (readonly (string)[])[])[]
 
-export function decodeMultiArray(bc: bare.ByteCursor): MultiArray
+export function readMultiArray(bc: bare.ByteCursor): MultiArray
 
-export function encodeMultiArray(bc: bare.ByteCursor, x: MultiArray): void
+export function writeMultiArray(bc: bare.ByteCursor, x: MultiArray): void

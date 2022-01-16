@@ -31,6 +31,15 @@ This project adheres to [Semantic Versioning][semver].
 * Better diagnostics when semicolons are used to separate enum or
     struct members
 
+* BREAKING CHANGE: adapt to @bare-ts/lib@0.2.0
+
+    @bare-ts/lib@0.2.0 introduces several breaking change.
+    As a consequence:
+    - all decode/encode are renamed into read/write
+    - all pack/unpack are renamed into encode/decode
+    - decoders (previously unpackers) no longer accept `ArrayBuffer` as 
+    type of read buffer
+
 ## 0.1.1 (2020-01-05)
 
 * Fix array encoders

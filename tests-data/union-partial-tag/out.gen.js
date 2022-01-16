@@ -1,24 +1,24 @@
 import * as bare from "@bare-ts/lib"
 
 
-export function decodeUnsignedInt(bc) {
+export function readUnsignedInt(bc) {
     const offset = bc.offset
-    const tag = bare.decodeU8(bc)
+    const tag = bare.readU8(bc)
     switch (tag) {
         case 0: {
-            const val = (bare.decodeU8)(bc)
+            const val = (bare.readU8)(bc)
             return { tag, val }
         }
         case 5: {
-            const val = (bare.decodeU16)(bc)
+            const val = (bare.readU16)(bc)
             return { tag, val }
         }
         case 6: {
-            const val = (bare.decodeU32)(bc)
+            const val = (bare.readU32)(bc)
             return { tag, val }
         }
         case 7: {
-            const val = (bare.decodeU64)(bc)
+            const val = (bare.readU64)(bc)
             return { tag, val }
         }
         default: {
@@ -28,21 +28,21 @@ export function decodeUnsignedInt(bc) {
     }
 }
 
-export function encodeUnsignedInt(bc, x) {
+export function writeUnsignedInt(bc, x) {
     const tag = x.tag;
-    bare.encodeU8(bc, tag)
+    bare.writeU8(bc, tag)
     switch (tag) {
         case 0:
-            (bare.encodeU8)(bc, x.val)
+            (bare.writeU8)(bc, x.val)
             break
         case 5:
-            (bare.encodeU16)(bc, x.val)
+            (bare.writeU16)(bc, x.val)
             break
         case 6:
-            (bare.encodeU32)(bc, x.val)
+            (bare.writeU32)(bc, x.val)
             break
         case 7:
-            (bare.encodeU64)(bc, x.val)
+            (bare.writeU64)(bc, x.val)
             break
     }
 }

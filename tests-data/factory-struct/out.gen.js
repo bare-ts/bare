@@ -2,13 +2,13 @@ import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
 
-export function decodePerson(bc) {
-    const name = (bare.decodeString)(bc)
-    const age = (bare.decodeU8)(bc)
+export function readPerson(bc) {
+    const name = (bare.readString)(bc)
+    const age = (bare.readU8)(bc)
     return ext.Person(name,age)
 }
 
-export function encodePerson(bc, x) {
-    (bare.encodeString)(bc, x.name);
-    (bare.encodeU8)(bc, x.age);
+export function writePerson(bc, x) {
+    (bare.writeString)(bc, x.name);
+    (bare.writeU8)(bc, x.age);
 }

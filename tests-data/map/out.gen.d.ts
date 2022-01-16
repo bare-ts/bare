@@ -19,6 +19,6 @@ export type uintSafe = number
 
 export type Dict = ReadonlyMap<string, string>
 
-export function decodeDict(bc: bare.ByteCursor): Dict
+export function readDict(bc: bare.ByteCursor): Dict
 
-export function encodeDict(bc: bare.ByteCursor, x: Dict): void
+export function writeDict(bc: bare.ByteCursor, x: Dict): void
