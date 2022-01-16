@@ -36,8 +36,10 @@ export function parse(
     filename: string,
     partConfig: Partial<BareParserConfig>
 ): BareAst {
-    const lex = new Lex(content, filename)
-    const p = BareParser(lex, partConfig)
+    const p = {
+        config: BareParserConfig(partConfig),
+        lex: new Lex(content, filename, { commentMark: "#" }),
+    }
     const result: Map<string, AliasedBareType> = new Map()
     while (p.lex.token() !== "") {
         const location = p.lex.location()
