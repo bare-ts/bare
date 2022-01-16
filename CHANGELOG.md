@@ -4,6 +4,24 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Fix location report upon compilation errors
+
+    Upon errors the compiler reports the error and a file location.
+    Previously, the reported location was shifted by 1 column and at
+    the end of a token.
+    Now, the compiler reports the correct location and at the start of a
+    token.
+
+    For instance, if a type alias is in lowercase in a bare schema,
+    then the parser reported an error at the end of the alias.
+    The error is now reported at the start of the alias:
+
+    ```bare
+    type lowerCaseAlias u8
+                      ^ error was previously reported here
+         ^ error is now reported here
+    ```
+
 * Add @bare-ts/lib as peer dependency
 
     This enables to inform the user of @bare-ts/tools which version of

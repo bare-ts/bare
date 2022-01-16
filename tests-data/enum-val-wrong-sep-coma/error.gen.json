@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "enum-val-wrong-sep-coma/schema.bare",
-    "offset": 25,
+    "offset": 24,
     "line": 3,
     "col": 10
   },

@@ -4,7 +4,7 @@
     "filename": "struct-no-end-delim/schema.bare",
     "offset": 46,
     "line": 5,
-    "col": 0
+    "col": 1
   },
-  "message": "(struct-no-end-delim/schema.bare:5:0) Declaration of a struct body must end with '}'."
+  "message": "(struct-no-end-delim/schema.bare:5:1) Declaration of a struct body must end with '}'."
 }

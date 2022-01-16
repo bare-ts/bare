@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "fixed-data-hex/schema.bare",
-    "offset": 21,
+    "offset": 18,
     "line": 1,
-    "col": 21
+    "col": 19
   },
-  "message": "(fixed-data-hex/schema.bare:1:21) Data length must be an integer >= 0."
+  "message": "(fixed-data-hex/schema.bare:1:19) Data length must be an integer >= 0."
 }

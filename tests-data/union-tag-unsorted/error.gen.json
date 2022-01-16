@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "union-tag-unsorted/schema.bare",
-    "offset": 44,
+    "offset": 43,
     "line": 1,
     "col": 44
   },

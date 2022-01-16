@@ -4,7 +4,7 @@
     "filename": "fixed-data-no-end-delim/schema.bare",
     "offset": 20,
     "line": 2,
-    "col": 0
+    "col": 1
   },
-  "message": "(fixed-data-no-end-delim/schema.bare:2:0) Data length must be enclosed by '<>'."
+  "message": "(fixed-data-no-end-delim/schema.bare:2:1) Data length must be enclosed by '<>'."
 }

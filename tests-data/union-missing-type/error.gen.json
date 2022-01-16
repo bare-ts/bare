@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "union-missing-type/schema.bare",
-    "offset": 27,
+    "offset": 26,
     "line": 1,
     "col": 27
   },

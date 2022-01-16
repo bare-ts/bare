@@ -4,7 +4,7 @@
     "filename": "union-no-end-delim/schema.bare",
     "offset": 39,
     "line": 2,
-    "col": 0
+    "col": 1
   },
-  "message": "(union-no-end-delim/schema.bare:2:0) Declaration of a union type must end with ')'."
+  "message": "(union-no-end-delim/schema.bare:2:1) Declaration of a union type must end with ')'."
 }

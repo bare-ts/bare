@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "union-not-enclosed/schema.bare",
-    "offset": 15,
+    "offset": 14,
     "line": 1,
     "col": 15
   },

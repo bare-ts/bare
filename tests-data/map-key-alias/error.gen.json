@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "map-key-alias/schema.bare",
-    "offset": 43,
+    "offset": 42,
     "line": 3,
     "col": 22
   },

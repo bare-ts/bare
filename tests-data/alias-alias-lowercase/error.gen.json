@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "alias-alias-lowercase/schema.bare",
-    "offset": 27,
+    "offset": 13,
     "line": 1,
-    "col": 27
+    "col": 14
   },
-  "message": "(alias-alias-lowercase/schema.bare:1:27) A type name is either in UpperCamelCase or is among predefined types."
+  "message": "(alias-alias-lowercase/schema.bare:1:14) A type name is either in UpperCamelCase or is among predefined types."
 }

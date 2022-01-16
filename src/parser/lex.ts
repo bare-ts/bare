@@ -3,8 +3,17 @@ import { ok as assert } from "assert"
 
 export interface Location {
     readonly filename: string
+    /**
+     * 0-based index
+     */
     readonly offset: number
+    /**
+     * 1-based line number
+     */
     readonly line: number
+    /**
+     * 1-based  column number
+     */
     readonly col: number
 }
 
@@ -46,7 +55,7 @@ export class Lex {
         this.filename = filename
         this.offset = 0
         this.line = 1
-        this.col = 0
+        this.col = 1
         this.forth()
     }
 
@@ -55,7 +64,9 @@ export class Lex {
     }
 
     location(): Location {
-        const { filename, offset, line, col } = this
+        let { filename, offset, line, col, _token } = this
+        offset -= _token.length
+        col -= _token.length
         return { filename, offset, line, col }
     }
 
@@ -67,7 +78,7 @@ export class Lex {
             if (WHITE_SPACE_PATTERN.test(c)) {
                 if (c === "\n") {
                     this.line++
-                    this.col = 0
+                    this.col = 1
                 } else {
                     this.col++
                 }

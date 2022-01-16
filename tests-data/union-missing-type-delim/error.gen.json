@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "union-missing-type-delim/schema.bare",
-    "offset": 29,
+    "offset": 26,
     "line": 1,
-    "col": 29
+    "col": 27
   },
-  "message": "(union-missing-type-delim/schema.bare:1:29) Declaration of a union type must end with ')'."
+  "message": "(union-missing-type-delim/schema.bare:1:27) Declaration of a union type must end with ')'."
 }

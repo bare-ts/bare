@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "struct-no-start-delim/schema.bare",
-    "offset": 23,
+    "offset": 19,
     "line": 3,
-    "col": 8
+    "col": 5
   },
-  "message": "(struct-no-start-delim/schema.bare:3:8) Declaration of a struct body must start with '{'."
+  "message": "(struct-no-start-delim/schema.bare:3:5) Declaration of a struct body must start with '{'."
 }

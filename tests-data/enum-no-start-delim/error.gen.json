@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "enum-no-start-delim/schema.bare",
-    "offset": 22,
+    "offset": 17,
     "line": 3,
-    "col": 9
+    "col": 5
   },
-  "message": "(enum-no-start-delim/schema.bare:3:9) Declaration of an enum body must start with '{'."
+  "message": "(enum-no-start-delim/schema.bare:3:5) Declaration of an enum body must start with '{'."
 }

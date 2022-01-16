@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "enum-empty/schema.bare",
-    "offset": 15,
+    "offset": 14,
     "line": 2,
     "col": 14
   },

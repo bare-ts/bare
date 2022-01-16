@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "optional-no-start-delim/schema.bare",
-    "offset": 29,
+    "offset": 25,
     "line": 2,
-    "col": 28
+    "col": 25
   },
-  "message": "(optional-no-start-delim/schema.bare:2:28) 'optional' must be followed by '<'."
+  "message": "(optional-no-start-delim/schema.bare:2:25) 'optional' must be followed by '<'."
 }

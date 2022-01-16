@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "fixed-typed-array-no-end-delim/schema.bare",
-    "offset": 18,
+    "offset": 16,
     "line": 1,
-    "col": 18
+    "col": 17
   },
-  "message": "(fixed-typed-array-no-end-delim/schema.bare:1:18) Array length must be enclosed by '[]'."
+  "message": "(fixed-typed-array-no-end-delim/schema.bare:1:17) Array length must be enclosed by '[]'."
 }

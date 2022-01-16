@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "struct-repeated-field/schema.bare",
-    "offset": 54,
+    "offset": 50,
     "line": 5,
-    "col": 8
+    "col": 5
   },
-  "message": "(struct-repeated-field/schema.bare:5:8) a field name must be unique."
+  "message": "(struct-repeated-field/schema.bare:5:5) a field name must be unique."
 }

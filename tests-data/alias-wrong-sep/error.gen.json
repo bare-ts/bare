@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "alias-wrong-sep/schema.bare",
-    "offset": 12,
+    "offset": 11,
     "line": 1,
     "col": 12
   },

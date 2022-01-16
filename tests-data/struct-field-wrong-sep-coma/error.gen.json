@@ -2,7 +2,7 @@
   "name": "BareParserError",
   "location": {
     "filename": "struct-field-wrong-sep-coma/schema.bare",
-    "offset": 34,
+    "offset": 33,
     "line": 3,
     "col": 17
   },

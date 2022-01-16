@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "map-no-start-key-delim/schema.bare",
-    "offset": 20,
+    "offset": 14,
     "line": 1,
-    "col": 20
+    "col": 15
   },
-  "message": "(map-no-start-key-delim/schema.bare:1:20) 'map' must be followed by '['."
+  "message": "(map-no-start-key-delim/schema.bare:1:15) 'map' must be followed by '['."
 }

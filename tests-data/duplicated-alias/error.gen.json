@@ -2,9 +2,9 @@
   "name": "BareParserError",
   "location": {
     "filename": "duplicated-alias/schema.bare",
-    "offset": 23,
+    "offset": 19,
     "line": 2,
-    "col": 4
+    "col": 1
   },
-  "message": "(duplicated-alias/schema.bare:2:4) Alias 'Duplicated' is already used."
+  "message": "(duplicated-alias/schema.bare:2:1) Alias 'Duplicated' is already used."
 }
