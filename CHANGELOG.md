@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Fix generator choice
+
+    The option `--generator` enables to specify which generator is used to
+    produce the output.
+    When the output is written to stdout, the generator `ts` is used by
+    default.
+    The option `--generator` should override this default.
+
+    Previously the option did not override the default.
+
 * Fix location report upon compilation errors
 
     Upon errors the compiler reports the error and a file location.

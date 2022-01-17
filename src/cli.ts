@@ -119,14 +119,14 @@ function completeOptions(
         )
     }
     const generator =
-        typeof opts.out === "number"
-            ? "ts"
-            : opts.out.endsWith(".d.ts")
+        typeof opts.out === "string" && opts.out.endsWith(".d.ts")
             ? "dts"
-            : opts.out.endsWith(".ts")
+            : typeof opts.out === "string" && opts.out.endsWith(".ts")
             ? "ts"
-            : opts.out.endsWith(".js")
+            : typeof opts.out === "string" && opts.out.endsWith(".js")
             ? "js"
+            : typeof opts.out === "number" && opts.generator === undefined
+            ? "ts"
             : opts.generator
     if (generator === undefined) {
         throw new BareConfigError(
