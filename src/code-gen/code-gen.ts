@@ -41,8 +41,11 @@ export function generate(ast: BareAst, config: Partial<CodeGenConfig>): string {
             }
             case "ts":
                 if (exported) {
-                    body += `${genAliasedType(g, aliased)}\n\n`
+                    const aliasedType = genAliasedType(g, aliased)
+                    body += aliasedType !== "" ? aliasedType + "\n\n" : ""
                 }
+                const code = genCode(g, aliased)
+                body += code !== "" ? code + "\n\n" : ""
                 body += `${genAliasedReader(g, aliased)}\n\n`
                 body += `${genAliasedWriter(g, aliased)}\n\n`
                 break
@@ -147,10 +150,22 @@ function genAliasedType(g: CodeGen, { alias, type }: AliasedBareType): string {
             return "export " + genAliasedEnumType(g, alias, type)
         case "struct": {
             if (g.config.importFactory) {
-                const extType = `ReturnType<typeof ext.${alias}>`
+                const extType = type.props.class
+                    ? `ext.${alias}`
+                    : `ReturnType<typeof ext.${alias}>`
                 return `export type ${alias} = ${extType}`
             }
-            return `export interface ${alias} ${genStructType(g, type)}`
+            if (!type.props.class) {
+                return `export interface ${alias} ${genStructType(g, type)}`
+            } else if (g.config.generator !== "dts") {
+                return "" // A non-ambient class will be generated
+            }
+            return unindent(
+                `export declare class ${alias} {
+                    ${indent(genStructTypeClassBody(g, type), 5)}
+                }`,
+                4
+            )
         }
     }
     return `export type ${alias} = ${genType(g, type)}`
@@ -287,14 +302,31 @@ function genSetType(g: CodeGen, { props }: BareSet): string {
     return `${setType}<${typedef}>`
 }
 
-function genStructType(g: CodeGen, { props }: BareStruct): string {
-    const lines = props.fields.map(
+function genStructType(g: CodeGen, type: BareStruct): string {
+    return unindent(`{
+        ${indent(genStructTypeBody(g, type), 2)}
+    }`)
+}
+
+function genStructTypeBody(g: CodeGen, type: BareStruct): string {
+    const members = type.props.fields.map(
         ({ mutable, name, type }) =>
             `${mutable ? "" : "readonly "}${name}: ${genType(g, type)}`
     )
-    return unindent(`{
-        ${indent(lines.join("\n"), 2)}
-    }`)
+    return members.join("\n")
+}
+
+function genStructTypeClassBody(g: CodeGen, type: BareStruct): string {
+    const params = type.props.fields
+        .map(({ name, type }) => `${jsIdFrom(name)}: ${genType(g, type)},`)
+        .join("\n")
+    return unindent(
+        `${indent(genStructTypeBody(g, type), 2)}
+        constructor(
+            ${indent(params, 3)}
+        )`,
+        2
+    )
 }
 
 function genTypedArrayType(_g: CodeGen, { props }: BareTypedArray): string {
@@ -362,8 +394,18 @@ function genEncoderHead(g: CodeGen, type: BareType, id: string): string {
 
 function genCode(g: CodeGen, aliased: AliasedBareType): string {
     const { alias, exported, type } = aliased
-    if (type.tag === "enum") {
+    if (type.tag === "enum" && g.config.generator === "js") {
         return (exported ? "export " : "") + genAliasedEnumCode(g, alias, type)
+    }
+    if (
+        type.tag === "struct" &&
+        type.props.class &&
+        aliased.exported &&
+        !g.config.importFactory
+    ) {
+        return (
+            (exported ? "export " : "") + genAliasedStructCode(g, alias, type)
+        )
     }
     return ""
 }
@@ -383,6 +425,31 @@ function genAliasedEnumCode(g: CodeGen, alias: string, type: BareEnum): string {
     return unindent(`const ${alias} = {
         ${indent(body, 2)}
     }${constAssert}`)
+}
+
+function genAliasedStructCode(
+    g: CodeGen,
+    alias: string,
+    type: BareStruct
+): string {
+    const ts = g.config.generator === "ts"
+    const members = ts ? "\n" + genStructTypeBody(g, type) : ""
+    const params = type.props.fields
+        .map(
+            ({ name, type }) =>
+                `${jsIdFrom(name)}` + (ts ? `: ${genType(g, type)},` : ",")
+        )
+        .join("\n")
+    const assignments = type.props.fields
+        .map(({ name }) => `this.${name} = ${jsIdFrom(name)}`)
+        .join("\n")
+    return unindent(`class ${alias} {${indent(members, 2)}
+        constructor(
+            ${indent(params, 3)}
+        ) {
+            ${indent(assignments, 3)}
+        }
+    }`)
 }
 
 // JS/TS reader generation
@@ -586,24 +653,25 @@ function genStructReader(g: CodeGen, type: BareStruct, id: string): string {
     let factoryArgs = ""
     for (const field of type.props.fields) {
         const fieldReader = genReader(g, field.type)
-        if (
-            JS_RESERVED_WORD.indexOf(field.name) !== -1 ||
-            /^(assert|bare|bc|ext|x)$|^read/.test(field.name)
-        ) {
-            fieldInit += `const _${field.name} = (${fieldReader})(bc)\n`
-            objBody += `\n${field.name}: _${field.name},`
-            factoryArgs += `_${field.name},`
-        } else {
-            fieldInit += `const ${field.name} = (${fieldReader})(bc)\n`
+        const name = jsIdFrom(field.name)
+        fieldInit += `const ${name} = (${fieldReader})(bc)\n`
+        factoryArgs += `${name}, `
+        if (field.name === name) {
             objBody += `\n${field.name},`
-            factoryArgs += `${field.name},`
+        } else {
+            objBody += `\n${field.name}: ${name},`
         }
     }
-    factoryArgs = factoryArgs.slice(0, -1) // remove extra coma
+    factoryArgs = factoryArgs.slice(0, -2) // remove extra coma and space
     let objCreation: string
-    const alias = g.typeToAliased.get(type)?.alias
-    if (g.config.importFactory && alias !== undefined) {
-        objCreation = `ext.${alias}(${indent(factoryArgs)})`
+    const aliased = g.typeToAliased.get(type)
+    if (g.config.importFactory && aliased !== undefined) {
+        objCreation = `ext.${aliased.alias}(${indent(factoryArgs)})`
+        if (type.props.class) {
+            objCreation = `new ` + objCreation
+        }
+    } else if (type.props.class && aliased !== undefined && aliased.exported) {
+        objCreation = `new ${aliased.alias}(${indent(factoryArgs)})`
     } else {
         objCreation = `{${indent(objBody)}\n}`
     }
@@ -929,6 +997,17 @@ function indent(s: string, n = 1): string {
 
 function unindent(s: string, n = 1): string {
     return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
+}
+
+/**
+ * @param s identifier
+ * @returns valid JS identifier
+ */
+function jsIdFrom(s: string): string {
+    return JS_RESERVED_WORD.indexOf(s) !== -1 ||
+        /^(assert|bare|bc|ext|x)$|^read/.test(s)
+        ? "_" + s
+        : s
 }
 
 const JS_RESERVED_WORD: readonly string[] =

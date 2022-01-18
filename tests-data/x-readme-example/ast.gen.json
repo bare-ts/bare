@@ -29,6 +29,7 @@
     "type": {
       "tag": "struct",
       "props": {
+        "class": false,
         "fields": [
           {
             "mutable": false,
@@ -73,6 +74,7 @@
     "type": {
       "tag": "struct",
       "props": {
+        "class": false,
         "fields": [
           {
             "mutable": false,

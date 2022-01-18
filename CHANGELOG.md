@@ -32,6 +32,10 @@ This project adheres to [Semantic Versioning][semver].
          ^ error is now reported here
     ```
 
+* Add `--use-class` option
+
+    This generates classes instead of interfaces for struct types.
+
 * Add @bare-ts/lib as peer dependency
 
     This enables to inform the user of @bare-ts/tools which version of

@@ -92,6 +92,7 @@ export interface BareSet {
 export interface BareStruct {
     readonly tag: "struct"
     readonly props: {
+        readonly class: boolean
         readonly fields: readonly StructField[]
     }
 }

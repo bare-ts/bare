@@ -5,6 +5,7 @@
     "type": {
       "tag": "struct",
       "props": {
+        "class": false,
         "fields": [
           {
             "mutable": true,

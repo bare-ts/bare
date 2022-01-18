@@ -1,4 +1,5 @@
 export interface BareParserConfig {
+    readonly useClass: boolean
     readonly useFlatUnion: boolean
     readonly useGenericArray: boolean
     readonly useIntEnum: boolean
@@ -13,6 +14,7 @@ export function BareParserConfig(
 ): BareParserConfig {
     return Object.assign(
         {
+            useClass: false,
             useFlatUnion: false,
             useGenericArray: false,
             useIntEnum: false,

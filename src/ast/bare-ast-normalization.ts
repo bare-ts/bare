@@ -100,7 +100,7 @@ function normalizeType(an: BareAstNormalizer, type: BareType): BareType {
                 fields.push(field)
             }
             return atLeastOneAliased
-                ? { tag: "struct", props: { fields } }
+                ? { tag: "struct", props: { class: type.props.class, fields } }
                 : type
         }
         case "union": {

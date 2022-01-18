@@ -459,5 +459,5 @@ function parseStructBody(p: BareParser): BareType {
         )
     }
     p.lex.forth()
-    return { tag: "struct", props: { fields } }
+    return { tag: "struct", props: { class: p.config.useClass, fields } }
 }

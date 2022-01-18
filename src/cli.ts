@@ -81,6 +81,7 @@ program
     )
     .option("--import-config", "import custom runtime config")
     .option("--import-factory", "import custom struct factory")
+    .option("--use-class", "use classes instead of interfaces for structs")
     .option("--use-flat-union", "use flat unions instead of tagged unions")
     .option("--use-generic-array", "use generic arrays instead of typed arrays")
     .option("--use-int-enum", "use integers for enum values instead of strings")

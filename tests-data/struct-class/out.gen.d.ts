@@ -1,5 +1,4 @@
 import * as bare from "@bare-ts/lib"
-import * as ext from "./ext.js"
 
 export type f32 = number
 export type f64 = number
@@ -18,15 +17,15 @@ export type u64Safe = number
 export type uint = bigint
 export type uintSafe = number
 
-export type Person = ReturnType<typeof ext.Person>
-
-export function readPerson(bc: bare.ByteCursor): Person {
-    const name = (bare.readString)(bc)
-    const age = (bare.readU8)(bc)
-    return ext.Person(name, age)
+export declare class Person {
+    readonly name: string
+    readonly age: u8
+    constructor(
+        name: string,
+        age: u8,
+    )
 }
 
-export function writePerson(bc: bare.ByteCursor, x: Person): void {
-    (bare.writeString)(bc, x.name);
-    (bare.writeU8)(bc, x.age);
-}
+export function readPerson(bc: bare.ByteCursor): Person
+
+export function writePerson(bc: bare.ByteCursor, x: Person): void
