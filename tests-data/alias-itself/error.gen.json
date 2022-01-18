@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "alias-itself/schema.bare",
+    "offset": 16,
+    "line": 1,
+    "col": 17
+  },
+  "message": "(alias-itself/schema.bare:1:17) A type cannot alias itself."
+}

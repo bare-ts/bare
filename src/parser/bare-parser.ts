@@ -87,6 +87,16 @@ function parseAliased(p: BareParser): AliasedBareType {
             : keyword === "struct"
             ? parseStructBody(p)
             : parseTypeCheckUnion(p)
+    if (
+        keyword === "type" &&
+        type.tag === "alias" &&
+        alias === type.props.alias
+    ) {
+        throw new BareParserError(
+            "A type cannot alias itself.",
+            p.lex.location()
+        )
+    }
     return { alias, exported: true, type }
 }
 
