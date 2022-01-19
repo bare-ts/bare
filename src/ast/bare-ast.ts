@@ -182,11 +182,3 @@ export function aliasToAliased(ast: BareAst): Map<string, AliasedBareType> {
     }
     return result
 }
-
-export function typeToAliased(ast: BareAst): Map<BareType, AliasedBareType> {
-    const result = new Map<BareType, AliasedBareType>()
-    for (const aliased of ast) {
-        result.set(aliased.type, aliased)
-    }
-    return result
-}

@@ -52,10 +52,10 @@ export function generate(ast: BareAst, config: Partial<CodeGenConfig>): string {
         }
         if (g.config.main.indexOf(alias) !== -1) {
             const aliasT = { tag: "alias", props: { alias } } as const
-            const encode = genEncoder(g, aliasT, `encode${alias}`)
-            const encodeType = genEncoderHead(g, aliasT, `encode${alias}`)
-            const decode = genDecoder(g, aliasT, `decode${alias}`)
-            const decodeType = genDecoderHead(g, aliasT, `decode${alias}`)
+            const encode = genEncoder(g, aliasT, alias)
+            const encodeType = genEncoderHead(g, aliasT, alias)
+            const decode = genDecoder(g, aliasT, alias)
+            const decodeType = genDecoderHead(g, aliasT, alias)
             switch (g.config.generator) {
                 case "dts":
                     body += `export ${encodeType}\n\n`
@@ -118,14 +118,12 @@ export function generate(ast: BareAst, config: Partial<CodeGenConfig>): string {
 
 interface CodeGen {
     readonly aliasToAliased: ReadonlyMap<string, AliasedBareType>
-    readonly typeToAliased: ReadonlyMap<BareType, AliasedBareType>
     readonly config: CodeGenConfig
 }
 
 function CodeGen(ast: BareAst, partConfig: Partial<CodeGenConfig>): CodeGen {
     return {
         aliasToAliased: BareAst_.aliasToAliased(ast),
-        typeToAliased: BareAst_.typeToAliased(ast),
         config: CodeGenConfig(partConfig),
     }
 }
@@ -171,8 +169,8 @@ function genAliasedType(g: CodeGen, { alias, type }: AliasedBareType): string {
     return `export type ${alias} = ${genType(g, type)}`
 }
 
-function typeAliasOrDef(g: CodeGen, type: BareType): string {
-    const aliased = g.typeToAliased.get(type)
+function typeAliasOrDef(g: CodeGen, type: BareType, alias: string): string {
+    const aliased = g.aliasToAliased.get(alias)
     return aliased !== undefined && aliased.exported
         ? aliased.alias
         : genType(g, type)
@@ -355,39 +353,43 @@ function genUnionType(g: CodeGen, { props }: BareUnion): string {
 }
 
 function genAliasedReaderHead(g: CodeGen, aliased: AliasedBareType): string {
-    return "export " + genReaderHead(g, aliased.type, `read${aliased.alias}`)
+    return "export " + genReaderHead(g, aliased.type, `${aliased.alias}`)
 }
 
-function genReaderHead(g: CodeGen, type: BareType, id: string): string {
-    const rType = typeAliasOrDef(g, type)
+function genReaderHead(g: CodeGen, type: BareType, alias: string): string {
+    const rType = typeAliasOrDef(g, type, alias)
+    const fname = alias !== "" ? `read${alias}` : ""
     return g.config.generator === "js"
-        ? `function ${id}(bc)`
-        : `function ${id}(bc: bare.ByteCursor): ${rType}`
+        ? `function ${fname}(bc)`
+        : `function ${fname}(bc: bare.ByteCursor): ${rType}`
 }
 
 function genAliasedWriterHead(g: CodeGen, aliased: AliasedBareType): string {
-    return "export " + genWriterHead(g, aliased.type, `write${aliased.alias}`)
+    return "export " + genWriterHead(g, aliased.type, `${aliased.alias}`)
 }
 
-function genWriterHead(g: CodeGen, type: BareType, id: string): string {
-    const xType = typeAliasOrDef(g, type)
+function genWriterHead(g: CodeGen, type: BareType, alias: string): string {
+    const xType = typeAliasOrDef(g, type, alias)
+    const fname = alias !== "" ? `write${alias}` : ""
     return g.config.generator === "js"
-        ? `function ${id}(bc, x)`
-        : `function ${id}(bc: bare.ByteCursor, x: ${xType}): void`
+        ? `function ${fname}(bc, x)`
+        : `function ${fname}(bc: bare.ByteCursor, x: ${xType}): void`
 }
 
-function genDecoderHead(g: CodeGen, type: BareType, id: string): string {
-    const rType = typeAliasOrDef(g, type)
+function genDecoderHead(g: CodeGen, type: BareType, alias: string): string {
+    const rType = typeAliasOrDef(g, type, alias)
+    const fname = alias !== "" ? `decode${alias}` : ""
     return g.config.generator === "js"
-        ? `function ${id}(bytes)`
-        : `function ${id}(bytes: Uint8Array): ${rType}`
+        ? `function ${fname}(bytes)`
+        : `function ${fname}(bytes: Uint8Array): ${rType}`
 }
 
-function genEncoderHead(g: CodeGen, type: BareType, id: string): string {
-    const xType = typeAliasOrDef(g, type)
+function genEncoderHead(g: CodeGen, type: BareType, alias: string): string {
+    const xType = typeAliasOrDef(g, type, alias)
+    const fname = alias !== "" ? `encode${alias}` : ""
     return g.config.generator === "js"
-        ? `function ${id}(x)`
-        : `function ${id}(x: ${xType}): Uint8Array`
+        ? `function ${fname}(x)`
+        : `function ${fname}(x: ${xType}): Uint8Array`
 }
 
 // JS/TS code
@@ -455,19 +457,19 @@ function genAliasedStructCode(
 // JS/TS reader generation
 
 function genAliasedReader(g: CodeGen, aliased: AliasedBareType): string {
-    const reader = genReader(g, aliased.type, `read${aliased.alias}`)
+    const reader = genReader(g, aliased.type, `${aliased.alias}`)
     const statement = reader.startsWith("function")
         ? reader
         : `const read${aliased.alias} = ${reader}`
     return (aliased.exported ? "export " : "") + statement
 }
 
-function genReader(g: CodeGen, type: BareType, id = ""): string {
+function genReader(g: CodeGen, type: BareType, alias = ""): string {
     switch (type.tag) {
         case "alias":
             return `${namespaced(g, type.props.alias)}read${type.props.alias}`
         case "array":
-            return genArrayReader(g, type, id)
+            return genArrayReader(g, type, alias)
         case "bool":
         case "f32":
         case "f64":
@@ -489,33 +491,33 @@ function genReader(g: CodeGen, type: BareType, id = ""): string {
         case "void":
             return `bare.read${capitalize(type.tag)}`
         case "data":
-            return genDataReader(g, type, id)
+            return genDataReader(g, type, alias)
         case "enum":
-            return genEnumReader(g, type, id)
+            return genEnumReader(g, type, alias)
         case "literal":
-            return genLiteralReader(g, type, id)
+            return genLiteralReader(g, type, alias)
         case "map":
-            return genMapReader(g, type, id)
+            return genMapReader(g, type, alias)
         case "optional":
-            return genOptionalReader(g, type, id)
+            return genOptionalReader(g, type, alias)
         case "set":
-            return genSetReader(g, type, id)
+            return genSetReader(g, type, alias)
         case "struct":
-            return genStructReader(g, type, id)
+            return genStructReader(g, type, alias)
         case "typedArray":
-            return genTypedArrayReader(g, type, id)
+            return genTypedArrayReader(g, type, alias)
         case "union":
-            return genUnionReader(g, type, id)
+            return genUnionReader(g, type, alias)
     }
 }
 
-function genArrayReader(g: CodeGen, type: BareArray, id: string): string {
+function genArrayReader(g: CodeGen, type: BareArray, alias = ""): string {
     const valReader = genReader(g, type.props.valType)
     const lenDecoding =
         type.props.len != null
             ? `${type.props.len}`
             : `bare.readUintSafe(bc)\nif (len === 0) return []`
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         const len = ${indent(lenDecoding, 2)}
         const valReader = ${indent(valReader, 2)}
         const result = [valReader(bc)]
@@ -526,24 +528,23 @@ function genArrayReader(g: CodeGen, type: BareArray, id: string): string {
     }`)
 }
 
-function genDataReader(g: CodeGen, type: BareData, id: string): string {
+function genDataReader(g: CodeGen, type: BareData, alias = ""): string {
     if (type.props.len == null) {
         return `bare.readData`
     }
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         return bare.readFixedData(bc, ${type.props.len})
     }`)
 }
 
-function genEnumReader(g: CodeGen, type: BareEnum, id: string): string {
+function genEnumReader(g: CodeGen, type: BareEnum, alias = ""): string {
     const {
         props: { useName, vals },
     } = type
-    const rType = typeAliasOrDef(g, type)
-    const aliased = g.typeToAliased.get(type)
+    const rType = typeAliasOrDef(g, type, alias)
     const lastTag = vals[vals.length - 1].val
     const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readSafeUint"
-    const signature = genReaderHead(g, type, id)
+    const signature = genReaderHead(g, type, alias)
     if (!useName && lastTag === vals.length - 1) {
         const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
         return unindent(
@@ -562,11 +563,7 @@ function genEnumReader(g: CodeGen, type: BareEnum, id: string): string {
     let switchBody = ""
     for (const { name, val } of vals) {
         const enumVal =
-            aliased !== undefined
-                ? `${aliased.alias}.${name}`
-                : useName
-                ? `"${name}"`
-                : val
+            alias !== "" ? `${alias}.${name}` : useName ? `"${name}"` : val
         switchBody += `
         case ${val}:
             return ${enumVal}`
@@ -584,23 +581,23 @@ function genEnumReader(g: CodeGen, type: BareEnum, id: string): string {
     }`)
 }
 
-function genLiteralReader(g: CodeGen, type: BareLiteral, id: string): string {
+function genLiteralReader(g: CodeGen, type: BareLiteral, alias = ""): string {
     const val = type.props.val
     const rVal = typeof val === "string" ? `"${val}"` : `${val}`
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         return ${rVal}
     }`)
 }
 
-function genMapReader(g: CodeGen, type: BareMap, id: string): string {
+function genMapReader(g: CodeGen, type: BareMap, alias = ""): string {
     const { props } = type
-    const kType = typeAliasOrDef(g, props.keyType)
-    const vType = typeAliasOrDef(g, props.valType)
+    const kType = genType(g, props.keyType)
+    const vType = genType(g, props.valType)
     const MapGenerics =
         g.config.generator === "js"
             ? ""
             : `<${indent(kType, 2)}, ${indent(vType, 2)}>`
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         const len = bare.readUintSafe(bc)
         const result = new Map${MapGenerics}()
         for (let i = 0; i < len; i++) {
@@ -616,22 +613,20 @@ function genMapReader(g: CodeGen, type: BareMap, id: string): string {
     }`)
 }
 
-function genOptionalReader(g: CodeGen, type: BareOptional, id: string): string {
+function genOptionalReader(g: CodeGen, type: BareOptional, alias = ""): string {
     const noneVal = type.props.null ? "null" : "undefined"
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         return bare.readBool(bc)
             ? (${indent(genReader(g, type.props.type), 3)})(bc)
             : ${noneVal}
     }`)
 }
 
-function genSetReader(g: CodeGen, type: BareSet, id: string): string {
+function genSetReader(g: CodeGen, type: BareSet, alias = ""): string {
     const valType = type.props.valType
     const SetGenerics =
-        g.config.generator === "js"
-            ? ""
-            : `<${indent(typeAliasOrDef(g, valType), 2)}>`
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+        g.config.generator === "js" ? "" : `<${indent(genType(g, valType), 2)}>`
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         const len = bare.readUintSafe(bc)
         const result = new Set${SetGenerics}()
         for (let i = 0; i < len; i++) {
@@ -647,7 +642,7 @@ function genSetReader(g: CodeGen, type: BareSet, id: string): string {
     }`)
 }
 
-function genStructReader(g: CodeGen, type: BareStruct, id: string): string {
+function genStructReader(g: CodeGen, type: BareStruct, alias = ""): string {
     let fieldInit = ""
     let objBody = ""
     let factoryArgs = ""
@@ -664,18 +659,21 @@ function genStructReader(g: CodeGen, type: BareStruct, id: string): string {
     }
     factoryArgs = factoryArgs.slice(0, -2) // remove extra coma and space
     let objCreation: string
-    const aliased = g.typeToAliased.get(type)
-    if (g.config.importFactory && aliased !== undefined) {
-        objCreation = `ext.${aliased.alias}(${indent(factoryArgs)})`
+    if (g.config.importFactory && alias !== "") {
+        objCreation = `ext.${alias}(${indent(factoryArgs)})`
         if (type.props.class) {
             objCreation = `new ` + objCreation
         }
-    } else if (type.props.class && aliased !== undefined && aliased.exported) {
-        objCreation = `new ${aliased.alias}(${indent(factoryArgs)})`
+    } else if (
+        type.props.class &&
+        alias !== "" &&
+        g.aliasToAliased.get(alias)?.exported
+    ) {
+        objCreation = `new ${alias}(${indent(factoryArgs)})`
     } else {
         objCreation = `{${indent(objBody)}\n}`
     }
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         ${indent(fieldInit.trim(), 2)}
         return ${indent(objCreation, 2)}
     }`)
@@ -684,7 +682,7 @@ function genStructReader(g: CodeGen, type: BareStruct, id: string): string {
 function genTypedArrayReader(
     g: CodeGen,
     type: BareTypedArray,
-    id: string
+    id = ""
 ): string {
     const { props } = type
     const typeName = capitalize(props.valTypeName)
@@ -696,7 +694,7 @@ function genTypedArrayReader(
     }`)
 }
 
-function genUnionReader(g: CodeGen, type: BareUnion, id: string): string {
+function genUnionReader(g: CodeGen, type: BareUnion, alias = ""): string {
     const lastTag = type.props.units[type.props.units.length - 1].tagVal
     const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readSafeUint"
     const flatten = type.props.flat
@@ -715,7 +713,7 @@ function genUnionReader(g: CodeGen, type: BareUnion, id: string): string {
             }`
         }
     }
-    return unindent(`${indent(genReaderHead(g, type, id))} {
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
         const offset = bc.offset
         const tag = ${tagReader}(bc)
         switch (tag) {
@@ -731,19 +729,19 @@ function genUnionReader(g: CodeGen, type: BareUnion, id: string): string {
 // JS/TS writers generation
 
 function genAliasedWriter(g: CodeGen, aliased: AliasedBareType): string {
-    const writer = genWriter(g, aliased.type, `write${aliased.alias}`)
+    const writer = genWriter(g, aliased.type, `${aliased.alias}`)
     const statement = writer.startsWith("function")
         ? writer
         : `const write${aliased.alias} = ${writer}`
     return (aliased.exported ? "export " : "") + statement
 }
 
-function genWriter(g: CodeGen, type: BareType, id = ""): string {
+function genWriter(g: CodeGen, type: BareType, alias = ""): string {
     switch (type.tag) {
         case "alias":
             return `${namespaced(g, type.props.alias)}write${type.props.alias}`
         case "array":
-            return genArrayWriter(g, type, id)
+            return genArrayWriter(g, type, alias)
         case "bool":
         case "f32":
         case "f64":
@@ -765,32 +763,32 @@ function genWriter(g: CodeGen, type: BareType, id = ""): string {
         case "void":
             return `bare.write${capitalize(type.tag)}`
         case "data":
-            return genDataWriter(g, type, id)
+            return genDataWriter(g, type, alias)
         case "enum":
-            return genEnumWriter(g, type, id)
+            return genEnumWriter(g, type, alias)
         case "literal":
-            return genLiteralWriter(g, type, id)
+            return genLiteralWriter(g, type, alias)
         case "map":
-            return genMapWriter(g, type, id)
+            return genMapWriter(g, type, alias)
         case "optional":
-            return genOptionalWriter(g, type, id)
+            return genOptionalWriter(g, type, alias)
         case "set":
-            return genSetWriter(g, type, id)
+            return genSetWriter(g, type, alias)
         case "struct":
-            return genStructWriter(g, type, id)
+            return genStructWriter(g, type, alias)
         case "typedArray":
-            return genTypedArrayWriter(g, type, id)
+            return genTypedArrayWriter(g, type, alias)
         case "union":
-            return genUnionWriter(g, type, id)
+            return genUnionWriter(g, type, alias)
     }
 }
 
-function genArrayWriter(g: CodeGen, type: BareArray, id: string): string {
+function genArrayWriter(g: CodeGen, type: BareArray, alias = ""): string {
     const lenEncoding =
         type.props.len != null
             ? `assert(x.length === ${type.props.len}, "Unmatched length")`
             : `bare.writeUintSafe(bc, x.length)`
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         ${lenEncoding}
         for (let i = 0; i < x.length; i++) {
             (${indent(genWriter(g, type.props.valType), 2)})(bc, x[i])
@@ -798,24 +796,23 @@ function genArrayWriter(g: CodeGen, type: BareArray, id: string): string {
     }`)
 }
 
-function genDataWriter(g: CodeGen, type: BareData, id: string): string {
+function genDataWriter(g: CodeGen, type: BareData, alias = ""): string {
     if (type.props.len == null) {
         return `bare.writeData`
     }
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         assert(x.byteLength === ${type.props.len})
         bare.writeFixedData(bc, x)
     }`)
 }
 
-function genEnumWriter(g: CodeGen, type: BareEnum, id: string): string {
+function genEnumWriter(g: CodeGen, type: BareEnum, alias = ""): string {
     const {
         props: { useName, vals },
     } = type
-    const aliased = g.typeToAliased.get(type)
     const lastTag = vals[vals.length - 1].val
     const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeSafeUint"
-    const signature = genWriterHead(g, type, id)
+    const signature = genWriterHead(g, type, alias)
     if (!useName) {
         return unindent(
             `${signature} {
@@ -827,11 +824,7 @@ function genEnumWriter(g: CodeGen, type: BareEnum, id: string): string {
     let switchBody = ""
     for (const { name, val } of vals) {
         const enumVal =
-            aliased !== undefined
-                ? `${aliased.alias}.${name}`
-                : useName
-                ? `"${name}"`
-                : val
+            alias !== "" ? `${alias}.${name}` : useName ? `"${name}"` : val
         switchBody += `
         case ${enumVal}: {
             ${tagWriter}(bc, ${val})
@@ -845,14 +838,14 @@ function genEnumWriter(g: CodeGen, type: BareEnum, id: string): string {
     }`)
 }
 
-function genLiteralWriter(g: CodeGen, type: BareLiteral, id: string): string {
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+function genLiteralWriter(g: CodeGen, type: BareLiteral, alias = ""): string {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         // do nothing
     }`)
 }
 
-function genMapWriter(g: CodeGen, type: BareMap, id: string): string {
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+function genMapWriter(g: CodeGen, type: BareMap, alias = ""): string {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.writeUintSafe(bc, x.size)
         for(const kv of x) {
             (${indent(genWriter(g, type.props.keyType), 2)})(bc, kv[0]);
@@ -861,8 +854,8 @@ function genMapWriter(g: CodeGen, type: BareMap, id: string): string {
     }`)
 }
 
-function genOptionalWriter(g: CodeGen, type: BareOptional, id: string): string {
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+function genOptionalWriter(g: CodeGen, type: BareOptional, alias = ""): string {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.writeBool(bc, x != null)
         if (x != null) {
             (${indent(genWriter(g, type.props.type), 3)})(bc, x)
@@ -870,8 +863,8 @@ function genOptionalWriter(g: CodeGen, type: BareOptional, id: string): string {
     }`)
 }
 
-function genSetWriter(g: CodeGen, type: BareSet, id: string): string {
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+function genSetWriter(g: CodeGen, type: BareSet, alias = ""): string {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.writeUintSafe(bc, x.size)
         for (const v of x) {
             (${indent(genWriter(g, type.props.valType), 2)})(bc, v)
@@ -879,11 +872,11 @@ function genSetWriter(g: CodeGen, type: BareSet, id: string): string {
     }`)
 }
 
-function genStructWriter(g: CodeGen, type: BareStruct, id: string): string {
+function genStructWriter(g: CodeGen, type: BareStruct, alias = ""): string {
     const fieldEncoding = type.props.fields.map(
         ({ name, type }) => `(${genWriter(g, type)})(bc, x.${name});`
     )
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         ${indent(fieldEncoding.join("\n"), 2)}
     }`)
 }
@@ -891,7 +884,7 @@ function genStructWriter(g: CodeGen, type: BareStruct, id: string): string {
 function genTypedArrayWriter(
     g: CodeGen,
     type: BareTypedArray,
-    id: string
+    id = ""
 ): string {
     const { len, valTypeName } = type.props
     if (len == null) {
@@ -903,8 +896,8 @@ function genTypedArrayWriter(
     }`)
 }
 
-function genUnionWriter(g: CodeGen, type: BareUnion, id: string): string {
-    const xType = typeAliasOrDef(g, type)
+function genUnionWriter(g: CodeGen, type: BareUnion, alias = ""): string {
+    const xType = typeAliasOrDef(g, type, alias)
     const lastTag = type.props.units[type.props.units.length - 1].tagVal
     const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeSafeUint"
     const tagExp = type.props.flat ? `ext.tag${xType}(x)` : "x.tag"
@@ -920,7 +913,7 @@ function genUnionWriter(g: CodeGen, type: BareUnion, id: string): string {
             (${genWriter(g, enumVal.type)})(bc, ${valExp})
             break`
     }
-    return unindent(`${indent(genWriterHead(g, type, id))} {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
         const tag = ${tagExp};
         ${tagWriter}(bc, tag)
         switch (tag) {
@@ -931,9 +924,9 @@ function genUnionWriter(g: CodeGen, type: BareUnion, id: string): string {
 
 // decode
 
-function genDecoder(g: CodeGen, type: BareType, id: string): string {
+function genDecoder(g: CodeGen, type: BareType, alias = ""): string {
     const config = g.config.importConfig ? `ext.config` : "config"
-    return unindent(`${genDecoderHead(g, type, id)} {
+    return unindent(`${genDecoderHead(g, type, alias)} {
         const bc = new bare.ByteCursor(bytes, ${config})
         const result = ${indent(genReader(g, type), 2)}(bc)
         if (bc.offset < bc.view.byteLength) {
@@ -943,7 +936,7 @@ function genDecoder(g: CodeGen, type: BareType, id: string): string {
     }`)
 }
 
-// function genDecoderStream(g: CodeGen, type: BareType, id: string): string {
+// function genDecoderStream(g: CodeGen, type: BareType, id = ""): string {
 //     const reader = genReader(g, type)
 //     const rType = typeAliasOrDef(g, type)
 //     const config = g.config.importConfig ? `ext.config` : "config"
@@ -959,9 +952,9 @@ function genDecoder(g: CodeGen, type: BareType, id: string): string {
 
 // encode
 
-function genEncoder(g: CodeGen, type: BareType, id: string): string {
+function genEncoder(g: CodeGen, type: BareType, alias = ""): string {
     const config = g.config.importConfig ? `ext.config` : "config"
-    return unindent(`${genEncoderHead(g, type, id)} {
+    return unindent(`${genEncoderHead(g, type, alias)} {
         const bc = new bare.ByteCursor(
             new Uint8Array(${config}.initialBufferLength),
             ${config}
@@ -971,7 +964,7 @@ function genEncoder(g: CodeGen, type: BareType, id: string): string {
     }`)
 }
 
-// function genEncoderInto(g: CodeGen, type: BareType, id: string): string {
+// function genEncoderInto(g: CodeGen, type: BareType, id = ""): string {
 //     const config = g.config.importConfig ? `ext.config` : "config"
 //     return unindent(`function ${id}(x/*: ${indent(
 //         typeAliasOrDef(g, type)
