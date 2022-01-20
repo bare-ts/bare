@@ -268,7 +268,8 @@ function genAliasedEnumType(g: CodeGen, alias: string, type: BareEnum): string {
         }
     }
     body = body.slice(0, -1) // remove last newline
-    return unindent(`enum ${alias} {
+    const modifier = g.config.generator === "dts" ? "declare " : ""
+    return unindent(`${modifier}enum ${alias} {
         ${indent(body, 2)}
     }`)
 }

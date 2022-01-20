@@ -29,7 +29,7 @@ export function readTime(bc: bare.ByteCursor): Time
 
 export function writeTime(bc: bare.ByteCursor, x: Time): void
 
-export enum Department {
+export declare enum Department {
     ACCOUNTING = "ACCOUNTING",
     ADMINISTRATION = "ADMINISTRATION",
     CUSTOMER_SERVICE = "CUSTOMER_SERVICE",

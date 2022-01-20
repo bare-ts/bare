@@ -17,7 +17,7 @@ export type u64Safe = number
 export type uint = bigint
 export type uintSafe = number
 
-export enum Gender {
+export declare enum Gender {
     FEMALE = "FEMALE",
     FLUID = "FLUID",
     MALE = "MALE",
