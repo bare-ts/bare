@@ -167,9 +167,9 @@ function parseData(p: BareParser): BareType {
     if (p.lex.token() === "<") {
         p.lex.forth()
         len = parseInt(p.lex.token(), 10)
-        if (!DIGIT_PATTERN.test(p.lex.token())) {
+        if (!DIGIT_PATTERN.test(p.lex.token()) || len === 0) {
             throw new BareParserError(
-                "Data length must be an integer >= 0.",
+                "Data length must be an integer > 0.",
                 p.lex.location()
             )
         }

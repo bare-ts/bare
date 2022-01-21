@@ -6,5 +6,5 @@
     "line": 1,
     "col": 19
   },
-  "message": "(fixed-data-hex/schema.bare:1:19) Data length must be an integer >= 0."
+  "message": "(fixed-data-hex/schema.bare:1:19) Data length must be an integer > 0."
 }

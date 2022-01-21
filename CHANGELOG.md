@@ -41,6 +41,14 @@ This project adheres to [Semantic Versioning][semver].
     This enables to inform the user of @bare-ts/tools which version of
     @bare-ts/lib is expected.
 
+* Forbid bare schema in which the length of a fixed data is 0
+
+    The following schema is now invalid:
+
+    ```bare
+    type EmptyData data<0>
+    ```
+
 * Forbid bare schema in which an enum have several members with the same name
 
     The following schema is now invalid:

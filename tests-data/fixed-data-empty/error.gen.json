@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "fixed-data-empty/schema.bare",
+    "offset": 20,
+    "line": 1,
+    "col": 21
+  },
+  "message": "(fixed-data-empty/schema.bare:1:21) Data length must be an integer > 0."
+}
