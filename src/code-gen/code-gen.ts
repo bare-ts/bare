@@ -132,10 +132,10 @@ function checkConfig(g: CodeGen): void {
     for (const alias of g.config.main) {
         const aliased = g.aliasToAliased.get(alias)
         if (aliased === undefined) {
-            throw new BareConfigError(`main codec '${alias}' does not exist`)
+            throw new BareConfigError(`Main codec '${alias}' does not exist.`)
         }
         if (!aliased.exported) {
-            throw new BareConfigError(`A main codec must be exported`)
+            throw new BareConfigError(`A main codec must be exported.`)
         }
     }
 }

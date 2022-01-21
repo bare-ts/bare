@@ -6,5 +6,5 @@
     "line": 3,
     "col": 1
   },
-  "message": "(optional-no-end-delim/schema.bare:3:1) 'optional' must end with '>'."
+  "message": "(optional-no-end-delim/schema.bare:3:1) '>' is expected."
 }

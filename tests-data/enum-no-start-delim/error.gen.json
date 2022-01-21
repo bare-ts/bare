@@ -6,5 +6,5 @@
     "line": 3,
     "col": 5
   },
-  "message": "(enum-no-start-delim/schema.bare:3:5) Declaration of an enum body must start with '{'."
+  "message": "(enum-no-start-delim/schema.bare:3:5) '{' is expected."
 }

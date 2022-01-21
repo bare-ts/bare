@@ -112,7 +112,7 @@ export class Lex {
                     return
                 } else {
                     throw new BareParserError(
-                        `invalid character '${c}'`,
+                        `Character '${c}' cannot be handled. BARE only supports ASCII characters for identifiers.`,
                         this.location()
                     )
                 }

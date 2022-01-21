@@ -6,5 +6,5 @@
     "line": 2,
     "col": 16
   },
-  "message": "(struct-empty/schema.bare:2:16) Declaration of a struct must include at least one member."
+  "message": "(struct-empty/schema.bare:2:16) A struct must include at least one member."
 }

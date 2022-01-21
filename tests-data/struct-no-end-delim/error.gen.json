@@ -6,5 +6,5 @@
     "line": 5,
     "col": 1
   },
-  "message": "(struct-no-end-delim/schema.bare:5:1) Declaration of a struct body must end with '}'."
+  "message": "(struct-no-end-delim/schema.bare:5:1) '}' is expected."
 }

@@ -6,5 +6,5 @@
     "line": 3,
     "col": 5
   },
-  "message": "(enum-val-lowercase/schema.bare:3:5) An enum member name must be in UPPER_SNAKE_CASE."
+  "message": "(enum-val-lowercase/schema.bare:3:5) The name of an enum member must be in UPPER_SNAKE_CASE."
 }

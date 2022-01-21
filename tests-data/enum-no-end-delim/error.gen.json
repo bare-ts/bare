@@ -6,5 +6,5 @@
     "line": 6,
     "col": 1
   },
-  "message": "(enum-no-end-delim/schema.bare:6:1) Declaration of an enum body must end with '}'."
+  "message": "(enum-no-end-delim/schema.bare:6:1) '}' is expected."
 }

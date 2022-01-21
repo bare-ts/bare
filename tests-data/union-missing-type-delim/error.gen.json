@@ -6,5 +6,5 @@
     "line": 1,
     "col": 27
   },
-  "message": "(union-missing-type-delim/schema.bare:1:27) Declaration of a union type must end with ')'."
+  "message": "(union-missing-type-delim/schema.bare:1:27) ')' is expected."
 }

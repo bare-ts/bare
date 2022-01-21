@@ -6,5 +6,5 @@
     "line": 3,
     "col": 10
   },
-  "message": "(struct-no-prop-type-sep/schema.bare:3:10) field name and field type must be separated by ':'."
+  "message": "(struct-no-prop-type-sep/schema.bare:3:10) ':' is expected."
 }

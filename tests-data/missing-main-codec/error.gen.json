@@ -1,4 +1,4 @@
 {
   "name": "BareConfigError",
-  "message": "main codec 'Message' does not exist"
+  "message": "Main codec 'Message' does not exist."
 }

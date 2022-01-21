@@ -6,5 +6,5 @@
     "line": 2,
     "col": 6
   },
-  "message": "(enum-lowercase/schema.bare:2:6) a user-defined type name must be in UpperCamelCase."
+  "message": "(enum-lowercase/schema.bare:2:6) The type name 'gender' must be in UpperCamelCase."
 }

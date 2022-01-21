@@ -62,7 +62,7 @@ function parseAliased(p: BareParser): AliasedBareType {
     const keyword = p.lex.token()
     if (keyword !== "enum" && keyword !== "struct" && keyword !== "type") {
         throw new BareParserError(
-            "a type definition must start with keyword 'enum', 'struct', or 'type'.",
+            "'enum', 'struct', or 'type' is expected.",
             p.lex.location()
         )
     }
@@ -70,14 +70,14 @@ function parseAliased(p: BareParser): AliasedBareType {
     const alias = p.lex.token()
     if (!UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new BareParserError(
-            "a user-defined type name must be in UpperCamelCase.",
+            `The type name '${alias}' must be in UpperCamelCase.`,
             p.lex.location()
         )
     }
     p.lex.forth()
     if (p.lex.token() === "=") {
         throw new BareParserError(
-            "a type definition and its body cannot be separated by '='.",
+            "A type definition and its body cannot be separated by '='.",
             p.lex.location()
         )
     }
@@ -125,7 +125,7 @@ function parseTypeCheckUnion(p: BareParser): BareType {
     const result = parseType(p)
     if (p.lex.token() === "|" || p.lex.token() === "=") {
         throw new BareParserError(
-            "a union type must be enclosed by '()'.",
+            "A union must be enclosed by '()'.",
             p.lex.location()
         )
     }
@@ -139,7 +139,7 @@ function parseTypeName(p: BareParser): BareType {
         !UPPER_CAMEL_CASE_PATTERN.test(alias)
     ) {
         throw new BareParserError(
-            "A type name is either in UpperCamelCase or is among predefined types.",
+            "A type name is either in UpperCamelCase or is a predefined types.",
             p.lex.location()
         )
     }
@@ -161,10 +161,7 @@ function parseTypeName(p: BareParser): BareType {
 }
 
 function parseData(p: BareParser): BareType {
-    assert(
-        p.lex.token() === "data",
-        "Data type declaration must start with 'data'."
-    )
+    assert(p.lex.token() === "data", "'data' is expected.")
     let len: number | null = null
     p.lex.forth()
     if (p.lex.token() === "<") {
@@ -178,10 +175,7 @@ function parseData(p: BareParser): BareType {
         }
         p.lex.forth()
         if (p.lex.token() !== ">") {
-            throw new BareParserError(
-                "Data length must be enclosed by '<>'.",
-                p.lex.location()
-            )
+            throw new BareParserError("'>' is expected.", p.lex.location())
         }
         p.lex.forth()
     }
@@ -189,10 +183,7 @@ function parseData(p: BareParser): BareType {
 }
 
 function parseArray(p: BareParser): BareType {
-    assert(
-        p.lex.token() === "[",
-        "Declaration of an array type must start with symbol '['."
-    )
+    assert(p.lex.token() === "[", "'[' is expected.")
     let len: number | null = null
     p.lex.forth()
     if (p.lex.token() !== "]") {
@@ -205,10 +196,7 @@ function parseArray(p: BareParser): BareType {
         }
         p.lex.forth()
         if (p.lex.token() !== "]") {
-            throw new BareParserError(
-                "Array length must be enclosed by '[]'.",
-                p.lex.location()
-            )
+            throw new BareParserError("']' is expected.", p.lex.location())
         }
     }
     p.lex.forth()
@@ -226,24 +214,15 @@ function parseArray(p: BareParser): BareType {
 }
 
 function parseOptional(p: BareParser): BareType {
-    assert(
-        p.lex.token() === "optional",
-        "Declaration of an optional type must start with 'optional'."
-    )
+    assert(p.lex.token() === "optional", "'optional' is expected.")
     p.lex.forth()
     if (p.lex.token() !== "<") {
-        throw new BareParserError(
-            "'optional' must be followed by '<'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'<' is expected.", p.lex.location())
     }
     p.lex.forth()
     const type = parseType(p)
     if (p.lex.token() !== ">") {
-        throw new BareParserError(
-            "'optional' must end with '>'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'>' is expected.", p.lex.location())
     }
     p.lex.forth()
     return {
@@ -257,30 +236,21 @@ function parseOptional(p: BareParser): BareType {
 }
 
 function parseMap(p: BareParser): BareType {
-    assert(
-        p.lex.token() === "map",
-        "Declaration of a map type must start with 'map'."
-    )
+    assert(p.lex.token() === "map", "'map' is expected.")
     p.lex.forth()
     if (p.lex.token() !== "[") {
-        throw new BareParserError(
-            "'map' must be followed by '['.",
-            p.lex.location()
-        )
+        throw new BareParserError("'[' is expected.", p.lex.location())
     }
     p.lex.forth()
     const keyType = parseType(p)
     if (!BareAst_.isPropertylessTag(keyType.tag) || keyType.tag === "void") {
         throw new BareParserError(
-            "The key type of a map type must be a type among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint.",
+            "The type of keys must be among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint.",
             p.lex.location()
         )
     }
     if (p.lex.token() !== "]") {
-        throw new BareParserError(
-            "The key type of a map type must be enclosed by '[]'.",
-            p.lex.location()
-        )
+        throw new BareParserError("']' is expected.", p.lex.location())
     }
     p.lex.forth()
     const valType = parseType(p)
@@ -291,10 +261,7 @@ function parseMap(p: BareParser): BareType {
 }
 
 function parseUnion(p: BareParser): BareType {
-    assert(
-        p.lex.token() === "(",
-        "Declaration of a union type must start with '('."
-    )
+    assert(p.lex.token() === "(", "'(' is expected.")
     const units: UnionUnit[] = []
     let tagVal = 0
     do {
@@ -302,12 +269,12 @@ function parseUnion(p: BareParser): BareType {
         if (p.lex.token() === ")") {
             if (units.length === 0) {
                 throw new BareParserError(
-                    "Declaration of a union type must include at least one type.",
+                    "A union must include at least one type.",
                     p.lex.location()
                 )
             } else {
                 throw new BareParserError(
-                    "A type delimiter '|' must be followed by a type.",
+                    "'|' must be followed by a type.",
                     p.lex.location()
                 )
             }
@@ -335,10 +302,7 @@ function parseUnion(p: BareParser): BareType {
         tagVal++
     } while (p.lex.token() === "|")
     if (p.lex.token() !== ")") {
-        throw new BareParserError(
-            "Declaration of a union type must end with ')'.",
-            p.lex.location()
-        )
+        throw new BareParserError("')' is expected.", p.lex.location())
     }
     p.lex.forth()
     return { tag: "union", props: { flat: p.config.useFlatUnion, units } }
@@ -346,10 +310,7 @@ function parseUnion(p: BareParser): BareType {
 
 function parseEnumBody(p: BareParser): BareType {
     if (p.lex.token() !== "{") {
-        throw new BareParserError(
-            "Declaration of an enum body must start with '{'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'{' is expected.", p.lex.location())
     }
     p.lex.forth()
     const vals: EnumVal[] = []
@@ -359,13 +320,13 @@ function parseEnumBody(p: BareParser): BareType {
         const name = p.lex.token()
         if (!UPPER_SNAKE_CASE_PATTERN.test(name)) {
             throw new BareParserError(
-                "An enum member name must be in UPPER_SNAKE_CASE.",
+                "The name of an enum member must be in UPPER_SNAKE_CASE.",
                 p.lex.location()
             )
         }
         if (names.has(name)) {
             throw new BareParserError(
-                "An enum member name must be unique.",
+                "The name of an enum member must be unique.",
                 p.lex.location()
             )
         }
@@ -377,13 +338,13 @@ function parseEnumBody(p: BareParser): BareType {
             val = parseInt(p.lex.token(), 10)
             if (!DIGIT_PATTERN.test(p.lex.token())) {
                 throw new BareParserError(
-                    "A enum value must be an integer >= 0.",
+                    "An enum tag must be an integer >= 0.",
                     p.lex.location()
                 )
             }
             if (prevVal !== -1 && prevVal >= val) {
                 throw new BareParserError(
-                    "A enum value must be greater than the previous one.",
+                    "A enum tag must be greater than the previous one.",
                     p.lex.location()
                 )
             }
@@ -393,20 +354,17 @@ function parseEnumBody(p: BareParser): BareType {
         val++
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new BareParserError(
-                `enum value cannot be separated by '${p.lex.token()}'.`,
+                `Enum members cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }
     }
     if (p.lex.token() !== "}") {
-        throw new BareParserError(
-            "Declaration of an enum body must end with '}'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'}' is expected.", p.lex.location())
     }
     if (vals.length === 0) {
         throw new BareParserError(
-            "Declaration of an enum must include at least one member.",
+            "An enum must include at least one member.",
             p.lex.location()
         )
     }
@@ -416,10 +374,7 @@ function parseEnumBody(p: BareParser): BareType {
 
 function parseStructBody(p: BareParser): BareType {
     if (p.lex.token() !== "{") {
-        throw new BareParserError(
-            "Declaration of a struct body must start with '{'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'{' is expected.", p.lex.location())
     }
     p.lex.forth()
     const fields: StructField[] = []
@@ -428,43 +383,37 @@ function parseStructBody(p: BareParser): BareType {
         const name = p.lex.token()
         if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
             throw new BareParserError(
-                "a field name must be in lowerCamelCase.",
+                "The name of a field must be in lowerCamelCase.",
                 p.lex.location()
             )
         }
         if (names.has(name)) {
             throw new BareParserError(
-                "a field name must be unique.",
+                "The name of a field must be unique.",
                 p.lex.location()
             )
         }
         names.add(name)
         p.lex.forth()
         if (p.lex.token() !== ":") {
-            throw new BareParserError(
-                "field name and field type must be separated by ':'.",
-                p.lex.location()
-            )
+            throw new BareParserError("':' is expected.", p.lex.location())
         }
         p.lex.forth()
         const type = parseTypeCheckUnion(p)
         fields.push({ mutable: p.config.useMutable, name, type })
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new BareParserError(
-                `struct fields cannot be separated by '${p.lex.token()}'.`,
+                `Fields cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }
     }
     if (p.lex.token() !== "}") {
-        throw new BareParserError(
-            "Declaration of a struct body must end with '}'.",
-            p.lex.location()
-        )
+        throw new BareParserError("'}' is expected.", p.lex.location())
     }
     if (fields.length === 0) {
         throw new BareParserError(
-            "Declaration of a struct must include at least one member.",
+            "A struct must include at least one member.",
             p.lex.location()
         )
     }

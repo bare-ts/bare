@@ -6,5 +6,5 @@
     "line": 2,
     "col": 14
   },
-  "message": "(enum-empty/schema.bare:2:14) Declaration of an enum must include at least one member."
+  "message": "(enum-empty/schema.bare:2:14) An enum must include at least one member."
 }
