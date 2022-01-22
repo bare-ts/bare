@@ -1,0 +1,38 @@
+[
+  {
+    "alias": "Y",
+    "exported": true,
+    "type": {
+      "tag": "u8",
+      "props": {}
+    }
+  },
+  {
+    "alias": "X",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "u8",
+              "props": {}
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "alias",
+              "props": {
+                "alias": "Y"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+]

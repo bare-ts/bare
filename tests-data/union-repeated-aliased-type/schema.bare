@@ -1,0 +1,2 @@
+type Y u8
+type X (u8 | Y)

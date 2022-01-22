@@ -263,6 +263,7 @@ function parseMap(p: BareParser): BareType {
 function parseUnion(p: BareParser): BareType {
     assert(p.lex.token() === "(", "'(' is expected.")
     const units: UnionUnit[] = []
+    const stringifiedUnits = new Set()
     let tagVal = 0
     do {
         p.lex.forth()
@@ -280,6 +281,16 @@ function parseUnion(p: BareParser): BareType {
             }
         }
         const type = parseType(p)
+        const stringifiedType = JSON.stringify(type)
+        // NOTE: this dirty check is ok because we initialize
+        // every object in the same way (properties are sorted)
+        if (stringifiedUnits.has(stringifiedType)) {
+            throw new BareParserError(
+                "A type cannot be repeated in an union.",
+                p.lex.location()
+            )
+        }
+        stringifiedUnits.add(stringifiedType)
         if (p.lex.token() === "=") {
             p.lex.forth()
             const prevTagVal = tagVal - 1

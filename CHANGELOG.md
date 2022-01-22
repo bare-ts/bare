@@ -49,6 +49,23 @@ This project adheres to [Semantic Versioning][semver].
     type EmptyData data<0>
     ```
 
+* Forbid bare schema in which a type is repeated in an union
+
+    The following schema is now invalid:
+
+    ```bare
+    type X (u8 | u8)
+    ```
+
+    Note that the following schema is still valid:
+
+    ```bare
+    type Y u8
+    type X (u8 | Y)
+    ```
+
+    `Y` is a user-defined type.
+
 * Forbid bare schema in which an enum have several members with the same name
 
     The following schema is now invalid:
