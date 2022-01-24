@@ -1,0 +1,42 @@
+[
+  {
+    "alias": "UnsignedInt",
+    "exported": true,
+    "type": {
+      "tag": "union",
+      "props": {
+        "flat": false,
+        "units": [
+          {
+            "tagVal": 0,
+            "type": {
+              "tag": "u8",
+              "props": {}
+            }
+          },
+          {
+            "tagVal": 1,
+            "type": {
+              "tag": "u16",
+              "props": {}
+            }
+          },
+          {
+            "tagVal": 2,
+            "type": {
+              "tag": "u32",
+              "props": {}
+            }
+          },
+          {
+            "tagVal": 9007199254740991,
+            "type": {
+              "tag": "u64",
+              "props": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+]

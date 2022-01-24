@@ -544,7 +544,7 @@ function genEnumReader(g: CodeGen, type: BareEnum, alias = ""): string {
     } = type
     const rType = typeAliasOrDef(g, type, alias)
     const lastTag = vals[vals.length - 1].val
-    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readSafeUint"
+    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readUintSafe"
     const signature = genReaderHead(g, type, alias)
     if (!useName && lastTag === vals.length - 1) {
         const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
@@ -697,7 +697,7 @@ function genTypedArrayReader(
 
 function genUnionReader(g: CodeGen, type: BareUnion, alias = ""): string {
     const lastTag = type.props.units[type.props.units.length - 1].tagVal
-    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readSafeUint"
+    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readUintSafe"
     const flatten = type.props.flat
     let switchBody = ""
     for (const enumVal of type.props.units) {
@@ -812,7 +812,7 @@ function genEnumWriter(g: CodeGen, type: BareEnum, alias = ""): string {
         props: { useName, vals },
     } = type
     const lastTag = vals[vals.length - 1].val
-    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeSafeUint"
+    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeUintSafe"
     const signature = genWriterHead(g, type, alias)
     if (!useName) {
         return unindent(
@@ -900,7 +900,7 @@ function genTypedArrayWriter(
 function genUnionWriter(g: CodeGen, type: BareUnion, alias = ""): string {
     const xType = typeAliasOrDef(g, type, alias)
     const lastTag = type.props.units[type.props.units.length - 1].tagVal
-    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeSafeUint"
+    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeUintSafe"
     const tagExp = type.props.flat ? `ext.tag${xType}(x)` : "x.tag"
     const valExp = type.props.flat
         ? g.config.generator === "ts"

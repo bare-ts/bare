@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Fix invalid code generation for big tags in enums and unions
+
+    bare-ts applies an optimization when tags can be encoded on 7bits.
+    The general case was not tested yet.
+    The addition of tests enabled to catch typo errors.
+    The generated code imported non-existing readers and writers.
+
 * Fix generator choice
 
     The option `--generator` enables to specify which generator is used to
