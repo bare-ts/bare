@@ -6,5 +6,5 @@
     "line": 1,
     "col": 18
   },
-  "message": "(fixed-typed-array-empty/schema.bare:1:18) Array length must be an integer > 0."
+  "message": "(fixed-typed-array-empty/schema.bare:1:18) A non-zero u32 is expected."
 }

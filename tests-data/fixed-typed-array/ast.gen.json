@@ -3,14 +3,10 @@
     "alias": "U8Array",
     "exported": true,
     "type": {
-      "tag": "array",
+      "tag": "typedArray",
       "props": {
         "len": 4,
-        "mutable": false,
-        "valType": {
-          "tag": "u8",
-          "props": {}
-        }
+        "valTypeName": "u8"
       }
     }
   }

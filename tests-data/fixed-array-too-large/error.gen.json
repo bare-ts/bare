@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "fixed-array-too-large/schema.bare",
+    "offset": 14,
+    "line": 1,
+    "col": 15
+  },
+  "message": "(fixed-array-too-large/schema.bare:1:15) A non-zero u32 is expected."
+}

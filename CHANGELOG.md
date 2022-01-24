@@ -48,6 +48,15 @@ This project adheres to [Semantic Versioning][semver].
     This enables to inform the user of @bare-ts/tools which version of
     @bare-ts/lib is expected.
 
+* Forbid bare schema in which length and tags are too large
+
+    Length of fixed data and (typed) array must be a u32.
+    This is a limitation of the ECMAScript standard.
+
+    Tags of enums and unions must be a safe integers.
+    In the future, this requirement could be relaxed by switching to
+    bigint for larger integers.
+
 * Forbid bare schema in which the length of a fixed data is 0
 
     The following schema is now invalid:

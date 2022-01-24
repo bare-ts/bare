@@ -17,7 +17,7 @@ export type u64Safe = number
 export type uint = bigint
 export type uintSafe = number
 
-export type U8Array = readonly (u8)[]
+export type U8Array = Uint8Array
 
 export function readU8Array(bc: bare.ByteCursor): U8Array
 

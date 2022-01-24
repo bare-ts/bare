@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "union-too-big-tag/schema.bare",
+    "offset": 95,
+    "line": 2,
+    "col": 54
+  },
+  "message": "(union-too-big-tag/schema.bare:2:54) A non-negative safe integer is expected."
+}

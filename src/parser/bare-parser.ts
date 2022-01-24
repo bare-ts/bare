@@ -166,13 +166,7 @@ function parseData(p: BareParser): BareType {
     p.lex.forth()
     if (p.lex.token() === "<") {
         p.lex.forth()
-        len = parseInt(p.lex.token(), 10)
-        if (!DIGIT_PATTERN.test(p.lex.token()) || len === 0) {
-            throw new BareParserError(
-                "Data length must be an integer > 0.",
-                p.lex.location()
-            )
-        }
+        len = parseU32(p)
         p.lex.forth()
         if (p.lex.token() !== ">") {
             throw new BareParserError("'>' is expected.", p.lex.location())
@@ -187,13 +181,7 @@ function parseArray(p: BareParser): BareType {
     let len: number | null = null
     p.lex.forth()
     if (p.lex.token() !== "]") {
-        len = parseInt(p.lex.token(), 10)
-        if (!DIGIT_PATTERN.test(p.lex.token()) || len === 0) {
-            throw new BareParserError(
-                "Array length must be an integer > 0.",
-                p.lex.location()
-            )
-        }
+        len = parseU32(p)
         p.lex.forth()
         if (p.lex.token() !== "]") {
             throw new BareParserError("']' is expected.", p.lex.location())
@@ -294,13 +282,7 @@ function parseUnion(p: BareParser): BareType {
         if (p.lex.token() === "=") {
             p.lex.forth()
             const prevTagVal = tagVal - 1
-            tagVal = parseInt(p.lex.token(), 10)
-            if (!DIGIT_PATTERN.test(p.lex.token())) {
-                throw new BareParserError(
-                    "A union tag must be an integer >= 0.",
-                    p.lex.location()
-                )
-            }
+            tagVal = parseU64Safe(p)
             if (prevTagVal !== -1 && prevTagVal >= tagVal) {
                 throw new BareParserError(
                     "A union tag must be greater than the previous one.",
@@ -346,13 +328,7 @@ function parseEnumBody(p: BareParser): BareType {
         if (p.lex.token() === "=") {
             p.lex.forth()
             const prevVal = val - 1
-            val = parseInt(p.lex.token(), 10)
-            if (!DIGIT_PATTERN.test(p.lex.token())) {
-                throw new BareParserError(
-                    "An enum tag must be an integer >= 0.",
-                    p.lex.location()
-                )
-            }
+            val = parseU64Safe(p)
             if (prevVal !== -1 && prevVal >= val) {
                 throw new BareParserError(
                     "A enum tag must be greater than the previous one.",
@@ -430,4 +406,30 @@ function parseStructBody(p: BareParser): BareType {
     }
     p.lex.forth()
     return { tag: "struct", props: { class: p.config.useClass, fields } }
+}
+
+function parseU32(p: BareParser): number {
+    const result = Number.parseInt(p.lex.token(), 10)
+    if (
+        !DIGIT_PATTERN.test(p.lex.token()) ||
+        result === 0 ||
+        result >>> 0 !== result
+    ) {
+        throw new BareParserError(
+            "A non-zero u32 is expected.",
+            p.lex.location()
+        )
+    }
+    return result
+}
+
+function parseU64Safe(p: BareParser): number {
+    const result = Number.parseInt(p.lex.token(), 10)
+    if (!DIGIT_PATTERN.test(p.lex.token()) || !Number.isSafeInteger(result)) {
+        throw new BareParserError(
+            "A non-negative safe integer is expected.",
+            p.lex.location()
+        )
+    }
+    return result
 }

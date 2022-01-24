@@ -1,0 +1,2 @@
+# last tag is Number.MAX_SAFE_INTEGER + 1
+type UnsignedInt (u8 = 0 | u16 = 1 | u32 = 2 | u64 = 9007199254740992)

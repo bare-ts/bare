@@ -1,0 +1,10 @@
+{
+  "name": "BareParserError",
+  "location": {
+    "filename": "enum-too-big-val/schema.bare",
+    "offset": 55,
+    "line": 5,
+    "col": 13
+  },
+  "message": "(enum-too-big-val/schema.bare:5:13) A non-negative safe integer is expected."
+}

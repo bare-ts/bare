@@ -6,5 +6,5 @@
     "line": 3,
     "col": 13
   },
-  "message": "(enum-val-non-int/schema.bare:3:13) An enum tag must be an integer >= 0."
+  "message": "(enum-val-non-int/schema.bare:3:13) A non-negative safe integer is expected."
 }

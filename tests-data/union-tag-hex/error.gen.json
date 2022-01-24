@@ -6,5 +6,5 @@
     "line": 1,
     "col": 24
   },
-  "message": "(union-tag-hex/schema.bare:1:24) A union tag must be an integer >= 0."
+  "message": "(union-tag-hex/schema.bare:1:24) A non-negative safe integer is expected."
 }

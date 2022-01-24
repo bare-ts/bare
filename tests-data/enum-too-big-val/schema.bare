@@ -1,0 +1,6 @@
+
+enum Gender {
+    MALE = 1
+    FEMALE = 2
+    FLUID = 9007199254740992    # this is Number.MAX_SAFE_INTEGER + 1
+}
