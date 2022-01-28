@@ -145,14 +145,8 @@ function parseTypeName(p: BareParser): BareType {
     }
     p.lex.forth()
     if (BareAst_.isPropertylessTag(alias)) {
-        if (
-            p.config.useSafeInt &&
-            (alias === "i64" ||
-                alias === "int" ||
-                alias === "u64" ||
-                alias === "uint")
-        ) {
-            const safeTypeName = `${alias}Safe` as const
+        const safeTypeName = `${alias}Safe`
+        if (p.config.useSafeInt && BareAst_.isPropertylessTag(safeTypeName)) {
             return { tag: safeTypeName, props: {} }
         }
         return { tag: alias, props: {} }
