@@ -7,6 +7,9 @@
     "module": "ES2020",
     "target": "ES2019",
 
+    // Does not implicitly import @types/*
+    "types": [],
+
     "noEmit": true,
 
     "sourceMap": true,
@@ -26,8 +29,10 @@
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
+    "noImplicitThis": true,
     "noPropertyAccessFromIndexSignature": true,
     "strict": true
   }
