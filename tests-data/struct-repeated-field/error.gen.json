@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "struct-repeated-field/schema.bare",
     "offset": 50,

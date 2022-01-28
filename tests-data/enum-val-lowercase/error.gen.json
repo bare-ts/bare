@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "enum-val-lowercase/schema.bare",
     "offset": 19,

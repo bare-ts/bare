@@ -17,12 +17,10 @@ export type u64Safe = number
 export type uint = bigint
 export type uintSafe = number
 
-export declare enum Gender {
-    MALE = "MALE",
-    FEMALE = "FEMALE",
-    FLUID = "FLUID",
-}
+export type X = 
+    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 1; readonly val: u8 }
 
-export function readGender(bc: bare.ByteCursor): Gender
+export function readX(bc: bare.ByteCursor): X
 
-export function writeGender(bc: bare.ByteCursor, x: Gender): void
+export function writeX(bc: bare.ByteCursor, x: X): void

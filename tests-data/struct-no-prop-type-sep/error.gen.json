@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "struct-no-prop-type-sep/schema.bare",
     "offset": 26,

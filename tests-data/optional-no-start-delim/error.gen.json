@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "optional-no-start-delim/schema.bare",
     "offset": 25,

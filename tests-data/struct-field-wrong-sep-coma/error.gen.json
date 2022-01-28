@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "struct-field-wrong-sep-coma/schema.bare",
     "offset": 33,

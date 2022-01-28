@@ -23,6 +23,6 @@ test("valid-tokens", (t) => {
 test("invalid-tokens", (t) => {
     const lex = new Lex("d à", "inline", LEX_CONFIG)
     t.throws(() => lex.forth(), {
-        name: "BareParserError",
+        name: "CompilerError",
     })
 })

@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "alias-wrong-sep/schema.bare",
     "offset": 11,

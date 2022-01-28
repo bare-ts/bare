@@ -1,6 +1,6 @@
 import {
     ConfigError,
-    BareParserError,
+    CompilerError,
     transform,
     generate,
     normalize,
@@ -29,7 +29,7 @@ test("parse", (t) => {
             try {
                 actual = parse(content, Config({ ...config, schema }))
             } catch (e) {
-                if (!(e instanceof BareParserError)) throw e
+                if (!(e instanceof CompilerError)) throw e
                 filename = "error.gen.json"
                 actual = { ...e, message: e.message }
             }
@@ -76,19 +76,18 @@ test("generate", (t) => {
             const config = fs.existsSync(configPath)
                 ? JSON.parse(fs.readFileSync(configPath).toString())
                 : {}
-
             try {
                 const tsComputed = generate(
                     ast,
-                    Object.assign(config, { generator: "ts" })
+                    Config({ ...config, generator: "ts" })
                 )
                 const dtsComputed = generate(
                     ast,
-                    Object.assign(config, { generator: "dts" })
+                    Config({ ...config, generator: "dts" })
                 )
                 const jsComputed = generate(
                     ast,
-                    Object.assign(config, { generator: "js" })
+                    Config({ ...config, generator: "js" })
                 )
 
                 const tsPath = resolve(dir, "out.gen.ts")
@@ -110,11 +109,7 @@ test("generate", (t) => {
                     tsContent,
                     `out must match ${tsRelPath}`
                 )
-                t.deepEqual(
-                    dtsComputed,
-                    dtsContent,
-                    `out must match ${dtsRelPath}`
-                )
+                t.deepEqual(dtsComputed, dtsContent)
                 t.deepEqual(
                     jsComputed,
                     jsContent,
@@ -164,7 +159,7 @@ test("transform", (t) => {
 
                 t.deepEqual(result, tsContent, `out must match ${tsRelPath}`)
             } catch (e) {
-                if (e instanceof BareParserError || e instanceof ConfigError) {
+                if (e instanceof CompilerError || e instanceof ConfigError) {
                     const errorPath = resolve(dir, "error.gen.json")
                     const errorRelPath = relative(DATA_DIR, errorPath)
                     t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)

@@ -2,12 +2,9 @@ import * as bare from "@bare-ts/lib"
 
 
 export const Gender = {
-    MALE: 1,
-    1: "MALE",
-    FEMALE: 2,
-    2: "FEMALE",
-    FLUID: 9007199254740991,
-    9007199254740991: "FLUID"
+    MALE: "MALE",
+    FEMALE: "FEMALE",
+    FLUID: "FLUID"
 }
 
 export function readGender(bc) {
@@ -28,5 +25,18 @@ export function readGender(bc) {
 }
 
 export function writeGender(bc, x) {
-    bare.writeUintSafe(bc, x)
+    switch (x) {
+        case Gender.MALE: {
+            bare.writeUintSafe(bc, 1)
+            break
+        }
+        case Gender.FEMALE: {
+            bare.writeUintSafe(bc, 2)
+            break
+        }
+        case Gender.FLUID: {
+            bare.writeUintSafe(bc, 9007199254740991)
+            break
+        }
+    }
 }

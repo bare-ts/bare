@@ -1,17 +1,46 @@
-[
-  {
-    "alias": "U8Array",
-    "exported": true,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": null,
-        "mutable": false,
-        "valType": {
-          "tag": "u8",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "U8Array",
+      "exported": true,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "array/schema.bare",
+              "offset": 15,
+              "line": 1,
+              "col": 16
+            }
+          }
+        ],
+        "loc": {
+          "filename": "array/schema.bare",
+          "offset": 13,
+          "line": 1,
+          "col": 14
         }
+      },
+      "loc": {
+        "filename": "array/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "array/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

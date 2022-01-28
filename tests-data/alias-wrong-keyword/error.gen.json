@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "alias-wrong-keyword/schema.bare",
     "offset": 0,

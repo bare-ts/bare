@@ -1,17 +1,46 @@
-[
-  {
-    "alias": "U64Array",
-    "exported": true,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": null,
-        "mutable": false,
-        "valType": {
-          "tag": "u64Safe",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "U64Array",
+      "exported": true,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "u64Safe",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "safe-int-array/schema.bare",
+              "offset": 16,
+              "line": 1,
+              "col": 17
+            }
+          }
+        ],
+        "loc": {
+          "filename": "safe-int-array/schema.bare",
+          "offset": 14,
+          "line": 1,
+          "col": 15
         }
+      },
+      "loc": {
+        "filename": "safe-int-array/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "safe-int-array/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

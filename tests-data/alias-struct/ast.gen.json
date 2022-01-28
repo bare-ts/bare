@@ -1,30 +1,78 @@
-[
-  {
-    "alias": "Person",
-    "exported": true,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "loc": {
+                "filename": "alias-struct/schema.bare",
+                "offset": 18,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "age",
+              "loc": {
+                "filename": "alias-struct/schema.bare",
+                "offset": 35,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
           {
-            "mutable": false,
-            "name": "name",
-            "type": {
-              "tag": "string",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "alias-struct/schema.bare",
+              "offset": 24,
+              "line": 2,
+              "col": 11
             }
           },
           {
-            "mutable": false,
-            "name": "age",
-            "type": {
-              "tag": "u8",
-              "props": {}
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "alias-struct/schema.bare",
+              "offset": 40,
+              "line": 3,
+              "col": 10
             }
           }
-        ]
+        ],
+        "loc": {
+          "filename": "alias-struct/schema.bare",
+          "offset": 12,
+          "line": 1,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "alias-struct/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "alias-struct/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "union-missing-type-delim/schema.bare",
     "offset": 26,

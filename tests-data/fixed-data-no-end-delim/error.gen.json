@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "fixed-data-no-end-delim/schema.bare",
     "offset": 20,

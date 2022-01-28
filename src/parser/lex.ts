@@ -1,21 +1,5 @@
-import { BareParserError } from "./bare-parser-error.js"
+import { CompilerError, type Location } from "../core/compiler-error.js"
 import { ok as assert } from "assert"
-
-export interface Location {
-    readonly filename: string | number
-    /**
-     * 0-based index
-     */
-    readonly offset: number
-    /**
-     * 1-based line number
-     */
-    readonly line: number
-    /**
-     * 1-based  column number
-     */
-    readonly col: number
-}
 
 /**
  * @invariant commentMark == null || commentMark.length === 1
@@ -111,7 +95,7 @@ export class Lex {
                     this._token = c
                     return
                 } else {
-                    throw new BareParserError(
+                    throw new CompilerError(
                         `Character '${c}' cannot be handled. BARE only supports ASCII characters for identifiers.`,
                         this.location()
                     )

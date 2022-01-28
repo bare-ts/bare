@@ -1,0 +1,60 @@
+{
+  "defs": [
+    {
+      "alias": "X",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-repeated-type/schema.bare",
+              "offset": 8,
+              "line": 1,
+              "col": 9
+            }
+          },
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-repeated-type/schema.bare",
+              "offset": 13,
+              "line": 1,
+              "col": 14
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-repeated-type/schema.bare",
+          "offset": 7,
+          "line": 1,
+          "col": 8
+        }
+      },
+      "loc": {
+        "filename": "union-repeated-type/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-repeated-type/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

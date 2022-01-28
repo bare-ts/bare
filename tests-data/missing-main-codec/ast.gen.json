@@ -1,10 +1,31 @@
-[
-  {
-    "alias": "Other",
-    "exported": true,
-    "type": {
-      "tag": "string",
-      "props": {}
+{
+  "defs": [
+    {
+      "alias": "Other",
+      "exported": true,
+      "type": {
+        "tag": "string",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "missing-main-codec/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "missing-main-codec/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
     }
+  ],
+  "loc": {
+    "filename": "missing-main-codec/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

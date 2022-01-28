@@ -1,31 +1,76 @@
-[
-  {
-    "alias": "MultiArray",
-    "exported": true,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": null,
-        "mutable": false,
-        "valType": {
-          "tag": "array",
-          "props": {
-            "len": null,
-            "mutable": false,
-            "valType": {
-              "tag": "array",
-              "props": {
-                "len": null,
-                "mutable": false,
-                "valType": {
-                  "tag": "string",
-                  "props": {}
+{
+  "defs": [
+    {
+      "alias": "MultiArray",
+      "exported": true,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "array",
+            "props": {
+              "len": null,
+              "mut": false
+            },
+            "types": [
+              {
+                "tag": "array",
+                "props": {
+                  "len": null,
+                  "mut": false
+                },
+                "types": [
+                  {
+                    "tag": "string",
+                    "props": null,
+                    "types": null,
+                    "loc": {
+                      "filename": "multi-array/schema.bare",
+                      "offset": 22,
+                      "line": 1,
+                      "col": 23
+                    }
+                  }
+                ],
+                "loc": {
+                  "filename": "multi-array/schema.bare",
+                  "offset": 20,
+                  "line": 1,
+                  "col": 21
                 }
               }
+            ],
+            "loc": {
+              "filename": "multi-array/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
             }
           }
+        ],
+        "loc": {
+          "filename": "multi-array/schema.bare",
+          "offset": 16,
+          "line": 1,
+          "col": 17
         }
+      },
+      "loc": {
+        "filename": "multi-array/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "multi-array/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

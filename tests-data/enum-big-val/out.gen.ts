@@ -18,9 +18,9 @@ export type uint = bigint
 export type uintSafe = number
 
 export enum Gender {
-    MALE = 1,
-    FEMALE,
-    FLUID = 9007199254740991,
+    MALE = "MALE",
+    FEMALE = "FEMALE",
+    FLUID = "FLUID",
 }
 
 export function readGender(bc: bare.ByteCursor): Gender {
@@ -41,5 +41,18 @@ export function readGender(bc: bare.ByteCursor): Gender {
 }
 
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
-    bare.writeUintSafe(bc, x)
+    switch (x) {
+        case Gender.MALE: {
+            bare.writeUintSafe(bc, 1)
+            break
+        }
+        case Gender.FEMALE: {
+            bare.writeUintSafe(bc, 2)
+            break
+        }
+        case Gender.FLUID: {
+            bare.writeUintSafe(bc, 9007199254740991)
+            break
+        }
+    }
 }

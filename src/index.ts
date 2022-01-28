@@ -1,13 +1,13 @@
-import { normalize } from "./ast/bare-ast-normalization.js"
-import { generate } from "./code-gen/code-gen.js"
+import { normalize } from "./ast/bare-normalization.js"
+import { generate } from "./generator/js-generator.js"
 import { Config } from "./core/config.js"
 import { parse } from "./parser/bare-parser.js"
 
-export * from "./ast/bare-ast-normalization.js"
+export * from "./ast/bare-normalization.js"
 export * from "./ast/bare-ast.js"
-export * from "./code-gen/code-gen.js"
+export * from "./generator/js-generator.js"
+export * from "./core/compiler-error.js"
 export * from "./core/config.js"
-export * from "./parser/bare-parser-error.js"
 export * from "./parser/bare-parser.js"
 export * from "./parser/lex.js"
 
@@ -21,7 +21,7 @@ export * from "./parser/lex.js"
  */
 export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)
-    const ast = parse(content, completedConfig)
-    const normalizedAst = normalize(ast)
-    return generate(normalizedAst, conf)
+    const schema = parse(content, completedConfig)
+    const normalizedSchema = normalize(schema)
+    return generate(normalizedSchema, completedConfig)
 }

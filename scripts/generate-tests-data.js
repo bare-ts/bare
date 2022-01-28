@@ -3,7 +3,7 @@
 import {
     Config,
     ConfigError,
-    BareParserError,
+    CompilerError,
     generate,
     normalize,
     parse,
@@ -67,7 +67,7 @@ program
                     )
                     fs.writeFileSync(dtsPath, out)
                 } catch (e) {
-                    if (e instanceof BareParserError) {
+                    if (e instanceof CompilerError) {
                         // Error.message is not enumerable and then is not serialized
                         const ex = { ...e, message: e.message }
                         fs.writeFileSync(errorPath, JSON.stringify(ex, null, 2))

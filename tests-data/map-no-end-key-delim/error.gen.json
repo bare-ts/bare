@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "map-no-end-key-delim/schema.bare",
     "offset": 21,

@@ -1,119 +1,166 @@
-export type BareAst = readonly AliasedBareType[]
+import type { Location } from "../core/compiler-error.js"
 
-export interface AliasedBareType {
-    readonly alias: string
-    readonly exported: boolean
-    readonly type: BareType
+export interface Ast {
+    readonly defs: readonly AliasedType[]
+    readonly loc: Location | null
 }
 
-export type BareType =
-    | BareAlias // Named user type
-    | BareArray // []type, [n]type
-    | BareData // data, data<length>
-    | BareEnum
-    | BareLiteral // map[type]type
-    | BareMap // map[type]type
-    | BareOptional // optional<type>
-    | BarePropertyLessType
-    | BareSet // []type
-    | BareStruct // { fields... }
-    | BareTypedArray
-    | BareUnion // (type | ...)
+export interface AliasedType {
+    readonly alias: string
+    readonly exported: boolean
+    readonly type: Type
+    readonly loc: Location | null
+}
 
-export interface BareAlias {
+export type Type =
+    | Alias // Named user type
+    | ArrayType // []type, [n]type
+    | DataType // data, data<length>
+    | EnumType
+    | LiteralType // map[type]type
+    | MapType // map[type]type
+    | OptionalType // optional<type>
+    | PrimitiveType
+    | SetType // []type
+    | StructType // { fields... }
+    | TypedArrayType
+    | UnionType // (type | ...)
+
+export interface Alias {
     readonly tag: "alias"
     readonly props: {
         readonly alias: string
     }
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareArray {
+export interface ArrayType {
     readonly tag: "array"
     readonly props: {
         readonly len: number | null
-        readonly mutable: boolean
-        readonly valType: BareType
+        readonly mut: boolean
     }
+    readonly types: readonly [valType: Type]
+    readonly loc: Location | null
 }
 
-export interface BareData {
+export interface DataType {
     readonly tag: "data"
     readonly props: {
         readonly len: number | null
+        readonly mut: boolean
     }
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareEnum {
+export interface EnumType {
     readonly tag: "enum"
     readonly props: {
-        readonly useName: boolean
+        readonly intEnum: boolean
         readonly vals: readonly EnumVal[]
     }
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareLiteral {
+export interface EnumVal {
+    readonly name: string
+    readonly val: number
+    readonly loc: Location | null
+}
+
+export interface LiteralType {
     readonly tag: "literal"
     readonly props: {
-        readonly val: string | number
+        readonly val?: Literal
     }
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareMap {
+export type Literal = bigint | boolean | number | null | string | undefined
+
+export interface MapType {
     readonly tag: "map"
     readonly props: {
-        readonly keyType: BareType
-        readonly mutable: boolean
-        readonly valType: BareType
+        readonly mut: boolean
     }
+    readonly types: readonly [keyType: Type, valType: Type]
+    readonly loc: Location | null
 }
 
-export interface BareOptional {
+export interface OptionalType {
     readonly tag: "optional"
     readonly props: {
-        readonly permissive: boolean
+        readonly lax: boolean
         readonly null: boolean
-        readonly type: BareType
     }
+    readonly types: readonly [type: Type]
+    readonly loc: Location | null
 }
 
-export interface BarePropertyLessType {
-    readonly tag: PropertyLessTypeTag
-    readonly props: {}
+export interface PrimitiveType {
+    readonly tag: PrimitiveTag
+    readonly props: null
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareSet {
+export interface SetType {
     readonly tag: "set"
     readonly props: {
-        readonly mutable: boolean
-        readonly valType: BareType
+        readonly len: null
+        readonly mut: boolean
     }
+    readonly types: readonly [valType: Type]
+    readonly loc: Location | null
 }
 
-export interface BareStruct {
+export interface StructType {
     readonly tag: "struct"
     readonly props: {
         readonly class: boolean
-        readonly fields: readonly StructField[]
+        readonly fields: StructField[]
     }
+    readonly types: readonly Type[]
+    readonly loc: Location | null
 }
 
-export interface BareTypedArray {
-    readonly tag: "typedArray"
+export interface StructField {
+    readonly mut: boolean
+    readonly name: string
+    readonly loc: Location | null
+}
+
+export interface TypedArrayType {
+    readonly tag: "typedarray"
     readonly props: {
         readonly len: number | null
-        readonly valTypeName: TypedArrayValType
+        readonly valType: TypedArrayValType
     }
+    readonly types: null
+    readonly loc: Location | null
 }
 
-export interface BareUnion {
+export interface UnionType {
     readonly tag: "union"
     readonly props: {
         readonly flat: boolean
-        readonly units: readonly UnionUnit[]
+        readonly tags: readonly number[]
     }
+    readonly types: readonly Type[]
+    readonly loc: Location | null
 }
 
-export const PROPERTY_LESS_TAG = [
+export type PrimitiveTag = typeof PRIMITIVE_TAG[number]
+
+export function isPrimitiveTag(tag: string): tag is PrimitiveTag {
+    return PRIMITIVE_TAG_SET.has(tag)
+}
+
+const PRIMITIVE_TAG = [
     "bool",
     "f32",
     "f64",
@@ -135,21 +182,12 @@ export const PROPERTY_LESS_TAG = [
     "void",
 ] as const
 
-export type PropertyLessTypeTag = typeof PROPERTY_LESS_TAG[number]
+const PRIMITIVE_TAG_SET: ReadonlySet<string> = new Set(PRIMITIVE_TAG)
 
-export function isPropertylessTag(tag: string): tag is PropertyLessTypeTag {
-    return PROPERTY_LESS_TAG.indexOf(tag as PropertyLessTypeTag) !== -1
-}
+export type TypedArrayValType = keyof typeof TYPED_ARRAY_VAL_TYPE_TO_ARRAY
 
-export interface EnumVal {
-    readonly name: string
-    readonly val: /* non-zero safe-u64 */ number
-}
-
-export interface StructField {
-    readonly mutable: boolean
-    readonly name: string
-    readonly type: BareType
+export function isTypedArrayValType(name: string): name is TypedArrayValType {
+    return Object.hasOwnProperty.call(TYPED_ARRAY_VAL_TYPE_TO_ARRAY, name)
 }
 
 export const TYPED_ARRAY_VAL_TYPE_TO_ARRAY = {
@@ -164,20 +202,11 @@ export const TYPED_ARRAY_VAL_TYPE_TO_ARRAY = {
     "u64": "BigUint64Array",
 } as const
 
-export type TypedArrayValType = keyof typeof TYPED_ARRAY_VAL_TYPE_TO_ARRAY
+export type SymbolTable = ReadonlyMap<string, AliasedType>
 
-export function isTypedArrayValType(name: string): name is TypedArrayValType {
-    return Object.hasOwnProperty.call(TYPED_ARRAY_VAL_TYPE_TO_ARRAY, name)
-}
-
-export interface UnionUnit {
-    readonly tagVal: /* non-zero safe-u64 */ number
-    readonly type: BareType
-}
-
-export function aliasToAliased(ast: BareAst): Map<string, AliasedBareType> {
-    const result = new Map<string, AliasedBareType>()
-    for (const aliased of ast) {
+export function symbols(schema: Ast): SymbolTable {
+    const result = new Map<string, AliasedType>()
+    for (const aliased of schema.defs) {
         result.set(aliased.alias, aliased)
     }
     return result

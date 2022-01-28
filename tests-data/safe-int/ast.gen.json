@@ -1,18 +1,52 @@
-[
-  {
-    "alias": "I64",
-    "exported": true,
-    "type": {
-      "tag": "i64Safe",
-      "props": {}
+{
+  "defs": [
+    {
+      "alias": "I64",
+      "exported": true,
+      "type": {
+        "tag": "i64Safe",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "safe-int/schema.bare",
+          "offset": 9,
+          "line": 1,
+          "col": 10
+        }
+      },
+      "loc": {
+        "filename": "safe-int/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "U64",
+      "exported": true,
+      "type": {
+        "tag": "u64Safe",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "safe-int/schema.bare",
+          "offset": 22,
+          "line": 2,
+          "col": 10
+        }
+      },
+      "loc": {
+        "filename": "safe-int/schema.bare",
+        "offset": 13,
+        "line": 2,
+        "col": 1
+      }
     }
-  },
-  {
-    "alias": "U64",
-    "exported": true,
-    "type": {
-      "tag": "u64Safe",
-      "props": {}
-    }
+  ],
+  "loc": {
+    "filename": "safe-int/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

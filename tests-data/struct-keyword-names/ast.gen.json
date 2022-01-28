@@ -1,54 +1,141 @@
-[
-  {
-    "alias": "Operation",
-    "exported": true,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
+{
+  "defs": [
+    {
+      "alias": "Operation",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "type",
+              "loc": {
+                "filename": "struct-keyword-names/schema.bare",
+                "offset": 23,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "struct",
+              "loc": {
+                "filename": "struct-keyword-names/schema.bare",
+                "offset": 40,
+                "line": 3,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "enum",
+              "loc": {
+                "filename": "struct-keyword-names/schema.bare",
+                "offset": 59,
+                "line": 4,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "const",
+              "loc": {
+                "filename": "struct-keyword-names/schema.bare",
+                "offset": 76,
+                "line": 5,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "bc",
+              "loc": {
+                "filename": "struct-keyword-names/schema.bare",
+                "offset": 92,
+                "line": 6,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
           {
-            "mutable": false,
-            "name": "type",
-            "type": {
-              "tag": "string",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-keyword-names/schema.bare",
+              "offset": 29,
+              "line": 2,
+              "col": 11
             }
           },
           {
-            "mutable": false,
-            "name": "struct",
-            "type": {
-              "tag": "string",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-keyword-names/schema.bare",
+              "offset": 48,
+              "line": 3,
+              "col": 13
             }
           },
           {
-            "mutable": false,
-            "name": "enum",
-            "type": {
-              "tag": "string",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-keyword-names/schema.bare",
+              "offset": 65,
+              "line": 4,
+              "col": 11
             }
           },
           {
-            "mutable": false,
-            "name": "const",
-            "type": {
-              "tag": "bool",
-              "props": {}
+            "tag": "bool",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-keyword-names/schema.bare",
+              "offset": 83,
+              "line": 5,
+              "col": 12
             }
           },
           {
-            "mutable": false,
-            "name": "bc",
-            "type": {
-              "tag": "u8",
-              "props": {}
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-keyword-names/schema.bare",
+              "offset": 96,
+              "line": 6,
+              "col": 9
             }
           }
-        ]
+        ],
+        "loc": {
+          "filename": "struct-keyword-names/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "struct-keyword-names/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "struct-keyword-names/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

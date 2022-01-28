@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "union-too-big-tag/schema.bare",
     "offset": 95,

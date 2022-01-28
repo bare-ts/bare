@@ -1,42 +1,84 @@
-[
-  {
-    "alias": "UnsignedInt",
-    "exported": true,
-    "type": {
-      "tag": "union",
-      "props": {
-        "flat": true,
-        "units": [
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": true,
+          "tags": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "types": [
           {
-            "tagVal": 0,
-            "type": {
-              "tag": "u8",
-              "props": {}
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
             }
           },
           {
-            "tagVal": 1,
-            "type": {
-              "tag": "u16",
-              "props": {}
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat/schema.bare",
+              "offset": 23,
+              "line": 1,
+              "col": 24
             }
           },
           {
-            "tagVal": 2,
-            "type": {
-              "tag": "u32",
-              "props": {}
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat/schema.bare",
+              "offset": 29,
+              "line": 1,
+              "col": 30
             }
           },
           {
-            "tagVal": 3,
-            "type": {
-              "tag": "u64",
-              "props": {}
+            "tag": "u64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat/schema.bare",
+              "offset": 35,
+              "line": 1,
+              "col": 36
             }
           }
-        ]
+        ],
+        "loc": {
+          "filename": "union-flat/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-flat/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "union-flat/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

@@ -1,42 +1,84 @@
-[
-  {
-    "alias": "UnsignedInt",
-    "exported": true,
-    "type": {
-      "tag": "union",
-      "props": {
-        "flat": false,
-        "units": [
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1,
+            2,
+            9007199254740991
+          ]
+        },
+        "types": [
           {
-            "tagVal": 0,
-            "type": {
-              "tag": "u8",
-              "props": {}
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-big-tag/schema.bare",
+              "offset": 56,
+              "line": 2,
+              "col": 19
             }
           },
           {
-            "tagVal": 1,
-            "type": {
-              "tag": "u16",
-              "props": {}
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-big-tag/schema.bare",
+              "offset": 65,
+              "line": 2,
+              "col": 28
             }
           },
           {
-            "tagVal": 2,
-            "type": {
-              "tag": "u32",
-              "props": {}
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-big-tag/schema.bare",
+              "offset": 75,
+              "line": 2,
+              "col": 38
             }
           },
           {
-            "tagVal": 9007199254740991,
-            "type": {
-              "tag": "u64",
-              "props": {}
+            "tag": "u64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-big-tag/schema.bare",
+              "offset": 85,
+              "line": 2,
+              "col": 48
             }
           }
-        ]
+        ],
+        "loc": {
+          "filename": "union-big-tag/schema.bare",
+          "offset": 55,
+          "line": 2,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-big-tag/schema.bare",
+        "offset": 38,
+        "line": 2,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "union-big-tag/schema.bare",
+    "offset": 38,
+    "line": 2,
+    "col": 1
   }
-]
+}

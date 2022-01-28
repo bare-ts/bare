@@ -1,12 +1,34 @@
-[
-  {
-    "alias": "U8Alias",
-    "exported": true,
-    "type": {
-      "tag": "data",
-      "props": {
-        "len": 4
+{
+  "defs": [
+    {
+      "alias": "U8Alias",
+      "exported": true,
+      "type": {
+        "tag": "data",
+        "props": {
+          "len": 4,
+          "mut": false
+        },
+        "types": null,
+        "loc": {
+          "filename": "fixed-data/schema.bare",
+          "offset": 13,
+          "line": 1,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "fixed-data/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "fixed-data/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

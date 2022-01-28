@@ -1,402 +1,874 @@
-[
-  {
-    "alias": "PublicKey",
-    "exported": true,
-    "type": {
-      "tag": "data",
-      "props": {
-        "len": 128
-      }
-    }
-  },
-  {
-    "alias": "Time",
-    "exported": true,
-    "type": {
-      "tag": "string",
-      "props": {}
-    }
-  },
-  {
-    "alias": "Department",
-    "exported": true,
-    "type": {
-      "tag": "enum",
-      "props": {
-        "useName": true,
-        "vals": [
-          {
-            "name": "ACCOUNTING",
-            "val": 0
-          },
-          {
-            "name": "ADMINISTRATION",
-            "val": 1
-          },
-          {
-            "name": "CUSTOMER_SERVICE",
-            "val": 2
-          },
-          {
-            "name": "DEVELOPMENT",
-            "val": 3
-          },
-          {
-            "name": "JSMITH",
-            "val": 99
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "Customer",
-    "exported": true,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
-          {
-            "mutable": false,
-            "name": "ame",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "email",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "address",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Address"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "orders",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "0"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "metadata",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "1"
-              }
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "Employee",
-    "exported": true,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
-          {
-            "mutable": false,
-            "name": "name",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "email",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "address",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Address"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "department",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Department"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "hireDate",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Time"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "publicKey",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "2"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "metadata",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "3"
-              }
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "Person",
-    "exported": true,
-    "type": {
-      "tag": "union",
-      "props": {
-        "flat": false,
-        "units": [
-          {
-            "tagVal": 0,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Customer"
-              }
-            }
-          },
-          {
-            "tagVal": 1,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Employee"
-              }
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "Address",
-    "exported": true,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
-          {
-            "mutable": false,
-            "name": "address",
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "4"
-              }
-            }
-          },
-          {
-            "mutable": false,
-            "name": "city",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "state",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          },
-          {
-            "mutable": false,
-            "name": "country",
-            "type": {
-              "tag": "string",
-              "props": {}
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "Message",
-    "exported": true,
-    "type": {
-      "tag": "union",
-      "props": {
-        "flat": false,
-        "units": [
-          {
-            "tagVal": 0,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "Person"
-              }
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "0",
-    "exported": false,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": null,
-        "mutable": false,
-        "valType": {
-          "tag": "alias",
-          "props": {
-            "alias": "5"
-          }
-        }
-      }
-    }
-  },
-  {
-    "alias": "1",
-    "exported": false,
-    "type": {
-      "tag": "map",
-      "props": {
-        "keyType": {
-          "tag": "string",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "PublicKey",
+      "exported": true,
+      "type": {
+        "tag": "data",
+        "props": {
+          "len": 128,
+          "mut": false
         },
-        "mutable": false,
-        "valType": {
-          "tag": "data",
-          "props": {
-            "len": null
-          }
+        "types": null,
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 15,
+          "line": 1,
+          "col": 16
         }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
-    }
-  },
-  {
-    "alias": "2",
-    "exported": false,
-    "type": {
-      "tag": "optional",
-      "props": {
-        "permissive": false,
-        "null": false,
-        "type": {
-          "tag": "alias",
-          "props": {
-            "alias": "PublicKey"
-          }
+    },
+    {
+      "alias": "Time",
+      "exported": true,
+      "type": {
+        "tag": "string",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 35,
+          "line": 2,
+          "col": 11
         }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 25,
+        "line": 2,
+        "col": 1
       }
-    }
-  },
-  {
-    "alias": "3",
-    "exported": false,
-    "type": {
-      "tag": "map",
-      "props": {
-        "keyType": {
-          "tag": "string",
-          "props": {}
+    },
+    {
+      "alias": "Department",
+      "exported": true,
+      "type": {
+        "tag": "enum",
+        "props": {
+          "intEnum": false,
+          "vals": [
+            {
+              "name": "ACCOUNTING",
+              "val": 0,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 74,
+                "line": 5,
+                "col": 3
+              }
+            },
+            {
+              "name": "ADMINISTRATION",
+              "val": 1,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 87,
+                "line": 6,
+                "col": 3
+              }
+            },
+            {
+              "name": "CUSTOMER_SERVICE",
+              "val": 2,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 104,
+                "line": 7,
+                "col": 3
+              }
+            },
+            {
+              "name": "DEVELOPMENT",
+              "val": 3,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 123,
+                "line": 8,
+                "col": 3
+              }
+            },
+            {
+              "name": "JSMITH",
+              "val": 99,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 163,
+                "line": 11,
+                "col": 3
+              }
+            }
+          ]
         },
-        "mutable": false,
-        "valType": {
-          "tag": "data",
-          "props": {
-            "len": null
-          }
+        "types": null,
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 70,
+          "line": 4,
+          "col": 17
         }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 54,
+        "line": 4,
+        "col": 1
       }
-    }
-  },
-  {
-    "alias": "4",
-    "exported": false,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": 4,
-        "mutable": false,
-        "valType": {
-          "tag": "string",
-          "props": {}
-        }
-      }
-    }
-  },
-  {
-    "alias": "5",
-    "exported": false,
-    "type": {
-      "tag": "struct",
-      "props": {
-        "class": false,
-        "fields": [
+    },
+    {
+      "alias": "Customer",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "ame",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 198,
+                "line": 15,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "email",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 212,
+                "line": 16,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "address",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 228,
+                "line": 17,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "orders",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 247,
+                "line": 18,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "metadata",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 300,
+                "line": 22,
+                "col": 3
+              }
+            }
+          ]
+        },
+        "types": [
           {
-            "mutable": false,
-            "name": "orderId",
-            "type": {
-              "tag": "i64",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 203,
+              "line": 15,
+              "col": 8
             }
           },
           {
-            "mutable": false,
-            "name": "quantity",
-            "type": {
-              "tag": "i32",
-              "props": {}
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 219,
+              "line": 16,
+              "col": 10
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Address"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 237,
+              "line": 17,
+              "col": 12
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "0"
+            },
+            "types": null,
+            "loc": null
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "1"
+            },
+            "types": null,
+            "loc": null
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 194,
+          "line": 14,
+          "col": 17
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 178,
+        "line": 14,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Employee",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 349,
+                "line": 26,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "email",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 364,
+                "line": 27,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "address",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 380,
+                "line": 28,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "department",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 399,
+                "line": 29,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "hireDate",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 424,
+                "line": 30,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "publicKey",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 441,
+                "line": 31,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "metadata",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 474,
+                "line": 32,
+                "col": 3
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 355,
+              "line": 26,
+              "col": 9
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 371,
+              "line": 27,
+              "col": 10
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Address"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 389,
+              "line": 28,
+              "col": 12
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Department"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 411,
+              "line": 29,
+              "col": 15
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Time"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 434,
+              "line": 30,
+              "col": 13
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "2"
+            },
+            "types": null,
+            "loc": null
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "3"
+            },
+            "types": null,
+            "loc": null
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 345,
+          "line": 25,
+          "col": 17
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 329,
+        "line": 25,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Customer"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 516,
+              "line": 35,
+              "col": 14
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Employee"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 527,
+              "line": 35,
+              "col": 25
             }
           }
-        ]
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 515,
+          "line": 35,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 503,
+        "line": 35,
+        "col": 1
       }
+    },
+    {
+      "alias": "Address",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "address",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 557,
+                "line": 38,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "city",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 578,
+                "line": 39,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "state",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 593,
+                "line": 40,
+                "col": 3
+              }
+            },
+            {
+              "mut": false,
+              "name": "country",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 609,
+                "line": 41,
+                "col": 3
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "4"
+            },
+            "types": null,
+            "loc": null
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 584,
+              "line": 39,
+              "col": 9
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 600,
+              "line": 40,
+              "col": 10
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 618,
+              "line": 41,
+              "col": 12
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 553,
+          "line": 37,
+          "col": 16
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 538,
+        "line": 37,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Message",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Person"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 642,
+              "line": 44,
+              "col": 15
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 641,
+          "line": 44,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 628,
+        "line": 44,
+        "col": 1
+      }
+    },
+    {
+      "alias": "0",
+      "exported": false,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "5"
+            },
+            "types": null,
+            "loc": null
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 255,
+          "line": 18,
+          "col": 11
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "1",
+      "exported": false,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 314,
+              "line": 22,
+              "col": 17
+            }
+          },
+          {
+            "tag": "data",
+            "props": {
+              "len": null,
+              "mut": false
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 321,
+              "line": 22,
+              "col": 24
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 310,
+          "line": 22,
+          "col": 13
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "2",
+      "exported": false,
+      "type": {
+        "tag": "optional",
+        "props": {
+          "lax": false,
+          "null": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "PublicKey"
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 461,
+              "line": 31,
+              "col": 23
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 452,
+          "line": 31,
+          "col": 14
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "3",
+      "exported": false,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 488,
+              "line": 32,
+              "col": 17
+            }
+          },
+          {
+            "tag": "data",
+            "props": {
+              "len": null,
+              "mut": false
+            },
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 495,
+              "line": 32,
+              "col": 24
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 484,
+          "line": 32,
+          "col": 13
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "4",
+      "exported": false,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": 4,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 569,
+              "line": 38,
+              "col": 15
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 566,
+          "line": 38,
+          "col": 12
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "5",
+      "exported": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "orderId",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 263,
+                "line": 19,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "quantity",
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 280,
+                "line": 20,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "i64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 272,
+              "line": 19,
+              "col": 14
+            }
+          },
+          {
+            "tag": "i32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 290,
+              "line": 20,
+              "col": 15
+            }
+          }
+        ],
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 257,
+          "line": 18,
+          "col": 13
+        }
+      },
+      "loc": null
     }
+  ],
+  "loc": {
+    "filename": "x-bareorg-example/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

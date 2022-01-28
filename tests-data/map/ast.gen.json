@@ -1,20 +1,56 @@
-[
-  {
-    "alias": "Dict",
-    "exported": true,
-    "type": {
-      "tag": "map",
-      "props": {
-        "keyType": {
-          "tag": "string",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "Dict",
+      "exported": true,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
         },
-        "mutable": false,
-        "valType": {
-          "tag": "string",
-          "props": {}
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map/schema.bare",
+              "offset": 14,
+              "line": 1,
+              "col": 15
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map/schema.bare",
+              "offset": 22,
+              "line": 1,
+              "col": 23
+            }
+          }
+        ],
+        "loc": {
+          "filename": "map/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
         }
+      },
+      "loc": {
+        "filename": "map/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "map/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

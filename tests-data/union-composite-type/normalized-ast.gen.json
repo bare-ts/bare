@@ -1,119 +1,210 @@
-[
-  {
-    "alias": "Composite",
-    "exported": true,
-    "type": {
-      "tag": "union",
-      "props": {
-        "flat": false,
-        "units": [
-          {
-            "tagVal": 0,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "0"
-              }
-            }
-          },
-          {
-            "tagVal": 1,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "1"
-              }
-            }
-          },
-          {
-            "tagVal": 2,
-            "type": {
-              "tag": "alias",
-              "props": {
-                "alias": "2"
-              }
-            }
-          }
-        ]
-      }
-    }
-  },
-  {
-    "alias": "0",
-    "exported": false,
-    "type": {
-      "tag": "map",
-      "props": {
-        "mutable": false,
-        "keyType": {
-          "tag": "string",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "Composite",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1,
+            2
+          ]
         },
-        "valType": {
-          "tag": "alias",
-          "props": {
-            "alias": "3"
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "0"
+            },
+            "types": null,
+            "loc": null
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "1"
+            },
+            "types": null,
+            "loc": null
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "2"
+            },
+            "types": null,
+            "loc": null
           }
+        ],
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 15,
+          "line": 1,
+          "col": 16
         }
+      },
+      "loc": {
+        "filename": "union-composite-type/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
       }
-    }
-  },
-  {
-    "alias": "1",
-    "exported": false,
-    "type": {
-      "tag": "array",
-      "props": {
-        "len": 4,
-        "mutable": false,
-        "valType": {
-          "tag": "alias",
-          "props": {
-            "alias": "4"
+    },
+    {
+      "alias": "0",
+      "exported": false,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-composite-type/schema.bare",
+              "offset": 20,
+              "line": 1,
+              "col": 21
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "3"
+            },
+            "types": null,
+            "loc": null
           }
+        ],
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 16,
+          "line": 1,
+          "col": 17
         }
-      }
-    }
-  },
-  {
-    "alias": "2",
-    "exported": false,
-    "type": {
-      "tag": "typedArray",
-      "props": {
-        "len": 4,
-        "valTypeName": "u8"
-      }
-    }
-  },
-  {
-    "alias": "3",
-    "exported": false,
-    "type": {
-      "tag": "optional",
-      "props": {
-        "permissive": false,
-        "null": false,
-        "type": {
-          "tag": "string",
-          "props": {}
+      },
+      "loc": null
+    },
+    {
+      "alias": "1",
+      "exported": false,
+      "type": {
+        "tag": "array",
+        "props": {
+          "len": 4,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "4"
+            },
+            "types": null,
+            "loc": null
+          }
+        ],
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 46,
+          "line": 1,
+          "col": 47
         }
-      }
-    }
-  },
-  {
-    "alias": "4",
-    "exported": false,
-    "type": {
-      "tag": "optional",
-      "props": {
-        "permissive": false,
-        "null": false,
-        "type": {
-          "tag": "string",
-          "props": {}
+      },
+      "loc": null
+    },
+    {
+      "alias": "2",
+      "exported": false,
+      "type": {
+        "tag": "typedarray",
+        "props": {
+          "len": 4,
+          "valType": "u8"
+        },
+        "types": null,
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 68,
+          "line": 1,
+          "col": 69
         }
-      }
+      },
+      "loc": null
+    },
+    {
+      "alias": "3",
+      "exported": false,
+      "type": {
+        "tag": "optional",
+        "props": {
+          "lax": false,
+          "null": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-composite-type/schema.bare",
+              "offset": 36,
+              "line": 1,
+              "col": 37
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 27,
+          "line": 1,
+          "col": 28
+        }
+      },
+      "loc": null
+    },
+    {
+      "alias": "4",
+      "exported": false,
+      "type": {
+        "tag": "optional",
+        "props": {
+          "lax": false,
+          "null": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-composite-type/schema.bare",
+              "offset": 58,
+              "line": 1,
+              "col": 59
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-composite-type/schema.bare",
+          "offset": 49,
+          "line": 1,
+          "col": 50
+        }
+      },
+      "loc": null
     }
+  ],
+  "loc": {
+    "filename": "union-composite-type/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}

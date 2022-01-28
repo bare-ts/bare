@@ -1,5 +1,5 @@
 {
-  "name": "BareParserError",
+  "name": "CompilerError",
   "location": {
     "filename": "fixed-data-hex/schema.bare",
     "offset": 18,

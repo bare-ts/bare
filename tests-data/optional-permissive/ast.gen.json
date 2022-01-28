@@ -1,17 +1,46 @@
-[
-  {
-    "alias": "MaybeBool",
-    "exported": true,
-    "type": {
-      "tag": "optional",
-      "props": {
-        "permissive": true,
-        "null": false,
-        "type": {
-          "tag": "bool",
-          "props": {}
+{
+  "defs": [
+    {
+      "alias": "MaybeBool",
+      "exported": true,
+      "type": {
+        "tag": "optional",
+        "props": {
+          "lax": true,
+          "null": false
+        },
+        "types": [
+          {
+            "tag": "bool",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "optional-permissive/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 25
+            }
+          }
+        ],
+        "loc": {
+          "filename": "optional-permissive/schema.bare",
+          "offset": 16,
+          "line": 2,
+          "col": 16
         }
+      },
+      "loc": {
+        "filename": "optional-permissive/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
       }
     }
+  ],
+  "loc": {
+    "filename": "optional-permissive/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
   }
-]
+}

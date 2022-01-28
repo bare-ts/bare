@@ -1,10 +1,31 @@
-[
-  {
-    "alias": "Message",
-    "exported": true,
-    "type": {
-      "tag": "u8",
-      "props": {}
+{
+  "defs": [
+    {
+      "alias": "Message",
+      "exported": true,
+      "type": {
+        "tag": "u8",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "imported-config/schema.bare",
+          "offset": 13,
+          "line": 1,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "imported-config/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
     }
+  ],
+  "loc": {
+    "filename": "imported-config/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
   }
-]
+}
