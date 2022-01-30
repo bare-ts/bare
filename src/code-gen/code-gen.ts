@@ -328,17 +328,7 @@ function genStructTypeClassBody(g: CodeGen, type: BareStruct): string {
 }
 
 function genTypedArrayType(_g: CodeGen, { props }: BareTypedArray): string {
-    return {
-        i8: "Int8Array",
-        i16: "Int16Array",
-        i32: "Int32Array",
-        i64: "BigInt64Array",
-        u8: "Uint8Array",
-        u8Clamped: "Uint8ClampedArray",
-        u16: "Uint16Array",
-        u32: "Uint32Array",
-        u64: "BigUint64Array",
-    }[props.valTypeName]
+    return BareAst_.TYPED_ARRAY_VAL_TYPE_TO_ARRAY[props.valTypeName]
 }
 
 function genUnionType(g: CodeGen, { props }: BareUnion): string {

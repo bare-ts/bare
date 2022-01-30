@@ -152,22 +152,22 @@ export interface StructField {
     readonly type: BareType
 }
 
-export const TYPED_ARRAY_VAL_TYPE = [
-    "i8",
-    "i16",
-    "i32",
-    "i64",
-    "u8",
-    "u8Clamped",
-    "u16",
-    "u32",
-    "u64",
-] as const
+export const TYPED_ARRAY_VAL_TYPE_TO_ARRAY = {
+    "i8": "Int8Array",
+    "i16": "Int16Array",
+    "i32": "Int32Array",
+    "i64": "BigInt64Array",
+    "u8": "Uint8Array",
+    "u8Clamped": "Uint8ClampedArray",
+    "u16": "Uint16Array",
+    "u32": "Uint32Array",
+    "u64": "BigUint64Array",
+} as const
 
-export type TypedArrayValType = typeof TYPED_ARRAY_VAL_TYPE[number]
+export type TypedArrayValType = keyof typeof TYPED_ARRAY_VAL_TYPE_TO_ARRAY
 
 export function isTypedArrayValType(name: string): name is TypedArrayValType {
-    return TYPED_ARRAY_VAL_TYPE.indexOf(name as TypedArrayValType) !== -1
+    return Object.hasOwnProperty.call(TYPED_ARRAY_VAL_TYPE_TO_ARRAY, name)
 }
 
 export interface UnionUnit {
