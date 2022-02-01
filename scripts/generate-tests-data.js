@@ -1,7 +1,8 @@
 #!/usr/bin/node
 
 import {
-    BareConfigError,
+    Config,
+    ConfigError,
     BareParserError,
     generate,
     normalize,
@@ -28,7 +29,7 @@ program
                     ? JSON.parse(fs.readFileSync(configPath).toString())
                     : {}
                 const schemaPath = resolve(dir, "schema.bare")
-                const schemaRelPath = relative(root, schemaPath)
+                const schema = relative(root, schemaPath)
                 const content = fs.readFileSync(schemaPath).toString()
                 const errorPath = resolve(dir, "error.gen.json")
                 const astPath = resolve(dir, "ast.gen.json")
@@ -37,7 +38,7 @@ program
                 const dtsPath = resolve(dir, "out.gen.d.ts")
                 const jsPath = resolve(dir, "out.gen.js")
                 try {
-                    const ast = parse(content, schemaRelPath, config)
+                    const ast = parse(content, Config({ ...config, schema }))
                     // clean-up
                     if (fs.existsSync(errorPath)) {
                         fs.unlinkSync(errorPath)
@@ -52,17 +53,17 @@ program
                     }
                     let out = generate(
                         normalizedAst,
-                        Object.assign(config, { generator: "ts" })
+                        Config({ ...config, schema, generator: "ts" })
                     )
                     fs.writeFileSync(tsPath, out)
                     out = generate(
                         normalizedAst,
-                        Object.assign(config, { generator: "js" })
+                        Config({ ...config, schema, generator: "js" })
                     )
                     fs.writeFileSync(jsPath, out)
                     out = generate(
                         normalizedAst,
-                        Object.assign(config, { generator: "dts" })
+                        Config({ ...config, schema, generator: "dts" })
                     )
                     fs.writeFileSync(dtsPath, out)
                 } catch (e) {
@@ -80,7 +81,7 @@ program
                         if (fs.existsSync(ast2Path)) {
                             fs.unlinkSync(ast2Path)
                         }
-                    } else if (e instanceof BareConfigError) {
+                    } else if (e instanceof ConfigError) {
                         const ex = { ...e, message: e.message }
                         fs.writeFileSync(errorPath, JSON.stringify(ex, null, 2))
                         // clean-up

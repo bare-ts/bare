@@ -2,18 +2,7 @@
 
 import { Argument, Command, Option } from "commander"
 import * as fs from "node:fs"
-import {
-    type BareParserConfig,
-    type CodeGenConfig,
-    compile,
-    BareConfigError,
-} from "./index.js"
-
-interface BareOptions
-    extends Partial<BareParserConfig>,
-        Partial<CodeGenConfig> {
-    readonly out: string | number
-}
+import { Config, compile } from "./index.js"
 
 const REPOSITORY_HELP = `Repository:
   https://github.com/bare-ts/compiler`
@@ -97,42 +86,14 @@ program
 
 program.parse()
 
-function compileAction(schemaPath: string | number, opts: BareOptions): void {
-    const schemaId = typeof schemaPath === "number" ? "/dev/stdin" : schemaPath
+function compileAction(schema: string | number, opts: Partial<Config>): void {
     try {
-        opts = completeOptions(schemaPath, opts)
-        const content = fs.readFileSync(schemaPath).toString()
-        const compiled = compile(content, schemaId, opts)
-        fs.writeFileSync(opts.out, compiled)
+        const config = Config({ ...opts, schema })
+        const content = fs.readFileSync(schema).toString()
+        const compiled = compile(content, config)
+        fs.writeFileSync(config.out, compiled)
     } catch (e) {
         console.error(e instanceof Error ? e.message : e)
         process.exit(1)
     }
-}
-
-function completeOptions(
-    schemaPath: string | number,
-    opts: BareOptions
-): BareOptions {
-    if (typeof schemaPath === "string" && !schemaPath.endsWith(".bare")) {
-        throw new BareConfigError(
-            "A file containing a BARE schema must end with extension '.bare'"
-        )
-    }
-    const generator =
-        typeof opts.out === "string" && opts.out.endsWith(".d.ts")
-            ? "dts"
-            : typeof opts.out === "string" && opts.out.endsWith(".ts")
-            ? "ts"
-            : typeof opts.out === "string" && opts.out.endsWith(".js")
-            ? "js"
-            : typeof opts.out === "number" && opts.generator === undefined
-            ? "ts"
-            : opts.generator
-    if (generator === undefined) {
-        throw new BareConfigError(
-            "The code generator to use cannot be determinate. Please use the option --generator"
-        )
-    }
-    return { ...opts, generator }
 }

@@ -1,3 +1,4 @@
+import assert from "assert"
 import type {
     AliasedBareType,
     BareAst,
@@ -7,38 +8,14 @@ import type {
     UnionUnit,
 } from "../ast/bare-ast.js"
 import * as BareAst_ from "../ast/bare-ast.js"
-import { BareParserConfig } from "./bare-parser-config.js"
+import type { Config } from "../core/config.js"
 import { BareParserError } from "./bare-parser-error.js"
 import { Lex } from "./lex.js"
-import assert from "assert"
 
-interface BareParser {
-    readonly config: BareParserConfig
-    readonly lex: Lex
-}
-
-function BareParser(
-    lex: Lex,
-    partConfig: Partial<BareParserConfig> = {}
-): BareParser {
-    const config = BareParserConfig(partConfig)
-    return { config, lex }
-}
-
-const ALL_CASE_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/
-const UPPER_SNAKE_CASE_PATTERN = /^[A-Z][A-Z0-9_]*$/
-const LOWER_CAMEL_CASE_PATTERN = /^[a-z][A-Za-z0-9]*$/
-const UPPER_CAMEL_CASE_PATTERN = /^[A-Z][A-Za-z0-9]*$/
-const DIGIT_PATTERN = /^(0|[1-9][0-9]*)$/
-
-export function parse(
-    content: string,
-    filename: string,
-    partConfig: Partial<BareParserConfig>
-): BareAst {
+export function parse(content: string, config: Config): BareAst {
     const p = {
-        config: BareParserConfig(partConfig),
-        lex: new Lex(content, filename, { commentMark: "#" }),
+        config,
+        lex: new Lex(content, config.schema, { commentMark: "#" }),
     }
     const result: Map<string, AliasedBareType> = new Map()
     while (p.lex.token() !== "") {
@@ -57,6 +34,17 @@ export function parse(
     }
     return Array.from(result.values())
 }
+
+interface BareParser {
+    readonly config: Config
+    readonly lex: Lex
+}
+
+const ALL_CASE_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/
+const UPPER_SNAKE_CASE_PATTERN = /^[A-Z][A-Z0-9_]*$/
+const LOWER_CAMEL_CASE_PATTERN = /^[a-z][A-Za-z0-9]*$/
+const UPPER_CAMEL_CASE_PATTERN = /^[A-Z][A-Za-z0-9]*$/
+const DIGIT_PATTERN = /^(0|[1-9][0-9]*)$/
 
 function parseAliased(p: BareParser): AliasedBareType {
     const keyword = p.lex.token()

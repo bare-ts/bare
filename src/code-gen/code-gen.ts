@@ -15,11 +15,10 @@ import type {
     BareUnion,
 } from "../ast/bare-ast.js"
 import * as BareAst_ from "../ast/bare-ast.js"
-import { BareConfigError } from "./bare-config-error.js"
-import { CodeGenConfig } from "./code-gen-config.js"
+import { Config, ConfigError } from "../core/config.js"
 
-export function generate(ast: BareAst, config: Partial<CodeGenConfig>): string {
-    const g: CodeGen = CodeGen(ast, config)
+export function generate(ast: BareAst, config: Partial<Config> = {}): string {
+    const g = CodeGen(ast, Config(config))
     checkConfig(g) // may throw
     let body = ""
     for (const aliased of ast) {
@@ -118,13 +117,13 @@ export function generate(ast: BareAst, config: Partial<CodeGenConfig>): string {
 
 interface CodeGen {
     readonly aliasToAliased: ReadonlyMap<string, AliasedBareType>
-    readonly config: CodeGenConfig
+    readonly config: Config
 }
 
-function CodeGen(ast: BareAst, partConfig: Partial<CodeGenConfig>): CodeGen {
+function CodeGen(ast: BareAst, config: Config): CodeGen {
     return {
         aliasToAliased: BareAst_.aliasToAliased(ast),
-        config: CodeGenConfig(partConfig),
+        config,
     }
 }
 
@@ -132,10 +131,10 @@ function checkConfig(g: CodeGen): void {
     for (const alias of g.config.main) {
         const aliased = g.aliasToAliased.get(alias)
         if (aliased === undefined) {
-            throw new BareConfigError(`Main codec '${alias}' does not exist.`)
+            throw new ConfigError(`Main codec '${alias}' does not exist.`)
         }
         if (!aliased.exported) {
-            throw new BareConfigError(`A main codec must be exported.`)
+            throw new ConfigError(`A main codec must be exported.`)
         }
     }
 }

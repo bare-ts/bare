@@ -2,7 +2,7 @@ import { BareParserError } from "./bare-parser-error.js"
 import { ok as assert } from "assert"
 
 export interface Location {
-    readonly filename: string
+    readonly filename: string | number
     /**
      * 0-based index
      */
@@ -39,7 +39,7 @@ const ID_PATTERN = /([A-Za-z0-9_]+)/
 export class Lex {
     declare readonly config: LexConfig
     declare readonly content: string
-    declare readonly filename: string
+    declare readonly filename: string | number
     private declare offset: number
     private declare line: number
     private declare col: number
@@ -47,7 +47,7 @@ export class Lex {
 
     constructor(
         content: string,
-        filename: string,
+        filename: string | number,
         config: Partial<LexConfig> = {}
     ) {
         this.config = LexConfig(config)

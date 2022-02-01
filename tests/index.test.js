@@ -1,10 +1,11 @@
 import {
-    BareConfigError,
+    ConfigError,
     BareParserError,
     compile,
     generate,
     normalize,
     parse,
+    Config,
 } from "@bare-ts/tools"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
@@ -17,7 +18,7 @@ test("parse", (t) => {
         dir = resolve(DATA_DIR, dir)
         if (fs.lstatSync(dir).isDirectory()) {
             const schemaPath = resolve(dir, "schema.bare")
-            const schemaRelPath = relative(DATA_DIR, schemaPath)
+            const schema = relative(DATA_DIR, schemaPath)
             const content = fs.readFileSync(schemaPath).toString()
             const configPath = resolve(dir, "config.json")
             const config = fs.existsSync(configPath)
@@ -26,7 +27,7 @@ test("parse", (t) => {
             let actual
             let filename = "ast.gen.json"
             try {
-                actual = parse(content, schemaRelPath, config)
+                actual = parse(content, Config({ ...config, schema }))
             } catch (e) {
                 if (!(e instanceof BareParserError)) throw e
                 filename = "error.gen.json"
@@ -120,7 +121,7 @@ test("generate", (t) => {
                     `out must match ${jsRelPath}`
                 )
             } catch (e) {
-                if (e instanceof BareConfigError) {
+                if (e instanceof ConfigError) {
                     const errorPath = resolve(dir, "error.gen.json")
                     const errorRelPath = relative(DATA_DIR, errorPath)
                     t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)
@@ -146,14 +147,14 @@ test("compile", (t) => {
         dir = resolve(DATA_DIR, dir)
         if (fs.lstatSync(dir).isDirectory()) {
             const schemaPath = resolve(dir, "schema.bare")
-            const schemaRelPath = relative(DATA_DIR, schemaPath)
+            const schema = relative(DATA_DIR, schemaPath)
             const content = fs.readFileSync(schemaPath).toString()
             const configPath = resolve(dir, "config.json")
             const config = fs.existsSync(configPath)
                 ? JSON.parse(fs.readFileSync(configPath).toString())
                 : {}
             try {
-                const result = compile(content, schemaRelPath, config)
+                const result = compile(content, { ...config, schema })
 
                 const tsPath = resolve(dir, "out.gen.ts")
                 const tsRelPath = relative(DATA_DIR, tsPath)
@@ -163,10 +164,7 @@ test("compile", (t) => {
 
                 t.deepEqual(result, tsContent, `out must match ${tsRelPath}`)
             } catch (e) {
-                if (
-                    e instanceof BareParserError ||
-                    e instanceof BareConfigError
-                ) {
+                if (e instanceof BareParserError || e instanceof ConfigError) {
                     const errorPath = resolve(dir, "error.gen.json")
                     const errorRelPath = relative(DATA_DIR, errorPath)
                     t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)

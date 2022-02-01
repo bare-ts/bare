@@ -1,15 +1,12 @@
 import { normalize } from "./ast/bare-ast-normalization.js"
-import type { CodeGenConfig } from "./code-gen/code-gen-config.js"
 import { generate } from "./code-gen/code-gen.js"
-import type { BareParserConfig } from "./parser/bare-parser-config.js"
+import { Config } from "./core/config.js"
 import { parse } from "./parser/bare-parser.js"
 
 export * from "./ast/bare-ast-normalization.js"
 export * from "./ast/bare-ast.js"
-export * from "./code-gen/bare-config-error.js"
-export * from "./code-gen/code-gen-config.js"
 export * from "./code-gen/code-gen.js"
-export * from "./parser/bare-parser-config.js"
+export * from "./core/config.js"
 export * from "./parser/bare-parser-error.js"
 export * from "./parser/bare-parser.js"
 export * from "./parser/lex.js"
@@ -17,19 +14,14 @@ export * from "./parser/lex.js"
 /**
  *
  * @param content
- * @param filename
- * @param parserConfig
- * @param codeGenConfig
- * @throw BareParserError upon parsing error
- * @throw BareConfigError upon error in parser or code-gen config
+ * @param conf
  * @return code
+ * @throw {BareParserError} upon parsing error
+ * @throw {ConfigError} upon error in config
  */
-export function compile(
-    content: string,
-    filename: string,
-    config: Partial<BareParserConfig> & Partial<CodeGenConfig>
-): string {
-    const ast = parse(content, filename, config)
+export function compile(content: string, conf: Partial<Config> = {}): string {
+    const completedConfig = Config(conf)
+    const ast = parse(content, completedConfig)
     const normalizedAst = normalize(ast)
-    return generate(normalizedAst, config)
+    return generate(normalizedAst, conf)
 }
