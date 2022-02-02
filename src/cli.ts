@@ -2,7 +2,7 @@
 
 import { Argument, Command, Option } from "commander"
 import * as fs from "node:fs"
-import { Config, compile } from "./index.js"
+import { Config, transform } from "./index.js"
 
 const REPOSITORY_HELP = `Repository:
   https://github.com/bare-ts/compiler`
@@ -90,7 +90,7 @@ function compileAction(schema: string | number, opts: Partial<Config>): void {
     try {
         const config = Config({ ...opts, schema })
         const content = fs.readFileSync(schema).toString()
-        const compiled = compile(content, config)
+        const compiled = transform(content, config)
         fs.writeFileSync(config.out, compiled)
     } catch (e) {
         console.error(e instanceof Error ? e.message : e)

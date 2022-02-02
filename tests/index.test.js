@@ -1,7 +1,7 @@
 import {
     ConfigError,
     BareParserError,
-    compile,
+    transform,
     generate,
     normalize,
     parse,
@@ -142,7 +142,7 @@ test("generate", (t) => {
     }
 })
 
-test("compile", (t) => {
+test("transform", (t) => {
     for (let dir of fs.readdirSync(DATA_DIR)) {
         dir = resolve(DATA_DIR, dir)
         if (fs.lstatSync(dir).isDirectory()) {
@@ -154,7 +154,7 @@ test("compile", (t) => {
                 ? JSON.parse(fs.readFileSync(configPath).toString())
                 : {}
             try {
-                const result = compile(content, { ...config, schema })
+                const result = transform(content, { ...config, schema })
 
                 const tsPath = resolve(dir, "out.gen.ts")
                 const tsRelPath = relative(DATA_DIR, tsPath)

@@ -19,7 +19,7 @@ export * from "./parser/lex.js"
  * @throw {BareParserError} upon parsing error
  * @throw {ConfigError} upon error in config
  */
-export function compile(content: string, conf: Partial<Config> = {}): string {
+export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)
     const ast = parse(content, completedConfig)
     const normalizedAst = normalize(ast)
