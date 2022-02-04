@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig-base.json",
+  "compilerOptions": {
+    "paths": { "@bare-ts/tools": ["./index.js"] },
+    "types": ["node"]
+  },
+  "include": ["./cli.ts"],
+  "references": [{ "path": "./" }]
+}

@@ -1,5 +1,5 @@
 import { CompilerError, type Location } from "../core/compiler-error.js"
-import { ok as assert } from "assert"
+import { ConfigError } from "../core/config.js"
 
 /**
  * @invariant commentMark == null || commentMark.length === 1
@@ -12,7 +12,9 @@ export function LexConfig(config: Partial<LexConfig>): LexConfig {
     const result = {
         commentMark: config.commentMark,
     }
-    assert(result.commentMark == null || result.commentMark.length == 1)
+    if (result.commentMark != null && result.commentMark.length !== 1) {
+        throw new ConfigError("A comment mark must be a single char.")
+    }
     return result
 }
 

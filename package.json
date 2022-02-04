@@ -33,12 +33,9 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "es2015": "./dist/index.js",
-  "browser": {
-    "assert": "./dist/util/assert.js"
-  },
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.js"
   },
   "sideEffects": false,
   "files": [

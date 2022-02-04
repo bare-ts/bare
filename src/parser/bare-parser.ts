@@ -1,4 +1,3 @@
-import assert from "assert"
 import * as ast from "../ast/bare-ast.js"
 import type { Config } from "../core/config.js"
 import { CompilerError } from "../core/compiler-error.js"
@@ -130,7 +129,9 @@ function parseTypeName(p: Parser): ast.Type {
 }
 
 function parseData(p: Parser): ast.Type {
-    assert(p.lex.token() === "data", "'data' is expected.")
+    if (p.lex.token() !== "data") {
+        throw new CompilerError("'data' is expected.", p.lex.location())
+    }
     let len: number | null = null
     const loc = p.lex.location()
     p.lex.forth()
@@ -147,7 +148,9 @@ function parseData(p: Parser): ast.Type {
 }
 
 function parseArray(p: Parser): ast.Type {
-    assert(p.lex.token() === "[", "'[' is expected.")
+    if (p.lex.token() !== "[") {
+        throw new CompilerError("'[' is expected.", p.lex.location())
+    }
     let len: number | null = null
     const loc = p.lex.location()
     p.lex.forth()
@@ -177,7 +180,9 @@ function parseArray(p: Parser): ast.Type {
 }
 
 function parseOptional(p: Parser): ast.Type {
-    assert(p.lex.token() === "optional", "'optional' is expected.")
+    if (p.lex.token() !== "optional") {
+        throw new CompilerError("'optional' is expected.", p.lex.location())
+    }
     const loc = p.lex.location()
     p.lex.forth()
     if (p.lex.token() !== "<") {
@@ -201,7 +206,9 @@ function parseOptional(p: Parser): ast.Type {
 }
 
 function parseMap(p: Parser): ast.Type {
-    assert(p.lex.token() === "map", "'map' is expected.")
+    if (p.lex.token() !== "map") {
+        throw new CompilerError("'map' is expected.", p.lex.location())
+    }
     const loc = p.lex.location()
     p.lex.forth()
     if (p.lex.token() !== "[") {
@@ -229,7 +236,9 @@ function parseMap(p: Parser): ast.Type {
 }
 
 function parseUnion(p: Parser): ast.Type {
-    assert(p.lex.token() === "(", "'(' is expected.")
+    if (p.lex.token() !== "(") {
+        throw new CompilerError("'(' is expected.", p.lex.location())
+    }
     const loc = p.lex.location()
     const tags: number[] = []
     const types: ast.Type[] = []

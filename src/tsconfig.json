@@ -5,9 +5,8 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
 
-    "composite": true,
-
-    "types": ["node"]
+    "composite": true
   },
-  "include": ["**/*.ts"]
+  "include": ["./**/*.ts"],
+  "exclude": ["./cli.ts"]
 }

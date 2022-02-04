@@ -39,6 +39,11 @@ This project adheres to [Semantic Versioning][semver].
          ^ error is now reported here
     ```
 
+* Make @bare-ts/tools library platform-agnostic
+
+    Use your favorite ESM-ready CDN and simply import @bare-ts/tools.
+    This was made possible by removing the dependency over node:assert.
+
 * Add `--use-class` option
 
     This generates classes instead of interfaces for struct types.
