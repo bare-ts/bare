@@ -8,11 +8,11 @@ import {
     normalize,
     parse,
 } from "@bare-ts/tools"
-import { Argument, Command } from "commander"
+import { Argument, program } from "commander"
 import * as fs from "node:fs"
 import { relative, resolve } from "node:path"
 
-const program = new Command().name("bare-ast").version("1.0.0")
+program.name("bare-ast").version("1.0.0")
 
 program
     .description("Generate tests data")

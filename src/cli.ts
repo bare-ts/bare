@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Argument, Command, Option } from "commander"
+import { Argument, Option, program } from "commander"
 import * as fs from "node:fs"
 import { Config, transform } from "./index.js"
 
@@ -35,8 +35,6 @@ Examples:
 
 ${REPOSITORY_HELP}
 `
-
-const program = new Command()
 
 program
     .name("bare-ts")
