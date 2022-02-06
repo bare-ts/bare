@@ -6,5 +6,5 @@
     "line": 1,
     "col": 18
   },
-  "message": "(union-empty/schema.bare:1:18) A union must include at least one type."
+  "message": "(union-empty/schema.bare:1:18) a union must include at least one type."
 }

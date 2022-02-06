@@ -6,5 +6,5 @@
     "line": 1,
     "col": 11
   },
-  "message": "(alias-missing-type/schema.bare:1:11) A type is expected."
+  "message": "(alias-missing-type/schema.bare:1:11) a type is expected."
 }

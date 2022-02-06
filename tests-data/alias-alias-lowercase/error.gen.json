@@ -6,5 +6,5 @@
     "line": 1,
     "col": 14
   },
-  "message": "(alias-alias-lowercase/schema.bare:1:14) A type name is either in UpperCamelCase or is a predefined types."
+  "message": "(alias-alias-lowercase/schema.bare:1:14) a type name is either in UpperCamelCase or is a predefined types."
 }

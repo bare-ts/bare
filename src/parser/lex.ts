@@ -98,7 +98,7 @@ export class Lex {
                     return
                 } else {
                     throw new CompilerError(
-                        `Character '${c}' cannot be handled. BARE only supports ASCII characters for identifiers.`,
+                        `character '${c}' cannot be handled. BARE only supports ASCII characters for identifiers.`,
                         this.location()
                     )
                 }

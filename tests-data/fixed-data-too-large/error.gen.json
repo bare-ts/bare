@@ -6,5 +6,5 @@
     "line": 1,
     "col": 21
   },
-  "message": "(fixed-data-too-large/schema.bare:1:21) A non-zero u32 is expected."
+  "message": "(fixed-data-too-large/schema.bare:1:21) a non-zero u32 is expected."
 }

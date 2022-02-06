@@ -102,10 +102,10 @@ function Gen(config: Config, symbols: ast.SymbolTable): Gen {
     for (const alias of config.main) {
         const aliased = symbols.get(alias)
         if (aliased === undefined) {
-            throw new ConfigError(`Main codec '${alias}' does not exist.`)
+            throw new ConfigError(`main codec '${alias}' does not exist.`)
         }
         if (!aliased.exported) {
-            throw new ConfigError(`A main codec must be exported.`)
+            throw new ConfigError(`a main codec must be exported.`)
         }
     }
     return { config, symbols }

@@ -6,5 +6,5 @@
     "line": 3,
     "col": 13
   },
-  "message": "(enum-val-non-int/schema.bare:3:13) A non-negative safe integer is expected."
+  "message": "(enum-val-non-int/schema.bare:3:13) a non-negative safe integer is expected."
 }

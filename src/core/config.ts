@@ -52,7 +52,7 @@ export function Config({
         !schema.endsWith(".bare")
     ) {
         throw new ConfigError(
-            "A file containing a BARE schema must end with extension '.bare'."
+            "a file containing a BARE schema must end with extension '.bare'."
         )
     }
     const inferredGenerator =
@@ -67,12 +67,12 @@ export function Config({
             : generator
     if (generator !== undefined && inferredGenerator !== generator) {
         throw new ConfigError(
-            `The inferred generator '${inferredGenerator}' from out '${out}' does not match the chosen generator '${generator}'.`
+            `the inferred generator '${inferredGenerator}' from out '${out}' does not match the chosen generator '${generator}'.`
         )
     }
     if (inferredGenerator === undefined) {
         throw new ConfigError(
-            "The code generator to use cannot be determinate. Please set the option 'generator'."
+            "the code generator to use cannot be determinate. Please set the option 'generator'."
         )
     }
     return {

@@ -15,14 +15,14 @@ export function parse(content: string, config: Config): ast.Ast {
         const aliased = parseAliased(p)
         if (result.has(aliased.alias)) {
             throw new CompilerError(
-                `Alias '${aliased.alias}' is already used.`,
+                `alias '${aliased.alias}' is already used.`,
                 location
             )
         }
         result.set(aliased.alias, aliased)
     }
     if (result.size === 0) {
-        throw new CompilerError("A schema cannot be empty.", p.lex.location())
+        throw new CompilerError("a schema cannot be empty.", p.lex.location())
     }
     return { defs: Array.from(result.values()), loc: startLocation }
 }
@@ -48,14 +48,14 @@ function parseAliased(p: Parser): ast.AliasedType {
     const alias = p.lex.token()
     if (!UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new CompilerError(
-            `The type name '${alias}' must be in UpperCamelCase.`,
+            `the type name '${alias}' must be in UpperCamelCase.`,
             p.lex.location()
         )
     }
     p.lex.forth()
     if (p.lex.token() === "=") {
         throw new CompilerError(
-            "A type definition and its body cannot be separated by '='.",
+            "a type definition and its body cannot be separated by '='.",
             p.lex.location()
         )
     }
@@ -70,7 +70,7 @@ function parseAliased(p: Parser): ast.AliasedType {
         type.tag === "alias" &&
         alias === type.props.alias
     ) {
-        throw new CompilerError("A type cannot alias itself.", p.lex.location())
+        throw new CompilerError("a type cannot alias itself.", p.lex.location())
     }
     return { alias, exported: true, type, loc }
 }
@@ -78,7 +78,7 @@ function parseAliased(p: Parser): ast.AliasedType {
 function parseType(p: Parser): ast.Type {
     switch (p.lex.token()) {
         case "":
-            throw new CompilerError("A type is expected.", p.lex.location())
+            throw new CompilerError("a type is expected.", p.lex.location())
         case "[": // array
             return parseArray(p)
         case "(": // union
@@ -100,7 +100,7 @@ function parseTypeCheckUnion(p: Parser): ast.Type {
     const result = parseType(p)
     if (p.lex.token() === "|" || p.lex.token() === "=") {
         throw new CompilerError(
-            "A union must be enclosed by '()'.",
+            "a union must be enclosed by '()'.",
             p.lex.location()
         )
     }
@@ -112,7 +112,7 @@ function parseTypeName(p: Parser): ast.Type {
     const loc = p.lex.location()
     if (!ast.isPrimitiveTag(alias) && !UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new CompilerError(
-            "A type name is either in UpperCamelCase or is a predefined types.",
+            "a type name is either in UpperCamelCase or is a predefined types.",
             loc
         )
     }
@@ -218,7 +218,7 @@ function parseMap(p: Parser): ast.Type {
     const keyType = parseType(p)
     if (!ast.isPrimitiveTag(keyType.tag) || keyType.tag === "void") {
         throw new CompilerError(
-            "The type of keys must be among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint.",
+            "the type of keys must be among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint.",
             p.lex.location()
         )
     }
@@ -249,7 +249,7 @@ function parseUnion(p: Parser): ast.Type {
         if (p.lex.token() === ")") {
             if (tags.length === 0) {
                 throw new CompilerError(
-                    "A union must include at least one type.",
+                    "a union must include at least one type.",
                     p.lex.location()
                 )
             } else {
@@ -265,7 +265,7 @@ function parseUnion(p: Parser): ast.Type {
         // every object in the same way (properties are sorted)
         if (stringifiedUnits.has(stringifiedType)) {
             throw new CompilerError(
-                "A type cannot be repeated in an union.",
+                "a type cannot be repeated in an union.",
                 p.lex.location()
             )
         }
@@ -276,7 +276,7 @@ function parseUnion(p: Parser): ast.Type {
             tagVal = parseU64Safe(p)
             if (prevTagVal !== -1 && prevTagVal >= tagVal) {
                 throw new CompilerError(
-                    "A union tag must be greater than the previous one.",
+                    "a union tag must be greater than the previous one.",
                     p.lex.location()
                 )
             }
@@ -307,13 +307,13 @@ function parseEnumBody(p: Parser): ast.Type {
         const name = p.lex.token()
         if (!UPPER_SNAKE_CASE_PATTERN.test(name)) {
             throw new CompilerError(
-                "The name of an enum member must be in UPPER_SNAKE_CASE.",
+                "the name of an enum member must be in UPPER_SNAKE_CASE.",
                 p.lex.location()
             )
         }
         if (names.has(name)) {
             throw new CompilerError(
-                "The name of an enum member must be unique.",
+                "the name of an enum member must be unique.",
                 p.lex.location()
             )
         }
@@ -326,7 +326,7 @@ function parseEnumBody(p: Parser): ast.Type {
             val = parseU64Safe(p)
             if (prevVal !== -1 && prevVal >= val) {
                 throw new CompilerError(
-                    "A enum tag must be greater than the previous one.",
+                    "a enum tag must be greater than the previous one.",
                     p.lex.location()
                 )
             }
@@ -336,7 +336,7 @@ function parseEnumBody(p: Parser): ast.Type {
         val++
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
-                `Enum members cannot be separated by '${p.lex.token()}'.`,
+                `enum members cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }
@@ -346,7 +346,7 @@ function parseEnumBody(p: Parser): ast.Type {
     }
     if (vals.length === 0) {
         throw new CompilerError(
-            "An enum must include at least one member.",
+            "an enum must include at least one member.",
             p.lex.location()
         )
     }
@@ -368,13 +368,13 @@ function parseStructBody(p: Parser): ast.Type {
         const name = p.lex.token()
         if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
             throw new CompilerError(
-                "The name of a field must be in lowerCamelCase.",
+                "the name of a field must be in lowerCamelCase.",
                 p.lex.location()
             )
         }
         if (names.has(name)) {
             throw new CompilerError(
-                "The name of a field must be unique.",
+                "the name of a field must be unique.",
                 p.lex.location()
             )
         }
@@ -388,7 +388,7 @@ function parseStructBody(p: Parser): ast.Type {
         const type = parseTypeCheckUnion(p)
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
-                `Fields cannot be separated by '${p.lex.token()}'.`,
+                `fields cannot be separated by '${p.lex.token()}'.`,
                 p.lex.location()
             )
         }
@@ -400,7 +400,7 @@ function parseStructBody(p: Parser): ast.Type {
     }
     if (fields.length === 0) {
         throw new CompilerError(
-            "A struct must include at least one member.",
+            "a struct must include at least one member.",
             p.lex.location()
         )
     }
@@ -420,7 +420,7 @@ function parseLength(p: Parser): number {
         result === 0 ||
         result >>> 0 !== result
     ) {
-        throw new CompilerError("A non-zero u32 is expected.", p.lex.location())
+        throw new CompilerError("a non-zero u32 is expected.", p.lex.location())
     }
     return result
 }
@@ -429,7 +429,7 @@ function parseU64Safe(p: Parser): number {
     const result = Number.parseInt(p.lex.token(), 10)
     if (!DIGIT_PATTERN.test(p.lex.token()) || !Number.isSafeInteger(result)) {
         throw new CompilerError(
-            "A non-negative safe integer is expected.",
+            "a non-negative safe integer is expected.",
             p.lex.location()
         )
     }

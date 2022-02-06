@@ -6,5 +6,5 @@
     "line": 5,
     "col": 5
   },
-  "message": "(struct-repeated-field/schema.bare:5:5) The name of a field must be unique."
+  "message": "(struct-repeated-field/schema.bare:5:5) the name of a field must be unique."
 }

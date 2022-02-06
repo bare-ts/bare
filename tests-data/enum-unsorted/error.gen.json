@@ -6,5 +6,5 @@
     "line": 4,
     "col": 12
   },
-  "message": "(enum-unsorted/schema.bare:4:12) A enum tag must be greater than the previous one."
+  "message": "(enum-unsorted/schema.bare:4:12) a enum tag must be greater than the previous one."
 }

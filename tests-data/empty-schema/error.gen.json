@@ -6,5 +6,5 @@
     "line": 1,
     "col": 1
   },
-  "message": "(empty-schema/schema.bare:1:1) A schema cannot be empty."
+  "message": "(empty-schema/schema.bare:1:1) a schema cannot be empty."
 }

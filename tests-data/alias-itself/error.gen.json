@@ -6,5 +6,5 @@
     "line": 1,
     "col": 17
   },
-  "message": "(alias-itself/schema.bare:1:17) A type cannot alias itself."
+  "message": "(alias-itself/schema.bare:1:17) a type cannot alias itself."
 }

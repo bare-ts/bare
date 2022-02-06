@@ -91,7 +91,7 @@ function compileAction(schema: string | number, opts: Partial<Config>): void {
         const compiled = transform(content, config)
         fs.writeFileSync(config.out, compiled)
     } catch (e) {
-        console.error(e instanceof Error ? e.message : e)
+        console.error(`error: ${e instanceof Error ? e.message : e}`)
         process.exit(1)
     }
 }

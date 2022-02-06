@@ -6,5 +6,5 @@
     "line": 3,
     "col": 17
   },
-  "message": "(struct-field-wrong-sep-semicolon/schema.bare:3:17) Fields cannot be separated by ';'."
+  "message": "(struct-field-wrong-sep-semicolon/schema.bare:3:17) fields cannot be separated by ';'."
 }
