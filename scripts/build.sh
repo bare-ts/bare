@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # build .d.ts
 npx tsc --build src
 
