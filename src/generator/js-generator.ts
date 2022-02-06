@@ -221,12 +221,10 @@ function genEnumType(_g: Gen, type: ast.EnumType): string {
 function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
     let body = ""
     let defaultVal = 0
-    let usedName = false
     for (const { name, val } of type.props.vals) {
         if (!type.props.intEnum) {
-            usedName = true
             body += `${name} = "${name}",\n`
-        } else if (!usedName && defaultVal === val) {
+        } else if (defaultVal === val) {
             body += `${name},\n`
             defaultVal++
         } else {
