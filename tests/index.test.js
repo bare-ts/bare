@@ -1,11 +1,9 @@
 import {
-    ConfigError,
     CompilerError,
-    transform,
-    generate,
-    normalize,
-    parse,
     Config,
+    ConfigError,
+    parse,
+    transform,
 } from "@bare-ts/tools"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
@@ -29,7 +27,9 @@ test("parse", (t) => {
             try {
                 actual = parse(content, Config({ ...config, schema }))
             } catch (e) {
-                if (!(e instanceof CompilerError)) throw e
+                if (!(e instanceof Error)) {
+                    throw e
+                }
                 filename = "error.gen.json"
                 actual = { ...e, message: e.message }
             }
@@ -42,53 +42,32 @@ test("parse", (t) => {
     }
 })
 
-test("normalize", (t) => {
+test("transform", (t) => {
     for (let dir of fs.readdirSync(DATA_DIR)) {
         dir = resolve(DATA_DIR, dir)
-        const astPath = resolve(dir, "ast.gen.json")
-        const ast2Path = resolve(dir, "normalized-ast.gen.json")
-        if (
-            fs.lstatSync(dir).isDirectory() &&
-            fs.existsSync(astPath) &&
-            fs.existsSync(ast2Path)
-        ) {
-            const ast2RelPath = relative(DATA_DIR, ast2Path)
-            t.ok(fs.existsSync(ast2Path), `${ast2RelPath} must exist`)
-
-            const ast = JSON.parse(fs.readFileSync(astPath).toString())
-            const ast2 = JSON.parse(fs.readFileSync(ast2Path).toString())
-            const computed = normalize(ast)
-            t.deepEqual(computed, ast2, `ast must match ${ast2RelPath}`)
-        }
-    }
-})
-
-test("generate", (t) => {
-    for (let dir of fs.readdirSync(DATA_DIR)) {
-        dir = resolve(DATA_DIR, dir)
-        const normalizedAstPath = resolve(dir, "normalized-ast.gen.json")
-        const astPath = fs.existsSync(normalizedAstPath)
-            ? normalizedAstPath
-            : resolve(dir, "ast.gen.json")
-        if (fs.lstatSync(dir).isDirectory() && fs.existsSync(astPath)) {
-            const ast = JSON.parse(fs.readFileSync(astPath).toString())
+        if (fs.lstatSync(dir).isDirectory()) {
+            const schemaPath = resolve(dir, "schema.bare")
+            const schema = relative(DATA_DIR, schemaPath)
+            const content = fs.readFileSync(schemaPath).toString()
             const configPath = resolve(dir, "config.json")
             const config = fs.existsSync(configPath)
                 ? JSON.parse(fs.readFileSync(configPath).toString())
                 : {}
             try {
-                const tsComputed = generate(
-                    ast,
-                    Config({ ...config, generator: "ts" })
-                )
-                const dtsComputed = generate(
-                    ast,
-                    Config({ ...config, generator: "dts" })
-                )
-                const jsComputed = generate(
-                    ast,
-                    Config({ ...config, generator: "js" })
-                )
+                const tsComputed = transform(content, {
+                    ...config,
+                    generator: "ts",
+                    schema,
+                })
+                const dtsComputed = transform(content, {
+                    ...config,
+                    generator: "dts",
+                })
+                const jsComputed = transform(content, {
+                    ...config,
+                    generator: "js",
+                    schema,
+                })
 
                 const tsPath = resolve(dir, "out.gen.ts")
                 const tsRelPath = relative(DATA_DIR, tsPath)
@@ -116,65 +95,21 @@ test("generate", (t) => {
                     `out must match ${jsRelPath}`
                 )
             } catch (e) {
-                if (e instanceof ConfigError) {
-                    const errorPath = resolve(dir, "error.gen.json")
-                    const errorRelPath = relative(DATA_DIR, errorPath)
-                    t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)
-
-                    const errorContent = JSON.parse(
-                        fs.readFileSync(errorPath).toString()
-                    )
-                    t.deepEqual(
-                        { ...e, message: e.message },
-                        errorContent,
-                        `error must match ${errorRelPath}`
-                    )
-                } else {
+                if (!(e instanceof CompilerError || e instanceof ConfigError)) {
                     throw e
                 }
-            }
-        }
-    }
-})
+                const errorPath = resolve(dir, "error.gen.json")
+                const errorRelPath = relative(DATA_DIR, errorPath)
+                t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)
 
-test("transform", (t) => {
-    for (let dir of fs.readdirSync(DATA_DIR)) {
-        dir = resolve(DATA_DIR, dir)
-        if (fs.lstatSync(dir).isDirectory()) {
-            const schemaPath = resolve(dir, "schema.bare")
-            const schema = relative(DATA_DIR, schemaPath)
-            const content = fs.readFileSync(schemaPath).toString()
-            const configPath = resolve(dir, "config.json")
-            const config = fs.existsSync(configPath)
-                ? JSON.parse(fs.readFileSync(configPath).toString())
-                : {}
-            try {
-                const result = transform(content, { ...config, schema })
-
-                const tsPath = resolve(dir, "out.gen.ts")
-                const tsRelPath = relative(DATA_DIR, tsPath)
-                t.ok(fs.existsSync(tsPath), `${tsRelPath} must exist`)
-
-                const tsContent = fs.readFileSync(tsPath).toString()
-
-                t.deepEqual(result, tsContent, `out must match ${tsRelPath}`)
-            } catch (e) {
-                if (e instanceof CompilerError || e instanceof ConfigError) {
-                    const errorPath = resolve(dir, "error.gen.json")
-                    const errorRelPath = relative(DATA_DIR, errorPath)
-                    t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)
-
-                    const errorContent = JSON.parse(
-                        fs.readFileSync(errorPath).toString()
-                    )
-                    t.deepEqual(
-                        errorContent,
-                        { ...e, message: e.message },
-                        `error must match ${errorRelPath}`
-                    )
-                } else {
-                    throw e
-                }
+                const errorContent = JSON.parse(
+                    fs.readFileSync(errorPath).toString()
+                )
+                t.deepEqual(
+                    { ...e, message: e.message },
+                    errorContent,
+                    `error must match ${errorRelPath}`
+                )
             }
         }
     }
