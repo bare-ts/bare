@@ -491,16 +491,16 @@ function genDataReader(g: Gen, type: ast.DataType, alias = ""): string {
 
 function genEnumReader(g: Gen, type: ast.EnumType, alias = ""): string {
     const rType = typeAliasOrDef(g, type, alias)
-    const lastTag = type.props.vals[type.props.vals.length - 1].val
-    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readUintSafe"
+    const maxTag = max(type.props.vals.map((v) => v.val))
+    const tagReader = maxTag < 128 ? "readU8" : "readUintSafe"
     const signature = genReaderHead(g, type, alias)
-    if (type.props.intEnum && lastTag === type.props.vals.length - 1) {
+    if (type.props.intEnum && maxTag === type.props.vals.length - 1) {
         const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
         return unindent(
             `${signature} {
                 const offset = bc.offset
-                const tag = ${tagReader}(bc)
-                if (tag > ${lastTag}) {
+                const tag = bare.${tagReader}(bc)
+                if (tag > ${maxTag}) {
                     bc.offset = offset
                     throw new bare.BareError(offset, "invalid tag")
                 }
@@ -520,7 +520,7 @@ function genEnumReader(g: Gen, type: ast.EnumType, alias = ""): string {
     }
     return unindent(`${signature} {
         const offset = bc.offset
-        const tag = ${tagReader}(bc)
+        const tag = bare.${tagReader}(bc)
         switch (tag) {
             ${indent(switchBody.trim())}
             default: {
@@ -645,8 +645,7 @@ function genTypedArrayReader(
 }
 
 function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
-    const lastTag = type.props.tags[type.props.tags.length - 1]
-    const tagReader = lastTag < 128 ? "bare.readU8" : "bare.readUintSafe"
+    const tagReader = max(type.props.tags) < 128 ? "readU8" : "readUintSafe"
     const flatten = type.props.flat
     let switchBody = ""
     for (let i = 0; i < type.types.length; i++) {
@@ -665,7 +664,7 @@ function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
     }
     return unindent(`${indent(genReaderHead(g, type, alias))} {
         const offset = bc.offset
-        const tag = ${tagReader}(bc)
+        const tag = bare.${tagReader}(bc)
         switch (tag) {
             ${switchBody.trim()}
             default: {
@@ -757,13 +756,13 @@ function genDataWriter(g: Gen, type: ast.DataType, alias = ""): string {
 }
 
 function genEnumWriter(g: Gen, type: ast.EnumType, alias = ""): string {
-    const lastTag = type.props.vals[type.props.vals.length - 1].val
-    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeUintSafe"
+    const maxTag = max(type.props.vals.map((v) => v.val))
+    const tagWriter = maxTag < 128 ? "writeU8" : "writeUintSafe"
     const signature = genWriterHead(g, type, alias)
     if (type.props.intEnum) {
         return unindent(
             `${signature} {
-            ${tagWriter}(bc, x)
+            bare.${tagWriter}(bc, x)
         }`,
             2
         )
@@ -775,7 +774,7 @@ function genEnumWriter(g: Gen, type: ast.EnumType, alias = ""): string {
             alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
         switchBody += `
         case ${enumVal}: {
-            ${tagWriter}(bc, ${val})
+            bare.${tagWriter}(bc, ${val})
             break
         }`
     }
@@ -845,8 +844,7 @@ function genTypedArrayWriter(
 
 function genUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
     const xType = typeAliasOrDef(g, type, alias)
-    const lastTag = type.props.tags[type.props.tags.length - 1]
-    const tagWriter = lastTag < 128 ? "bare.writeU8" : "bare.writeUintSafe"
+    const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
     const tagExp = type.props.flat ? `ext.tag${xType}(x)` : "x.tag"
     const valExp = type.props.flat
         ? g.config.generator === "ts"
@@ -862,7 +860,7 @@ function genUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
     }
     return unindent(`${indent(genWriterHead(g, type, alias))} {
         const tag = ${tagExp};
-        ${tagWriter}(bc, tag)
+        bare.${tagWriter}(bc, tag)
         switch (tag) {
             ${indent(switchBody.trim())}
         }
@@ -920,6 +918,10 @@ function jsId(s: string): string {
         /^(assert|bare|bc|ext|x)$|^read/.test(s)
         ? "_" + s
         : s
+}
+
+function max(vals: readonly number[]): number {
+    return Math.max(...vals)
 }
 
 const JS_RESERVED_WORD: readonly string[] =
