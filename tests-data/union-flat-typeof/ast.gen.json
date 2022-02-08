@@ -1,0 +1,84 @@
+{
+  "defs": [
+    {
+      "alias": "TypeOfUnion",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": true,
+          "tags": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "types": [
+          {
+            "tag": "bool",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-typeof/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
+            }
+          },
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-typeof/schema.bare",
+              "offset": 25,
+              "line": 1,
+              "col": 26
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-typeof/schema.bare",
+              "offset": 31,
+              "line": 1,
+              "col": 32
+            }
+          },
+          {
+            "tag": "void",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-typeof/schema.bare",
+              "offset": 40,
+              "line": 1,
+              "col": 41
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-flat-typeof/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-flat-typeof/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-typeof/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

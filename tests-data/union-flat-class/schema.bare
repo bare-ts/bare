@@ -1,0 +1,9 @@
+struct BoxedU32 {
+    val: u32
+}
+
+struct BoxedString {
+    val: string
+}
+
+type Boxed (BoxedU32 | BoxedString)

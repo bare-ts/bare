@@ -125,9 +125,8 @@ export function readContact(bc: bare.ByteCursor): Contact {
 }
 
 export function writeContact(bc: bare.ByteCursor, x: Contact): void {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
             break

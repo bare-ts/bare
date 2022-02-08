@@ -143,9 +143,8 @@ export function readPerson(bc) {
 }
 
 export function writePerson(bc, x) {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writeCustomer)(bc, x.val)
             break
@@ -191,9 +190,8 @@ export function readMessage(bc) {
 }
 
 export function writeMessage(bc, x) {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
             break

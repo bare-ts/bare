@@ -188,9 +188,8 @@ export function readPerson(bc: bare.ByteCursor): Person {
 }
 
 export function writePerson(bc: bare.ByteCursor, x: Person): void {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writeCustomer)(bc, x.val)
             break
@@ -246,9 +245,8 @@ export function readMessage(bc: bare.ByteCursor): Message {
 }
 
 export function writeMessage(bc: bare.ByteCursor, x: Message): void {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
             break

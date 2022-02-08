@@ -26,9 +26,8 @@ export function readComposite(bc) {
 }
 
 export function writeComposite(bc, x) {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (write0)(bc, x.val)
             break

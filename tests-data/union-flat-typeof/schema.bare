@@ -1,0 +1,1 @@
+type TypeOfUnion (bool | u32 | string | void)

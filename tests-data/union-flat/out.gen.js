@@ -22,7 +22,7 @@ export function readUnsignedInt(bc) {
 }
 
 export function writeUnsignedInt(bc, x) {
-    const tag = ext.tagUnsignedInt(x);
+    const tag = ext.tagUnsignedInt(x)
     bare.writeU8(bc, tag)
     switch (tag) {
         case 0:

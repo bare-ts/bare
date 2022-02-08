@@ -41,9 +41,8 @@ export function readX(bc: bare.ByteCursor): X {
 }
 
 export function writeX(bc: bare.ByteCursor, x: X): void {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (bare.writeU8)(bc, x.val)
             break

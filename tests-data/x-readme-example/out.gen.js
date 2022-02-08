@@ -94,9 +94,8 @@ export function readContact(bc) {
 }
 
 export function writeContact(bc, x) {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
             break

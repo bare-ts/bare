@@ -47,9 +47,8 @@ export function readComposite(bc: bare.ByteCursor): Composite {
 }
 
 export function writeComposite(bc: bare.ByteCursor, x: Composite): void {
-    const tag = x.tag;
-    bare.writeU8(bc, tag)
-    switch (tag) {
+    bare.writeU8(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (write0)(bc, x.val)
             break

@@ -1,0 +1,158 @@
+{
+  "defs": [
+    {
+      "alias": "BoxedU32",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": true,
+          "fields": [
+            {
+              "mut": false,
+              "name": "val",
+              "loc": {
+                "filename": "union-flat-class/schema.bare",
+                "offset": 22,
+                "line": 2,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 27,
+              "line": 2,
+              "col": 10
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-flat-class/schema.bare",
+          "offset": 16,
+          "line": 1,
+          "col": 17
+        }
+      },
+      "loc": {
+        "filename": "union-flat-class/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "BoxedString",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": true,
+          "fields": [
+            {
+              "mut": false,
+              "name": "val",
+              "loc": {
+                "filename": "union-flat-class/schema.bare",
+                "offset": 59,
+                "line": 6,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 64,
+              "line": 6,
+              "col": 10
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-flat-class/schema.bare",
+          "offset": 53,
+          "line": 5,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "union-flat-class/schema.bare",
+        "offset": 34,
+        "line": 5,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Boxed",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": true,
+          "tags": [
+            0,
+            1
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "BoxedU32"
+            },
+            "types": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 86,
+              "line": 9,
+              "col": 13
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "BoxedString"
+            },
+            "types": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 97,
+              "line": 9,
+              "col": 24
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-flat-class/schema.bare",
+          "offset": 85,
+          "line": 9,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "union-flat-class/schema.bare",
+        "offset": 74,
+        "line": 9,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-class/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

@@ -250,9 +250,7 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
 }
 
 function genLiteralType(_g: Gen, type: ast.LiteralType): string {
-    return typeof type.props.val === "string"
-        ? `"${type.props.val}"`
-        : `${type.props.val}`
+    return rpr(type.props.val)
 }
 
 function genMapType(g: Gen, type: ast.MapType): string {
@@ -842,27 +840,147 @@ function genTypedArrayWriter(
     }`)
 }
 
-function genUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
-    const xType = typeAliasOrDef(g, type, alias)
-    const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
-    const tagExp = type.props.flat ? `ext.tag${xType}(x)` : "x.tag"
-    const valExp = type.props.flat
-        ? g.config.generator === "ts"
-            ? "x as any"
-            : "x"
-        : "x.val"
+function genUnionWriter(g: Gen, union: ast.UnionType, alias = ""): string {
+    if (!union.props.flat) {
+        return genTaggedUnionWriter(g, union, alias)
+    } else if (union.types.every(ast.isPrimitiveType)) {
+        const primitiveUnion = union as ast.UnionType<ast.PrimitiveType>
+        return genPropertylessTypesFlatUnionWriter(g, primitiveUnion, alias)
+    } else if (union.types.every((t) => t.tag === "alias")) {
+        const aliasesUnion = union as ast.UnionType<ast.Alias>
+        return genAliasFlatUnionWriter(g, aliasesUnion, alias)
+    } else return genDefaultFlatUnionWriter(g, union, alias)
+}
+
+function genAliasFlatUnionWriter(
+    g: Gen,
+    union: ast.UnionType<ast.Alias>,
+    alias = ""
+): string {
+    const resolved = union.types.map((t) => ast.resolveAlias(t, g.symbols))
+    if (resolved.every((t): t is ast.StructType => t.tag === "struct")) {
+        const discriminators = ast.leadingDiscriminators(resolved)
+        let body = ""
+        if (
+            resolved.every((t) => t.props.class) &&
+            resolved.length === new Set(resolved).size
+        ) {
+            // every class is unique + we assume no inheritance between them
+            // => we can discriminate based of the instance type
+            for (let i = 0; i < union.types.length; i++) {
+                const tag = union.props.tags[i]
+                const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+                const className = union.types[i].props.alias
+                body += `if (x instanceof ${className}) {
+                    bare.${tagWriter}(bc, ${tag});
+                    (${genWriter(g, union.types[i])})(bc, x)
+                } else `
+            }
+            body = body.slice(0, body.length - 6) // remove last 'else '
+        } else if (
+            resolved.every((t) => !t.props.class) &&
+            discriminators != null
+        ) {
+            const leadingFieldName = resolved[0].props.fields[0].name
+            let switchBody = ""
+            for (let i = 0; i < union.types.length; i++) {
+                const tag = union.props.tags[i]
+                const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+                switchBody += `
+                case ${rpr(discriminators[i])}:
+                    bare.${tagWriter}(bc, ${tag});
+                    (${genWriter(g, union.types[i])})(bc, x)
+                    break`
+            }
+            body = `
+            switch (x.${leadingFieldName}) {
+                ${switchBody.trim()}
+            }`
+        }
+        return unindent(
+            `${indent(genWriterHead(g, union, alias))} {
+                ${body.trim()}
+            }`,
+            3
+        )
+    }
+    return genDefaultFlatUnionWriter(g, union, alias)
+}
+
+function genDefaultFlatUnionWriter(
+    g: Gen,
+    union: ast.UnionType,
+    alias = ""
+): string {
+    if (alias === "") {
+        return genTaggedUnionWriter(g, union) // fallback if no alias
+    }
     let switchBody = ""
-    for (let i = 0; i < type.types.length; i++) {
+    const isTs = g.config.generator === "ts"
+    for (let i = 0; i < union.types.length; i++) {
+        const valExp = isTs ? `x as ${genType(g, union.types[i])}` : "x"
         switchBody += `
-        case ${type.props.tags[i]}:
-            (${genWriter(g, type.types[i])})(bc, ${valExp})
+        case ${union.props.tags[i]}:
+            (${genWriter(g, union.types[i])})(bc, ${valExp})
             break`
     }
-    return unindent(`${indent(genWriterHead(g, type, alias))} {
-        const tag = ${tagExp};
+    const tagWriter = max(union.props.tags) < 128 ? "writeU8" : "writeUintSafe"
+    return unindent(`${indent(genWriterHead(g, union, alias))} {
+        const tag = ext.tag${alias}(x)
         bare.${tagWriter}(bc, tag)
         switch (tag) {
             ${indent(switchBody.trim())}
+        }
+    }`)
+}
+
+function genPropertylessTypesFlatUnionWriter(
+    g: Gen,
+    union: ast.UnionType<ast.PrimitiveType>,
+    alias = ""
+): string {
+    const vs = union.types.map((t) => ast.PRIMITIVE_TAG_TO_TYPEOF[t.tag])
+    if (vs.length !== new Set(vs).size) {
+        return genDefaultFlatUnionWriter(g, union, alias)
+    } // every typeof value is unique => this discriminates the union
+    let switchBody = ""
+    let defaultCase = ""
+    for (let i = 0; i < vs.length; i++) {
+        const tag = union.props.tags[i]
+        const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+        if (union.types[i].tag === "void") {
+            defaultCase = `
+            default:
+                bare.${tagWriter}(bc, ${tag})
+                break`
+        } else {
+            switchBody += `
+            case "${vs[i]}":
+                bare.${tagWriter}(bc, ${tag});
+                (${genWriter(g, union.types[i])})(bc, x)
+                break`
+        }
+    }
+    return unindent(`${indent(genWriterHead(g, union, alias))} {
+        switch (typeof x) {
+            ${switchBody.trim() + defaultCase}
+        }
+    }`)
+}
+
+function genTaggedUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
+    const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
+    let switchBody = ""
+    for (let i = 0; i < type.types.length; i++) {
+        switchBody += `
+            case ${type.props.tags[i]}:
+                (${genWriter(g, type.types[i])})(bc, x.val)
+                break`
+    }
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
+        bare.${tagWriter}(bc, x.tag)
+        switch (x.tag) {
+            ${switchBody.trim()}
         }
     }`)
 }
@@ -907,6 +1025,10 @@ function indent(s: string, n = 1): string {
 
 function unindent(s: string, n = 1): string {
     return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
+}
+
+function rpr(v: bigint | boolean | number | string | undefined | null): string {
+    return typeof v === "string" ? `"${v}"` : `${v}`
 }
 
 /**

@@ -51,9 +51,8 @@ export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
 }
 
 export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
-    const tag = x.tag;
-    bare.writeUintSafe(bc, tag)
-    switch (tag) {
+    bare.writeUintSafe(bc, x.tag)
+    switch (x.tag) {
         case 0:
             (bare.writeU8)(bc, x.val)
             break
