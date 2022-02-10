@@ -754,10 +754,10 @@ function genDataWriter(g: Gen, type: ast.DataType, alias = ""): string {
 }
 
 function genEnumWriter(g: Gen, type: ast.EnumType, alias = ""): string {
-    const maxTag = max(type.props.vals.map((v) => v.val))
-    const tagWriter = maxTag < 128 ? "writeU8" : "writeUintSafe"
     const signature = genWriterHead(g, type, alias)
     if (type.props.intEnum) {
+        const maxTag = max(type.props.vals.map((v) => v.val))
+        const tagWriter = maxTag < 128 ? "writeU8" : "writeUintSafe"
         return unindent(
             `${signature} {
             bare.${tagWriter}(bc, x)
@@ -768,6 +768,7 @@ function genEnumWriter(g: Gen, type: ast.EnumType, alias = ""): string {
     let switchBody = ""
     const intEnum = type.props.intEnum
     for (const { name, val } of type.props.vals) {
+        const tagWriter = val < 128 ? "writeU8" : "writeUintSafe"
         const enumVal =
             alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
         switchBody += `

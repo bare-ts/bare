@@ -43,11 +43,11 @@ export function readGender(bc: bare.ByteCursor): Gender {
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
         case Gender.MALE: {
-            bare.writeUintSafe(bc, 1)
+            bare.writeU8(bc, 1)
             break
         }
         case Gender.FEMALE: {
-            bare.writeUintSafe(bc, 2)
+            bare.writeU8(bc, 2)
             break
         }
         case Gender.FLUID: {
