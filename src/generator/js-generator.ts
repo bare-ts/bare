@@ -69,23 +69,16 @@ export function generate(schema: ast.Ast, config: Config): string {
         head += "\nconst config = bare.Config({})\n"
     }
     if (g.config.generator !== "js") {
-        head += unindent(`
-        export type f32 = number
-        export type f64 = number
-        export type i8 = number
-        export type i16 = number
-        export type i32 = number
-        export type i64 = bigint
-        export type i64Safe = number
-        export type int = bigint
-        export type intSafe = number
-        export type u8 = number
-        export type u16 = number
-        export type u32 = number
-        export type u64 = bigint
-        export type u64Safe = number
-        export type uint = bigint
-        export type uintSafe = number`)
+        head += "\n"
+        for (const tag of ast.PRIMITIVE_TAG) {
+            const typeofVal = ast.PRIMITIVE_TAG_TO_TYPEOF[tag]
+            if (
+                (typeofVal === "number" || typeofVal === "bigint") &&
+                RegExp(`\\b${tag}\\b`).test(body)
+            ) {
+                head += `export type ${tag} = ${typeofVal}\n`
+            }
+        }
     }
     return head.trim() + "\n\n" + body.trim() + "\n"
 }

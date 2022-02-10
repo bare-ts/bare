@@ -164,7 +164,7 @@ export function isPrimitiveType(type: Type): type is PrimitiveType {
     return isPrimitiveTag(type.tag)
 }
 
-const PRIMITIVE_TAG = [
+export const PRIMITIVE_TAG = [
     "bool",
     "f32",
     "f64",
