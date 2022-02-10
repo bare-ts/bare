@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readMultiArray(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []

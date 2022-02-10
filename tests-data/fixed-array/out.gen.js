@@ -1,7 +1,6 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
-
 export function readU8Array(bc) {
     const len = 4
     const valReader = bare.readU8

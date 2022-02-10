@@ -1,7 +1,6 @@
 import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
-
 export function readUnsignedInt(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)

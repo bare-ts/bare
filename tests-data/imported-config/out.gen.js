@@ -1,7 +1,6 @@
 import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
-
 export const readMessage = bare.readU8
 
 export const writeMessage = bare.writeU8

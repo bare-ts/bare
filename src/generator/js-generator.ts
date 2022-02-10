@@ -69,28 +69,25 @@ export function generate(schema: ast.Ast, config: Config): string {
         head += "\nconst config = bare.Config({})\n"
     }
     if (g.config.generator !== "js") {
-        head += unindent(
-            `
-            export type f32 = number
-            export type f64 = number
-            export type i8 = number
-            export type i16 = number
-            export type i32 = number
-            export type i64 = bigint
-            export type i64Safe = number
-            export type int = bigint
-            export type intSafe = number
-            export type u8 = number
-            export type u16 = number
-            export type u32 = number
-            export type u64 = bigint
-            export type u64Safe = number
-            export type uint = bigint
-            export type uintSafe = number`,
-            3
-        )
+        head += unindent(`
+        export type f32 = number
+        export type f64 = number
+        export type i8 = number
+        export type i16 = number
+        export type i32 = number
+        export type i64 = bigint
+        export type i64Safe = number
+        export type int = bigint
+        export type intSafe = number
+        export type u8 = number
+        export type u16 = number
+        export type u32 = number
+        export type u64 = bigint
+        export type u64Safe = number
+        export type uint = bigint
+        export type uintSafe = number`)
     }
-    return head + "\n\n" + body.slice(0, -1) // remove last newline
+    return head.trim() + "\n\n" + body.trim() + "\n"
 }
 
 interface Gen {
@@ -103,8 +100,7 @@ function Gen(config: Config, symbols: ast.SymbolTable): Gen {
         const aliased = symbols.get(alias)
         if (aliased === undefined) {
             throw new ConfigError(`main codec '${alias}' does not exist.`)
-        }
-        if (!aliased.exported) {
+        } else if (!aliased.exported) {
             throw new ConfigError(`a main codec must be exported.`)
         }
     }
@@ -284,13 +280,10 @@ function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
     const params = type.props.fields
         .map(({ name }, i) => `${jsId(name)}: ${genType(g, type.types[i])},`)
         .join("\n")
-    return unindent(
-        `${indent(genStructTypeBody(g, type), 2)}
-        constructor(
-            ${indent(params, 3)}
-        )`,
-        2
-    )
+    return unindent(`${indent(genStructTypeBody(g, type))}
+    constructor(
+        ${indent(params, 2)}
+    )`)
 }
 
 function genTypedArrayType(_g: Gen, type: ast.TypedArrayType): string {
@@ -415,31 +408,14 @@ function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
 }
 
 function genReader(g: Gen, type: ast.Type, alias = ""): string {
+    if (ast.isPrimitiveType(type)) {
+        return `bare.read${capitalize(type.tag)}`
+    }
     switch (type.tag) {
         case "alias":
             return `${namespaced(g, type.props.alias)}read${type.props.alias}`
         case "array":
             return genArrayReader(g, type, alias)
-        case "bool":
-        case "f32":
-        case "f64":
-        case "i8":
-        case "i16":
-        case "i32":
-        case "i64":
-        case "i64Safe":
-        case "int":
-        case "intSafe":
-        case "string":
-        case "u8":
-        case "u16":
-        case "u32":
-        case "u64":
-        case "u64Safe":
-        case "uint":
-        case "uintSafe":
-        case "void":
-            return `bare.read${capitalize(type.tag)}`
         case "data":
             return genDataReader(g, type, alias)
         case "enum":
@@ -488,44 +464,39 @@ function genDataReader(g: Gen, type: ast.DataType, alias = ""): string {
 }
 
 function genEnumReader(g: Gen, type: ast.EnumType, alias = ""): string {
-    const rType = typeAliasOrDef(g, type, alias)
+    let body: string
     const maxTag = max(type.props.vals.map((v) => v.val))
     const tagReader = maxTag < 128 ? "readU8" : "readUintSafe"
-    const signature = genReaderHead(g, type, alias)
-    if (type.props.intEnum && maxTag === type.props.vals.length - 1) {
-        const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
-        return unindent(
-            `${signature} {
-                const offset = bc.offset
-                const tag = bare.${tagReader}(bc)
-                if (tag > ${maxTag}) {
-                    bc.offset = offset
-                    throw new bare.BareError(offset, "invalid tag")
-                }
-                return tag${typeAssert}
-            }`,
-            3
-        )
-    }
-    let switchBody = ""
     const intEnum = type.props.intEnum
-    for (const { name, val } of type.props.vals) {
-        const enumVal =
-            alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
-        switchBody += `
-        case ${val}:
-            return ${enumVal}`
-    }
-    return unindent(`${signature} {
-        const offset = bc.offset
-        const tag = bare.${tagReader}(bc)
-        switch (tag) {
-            ${indent(switchBody.trim())}
+    if (intEnum && maxTag === type.props.vals.length - 1) {
+        const rType = typeAliasOrDef(g, type, alias)
+        const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
+        body = `if (tag > ${maxTag}) {
+            bc.offset = offset
+            throw new bare.BareError(offset, "invalid tag")
+        }
+        return tag${typeAssert}`
+    } else {
+        let switchBody = ""
+        for (const { name, val } of type.props.vals) {
+            const enumVal =
+                alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
+            switchBody += `
+            case ${val}:
+                return ${enumVal}`
+        }
+        body = `switch (tag) {
+            ${switchBody.trim()}
             default: {
                 bc.offset = offset
                 throw new bare.BareError(offset, "invalid tag")
             }
-        }
+        }`
+    }
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
+        const offset = bc.offset
+        const tag = bare.${tagReader}(bc)
+        ${body}
     }`)
 }
 
@@ -684,31 +655,14 @@ function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
 }
 
 function genWriter(g: Gen, type: ast.Type, alias = ""): string {
+    if (ast.isPrimitiveType(type)) {
+        return `bare.write${capitalize(type.tag)}`
+    }
     switch (type.tag) {
         case "alias":
             return `${namespaced(g, type.props.alias)}write${type.props.alias}`
         case "array":
             return genArrayWriter(g, type, alias)
-        case "bool":
-        case "f32":
-        case "f64":
-        case "i8":
-        case "i16":
-        case "i32":
-        case "i64":
-        case "i64Safe":
-        case "int":
-        case "intSafe":
-        case "string":
-        case "u8":
-        case "u16":
-        case "u32":
-        case "u64":
-        case "u64Safe":
-        case "uint":
-        case "uintSafe":
-        case "void":
-            return `bare.write${capitalize(type.tag)}`
         case "data":
             return genDataWriter(g, type, alias)
         case "enum":
@@ -754,33 +708,30 @@ function genDataWriter(g: Gen, type: ast.DataType, alias = ""): string {
 }
 
 function genEnumWriter(g: Gen, type: ast.EnumType, alias = ""): string {
-    const signature = genWriterHead(g, type, alias)
-    if (type.props.intEnum) {
+    let body: string
+    const intEnum = type.props.intEnum
+    if (intEnum) {
         const maxTag = max(type.props.vals.map((v) => v.val))
         const tagWriter = maxTag < 128 ? "writeU8" : "writeUintSafe"
-        return unindent(
-            `${signature} {
-            bare.${tagWriter}(bc, x)
-        }`,
-            2
-        )
-    }
-    let switchBody = ""
-    const intEnum = type.props.intEnum
-    for (const { name, val } of type.props.vals) {
-        const tagWriter = val < 128 ? "writeU8" : "writeUintSafe"
-        const enumVal =
-            alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
-        switchBody += `
-        case ${enumVal}: {
-            bare.${tagWriter}(bc, ${val})
-            break
+        body = `bare.${tagWriter}(bc, x)`
+    } else {
+        let switchBody = ""
+        for (const { name, val } of type.props.vals) {
+            const tagWriter = val < 128 ? "writeU8" : "writeUintSafe"
+            const enumVal =
+                alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
+            switchBody += `
+            case ${enumVal}: {
+                bare.${tagWriter}(bc, ${val})
+                break
+            }`
+        }
+        body = `switch (x) {
+            ${switchBody.trim()}
         }`
     }
-    return unindent(`${indent(signature)} {
-        switch (x) {
-            ${indent(switchBody.trim())}
-        }
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
+        ${body}
     }`)
 }
 
@@ -813,7 +764,7 @@ function genSetWriter(g: Gen, type: ast.SetType, alias = ""): string {
     return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.writeUintSafe(bc, x.size)
         for (const v of x) {
-            (${indent(genWriter(g, type.types[0]), 2)})(bc, v)
+            (${indent(genWriter(g, type.types[0]), 3)})(bc, v)
         }
     }`)
 }
@@ -893,14 +844,13 @@ function genAliasFlatUnionWriter(
                     (${genWriter(g, union.types[i])})(bc, x)
                     break`
             }
-            body = `
-            switch (x.${leadingFieldName}) {
+            body = `switch (x.${leadingFieldName}) {
                 ${switchBody.trim()}
             }`
         }
         return unindent(
             `${indent(genWriterHead(g, union, alias))} {
-                ${body.trim()}
+                ${body}
             }`,
             3
         )

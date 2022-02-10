@@ -2,7 +2,6 @@ import * as bare from "@bare-ts/lib"
 
 const config = bare.Config({})
 
-
 export const Gender = {
     FEMALE: "FEMALE",
     FLUID: "FLUID",

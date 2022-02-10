@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export class BoxedU32 {
     constructor(
         val,

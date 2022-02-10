@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export const Gender = {
     FLUID: 0,
     0: "FLUID",

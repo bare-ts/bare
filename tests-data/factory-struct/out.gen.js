@@ -1,7 +1,6 @@
 import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
-
 export function readPerson(bc) {
     const name = (bare.readString)(bc)
     const age = (bare.readU8)(bc)

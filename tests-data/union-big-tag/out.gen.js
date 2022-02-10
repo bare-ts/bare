@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readUnsignedInt(bc) {
     const offset = bc.offset
     const tag = bare.readUintSafe(bc)

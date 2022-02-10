@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readOperation(bc) {
     const type = (bare.readString)(bc)
     const struct = (bare.readString)(bc)

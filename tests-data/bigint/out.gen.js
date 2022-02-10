@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export const readI64 = bare.readI64
 
 export const writeI64 = bare.writeI64

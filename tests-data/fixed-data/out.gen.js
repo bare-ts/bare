@@ -1,7 +1,6 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
-
 export function readU8Alias(bc) {
     return bare.readFixedData(bc, 4)
 }

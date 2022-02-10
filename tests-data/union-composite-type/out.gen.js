@@ -1,7 +1,6 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
-
 export function readComposite(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)

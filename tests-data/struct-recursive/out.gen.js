@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readNode(bc) {
     const children = (read0)(bc)
     return {

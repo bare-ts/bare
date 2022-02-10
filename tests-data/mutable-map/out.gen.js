@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readDict(bc) {
     const len = bare.readUintSafe(bc)
     const result = new Map()

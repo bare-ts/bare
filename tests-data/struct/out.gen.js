@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export function readPerson(bc) {
     const name = (bare.readString)(bc)
     const age = (bare.readU8)(bc)

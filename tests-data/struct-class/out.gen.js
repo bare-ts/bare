@@ -1,6 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-
 export class Person {
     constructor(
         name,
