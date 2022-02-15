@@ -86,6 +86,8 @@ This project adheres to [Semantic Versioning][semver].
     This enables to inform the user of @bare-ts/tools which version of
     @bare-ts/lib is expected.
 
+* Forbid bare schema with undefined aliases
+
 * Forbid bare schema in which length and tags are too large
 
     Length of fixed data and (typed) array must be a u32.

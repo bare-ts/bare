@@ -24,6 +24,9 @@ export function checkSemantic(schema: ast.Ast): ast.Ast {
 
 function checkTypeInvariants(type: ast.Type, symbols: ast.SymbolTable): void {
     switch (type.tag) {
+        case "alias":
+            checkUndefinedAlias(type, symbols)
+            break
         case "enum":
             checkEnumInvariants(type)
             break
@@ -159,6 +162,13 @@ function checkUnionInvariants(type: ast.UnionType): void {
             )
         }
         stringifiedTypes.add(stringifiedType)
+    }
+}
+
+function checkUndefinedAlias(type: ast.Alias, symbols: ast.SymbolTable): void {
+    if (!symbols.has(type.props.alias)) {
+        const alias = type.props.alias
+        throw new CompilerError(`alias '${alias}' is not defined.`, type.loc)
     }
 }
 

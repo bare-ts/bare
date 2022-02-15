@@ -1,0 +1,95 @@
+{
+  "defs": [
+    {
+      "alias": "A",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "field0",
+              "loc": {
+                "filename": "alias-undef/schema.bare",
+                "offset": 15,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "field1",
+              "loc": {
+                "filename": "alias-undef/schema.bare",
+                "offset": 30,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "alias-undef/schema.bare",
+              "offset": 23,
+              "line": 2,
+              "col": 13
+            }
+          },
+          {
+            "tag": "array",
+            "props": {
+              "len": null,
+              "mut": false
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "UndefinedAlias"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "alias-undef/schema.bare",
+                  "offset": 40,
+                  "line": 3,
+                  "col": 15
+                }
+              }
+            ],
+            "loc": {
+              "filename": "alias-undef/schema.bare",
+              "offset": 38,
+              "line": 3,
+              "col": 13
+            }
+          }
+        ],
+        "loc": {
+          "filename": "alias-undef/schema.bare",
+          "offset": 9,
+          "line": 1,
+          "col": 10
+        }
+      },
+      "loc": {
+        "filename": "alias-undef/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "alias-undef/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

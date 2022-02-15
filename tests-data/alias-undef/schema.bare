@@ -1,0 +1,4 @@
+struct A {
+    field0: u8
+    field1: []UndefinedAlias
+}
