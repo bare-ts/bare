@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "alias-itself/schema.bare",
-    "offset": 16,
+    "offset": 11,
     "line": 1,
-    "col": 17
+    "col": 12
   },
-  "message": "(alias-itself/schema.bare:1:17) a type cannot alias itself."
+  "message": "(alias-itself/schema.bare:1:12) circular references are not allowed."
 }

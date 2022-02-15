@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-empty/schema.bare",
-    "offset": 14,
+    "offset": 13,
     "line": 2,
-    "col": 14
+    "col": 13
   },
-  "message": "(enum-empty/schema.bare:2:14) an enum must include at least one member."
+  "message": "(enum-empty/schema.bare:2:13) an enum must include at least one member."
 }

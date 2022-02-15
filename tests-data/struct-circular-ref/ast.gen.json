@@ -1,0 +1,59 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "bestFriend",
+              "loc": {
+                "filename": "struct-circular-ref/schema.bare",
+                "offset": 21,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Person"
+            },
+            "types": null,
+            "loc": {
+              "filename": "struct-circular-ref/schema.bare",
+              "offset": 33,
+              "line": 3,
+              "col": 17
+            }
+          }
+        ],
+        "loc": {
+          "filename": "struct-circular-ref/schema.bare",
+          "offset": 15,
+          "line": 2,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "struct-circular-ref/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "struct-circular-ref/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}

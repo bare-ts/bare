@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "union-circular-ref/schema.bare",
+    "offset": 43,
+    "line": 2,
+    "col": 13
+  },
+  "message": "(union-circular-ref/schema.bare:2:13) circular references are not allowed."
+}

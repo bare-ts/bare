@@ -1,0 +1,52 @@
+{
+  "defs": [
+    {
+      "alias": "Duplicated",
+      "exported": true,
+      "type": {
+        "tag": "u8",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "duplicated-alias/schema.bare",
+          "offset": 16,
+          "line": 1,
+          "col": 17
+        }
+      },
+      "loc": {
+        "filename": "duplicated-alias/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Duplicated",
+      "exported": true,
+      "type": {
+        "tag": "u8",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "duplicated-alias/schema.bare",
+          "offset": 35,
+          "line": 2,
+          "col": 17
+        }
+      },
+      "loc": {
+        "filename": "duplicated-alias/schema.bare",
+        "offset": 19,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "duplicated-alias/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

@@ -1,0 +1,4 @@
+type Alias0 Alias1
+type Alias1 Alias2
+type Alias2 Alias3
+type Alias3 Alias0

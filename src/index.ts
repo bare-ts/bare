@@ -1,4 +1,5 @@
 import { normalize } from "./ast/bare-normalization.js"
+import { checkSemantic } from "./ast/bare-semantic-checker.js"
 import { generate } from "./generator/js-generator.js"
 import { Config } from "./core/config.js"
 import { parse } from "./parser/bare-parser.js"
@@ -22,6 +23,7 @@ export * from "./parser/lex.js"
 export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)
     const schema = parse(content, completedConfig)
+    checkSemantic(schema)
     const normalizedSchema = normalize(schema)
     return generate(normalizedSchema, completedConfig)
 }

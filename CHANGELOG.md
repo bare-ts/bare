@@ -144,6 +144,8 @@ This project adheres to [Semantic Versioning][semver].
     }
     ```
 
+* Forbid bare schema with circular references
+
 * Better diagnostics when semicolons are used to separate enum or
     struct members
 

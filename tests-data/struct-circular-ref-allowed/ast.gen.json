@@ -1,0 +1,212 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "bestFriend",
+              "loc": {
+                "filename": "struct-circular-ref-allowed/schema.bare",
+                "offset": 21,
+                "line": 3,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "secondBestFriend",
+              "loc": {
+                "filename": "struct-circular-ref-allowed/schema.bare",
+                "offset": 54,
+                "line": 4,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "friends",
+              "loc": {
+                "filename": "struct-circular-ref-allowed/schema.bare",
+                "offset": 94,
+                "line": 5,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "friendNicknames",
+              "loc": {
+                "filename": "struct-circular-ref-allowed/schema.bare",
+                "offset": 116,
+                "line": 6,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "optional",
+            "props": {
+              "lax": false,
+              "null": false
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Person"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 42,
+                  "line": 3,
+                  "col": 26
+                }
+              }
+            ],
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 33,
+              "line": 3,
+              "col": 17
+            }
+          },
+          {
+            "tag": "union",
+            "props": {
+              "flat": false,
+              "tags": [
+                0,
+                1
+              ]
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Person"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 74,
+                  "line": 4,
+                  "col": 25
+                }
+              },
+              {
+                "tag": "void",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 83,
+                  "line": 4,
+                  "col": 34
+                }
+              }
+            ],
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 72,
+              "line": 4,
+              "col": 23
+            }
+          },
+          {
+            "tag": "array",
+            "props": {
+              "len": null,
+              "mut": false
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Person"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 105,
+                  "line": 5,
+                  "col": 16
+                }
+              }
+            ],
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 103,
+              "line": 5,
+              "col": 14
+            }
+          },
+          {
+            "tag": "map",
+            "props": {
+              "mut": false
+            },
+            "types": [
+              {
+                "tag": "string",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 137,
+                  "line": 6,
+                  "col": 26
+                }
+              },
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Person"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "struct-circular-ref-allowed/schema.bare",
+                  "offset": 144,
+                  "line": 6,
+                  "col": 33
+                }
+              }
+            ],
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 133,
+              "line": 6,
+              "col": 22
+            }
+          }
+        ],
+        "loc": {
+          "filename": "struct-circular-ref-allowed/schema.bare",
+          "offset": 15,
+          "line": 2,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "struct-circular-ref-allowed/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "struct-circular-ref-allowed/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}

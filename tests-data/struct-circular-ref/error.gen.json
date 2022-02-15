@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "struct-circular-ref/schema.bare",
+    "offset": 33,
+    "line": 3,
+    "col": 17
+  },
+  "message": "(struct-circular-ref/schema.bare:3:17) circular references are not allowed."
+}

@@ -8,23 +8,12 @@ export function parse(content: string, config: Config): ast.Ast {
         config,
         lex: new Lex(content, config.schema, { commentMark: "#" }),
     }
-    const startLocation = p.lex.location()
-    const result: Map<string, ast.AliasedType> = new Map()
+    const loc = p.lex.location()
+    const defs: ast.AliasedType[] = []
     while (p.lex.token() !== "") {
-        const location = p.lex.location()
-        const aliased = parseAliased(p)
-        if (result.has(aliased.alias)) {
-            throw new CompilerError(
-                `alias '${aliased.alias}' is already used.`,
-                location
-            )
-        }
-        result.set(aliased.alias, aliased)
+        defs.push(parseAliased(p))
     }
-    if (result.size === 0) {
-        throw new CompilerError("a schema cannot be empty.", p.lex.location())
-    }
-    return { defs: Array.from(result.values()), loc: startLocation }
+    return { defs, loc }
 }
 
 interface Parser {
@@ -65,13 +54,6 @@ function parseAliased(p: Parser): ast.AliasedType {
             : keyword === "struct"
             ? parseStructBody(p)
             : parseTypeCheckUnion(p)
-    if (
-        keyword === "type" &&
-        type.tag === "alias" &&
-        alias === type.props.alias
-    ) {
-        throw new CompilerError("a type cannot alias itself.", p.lex.location())
-    }
     return { alias, exported: true, type, loc }
 }
 
@@ -216,12 +198,6 @@ function parseMap(p: Parser): ast.Type {
     }
     p.lex.forth()
     const keyType = parseType(p)
-    if (!ast.isPrimitiveTag(keyType.tag) || keyType.tag === "void") {
-        throw new CompilerError(
-            "the type of keys must be among: bool, f32, f64, i8, i16, i32, i64, int, string, u8, u16, u32, u64, uint.",
-            p.lex.location()
-        )
-    }
     if (p.lex.token() !== "]") {
         throw new CompilerError("']' is expected.", p.lex.location())
     }
@@ -242,7 +218,6 @@ function parseUnion(p: Parser): ast.Type {
     const loc = p.lex.location()
     const tags: number[] = []
     const types: ast.Type[] = []
-    const stringifiedUnits = new Set()
     let tagVal = 0
     do {
         p.lex.forth()
@@ -260,16 +235,6 @@ function parseUnion(p: Parser): ast.Type {
             }
         }
         const type = parseType(p)
-        const stringifiedType = JSON.stringify(type)
-        // NOTE: this dirty check is ok because we initialize
-        // every object in the same way (properties are sorted)
-        if (stringifiedUnits.has(stringifiedType)) {
-            throw new CompilerError(
-                "a type cannot be repeated in an union.",
-                p.lex.location()
-            )
-        }
-        stringifiedUnits.add(stringifiedType)
         if (p.lex.token() === "=") {
             p.lex.forth()
             const prevTagVal = tagVal - 1
@@ -311,12 +276,6 @@ function parseEnumBody(p: Parser): ast.Type {
                 p.lex.location()
             )
         }
-        if (names.has(name)) {
-            throw new CompilerError(
-                "the name of an enum member must be unique.",
-                p.lex.location()
-            )
-        }
         names.add(name)
         const valLoc = p.lex.location()
         p.lex.forth()
@@ -344,12 +303,6 @@ function parseEnumBody(p: Parser): ast.Type {
     if (p.lex.token() !== "}") {
         throw new CompilerError("'}' is expected.", p.lex.location())
     }
-    if (vals.length === 0) {
-        throw new CompilerError(
-            "an enum must include at least one member.",
-            p.lex.location()
-        )
-    }
     p.lex.forth()
     const intEnum = p.config.useIntEnum
     return { tag: "enum", props: { intEnum, vals }, types: null, loc }
@@ -372,12 +325,6 @@ function parseStructBody(p: Parser): ast.Type {
                 p.lex.location()
             )
         }
-        if (names.has(name)) {
-            throw new CompilerError(
-                "the name of a field must be unique.",
-                p.lex.location()
-            )
-        }
         names.add(name)
         const fieldLoc = p.lex.location()
         p.lex.forth()
@@ -397,12 +344,6 @@ function parseStructBody(p: Parser): ast.Type {
     }
     if (p.lex.token() !== "}") {
         throw new CompilerError("'}' is expected.", p.lex.location())
-    }
-    if (fields.length === 0) {
-        throw new CompilerError(
-            "a struct must include at least one member.",
-            p.lex.location()
-        )
     }
     p.lex.forth()
     return {

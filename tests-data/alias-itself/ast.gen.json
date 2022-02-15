@@ -1,0 +1,33 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "exported": true,
+      "type": {
+        "tag": "alias",
+        "props": {
+          "alias": "Alias"
+        },
+        "types": null,
+        "loc": {
+          "filename": "alias-itself/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "alias-itself/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "alias-itself/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

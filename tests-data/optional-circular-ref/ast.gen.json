@@ -1,0 +1,48 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "exported": true,
+      "type": {
+        "tag": "optional",
+        "props": {
+          "lax": false,
+          "null": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Alias"
+            },
+            "types": null,
+            "loc": {
+              "filename": "optional-circular-ref/schema.bare",
+              "offset": 20,
+              "line": 1,
+              "col": 21
+            }
+          }
+        ],
+        "loc": {
+          "filename": "optional-circular-ref/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "optional-circular-ref/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "optional-circular-ref/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

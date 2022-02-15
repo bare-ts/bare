@@ -1,0 +1,79 @@
+{
+  "defs": [
+    {
+      "alias": "KeyType",
+      "exported": true,
+      "type": {
+        "tag": "string",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "map-key-alias/schema.bare",
+          "offset": 13,
+          "line": 1,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "map-key-alias/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Dict",
+      "exported": true,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "KeyType"
+            },
+            "types": null,
+            "loc": {
+              "filename": "map-key-alias/schema.bare",
+              "offset": 35,
+              "line": 3,
+              "col": 15
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map-key-alias/schema.bare",
+              "offset": 44,
+              "line": 3,
+              "col": 24
+            }
+          }
+        ],
+        "loc": {
+          "filename": "map-key-alias/schema.bare",
+          "offset": 31,
+          "line": 3,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "map-key-alias/schema.bare",
+        "offset": 21,
+        "line": 3,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "map-key-alias/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

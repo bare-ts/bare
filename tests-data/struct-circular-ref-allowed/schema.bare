@@ -1,0 +1,7 @@
+
+struct Person {
+    bestFriend: optional<Person>
+    secondBestFriend: ( Person | void )
+    friends: []Person
+    friendNicknames: map[string]Person
+}

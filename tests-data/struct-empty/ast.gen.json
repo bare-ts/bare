@@ -1,0 +1,34 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": []
+        },
+        "types": [],
+        "loc": {
+          "filename": "struct-empty/schema.bare",
+          "offset": 15,
+          "line": 2,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "struct-empty/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "struct-empty/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}

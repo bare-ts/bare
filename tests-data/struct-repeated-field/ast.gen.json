@@ -1,0 +1,99 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "exported": true,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "loc": {
+                "filename": "struct-repeated-field/schema.bare",
+                "offset": 21,
+                "line": 3,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "age",
+              "loc": {
+                "filename": "struct-repeated-field/schema.bare",
+                "offset": 38,
+                "line": 4,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "name",
+              "loc": {
+                "filename": "struct-repeated-field/schema.bare",
+                "offset": 50,
+                "line": 5,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 27,
+              "line": 3,
+              "col": 11
+            }
+          },
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 43,
+              "line": 4,
+              "col": 10
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 56,
+              "line": 5,
+              "col": 11
+            }
+          }
+        ],
+        "loc": {
+          "filename": "struct-repeated-field/schema.bare",
+          "offset": 15,
+          "line": 2,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "struct-repeated-field/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "struct-repeated-field/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}

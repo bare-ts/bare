@@ -1,0 +1,108 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1
+          ]
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Alias1"
+            },
+            "types": null,
+            "loc": {
+              "filename": "union-circular-ref/schema.bare",
+              "offset": 13,
+              "line": 1,
+              "col": 14
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Alias2"
+            },
+            "types": null,
+            "loc": {
+              "filename": "union-circular-ref/schema.bare",
+              "offset": 22,
+              "line": 1,
+              "col": 23
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-circular-ref/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "union-circular-ref/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Alias1",
+      "exported": true,
+      "type": {
+        "tag": "alias",
+        "props": {
+          "alias": "Alias"
+        },
+        "types": null,
+        "loc": {
+          "filename": "union-circular-ref/schema.bare",
+          "offset": 43,
+          "line": 2,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "union-circular-ref/schema.bare",
+        "offset": 31,
+        "line": 2,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Alias2",
+      "exported": true,
+      "type": {
+        "tag": "u8",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "union-circular-ref/schema.bare",
+          "offset": 61,
+          "line": 3,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "union-circular-ref/schema.bare",
+        "offset": 49,
+        "line": 3,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-circular-ref/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
