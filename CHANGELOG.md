@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.2.0 (2022-02-20)
 
 * Fix invalid code generation for big tags in enums and unions
 
