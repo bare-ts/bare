@@ -63,7 +63,7 @@ The option `--main` specifies which type is used to encode and decode messages.
 Once the code generated, you can encode and decode messages:
 
 ```ts
-import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
+import { decodeContacts, encodeContacts, Gender } from "./code.js"
 import { strict } from "assert"
 
 const contacts = [
