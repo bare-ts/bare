@@ -9,108 +9,117 @@ import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { default as test } from "oletus"
 
-const DATA_DIR = "./tests-data"
+const CORPUS_DIR = "./tests-corpus"
+const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`
+const INVALID_CONFIG_DIR = `${CORPUS_DIR}/invalid-config`
+const VALID_BARE_DIR = `${CORPUS_DIR}/valid-bare-schema`
 
-test("parse", (t) => {
-    for (let dir of fs.readdirSync(DATA_DIR)) {
-        dir = resolve(DATA_DIR, dir)
-        if (fs.lstatSync(dir).isDirectory()) {
-            const schemaPath = resolve(dir, "schema.bare")
-            const schema = relative(DATA_DIR, schemaPath)
-            const content = fs.readFileSync(schemaPath).toString()
-            const configPath = resolve(dir, "config.json")
-            const config = fs.existsSync(configPath)
-                ? JSON.parse(fs.readFileSync(configPath).toString())
-                : {}
-            let actual
-            let filename = "ast.gen.json"
-            try {
-                actual = parse(content, Config({ ...config, schema }))
-            } catch (e) {
-                if (!(e instanceof Error)) {
-                    throw e
-                }
-                filename = "error.gen.json"
-                actual = { ...e, message: e.message }
-            }
-            const path = resolve(dir, filename)
-            const relPath = relative(DATA_DIR, path)
-            t.ok(fs.existsSync(path), `file ${relPath} must exist`)
-            const expected = JSON.parse(fs.readFileSync(path).toString())
-            t.deepEqual(actual, expected, `actual must match ${relPath}`)
+for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
+    const dir = resolve(INVALID_BARE_DIR, relDir)
+
+    test(relative(CORPUS_DIR, dir), (t) => {
+        const schemaPath = resolve(dir, "schema.bare")
+        const configPath = resolve(dir, "config.json")
+        const astPath = resolve(dir, "ast.gen.json")
+        const errorPath = resolve(dir, "error.gen.json")
+        const schema = fs.readFileSync(schemaPath).toString()
+        const astExpected = fs.existsSync(astPath)
+            ? JSON.parse(fs.readFileSync(astPath).toString())
+            : {}
+        let config = fs.existsSync(configPath)
+            ? JSON.parse(fs.readFileSync(configPath).toString())
+            : {}
+        config = Config({
+            ...config,
+            generator: "ts",
+            schema: relative(INVALID_BARE_DIR, schemaPath),
+        })
+        const error = JSON.parse(fs.readFileSync(errorPath).toString())
+        try {
+            const astComputed = parse(schema, config)
+            t.deepEqual(astComputed, astExpected)
+            void transform(schema, config)
+            t.ok(false) // must be unreachable
+        } catch (e) {
+            if (!(e instanceof CompilerError)) throw e
+            t.deepEqual({ ...e, message: e.message }, error)
         }
-    }
-})
+    })
+}
 
-test("transform", (t) => {
-    for (let dir of fs.readdirSync(DATA_DIR)) {
-        dir = resolve(DATA_DIR, dir)
-        if (fs.lstatSync(dir).isDirectory()) {
-            const schemaPath = resolve(dir, "schema.bare")
-            const schema = relative(DATA_DIR, schemaPath)
-            const content = fs.readFileSync(schemaPath).toString()
-            const configPath = resolve(dir, "config.json")
-            const config = fs.existsSync(configPath)
-                ? JSON.parse(fs.readFileSync(configPath).toString())
-                : {}
-            try {
-                const tsComputed = transform(content, {
-                    ...config,
-                    generator: "ts",
-                    schema,
-                })
-                const dtsComputed = transform(content, {
-                    ...config,
-                    generator: "dts",
-                })
-                const jsComputed = transform(content, {
-                    ...config,
-                    generator: "js",
-                    schema,
-                })
+for (let dir of fs.readdirSync(INVALID_CONFIG_DIR)) {
+    dir = resolve(INVALID_CONFIG_DIR, dir)
 
-                const tsPath = resolve(dir, "out.gen.ts")
-                const tsRelPath = relative(DATA_DIR, tsPath)
-                const dtsPath = resolve(dir, "out.gen.d.ts")
-                const dtsRelPath = relative(DATA_DIR, tsPath)
-                const jsPath = resolve(dir, "out.gen.js")
-                const jsRelPath = relative(DATA_DIR, jsPath)
-                t.ok(fs.existsSync(tsPath), `${tsRelPath} must exist`)
-                t.ok(fs.existsSync(dtsPath), `${dtsRelPath} must exist`)
-                t.ok(fs.existsSync(jsPath), `${jsRelPath} must exist`)
-
-                const tsContent = fs.readFileSync(tsPath).toString()
-                const dtsContent = fs.readFileSync(dtsPath).toString()
-                const jsContent = fs.readFileSync(jsPath).toString()
-
-                t.deepEqual(
-                    tsComputed,
-                    tsContent,
-                    `out must match ${tsRelPath}`
-                )
-                t.deepEqual(dtsComputed, dtsContent)
-                t.deepEqual(
-                    jsComputed,
-                    jsContent,
-                    `out must match ${jsRelPath}`
-                )
-            } catch (e) {
-                if (!(e instanceof CompilerError || e instanceof ConfigError)) {
-                    throw e
-                }
-                const errorPath = resolve(dir, "error.gen.json")
-                const errorRelPath = relative(DATA_DIR, errorPath)
-                t.ok(fs.existsSync(errorPath), `${errorRelPath} must exist`)
-
-                const errorContent = JSON.parse(
-                    fs.readFileSync(errorPath).toString()
-                )
-                t.deepEqual(
-                    { ...e, message: e.message },
-                    errorContent,
-                    `error must match ${errorRelPath}`
-                )
-            }
+    test(relative(CORPUS_DIR, dir), (t) => {
+        const schemaPath = resolve(dir, "schema.bare")
+        const configPath = resolve(dir, "config.json")
+        const errorPath = resolve(dir, "error.gen.json")
+        const schema = fs.readFileSync(schemaPath).toString()
+        const config = JSON.parse(fs.readFileSync(configPath).toString())
+        const error = JSON.parse(fs.readFileSync(errorPath).toString())
+        try {
+            void transform(schema, {
+                ...config,
+                generator: "ts",
+                schema: relative(INVALID_CONFIG_DIR, schemaPath),
+            })
+            t.ok(false) // must be unreachable
+        } catch (e) {
+            if (!(e instanceof ConfigError)) throw e
+            t.deepEqual({ ...e, message: e.message }, error)
         }
-    }
-})
+    })
+}
+
+for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
+    dir = resolve(VALID_BARE_DIR, dir)
+
+    test(relative(CORPUS_DIR, dir), (t) => {
+        const schemaPath = resolve(dir, "schema.bare")
+        const schemaRelPath = relative(VALID_BARE_DIR, schemaPath)
+        const configPath = resolve(dir, "config.json")
+        const astPath = resolve(dir, "ast.gen.json")
+        const tsPath = resolve(dir, "out.gen.ts")
+        const dtsPath = resolve(dir, "out.gen.d.ts")
+        const jsPath = resolve(dir, "out.gen.js")
+
+        const schema = fs.readFileSync(schemaPath).toString()
+        const config = fs.existsSync(configPath)
+            ? JSON.parse(fs.readFileSync(configPath).toString())
+            : {}
+        const astExpected = JSON.parse(fs.readFileSync(astPath).toString())
+        const tsExpected = fs.readFileSync(tsPath).toString()
+        const dtsExpected = fs.readFileSync(dtsPath).toString()
+        const jsExpected = fs.readFileSync(jsPath).toString()
+
+        const astComputed = parse(
+            schema,
+            Config({
+                ...config,
+                generator: "ts",
+                schema: schemaRelPath,
+            })
+        )
+
+        const tsComputed = transform(schema, {
+            ...config,
+            generator: "ts",
+            schema: schemaRelPath,
+        })
+        const dtsComputed = transform(schema, {
+            ...config,
+            generator: "dts",
+            schema: schemaRelPath,
+        })
+        const jsComputed = transform(schema, {
+            ...config,
+            generator: "js",
+            schema: schemaRelPath,
+        })
+
+        t.deepEqual(astComputed, astExpected)
+        t.deepEqual(tsComputed, tsExpected)
+        t.deepEqual(dtsComputed, dtsExpected)
+        t.deepEqual(jsComputed, jsExpected)
+    })
+}
