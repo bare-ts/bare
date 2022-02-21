@@ -259,7 +259,7 @@ function write1(bc, x) {
 function read2(bc) {
     return bare.readBool(bc)
         ? (readPublicKey)(bc)
-        : undefined
+        : null
 }
 
 function write2(bc, x) {

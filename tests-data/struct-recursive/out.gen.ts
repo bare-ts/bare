@@ -1,7 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 export interface Node {
-    readonly children: readonly (Node)[] | undefined
+    readonly children: readonly (Node)[] | null
 }
 
 export function readNode(bc: bare.ByteCursor): Node {
@@ -15,13 +15,13 @@ export function writeNode(bc: bare.ByteCursor, x: Node): void {
     (write0)(bc, x.children);
 }
 
-function read0(bc: bare.ByteCursor): readonly (Node)[] | undefined {
+function read0(bc: bare.ByteCursor): readonly (Node)[] | null {
     return bare.readBool(bc)
         ? (read1)(bc)
-        : undefined
+        : null
 }
 
-function write0(bc: bare.ByteCursor, x: readonly (Node)[] | undefined): void {
+function write0(bc: bare.ByteCursor, x: readonly (Node)[] | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (write1)(bc, x)

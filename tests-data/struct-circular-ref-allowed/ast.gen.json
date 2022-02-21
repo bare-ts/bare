@@ -55,7 +55,7 @@
             "tag": "optional",
             "props": {
               "lax": false,
-              "null": false
+              "undef": false
             },
             "types": [
               {

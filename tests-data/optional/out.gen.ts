@@ -1,11 +1,11 @@
 import * as bare from "@bare-ts/lib"
 
-export type MaybeBool = boolean | undefined
+export type MaybeBool = boolean | null
 
 export function readMaybeBool(bc: bare.ByteCursor): MaybeBool {
     return bare.readBool(bc)
         ? (bare.readBool)(bc)
-        : undefined
+        : null
 }
 
 export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {

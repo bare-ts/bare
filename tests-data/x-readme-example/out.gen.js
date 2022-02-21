@@ -143,7 +143,7 @@ export function decodeMessage(bytes) {
 function read0(bc) {
     return bare.readBool(bc)
         ? (readGender)(bc)
-        : undefined
+        : null
 }
 
 function write0(bc, x) {

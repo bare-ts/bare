@@ -7,7 +7,7 @@
         "tag": "optional",
         "props": {
           "lax": true,
-          "null": false
+          "undef": false
         },
         "types": [
           {

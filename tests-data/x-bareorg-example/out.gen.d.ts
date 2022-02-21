@@ -48,7 +48,7 @@ export interface Employee {
     readonly address: Address
     readonly department: Department
     readonly hireDate: Time
-    readonly publicKey: PublicKey | undefined
+    readonly publicKey: PublicKey | null
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 

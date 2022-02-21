@@ -20,8 +20,8 @@ export interface Config {
     readonly useIntEnum: boolean
     readonly useLaxOptional: boolean
     readonly useMutable: boolean
-    readonly useNull: boolean
     readonly useSafeInt: boolean
+    readonly useUndefined: boolean
 }
 
 /**
@@ -43,8 +43,8 @@ export function Config({
     useIntEnum = false,
     useLaxOptional = false,
     useMutable = false,
-    useNull = false,
     useSafeInt = false,
+    useUndefined = false,
 }: Partial<Config>): Config {
     if (
         typeof schema === "string" &&
@@ -88,7 +88,7 @@ export function Config({
         useIntEnum,
         useLaxOptional,
         useMutable,
-        useNull,
         useSafeInt,
+        useUndefined,
     }
 }

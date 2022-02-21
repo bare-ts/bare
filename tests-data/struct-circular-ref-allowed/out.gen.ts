@@ -1,7 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 export interface Person {
-    readonly bestFriend: Person | undefined
+    readonly bestFriend: Person | null
     readonly secondBestFriend: 
         | { readonly tag: 0; readonly val: Person }
         | { readonly tag: 1; readonly val: undefined }
@@ -29,13 +29,13 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
     (write3)(bc, x.friendNicknames);
 }
 
-function read0(bc: bare.ByteCursor): Person | undefined {
+function read0(bc: bare.ByteCursor): Person | null {
     return bare.readBool(bc)
         ? (readPerson)(bc)
-        : undefined
+        : null
 }
 
-function write0(bc: bare.ByteCursor, x: Person | undefined): void {
+function write0(bc: bare.ByteCursor, x: Person | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (writePerson)(bc, x)

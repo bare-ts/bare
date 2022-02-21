@@ -2,8 +2,8 @@ import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
 export type Composite = 
-    | { readonly tag: 0; readonly val: ReadonlyMap<string, string | undefined> }
-    | { readonly tag: 1; readonly val: readonly (string | undefined)[] }
+    | { readonly tag: 0; readonly val: ReadonlyMap<string, string | null> }
+    | { readonly tag: 1; readonly val: readonly (string | null)[] }
     | { readonly tag: 2; readonly val: Uint8Array }
 
 export function readComposite(bc: bare.ByteCursor): Composite {
@@ -44,9 +44,9 @@ export function writeComposite(bc: bare.ByteCursor, x: Composite): void {
     }
 }
 
-function read0(bc: bare.ByteCursor): ReadonlyMap<string, string | undefined> {
+function read0(bc: bare.ByteCursor): ReadonlyMap<string, string | null> {
     const len = bare.readUintSafe(bc)
-    const result = new Map<string, string | undefined>()
+    const result = new Map<string, string | null>()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
         const key = (bare.readString)(bc)
@@ -59,7 +59,7 @@ function read0(bc: bare.ByteCursor): ReadonlyMap<string, string | undefined> {
     return result
 }
 
-function write0(bc: bare.ByteCursor, x: ReadonlyMap<string, string | undefined>): void {
+function write0(bc: bare.ByteCursor, x: ReadonlyMap<string, string | null>): void {
     bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
         (bare.writeString)(bc, kv[0]);
@@ -67,7 +67,7 @@ function write0(bc: bare.ByteCursor, x: ReadonlyMap<string, string | undefined>)
     }
 }
 
-function read1(bc: bare.ByteCursor): readonly (string | undefined)[] {
+function read1(bc: bare.ByteCursor): readonly (string | null)[] {
     const len = 4
     const valReader = read4
     const result = [valReader(bc)]
@@ -77,7 +77,7 @@ function read1(bc: bare.ByteCursor): readonly (string | undefined)[] {
     return result
 }
 
-function write1(bc: bare.ByteCursor, x: readonly (string | undefined)[]): void {
+function write1(bc: bare.ByteCursor, x: readonly (string | null)[]): void {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
         (write4)(bc, x[i])
@@ -93,26 +93,26 @@ function write2(bc: bare.ByteCursor, x: Uint8Array): void {
     return bare.writeU8FixedArray(bc, x)
 }
 
-function read3(bc: bare.ByteCursor): string | undefined {
+function read3(bc: bare.ByteCursor): string | null {
     return bare.readBool(bc)
         ? (bare.readString)(bc)
-        : undefined
+        : null
 }
 
-function write3(bc: bare.ByteCursor, x: string | undefined): void {
+function write3(bc: bare.ByteCursor, x: string | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (bare.writeString)(bc, x)
     }
 }
 
-function read4(bc: bare.ByteCursor): string | undefined {
+function read4(bc: bare.ByteCursor): string | null {
     return bare.readBool(bc)
         ? (bare.readString)(bc)
-        : undefined
+        : null
 }
 
-function write4(bc: bare.ByteCursor, x: string | undefined): void {
+function write4(bc: bare.ByteCursor, x: string | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (bare.writeString)(bc, x)

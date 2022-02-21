@@ -23,7 +23,7 @@ export function writePerson(bc, x) {
 function read0(bc) {
     return bare.readBool(bc)
         ? (readPerson)(bc)
-        : undefined
+        : null
 }
 
 function write0(bc, x) {

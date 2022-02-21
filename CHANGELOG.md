@@ -2,6 +2,15 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+* Default to null instead of undefined for optional types
+
+    The use of `null` seems more common than the use of `undefined`.
+
+    The option `--use-null` is removed.
+    A new option `--use-undefined` is added.
+
 ## 0.2.0 (2022-02-20)
 
 * Fix invalid code generation for big tags in enums and unions

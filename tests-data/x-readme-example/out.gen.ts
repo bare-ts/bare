@@ -45,7 +45,7 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void {
 export interface Person {
     readonly name: string
     readonly email: string
-    readonly gender: Gender | undefined
+    readonly gender: Gender | null
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -157,13 +157,13 @@ export function decodeMessage(bytes: Uint8Array): Message {
     return result
 }
 
-function read0(bc: bare.ByteCursor): Gender | undefined {
+function read0(bc: bare.ByteCursor): Gender | null {
     return bare.readBool(bc)
         ? (readGender)(bc)
-        : undefined
+        : null
 }
 
-function write0(bc: bare.ByteCursor, x: Gender | undefined): void {
+function write0(bc: bare.ByteCursor, x: Gender | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (writeGender)(bc, x)

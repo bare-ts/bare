@@ -95,7 +95,7 @@ export interface OptionalType {
     readonly tag: "optional"
     readonly props: {
         readonly lax: boolean
-        readonly null: boolean
+        readonly undef: boolean
     }
     readonly types: readonly [type: Type]
     readonly loc: Location | null

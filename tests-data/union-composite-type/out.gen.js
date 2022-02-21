@@ -91,7 +91,7 @@ function write2(bc, x) {
 function read3(bc) {
     return bare.readBool(bc)
         ? (bare.readString)(bc)
-        : undefined
+        : null
 }
 
 function write3(bc, x) {
@@ -104,7 +104,7 @@ function write3(bc, x) {
 function read4(bc) {
     return bare.readBool(bc)
         ? (bare.readString)(bc)
-        : undefined
+        : null
 }
 
 function write4(bc, x) {

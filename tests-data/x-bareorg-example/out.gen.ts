@@ -117,7 +117,7 @@ export interface Employee {
     readonly address: Address
     readonly department: Department
     readonly hireDate: Time
-    readonly publicKey: PublicKey | undefined
+    readonly publicKey: PublicKey | null
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
@@ -304,13 +304,13 @@ function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void 
     }
 }
 
-function read2(bc: bare.ByteCursor): PublicKey | undefined {
+function read2(bc: bare.ByteCursor): PublicKey | null {
     return bare.readBool(bc)
         ? (readPublicKey)(bc)
-        : undefined
+        : null
 }
 
-function write2(bc: bare.ByteCursor, x: PublicKey | undefined): void {
+function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (writePublicKey)(bc, x)

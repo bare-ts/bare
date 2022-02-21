@@ -3,7 +3,7 @@ import * as bare from "@bare-ts/lib"
 export function readMaybeBool(bc) {
     return bare.readBool(bc)
         ? (bare.readBool)(bc)
-        : undefined
+        : null
 }
 
 export function writeMaybeBool(bc, x) {

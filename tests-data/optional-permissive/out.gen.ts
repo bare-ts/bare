@@ -5,7 +5,7 @@ export type MaybeBool = boolean | undefined | null
 export function readMaybeBool(bc: bare.ByteCursor): MaybeBool {
     return bare.readBool(bc)
         ? (bare.readBool)(bc)
-        : undefined
+        : null
 }
 
 export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {

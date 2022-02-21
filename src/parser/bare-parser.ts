@@ -180,7 +180,7 @@ function parseOptional(p: Parser): ast.Type {
         tag: "optional",
         props: {
             lax: p.config.useLaxOptional,
-            null: p.config.useNull,
+            undef: p.config.useUndefined,
         },
         types: [type],
         loc,

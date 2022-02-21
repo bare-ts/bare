@@ -232,9 +232,9 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
     const typedef = genType(g, type.types[0])
     const optionalValue = type.props.lax
         ? "undefined | null"
-        : type.props.null
-        ? "null"
-        : "undefined"
+        : type.props.undef
+        ? "undefined"
+        : "null"
     return `${typedef} | ${optionalValue}`
 }
 
@@ -526,7 +526,7 @@ function genMapReader(g: Gen, type: ast.MapType, alias = ""): string {
 }
 
 function genOptionalReader(g: Gen, type: ast.OptionalType, alias = ""): string {
-    const noneVal = type.props.null ? "null" : "undefined"
+    const noneVal = type.props.undef ? "undefined" : "null"
     return unindent(`${indent(genReaderHead(g, type, alias))} {
         return bare.readBool(bc)
             ? (${indent(genReader(g, type.types[0]), 3)})(bc)

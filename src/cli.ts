@@ -73,10 +73,13 @@ program
     .option("--use-generic-array", "use generic arrays instead of typed arrays")
     .option("--use-int-enum", "use integers for enum values instead of strings")
     .option("--use-mutable", "use mutable types")
-    .option("--use-null", "return null instead of undefined for optional types")
     .option(
         "--use-lax-optional",
         "accept null and undefined values for optional types"
+    )
+    .option(
+        "--use-undefined",
+        "return undefined instead of null for optional types"
     )
     .option("--use-safe-int", "use safe integers instead of bigint")
     .addHelpText("after", COMPILE_EXTRA_HELP)

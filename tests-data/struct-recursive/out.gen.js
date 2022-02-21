@@ -14,7 +14,7 @@ export function writeNode(bc, x) {
 function read0(bc) {
     return bare.readBool(bc)
         ? (read1)(bc)
-        : undefined
+        : null
 }
 
 function write0(bc, x) {

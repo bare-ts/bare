@@ -13,7 +13,7 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void
 export interface Person {
     readonly name: string
     readonly email: string
-    readonly gender: Gender | undefined
+    readonly gender: Gender | null
 }
 
 export function readPerson(bc: bare.ByteCursor): Person

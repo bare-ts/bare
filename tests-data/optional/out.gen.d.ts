@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export type MaybeBool = boolean | undefined
+export type MaybeBool = boolean | null
 
 export function readMaybeBool(bc: bare.ByteCursor): MaybeBool
 
