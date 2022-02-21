@@ -276,3 +276,14 @@ export function leadingDiscriminators(
     }
     return null
 }
+
+/**
+ * Recursively traverse the ast and set loc to null
+ * @param type
+ * @returns type with loc set to null
+ */
+export function withoutLoc(type: Type): Type {
+    return JSON.parse(
+        JSON.stringify(type, (name, val) => (name === "loc" ? null : val))
+    )
+}

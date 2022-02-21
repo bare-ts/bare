@@ -1,0 +1,2 @@
+type Void void
+type UnsignedInt (u8 | u16 | u32 | u64 | Void)

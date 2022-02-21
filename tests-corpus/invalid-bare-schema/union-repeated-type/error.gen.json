@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "union-repeated-type/schema.bare",
+    "offset": 13,
+    "line": 1,
+    "col": 14
+  },
+  "message": "(union-repeated-type/schema.bare:1:14) a type cannot be repeated in an union."
+}

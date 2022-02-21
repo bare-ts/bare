@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Fix regression: Forbid bare schema in which a type is repeated in an union
+
+    The following schema is now correctly reported as invalid:
+
+    ```bare
+    type X (u8 | u8)
+    ```
+
 * Default to null instead of undefined for optional types
 
     The use of `null` seems more common than the use of `undefined`.

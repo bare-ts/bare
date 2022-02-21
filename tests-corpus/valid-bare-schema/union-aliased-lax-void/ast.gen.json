@@ -1,0 +1,119 @@
+{
+  "defs": [
+    {
+      "alias": "Void",
+      "exported": true,
+      "type": {
+        "tag": "void",
+        "props": null,
+        "types": null,
+        "loc": {
+          "filename": "union-aliased-lax-void/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "union-aliased-lax-void/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-aliased-lax-void/schema.bare",
+              "offset": 33,
+              "line": 2,
+              "col": 19
+            }
+          },
+          {
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-aliased-lax-void/schema.bare",
+              "offset": 38,
+              "line": 2,
+              "col": 24
+            }
+          },
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-aliased-lax-void/schema.bare",
+              "offset": 44,
+              "line": 2,
+              "col": 30
+            }
+          },
+          {
+            "tag": "u64Safe",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-aliased-lax-void/schema.bare",
+              "offset": 50,
+              "line": 2,
+              "col": 36
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Void"
+            },
+            "types": null,
+            "loc": {
+              "filename": "union-aliased-lax-void/schema.bare",
+              "offset": 56,
+              "line": 2,
+              "col": 42
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-aliased-lax-void/schema.bare",
+          "offset": 32,
+          "line": 2,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-aliased-lax-void/schema.bare",
+        "offset": 15,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-aliased-lax-void/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

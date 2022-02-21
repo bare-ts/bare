@@ -152,7 +152,7 @@ function checkUnionInvariants(type: ast.UnionType): void {
             )
         }
         tagVals.add(tagVal)
-        const stringifiedType = JSON.stringify(type.types[i])
+        const stringifiedType = JSON.stringify(ast.withoutLoc(type.types[i]))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {
