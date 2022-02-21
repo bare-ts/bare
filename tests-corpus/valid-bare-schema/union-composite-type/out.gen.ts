@@ -69,7 +69,7 @@ function write0(bc: bare.ByteCursor, x: ReadonlyMap<string, string | null>): voi
 
 function read1(bc: bare.ByteCursor): readonly (string | null)[] {
     const len = 4
-    const valReader = read4
+    const valReader = read3
     const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = valReader(bc)
@@ -80,7 +80,7 @@ function read1(bc: bare.ByteCursor): readonly (string | null)[] {
 function write1(bc: bare.ByteCursor, x: readonly (string | null)[]): void {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (write4)(bc, x[i])
+        (write3)(bc, x[i])
     }
 }
 
@@ -100,19 +100,6 @@ function read3(bc: bare.ByteCursor): string | null {
 }
 
 function write3(bc: bare.ByteCursor, x: string | null): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
-        (bare.writeString)(bc, x)
-    }
-}
-
-function read4(bc: bare.ByteCursor): string | null {
-    return bare.readBool(bc)
-        ? (bare.readString)(bc)
-        : null
-}
-
-function write4(bc: bare.ByteCursor, x: string | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (bare.writeString)(bc, x)

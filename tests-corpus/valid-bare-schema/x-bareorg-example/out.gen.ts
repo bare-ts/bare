@@ -128,7 +128,7 @@ export function readEmployee(bc: bare.ByteCursor): Employee {
     const department = (readDepartment)(bc)
     const hireDate = (readTime)(bc)
     const publicKey = (read2)(bc)
-    const metadata = (read3)(bc)
+    const metadata = (read1)(bc)
     return {
         name,
         email,
@@ -147,7 +147,7 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
     (writeDepartment)(bc, x.department);
     (writeTime)(bc, x.hireDate);
     (write2)(bc, x.publicKey);
-    (write3)(bc, x.metadata);
+    (write1)(bc, x.metadata);
 }
 
 export type Person = 
@@ -193,7 +193,7 @@ export interface Address {
 }
 
 export function readAddress(bc: bare.ByteCursor): Address {
-    const address = (read4)(bc)
+    const address = (read3)(bc)
     const city = (bare.readString)(bc)
     const state = (bare.readString)(bc)
     const country = (bare.readString)(bc)
@@ -206,7 +206,7 @@ export function readAddress(bc: bare.ByteCursor): Address {
 }
 
 export function writeAddress(bc: bare.ByteCursor, x: Address): void {
-    (write4)(bc, x.address);
+    (write3)(bc, x.address);
     (bare.writeString)(bc, x.city);
     (bare.writeString)(bc, x.state);
     (bare.writeString)(bc, x.country);
@@ -263,7 +263,7 @@ function read0(bc: bare.ByteCursor): readonly ({
 })[] {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valReader = read5
+    const valReader = read4
     const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = valReader(bc)
@@ -277,7 +277,7 @@ function write0(bc: bare.ByteCursor, x: readonly ({
 })[]): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (write5)(bc, x[i])
+        (write4)(bc, x[i])
     }
 }
 
@@ -317,30 +317,7 @@ function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
     }
 }
 
-function read3(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
-    const len = bare.readUintSafe(bc)
-    const result = new Map<string, ArrayBuffer>()
-    for (let i = 0; i < len; i++) {
-        const offset = bc.offset
-        const key = (bare.readString)(bc)
-        if (result.has(key)) {
-            bc.offset = offset
-            throw new bare.BareError(offset, "duplicated key")
-        }
-        result.set(key, (bare.readData)(bc))
-    }
-    return result
-}
-
-function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
-    bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
-        (bare.writeString)(bc, kv[0]);
-        (bare.writeData)(bc, kv[1])
-    }
-}
-
-function read4(bc: bare.ByteCursor): readonly (string)[] {
+function read3(bc: bare.ByteCursor): readonly (string)[] {
     const len = 4
     const valReader = bare.readString
     const result = [valReader(bc)]
@@ -350,14 +327,14 @@ function read4(bc: bare.ByteCursor): readonly (string)[] {
     return result
 }
 
-function write4(bc: bare.ByteCursor, x: readonly (string)[]): void {
+function write3(bc: bare.ByteCursor, x: readonly (string)[]): void {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
         (bare.writeString)(bc, x[i])
     }
 }
 
-function read5(bc: bare.ByteCursor): {
+function read4(bc: bare.ByteCursor): {
     readonly orderId: i64
     readonly quantity: i32
 } {
@@ -369,7 +346,7 @@ function read5(bc: bare.ByteCursor): {
     }
 }
 
-function write5(bc: bare.ByteCursor, x: {
+function write4(bc: bare.ByteCursor, x: {
     readonly orderId: i64
     readonly quantity: i32
 }): void {

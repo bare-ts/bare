@@ -64,7 +64,7 @@ function write0(bc, x) {
 
 function read1(bc) {
     const len = 4
-    const valReader = read4
+    const valReader = read3
     const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = valReader(bc)
@@ -75,7 +75,7 @@ function read1(bc) {
 function write1(bc, x) {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (write4)(bc, x[i])
+        (write3)(bc, x[i])
     }
 }
 
@@ -95,19 +95,6 @@ function read3(bc) {
 }
 
 function write3(bc, x) {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
-        (bare.writeString)(bc, x)
-    }
-}
-
-function read4(bc) {
-    return bare.readBool(bc)
-        ? (bare.readString)(bc)
-        : null
-}
-
-function write4(bc, x) {
     bare.writeBool(bc, x != null)
     if (x != null) {
         (bare.writeString)(bc, x)

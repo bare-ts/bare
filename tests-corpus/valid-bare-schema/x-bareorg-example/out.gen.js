@@ -100,7 +100,7 @@ export function readEmployee(bc) {
     const department = (readDepartment)(bc)
     const hireDate = (readTime)(bc)
     const publicKey = (read2)(bc)
-    const metadata = (read3)(bc)
+    const metadata = (read1)(bc)
     return {
         name,
         email,
@@ -119,7 +119,7 @@ export function writeEmployee(bc, x) {
     (writeDepartment)(bc, x.department);
     (writeTime)(bc, x.hireDate);
     (write2)(bc, x.publicKey);
-    (write3)(bc, x.metadata);
+    (write1)(bc, x.metadata);
 }
 
 export function readPerson(bc) {
@@ -154,7 +154,7 @@ export function writePerson(bc, x) {
 }
 
 export function readAddress(bc) {
-    const address = (read4)(bc)
+    const address = (read3)(bc)
     const city = (bare.readString)(bc)
     const state = (bare.readString)(bc)
     const country = (bare.readString)(bc)
@@ -167,7 +167,7 @@ export function readAddress(bc) {
 }
 
 export function writeAddress(bc, x) {
-    (write4)(bc, x.address);
+    (write3)(bc, x.address);
     (bare.writeString)(bc, x.city);
     (bare.writeString)(bc, x.state);
     (bare.writeString)(bc, x.country);
@@ -218,7 +218,7 @@ export function decodeMessage(bytes) {
 function read0(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valReader = read5
+    const valReader = read4
     const result = [valReader(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = valReader(bc)
@@ -229,7 +229,7 @@ function read0(bc) {
 function write0(bc, x) {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (write5)(bc, x[i])
+        (write4)(bc, x[i])
     }
 }
 
@@ -270,29 +270,6 @@ function write2(bc, x) {
 }
 
 function read3(bc) {
-    const len = bare.readUintSafe(bc)
-    const result = new Map()
-    for (let i = 0; i < len; i++) {
-        const offset = bc.offset
-        const key = (bare.readString)(bc)
-        if (result.has(key)) {
-            bc.offset = offset
-            throw new bare.BareError(offset, "duplicated key")
-        }
-        result.set(key, (bare.readData)(bc))
-    }
-    return result
-}
-
-function write3(bc, x) {
-    bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
-        (bare.writeString)(bc, kv[0]);
-        (bare.writeData)(bc, kv[1])
-    }
-}
-
-function read4(bc) {
     const len = 4
     const valReader = bare.readString
     const result = [valReader(bc)]
@@ -302,14 +279,14 @@ function read4(bc) {
     return result
 }
 
-function write4(bc, x) {
+function write3(bc, x) {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
         (bare.writeString)(bc, x[i])
     }
 }
 
-function read5(bc) {
+function read4(bc) {
     const orderId = (bare.readI64)(bc)
     const quantity = (bare.readI32)(bc)
     return {
@@ -318,7 +295,7 @@ function read5(bc) {
     }
 }
 
-function write5(bc, x) {
+function write4(bc, x) {
     (bare.writeI64)(bc, x.orderId);
     (bare.writeI32)(bc, x.quantity);
 }

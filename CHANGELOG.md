@@ -12,6 +12,11 @@ This project adheres to [Semantic Versioning][semver].
     type X (u8 | u8)
     ```
 
+* Deduplicate readers and writers of complex non-aliased types
+
+    @bare-ts/tools generates readers and writers for complex non-aliased types.
+    These reader and writer are now de-duplicated.
+
 * Default to null instead of undefined for optional types
 
     The use of `null` seems more common than the use of `undefined`.

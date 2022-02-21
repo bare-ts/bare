@@ -1,8 +1,8 @@
-import type * as ast from "./bare-ast.js"
+import * as ast from "./bare-ast.js"
 
 export function normalize(schema: ast.Ast): ast.Ast {
     const defs = schema.defs.slice()
-    const n = { mutSchema: defs, aliasCount: 0 }
+    const n: Context = { mutSchema: defs, dedup: new Map(), aliasCount: 0 }
     for (let i = 0; i < defs.length; i++) {
         const type = normalizeSubtypes(n, defs[i].type)
         if (defs[i].type !== type) {
@@ -15,6 +15,7 @@ export function normalize(schema: ast.Ast): ast.Ast {
 
 interface Context {
     readonly mutSchema: ast.AliasedType[]
+    readonly dedup: Map<unknown, string>
     aliasCount: number
 }
 
@@ -53,7 +54,14 @@ function maybeAlias(n: Context, type: ast.Type): ast.Type {
 }
 
 function genAlias(n: Context, type: ast.Type): ast.Alias {
-    const alias = `${n.aliasCount++}`
-    n.mutSchema.push({ alias, exported: false, type, loc: null })
+    // NOTE: this dirty check is ok because we initialize
+    // every object in the same way (properties are in the same order)
+    const stringifiedType = JSON.stringify(ast.withoutLoc(type))
+    let alias = n.dedup.get(stringifiedType)
+    if (alias == null) {
+        alias = `${n.aliasCount++}`
+        n.mutSchema.push({ alias, exported: false, type, loc: null })
+        n.dedup.set(stringifiedType, alias)
+    }
     return { tag: "alias", props: { alias }, types: null, loc: null }
 }
