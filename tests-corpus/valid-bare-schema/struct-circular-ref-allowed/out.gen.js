@@ -37,14 +37,10 @@ function read1(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (readPerson)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (bare.readVoid)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (readPerson)(bc) }
+        case 1:
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -57,9 +53,6 @@ function write1(bc, x) {
     switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
-            break
-        case 1:
-            (bare.writeVoid)(bc, x.val)
             break
     }
 }

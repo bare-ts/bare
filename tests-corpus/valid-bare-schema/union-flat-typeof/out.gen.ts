@@ -6,7 +6,7 @@ export type TypeOfUnion =
     | boolean
     | u32
     | string
-    | undefined
+    | null
 
 export function readTypeOfUnion(bc: bare.ByteCursor): TypeOfUnion {
     const offset = bc.offset
@@ -19,7 +19,7 @@ export function readTypeOfUnion(bc: bare.ByteCursor): TypeOfUnion {
         case 2:
             return (bare.readString)(bc)
         case 3:
-            return (bare.readVoid)(bc)
+            return null
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

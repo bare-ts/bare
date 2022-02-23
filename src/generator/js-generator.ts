@@ -185,7 +185,7 @@ function genType(g: Gen, type: ast.Type): string {
         case "union":
             return genUnionType(g, type)
         case "void":
-            return "undefined"
+            return genVoidType(g, type)
     }
 }
 
@@ -292,6 +292,14 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
             : `\n| { readonly tag: ${type.props.tags[i]}; readonly val: ${valType} }`
     }
     return indent(result)
+}
+
+function genVoidType(_g: Gen, type: ast.VoidType): string {
+    return type.props.lax
+        ? "undefined | null"
+        : type.props.undef
+        ? "undefined"
+        : "null"
 }
 
 function genAliasedReaderHead(g: Gen, aliased: ast.AliasedType): string {
@@ -427,6 +435,8 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
             return genTypedArrayReader(g, type, alias)
         case "union":
             return genUnionReader(g, type, alias)
+        case "void":
+            return genVoidReader(g, type, alias)
     }
 }
 
@@ -494,10 +504,8 @@ function genEnumReader(g: Gen, type: ast.EnumType, alias = ""): string {
 }
 
 function genLiteralReader(g: Gen, type: ast.LiteralType, alias = ""): string {
-    const val = type.props.val
-    const rVal = typeof val === "string" ? `"${val}"` : `${val}`
     return unindent(`${indent(genReaderHead(g, type, alias))} {
-        return ${rVal}
+        return ${rpr(type.props.val)}
     }`)
 }
 
@@ -611,17 +619,21 @@ function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
     const flatten = type.props.flat
     let switchBody = ""
     for (let i = 0; i < type.types.length; i++) {
-        const reader = genReader(g, type.types[i])
+        const currType = type.types[i]
+        const valExpr =
+            currType.tag !== "void"
+                ? `(${genReader(g, currType)})(bc)`
+                : currType.props.undef
+                ? "undefined"
+                : "null"
         if (flatten) {
             switchBody += `
             case ${type.props.tags[i]}:
-                return (${reader})(bc)`
+                return ${valExpr}`
         } else {
             switchBody += `
-            case ${type.props.tags[i]}: {
-                const val = (${reader})(bc)
-                return { tag, val }
-            }`
+            case ${type.props.tags[i]}:
+                return { tag, val: ${valExpr} }`
         }
     }
     return unindent(`${indent(genReaderHead(g, type, alias))} {
@@ -634,6 +646,13 @@ function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
                 throw new bare.BareError(offset, "invalid tag")
             }
         }
+    }`)
+}
+
+function genVoidReader(g: Gen, type: ast.VoidType, alias = ""): string {
+    const retVal = type.props.undef ? "undefined" : "null"
+    return unindent(`${indent(genReaderHead(g, type, alias))} {
+        return ${retVal}
     }`)
 }
 
@@ -674,6 +693,8 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
             return genTypedArrayWriter(g, type, alias)
         case "union":
             return genUnionWriter(g, type, alias)
+        case "void":
+            return genVoidWriter(g, type, alias)
     }
 }
 
@@ -788,13 +809,21 @@ function genTypedArrayWriter(
 function genUnionWriter(g: Gen, union: ast.UnionType, alias = ""): string {
     if (!union.props.flat) {
         return genTaggedUnionWriter(g, union, alias)
-    } else if (union.types.every(ast.isPrimitiveType)) {
+    } else if (
+        union.types.every((t) => ast.isPrimitiveType(t) || t.tag === "void")
+    ) {
         const primitiveUnion = union as ast.UnionType<ast.PrimitiveType>
         return genPropertylessTypesFlatUnionWriter(g, primitiveUnion, alias)
     } else if (union.types.every((t) => t.tag === "alias")) {
         const aliasesUnion = union as ast.UnionType<ast.Alias>
         return genAliasFlatUnionWriter(g, aliasesUnion, alias)
     } else return genDefaultFlatUnionWriter(g, union, alias)
+}
+
+function genVoidWriter(g: Gen, type: ast.VoidType, alias = ""): string {
+    return unindent(`${indent(genWriterHead(g, type, alias))} {
+        // do nothing
+    }`)
 }
 
 function genAliasFlatUnionWriter(
@@ -862,28 +891,32 @@ function genDefaultFlatUnionWriter(
     let switchBody = ""
     const isTs = g.config.generator === "ts"
     for (let i = 0; i < union.types.length; i++) {
-        const valExp = isTs ? `x as ${genType(g, union.types[i])}` : "x"
-        switchBody += `
-        case ${union.props.tags[i]}:
-            (${genWriter(g, union.types[i])})(bc, ${valExp})
-            break`
+        if (union.types[i].tag !== "void") {
+            const valExp = isTs ? `x as ${genType(g, union.types[i])}` : "x"
+            switchBody += `
+            case ${union.props.tags[i]}:
+                (${genWriter(g, union.types[i])})(bc, ${valExp})
+                break`
+        }
     }
     const tagWriter = max(union.props.tags) < 128 ? "writeU8" : "writeUintSafe"
     return unindent(`${indent(genWriterHead(g, union, alias))} {
         const tag = ext.tag${alias}(x)
         bare.${tagWriter}(bc, tag)
         switch (tag) {
-            ${indent(switchBody.trim())}
+            ${switchBody.trim()}
         }
     }`)
 }
 
 function genPropertylessTypesFlatUnionWriter(
     g: Gen,
-    union: ast.UnionType<ast.PrimitiveType>,
+    union: ast.UnionType<ast.PrimitiveType | ast.VoidType>,
     alias = ""
 ): string {
-    const vs = union.types.map((t) => ast.PRIMITIVE_TAG_TO_TYPEOF[t.tag])
+    const vs = union.types.map((t) =>
+        ast.isPrimitiveType(t) ? ast.PRIMITIVE_TAG_TO_TYPEOF[t.tag] : null
+    )
     if (vs.length !== new Set(vs).size) {
         return genDefaultFlatUnionWriter(g, union, alias)
     } // every typeof value is unique => this discriminates the union
@@ -916,10 +949,12 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
     const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
     let switchBody = ""
     for (let i = 0; i < type.types.length; i++) {
-        switchBody += `
+        if (type.types[i].tag !== "void") {
+            switchBody += `
             case ${type.props.tags[i]}:
                 (${genWriter(g, type.types[i])})(bc, x.val)
                 break`
+        }
     }
     return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.${tagWriter}(bc, x.tag)

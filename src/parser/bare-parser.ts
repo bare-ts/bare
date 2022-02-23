@@ -92,13 +92,24 @@ function parseTypeCheckUnion(p: Parser): ast.Type {
 function parseTypeName(p: Parser): ast.Type {
     const alias = p.lex.token()
     const loc = p.lex.location()
+    p.lex.forth()
+    if (alias === "void") {
+        return {
+            tag: "void",
+            props: {
+                lax: p.config.useLaxOptional,
+                undef: p.config.useUndefined,
+            },
+            types: null,
+            loc,
+        }
+    }
     if (!ast.isPrimitiveTag(alias) && !UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new CompilerError(
             "a type name is either in UpperCamelCase or is a predefined types.",
             loc
         )
     }
-    p.lex.forth()
     if (ast.isPrimitiveTag(alias)) {
         const safeTypeName = `${alias}Safe`
         const tag =

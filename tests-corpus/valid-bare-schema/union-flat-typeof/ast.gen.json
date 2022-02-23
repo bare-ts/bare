@@ -50,7 +50,10 @@
           },
           {
             "tag": "void",
-            "props": null,
+            "props": {
+              "lax": false,
+              "undef": false
+            },
             "types": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",

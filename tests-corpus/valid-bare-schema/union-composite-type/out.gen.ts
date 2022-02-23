@@ -10,18 +10,12 @@ export function readComposite(bc: bare.ByteCursor): Composite {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (read0)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (read1)(bc)
-            return { tag, val }
-        }
-        case 2: {
-            const val = (read2)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (read0)(bc) }
+        case 1:
+            return { tag, val: (read1)(bc) }
+        case 2:
+            return { tag, val: (read2)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

@@ -104,7 +104,10 @@
               },
               {
                 "tag": "void",
-                "props": null,
+                "props": {
+                  "lax": false,
+                  "undef": false
+                },
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",

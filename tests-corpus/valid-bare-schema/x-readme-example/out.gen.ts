@@ -92,14 +92,10 @@ export function readContact(bc: bare.ByteCursor): Contact {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (readPerson)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (readOrganization)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (readPerson)(bc) }
+        case 1:
+            return { tag, val: (readOrganization)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

@@ -6,7 +6,7 @@ export type TypeOfUnion =
     | boolean
     | u32
     | string
-    | undefined
+    | null
 
 export function readTypeOfUnion(bc: bare.ByteCursor): TypeOfUnion
 

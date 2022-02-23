@@ -4,7 +4,7 @@ export interface Person {
     readonly bestFriend: Person | null
     readonly secondBestFriend: 
         | { readonly tag: 0; readonly val: Person }
-        | { readonly tag: 1; readonly val: undefined }
+        | { readonly tag: 1; readonly val: null }
     readonly friends: readonly (Person)[]
     readonly friendNicknames: ReadonlyMap<string, Person>
 }
@@ -44,18 +44,14 @@ function write0(bc: bare.ByteCursor, x: Person | null): void {
 
 function read1(bc: bare.ByteCursor): 
     | { readonly tag: 0; readonly val: Person }
-    | { readonly tag: 1; readonly val: undefined } {
+    | { readonly tag: 1; readonly val: null } {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (readPerson)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (bare.readVoid)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (readPerson)(bc) }
+        case 1:
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -65,14 +61,11 @@ function read1(bc: bare.ByteCursor):
 
 function write1(bc: bare.ByteCursor, x: 
     | { readonly tag: 0; readonly val: Person }
-    | { readonly tag: 1; readonly val: undefined }): void {
+    | { readonly tag: 1; readonly val: null }): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
             (writePerson)(bc, x.val)
-            break
-        case 1:
-            (bare.writeVoid)(bc, x.val)
             break
     }
 }

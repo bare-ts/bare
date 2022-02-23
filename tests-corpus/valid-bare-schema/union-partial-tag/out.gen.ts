@@ -15,22 +15,14 @@ export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (bare.readU8)(bc)
-            return { tag, val }
-        }
-        case 5: {
-            const val = (bare.readU16)(bc)
-            return { tag, val }
-        }
-        case 6: {
-            const val = (bare.readU32)(bc)
-            return { tag, val }
-        }
-        case 7: {
-            const val = (bare.readU64)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (bare.readU8)(bc) }
+        case 5:
+            return { tag, val: (bare.readU16)(bc) }
+        case 6:
+            return { tag, val: (bare.readU32)(bc) }
+        case 7:
+            return { tag, val: (bare.readU64)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

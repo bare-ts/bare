@@ -10,7 +10,7 @@ export type UnsignedInt =
     | { readonly tag: 1; readonly val: u16 }
     | { readonly tag: 2; readonly val: u32 }
     | { readonly tag: 3; readonly val: u64Safe }
-    | { readonly tag: 4; readonly val: undefined }
+    | { readonly tag: 4; readonly val: null }
 
 export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt
 

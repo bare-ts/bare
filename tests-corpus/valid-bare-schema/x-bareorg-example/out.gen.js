@@ -126,14 +126,10 @@ export function readPerson(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (readCustomer)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (readEmployee)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (readCustomer)(bc) }
+        case 1:
+            return { tag, val: (readEmployee)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -177,10 +173,8 @@ export function readMessage(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
-        case 0: {
-            const val = (readPerson)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (readPerson)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

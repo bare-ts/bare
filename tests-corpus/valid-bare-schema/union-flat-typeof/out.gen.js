@@ -11,7 +11,7 @@ export function readTypeOfUnion(bc) {
         case 2:
             return (bare.readString)(bc)
         case 3:
-            return (bare.readVoid)(bc)
+            return null
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")

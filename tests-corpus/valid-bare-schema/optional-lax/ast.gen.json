@@ -15,7 +15,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "optional-permissive/schema.bare",
+              "filename": "optional-lax/schema.bare",
               "offset": 25,
               "line": 2,
               "col": 25
@@ -23,14 +23,14 @@
           }
         ],
         "loc": {
-          "filename": "optional-permissive/schema.bare",
+          "filename": "optional-lax/schema.bare",
           "offset": 16,
           "line": 2,
           "col": 16
         }
       },
       "loc": {
-        "filename": "optional-permissive/schema.bare",
+        "filename": "optional-lax/schema.bare",
         "offset": 1,
         "line": 2,
         "col": 1
@@ -38,7 +38,7 @@
     }
   ],
   "loc": {
-    "filename": "optional-permissive/schema.bare",
+    "filename": "optional-lax/schema.bare",
     "offset": 1,
     "line": 2,
     "col": 1

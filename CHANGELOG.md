@@ -24,6 +24,19 @@ This project adheres to [Semantic Versioning][semver].
     The option `--use-null` is removed.
     A new option `--use-undefined` is added.
 
+* Make configurable the emitted type for void type
+
+    BARE schema enable use of void types in unions. For example:
+
+    ```bare
+    type Union (u8 | void)
+    ```
+
+    Previously, @bare-ts/tools emitted the type `undefined` for `void`.
+    Now it relies on options `--use-undefined` and `--use-lax-optional` to
+    choose between `null`, `undefined`, and `null | undefined`.
+    Note that these options also modify the emitted types for optionals.
+
 ## 0.2.0 (2022-02-20)
 
 * Fix invalid code generation for big tags in enums and unions

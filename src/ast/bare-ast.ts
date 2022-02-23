@@ -25,6 +25,7 @@ export type Type =
     | StructType // { fields... }
     | TypedArrayType
     | UnionType // (type | ...)
+    | VoidType // void
 
 export interface Alias {
     readonly tag: "alias"
@@ -154,6 +155,16 @@ export interface UnionType<T extends Type = Type> {
     readonly loc: Location | null
 }
 
+export interface VoidType {
+    readonly tag: "void"
+    readonly props: {
+        readonly lax: boolean
+        readonly undef: boolean
+    }
+    readonly types: null
+    readonly loc: Location | null
+}
+
 export type PrimitiveTag = typeof PRIMITIVE_TAG[number]
 
 export function isPrimitiveTag(tag: string): tag is PrimitiveTag {
@@ -183,7 +194,6 @@ export const PRIMITIVE_TAG = [
     "u64Safe",
     "uint",
     "uintSafe",
-    "void",
 ] as const
 
 const PRIMITIVE_TAG_SET: ReadonlySet<string> = new Set(PRIMITIVE_TAG)
@@ -245,7 +255,6 @@ export const PRIMITIVE_TAG_TO_TYPEOF = {
     "u64Safe": "number",
     "uint": "bigint",
     "uintSafe": "number",
-    "void": null,
 } as const
 
 /**

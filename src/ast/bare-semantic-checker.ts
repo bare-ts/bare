@@ -79,7 +79,7 @@ function checkEnumInvariants(type: ast.EnumType): void {
 
 function checkMapInvariants(type: ast.MapType): void {
     const keyType = type.types[0]
-    if (!ast.isPrimitiveTag(keyType.tag) || keyType.tag === "void") {
+    if (!ast.isPrimitiveTag(keyType.tag)) {
         throw new CompilerError(
             "the key type must be a primitive type.",
             keyType.loc

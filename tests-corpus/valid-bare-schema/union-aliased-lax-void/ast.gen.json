@@ -5,7 +5,10 @@
       "exported": true,
       "type": {
         "tag": "void",
-        "props": null,
+        "props": {
+          "lax": true,
+          "undef": false
+        },
         "types": null,
         "loc": {
           "filename": "union-aliased-lax-void/schema.bare",

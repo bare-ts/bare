@@ -62,7 +62,10 @@
           },
           {
             "tag": "void",
-            "props": null,
+            "props": {
+              "lax": false,
+              "undef": false
+            },
             "types": null,
             "loc": {
               "filename": "union-void/schema.bare",

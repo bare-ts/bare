@@ -4,22 +4,14 @@ export function readUnsignedInt(bc) {
     const offset = bc.offset
     const tag = bare.readUintSafe(bc)
     switch (tag) {
-        case 0: {
-            const val = (bare.readU8)(bc)
-            return { tag, val }
-        }
-        case 1: {
-            const val = (bare.readU16)(bc)
-            return { tag, val }
-        }
-        case 2: {
-            const val = (bare.readU32)(bc)
-            return { tag, val }
-        }
-        case 9007199254740991: {
-            const val = (bare.readU64)(bc)
-            return { tag, val }
-        }
+        case 0:
+            return { tag, val: (bare.readU8)(bc) }
+        case 1:
+            return { tag, val: (bare.readU16)(bc) }
+        case 2:
+            return { tag, val: (bare.readU32)(bc) }
+        case 9007199254740991:
+            return { tag, val: (bare.readU64)(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
