@@ -102,6 +102,13 @@ export interface OptionalType {
     readonly loc: Location | null
 }
 
+export interface FixedNumberType {
+    readonly tag: FixedNumberTag
+    readonly props: null
+    readonly types: null
+    readonly loc: Location | null
+}
+
 export interface PrimitiveType {
     readonly tag: PrimitiveTag
     readonly props: null
@@ -139,9 +146,8 @@ export interface TypedArrayType {
     readonly tag: "typedarray"
     readonly props: {
         readonly len: number | null
-        readonly valType: TypedArrayValType
     }
-    readonly types: null
+    readonly types: readonly [FixedNumberType]
     readonly loc: Location | null
 }
 
@@ -175,22 +181,35 @@ export function isPrimitiveType(type: Type): type is PrimitiveType {
     return isPrimitiveTag(type.tag)
 }
 
-export const PRIMITIVE_TAG = [
-    "bool",
+export type FixedNumberTag = typeof FIXED_NUMBER_TAG[number]
+
+export function isFixedNumberType(type: Type): type is FixedNumberType {
+    return FIXED_NUMBER_TAG_SET.has(type.tag)
+}
+
+export const FIXED_NUMBER_TAG = [
     "f32",
     "f64",
     "i8",
     "i16",
     "i32",
-    "i64Safe",
     "i64",
-    "int",
-    "intSafe",
-    "string",
     "u8",
+    "u8Clamped",
     "u16",
     "u32",
     "u64",
+] as const
+
+const FIXED_NUMBER_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMBER_TAG)
+
+export const PRIMITIVE_TAG = [
+    ...FIXED_NUMBER_TAG,
+    "bool",
+    "i64Safe",
+    "int",
+    "intSafe",
+    "string",
     "u64Safe",
     "uint",
     "uintSafe",
@@ -198,13 +217,9 @@ export const PRIMITIVE_TAG = [
 
 const PRIMITIVE_TAG_SET: ReadonlySet<string> = new Set(PRIMITIVE_TAG)
 
-export type TypedArrayValType = keyof typeof TYPED_ARRAY_VAL_TYPE_TO_ARRAY
-
-export function isTypedArrayValType(name: string): name is TypedArrayValType {
-    return Object.hasOwnProperty.call(TYPED_ARRAY_VAL_TYPE_TO_ARRAY, name)
-}
-
-export const TYPED_ARRAY_VAL_TYPE_TO_ARRAY = {
+export const FIXED_NUMBER_TYPE_TO_TYPED_ARRAY = {
+    "f32": "Float32Array",
+    "f64": "Float64Array",
     "i8": "Int8Array",
     "i16": "Int16Array",
     "i32": "Int32Array",
@@ -249,6 +264,7 @@ export const PRIMITIVE_TAG_TO_TYPEOF = {
     "intSafe": "number",
     "string": "string",
     "u8": "number",
+    "u8Clamped": "number",
     "u16": "number",
     "u32": "number",
     "u64": "bigint",

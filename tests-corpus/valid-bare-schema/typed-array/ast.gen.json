@@ -6,10 +6,21 @@
       "type": {
         "tag": "typedarray",
         "props": {
-          "len": null,
-          "valType": "u8"
+          "len": null
         },
-        "types": null,
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "typed-array/schema.bare",
+              "offset": 15,
+              "line": 1,
+              "col": 16
+            }
+          }
+        ],
         "loc": {
           "filename": "typed-array/schema.bare",
           "offset": 13,

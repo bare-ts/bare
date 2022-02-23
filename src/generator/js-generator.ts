@@ -161,6 +161,7 @@ function genType(g: Gen, type: ast.Type): string {
         case "int":
         case "intSafe":
         case "u8":
+        case "u8Clamped":
         case "u16":
         case "u32":
         case "u64":
@@ -280,7 +281,7 @@ function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
 }
 
 function genTypedArrayType(_g: Gen, type: ast.TypedArrayType): string {
-    return ast.TYPED_ARRAY_VAL_TYPE_TO_ARRAY[type.props.valType]
+    return ast.FIXED_NUMBER_TYPE_TO_TYPED_ARRAY[type.types[0].tag]
 }
 
 function genUnionType(g: Gen, type: ast.UnionType): string {
@@ -605,7 +606,7 @@ function genTypedArrayReader(
     type: ast.TypedArrayType,
     id = ""
 ): string {
-    const typeName = capitalize(type.props.valType)
+    const typeName = capitalize(type.types[0].tag)
     if (type.props.len == null) {
         return `bare.read${typeName}Array`
     }
@@ -798,11 +799,11 @@ function genTypedArrayWriter(
     id = ""
 ): string {
     if (type.props.len == null) {
-        return `bare.write${capitalize(type.props.valType)}Array`
+        return `bare.write${capitalize(type.types[0].tag)}Array`
     }
     return unindent(`${indent(genWriterHead(g, type, id))} {
         assert(x.length === ${type.props.len})
-        return bare.write${capitalize(type.props.valType)}FixedArray(bc, x)
+        return bare.write${capitalize(type.types[0].tag)}FixedArray(bc, x)
     }`)
 }
 

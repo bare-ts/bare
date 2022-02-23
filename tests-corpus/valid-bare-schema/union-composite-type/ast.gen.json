@@ -109,10 +109,21 @@
           {
             "tag": "typedarray",
             "props": {
-              "len": 4,
-              "valType": "u8"
+              "len": 4
             },
-            "types": null,
+            "types": [
+              {
+                "tag": "u8",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "union-composite-type/schema.bare",
+                  "offset": 71,
+                  "line": 1,
+                  "col": 72
+                }
+              }
+            ],
             "loc": {
               "filename": "union-composite-type/schema.bare",
               "offset": 68,

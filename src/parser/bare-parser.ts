@@ -156,11 +156,11 @@ function parseArray(p: Parser): ast.Type {
     }
     p.lex.forth()
     const valType = parseType(p)
-    if (!p.config.useGenericArray && ast.isTypedArrayValType(valType.tag)) {
+    if (!p.config.useGenericArray && ast.isFixedNumberType(valType)) {
         return {
             tag: "typedarray",
-            props: { len, valType: valType.tag },
-            types: null,
+            props: { len },
+            types: [valType],
             loc,
         }
     }
