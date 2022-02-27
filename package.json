@@ -51,7 +51,7 @@
   "scripts": {
     "build": "sh ./scripts/build.sh",
     "clean": "rm -rf dist",
-    "postinstall": "validate-commit-msg",
+    "prepare": "validate-commit-msg",
     "prepublishOnly": "npm run clean && npm test",
     "test": "npm run build && tsc -b tests tests-corpus && oletus tests/*.test.js tests-corpus/**/**/*.test.js",
     "test:coverage": "c8 --reporter=lcovonly npm test"
