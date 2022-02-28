@@ -11,6 +11,7 @@
             {
               "mut": false,
               "name": "bestFriend",
+              "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
                 "offset": 21,
@@ -21,6 +22,7 @@
             {
               "mut": false,
               "name": "secondBestFriend",
+              "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
                 "offset": 54,
@@ -31,6 +33,7 @@
             {
               "mut": false,
               "name": "friends",
+              "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
                 "offset": 94,
@@ -41,6 +44,7 @@
             {
               "mut": false,
               "name": "friendNicknames",
+              "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
                 "offset": 116,

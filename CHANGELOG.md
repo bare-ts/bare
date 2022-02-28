@@ -37,6 +37,14 @@ This project adheres to [Semantic Versioning][semver].
     choose between `null`, `undefined`, and `null | undefined`.
     Note that these options also modify the emitted types for optionals.
 
+* Support for quoted properties
+
+    The option `--use-quoted-property` enables to output
+    quoted properties instead of unquoted properties.
+
+    This can be useful when using a JS minifier that differently handles
+    quoted and unquoted properties.
+
 ## 0.2.0 (2022-02-20)
 
 * Fix invalid code generation for big tags in enums and unions

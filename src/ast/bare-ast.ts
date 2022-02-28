@@ -139,6 +139,7 @@ export interface StructType {
 export interface StructField {
     readonly mut: boolean
     readonly name: string
+    readonly quoted: boolean
     readonly loc: Location | null
 }
 

@@ -20,6 +20,7 @@ export interface Config {
     readonly useIntEnum: boolean
     readonly useLaxOptional: boolean
     readonly useMutable: boolean
+    readonly useQuotedProperty: boolean
     readonly useSafeInt: boolean
     readonly useUndefined: boolean
 }
@@ -43,6 +44,7 @@ export function Config({
     useIntEnum = false,
     useLaxOptional = false,
     useMutable = false,
+    useQuotedProperty = false,
     useSafeInt = false,
     useUndefined = false,
 }: Partial<Config>): Config {
@@ -88,6 +90,7 @@ export function Config({
         useIntEnum,
         useLaxOptional,
         useMutable,
+        useQuotedProperty,
         useSafeInt,
         useUndefined,
     }

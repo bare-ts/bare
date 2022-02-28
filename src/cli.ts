@@ -74,6 +74,10 @@ program
     .option("--use-int-enum", "use integers for enum values instead of strings")
     .option("--use-mutable", "use mutable types")
     .option(
+        "--use-quoted-property",
+        "use quoted property instead of unquoted property"
+    )
+    .option(
         "--use-lax-optional",
         "accept null and undefined values for optional types"
     )

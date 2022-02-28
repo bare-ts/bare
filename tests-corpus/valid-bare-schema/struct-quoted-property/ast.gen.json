@@ -9,24 +9,24 @@
           "class": false,
           "fields": [
             {
-              "mut": true,
+              "mut": false,
               "name": "name",
-              "quoted": false,
+              "quoted": true,
               "loc": {
-                "filename": "mutable-struct/schema.bare",
-                "offset": 21,
-                "line": 3,
+                "filename": "struct-quoted-property/schema.bare",
+                "offset": 20,
+                "line": 2,
                 "col": 5
               }
             },
             {
-              "mut": true,
+              "mut": false,
               "name": "age",
-              "quoted": false,
+              "quoted": true,
               "loc": {
-                "filename": "mutable-struct/schema.bare",
-                "offset": 38,
-                "line": 4,
+                "filename": "struct-quoted-property/schema.bare",
+                "offset": 37,
+                "line": 3,
                 "col": 5
               }
             }
@@ -38,9 +38,9 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "mutable-struct/schema.bare",
-              "offset": 27,
-              "line": 3,
+              "filename": "struct-quoted-property/schema.bare",
+              "offset": 26,
+              "line": 2,
               "col": 11
             }
           },
@@ -49,32 +49,32 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "mutable-struct/schema.bare",
-              "offset": 43,
-              "line": 4,
+              "filename": "struct-quoted-property/schema.bare",
+              "offset": 42,
+              "line": 3,
               "col": 10
             }
           }
         ],
         "loc": {
-          "filename": "mutable-struct/schema.bare",
-          "offset": 15,
-          "line": 2,
+          "filename": "struct-quoted-property/schema.bare",
+          "offset": 14,
+          "line": 1,
           "col": 15
         }
       },
       "loc": {
-        "filename": "mutable-struct/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "filename": "struct-quoted-property/schema.bare",
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
   ],
   "loc": {
-    "filename": "mutable-struct/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "filename": "struct-quoted-property/schema.bare",
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

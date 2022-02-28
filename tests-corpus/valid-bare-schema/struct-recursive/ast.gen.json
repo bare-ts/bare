@@ -11,6 +11,7 @@
             {
               "mut": false,
               "name": "children",
+              "quoted": false,
               "loc": {
                 "filename": "struct-recursive/schema.bare",
                 "offset": 18,

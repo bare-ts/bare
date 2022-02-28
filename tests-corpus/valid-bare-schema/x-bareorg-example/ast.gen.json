@@ -131,6 +131,7 @@
             {
               "mut": false,
               "name": "ame",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 198,
@@ -141,6 +142,7 @@
             {
               "mut": false,
               "name": "email",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 212,
@@ -151,6 +153,7 @@
             {
               "mut": false,
               "name": "address",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 228,
@@ -161,6 +164,7 @@
             {
               "mut": false,
               "name": "orders",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 247,
@@ -171,6 +175,7 @@
             {
               "mut": false,
               "name": "metadata",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 300,
@@ -231,6 +236,7 @@
                     {
                       "mut": false,
                       "name": "orderId",
+                      "quoted": false,
                       "loc": {
                         "filename": "x-bareorg-example/schema.bare",
                         "offset": 263,
@@ -241,6 +247,7 @@
                     {
                       "mut": false,
                       "name": "quantity",
+                      "quoted": false,
                       "loc": {
                         "filename": "x-bareorg-example/schema.bare",
                         "offset": 280,
@@ -354,6 +361,7 @@
             {
               "mut": false,
               "name": "name",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 349,
@@ -364,6 +372,7 @@
             {
               "mut": false,
               "name": "email",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 364,
@@ -374,6 +383,7 @@
             {
               "mut": false,
               "name": "address",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 380,
@@ -384,6 +394,7 @@
             {
               "mut": false,
               "name": "department",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 399,
@@ -394,6 +405,7 @@
             {
               "mut": false,
               "name": "hireDate",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 424,
@@ -404,6 +416,7 @@
             {
               "mut": false,
               "name": "publicKey",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 441,
@@ -414,6 +427,7 @@
             {
               "mut": false,
               "name": "metadata",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 474,
@@ -632,6 +646,7 @@
             {
               "mut": false,
               "name": "address",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 557,
@@ -642,6 +657,7 @@
             {
               "mut": false,
               "name": "city",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 578,
@@ -652,6 +668,7 @@
             {
               "mut": false,
               "name": "state",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 593,
@@ -662,6 +679,7 @@
             {
               "mut": false,
               "name": "country",
+              "quoted": false,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
                 "offset": 609,

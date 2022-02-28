@@ -1,0 +1,96 @@
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-quoted-property/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
+            }
+          },
+          {
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-quoted-property/schema.bare",
+              "offset": 23,
+              "line": 1,
+              "col": 24
+            }
+          },
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-quoted-property/schema.bare",
+              "offset": 29,
+              "line": 1,
+              "col": 30
+            }
+          },
+          {
+            "tag": "u64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-quoted-property/schema.bare",
+              "offset": 35,
+              "line": 1,
+              "col": 36
+            }
+          },
+          {
+            "tag": "uint",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-quoted-property/schema.bare",
+              "offset": 41,
+              "line": 1,
+              "col": 42
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-quoted-property/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-quoted-property/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-quoted-property/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

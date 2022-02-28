@@ -11,6 +11,7 @@
             {
               "mut": false,
               "name": "val",
+              "quoted": false,
               "loc": {
                 "filename": "union-flat-class/schema.bare",
                 "offset": 22,
@@ -58,6 +59,7 @@
             {
               "mut": false,
               "name": "val",
+              "quoted": false,
               "loc": {
                 "filename": "union-flat-class/schema.bare",
                 "offset": 59,

@@ -66,6 +66,7 @@
             {
               "mut": false,
               "name": "name",
+              "quoted": false,
               "loc": {
                 "filename": "x-readme-example/schema.bare",
                 "offset": 67,
@@ -76,6 +77,7 @@
             {
               "mut": false,
               "name": "email",
+              "quoted": false,
               "loc": {
                 "filename": "x-readme-example/schema.bare",
                 "offset": 84,
@@ -86,6 +88,7 @@
             {
               "mut": false,
               "name": "gender",
+              "quoted": false,
               "loc": {
                 "filename": "x-readme-example/schema.bare",
                 "offset": 102,
@@ -172,6 +175,7 @@
             {
               "mut": false,
               "name": "name",
+              "quoted": false,
               "loc": {
                 "filename": "x-readme-example/schema.bare",
                 "offset": 156,
@@ -182,6 +186,7 @@
             {
               "mut": false,
               "name": "email",
+              "quoted": false,
               "loc": {
                 "filename": "x-readme-example/schema.bare",
                 "offset": 173,

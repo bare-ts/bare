@@ -263,11 +263,14 @@ function genStructType(g: Gen, type: ast.StructType): string {
 }
 
 function genStructTypeBody(g: Gen, type: ast.StructType): string {
-    const members = type.props.fields.map(
-        ({ mut, name }, i) =>
-            `${mut ? "" : "readonly "}${name}: ${genType(g, type.types[i])}`
-    )
-    return members.join("\n")
+    let result = ""
+    for (let i = 0; i < type.types.length; i++) {
+        const { mut, quoted, name } = type.props.fields[i]
+        const modifier = mut ? "" : "readonly "
+        const prop = quoted ? `"${name}"` : name
+        result += `${modifier}${prop}: ${genType(g, type.types[i])}\n`
+    }
+    return result.trim()
 }
 
 function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
@@ -285,12 +288,15 @@ function genTypedArrayType(_g: Gen, type: ast.TypedArrayType): string {
 }
 
 function genUnionType(g: Gen, type: ast.UnionType): string {
+    const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
+    const valProp = g.config.useQuotedProperty ? '"val"' : "val"
+    const tags = type.props.tags
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const valType = genType(g, type.types[i])
         result += type.props.flat
             ? `\n| ${valType}`
-            : `\n| { readonly tag: ${type.props.tags[i]}; readonly val: ${valType} }`
+            : `\n| { readonly ${tagProp}: ${tags[i]}; readonly ${valProp}: ${valType} }`
     }
     return indent(result)
 }
@@ -573,10 +579,13 @@ function genStructReader(g: Gen, type: ast.StructType, alias = ""): string {
         const name = jsId(fields[i].name)
         fieldInit += `const ${name} = (${fieldReader})(bc)\n`
         factoryArgs += `${name}, `
-        if (fields[i].name === name) {
+        if (fields[i].name === name && !fields[i].quoted) {
             objBody += `\n${name},`
         } else {
-            objBody += `\n${fields[i].name}: ${name},`
+            const prop = fields[i].quoted
+                ? `"${fields[i].name}"`
+                : fields[i].name
+            objBody += `\n${prop}: ${name},`
         }
     }
     factoryArgs = factoryArgs.slice(0, -2) // remove extra coma and space
@@ -619,6 +628,8 @@ function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
     const tagReader = max(type.props.tags) < 128 ? "readU8" : "readUintSafe"
     const flatten = type.props.flat
     let switchBody = ""
+    const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
+    const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     for (let i = 0; i < type.types.length; i++) {
         const currType = type.types[i]
         const valExpr =
@@ -634,7 +645,7 @@ function genUnionReader(g: Gen, type: ast.UnionType, alias = ""): string {
         } else {
             switchBody += `
             case ${type.props.tags[i]}:
-                return { tag, val: ${valExpr} }`
+                return { ${tagPropSet}, ${valProp}: ${valExpr} }`
         }
     }
     return unindent(`${indent(genReaderHead(g, type, alias))} {
@@ -785,9 +796,10 @@ function genSetWriter(g: Gen, type: ast.SetType, alias = ""): string {
 }
 
 function genStructWriter(g: Gen, type: ast.StructType, alias = ""): string {
-    const fieldEncoding = type.props.fields.map(
-        ({ name }, i) => `(${genWriter(g, type.types[i])})(bc, x.${name});`
-    )
+    const fieldEncoding = type.props.fields.map(({ quoted, name }, i) => {
+        const propAccess = quoted ? `["${name}"]` : `.${name}`
+        return `(${genWriter(g, type.types[i])})(bc, x${propAccess});`
+    })
     return unindent(`${indent(genWriterHead(g, type, alias))} {
         ${indent(fieldEncoding.join("\n"), 2)}
     }`)
@@ -948,18 +960,20 @@ function genPropertylessTypesFlatUnionWriter(
 
 function genTaggedUnionWriter(g: Gen, type: ast.UnionType, alias = ""): string {
     const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
+    const tagPropAccess = g.config.useQuotedProperty ? '["tag"]' : ".tag"
+    const valPropAccess = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
     for (let i = 0; i < type.types.length; i++) {
         if (type.types[i].tag !== "void") {
             switchBody += `
             case ${type.props.tags[i]}:
-                (${genWriter(g, type.types[i])})(bc, x.val)
+                (${genWriter(g, type.types[i])})(bc, x${valPropAccess})
                 break`
         }
     }
     return unindent(`${indent(genWriterHead(g, type, alias))} {
         bare.${tagWriter}(bc, x.tag)
-        switch (x.tag) {
+        switch (x${tagPropAccess}) {
             ${switchBody.trim()}
         }
     }`)

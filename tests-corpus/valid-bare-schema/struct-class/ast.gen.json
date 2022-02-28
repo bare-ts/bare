@@ -11,6 +11,7 @@
             {
               "mut": false,
               "name": "name",
+              "quoted": false,
               "loc": {
                 "filename": "struct-class/schema.bare",
                 "offset": 21,
@@ -21,6 +22,7 @@
             {
               "mut": false,
               "name": "age",
+              "quoted": false,
               "loc": {
                 "filename": "struct-class/schema.bare",
                 "offset": 38,

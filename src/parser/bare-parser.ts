@@ -325,6 +325,8 @@ function parseStructBody(p: Parser): ast.Type {
     }
     const loc = p.lex.location()
     p.lex.forth()
+    const mut = p.config.useMutable
+    const quoted = p.config.useQuotedProperty
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
     const names = new Set()
@@ -350,7 +352,7 @@ function parseStructBody(p: Parser): ast.Type {
                 p.lex.location()
             )
         }
-        fields.push({ mut: p.config.useMutable, name, loc: fieldLoc })
+        fields.push({ mut, name, quoted, loc: fieldLoc })
         types.push(type)
     }
     if (p.lex.token() !== "}") {

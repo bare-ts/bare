@@ -11,6 +11,7 @@
             {
               "mut": false,
               "name": "bestFriend",
+              "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref/schema.bare",
                 "offset": 21,
