@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.3.0 (2022-03-02)
 
 * Fix regression: Forbid bare schema in which a type is repeated in an union
 
