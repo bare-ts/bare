@@ -28,6 +28,7 @@ for (let category of fs.readdirSync(CORPUS_DIR)) {
         const config = fs.existsSync(configPath)
             ? JSON.parse(fs.readFileSync(configPath).toString())
             : {}
+        console.info("Generating... " + path.relative(CORPUS_DIR, dir))
         const schema = path.relative(category, schemaPath)
         const content = fs.readFileSync(schemaPath).toString()
         try {
