@@ -2,6 +2,21 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+* Forbid flat unions which cannot be automatically flatten
+
+    bare-ts is able to automatically compute the tag of simple flat unions
+    without any help. A simple union is either:
+    - a union of base or void types that can be discriminated by their
+      *typeof value*, or
+    - a union of classes (requires the option `--use-class`).
+
+    Previously, bare-ts asked to the user to provide a tagging function for
+    other cases (complex flat unions).
+    Now, bare-ts throws an error when it encounters a complex flat union.
+    Complex flat unions are no longer supported.
+
 ## 0.3.0 (2022-03-02)
 
 * Fix regression: Forbid bare schema in which a type is repeated in an union

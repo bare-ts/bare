@@ -37,7 +37,7 @@ function checkTypeInvariants(type: ast.Type, symbols: ast.SymbolTable): void {
             checkStructInvariants(type)
             break
         case "union":
-            checkUnionInvariants(type)
+            checkUnionInvariants(type, symbols)
             break
     }
     if (type.types != null) {
@@ -79,9 +79,9 @@ function checkEnumInvariants(type: ast.EnumType): void {
 
 function checkMapInvariants(type: ast.MapType): void {
     const keyType = type.types[0]
-    if (!ast.isPrimitiveTag(keyType.tag)) {
+    if (!ast.isBaseTag(keyType.tag)) {
         throw new CompilerError(
-            "the key type must be a primitive type.",
+            "the key type must be a base type.",
             keyType.loc
         )
     }
@@ -128,7 +128,10 @@ function checkStructInvariants(type: ast.StructType): void {
     }
 }
 
-function checkUnionInvariants(type: ast.UnionType): void {
+function checkUnionInvariants(
+    type: ast.UnionType,
+    symbols: ast.SymbolTable
+): void {
     if (type.types.length === 0) {
         throw new CompilerError(
             "a union must include at least one type.",
@@ -141,6 +144,7 @@ function checkUnionInvariants(type: ast.UnionType): void {
             null
         )
     }
+    // check type uniqueness
     const stringifiedTypes = new Set()
     const tagVals: Set<number> = new Set()
     for (let i = 0; i < type.props.tags.length; i++) {
@@ -162,6 +166,28 @@ function checkUnionInvariants(type: ast.UnionType): void {
             )
         }
         stringifiedTypes.add(stringifiedType)
+    }
+    // check that flat unions can be automatically flatten
+    if (type.props.flat) {
+        let isFlatUnion =
+            type.types.every(ast.isBaseOrVoidType) &&
+            ast.haveDistinctTypeof(type.types)
+        if (!isFlatUnion && type.types.every((t) => t.tag === "alias")) {
+            const resolved = type.types.map((t) => ast.resolveAlias(t, symbols))
+            if (
+                type.types.length === new Set(resolved).size &&
+                resolved.every((t): t is ast.StructType => t.tag === "struct")
+            ) {
+                // every struct is unique (no double aliasing)
+                isFlatUnion = resolved.every((t) => t.props.class)
+                if (!isFlatUnion) {
+                    isFlatUnion = ast.leadingDiscriminators(resolved) != null
+                }
+            }
+        }
+        if (!isFlatUnion) {
+            throw new CompilerError("the union cannot be flatten.", type.loc)
+        }
     }
 }
 

@@ -1,0 +1,114 @@
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": true,
+          "tags": [
+            0,
+            1
+          ]
+        },
+        "types": [
+          {
+            "tag": "struct",
+            "props": {
+              "class": true,
+              "fields": [
+                {
+                  "mut": false,
+                  "name": "value",
+                  "quoted": false,
+                  "loc": {
+                    "filename": "union-flat-no-aliasing/schema.bare",
+                    "offset": 20,
+                    "line": 1,
+                    "col": 21
+                  }
+                }
+              ]
+            },
+            "types": [
+              {
+                "tag": "string",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "union-flat-no-aliasing/schema.bare",
+                  "offset": 27,
+                  "line": 1,
+                  "col": 28
+                }
+              }
+            ],
+            "loc": {
+              "filename": "union-flat-no-aliasing/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
+            }
+          },
+          {
+            "tag": "struct",
+            "props": {
+              "class": true,
+              "fields": [
+                {
+                  "mut": false,
+                  "name": "value",
+                  "quoted": false,
+                  "loc": {
+                    "filename": "union-flat-no-aliasing/schema.bare",
+                    "offset": 40,
+                    "line": 1,
+                    "col": 41
+                  }
+                }
+              ]
+            },
+            "types": [
+              {
+                "tag": "u32",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "union-flat-no-aliasing/schema.bare",
+                  "offset": 47,
+                  "line": 1,
+                  "col": 48
+                }
+              }
+            ],
+            "loc": {
+              "filename": "union-flat-no-aliasing/schema.bare",
+              "offset": 38,
+              "line": 1,
+              "col": 39
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-flat-no-aliasing/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-flat-no-aliasing/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-no-aliasing/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

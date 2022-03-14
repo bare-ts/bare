@@ -20,7 +20,7 @@ export type Type =
     | LiteralType // map[type]type
     | MapType // map[type]type
     | OptionalType // optional<type>
-    | PrimitiveType
+    | BaseType
     | SetType // []type
     | StructType // { fields... }
     | TypedArrayType
@@ -109,8 +109,8 @@ export interface FixedNumberType {
     readonly loc: Location | null
 }
 
-export interface PrimitiveType {
-    readonly tag: PrimitiveTag
+export interface BaseType {
+    readonly tag: BaseTag
     readonly props: null
     readonly types: null
     readonly loc: Location | null
@@ -152,7 +152,7 @@ export interface TypedArrayType {
     readonly loc: Location | null
 }
 
-export interface UnionType<T extends Type = Type> {
+export interface UnionType<T = Type> {
     readonly tag: "union"
     readonly props: {
         readonly flat: boolean
@@ -172,14 +172,18 @@ export interface VoidType {
     readonly loc: Location | null
 }
 
-export type PrimitiveTag = typeof PRIMITIVE_TAG[number]
+export type BaseTag = typeof BASE_TAG[number]
 
-export function isPrimitiveTag(tag: string): tag is PrimitiveTag {
-    return PRIMITIVE_TAG_SET.has(tag)
+export function isBaseTag(tag: string): tag is BaseTag {
+    return BASE_TAG_SET.has(tag)
 }
 
-export function isPrimitiveType(type: Type): type is PrimitiveType {
-    return isPrimitiveTag(type.tag)
+export function isBaseType(type: Type): type is BaseType {
+    return isBaseTag(type.tag)
+}
+
+export function isBaseOrVoidType(type: Type): type is BaseType | VoidType {
+    return isBaseTag(type.tag) || type.tag === "void"
 }
 
 export type FixedNumberTag = typeof FIXED_NUMBER_TAG[number]
@@ -204,7 +208,7 @@ export const FIXED_NUMBER_TAG = [
 
 const FIXED_NUMBER_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMBER_TAG)
 
-export const PRIMITIVE_TAG = [
+export const BASE_TAG = [
     ...FIXED_NUMBER_TAG,
     "bool",
     "i64Safe",
@@ -216,7 +220,7 @@ export const PRIMITIVE_TAG = [
     "uintSafe",
 ] as const
 
-const PRIMITIVE_TAG_SET: ReadonlySet<string> = new Set(PRIMITIVE_TAG)
+const BASE_TAG_SET: ReadonlySet<string> = new Set(BASE_TAG)
 
 export const FIXED_NUMBER_TYPE_TO_TYPED_ARRAY = {
     "f32": "Float32Array",
@@ -252,7 +256,7 @@ export function resolveAlias(type: Type, symbols: SymbolTable): Type {
     return type
 }
 
-export const PRIMITIVE_TAG_TO_TYPEOF = {
+export const BASE_TAG_TO_TYPEOF = {
     "bool": "boolean",
     "f32": "number",
     "f64": "number",
@@ -301,6 +305,19 @@ export function leadingDiscriminators(
         return Array.from(literals.values()) // literals in insertion order
     }
     return null
+}
+
+/**
+ * @param types
+ * @returns have `types` distinct typeof values?
+ */
+export function haveDistinctTypeof(
+    types: readonly (BaseType | VoidType)[]
+): boolean {
+    const typeofValues = types.map((t) =>
+        isBaseType(t) ? BASE_TAG_TO_TYPEOF[t.tag] : null
+    ) // null for 'object' or 'undefined'
+    return types.length === new Set(typeofValues).size
 }
 
 /**

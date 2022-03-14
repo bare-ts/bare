@@ -51,10 +51,10 @@ export function readBoxed(bc) {
 
 export function writeBoxed(bc, x) {
     if (x instanceof BoxedU32) {
-        bare.writeU8(bc, 0);
-        (writeBoxedU32)(bc, x)
-    } else if (x instanceof BoxedString) {
-        bare.writeU8(bc, 1);
-        (writeBoxedString)(bc, x)
-    }
+            bare.writeU8(bc, 0);
+            (writeBoxedU32)(bc, x)
+        } else if (x instanceof BoxedString) {
+            bare.writeU8(bc, 1);
+            (writeBoxedString)(bc, x)
+        }
 }

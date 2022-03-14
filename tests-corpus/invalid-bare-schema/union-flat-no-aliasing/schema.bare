@@ -1,0 +1,1 @@
+type UnsignedInt ({ value: string } | { value: u32 })

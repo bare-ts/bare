@@ -6,5 +6,5 @@
     "line": 3,
     "col": 15
   },
-  "message": "(map-key-alias/schema.bare:3:15) the key type must be a primitive type."
+  "message": "(map-key-alias/schema.bare:3:15) the key type must be a base type."
 }

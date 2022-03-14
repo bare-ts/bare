@@ -104,16 +104,16 @@ function parseTypeName(p: Parser): ast.Type {
             loc,
         }
     }
-    if (!ast.isPrimitiveTag(alias) && !UPPER_CAMEL_CASE_PATTERN.test(alias)) {
+    if (!ast.isBaseTag(alias) && !UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new CompilerError(
             "a type name is either in UpperCamelCase or is a predefined types.",
             loc
         )
     }
-    if (ast.isPrimitiveTag(alias)) {
+    if (ast.isBaseTag(alias)) {
         const safeTypeName = `${alias}Safe`
         const tag =
-            p.config.useSafeInt && ast.isPrimitiveTag(safeTypeName)
+            p.config.useSafeInt && ast.isBaseTag(safeTypeName)
                 ? safeTypeName
                 : alias
         return { tag, props: null, types: null, loc }
