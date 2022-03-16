@@ -16,10 +16,20 @@ export function checkSemantic(schema: ast.Ast): ast.Ast {
             )
         }
         aliases.add(alias)
+        checkAliasedInvariants(aliased)
         checkTypeInvariants(type, symbols)
         checkCircularRef(type, symbols, new Set([alias]))
     }
     return schema
+}
+
+function checkAliasedInvariants(aliased: ast.AliasedType): void {
+    if (aliased.type.tag === "literal") {
+        throw new CompilerError(
+            "a literal type cannot be aliased.",
+            aliased.loc
+        )
+    }
 }
 
 function checkTypeInvariants(type: ast.Type, symbols: ast.SymbolTable): void {

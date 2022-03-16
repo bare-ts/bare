@@ -9,12 +9,12 @@ export class BoxedU32 {
 }
 
 export function readBoxedU32(bc) {
-    const val = (bare.readU32)(bc)
-    return new BoxedU32(val)
+    return new BoxedU32(
+        bare.readU32(bc))
 }
 
 export function writeBoxedU32(bc, x) {
-    (bare.writeU32)(bc, x.val);
+    bare.writeU32(bc, x.val)
 }
 
 export class BoxedString {
@@ -26,12 +26,12 @@ export class BoxedString {
 }
 
 export function readBoxedString(bc) {
-    const val = (bare.readString)(bc)
-    return new BoxedString(val)
+    return new BoxedString(
+        bare.readString(bc))
 }
 
 export function writeBoxedString(bc, x) {
-    (bare.writeString)(bc, x.val);
+    bare.writeString(bc, x.val)
 }
 
 export function readBoxed(bc) {
@@ -39,9 +39,9 @@ export function readBoxed(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return (readBoxedU32)(bc)
+            return readBoxedU32(bc)
         case 1:
-            return (readBoxedString)(bc)
+            return readBoxedString(bc)
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -51,10 +51,10 @@ export function readBoxed(bc) {
 
 export function writeBoxed(bc, x) {
     if (x instanceof BoxedU32) {
-            bare.writeU8(bc, 0);
-            (writeBoxedU32)(bc, x)
+            bare.writeU8(bc, 0)
+            writeBoxedU32(bc, x)
         } else if (x instanceof BoxedString) {
-            bare.writeU8(bc, 1);
-            (writeBoxedString)(bc, x)
+            bare.writeU8(bc, 1)
+            writeBoxedString(bc, x)
         }
 }

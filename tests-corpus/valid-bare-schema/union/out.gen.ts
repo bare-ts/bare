@@ -18,15 +18,15 @@ export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (bare.readU8)(bc) }
+            return { tag, val: bare.readU8(bc) }
         case 1:
-            return { tag, val: (bare.readU16)(bc) }
+            return { tag, val: bare.readU16(bc) }
         case 2:
-            return { tag, val: (bare.readU32)(bc) }
+            return { tag, val: bare.readU32(bc) }
         case 3:
-            return { tag, val: (bare.readU64Safe)(bc) }
+            return { tag, val: bare.readU64Safe(bc) }
         case 4:
-            return { tag, val: (bare.readUintSafe)(bc) }
+            return { tag, val: bare.readUintSafe(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -38,19 +38,19 @@ export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (bare.writeU8)(bc, x.val)
+            bare.writeU8(bc, x.val)
             break
         case 1:
-            (bare.writeU16)(bc, x.val)
+            bare.writeU16(bc, x.val)
             break
         case 2:
-            (bare.writeU32)(bc, x.val)
+            bare.writeU32(bc, x.val)
             break
         case 3:
-            (bare.writeU64Safe)(bc, x.val)
+            bare.writeU64Safe(bc, x.val)
             break
         case 4:
-            (bare.writeUintSafe)(bc, x.val)
+            bare.writeUintSafe(bc, x.val)
             break
     }
 }

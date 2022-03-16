@@ -65,7 +65,7 @@ function parseType(p: Parser): ast.Type {
             return parseArray(p)
         case "(": // union
             return parseUnion(p)
-        case "{": // DEPRECATED: anonymous struct (backward compatibility)
+        case "{":
             return parseStructBody(p)
         case "data":
             return parseData(p)

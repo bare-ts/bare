@@ -9,5 +9,5 @@ export function readU8Array(bc: bare.ByteCursor): U8Array {
 
 export function writeU8Array(bc: bare.ByteCursor, x: U8Array): void {
     assert(x.length === 4)
-    return bare.writeU8FixedArray(bc, x)
+    bare.writeU8FixedArray(bc, x)
 }

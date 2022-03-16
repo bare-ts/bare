@@ -1,0 +1,13 @@
+
+struct Person {
+    name: string
+    age: u8
+    address: {
+        country: string
+        city: {
+            name: string
+            code: u16
+        }
+        street: string
+    }
+}

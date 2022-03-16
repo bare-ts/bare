@@ -36,21 +36,14 @@ function maybeAlias(n: Context, type: ast.Type): ast.Type {
     switch (type.tag) {
         case "array":
         case "enum":
-        case "literal":
         case "map":
         case "optional":
         case "set":
-        case "struct":
         case "union":
             return genAlias(n, type)
-        case "data":
-        case "typedarray":
-            if (type.props.len != null) {
-                return genAlias(n, type)
-            }
-            return type
+        default:
+            return normalizeSubtypes(n, type)
     }
-    return type
 }
 
 function genAlias(n: Context, type: ast.Type): ast.Alias {

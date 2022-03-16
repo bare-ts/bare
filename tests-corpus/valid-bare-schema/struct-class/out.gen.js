@@ -11,12 +11,12 @@ export class Person {
 }
 
 export function readPerson(bc) {
-    const name = (bare.readString)(bc)
-    const age = (bare.readU8)(bc)
-    return new Person(name, age)
+    return new Person(
+        bare.readString(bc),
+        bare.readU8(bc))
 }
 
 export function writePerson(bc, x) {
-    (bare.writeString)(bc, x.name);
-    (bare.writeU8)(bc, x.age);
+    bare.writeString(bc, x.name)
+    bare.writeU8(bc, x.age)
 }

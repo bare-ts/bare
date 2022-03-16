@@ -7,5 +7,5 @@ export function readU8Array(bc) {
 
 export function writeU8Array(bc, x) {
     assert(x.length === 4)
-    return bare.writeU8FixedArray(bc, x)
+    bare.writeU8FixedArray(bc, x)
 }

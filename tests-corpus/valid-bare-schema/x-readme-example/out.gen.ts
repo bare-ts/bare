@@ -27,18 +27,15 @@ export function readGender(bc: bare.ByteCursor): Gender {
 
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
-        case Gender.FEMALE: {
+        case Gender.FEMALE:
             bare.writeU8(bc, 0)
             break
-        }
-        case Gender.FLUID: {
+        case Gender.FLUID:
             bare.writeU8(bc, 1)
             break
-        }
-        case Gender.MALE: {
+        case Gender.MALE:
             bare.writeU8(bc, 2)
             break
-        }
     }
 }
 
@@ -49,20 +46,17 @@ export interface Person {
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
-    const name = (bare.readString)(bc)
-    const email = (bare.readString)(bc)
-    const gender = (read0)(bc)
     return {
-        name,
-        email,
-        gender,
+        name: bare.readString(bc),
+        email: bare.readString(bc),
+        gender: read0(bc),
     }
 }
 
 export function writePerson(bc: bare.ByteCursor, x: Person): void {
-    (bare.writeString)(bc, x.name);
-    (bare.writeString)(bc, x.email);
-    (write0)(bc, x.gender);
+    bare.writeString(bc, x.name)
+    bare.writeString(bc, x.email)
+    write0(bc, x.gender)
 }
 
 export interface Organization {
@@ -71,17 +65,15 @@ export interface Organization {
 }
 
 export function readOrganization(bc: bare.ByteCursor): Organization {
-    const name = (bare.readString)(bc)
-    const email = (bare.readString)(bc)
     return {
-        name,
-        email,
+        name: bare.readString(bc),
+        email: bare.readString(bc),
     }
 }
 
 export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
-    (bare.writeString)(bc, x.name);
-    (bare.writeString)(bc, x.email);
+    bare.writeString(bc, x.name)
+    bare.writeString(bc, x.email)
 }
 
 export type Contact = 
@@ -93,9 +85,9 @@ export function readContact(bc: bare.ByteCursor): Contact {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (readPerson)(bc) }
+            return { tag, val: readPerson(bc) }
         case 1:
-            return { tag, val: (readOrganization)(bc) }
+            return { tag, val: readOrganization(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -107,23 +99,22 @@ export function writeContact(bc: bare.ByteCursor, x: Contact): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (writePerson)(bc, x.val)
+            writePerson(bc, x.val)
             break
         case 1:
-            (writeOrganization)(bc, x.val)
+            writeOrganization(bc, x.val)
             break
     }
 }
 
-export type Message = readonly (Contact)[]
+export type Message = readonly Contact[]
 
 export function readMessage(bc: bare.ByteCursor): Message {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valReader = readContact
-    const result = [valReader(bc)]
+    const result = [readContact(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valReader(bc)
+        result[i] = readContact(bc)
     }
     return result
 }
@@ -131,7 +122,7 @@ export function readMessage(bc: bare.ByteCursor): Message {
 export function writeMessage(bc: bare.ByteCursor, x: Message): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (writeContact)(bc, x[i])
+        writeContact(bc, x[i])
     }
 }
 
@@ -155,13 +146,13 @@ export function decodeMessage(bytes: Uint8Array): Message {
 
 function read0(bc: bare.ByteCursor): Gender | null {
     return bare.readBool(bc)
-        ? (readGender)(bc)
+        ? readGender(bc)
         : null
 }
 
 function write0(bc: bare.ByteCursor, x: Gender | null): void {
     bare.writeBool(bc, x != null)
     if (x != null) {
-        (writeGender)(bc, x)
+        writeGender(bc, x)
     }
 }

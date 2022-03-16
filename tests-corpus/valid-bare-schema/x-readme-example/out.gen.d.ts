@@ -37,7 +37,7 @@ export function readContact(bc: bare.ByteCursor): Contact
 
 export function writeContact(bc: bare.ByteCursor, x: Contact): void
 
-export type Message = readonly (Contact)[]
+export type Message = readonly Contact[]
 
 export function readMessage(bc: bare.ByteCursor): Message
 

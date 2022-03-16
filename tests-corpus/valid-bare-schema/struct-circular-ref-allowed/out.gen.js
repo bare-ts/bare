@@ -1,35 +1,31 @@
 import * as bare from "@bare-ts/lib"
 
 export function readPerson(bc) {
-    const bestFriend = (read0)(bc)
-    const secondBestFriend = (read1)(bc)
-    const friends = (read2)(bc)
-    const friendNicknames = (read3)(bc)
     return {
-        bestFriend,
-        secondBestFriend,
-        friends,
-        friendNicknames,
+        bestFriend: read0(bc),
+        secondBestFriend: read1(bc),
+        friends: read2(bc),
+        friendNicknames: read3(bc),
     }
 }
 
 export function writePerson(bc, x) {
-    (write0)(bc, x.bestFriend);
-    (write1)(bc, x.secondBestFriend);
-    (write2)(bc, x.friends);
-    (write3)(bc, x.friendNicknames);
+    write0(bc, x.bestFriend)
+    write1(bc, x.secondBestFriend)
+    write2(bc, x.friends)
+    write3(bc, x.friendNicknames)
 }
 
 function read0(bc) {
     return bare.readBool(bc)
-        ? (readPerson)(bc)
+        ? readPerson(bc)
         : null
 }
 
 function write0(bc, x) {
     bare.writeBool(bc, x != null)
     if (x != null) {
-        (writePerson)(bc, x)
+        writePerson(bc, x)
     }
 }
 
@@ -38,7 +34,7 @@ function read1(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (readPerson)(bc) }
+            return { tag, val: readPerson(bc) }
         case 1:
             return { tag, val: null }
         default: {
@@ -52,7 +48,7 @@ function write1(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (writePerson)(bc, x.val)
+            writePerson(bc, x.val)
             break
     }
 }
@@ -60,10 +56,9 @@ function write1(bc, x) {
 function read2(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valReader = readPerson
-    const result = [valReader(bc)]
+    const result = [readPerson(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valReader(bc)
+        result[i] = readPerson(bc)
     }
     return result
 }
@@ -71,7 +66,7 @@ function read2(bc) {
 function write2(bc, x) {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (writePerson)(bc, x[i])
+        writePerson(bc, x[i])
     }
 }
 
@@ -80,12 +75,12 @@ function read3(bc) {
     const result = new Map()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.readString)(bc)
+        const key = bare.readString(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (readPerson)(bc))
+        result.set(key, readPerson(bc))
     }
     return result
 }
@@ -93,7 +88,7 @@ function read3(bc) {
 function write3(bc, x) {
     bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.writeString)(bc, kv[0]);
-        (writePerson)(bc, kv[1])
+        bare.writeString(bc, kv[0])
+        writePerson(bc, kv[1])
     }
 }

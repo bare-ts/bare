@@ -17,9 +17,9 @@ export function readX(bc: bare.ByteCursor): X {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (bare.readU8)(bc) }
+            return { tag, val: bare.readU8(bc) }
         case 1:
-            return { tag, val: (readY)(bc) }
+            return { tag, val: readY(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -31,10 +31,10 @@ export function writeX(bc: bare.ByteCursor, x: X): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (bare.writeU8)(bc, x.val)
+            bare.writeU8(bc, x.val)
             break
         case 1:
-            (writeY)(bc, x.val)
+            writeY(bc, x.val)
             break
     }
 }

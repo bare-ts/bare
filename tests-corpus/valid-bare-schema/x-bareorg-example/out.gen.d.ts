@@ -65,7 +65,7 @@ export function readPerson(bc: bare.ByteCursor): Person
 export function writePerson(bc: bare.ByteCursor, x: Person): void
 
 export interface Address {
-    readonly address: readonly (string)[]
+    readonly address: readonly string[]
     readonly city: string
     readonly state: string
     readonly country: string

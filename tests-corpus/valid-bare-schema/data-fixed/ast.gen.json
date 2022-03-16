@@ -1,0 +1,34 @@
+{
+  "defs": [
+    {
+      "alias": "Data",
+      "exported": true,
+      "type": {
+        "tag": "data",
+        "props": {
+          "len": 16,
+          "mut": false
+        },
+        "types": null,
+        "loc": {
+          "filename": "data-fixed/schema.bare",
+          "offset": 11,
+          "line": 2,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "data-fixed/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "data-fixed/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}

@@ -17,6 +17,14 @@ This project adheres to [Semantic Versioning][semver].
     Now, bare-ts throws an error when it encounters a complex flat union.
     Complex flat unions are no longer supported.
 
+* Better code generation
+
+    bare-ts has a normalization step where it alias some types,
+    including anonymous structs, data arrays, and typed arrays.
+
+    bare-ts is now able to generate reader and writer without
+    aliasing these types.
+
 ## 0.3.0 (2022-03-02)
 
 * Fix regression: Forbid bare schema in which a type is repeated in an union

@@ -47,79 +47,62 @@ export function readDepartment(bc) {
 
 export function writeDepartment(bc, x) {
     switch (x) {
-        case Department.ACCOUNTING: {
+        case Department.ACCOUNTING:
             bare.writeU8(bc, 0)
             break
-        }
-        case Department.ADMINISTRATION: {
+        case Department.ADMINISTRATION:
             bare.writeU8(bc, 1)
             break
-        }
-        case Department.CUSTOMER_SERVICE: {
+        case Department.CUSTOMER_SERVICE:
             bare.writeU8(bc, 2)
             break
-        }
-        case Department.DEVELOPMENT: {
+        case Department.DEVELOPMENT:
             bare.writeU8(bc, 3)
             break
-        }
-        case Department.JSMITH: {
+        case Department.JSMITH:
             bare.writeU8(bc, 99)
             break
-        }
     }
 }
 
 export function readCustomer(bc) {
-    const ame = (bare.readString)(bc)
-    const email = (bare.readString)(bc)
-    const address = (readAddress)(bc)
-    const orders = (read0)(bc)
-    const metadata = (read1)(bc)
     return {
-        ame,
-        email,
-        address,
-        orders,
-        metadata,
+        ame: bare.readString(bc),
+        email: bare.readString(bc),
+        address: readAddress(bc),
+        orders: read0(bc),
+        metadata: read1(bc),
     }
 }
 
 export function writeCustomer(bc, x) {
-    (bare.writeString)(bc, x.ame);
-    (bare.writeString)(bc, x.email);
-    (writeAddress)(bc, x.address);
-    (write0)(bc, x.orders);
-    (write1)(bc, x.metadata);
+    bare.writeString(bc, x.ame)
+    bare.writeString(bc, x.email)
+    writeAddress(bc, x.address)
+    write0(bc, x.orders)
+    write1(bc, x.metadata)
 }
 
 export function readEmployee(bc) {
-    const name = (bare.readString)(bc)
-    const email = (bare.readString)(bc)
-    const address = (readAddress)(bc)
-    const department = (readDepartment)(bc)
-    const hireDate = (readTime)(bc)
-    const publicKey = (read2)(bc)
-    const metadata = (read1)(bc)
     return {
-        name,
-        email,
-        address,
-        department,
-        hireDate,
-        publicKey,
-        metadata,
+        name: bare.readString(bc),
+        email: bare.readString(bc),
+        address: readAddress(bc),
+        department: readDepartment(bc),
+        hireDate: readTime(bc),
+        publicKey: read2(bc),
+        metadata: read1(bc),
     }
 }
 
 export function writeEmployee(bc, x) {
-    (bare.writeString)(bc, x.name);
-    (bare.writeString)(bc, x.email);
-    (writeAddress)(bc, x.address);
-    (writeDepartment)(bc, x.department);
-    (writeTime)(bc, x.hireDate);
-    (write2)(bc, x.publicKey);
-    (write1)(bc, x.metadata);
+    bare.writeString(bc, x.name)
+    bare.writeString(bc, x.email)
+    writeAddress(bc, x.address)
+    writeDepartment(bc, x.department)
+    writeTime(bc, x.hireDate)
+    write2(bc, x.publicKey)
+    write1(bc, x.metadata)
 }
 
 export function readPerson(bc) {
@@ -127,9 +110,9 @@ export function readPerson(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (readCustomer)(bc) }
+            return { tag, val: readCustomer(bc) }
         case 1:
-            return { tag, val: (readEmployee)(bc) }
+            return { tag, val: readEmployee(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -141,32 +124,28 @@ export function writePerson(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (writeCustomer)(bc, x.val)
+            writeCustomer(bc, x.val)
             break
         case 1:
-            (writeEmployee)(bc, x.val)
+            writeEmployee(bc, x.val)
             break
     }
 }
 
 export function readAddress(bc) {
-    const address = (read3)(bc)
-    const city = (bare.readString)(bc)
-    const state = (bare.readString)(bc)
-    const country = (bare.readString)(bc)
     return {
-        address,
-        city,
-        state,
-        country,
+        address: read3(bc),
+        city: bare.readString(bc),
+        state: bare.readString(bc),
+        country: bare.readString(bc),
     }
 }
 
 export function writeAddress(bc, x) {
-    (write3)(bc, x.address);
-    (bare.writeString)(bc, x.city);
-    (bare.writeString)(bc, x.state);
-    (bare.writeString)(bc, x.country);
+    write3(bc, x.address)
+    bare.writeString(bc, x.city)
+    bare.writeString(bc, x.state)
+    bare.writeString(bc, x.country)
 }
 
 export function readMessage(bc) {
@@ -174,7 +153,7 @@ export function readMessage(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: (readPerson)(bc) }
+            return { tag, val: readPerson(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -186,7 +165,7 @@ export function writeMessage(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0:
-            (writePerson)(bc, x.val)
+            writePerson(bc, x.val)
             break
     }
 }
@@ -212,10 +191,15 @@ export function decodeMessage(bytes) {
 function read0(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
-    const valReader = read4
-    const result = [valReader(bc)]
+    const result = [{
+        orderId: bare.readI64(bc),
+        quantity: bare.readI32(bc),
+    }]
     for (let i = 1; i < len; i++) {
-        result[i] = valReader(bc)
+        result[i] = {
+            orderId: bare.readI64(bc),
+            quantity: bare.readI32(bc),
+        }
     }
     return result
 }
@@ -223,7 +207,10 @@ function read0(bc) {
 function write0(bc, x) {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
-        (write4)(bc, x[i])
+        {
+            bare.writeI64(bc, x[i].orderId)
+            bare.writeI32(bc, x[i].quantity)
+        }
     }
 }
 
@@ -232,12 +219,12 @@ function read1(bc) {
     const result = new Map()
     for (let i = 0; i < len; i++) {
         const offset = bc.offset
-        const key = (bare.readString)(bc)
+        const key = bare.readString(bc)
         if (result.has(key)) {
             bc.offset = offset
             throw new bare.BareError(offset, "duplicated key")
         }
-        result.set(key, (bare.readData)(bc))
+        result.set(key, bare.readData(bc))
     }
     return result
 }
@@ -245,30 +232,29 @@ function read1(bc) {
 function write1(bc, x) {
     bare.writeUintSafe(bc, x.size)
     for(const kv of x) {
-        (bare.writeString)(bc, kv[0]);
-        (bare.writeData)(bc, kv[1])
+        bare.writeString(bc, kv[0])
+        bare.writeData(bc, kv[1])
     }
 }
 
 function read2(bc) {
     return bare.readBool(bc)
-        ? (readPublicKey)(bc)
+        ? readPublicKey(bc)
         : null
 }
 
 function write2(bc, x) {
     bare.writeBool(bc, x != null)
     if (x != null) {
-        (writePublicKey)(bc, x)
+        writePublicKey(bc, x)
     }
 }
 
 function read3(bc) {
     const len = 4
-    const valReader = bare.readString
-    const result = [valReader(bc)]
+    const result = [bare.readString(bc)]
     for (let i = 1; i < len; i++) {
-        result[i] = valReader(bc)
+        result[i] = bare.readString(bc)
     }
     return result
 }
@@ -276,20 +262,6 @@ function read3(bc) {
 function write3(bc, x) {
     assert(x.length === 4, "Unmatched length")
     for (let i = 0; i < x.length; i++) {
-        (bare.writeString)(bc, x[i])
+        bare.writeString(bc, x[i])
     }
-}
-
-function read4(bc) {
-    const orderId = (bare.readI64)(bc)
-    const quantity = (bare.readI32)(bc)
-    return {
-        orderId,
-        quantity,
-    }
-}
-
-function write4(bc, x) {
-    (bare.writeI64)(bc, x.orderId);
-    (bare.writeI32)(bc, x.quantity);
 }

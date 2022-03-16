@@ -5,7 +5,7 @@ export interface Person {
     readonly secondBestFriend: 
         | { readonly tag: 0; readonly val: Person }
         | { readonly tag: 1; readonly val: null }
-    readonly friends: readonly (Person)[]
+    readonly friends: readonly Person[]
     readonly friendNicknames: ReadonlyMap<string, Person>
 }
 
