@@ -95,6 +95,13 @@ function Gen(config: Config, symbols: ast.SymbolTable): Gen {
             throw new ConfigError(`main codec '${alias}' does not exist.`)
         } else if (!aliased.exported) {
             throw new ConfigError(`a main codec must be exported.`)
+        } else {
+            const resolved = ast.resolveAlias(aliased.type, symbols)
+            if (resolved.tag === "void") {
+                throw new ConfigError(
+                    `main codec '${alias}' must not be resolved to void type.`
+                )
+            }
         }
     }
     return { config, symbols }

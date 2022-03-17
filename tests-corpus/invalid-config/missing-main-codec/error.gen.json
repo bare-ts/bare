@@ -1,4 +1,4 @@
 {
   "name": "ConfigError",
-  "message": "main codec 'Message' does not exist."
+  "message": "main codec 'Main' does not exist."
 }

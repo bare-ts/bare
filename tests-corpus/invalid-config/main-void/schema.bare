@@ -1,0 +1,2 @@
+type Main AliasedVoid
+type AliasedVoid void

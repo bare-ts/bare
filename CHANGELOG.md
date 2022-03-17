@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Forbid main codecs resolving to void type
+
+    The following BARE schema is no longer valid when 'Message' is
+    a main codec (using --main CLI option):
+
+    ```bare
+    type Message void
+         ^ error is now reported here
+    ```
+
 * Forbid flat unions which cannot be automatically flatten
 
     bare-ts is able to automatically compute the tag of simple flat unions

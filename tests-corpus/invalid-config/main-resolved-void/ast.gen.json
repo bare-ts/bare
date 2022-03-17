@@ -1,0 +1,34 @@
+{
+  "defs": [
+    {
+      "alias": "Main",
+      "exported": true,
+      "type": {
+        "tag": "void",
+        "props": {
+          "lax": false,
+          "undef": false
+        },
+        "types": null,
+        "loc": {
+          "filename": "main-resolved-void/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "main-resolved-void/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "main-resolved-void/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

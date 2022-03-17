@@ -1,0 +1,57 @@
+{
+  "defs": [
+    {
+      "alias": "Main",
+      "exported": true,
+      "type": {
+        "tag": "alias",
+        "props": {
+          "alias": "AliasedVoid"
+        },
+        "types": null,
+        "loc": {
+          "filename": "main-void/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "main-void/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "AliasedVoid",
+      "exported": true,
+      "type": {
+        "tag": "void",
+        "props": {
+          "lax": false,
+          "undef": false
+        },
+        "types": null,
+        "loc": {
+          "filename": "main-void/schema.bare",
+          "offset": 39,
+          "line": 2,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "main-void/schema.bare",
+        "offset": 22,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "main-void/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
