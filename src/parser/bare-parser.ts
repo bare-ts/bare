@@ -257,6 +257,11 @@ function parseUnion(p: Parser): ast.Type {
                 )
             }
             p.lex.forth()
+        } else if (p.config.pedantic) {
+            throw new CompilerError(
+                "in pedantic mode, all union tag must be set. '=' is expected.",
+                p.lex.location()
+            )
         }
         tags.push(tagVal)
         types.push(type)
@@ -301,6 +306,11 @@ function parseEnumBody(p: Parser): ast.Type {
                 )
             }
             p.lex.forth()
+        } else if (p.config.pedantic) {
+            throw new CompilerError(
+                "in pedantic mode, all enum tag must be set. '=' is expected.",
+                p.lex.location()
+            )
         }
         vals.push({ name, val, loc: valLoc })
         val++

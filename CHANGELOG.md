@@ -27,6 +27,8 @@ This project adheres to [Semantic Versioning][semver].
     Now, bare-ts throws an error when it encounters a complex flat union.
     Complex flat unions are no longer supported.
 
+* Add pedantic mode (option --pedantic)
+
 * Better code generation
 
     bare-ts has a normalization step where it alias some types,

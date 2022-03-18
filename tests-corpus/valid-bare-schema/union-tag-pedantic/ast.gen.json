@@ -20,7 +20,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "union-tag/schema.bare",
+              "filename": "union-tag-pedantic/schema.bare",
               "offset": 18,
               "line": 1,
               "col": 19
@@ -31,7 +31,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "union-tag/schema.bare",
+              "filename": "union-tag-pedantic/schema.bare",
               "offset": 27,
               "line": 1,
               "col": 28
@@ -42,7 +42,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "union-tag/schema.bare",
+              "filename": "union-tag-pedantic/schema.bare",
               "offset": 37,
               "line": 1,
               "col": 38
@@ -53,7 +53,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "union-tag/schema.bare",
+              "filename": "union-tag-pedantic/schema.bare",
               "offset": 47,
               "line": 1,
               "col": 48
@@ -61,14 +61,14 @@
           }
         ],
         "loc": {
-          "filename": "union-tag/schema.bare",
+          "filename": "union-tag-pedantic/schema.bare",
           "offset": 17,
           "line": 1,
           "col": 18
         }
       },
       "loc": {
-        "filename": "union-tag/schema.bare",
+        "filename": "union-tag-pedantic/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -76,7 +76,7 @@
     }
   ],
   "loc": {
-    "filename": "union-tag/schema.bare",
+    "filename": "union-tag-pedantic/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

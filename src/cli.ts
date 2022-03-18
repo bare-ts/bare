@@ -62,6 +62,7 @@ program
             "ts",
         ])
     )
+    .option("--pedantic", "require enum and union types to set tags")
     .option(
         "--main <aliases...>",
         "space-separated list of types used to encode and decode messages"

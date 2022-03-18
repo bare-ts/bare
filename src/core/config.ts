@@ -13,6 +13,7 @@ export interface Config {
     readonly importFactory: boolean
     readonly main: readonly string[]
     readonly out: string | number
+    readonly pedantic: boolean
     readonly schema: string | number
     readonly useClass: boolean
     readonly useFlatUnion: boolean
@@ -37,6 +38,7 @@ export function Config({
     importFactory = false,
     main = [],
     out = "",
+    pedantic = false,
     schema = "",
     useClass = false,
     useFlatUnion = false,
@@ -83,6 +85,7 @@ export function Config({
         importFactory,
         main,
         out,
+        pedantic,
         schema,
         useClass,
         useFlatUnion,
