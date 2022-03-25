@@ -221,17 +221,9 @@ function genEnumType(_g: Gen, type: ast.EnumType): string {
 
 function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
     let body = ""
-    let defaultVal = 0
     for (const { name, val } of type.props.vals) {
-        if (!type.props.intEnum) {
-            body += `${name} = "${name}",\n`
-        } else if (defaultVal === val) {
-            body += `${name},\n`
-            defaultVal++
-        } else {
-            body += `${name} = ${val},\n`
-            defaultVal = val + 1
-        }
+        let enumJsVal = type.props.intEnum ? `${val}` : `"${name}"`
+        body += `${name} = ${enumJsVal},\n`
     }
     body = body.slice(0, -1) // remove last newline
     const modifier = g.config.generator === "dts" ? "declare " : ""
