@@ -21,7 +21,7 @@ bare-ts provides two npm packages:
 Install @bare-ts/tools as a dev dependency and @bare-ts/lib as a dependency:
 
 ```sh
-npm install --dev @bare-ts/tools
+npm install --save-dev @bare-ts/tools
 npm install @bare-ts/lib
 ```
 
