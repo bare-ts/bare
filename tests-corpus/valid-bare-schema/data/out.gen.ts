@@ -2,6 +2,10 @@ import * as bare from "@bare-ts/lib"
 
 export type Data = ArrayBuffer
 
-export const readData = bare.readData
+export function readData(bc: bare.ByteCursor): Data {
+    return bare.readData(bc)
+}
 
-export const writeData = bare.writeData
+export function writeData(bc: bare.ByteCursor, x: Data): void {
+    bare.writeData(bc, x)
+}

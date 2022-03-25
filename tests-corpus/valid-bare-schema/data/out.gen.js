@@ -1,5 +1,9 @@
 import * as bare from "@bare-ts/lib"
 
-export const readData = bare.readData
+export function readData(bc) {
+    return bare.readData(bc)
+}
 
-export const writeData = bare.writeData
+export function writeData(bc, x) {
+    bare.writeData(bc, x)
+}

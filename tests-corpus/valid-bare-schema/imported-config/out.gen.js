@@ -1,9 +1,13 @@
 import * as bare from "@bare-ts/lib"
 import * as ext from "./ext.js"
 
-export const readMessage = bare.readU8
+export function readMessage(bc) {
+    return bare.readU8(bc)
+}
 
-export const writeMessage = bare.writeU8
+export function writeMessage(bc, x) {
+    bare.writeU8(bc, x)
+}
 
 export function encodeMessage(x) {
     const bc = new bare.ByteCursor(

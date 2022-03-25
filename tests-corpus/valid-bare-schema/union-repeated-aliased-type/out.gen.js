@@ -1,8 +1,12 @@
 import * as bare from "@bare-ts/lib"
 
-export const readY = bare.readU8
+export function readY(bc) {
+    return bare.readU8(bc)
+}
 
-export const writeY = bare.writeU8
+export function writeY(bc, x) {
+    bare.writeU8(bc, x)
+}
 
 export function readX(bc) {
     const offset = bc.offset

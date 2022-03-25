@@ -19,9 +19,13 @@ export function writePublicKey(bc: bare.ByteCursor, x: PublicKey): void {
 
 export type Time = string
 
-export const readTime = bare.readString
+export function readTime(bc: bare.ByteCursor): Time {
+    return bare.readString(bc)
+}
 
-export const writeTime = bare.writeString
+export function writeTime(bc: bare.ByteCursor, x: Time): void {
+    bare.writeString(bc, x)
+}
 
 export enum Department {
     ACCOUNTING = "ACCOUNTING",

@@ -1,9 +1,17 @@
 import * as bare from "@bare-ts/lib"
 
-export const readI64 = bare.readI64Safe
+export function readI64(bc) {
+    return bare.readI64Safe(bc)
+}
 
-export const writeI64 = bare.writeI64Safe
+export function writeI64(bc, x) {
+    bare.writeI64Safe(bc, x)
+}
 
-export const readU64 = bare.readU64Safe
+export function readU64(bc) {
+    return bare.readU64Safe(bc)
+}
 
-export const writeU64 = bare.writeU64Safe
+export function writeU64(bc, x) {
+    bare.writeU64Safe(bc, x)
+}

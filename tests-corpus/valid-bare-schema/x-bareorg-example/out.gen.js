@@ -12,9 +12,13 @@ export function writePublicKey(bc, x) {
     bare.writeFixedData(bc, x)
 }
 
-export const readTime = bare.readString
+export function readTime(bc) {
+    return bare.readString(bc)
+}
 
-export const writeTime = bare.writeString
+export function writeTime(bc, x) {
+    bare.writeString(bc, x)
+}
 
 export const Department = {
     ACCOUNTING: "ACCOUNTING",

@@ -419,19 +419,18 @@ function genAliasedStructCode(
 // JS/TS reader generation
 
 function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
-    const { alias, exported, type } = aliased
-    const body = genReader(g, type, alias)
-    const mod = exported ? "export " : ""
+    let body = genReader(g, aliased.type, aliased.alias)
+    const mod = aliased.exported ? "export " : ""
+    const head = genReaderHead(g, aliased.type, aliased.alias)
     switch (body[0]) {
         case "{": // block
-            return `${mod}${genReaderHead(g, type, alias)} ${body}`
+            return `${mod}${head} ${body}`
         case "(": // expression
-            const ret = indent("\nreturn")
-            return `${mod}${genReaderHead(g, type, alias)} {${ret} ${indent(
-                body.slice(1, body.length - 1) // remove parenthesis
-            )}\n}`
+            const ret = indent("\nreturn ")
+            body = body.slice(1, -1) // remove parenthesis
+            return `${mod}${head} {${ret}${indent(body)}\n}`
         default:
-            return `${mod}const read${alias} = ${body}` // function
+            throw Error("[internal] invalid reader template")
     }
 }
 
@@ -441,19 +440,21 @@ function genReading(g: Gen, type: ast.Type): string {
         case "{": // function body
             return `(() => ${indent(body)})()`
         case "(": // expression
-            return body.slice(1, body.length - 1) // remove parenthesis
+            return body.slice(1, -1) // remove parenthesis
         default:
-            return `${body}(bc)` // function
+            throw Error("[internal] invalid reader template")
     }
 }
 
 function genReader(g: Gen, type: ast.Type, alias = ""): string {
     if (ast.isBaseType(type)) {
-        return `bare.read${capitalize(type.tag)}`
+        return `(bare.read${capitalize(type.tag)}(bc))`
     }
     switch (type.tag) {
         case "alias":
-            return `${namespaced(g, type.props.alias)}read${type.props.alias}`
+            return `(${namespaced(g, type.props.alias)}read${
+                type.props.alias
+            }(bc))`
         case "array":
             return genArrayReader(g, type)
         case "data":
@@ -497,7 +498,7 @@ function genArrayReader(g: Gen, type: ast.ArrayType): string {
 
 function genDataReader(g: Gen, type: ast.DataType): string {
     if (type.props.len == null) {
-        return `bare.readData`
+        return `(bare.readData(bc))`
     }
     return `(bare.readFixedData(bc, ${type.props.len}))`
 }
@@ -634,7 +635,7 @@ function genObjectReader(g: Gen, type: ast.StructType): string {
 function genTypedArrayReader(g: Gen, type: ast.TypedArrayType): string {
     const typeName = capitalize(type.types[0].tag)
     if (type.props.len == null) {
-        return `bare.read${typeName}Array`
+        return `(bare.read${typeName}Array(bc))`
     }
     return `(bare.read${typeName}FixedArray(bc, ${type.props.len}))`
 }
@@ -677,41 +678,43 @@ function genVoidReader(g: Gen, type: ast.VoidType): string {
 // JS/TS writers generation
 
 function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
-    const { alias, exported, type } = aliased
-    let body = genWriter(g, type, alias).replace(/\$x\b/g, "x")
-    const mod = exported ? "export " : ""
-    if (body === "") {
-        const comment = "// do nothing"
-        return `${mod}${genWriterHead(g, type, alias)} {\n${indent(comment)}\n}`
-    }
+    let body = genWriter(g, aliased.type, aliased.alias).replace(/\$x\b/g, "x")
+    const mod = aliased.exported ? "export " : ""
+    const head = genWriterHead(g, aliased.type, aliased.alias)
     switch (body[0]) {
         case "{": // block
-            return `${mod}${genWriterHead(g, type, alias)} ${body}`
+            return `${mod}${head} ${body}`
+        case "(":
+            body = body.slice(1, -1) // remove parenthesis
+            body = "\n" + (body === "" ? "// do nothing" : body)
+            return `${mod}${head} {${indent(body)}\n}`
         default:
-            return `${mod}const write${alias} = ${body}` // function
+            throw Error("[internal] invalid writer template")
     }
 }
 
 function genWriting(g: Gen, type: ast.Type, x: string): string {
-    const body = genWriter(g, type).replace(/\$x\b/g, x)
-    if (body === "") {
-        return ""
-    }
+    let body = genWriter(g, type).replace(/\$x\b/g, x)
     switch (body[0]) {
         case "{": // block
             return body
+        case "(":
+            body = body.slice(1, -1) // remove parenthesis
+            return `${body}`
         default:
-            return `${body}(bc, ${x})` // function
+            throw Error("[internal] invalid writer template")
     }
 }
 
 function genWriter(g: Gen, type: ast.Type, alias = ""): string {
     if (ast.isBaseType(type)) {
-        return `bare.write${capitalize(type.tag)}`
+        return `(bare.write${capitalize(type.tag)}(bc, $x))`
     }
     switch (type.tag) {
         case "alias":
-            return `${namespaced(g, type.props.alias)}write${type.props.alias}`
+            return `(${namespaced(g, type.props.alias)}write${
+                type.props.alias
+            }(bc, $x))`
         case "array":
             return genArrayWriter(g, type)
         case "data":
@@ -753,7 +756,7 @@ function genArrayWriter(g: Gen, type: ast.ArrayType): string {
 
 function genDataWriter(g: Gen, type: ast.DataType): string {
     if (type.props.len == null) {
-        return `bare.writeData`
+        return `(bare.writeData(bc, $x))`
     }
     return unindent(`{
         assert($x.byteLength === ${type.props.len})
@@ -834,7 +837,7 @@ function genStructWriter(g: Gen, type: ast.StructType): string {
 
 function genTypedArrayWriter(g: Gen, type: ast.TypedArrayType): string {
     if (type.props.len == null) {
-        return `bare.write${capitalize(type.types[0].tag)}Array`
+        return `(bare.write${capitalize(type.types[0].tag)}Array(bc, $x))`
     }
     return unindent(`{
         assert($x.length === ${type.props.len})
@@ -855,9 +858,7 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
 }
 
 function genVoidWriter(g: Gen, type: ast.VoidType): string {
-    return unindent(`{
-        // do nothing
-    }`)
+    return "()"
 }
 
 function genAliasFlatUnionWriter(
@@ -886,7 +887,7 @@ function genAliasFlatUnionWriter(
                 ${indent(valWriting, 4)}
             } else `
         }
-        body = body.slice(0, body.length - 6) // remove last 'else '
+        body = body.slice(0, -6) // remove last 'else '
     } else if (
         resolved.every((t) => !t.props.class) &&
         discriminators != null

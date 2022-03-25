@@ -4,9 +4,13 @@ export type u8 = number
 
 export type Y = u8
 
-export const readY = bare.readU8
+export function readY(bc: bare.ByteCursor): Y {
+    return bare.readU8(bc)
+}
 
-export const writeY = bare.writeU8
+export function writeY(bc: bare.ByteCursor, x: Y): void {
+    bare.writeU8(bc, x)
+}
 
 export type X = 
     | { readonly tag: 0; readonly val: u8 }

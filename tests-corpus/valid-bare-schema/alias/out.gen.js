@@ -1,5 +1,9 @@
 import * as bare from "@bare-ts/lib"
 
-export const readU8Alias = bare.readU8
+export function readU8Alias(bc) {
+    return bare.readU8(bc)
+}
 
-export const writeU8Alias = bare.writeU8
+export function writeU8Alias(bc, x) {
+    bare.writeU8(bc, x)
+}

@@ -5,9 +5,13 @@ export type u8 = number
 
 export type Message = u8
 
-export const readMessage = bare.readU8
+export function readMessage(bc: bare.ByteCursor): Message {
+    return bare.readU8(bc)
+}
 
-export const writeMessage = bare.writeU8
+export function writeMessage(bc: bare.ByteCursor, x: Message): void {
+    bare.writeU8(bc, x)
+}
 
 export function encodeMessage(x: Message): Uint8Array {
     const bc = new bare.ByteCursor(
