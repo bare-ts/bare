@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.4.0 (2022-03-26)
 
 * Forbid main codecs resolving to void type
 
