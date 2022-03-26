@@ -37,6 +37,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "array/schema.bare",
     "offset": 0,

@@ -87,6 +87,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-quoted-property/schema.bare",
     "offset": 0,

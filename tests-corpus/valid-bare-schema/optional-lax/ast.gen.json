@@ -37,6 +37,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "optional-lax/schema.bare",
     "offset": 1,

@@ -151,6 +151,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-flat-class/schema.bare",
     "offset": 0,

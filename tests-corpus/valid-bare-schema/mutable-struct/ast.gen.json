@@ -71,6 +71,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "mutable-struct/schema.bare",
     "offset": 1,

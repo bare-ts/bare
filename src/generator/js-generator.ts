@@ -1,8 +1,8 @@
 import * as ast from "../ast/bare-ast.js"
-import { Config, ConfigError } from "../core/config.js"
+import type { Config } from "../core/config.js"
 
 export function generate(schema: ast.Ast, config: Config): string {
-    const g = Gen(config, ast.symbols(schema)) // may throw
+    const g: Gen = { config, symbols: ast.symbols(schema) }
     let body = ""
     for (const aliased of schema.defs) {
         switch (g.config.generator) {
@@ -86,25 +86,6 @@ export function generate(schema: ast.Ast, config: Config): string {
 interface Gen {
     readonly config: Config
     readonly symbols: ast.SymbolTable
-}
-
-function Gen(config: Config, symbols: ast.SymbolTable): Gen {
-    for (const alias of config.main) {
-        const aliased = symbols.get(alias)
-        if (aliased === undefined) {
-            throw new ConfigError(`main codec '${alias}' does not exist.`)
-        } else if (!aliased.exported) {
-            throw new ConfigError(`a main codec must be exported.`)
-        } else {
-            const resolved = ast.resolveAlias(aliased.type, symbols)
-            if (resolved.tag === "void") {
-                throw new ConfigError(
-                    `main codec '${alias}' must not be resolved to void type.`
-                )
-            }
-        }
-    }
-    return { config, symbols }
 }
 
 // TS type generation

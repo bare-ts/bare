@@ -147,6 +147,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-composite-type/schema.bare",
     "offset": 0,

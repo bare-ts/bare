@@ -39,6 +39,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "optional-circular-ref/schema.bare",
     "offset": 0,

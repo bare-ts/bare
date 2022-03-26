@@ -43,6 +43,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "bigint/schema.bare",
     "offset": 0,

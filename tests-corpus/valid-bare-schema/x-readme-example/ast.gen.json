@@ -327,6 +327,9 @@
       }
     }
   ],
+  "main": [
+    "Message"
+  ],
   "loc": {
     "filename": "x-readme-example/schema.bare",
     "offset": 0,

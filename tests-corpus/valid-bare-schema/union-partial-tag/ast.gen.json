@@ -75,6 +75,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-partial-tag/schema.bare",
     "offset": 0,

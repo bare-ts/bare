@@ -25,6 +25,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "enum-empty/schema.bare",
     "offset": 1,

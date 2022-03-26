@@ -75,6 +75,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-tag-pedantic/schema.bare",
     "offset": 0,

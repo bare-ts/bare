@@ -71,6 +71,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "alias-struct/schema.bare",
     "offset": 0,

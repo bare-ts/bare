@@ -51,6 +51,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "struct-circular-ref/schema.bare",
     "offset": 1,

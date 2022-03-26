@@ -25,6 +25,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "data-fixed/schema.bare",
     "offset": 1,

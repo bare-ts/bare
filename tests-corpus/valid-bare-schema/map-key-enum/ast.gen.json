@@ -104,6 +104,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "map-key-enum/schema.bare",
     "offset": 0,

@@ -1,10 +1,4 @@
-import {
-    CompilerError,
-    Config,
-    ConfigError,
-    parse,
-    transform,
-} from "@bare-ts/tools"
+import { CompilerError, Config, parse, transform } from "@bare-ts/tools"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { default as test } from "oletus"
@@ -65,7 +59,7 @@ for (let dir of fs.readdirSync(INVALID_CONFIG_DIR)) {
             })
             t.ok(false) // must be unreachable
         } catch (e) {
-            if (!(e instanceof ConfigError)) throw e
+            if (!(e instanceof Error)) throw e
             t.deepEqual({ ...e, message: e.message }, error)
         }
     })

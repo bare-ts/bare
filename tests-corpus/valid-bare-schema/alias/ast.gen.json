@@ -22,6 +22,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "alias/schema.bare",
     "offset": 0,

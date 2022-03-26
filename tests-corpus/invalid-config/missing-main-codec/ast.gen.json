@@ -22,6 +22,9 @@
       }
     }
   ],
+  "main": [
+    "Main"
+  ],
   "loc": {
     "filename": "missing-main-codec/schema.bare",
     "offset": 0,

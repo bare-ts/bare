@@ -1,4 +1,5 @@
 {
-  "name": "ConfigError",
+  "name": "CompilerError",
+  "location": null,
   "message": "main codec 'Main' must not be resolved to void type."
 }

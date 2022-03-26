@@ -67,6 +67,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "multi-array/schema.bare",
     "offset": 0,

@@ -90,6 +90,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-void/schema.bare",
     "offset": 0,

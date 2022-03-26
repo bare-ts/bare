@@ -93,6 +93,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "struct-repeated-field/schema.bare",
     "offset": 1,

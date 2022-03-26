@@ -75,6 +75,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-tag-unsorted/schema.bare",
     "offset": 0,

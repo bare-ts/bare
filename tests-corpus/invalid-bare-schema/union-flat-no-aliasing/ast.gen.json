@@ -105,6 +105,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-flat-no-aliasing/schema.bare",
     "offset": 0,

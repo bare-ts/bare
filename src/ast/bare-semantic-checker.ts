@@ -24,12 +24,38 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
         checkTypeInvariants(c, type)
         checkCircularRef(c, type, new Set([alias]))
     }
+    checkMainCodecs(c, schema)
     return schema
 }
 
 interface Checker {
     readonly config: Config
     readonly symbols: ast.SymbolTable
+}
+
+function checkMainCodecs(c: Checker, schema: ast.Ast): void {
+    for (const alias of schema.main) {
+        const aliased = c.symbols.get(alias)
+        if (aliased === undefined) {
+            throw new CompilerError(
+                `main codec '${alias}' does not exist.`,
+                null
+            )
+        } else if (!aliased.exported) {
+            throw new CompilerError(
+                `main codec '${alias}' must be exported.`,
+                null
+            )
+        } else {
+            const resolved = ast.resolveAlias(aliased.type, c.symbols)
+            if (resolved.tag === "void") {
+                throw new CompilerError(
+                    `main codec '${alias}' must not be resolved to void type.`,
+                    null
+                )
+            }
+        }
+    }
 }
 
 function checkAliasedInvariants(aliased: ast.AliasedType): void {

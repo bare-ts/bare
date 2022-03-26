@@ -1,4 +1,5 @@
 {
-  "name": "ConfigError",
+  "name": "CompilerError",
+  "location": null,
   "message": "main codec 'Main' does not exist."
 }

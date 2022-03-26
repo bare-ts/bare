@@ -78,6 +78,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-flat-typeof/schema.bare",
     "offset": 0,

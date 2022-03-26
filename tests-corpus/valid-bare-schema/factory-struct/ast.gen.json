@@ -71,6 +71,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "factory-struct/schema.bare",
     "offset": 1,

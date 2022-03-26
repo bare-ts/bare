@@ -13,7 +13,7 @@ export function parse(content: string, config: Config): ast.Ast {
     while (p.lex.token() !== "") {
         defs.push(parseAliased(p))
     }
-    return { defs, loc }
+    return { defs, main: config.main, loc }
 }
 
 interface Parser {

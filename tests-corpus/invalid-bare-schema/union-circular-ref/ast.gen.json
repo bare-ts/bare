@@ -99,6 +99,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union-circular-ref/schema.bare",
     "offset": 0,

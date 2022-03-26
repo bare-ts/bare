@@ -87,6 +87,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "union/schema.bare",
     "offset": 0,

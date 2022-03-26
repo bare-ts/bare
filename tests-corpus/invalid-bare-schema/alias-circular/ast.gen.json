@@ -93,6 +93,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "alias-circular/schema.bare",
     "offset": 0,

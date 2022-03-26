@@ -25,6 +25,7 @@
       }
     }
   ],
+  "main": [],
   "loc": {
     "filename": "struct-empty/schema.bare",
     "offset": 1,
