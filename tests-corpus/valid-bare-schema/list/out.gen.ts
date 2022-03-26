@@ -2,9 +2,9 @@ import * as bare from "@bare-ts/lib"
 
 export type u8 = number
 
-export type U8Array = readonly u8[]
+export type U8List = readonly u8[]
 
-export function readU8Array(bc: bare.ByteCursor): U8Array {
+export function readU8List(bc: bare.ByteCursor): U8List {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [bare.readU8(bc)]
@@ -14,7 +14,7 @@ export function readU8Array(bc: bare.ByteCursor): U8Array {
     return result
 }
 
-export function writeU8Array(bc: bare.ByteCursor, x: U8Array): void {
+export function writeU8List(bc: bare.ByteCursor, x: U8List): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         bare.writeU8(bc, x[i])

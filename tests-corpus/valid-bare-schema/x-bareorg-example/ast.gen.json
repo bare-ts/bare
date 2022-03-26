@@ -222,7 +222,7 @@
             }
           },
           {
-            "tag": "array",
+            "tag": "list",
             "props": {
               "len": null,
               "mut": false
@@ -691,7 +691,7 @@
         },
         "types": [
           {
-            "tag": "array",
+            "tag": "list",
             "props": {
               "len": 4,
               "mut": false

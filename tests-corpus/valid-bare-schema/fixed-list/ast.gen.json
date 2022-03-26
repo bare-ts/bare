@@ -4,9 +4,9 @@
       "alias": "U8Array",
       "exported": true,
       "type": {
-        "tag": "array",
+        "tag": "list",
         "props": {
-          "len": null,
+          "len": 4,
           "mut": false
         },
         "types": [
@@ -15,22 +15,22 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "array/schema.bare",
-              "offset": 15,
+              "filename": "fixed-list/schema.bare",
+              "offset": 16,
               "line": 1,
-              "col": 16
+              "col": 17
             }
           }
         ],
         "loc": {
-          "filename": "array/schema.bare",
+          "filename": "fixed-list/schema.bare",
           "offset": 13,
           "line": 1,
           "col": 14
         }
       },
       "loc": {
-        "filename": "array/schema.bare",
+        "filename": "fixed-list/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -39,7 +39,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "array/schema.bare",
+    "filename": "fixed-list/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

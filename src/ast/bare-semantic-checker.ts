@@ -302,7 +302,7 @@ function checkStructFieldCircularRef(
     traversed: Set<string>
 ): void {
     if (
-        fieldType.tag === "array" ||
+        fieldType.tag === "list" ||
         fieldType.tag === "map" ||
         fieldType.tag === "optional" ||
         fieldType.tag === "set"

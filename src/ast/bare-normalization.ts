@@ -36,7 +36,7 @@ function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
 
 function maybeAlias(n: Context, type: ast.Type): ast.Type {
     switch (type.tag) {
-        case "array":
+        case "list":
         case "enum":
         case "map":
         case "optional":

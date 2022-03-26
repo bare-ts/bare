@@ -131,8 +131,8 @@ function genType(g: Gen, type: ast.Type): string {
     switch (type.tag) {
         case "alias":
             return genAliasType(g, type)
-        case "array":
-            return genArrayType(g, type)
+        case "list":
+            return genListType(g, type)
         case "bool":
             return "boolean"
         case "data":
@@ -186,7 +186,7 @@ function genAliasType(g: Gen, type: ast.Alias): string {
     return `${namespaced(g, type.props.alias)}${type.props.alias}`
 }
 
-function genArrayType(g: Gen, type: ast.ArrayType): string {
+function genListType(g: Gen, type: ast.ListType): string {
     const valTypedef = genType(g, type.types[0])
     return type.props.mut
         ? `${valTypedef}[]`
@@ -430,8 +430,8 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
             return `(${namespaced(g, type.props.alias)}read${
                 type.props.alias
             }(bc))`
-        case "array":
-            return genArrayReader(g, type)
+        case "list":
+            return genListReader(g, type)
         case "data":
             return genDataReader(g, type)
         case "enum":
@@ -455,7 +455,7 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
     }
 }
 
-function genArrayReader(g: Gen, type: ast.ArrayType): string {
+function genListReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
         type.props.len != null
             ? `${type.props.len}`
@@ -690,8 +690,8 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
             return `(${namespaced(g, type.props.alias)}write${
                 type.props.alias
             }(bc, $x))`
-        case "array":
-            return genArrayWriter(g, type)
+        case "list":
+            return genListWriter(g, type)
         case "data":
             return genDataWriter(g, type)
         case "enum":
@@ -714,7 +714,7 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
     }
 }
 
-function genArrayWriter(g: Gen, type: ast.ArrayType): string {
+function genListWriter(g: Gen, type: ast.ListType): string {
     const lenEncoding =
         type.props.len != null
             ? `assert($x.length === ${type.props.len}, "Unmatched length")`

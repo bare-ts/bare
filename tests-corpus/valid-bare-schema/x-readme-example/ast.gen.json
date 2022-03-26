@@ -292,7 +292,7 @@
       "alias": "Message",
       "exported": true,
       "type": {
-        "tag": "array",
+        "tag": "list",
         "props": {
           "len": null,
           "mut": false

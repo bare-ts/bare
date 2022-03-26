@@ -1,24 +1,24 @@
 {
   "defs": [
     {
-      "alias": "MultiArray",
+      "alias": "MultiList",
       "exported": true,
       "type": {
-        "tag": "array",
+        "tag": "list",
         "props": {
           "len": null,
           "mut": false
         },
         "types": [
           {
-            "tag": "array",
+            "tag": "list",
             "props": {
               "len": null,
               "mut": false
             },
             "types": [
               {
-                "tag": "array",
+                "tag": "list",
                 "props": {
                   "len": null,
                   "mut": false
@@ -29,38 +29,38 @@
                     "props": null,
                     "types": null,
                     "loc": {
-                      "filename": "multi-array/schema.bare",
-                      "offset": 22,
+                      "filename": "multi-list/schema.bare",
+                      "offset": 21,
                       "line": 1,
-                      "col": 23
+                      "col": 22
                     }
                   }
                 ],
                 "loc": {
-                  "filename": "multi-array/schema.bare",
-                  "offset": 20,
+                  "filename": "multi-list/schema.bare",
+                  "offset": 19,
                   "line": 1,
-                  "col": 21
+                  "col": 20
                 }
               }
             ],
             "loc": {
-              "filename": "multi-array/schema.bare",
-              "offset": 18,
+              "filename": "multi-list/schema.bare",
+              "offset": 17,
               "line": 1,
-              "col": 19
+              "col": 18
             }
           }
         ],
         "loc": {
-          "filename": "multi-array/schema.bare",
-          "offset": 16,
+          "filename": "multi-list/schema.bare",
+          "offset": 15,
           "line": 1,
-          "col": 17
+          "col": 16
         }
       },
       "loc": {
-        "filename": "multi-array/schema.bare",
+        "filename": "multi-list/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -69,7 +69,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "multi-array/schema.bare",
+    "filename": "multi-list/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

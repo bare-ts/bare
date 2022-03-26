@@ -2,9 +2,9 @@ import * as bare from "@bare-ts/lib"
 
 export type u64Safe = number
 
-export type U64Array = readonly u64Safe[]
+export type U64List = readonly u64Safe[]
 
-export function readU64Array(bc: bare.ByteCursor): U64Array {
+export function readU64List(bc: bare.ByteCursor): U64List {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [bare.readU64Safe(bc)]
@@ -14,7 +14,7 @@ export function readU64Array(bc: bare.ByteCursor): U64Array {
     return result
 }
 
-export function writeU64Array(bc: bare.ByteCursor, x: U64Array): void {
+export function writeU64List(bc: bare.ByteCursor, x: U64List): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         bare.writeU64Safe(bc, x[i])

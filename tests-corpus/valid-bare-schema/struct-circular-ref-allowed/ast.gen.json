@@ -129,7 +129,7 @@
             }
           },
           {
-            "tag": "array",
+            "tag": "list",
             "props": {
               "len": null,
               "mut": false

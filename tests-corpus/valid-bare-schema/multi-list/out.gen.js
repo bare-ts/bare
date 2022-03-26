@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export function readMultiArray(bc) {
+export function readMultiList(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [read0(bc)]
@@ -10,7 +10,7 @@ export function readMultiArray(bc) {
     return result
 }
 
-export function writeMultiArray(bc, x) {
+export function writeMultiList(bc, x) {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         write0(bc, x[i])

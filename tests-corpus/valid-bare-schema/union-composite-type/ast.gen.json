@@ -66,7 +66,7 @@
             }
           },
           {
-            "tag": "array",
+            "tag": "list",
             "props": {
               "len": 4,
               "mut": false

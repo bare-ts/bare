@@ -1,12 +1,12 @@
 {
   "defs": [
     {
-      "alias": "U8Array",
+      "alias": "U8List",
       "exported": true,
       "type": {
-        "tag": "array",
+        "tag": "list",
         "props": {
-          "len": 4,
+          "len": null,
           "mut": false
         },
         "types": [
@@ -15,22 +15,22 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "fixed-array/schema.bare",
-              "offset": 16,
+              "filename": "list/schema.bare",
+              "offset": 14,
               "line": 1,
-              "col": 17
+              "col": 15
             }
           }
         ],
         "loc": {
-          "filename": "fixed-array/schema.bare",
-          "offset": 13,
+          "filename": "list/schema.bare",
+          "offset": 12,
           "line": 1,
-          "col": 14
+          "col": 13
         }
       },
       "loc": {
-        "filename": "fixed-array/schema.bare",
+        "filename": "list/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -39,7 +39,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "fixed-array/schema.bare",
+    "filename": "list/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

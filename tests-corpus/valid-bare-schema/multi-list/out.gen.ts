@@ -1,8 +1,8 @@
 import * as bare from "@bare-ts/lib"
 
-export type MultiArray = readonly (readonly (readonly string[])[])[]
+export type MultiList = readonly (readonly (readonly string[])[])[]
 
-export function readMultiArray(bc: bare.ByteCursor): MultiArray {
+export function readMultiList(bc: bare.ByteCursor): MultiList {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [read0(bc)]
@@ -12,7 +12,7 @@ export function readMultiArray(bc: bare.ByteCursor): MultiArray {
     return result
 }
 
-export function writeMultiArray(bc: bare.ByteCursor, x: MultiArray): void {
+export function writeMultiList(bc: bare.ByteCursor, x: MultiList): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         write0(bc, x[i])

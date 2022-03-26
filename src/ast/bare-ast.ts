@@ -15,7 +15,7 @@ export interface AliasedType {
 
 export type Type =
     | Alias // Named user type
-    | ArrayType // []type, [n]type
+    | ListType // []type, [n]type
     | DataType // data, data<length>
     | EnumType
     | LiteralType // map[type]type
@@ -37,8 +37,8 @@ export interface Alias {
     readonly loc: Location | null
 }
 
-export interface ArrayType {
-    readonly tag: "array"
+export interface ListType {
+    readonly tag: "list"
     readonly props: {
         readonly len: number | null
         readonly mut: boolean

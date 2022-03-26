@@ -62,7 +62,7 @@ function parseType(p: Parser): ast.Type {
         case "":
             throw new CompilerError("a type is expected.", p.lex.location())
         case "[": // array
-            return parseArray(p)
+            return parseList(p)
         case "(": // union
             return parseUnion(p)
         case "{":
@@ -139,7 +139,7 @@ function parseData(p: Parser): ast.Type {
     return { tag: "data", props: { len, mut: false }, types: null, loc }
 }
 
-function parseArray(p: Parser): ast.Type {
+function parseList(p: Parser): ast.Type {
     if (p.lex.token() !== "[") {
         throw new CompilerError("'[' is expected.", p.lex.location())
     }
@@ -163,7 +163,7 @@ function parseArray(p: Parser): ast.Type {
         }
     }
     return {
-        tag: "array",
+        tag: "list",
         props: { len, mut: p.config.useMutable },
         types: [valType],
         loc,
