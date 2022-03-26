@@ -1,0 +1,3 @@
+type KeyType data
+
+type Dict map[KeyType] string

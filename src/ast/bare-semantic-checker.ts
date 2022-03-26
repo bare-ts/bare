@@ -106,9 +106,10 @@ function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
 
 function checkMapInvariants(c: Checker, type: ast.MapType): void {
     const keyType = type.types[0]
-    if (!ast.isBaseTag(keyType.tag)) {
+    const resolvedKeyType = ast.resolveAlias(keyType, c.symbols)
+    if (!ast.isBaseTag(resolvedKeyType.tag) && resolvedKeyType.tag !== "enum") {
         throw new CompilerError(
-            "the key type must be a base type.",
+            "the key type must be a base type or an enum type.",
             keyType.loc
         )
     }

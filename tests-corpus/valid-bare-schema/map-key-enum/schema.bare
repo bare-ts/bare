@@ -1,0 +1,7 @@
+enum Gender {
+    FLUID
+    MALE
+    FEMALE
+}
+
+type GenderNames map[Gender] string

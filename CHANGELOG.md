@@ -4,6 +4,20 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Allow enum type and aliased types for map key type
+
+    The following schema is now valid:
+
+    ```bare
+    enum Gender {
+        FLUID
+        MALE
+        FEMALE
+    }
+
+    type GenderNames map[Gender] string
+    ```
+
 * Allow unsorted tags for unions and enums
 
     The following schemas was previously rejected because of unsorted tags.

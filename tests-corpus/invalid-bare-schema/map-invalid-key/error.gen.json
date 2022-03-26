@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "map-invalid-key/schema.bare",
+    "offset": 14,
+    "line": 1,
+    "col": 15
+  },
+  "message": "(map-invalid-key/schema.bare:1:15) the key type must be a base type or an enum type."
+}
