@@ -315,7 +315,7 @@ function checkStructFieldCircularRef(
         for (const subtype of fieldType.types) {
             try {
                 checkCircularRef(c, subtype, traversed)
-            } catch (e) {
+            } catch (_e) {
                 firstCycle = firstCycle ?? subtype
                 circularCount++
             }

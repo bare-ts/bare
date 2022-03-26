@@ -203,7 +203,7 @@ function genEnumType(_g: Gen, type: ast.EnumType): string {
 function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
     let body = ""
     for (const { name, val } of type.props.vals) {
-        let enumJsVal = type.props.intEnum ? `${val}` : `"${name}"`
+        const enumJsVal = type.props.intEnum ? `${val}` : `"${name}"`
         body += `${name} = ${enumJsVal},\n`
     }
     body = body.slice(0, -1) // remove last newline
@@ -398,10 +398,12 @@ function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
     switch (body[0]) {
         case "{": // block
             return `${mod}${head} ${body}`
-        case "(": // expression
+        case "(": {
+            // expression
             const ret = indent("\nreturn ")
             body = body.slice(1, -1) // remove parenthesis
             return `${mod}${head} {${ret}${indent(body)}\n}`
+        }
         default:
             throw Error("[internal] invalid reader template")
     }
@@ -469,7 +471,7 @@ function genArrayReader(g: Gen, type: ast.ArrayType): string {
     }`)
 }
 
-function genDataReader(g: Gen, type: ast.DataType): string {
+function genDataReader(_g: Gen, type: ast.DataType): string {
     if (type.props.len == null) {
         return `(bare.readData(bc))`
     }
@@ -513,7 +515,7 @@ function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
     }`)
 }
 
-function genLiteralReader(g: Gen, type: ast.LiteralType): string {
+function genLiteralReader(_g: Gen, type: ast.LiteralType): string {
     return `(${rpr(type.props.val)})`
 }
 
@@ -605,7 +607,7 @@ function genObjectReader(g: Gen, type: ast.StructType): string {
     })`)
 }
 
-function genTypedArrayReader(g: Gen, type: ast.TypedArrayType): string {
+function genTypedArrayReader(_g: Gen, type: ast.TypedArrayType): string {
     const typeName = capitalize(type.types[0].tag)
     if (type.props.len == null) {
         return `(bare.read${typeName}Array(bc))`
@@ -644,7 +646,7 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
     }`)
 }
 
-function genVoidReader(g: Gen, type: ast.VoidType): string {
+function genVoidReader(_g: Gen, type: ast.VoidType): string {
     return type.props.undef ? "(undefined)" : "(null)"
 }
 
@@ -695,7 +697,8 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
         case "enum":
             return genEnumWriter(g, type, alias)
         case "literal":
-            return genLiteralWriter(g, type)
+        case "void":
+            return "()"
         case "map":
             return genMapWriter(g, type)
         case "optional":
@@ -708,8 +711,6 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
             return genTypedArrayWriter(g, type)
         case "union":
             return genUnionWriter(g, type)
-        case "void":
-            return genVoidWriter(g, type)
     }
 }
 
@@ -727,7 +728,7 @@ function genArrayWriter(g: Gen, type: ast.ArrayType): string {
     }`)
 }
 
-function genDataWriter(g: Gen, type: ast.DataType): string {
+function genDataWriter(_g: Gen, type: ast.DataType): string {
     if (type.props.len == null) {
         return `(bare.writeData(bc, $x))`
     }
@@ -737,7 +738,7 @@ function genDataWriter(g: Gen, type: ast.DataType): string {
     }`)
 }
 
-function genEnumWriter(g: Gen, type: ast.EnumType, alias: string): string {
+function genEnumWriter(_g: Gen, type: ast.EnumType, alias: string): string {
     let body: string
     const intEnum = type.props.intEnum
     if (intEnum) {
@@ -762,10 +763,6 @@ function genEnumWriter(g: Gen, type: ast.EnumType, alias: string): string {
     return unindent(`{
         ${body}
     }`)
-}
-
-function genLiteralWriter(g: Gen, type: ast.LiteralType): string {
-    return "{}"
 }
 
 function genMapWriter(g: Gen, type: ast.MapType): string {
@@ -808,7 +805,7 @@ function genStructWriter(g: Gen, type: ast.StructType): string {
     }`)
 }
 
-function genTypedArrayWriter(g: Gen, type: ast.TypedArrayType): string {
+function genTypedArrayWriter(_g: Gen, type: ast.TypedArrayType): string {
     if (type.props.len == null) {
         return `(bare.write${capitalize(type.types[0].tag)}Array(bc, $x))`
     }
@@ -828,10 +825,6 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
         return genAliasFlatUnionWriter(g, aliasesUnion)
     }
     return genTaggedUnionWriter(g, union)
-}
-
-function genVoidWriter(g: Gen, type: ast.VoidType): string {
-    return "()"
 }
 
 function genAliasFlatUnionWriter(
@@ -984,8 +977,12 @@ function unindent(s: string, n = 1): string {
     return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
 }
 
-function rpr(v: bigint | boolean | number | string | undefined | null): string {
-    return typeof v === "string" ? `"${v}"` : `${v}`
+function rpr(v: ast.Literal): string {
+    return typeof v === "string"
+        ? `"${v}"`
+        : typeof v === "bigint"
+        ? `${v}n`
+        : `${v}`
 }
 
 /**
