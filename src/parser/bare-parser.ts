@@ -131,7 +131,6 @@ function parseData(p: Parser): ast.Type {
     if (p.lex.token() === "<") {
         p.lex.forth()
         len = parseLength(p)
-        p.lex.forth()
         if (p.lex.token() !== ">") {
             throw new CompilerError("'>' is expected.", p.lex.location())
         }
@@ -149,7 +148,6 @@ function parseArray(p: Parser): ast.Type {
     p.lex.forth()
     if (p.lex.token() !== "]") {
         len = parseLength(p)
-        p.lex.forth()
         if (p.lex.token() !== "]") {
             throw new CompilerError("']' is expected.", p.lex.location())
         }
@@ -249,7 +247,6 @@ function parseUnion(p: Parser): ast.Type {
         if (p.lex.token() === "=") {
             p.lex.forth()
             tagVal = parseU64Safe(p)
-            p.lex.forth()
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all union tag must be set. '=' is expected.",
@@ -291,7 +288,6 @@ function parseEnumBody(p: Parser): ast.Type {
         if (p.lex.token() === "=") {
             p.lex.forth()
             val = parseU64Safe(p)
-            p.lex.forth()
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all enum tag must be set. '=' is expected.",
@@ -372,6 +368,7 @@ function parseLength(p: Parser): number {
     ) {
         throw new CompilerError("a non-zero u32 is expected.", p.lex.location())
     }
+    p.lex.forth()
     return result
 }
 
@@ -383,5 +380,6 @@ function parseU64Safe(p: Parser): number {
             p.lex.location()
         )
     }
+    p.lex.forth()
     return result
 }
