@@ -71,13 +71,22 @@ export class Lex {
                 this.offset++
             } else if (c === commentMark) {
                 // comment
-                const len = content.indexOf("\n", this.offset + 1) - this.offset
+                let index = content.indexOf("\n", this.offset + 1)
+                if (index === -1) {
+                    // EOF
+                    index = content.length
+                }
+                const len = index - this.offset
                 this.col += len
                 this.offset += len
             } else if (c === "'" || c === '"') {
                 // we only support simple strings (no escape)
-                const len =
-                    content.indexOf(c, this.offset + 1) + 1 - this.offset
+                let index = content.indexOf(c, this.offset + 1)
+                if (index === -1) {
+                    // missing delimiter
+                    index = content.length
+                }
+                const len = index + 1 - this.offset
                 this._token = content.slice(this.offset, this.offset + len)
                 this.col += len
                 this.offset += len

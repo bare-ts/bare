@@ -26,3 +26,9 @@ test("invalid-tokens", (t) => {
         name: "CompilerError",
     })
 })
+
+test("comment-eof", (t) => {
+    const content = "# comment"
+    const lex = new Lex(content, "inline", LEX_CONFIG)
+    t.deepEqual(lex.location().col, content.length + 1)
+})
