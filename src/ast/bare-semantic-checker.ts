@@ -1,11 +1,15 @@
 import { CompilerError } from "../core/compiler-error.js"
+import type { Config } from "../core/config.js"
 import * as ast from "./bare-ast.js"
 
-export function checkSemantic(schema: ast.Ast): ast.Ast {
+export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {
         throw new CompilerError("a schema cannot be empty.", schema.loc)
     }
-    const symbols = ast.symbols(schema)
+    const c = {
+        config,
+        symbols: ast.symbols(schema),
+    }
     const aliases: Set<string> = new Set()
     for (const aliased of schema.defs) {
         const { alias, type } = aliased
@@ -17,10 +21,15 @@ export function checkSemantic(schema: ast.Ast): ast.Ast {
         }
         aliases.add(alias)
         checkAliasedInvariants(aliased)
-        checkTypeInvariants(type, symbols)
-        checkCircularRef(type, symbols, new Set([alias]))
+        checkTypeInvariants(c, type)
+        checkCircularRef(c, type, new Set([alias]))
     }
     return schema
+}
+
+interface Checker {
+    readonly config: Config
+    readonly symbols: ast.SymbolTable
 }
 
 function checkAliasedInvariants(aliased: ast.AliasedType): void {
@@ -32,35 +41,35 @@ function checkAliasedInvariants(aliased: ast.AliasedType): void {
     }
 }
 
-function checkTypeInvariants(type: ast.Type, symbols: ast.SymbolTable): void {
+function checkTypeInvariants(c: Checker, type: ast.Type): void {
     switch (type.tag) {
         case "alias":
-            checkUndefinedAlias(type, symbols)
+            checkUndefinedAlias(c, type)
             break
         case "enum":
-            checkEnumInvariants(type)
+            checkEnumInvariants(c, type)
             break
         case "map":
-            checkMapInvariants(type)
+            checkMapInvariants(c, type)
             break
         case "struct":
             checkStructInvariants(type)
             break
         case "union":
-            checkUnionInvariants(type, symbols)
+            checkUnionInvariants(c, type)
             break
     }
     if (type.types != null) {
         for (const subtype of type.types) {
             if (type.tag !== "union") {
-                checkNonVoid(subtype, symbols)
+                checkNonVoid(c, subtype)
             }
-            checkTypeInvariants(subtype, symbols)
+            checkTypeInvariants(c, subtype)
         }
     }
 }
 
-function checkEnumInvariants(type: ast.EnumType): void {
+function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
     if (type.props.vals.length === 0) {
         throw new CompilerError(
             "an enum must include at least one member.",
@@ -69,6 +78,7 @@ function checkEnumInvariants(type: ast.EnumType): void {
     }
     const valNames: Set<string> = new Set()
     const tagVals: Set<number> = new Set()
+    let prevVal = -1
     for (const enumVal of type.props.vals) {
         if (valNames.has(enumVal.name)) {
             throw new CompilerError(
@@ -82,12 +92,19 @@ function checkEnumInvariants(type: ast.EnumType): void {
                 enumVal.loc
             )
         }
+        if (c.config.pedantic && enumVal.val < prevVal) {
+            throw new CompilerError(
+                "in pedantic mode, all enum values must be in order.",
+                enumVal.loc
+            )
+        }
         valNames.add(enumVal.name)
         tagVals.add(enumVal.val)
+        prevVal = enumVal.val
     }
 }
 
-function checkMapInvariants(type: ast.MapType): void {
+function checkMapInvariants(c: Checker, type: ast.MapType): void {
     const keyType = type.types[0]
     if (!ast.isBaseTag(keyType.tag)) {
         throw new CompilerError(
@@ -97,12 +114,12 @@ function checkMapInvariants(type: ast.MapType): void {
     }
 }
 
-function checkNonVoid(type: ast.Type, symbols: ast.SymbolTable): void {
+function checkNonVoid(c: Checker, type: ast.Type): void {
     if (type.tag === "alias") {
-        const aliased = symbols.get(type.props.alias)
+        const aliased = c.symbols.get(type.props.alias)
         type =
             aliased !== undefined
-                ? ast.resolveAlias(aliased.type, symbols)
+                ? ast.resolveAlias(aliased.type, c.symbols)
                 : type
     }
     if (type.tag === "void") {
@@ -138,10 +155,7 @@ function checkStructInvariants(type: ast.StructType): void {
     }
 }
 
-function checkUnionInvariants(
-    type: ast.UnionType,
-    symbols: ast.SymbolTable
-): void {
+function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
     if (type.types.length === 0) {
         throw new CompilerError(
             "a union must include at least one type.",
@@ -157,6 +171,7 @@ function checkUnionInvariants(
     // check type uniqueness
     const stringifiedTypes = new Set()
     const tagVals: Set<number> = new Set()
+    let prevTagVal = -1
     for (let i = 0; i < type.props.tags.length; i++) {
         const tagVal = type.props.tags[i]
         if (tagVals.has(tagVal)) {
@@ -165,7 +180,14 @@ function checkUnionInvariants(
                 type.types[i].loc
             )
         }
+        if (c.config.pedantic && tagVal < prevTagVal) {
+            throw new CompilerError(
+                "in pedantic mode, all tags must be in order.",
+                type.types[i].loc
+            )
+        }
         tagVals.add(tagVal)
+        prevTagVal = tagVal
         const stringifiedType = JSON.stringify(ast.withoutLoc(type.types[i]))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
@@ -183,7 +205,9 @@ function checkUnionInvariants(
             type.types.every(ast.isBaseOrVoidType) &&
             ast.haveDistinctTypeof(type.types)
         if (!isFlatUnion && type.types.every((t) => t.tag === "alias")) {
-            const resolved = type.types.map((t) => ast.resolveAlias(t, symbols))
+            const resolved = type.types.map((t) =>
+                ast.resolveAlias(t, c.symbols)
+            )
             if (
                 type.types.length === new Set(resolved).size &&
                 resolved.every((t): t is ast.StructType => t.tag === "struct")
@@ -201,16 +225,16 @@ function checkUnionInvariants(
     }
 }
 
-function checkUndefinedAlias(type: ast.Alias, symbols: ast.SymbolTable): void {
-    if (!symbols.has(type.props.alias)) {
+function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
+    if (!c.symbols.has(type.props.alias)) {
         const alias = type.props.alias
         throw new CompilerError(`alias '${alias}' is not defined.`, type.loc)
     }
 }
 
 function checkCircularRef(
+    c: Checker,
     type: ast.Type,
-    symbols: ast.SymbolTable,
     traversed: Set<string>
 ): void {
     if (type.tag === "alias") {
@@ -221,18 +245,18 @@ function checkCircularRef(
                 type.loc
             )
         }
-        const aliased = symbols.get(alias)
+        const aliased = c.symbols.get(alias)
         if (aliased != null) {
             const subTraversed = new Set(traversed).add(alias)
-            checkCircularRef(aliased.type, symbols, subTraversed)
+            checkCircularRef(c, aliased.type, subTraversed)
         }
     }
     if (type.types != null) {
         for (const subtype of type.types) {
             if (type.tag === "struct") {
-                checkStructFieldCircularRef(subtype, symbols, traversed)
+                checkStructFieldCircularRef(c, subtype, traversed)
             } else {
-                checkCircularRef(subtype, symbols, traversed)
+                checkCircularRef(c, subtype, traversed)
             }
         }
     }
@@ -246,8 +270,8 @@ function checkCircularRef(
  * @throws CompilerError if a forbidden circular reference is discovered.
  */
 function checkStructFieldCircularRef(
+    c: Checker,
     fieldType: ast.Type,
-    symbols: ast.SymbolTable,
     traversed: Set<string>
 ): void {
     if (
@@ -263,7 +287,7 @@ function checkStructFieldCircularRef(
         let firstCycle: ast.Type | null = null
         for (const subtype of fieldType.types) {
             try {
-                checkCircularRef(subtype, symbols, traversed)
+                checkCircularRef(c, subtype, traversed)
             } catch (e) {
                 firstCycle = firstCycle ?? subtype
                 circularCount++
@@ -277,5 +301,5 @@ function checkStructFieldCircularRef(
         }
         return // allowed circular refs
     }
-    checkCircularRef(fieldType, symbols, traversed)
+    checkCircularRef(c, fieldType, traversed)
 }

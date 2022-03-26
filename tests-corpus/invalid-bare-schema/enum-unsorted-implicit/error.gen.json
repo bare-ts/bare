@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-unsorted-implicit/schema.bare",
-    "offset": 47,
+    "offset": 38,
     "line": 5,
-    "col": 14
+    "col": 5
   },
-  "message": "(enum-unsorted-implicit/schema.bare:5:14) a enum tag must be greater than the previous one."
+  "message": "(enum-unsorted-implicit/schema.bare:5:5) value '1' is assigned to a preceding member."
 }

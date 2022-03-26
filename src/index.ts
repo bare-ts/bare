@@ -23,7 +23,7 @@ export * from "./parser/lex.js"
 export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)
     const schema = parse(content, completedConfig)
-    checkSemantic(schema)
+    checkSemantic(schema, completedConfig)
     const normalizedSchema = normalize(schema)
     return generate(normalizedSchema, completedConfig)
 }

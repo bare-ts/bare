@@ -1,0 +1,84 @@
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            1,
+            0,
+            2,
+            3
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-pedantic-tag-unsorted/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
+            }
+          },
+          {
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-pedantic-tag-unsorted/schema.bare",
+              "offset": 27,
+              "line": 1,
+              "col": 28
+            }
+          },
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-pedantic-tag-unsorted/schema.bare",
+              "offset": 37,
+              "line": 1,
+              "col": 38
+            }
+          },
+          {
+            "tag": "u64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-pedantic-tag-unsorted/schema.bare",
+              "offset": 47,
+              "line": 1,
+              "col": 48
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-pedantic-tag-unsorted/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-pedantic-tag-unsorted/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-pedantic-tag-unsorted/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

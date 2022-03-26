@@ -2,6 +2,29 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+* Allow unsorted tags for unions and enums
+
+    The following schemas was previously rejected because of unsorted tags.
+
+    ```bare
+    enum Gender {
+        FLUID = 1
+        MALE = 0
+               ^ error was reported here
+        FEMALE = 2
+    }
+    ```
+
+    ```bare
+    type UnsignedInt (u8 = 1 | u16 = 0 | u32 = 2 | u64 = 3)
+                                     ^ error was reported here
+    ```
+
+    These schemas are now allowed.
+    They are still rejected in pedantic mode (option --pedantic)
+
 ## 0.4.0 (2022-03-26)
 
 * Forbid main codecs resolving to void type

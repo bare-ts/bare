@@ -248,14 +248,7 @@ function parseUnion(p: Parser): ast.Type {
         const type = parseType(p)
         if (p.lex.token() === "=") {
             p.lex.forth()
-            const prevTagVal = tagVal - 1
             tagVal = parseU64Safe(p)
-            if (prevTagVal !== -1 && prevTagVal >= tagVal) {
-                throw new CompilerError(
-                    "a union tag must be greater than the previous one.",
-                    p.lex.location()
-                )
-            }
             p.lex.forth()
         } else if (p.config.pedantic) {
             throw new CompilerError(
@@ -297,14 +290,7 @@ function parseEnumBody(p: Parser): ast.Type {
         p.lex.forth()
         if (p.lex.token() === "=") {
             p.lex.forth()
-            const prevVal = val - 1
             val = parseU64Safe(p)
-            if (prevVal !== -1 && prevVal >= val) {
-                throw new CompilerError(
-                    "a enum tag must be greater than the previous one.",
-                    p.lex.location()
-                )
-            }
             p.lex.forth()
         } else if (p.config.pedantic) {
             throw new CompilerError(

@@ -1,0 +1,65 @@
+{
+  "defs": [
+    {
+      "alias": "Gender",
+      "exported": true,
+      "type": {
+        "tag": "enum",
+        "props": {
+          "intEnum": false,
+          "vals": [
+            {
+              "name": "FLUID",
+              "val": 1,
+              "loc": {
+                "filename": "enum-unsorted/schema.bare",
+                "offset": 19,
+                "line": 3,
+                "col": 5
+              }
+            },
+            {
+              "name": "MALE",
+              "val": 0,
+              "loc": {
+                "filename": "enum-unsorted/schema.bare",
+                "offset": 33,
+                "line": 4,
+                "col": 5
+              }
+            },
+            {
+              "name": "FEMALE",
+              "val": 2,
+              "loc": {
+                "filename": "enum-unsorted/schema.bare",
+                "offset": 46,
+                "line": 5,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": null,
+        "loc": {
+          "filename": "enum-unsorted/schema.bare",
+          "offset": 13,
+          "line": 2,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "enum-unsorted/schema.bare",
+        "offset": 1,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "enum-unsorted/schema.bare",
+    "offset": 1,
+    "line": 2,
+    "col": 1
+  }
+}
