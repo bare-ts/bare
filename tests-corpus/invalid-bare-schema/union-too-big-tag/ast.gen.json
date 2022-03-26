@@ -1,0 +1,85 @@
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "exported": true,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            0,
+            1,
+            2,
+            9007199254740992
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-too-big-tag/schema.bare",
+              "offset": 60,
+              "line": 2,
+              "col": 19
+            }
+          },
+          {
+            "tag": "u16",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-too-big-tag/schema.bare",
+              "offset": 69,
+              "line": 2,
+              "col": 28
+            }
+          },
+          {
+            "tag": "u32",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-too-big-tag/schema.bare",
+              "offset": 79,
+              "line": 2,
+              "col": 38
+            }
+          },
+          {
+            "tag": "u64",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-too-big-tag/schema.bare",
+              "offset": 89,
+              "line": 2,
+              "col": 48
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-too-big-tag/schema.bare",
+          "offset": 59,
+          "line": 2,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-too-big-tag/schema.bare",
+        "offset": 42,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "union-too-big-tag/schema.bare",
+    "offset": 42,
+    "line": 2,
+    "col": 1
+  }
+}

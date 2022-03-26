@@ -234,7 +234,7 @@ function genMapType(g: Gen, type: ast.MapType): string {
     return `${mapType}<${genKeyType}, ${genValType}>`
 }
 
-function genSetType(g: Gen, type: ast.SetType): string {
+function genSetType(g: Gen, type: ast.ListType): string {
     const typedef = genType(g, type.types[0])
     const setType = type.props.mut ? "Set" : "ReadonlySet"
     return `${setType}<${typedef}>`
@@ -550,7 +550,7 @@ function genOptionalReader(g: Gen, type: ast.OptionalType): string {
         : ${noneVal})`)
 }
 
-function genSetReader(g: Gen, type: ast.SetType): string {
+function genSetReader(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
     const SetGenerics =
         g.config.generator === "js" ? "" : `<${indent(genType(g, valType), 2)}>`
@@ -786,7 +786,7 @@ function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
     }`)
 }
 
-function genSetWriter(g: Gen, type: ast.SetType): string {
+function genSetWriter(g: Gen, type: ast.ListType): string {
     return unindent(`{
         bare.writeUintSafe(bc, $x.size)
         for (const v of $x) {

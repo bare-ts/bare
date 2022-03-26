@@ -130,7 +130,7 @@ function parseData(p: Parser): ast.Type {
     p.lex.forth()
     if (p.lex.token() === "<") {
         p.lex.forth()
-        len = parseLength(p)
+        len = parseUnsignedNumber(p)
         if (p.lex.token() !== ">") {
             throw new CompilerError("'>' is expected.", p.lex.location())
         }
@@ -147,7 +147,7 @@ function parseList(p: Parser): ast.Type {
     const loc = p.lex.location()
     p.lex.forth()
     if (p.lex.token() !== "]") {
-        len = parseLength(p)
+        len = parseUnsignedNumber(p)
         if (p.lex.token() !== "]") {
             throw new CompilerError("']' is expected.", p.lex.location())
         }
@@ -157,7 +157,7 @@ function parseList(p: Parser): ast.Type {
     if (!p.config.useGenericArray && ast.isFixedNumberType(valType)) {
         return {
             tag: "typedarray",
-            props: { len },
+            props: { len, mut: p.config.useMutable },
             types: [valType],
             loc,
         }
@@ -246,7 +246,7 @@ function parseUnion(p: Parser): ast.Type {
         const type = parseType(p)
         if (p.lex.token() === "=") {
             p.lex.forth()
-            tagVal = parseU64Safe(p)
+            tagVal = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all union tag must be set. '=' is expected.",
@@ -287,7 +287,7 @@ function parseEnumBody(p: Parser): ast.Type {
         p.lex.forth()
         if (p.lex.token() === "=") {
             p.lex.forth()
-            val = parseU64Safe(p)
+            val = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all enum tag must be set. '=' is expected.",
@@ -359,24 +359,11 @@ function parseStructBody(p: Parser): ast.Type {
     }
 }
 
-function parseLength(p: Parser): number {
+function parseUnsignedNumber(p: Parser): number {
     const result = Number.parseInt(p.lex.token(), 10)
-    if (
-        !DIGIT_PATTERN.test(p.lex.token()) ||
-        result === 0 ||
-        result >>> 0 !== result
-    ) {
-        throw new CompilerError("a non-zero u32 is expected.", p.lex.location())
-    }
-    p.lex.forth()
-    return result
-}
-
-function parseU64Safe(p: Parser): number {
-    const result = Number.parseInt(p.lex.token(), 10)
-    if (!DIGIT_PATTERN.test(p.lex.token()) || !Number.isSafeInteger(result)) {
+    if (!DIGIT_PATTERN.test(p.lex.token())) {
         throw new CompilerError(
-            "a non-negative safe integer is expected.",
+            "an unsigned integer without leading zeroes is expected.",
             p.lex.location()
         )
     }

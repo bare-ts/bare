@@ -6,5 +6,5 @@
     "line": 1,
     "col": 24
   },
-  "message": "(union-tag-hex/schema.bare:1:24) a non-negative safe integer is expected."
+  "message": "(union-tag-hex/schema.bare:1:24) an unsigned integer without leading zeroes is expected."
 }

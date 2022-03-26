@@ -1,4 +1,4 @@
-import { CompilerError } from "../core/compiler-error.js"
+import { CompilerError, type Location } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
 import * as ast from "./bare-ast.js"
 
@@ -72,6 +72,12 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
         case "alias":
             checkUndefinedAlias(c, type)
             break
+        case "data":
+        case "list":
+        case "set":
+        case "typedarray":
+            checkLengthInvariants(type.props.len, type.loc)
+            break
         case "enum":
             checkEnumInvariants(c, type)
             break
@@ -112,6 +118,12 @@ function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
                 enumVal.loc
             )
         }
+        if (!Number.isSafeInteger(enumVal.val)) {
+            throw new CompilerError(
+                "only enum values encoded as safe integers are supported.",
+                enumVal.loc
+            )
+        }
         if (tagVals.has(enumVal.val)) {
             throw new CompilerError(
                 `value '${enumVal.val}' is assigned to a preceding member.`,
@@ -127,6 +139,21 @@ function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
         valNames.add(enumVal.name)
         tagVals.add(enumVal.val)
         prevVal = enumVal.val
+    }
+}
+
+function checkLengthInvariants(len: number | null, loc: Location | null): void {
+    if (len != null && len <= 0) {
+        throw new CompilerError(
+            "a fixed list or data must have a length strictly greater than 0.",
+            loc
+        )
+    }
+    if (len != null && len >>> 0 !== len) {
+        throw new CompilerError(
+            "only length encoded as a u32 are supported.",
+            loc
+        )
     }
 }
 
@@ -194,6 +221,14 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
             "the number of tags is not equal to the number of types of the union. This is likely an internal error.",
             null
         )
+    }
+    for (let i = 0; i < type.types.length; i++) {
+        if (!Number.isSafeInteger(type.props.tags[i])) {
+            throw new CompilerError(
+                "only tags encoded as safe integer are supported.",
+                type.types[i].loc
+            )
+        }
     }
     // check type uniqueness
     const stringifiedTypes = new Set()

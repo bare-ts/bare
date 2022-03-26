@@ -1,0 +1,35 @@
+{
+  "defs": [
+    {
+      "alias": "EmptyData",
+      "exported": true,
+      "type": {
+        "tag": "data",
+        "props": {
+          "len": 0,
+          "mut": false
+        },
+        "types": null,
+        "loc": {
+          "filename": "fixed-data-empty/schema.bare",
+          "offset": 15,
+          "line": 1,
+          "col": 16
+        }
+      },
+      "loc": {
+        "filename": "fixed-data-empty/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "fixed-data-empty/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

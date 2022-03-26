@@ -6,7 +6,8 @@
       "type": {
         "tag": "typedarray",
         "props": {
-          "len": null
+          "len": null,
+          "mut": false
         },
         "types": [
           {

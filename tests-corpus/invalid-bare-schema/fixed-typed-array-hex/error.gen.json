@@ -6,5 +6,5 @@
     "line": 1,
     "col": 15
   },
-  "message": "(fixed-typed-array-hex/schema.bare:1:15) a non-zero u32 is expected."
+  "message": "(fixed-typed-array-hex/schema.bare:1:15) an unsigned integer without leading zeroes is expected."
 }

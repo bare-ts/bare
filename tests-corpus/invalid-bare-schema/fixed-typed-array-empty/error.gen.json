@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "fixed-typed-array-empty/schema.bare",
-    "offset": 17,
+    "offset": 16,
     "line": 1,
-    "col": 18
+    "col": 17
   },
-  "message": "(fixed-typed-array-empty/schema.bare:1:18) a non-zero u32 is expected."
+  "message": "(fixed-typed-array-empty/schema.bare:1:17) a fixed list or data must have a length strictly greater than 0."
 }

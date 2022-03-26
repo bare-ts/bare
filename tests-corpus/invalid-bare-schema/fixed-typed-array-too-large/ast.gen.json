@@ -6,7 +6,7 @@
       "type": {
         "tag": "typedarray",
         "props": {
-          "len": 4,
+          "len": 4294967296,
           "mut": false
         },
         "types": [
@@ -15,22 +15,22 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "fixed-typed-array/schema.bare",
-              "offset": 16,
+              "filename": "fixed-typed-array-too-large/schema.bare",
+              "offset": 25,
               "line": 1,
-              "col": 17
+              "col": 26
             }
           }
         ],
         "loc": {
-          "filename": "fixed-typed-array/schema.bare",
+          "filename": "fixed-typed-array-too-large/schema.bare",
           "offset": 13,
           "line": 1,
           "col": 14
         }
       },
       "loc": {
-        "filename": "fixed-typed-array/schema.bare",
+        "filename": "fixed-typed-array-too-large/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -39,7 +39,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "fixed-typed-array/schema.bare",
+    "filename": "fixed-typed-array-too-large/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

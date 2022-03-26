@@ -22,7 +22,6 @@ export type Type =
     | MapType // map[type]type
     | OptionalType // optional<type>
     | BaseType
-    | SetType // []type
     | StructType // { fields... }
     | TypedArrayType
     | UnionType // (type | ...)
@@ -38,7 +37,7 @@ export interface Alias {
 }
 
 export interface ListType {
-    readonly tag: "list"
+    readonly tag: "list" | "set"
     readonly props: {
         readonly len: number | null
         readonly mut: boolean
@@ -117,16 +116,6 @@ export interface BaseType {
     readonly loc: Location | null
 }
 
-export interface SetType {
-    readonly tag: "set"
-    readonly props: {
-        readonly len: null
-        readonly mut: boolean
-    }
-    readonly types: readonly [valType: Type]
-    readonly loc: Location | null
-}
-
 export interface StructType {
     readonly tag: "struct"
     readonly props: {
@@ -148,6 +137,7 @@ export interface TypedArrayType {
     readonly tag: "typedarray"
     readonly props: {
         readonly len: number | null
+        readonly mut: boolean
     }
     readonly types: readonly [FixedNumberType]
     readonly loc: Location | null

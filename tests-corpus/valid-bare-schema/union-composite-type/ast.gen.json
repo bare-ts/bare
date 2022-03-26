@@ -109,7 +109,8 @@
           {
             "tag": "typedarray",
             "props": {
-              "len": 4
+              "len": 4,
+              "mut": false
             },
             "types": [
               {
