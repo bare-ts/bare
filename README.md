@@ -2,8 +2,9 @@
 
 [![CI status][ci-img]][ci-url]
 [![Coverage percentage][coveralls-img]][coveralls-url]
-[![minified and zipped size][bundlephobia-img]][bundlephobia-url]
-[![NPM version][npm-img]][npm-url]
+[![dependency count][bundlephobia-dep-img]][bundlephobia-url]
+[![minified and zipped size][bundlephobia-minzip-img]][bundlephobia-url]
+[![NPM version][npm-version-img]][npm-url]
 
 [BARE][bare] (Binary Application Record Encoding) is a schema-based binary format that favors compactness and simplicity.
 [bare-ts/tools](#) provides a compiler to generate Typescript or Javascript code from a BARE schema.
@@ -113,11 +114,12 @@ You can use [dedicated tools][unassert] to remove them.
 [bare]: https://baremessages.org
 [bare-ts-lib]: https://github.com/bare-ts/lib
 [unassert]: https://github.com/unassert-js
-[ci-img]: https://img.shields.io/github/workflow/status/bare-ts/tools/CI?label=CI&style=flat-square
+[ci-img]: https://flat.badgen.net/github/checks/bare-ts/tools/?label=CI
 [ci-url]: https://github.com/bare-ts/tools/actions/workflows/ci.yml
-[npm-img]: https://img.shields.io/npm/v/@bare-ts/tools.svg?style=flat-square
+[npm-version-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
 [npm-url]: https://www.npmjs.com/package/@bare-ts/tools
-[coveralls-img]: https://img.shields.io/coveralls/github/bare-ts/tools?style=flat-square
+[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
 [coveralls-url]: https://coveralls.io/github/bare-ts/tools?branch=main
-[bundlephobia-img]: https://img.shields.io/bundlephobia/minzip/@bare-ts/tools?label=minzipped&style=flat-square
+[bundlephobia-minzip-img]: https://flat.badgen.net/bundlephobia/minzip/@bare-ts/tools?label=minzipped
+[bundlephobia-dep-img]: https://flat.badgen.net/bundlephobia/dependency-count/@bare-ts/tools?label=dependency
 [bundlephobia-url]: https://bundlephobia.com/package/@bare-ts/tools
