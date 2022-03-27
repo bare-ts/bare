@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "KeyType",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "string",
         "props": null,
@@ -23,7 +23,7 @@
     },
     {
       "alias": "Dict",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "map",
         "props": {

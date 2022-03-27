@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Y",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "u8",
         "props": null,
@@ -23,7 +23,7 @@
     },
     {
       "alias": "X",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "union",
         "props": {

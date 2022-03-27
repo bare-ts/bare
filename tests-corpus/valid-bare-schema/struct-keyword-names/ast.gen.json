@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Operation",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "struct",
         "props": {

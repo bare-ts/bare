@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "EmptyArray",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "list",
         "props": {

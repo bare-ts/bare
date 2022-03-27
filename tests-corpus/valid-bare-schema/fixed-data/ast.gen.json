@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "U8Alias",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "data",
         "props": {

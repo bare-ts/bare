@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Alias0",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "alias",
         "props": {
@@ -25,7 +25,7 @@
     },
     {
       "alias": "Alias1",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "alias",
         "props": {
@@ -48,7 +48,7 @@
     },
     {
       "alias": "Alias2",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "alias",
         "props": {
@@ -71,7 +71,7 @@
     },
     {
       "alias": "Alias3",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "alias",
         "props": {

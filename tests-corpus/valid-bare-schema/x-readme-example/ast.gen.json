@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Gender",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "enum",
         "props": {
@@ -57,7 +57,7 @@
     },
     {
       "alias": "Person",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "struct",
         "props": {
@@ -166,7 +166,7 @@
     },
     {
       "alias": "Organization",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "struct",
         "props": {
@@ -236,7 +236,7 @@
     },
     {
       "alias": "Contact",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "union",
         "props": {
@@ -290,7 +290,7 @@
     },
     {
       "alias": "Message",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "list",
         "props": {

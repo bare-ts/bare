@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "X",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "union",
         "props": {

@@ -7,7 +7,7 @@ export function generate(schema: ast.Ast, config: Config): string {
     for (const aliased of schema.defs) {
         switch (g.config.generator) {
             case "dts":
-                if (aliased.exported) {
+                if (!aliased.internal) {
                     body += `${genAliasedType(g, aliased)}\n\n`
                     body += `${genAliasedReaderHead(g, aliased)}\n\n`
                     body += `${genAliasedWriterHead(g, aliased)}\n\n`
@@ -21,7 +21,7 @@ export function generate(schema: ast.Ast, config: Config): string {
                 break
             }
             case "ts": {
-                if (aliased.exported) {
+                if (!aliased.internal) {
                     const aliasedType = genAliasedType(g, aliased)
                     body += aliasedType !== "" ? aliasedType + "\n\n" : ""
                 }
@@ -119,7 +119,7 @@ function genAliasedType(g: Gen, { alias, type }: ast.AliasedType): string {
 
 function typeAliasOrDef(g: Gen, type: ast.Type, alias: string): string {
     const aliased = g.symbols.get(alias)
-    return aliased !== undefined && aliased.exported ? alias : genType(g, type)
+    return aliased !== undefined && !aliased.internal ? alias : genType(g, type)
     // TODO: just genType?
 }
 
@@ -180,7 +180,7 @@ function genType(g: Gen, type: ast.Type): string {
 
 function genAliasType(g: Gen, type: ast.Alias): string {
     const aliased = g.symbols.get(type.props.alias)
-    if (aliased !== undefined && !aliased.exported) {
+    if (aliased !== undefined && aliased.internal) {
         return genType(g, aliased.type) // inline a non-exported aliased type
     }
     return `${namespaced(g, type.props.alias)}${type.props.alias}`
@@ -332,14 +332,14 @@ function genEncoderHead(g: Gen, alias: string): string {
 // JS/TS code
 
 function genCode(g: Gen, aliased: ast.AliasedType): string {
-    const modifier = aliased.exported ? "export " : ""
+    const modifier = !aliased.internal ? "export " : ""
     if (aliased.type.tag === "enum" && g.config.generator === "js") {
         return modifier + genAliasedEnumCode(g, aliased.alias, aliased.type)
     }
     if (
         aliased.type.tag === "struct" &&
         aliased.type.props.class &&
-        aliased.exported &&
+        !aliased.internal &&
         !g.config.importFactory
     ) {
         return modifier + genAliasedStructCode(g, aliased.alias, aliased.type)
@@ -393,7 +393,7 @@ function genAliasedStructCode(
 
 function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
     let body = genReader(g, aliased.type, aliased.alias)
-    const mod = aliased.exported ? "export " : ""
+    const mod = !aliased.internal ? "export " : ""
     const head = genReaderHead(g, aliased.type, aliased.alias)
     switch (body[0]) {
         case "{": // block
@@ -574,7 +574,7 @@ function genStructReader(g: Gen, type: ast.StructType, alias: string): string {
     let objCreation: string
     if (
         alias !== "" &&
-        ((type.props.class && g.symbols.get(alias)?.exported) ||
+        ((type.props.class && g.symbols.get(alias)?.internal === false) ||
             g.config.importFactory)
     ) {
         const factoryArgs = type.props.fields
@@ -654,7 +654,7 @@ function genVoidReader(_g: Gen, type: ast.VoidType): string {
 
 function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
     let body = genWriter(g, aliased.type, aliased.alias).replace(/\$x\b/g, "x")
-    const mod = aliased.exported ? "export " : ""
+    const mod = aliased.internal ? "" : "export "
     const head = genWriterHead(g, aliased.type, aliased.alias)
     switch (body[0]) {
         case "{": // block

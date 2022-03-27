@@ -41,7 +41,7 @@ function checkMainCodecs(c: Checker, schema: ast.Ast): void {
                 `main codec '${alias}' does not exist.`,
                 null
             )
-        } else if (!aliased.exported) {
+        } else if (aliased.internal) {
             throw new CompilerError(
                 `main codec '${alias}' must be exported.`,
                 null

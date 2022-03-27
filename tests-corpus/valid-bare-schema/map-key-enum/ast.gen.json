@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Gender",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "enum",
         "props": {
@@ -57,7 +57,7 @@
     },
     {
       "alias": "GenderNames",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "map",
         "props": {

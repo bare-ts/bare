@@ -8,7 +8,7 @@ export interface Ast {
 
 export interface AliasedType {
     readonly alias: string
-    readonly exported: boolean
+    readonly internal: boolean
     readonly type: Type
     readonly loc: Location | null
 }

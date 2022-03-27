@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "I64",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "i64Safe",
         "props": null,
@@ -23,7 +23,7 @@
     },
     {
       "alias": "U64",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "u64Safe",
         "props": null,

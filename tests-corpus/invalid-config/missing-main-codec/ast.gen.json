@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Other",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "string",
         "props": null,

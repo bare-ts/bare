@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "U8Array",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "list",
         "props": {

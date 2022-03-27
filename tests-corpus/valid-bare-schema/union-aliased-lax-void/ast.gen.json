@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Void",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "void",
         "props": {
@@ -26,7 +26,7 @@
     },
     {
       "alias": "UnsignedInt",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "union",
         "props": {

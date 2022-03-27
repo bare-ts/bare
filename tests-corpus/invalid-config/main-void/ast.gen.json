@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Main",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "alias",
         "props": {
@@ -25,7 +25,7 @@
     },
     {
       "alias": "AliasedVoid",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "void",
         "props": {

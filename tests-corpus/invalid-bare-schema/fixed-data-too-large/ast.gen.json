@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "EmptyData",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "data",
         "props": {

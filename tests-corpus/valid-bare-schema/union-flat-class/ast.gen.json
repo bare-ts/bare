@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "BoxedU32",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "struct",
         "props": {
@@ -50,7 +50,7 @@
     },
     {
       "alias": "BoxedString",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "struct",
         "props": {
@@ -98,7 +98,7 @@
     },
     {
       "alias": "Boxed",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "union",
         "props": {

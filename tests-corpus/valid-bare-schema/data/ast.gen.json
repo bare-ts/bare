@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Data",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "data",
         "props": {

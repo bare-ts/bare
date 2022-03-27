@@ -2,7 +2,7 @@
   "defs": [
     {
       "alias": "Dict",
-      "exported": true,
+      "internal": false,
       "type": {
         "tag": "map",
         "props": {

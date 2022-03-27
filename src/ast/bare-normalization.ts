@@ -6,8 +6,8 @@ export function normalize(schema: ast.Ast): ast.Ast {
     for (let i = 0; i < defs.length; i++) {
         const type = normalizeSubtypes(n, defs[i].type)
         if (defs[i].type !== type) {
-            const { alias, exported, loc } = defs[i]
-            defs[i] = { alias, exported, type, loc }
+            const { alias, internal, loc } = defs[i]
+            defs[i] = { alias, internal, type, loc }
         }
     }
     return defs.length > schema.defs.length
@@ -55,7 +55,7 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
     let alias = n.dedup.get(stringifiedType)
     if (alias == null) {
         alias = `${n.aliasCount++}`
-        n.mutSchema.push({ alias, exported: false, type, loc: null })
+        n.mutSchema.push({ alias, internal: true, type, loc: null })
         n.dedup.set(stringifiedType, alias)
     }
     return { tag: "alias", props: { alias }, types: null, loc: null }

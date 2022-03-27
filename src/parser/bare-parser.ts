@@ -54,7 +54,7 @@ function parseAliased(p: Parser): ast.AliasedType {
             : keyword === "struct"
             ? parseStructBody(p)
             : parseTypeCheckUnion(p)
-    return { alias, exported: true, type, loc }
+    return { alias, internal: false, type, loc }
 }
 
 function parseType(p: Parser): ast.Type {
