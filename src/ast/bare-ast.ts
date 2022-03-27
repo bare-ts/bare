@@ -74,14 +74,25 @@ export interface EnumVal {
 
 export interface LiteralType {
     readonly tag: "literal"
-    readonly props: {
-        readonly val?: Literal
-    }
+    readonly props: LiteralVal
     readonly types: null
     readonly loc: Location | null
 }
 
-export type Literal = bigint | boolean | number | null | string | undefined
+export type Literal = bigint | boolean | null | number | string | undefined
+
+/**
+ * JSON representation of a literal type
+ */
+export type LiteralVal =
+    | { type: "bigint"; val: string } // bigint values are not serializable
+    | { type: "number"; val: number }
+    | { type: "string"; val: string }
+    // `type` is the literal value, `val` has no meaning
+    | { type: "false"; val: null }
+    | { type: "null"; val: null }
+    | { type: "true"; val: null }
+    | { type: "undefined"; val: null }
 
 export interface MapType {
     readonly tag: "map"

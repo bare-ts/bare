@@ -224,7 +224,7 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
 }
 
 function genLiteralType(_g: Gen, type: ast.LiteralType): string {
-    return rpr(type.props.val)
+    return literalValRepr(type.props)
 }
 
 function genMapType(g: Gen, type: ast.MapType): string {
@@ -516,7 +516,7 @@ function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
 }
 
 function genLiteralReader(_g: Gen, type: ast.LiteralType): string {
-    return `(${rpr(type.props.val)})`
+    return `(${literalValRepr(type.props)})`
 }
 
 function genMapReader(g: Gen, type: ast.MapType): string {
@@ -975,6 +975,21 @@ function indent(s: string, n = 1): string {
 
 function unindent(s: string, n = 1): string {
     return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
+}
+
+function literalValRepr(l: ast.LiteralVal): string {
+    switch (l.type) {
+        case "bigint":
+            return rpr(BigInt(l.val))
+        case "false":
+        case "null":
+        case "true":
+        case "undefined":
+            return l.type
+        case "number":
+        case "string":
+            return rpr(l.val)
+    }
 }
 
 function rpr(v: ast.Literal): string {
