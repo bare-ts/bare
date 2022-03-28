@@ -337,10 +337,10 @@ function checkStructFieldCircularRef(
     traversed: Set<string>
 ): void {
     if (
-        fieldType.tag === "list" ||
+        ((fieldType.tag === "list" || fieldType.tag === "set") &&
+            fieldType.props.len === null) ||
         fieldType.tag === "map" ||
-        fieldType.tag === "optional" ||
-        fieldType.tag === "set"
+        fieldType.tag === "optional"
     ) {
         return // allowed circular refs
     }

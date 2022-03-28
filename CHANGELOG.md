@@ -4,6 +4,16 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+* Forbid circular references with fixed lists
+
+    The following schema is now correctly rejected:
+
+    ```bare
+    struct Person {
+        bestFriends: [2]Person
+    }
+    ```
+
 * Allow enum type and aliased types for map key type
 
     The following schema is now valid:
