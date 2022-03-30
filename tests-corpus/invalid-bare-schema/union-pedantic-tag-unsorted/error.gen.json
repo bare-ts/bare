@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-pedantic-tag-unsorted/schema.bare",
-    "offset": 27,
+    "offset": 33,
     "line": 1,
-    "col": 28
+    "col": 34
   },
-  "message": "(union-pedantic-tag-unsorted/schema.bare:1:28) in pedantic mode, all tags must be in order."
+  "message": "(union-pedantic-tag-unsorted/schema.bare:1:34) in pedantic mode, all tags must be in order."
 }

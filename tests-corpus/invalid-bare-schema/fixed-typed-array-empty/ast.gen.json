@@ -6,7 +6,15 @@
       "type": {
         "tag": "list",
         "props": {
-          "len": 0,
+          "len": {
+            "val": 0,
+            "loc": {
+              "filename": "fixed-typed-array-empty/schema.bare",
+              "offset": 17,
+              "line": 1,
+              "col": 18
+            }
+          },
           "mut": false
         },
         "types": [

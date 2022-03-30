@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "union-repeated-tag/schema.bare",
+    "offset": 85,
+    "line": 2,
+    "col": 44
+  },
+  "message": "(union-repeated-tag/schema.bare:2:44) tag '1' is assigned to a preceding type."
+}

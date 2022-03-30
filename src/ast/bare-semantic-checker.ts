@@ -1,4 +1,4 @@
-import { CompilerError, type Location } from "../core/compiler-error.js"
+import { CompilerError } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
 import * as ast from "./bare-ast.js"
 
@@ -76,7 +76,7 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
         case "list":
         case "set":
         case "typedarray":
-            checkLengthInvariants(type.props.len, type.loc)
+            checkLengthInvariants(type.props.len)
             break
         case "enum":
             checkEnumInvariants(c, type)
@@ -142,17 +142,17 @@ function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
     }
 }
 
-function checkLengthInvariants(len: number | null, loc: Location | null): void {
-    if (len != null && len <= 0) {
+function checkLengthInvariants(len: ast.Integer | null): void {
+    if (len != null && len.val <= 0) {
         throw new CompilerError(
             "a fixed list or data must have a length strictly greater than 0.",
-            loc
+            len.loc
         )
     }
-    if (len != null && len >>> 0 !== len) {
+    if (len != null && len.val >>> 0 !== len.val) {
         throw new CompilerError(
             "only length encoded as a u32 are supported.",
-            loc
+            len.loc
         )
     }
 }
@@ -223,10 +223,11 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
         )
     }
     for (let i = 0; i < type.types.length; i++) {
-        if (!Number.isSafeInteger(type.props.tags[i])) {
+        const tag = type.props.tags[i]
+        if (!Number.isSafeInteger(tag.val)) {
             throw new CompilerError(
                 "only tags encoded as safe integer are supported.",
-                type.types[i].loc
+                tag.loc
             )
         }
     }
@@ -235,21 +236,21 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
     const tagVals: Set<number> = new Set()
     let prevTagVal = -1
     for (let i = 0; i < type.props.tags.length; i++) {
-        const tagVal = type.props.tags[i]
-        if (tagVals.has(tagVal)) {
+        const tag = type.props.tags[i]
+        if (tagVals.has(tag.val)) {
             throw new CompilerError(
-                `tag '${tagVal}' is assigned to a preceding type.`,
-                type.types[i].loc
+                `tag '${tag.val}' is assigned to a preceding type.`,
+                tag.loc
             )
         }
-        if (c.config.pedantic && tagVal < prevTagVal) {
+        if (c.config.pedantic && tag.val < prevTagVal) {
             throw new CompilerError(
                 "in pedantic mode, all tags must be in order.",
-                type.types[i].loc
+                tag.loc
             )
         }
-        tagVals.add(tagVal)
-        prevTagVal = tagVal
+        tagVals.add(tag.val)
+        prevTagVal = tag.val
         const stringifiedType = JSON.stringify(ast.withoutLoc(type.types[i]))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)

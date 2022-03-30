@@ -25,7 +25,15 @@
           {
             "tag": "list",
             "props": {
-              "len": 2,
+              "len": {
+                "val": 2,
+                "loc": {
+                  "filename": "fixed-list-circular/schema.bare",
+                  "offset": 34,
+                  "line": 2,
+                  "col": 19
+                }
+              },
               "mut": false
             },
             "types": [

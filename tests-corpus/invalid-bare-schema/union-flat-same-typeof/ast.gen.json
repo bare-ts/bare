@@ -8,10 +8,22 @@
         "props": {
           "flat": true,
           "tags": [
-            0,
-            1,
-            2,
-            3
+            {
+              "val": 0,
+              "loc": null
+            },
+            {
+              "val": 1,
+              "loc": null
+            },
+            {
+              "val": 2,
+              "loc": null
+            },
+            {
+              "val": 3,
+              "loc": null
+            }
           ]
         },
         "types": [

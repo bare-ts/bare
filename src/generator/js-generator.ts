@@ -274,13 +274,13 @@ function genTypedArrayType(_g: Gen, type: ast.TypedArrayType): string {
 function genUnionType(g: Gen, type: ast.UnionType): string {
     const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
-    const tags = type.props.tags
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const valType = genType(g, type.types[i])
+        const tagVal = type.props.tags[i].val
         result += type.props.flat
             ? `\n| ${valType}`
-            : `\n| { readonly ${tagProp}: ${tags[i]}; readonly ${valProp}: ${valType} }`
+            : `\n| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
     }
     return indent(result)
 }
@@ -458,7 +458,7 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
 function genListReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
         type.props.len != null
-            ? `${type.props.len}`
+            ? `${type.props.len.val}`
             : `bare.readUintSafe(bc)\nif (len === 0) return []`
     const valReading = genReading(g, type.types[0])
     return unindent(`{
@@ -475,7 +475,7 @@ function genDataReader(_g: Gen, type: ast.DataType): string {
     if (type.props.len == null) {
         return `(bare.readData(bc))`
     }
-    return `(bare.readFixedData(bc, ${type.props.len}))`
+    return `(bare.readFixedData(bc, ${type.props.len.val}))`
 }
 
 function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
@@ -612,11 +612,12 @@ function genTypedArrayReader(_g: Gen, type: ast.TypedArrayType): string {
     if (type.props.len == null) {
         return `(bare.read${typeName}Array(bc))`
     }
-    return `(bare.read${typeName}FixedArray(bc, ${type.props.len}))`
+    return `(bare.read${typeName}FixedArray(bc, ${type.props.len.val}))`
 }
 
 function genUnionReader(g: Gen, type: ast.UnionType): string {
-    const tagReader = max(type.props.tags) < 128 ? "readU8" : "readUintSafe"
+    const tagReader =
+        max(type.props.tags.map((v) => v.val)) < 128 ? "readU8" : "readUintSafe"
     const flat = type.props.flat
     let switchBody = ""
     const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
@@ -625,11 +626,11 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
         const valExpr = genReading(g, type.types[i])
         if (flat) {
             switchBody += `
-            case ${type.props.tags[i]}:
+            case ${type.props.tags[i].val}:
                 return ${valExpr}`
         } else {
             switchBody += `
-            case ${type.props.tags[i]}:
+            case ${type.props.tags[i].val}:
                 return { ${tagPropSet}, ${valProp}: ${valExpr} }`
         }
     }
@@ -717,7 +718,7 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
 function genListWriter(g: Gen, type: ast.ListType): string {
     const lenEncoding =
         type.props.len != null
-            ? `assert($x.length === ${type.props.len}, "Unmatched length")`
+            ? `assert($x.length === ${type.props.len.val}, "Unmatched length")`
             : `bare.writeUintSafe(bc, $x.length)`
     const writingElt = genWriting(g, type.types[0], "$x[i]")
     return unindent(`{
@@ -733,7 +734,7 @@ function genDataWriter(_g: Gen, type: ast.DataType): string {
         return `(bare.writeData(bc, $x))`
     }
     return unindent(`{
-        assert($x.byteLength === ${type.props.len})
+        assert($x.byteLength === ${type.props.len.val})
         bare.writeFixedData(bc, $x)
     }`)
 }
@@ -810,7 +811,7 @@ function genTypedArrayWriter(_g: Gen, type: ast.TypedArrayType): string {
         return `(bare.write${capitalize(type.types[0].tag)}Array(bc, $x))`
     }
     return unindent(`{
-        assert($x.length === ${type.props.len})
+        assert($x.length === ${type.props.len.val})
         bare.write${capitalize(type.types[0].tag)}FixedArray(bc, $x)
     }`)
 }
@@ -844,12 +845,12 @@ function genAliasFlatUnionWriter(
         // every class is unique + we assume no inheritance between them
         // => we can discriminate based of the instance type
         for (let i = 0; i < union.types.length; i++) {
-            const tag = union.props.tags[i]
-            const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+            const tagVal = union.props.tags[i].val
+            const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
             const className = union.types[i].props.alias
             const valWriting = genWriting(g, union.types[i], "$x")
             body += `if ($x instanceof ${className}) {
-                bare.${tagWriter}(bc, ${tag})
+                bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
             } else `
         }
@@ -861,12 +862,12 @@ function genAliasFlatUnionWriter(
         const leadingFieldName = resolved[0].props.fields[0].name
         let switchBody = ""
         for (let i = 0; i < union.types.length; i++) {
-            const tag = union.props.tags[i]
-            const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+            const tagVal = union.props.tags[i].val
+            const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
             const valWriting = genWriting(g, union.types[i], "$x")
             switchBody += `
             case ${rpr(discriminators[i])}:
-                bare.${tagWriter}(bc, ${tag})
+                bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
                 break`
         }
@@ -889,19 +890,19 @@ function genBaseFlatUnionWriter(
     let switchBody = ""
     let defaultCase = ""
     for (let i = 0; i < union.types.length; i++) {
-        const tag = union.props.tags[i]
-        const tagWriter = tag < 128 ? "writeU8" : "writeUintSafe"
+        const tagVal = union.props.tags[i].val
+        const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
         const type = union.types[i]
         if (type.tag === "void") {
             defaultCase = `
             default:
-                bare.${tagWriter}(bc, ${tag})
+                bare.${tagWriter}(bc, ${tagVal})
                 break`
         } else {
             const valWriting = genWriting(g, type, "$x")
             switchBody += `
             case "${ast.BASE_TAG_TO_TYPEOF[type.tag]}":
-                bare.${tagWriter}(bc, ${tag})
+                bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
                 break`
         }
@@ -914,7 +915,10 @@ function genBaseFlatUnionWriter(
 }
 
 function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
-    const tagWriter = max(type.props.tags) < 128 ? "writeU8" : "writeUintSafe"
+    const tagWriter =
+        max(type.props.tags.map((v) => v.val)) < 128
+            ? "writeU8"
+            : "writeUintSafe"
     const tagPropAccess = g.config.useQuotedProperty ? '["tag"]' : ".tag"
     const valProp = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
@@ -922,7 +926,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
         if (type.types[i].tag !== "void") {
             const valWriting = genWriting(g, type.types[i], `$x${valProp}`)
             switchBody += `
-            case ${type.props.tags[i]}:
+            case ${type.props.tags[i].val}:
                 ${indent(valWriting, 4)}
                 break`
         }

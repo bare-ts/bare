@@ -32,11 +32,26 @@
         "props": {
           "flat": false,
           "tags": [
-            0,
-            1,
-            2,
-            3,
-            4
+            {
+              "val": 0,
+              "loc": null
+            },
+            {
+              "val": 1,
+              "loc": null
+            },
+            {
+              "val": 2,
+              "loc": null
+            },
+            {
+              "val": 3,
+              "loc": null
+            },
+            {
+              "val": 4,
+              "loc": null
+            }
           ]
         },
         "types": [

@@ -6,7 +6,15 @@
       "type": {
         "tag": "data",
         "props": {
-          "len": 128,
+          "len": {
+            "val": 128,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 20,
+              "line": 1,
+              "col": 21
+            }
+          },
           "mut": false
         },
         "types": null,
@@ -589,8 +597,14 @@
         "props": {
           "flat": false,
           "tags": [
-            0,
-            1
+            {
+              "val": 0,
+              "loc": null
+            },
+            {
+              "val": 1,
+              "loc": null
+            }
           ]
         },
         "types": [
@@ -693,7 +707,15 @@
           {
             "tag": "list",
             "props": {
-              "len": 4,
+              "len": {
+                "val": 4,
+                "loc": {
+                  "filename": "x-bareorg-example/schema.bare",
+                  "offset": 567,
+                  "line": 38,
+                  "col": 13
+                }
+              },
               "mut": false
             },
             "types": [
@@ -772,7 +794,15 @@
         "props": {
           "flat": false,
           "tags": [
-            0
+            {
+              "val": 0,
+              "loc": {
+                "filename": "x-bareorg-example/schema.bare",
+                "offset": 651,
+                "line": 44,
+                "col": 24
+              }
+            }
           ]
         },
         "types": [

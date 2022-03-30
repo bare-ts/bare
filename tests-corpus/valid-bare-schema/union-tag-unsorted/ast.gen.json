@@ -8,10 +8,42 @@
         "props": {
           "flat": false,
           "tags": [
-            1,
-            0,
-            2,
-            3
+            {
+              "val": 1,
+              "loc": {
+                "filename": "union-tag-unsorted/schema.bare",
+                "offset": 23,
+                "line": 1,
+                "col": 24
+              }
+            },
+            {
+              "val": 0,
+              "loc": {
+                "filename": "union-tag-unsorted/schema.bare",
+                "offset": 33,
+                "line": 1,
+                "col": 34
+              }
+            },
+            {
+              "val": 2,
+              "loc": {
+                "filename": "union-tag-unsorted/schema.bare",
+                "offset": 43,
+                "line": 1,
+                "col": 44
+              }
+            },
+            {
+              "val": 3,
+              "loc": {
+                "filename": "union-tag-unsorted/schema.bare",
+                "offset": 53,
+                "line": 1,
+                "col": 54
+              }
+            }
           ]
         },
         "types": [

@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "fixed-typed-array-too-large/schema.bare",
-    "offset": 13,
+    "offset": 14,
     "line": 1,
-    "col": 14
+    "col": 15
   },
-  "message": "(fixed-typed-array-too-large/schema.bare:1:14) only length encoded as a u32 are supported."
+  "message": "(fixed-typed-array-too-large/schema.bare:1:15) only length encoded as a u32 are supported."
 }

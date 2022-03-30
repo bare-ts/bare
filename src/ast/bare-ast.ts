@@ -27,6 +27,11 @@ export type Type =
     | UnionType // (type | ...)
     | VoidType // void
 
+export interface Integer {
+    readonly val: number
+    readonly loc: Location | null
+}
+
 export interface Alias {
     readonly tag: "alias"
     readonly props: {
@@ -39,7 +44,7 @@ export interface Alias {
 export interface ListType {
     readonly tag: "list" | "set"
     readonly props: {
-        readonly len: number | null
+        readonly len: Integer | null
         readonly mut: boolean
     }
     readonly types: readonly [valType: Type]
@@ -49,7 +54,7 @@ export interface ListType {
 export interface DataType {
     readonly tag: "data"
     readonly props: {
-        readonly len: number | null
+        readonly len: Integer | null
         readonly mut: boolean
     }
     readonly types: null
@@ -147,7 +152,7 @@ export interface StructField {
 export interface TypedArrayType {
     readonly tag: "typedarray"
     readonly props: {
-        readonly len: number | null
+        readonly len: Integer | null
         readonly mut: boolean
     }
     readonly types: readonly [FixedNumberType]
@@ -158,7 +163,7 @@ export interface UnionType<T = Type> {
     readonly tag: "union"
     readonly props: {
         readonly flat: boolean
-        readonly tags: readonly number[]
+        readonly tags: readonly Integer[]
     }
     readonly types: readonly T[]
     readonly loc: Location | null

@@ -1,6 +1,6 @@
 import * as ast from "../ast/bare-ast.js"
 import type { Config } from "../core/config.js"
-import { CompilerError } from "../core/compiler-error.js"
+import { CompilerError, type Location } from "../core/compiler-error.js"
 import { Lex } from "./lex.js"
 
 export function parse(content: string, config: Config): ast.Ast {
@@ -125,12 +125,13 @@ function parseData(p: Parser): ast.Type {
     if (p.lex.token() !== "data") {
         throw new CompilerError("'data' is expected.", p.lex.location())
     }
-    let len: number | null = null
+    let len: ast.Integer | null = null
     const loc = p.lex.location()
     p.lex.forth()
     if (p.lex.token() === "<") {
         p.lex.forth()
-        len = parseUnsignedNumber(p)
+        const loc = p.lex.location()
+        len = { val: parseUnsignedNumber(p), loc }
         if (p.lex.token() !== ">") {
             throw new CompilerError("'>' is expected.", p.lex.location())
         }
@@ -143,11 +144,12 @@ function parseList(p: Parser): ast.Type {
     if (p.lex.token() !== "[") {
         throw new CompilerError("'[' is expected.", p.lex.location())
     }
-    let len: number | null = null
+    let len: ast.Integer | null = null
     const loc = p.lex.location()
     p.lex.forth()
     if (p.lex.token() !== "]") {
-        len = parseUnsignedNumber(p)
+        const loc = p.lex.location()
+        len = { val: parseUnsignedNumber(p), loc }
         if (p.lex.token() !== "]") {
             throw new CompilerError("']' is expected.", p.lex.location())
         }
@@ -225,7 +227,7 @@ function parseUnion(p: Parser): ast.Type {
         throw new CompilerError("'(' is expected.", p.lex.location())
     }
     const loc = p.lex.location()
-    const tags: number[] = []
+    const tags: ast.Integer[] = []
     const types: ast.Type[] = []
     let tagVal = 0
     do {
@@ -244,8 +246,10 @@ function parseUnion(p: Parser): ast.Type {
             }
         }
         const type = parseType(p)
+        let loc: Location | null = null
         if (p.lex.token() === "=") {
             p.lex.forth()
+            loc = p.lex.location()
             tagVal = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
             throw new CompilerError(
@@ -253,7 +257,7 @@ function parseUnion(p: Parser): ast.Type {
                 p.lex.location()
             )
         }
-        tags.push(tagVal)
+        tags.push({ val: tagVal, loc })
         types.push(type)
         tagVal++
     } while (p.lex.token() === "|")

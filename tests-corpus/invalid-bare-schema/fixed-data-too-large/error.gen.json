@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "fixed-data-too-large/schema.bare",
-    "offset": 15,
+    "offset": 20,
     "line": 1,
-    "col": 16
+    "col": 21
   },
-  "message": "(fixed-data-too-large/schema.bare:1:16) only length encoded as a u32 are supported."
+  "message": "(fixed-data-too-large/schema.bare:1:21) only length encoded as a u32 are supported."
 }

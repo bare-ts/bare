@@ -6,7 +6,15 @@
       "type": {
         "tag": "typedarray",
         "props": {
-          "len": 4294967296,
+          "len": {
+            "val": 4294967296,
+            "loc": {
+              "filename": "fixed-array-too-large/schema.bare",
+              "offset": 14,
+              "line": 1,
+              "col": 15
+            }
+          },
           "mut": false
         },
         "types": [

@@ -6,7 +6,15 @@
       "type": {
         "tag": "data",
         "props": {
-          "len": 16,
+          "len": {
+            "val": 16,
+            "loc": {
+              "filename": "data-fixed/schema.bare",
+              "offset": 16,
+              "line": 2,
+              "col": 16
+            }
+          },
           "mut": false
         },
         "types": null,

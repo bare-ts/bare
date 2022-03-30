@@ -8,10 +8,27 @@
         "props": {
           "flat": false,
           "tags": [
-            0,
-            5,
-            6,
-            7
+            {
+              "val": 0,
+              "loc": null
+            },
+            {
+              "val": 5,
+              "loc": {
+                "filename": "union-partial-tag/schema.bare",
+                "offset": 29,
+                "line": 1,
+                "col": 30
+              }
+            },
+            {
+              "val": 6,
+              "loc": null
+            },
+            {
+              "val": 7,
+              "loc": null
+            }
           ]
         },
         "types": [
