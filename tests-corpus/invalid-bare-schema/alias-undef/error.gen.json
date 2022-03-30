@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "alias-undef/schema.bare",
-    "offset": 40,
+    "offset": 48,
     "line": 3,
-    "col": 15
+    "col": 18
   },
-  "message": "(alias-undef/schema.bare:3:15) alias 'UndefinedAlias' is not defined."
+  "message": "(alias-undef/schema.bare:3:18) alias 'UndefinedAlias' is not defined."
 }

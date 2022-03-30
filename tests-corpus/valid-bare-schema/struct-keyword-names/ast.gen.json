@@ -14,7 +14,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-keyword-names/schema.bare",
-                "offset": 23,
+                "offset": 28,
                 "line": 2,
                 "col": 5
               }
@@ -25,7 +25,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-keyword-names/schema.bare",
-                "offset": 40,
+                "offset": 42,
                 "line": 3,
                 "col": 5
               }
@@ -36,7 +36,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-keyword-names/schema.bare",
-                "offset": 59,
+                "offset": 58,
                 "line": 4,
                 "col": 5
               }
@@ -47,7 +47,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-keyword-names/schema.bare",
-                "offset": 76,
+                "offset": 72,
                 "line": 5,
                 "col": 5
               }
@@ -58,7 +58,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-keyword-names/schema.bare",
-                "offset": 92,
+                "offset": 88,
                 "line": 6,
                 "col": 5
               }
@@ -72,7 +72,7 @@
             "types": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
-              "offset": 29,
+              "offset": 34,
               "line": 2,
               "col": 11
             }
@@ -83,7 +83,7 @@
             "types": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
-              "offset": 48,
+              "offset": 50,
               "line": 3,
               "col": 13
             }
@@ -94,7 +94,7 @@
             "types": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
-              "offset": 65,
+              "offset": 64,
               "line": 4,
               "col": 11
             }
@@ -105,7 +105,7 @@
             "types": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
-              "offset": 83,
+              "offset": 79,
               "line": 5,
               "col": 12
             }
@@ -116,7 +116,7 @@
             "types": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
-              "offset": 96,
+              "offset": 92,
               "line": 6,
               "col": 9
             }
@@ -124,9 +124,9 @@
         ],
         "loc": {
           "filename": "struct-keyword-names/schema.bare",
-          "offset": 17,
+          "offset": 22,
           "line": 1,
-          "col": 18
+          "col": 23
         }
       },
       "loc": {

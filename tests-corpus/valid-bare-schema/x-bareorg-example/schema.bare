@@ -1,7 +1,7 @@
-type PublicKey data<128>
-type Time string # ISO 8601
+type PublicKey data[128]
+type Time str # ISO 8601
 
-enum Department {
+type Department enum {
   ACCOUNTING
   ADMINISTRATION
   CUSTOMER_SERVICE
@@ -11,34 +11,34 @@ enum Department {
   JSMITH = 99
 }
 
-struct Customer {
-  ame: string
-  email: string
+type Customer struct {
+  ame: str
+  email: str
   address: Address
-  orders: []{
+  orders: list<struct {
     orderId: i64
     quantity: i32
-  }
-  metadata: map[string]data
+  }>
+  metadata: map<str><data>
 }
 
-struct Employee {
-  name: string
-  email: string
+type Employee struct {
+  name: str
+  email: str
   address: Address
   department: Department
   hireDate: Time
   publicKey: optional<PublicKey>
-  metadata: map[string]data
+  metadata: map<str><data>
 }
 
-type Person (Customer | Employee)
+type Person union { Customer | Employee }
 
-struct Address {
-  address: [4]string
-  city: string
-  state: string
-  country: string
+type Address struct {
+  address: list<str>[4]
+  city: str
+  state: str
+  country: str
 }
 
-type Message (Person = 0)
+type Message union { Person = 0 }

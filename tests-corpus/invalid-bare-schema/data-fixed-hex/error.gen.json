@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "data-fixed-hex/schema.bare",
+    "offset": 18,
+    "line": 1,
+    "col": 19
+  },
+  "message": "(data-fixed-hex/schema.bare:1:19) an unsigned integer is expected."
+}

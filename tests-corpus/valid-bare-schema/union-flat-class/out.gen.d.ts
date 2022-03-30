@@ -13,20 +13,20 @@ export function readBoxedU32(bc: bare.ByteCursor): BoxedU32
 
 export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void
 
-export declare class BoxedString {
+export declare class Boxedstr {
     readonly val: string
     constructor(
         val: string,
     )
 }
 
-export function readBoxedString(bc: bare.ByteCursor): BoxedString
+export function readBoxedstr(bc: bare.ByteCursor): Boxedstr
 
-export function writeBoxedString(bc: bare.ByteCursor, x: BoxedString): void
+export function writeBoxedstr(bc: bare.ByteCursor, x: Boxedstr): void
 
 export type Boxed = 
     | BoxedU32
-    | BoxedString
+    | Boxedstr
 
 export function readBoxed(bc: bare.ByteCursor): Boxed
 

@@ -1,7 +1,7 @@
-struct Operation {
-    type: string
-    struct: string
-    enum: string
+type Operation struct {
+    type: str
+    struct: str
+    enum: str
     const: bool
     bc: u8
 }

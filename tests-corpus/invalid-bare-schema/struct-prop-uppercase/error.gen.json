@@ -2,7 +2,7 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-prop-uppercase/schema.bare",
-    "offset": 21,
+    "offset": 26,
     "line": 3,
     "col": 5
   },

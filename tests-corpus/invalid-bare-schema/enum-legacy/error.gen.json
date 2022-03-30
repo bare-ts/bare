@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "enum-legacy/schema.bare",
+    "offset": 13,
+    "line": 2,
+    "col": 13
+  },
+  "message": "(enum-legacy/schema.bare:2:13) use 'type Gender enum { ... }' or allow 'enum Gender { ... }' with option '--legacy-syntax'."
+}

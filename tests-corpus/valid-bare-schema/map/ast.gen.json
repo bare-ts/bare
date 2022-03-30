@@ -26,9 +26,9 @@
             "types": null,
             "loc": {
               "filename": "map/schema.bare",
-              "offset": 22,
+              "offset": 19,
               "line": 1,
-              "col": 23
+              "col": 20
             }
           }
         ],

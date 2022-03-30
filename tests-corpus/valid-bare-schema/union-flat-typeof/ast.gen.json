@@ -33,9 +33,9 @@
             "types": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
-              "offset": 18,
+              "offset": 25,
               "line": 1,
-              "col": 19
+              "col": 26
             }
           },
           {
@@ -44,9 +44,9 @@
             "types": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
-              "offset": 25,
+              "offset": 32,
               "line": 1,
-              "col": 26
+              "col": 33
             }
           },
           {
@@ -55,9 +55,9 @@
             "types": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
-              "offset": 31,
+              "offset": 38,
               "line": 1,
-              "col": 32
+              "col": 39
             }
           },
           {
@@ -69,17 +69,17 @@
             "types": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
-              "offset": 40,
+              "offset": 44,
               "line": 1,
-              "col": 41
+              "col": 45
             }
           }
         ],
         "loc": {
           "filename": "union-flat-typeof/schema.bare",
-          "offset": 17,
+          "offset": 23,
           "line": 1,
-          "col": 18
+          "col": 24
         }
       },
       "loc": {

@@ -13,7 +13,7 @@
               "val": 0,
               "loc": {
                 "filename": "map-key-enum/schema.bare",
-                "offset": 18,
+                "offset": 23,
                 "line": 2,
                 "col": 5
               }
@@ -23,7 +23,7 @@
               "val": 1,
               "loc": {
                 "filename": "map-key-enum/schema.bare",
-                "offset": 28,
+                "offset": 33,
                 "line": 3,
                 "col": 5
               }
@@ -33,7 +33,7 @@
               "val": 2,
               "loc": {
                 "filename": "map-key-enum/schema.bare",
-                "offset": 37,
+                "offset": 42,
                 "line": 4,
                 "col": 5
               }
@@ -72,7 +72,7 @@
             "types": null,
             "loc": {
               "filename": "map-key-enum/schema.bare",
-              "offset": 68,
+              "offset": 73,
               "line": 7,
               "col": 22
             }
@@ -83,7 +83,7 @@
             "types": null,
             "loc": {
               "filename": "map-key-enum/schema.bare",
-              "offset": 76,
+              "offset": 81,
               "line": 7,
               "col": 30
             }
@@ -91,14 +91,14 @@
         ],
         "loc": {
           "filename": "map-key-enum/schema.bare",
-          "offset": 64,
+          "offset": 69,
           "line": 7,
           "col": 18
         }
       },
       "loc": {
         "filename": "map-key-enum/schema.bare",
-        "offset": 47,
+        "offset": 52,
         "line": 7,
         "col": 1
       }

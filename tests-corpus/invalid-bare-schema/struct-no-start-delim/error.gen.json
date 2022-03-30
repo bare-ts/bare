@@ -2,7 +2,7 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-no-start-delim/schema.bare",
-    "offset": 19,
+    "offset": 24,
     "line": 3,
     "col": 5
   },

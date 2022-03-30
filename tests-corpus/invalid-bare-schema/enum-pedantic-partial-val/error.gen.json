@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-pedantic-partial-val/schema.bare",
-    "offset": 42,
-    "line": 5,
+    "offset": 46,
+    "line": 4,
     "col": 5
   },
-  "message": "(enum-pedantic-partial-val/schema.bare:5:5) in pedantic mode, all enum tag must be set. '=' is expected."
+  "message": "(enum-pedantic-partial-val/schema.bare:4:5) in pedantic mode, all enum tag must be set. '=' is expected."
 }

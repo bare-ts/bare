@@ -35,9 +35,9 @@
                 "types": null,
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 20,
-                  "line": 1,
-                  "col": 21
+                  "offset": 31,
+                  "line": 2,
+                  "col": 9
                 }
               },
               {
@@ -53,25 +53,25 @@
                     "types": null,
                     "loc": {
                       "filename": "union-composite-type/schema.bare",
-                      "offset": 36,
-                      "line": 1,
-                      "col": 37
+                      "offset": 45,
+                      "line": 2,
+                      "col": 23
                     }
                   }
                 ],
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 27,
-                  "line": 1,
-                  "col": 28
+                  "offset": 36,
+                  "line": 2,
+                  "col": 14
                 }
               }
             ],
             "loc": {
               "filename": "union-composite-type/schema.bare",
-              "offset": 16,
-              "line": 1,
-              "col": 17
+              "offset": 27,
+              "line": 2,
+              "col": 5
             }
           },
           {
@@ -81,9 +81,9 @@
                 "val": 4,
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 47,
-                  "line": 1,
-                  "col": 48
+                  "offset": 73,
+                  "line": 2,
+                  "col": 51
                 }
               },
               "mut": false
@@ -102,25 +102,25 @@
                     "types": null,
                     "loc": {
                       "filename": "union-composite-type/schema.bare",
-                      "offset": 58,
-                      "line": 1,
-                      "col": 59
+                      "offset": 67,
+                      "line": 2,
+                      "col": 45
                     }
                   }
                 ],
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 49,
-                  "line": 1,
-                  "col": 50
+                  "offset": 58,
+                  "line": 2,
+                  "col": 36
                 }
               }
             ],
             "loc": {
               "filename": "union-composite-type/schema.bare",
-              "offset": 46,
-              "line": 1,
-              "col": 47
+              "offset": 53,
+              "line": 2,
+              "col": 31
             }
           },
           {
@@ -130,9 +130,9 @@
                 "val": 4,
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 69,
-                  "line": 1,
-                  "col": 70
+                  "offset": 87,
+                  "line": 2,
+                  "col": 65
                 }
               },
               "mut": false
@@ -144,25 +144,25 @@
                 "types": null,
                 "loc": {
                   "filename": "union-composite-type/schema.bare",
-                  "offset": 71,
-                  "line": 1,
-                  "col": 72
+                  "offset": 83,
+                  "line": 2,
+                  "col": 61
                 }
               }
             ],
             "loc": {
               "filename": "union-composite-type/schema.bare",
-              "offset": 68,
-              "line": 1,
-              "col": 69
+              "offset": 78,
+              "line": 2,
+              "col": 56
             }
           }
         ],
         "loc": {
           "filename": "union-composite-type/schema.bare",
-          "offset": 15,
+          "offset": 21,
           "line": 1,
-          "col": 16
+          "col": 22
         }
       },
       "loc": {

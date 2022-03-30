@@ -1,1 +1,1 @@
-type Dict map string string
+type Dict map str str

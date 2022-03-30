@@ -6,5 +6,5 @@
     "line": 1,
     "col": 15
   },
-  "message": "(map-no-start-key-delim/schema.bare:1:15) '[' is expected."
+  "message": "(map-no-start-key-delim/schema.bare:1:15) '<' is expected."
 }

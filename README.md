@@ -30,27 +30,27 @@ Let's us take a simple use-case.
 Your application enables to synchronize a list of contacts.
 First, you have to write a bare schema:
 
-```rs
-enum Gender {
+```zig
+type Gender enum {
     FEMALE
     FLUID
     MALE
 }
 
-struct Person {
-    name: string
-    email: string
+type Person struct {
+    name: str
+    email: str
     gender: optional<Gender>
 }
 
-struct Organization {
-    name: string
-    email: string
+type Organization struct {
+    name: str
+    email: str
 }
 
-type Contact (Person | Organization)
+type Contact union { Person | Organization }
 
-type Contacts []Contact
+type Message list<Contact>
 ```
 
 Next, you have to compile your schema into code:

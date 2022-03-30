@@ -14,7 +14,7 @@
               "quoted": false,
               "loc": {
                 "filename": "union-flat-class/schema.bare",
-                "offset": 22,
+                "offset": 27,
                 "line": 2,
                 "col": 5
               }
@@ -28,7 +28,7 @@
             "types": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
-              "offset": 27,
+              "offset": 32,
               "line": 2,
               "col": 10
             }
@@ -36,9 +36,9 @@
         ],
         "loc": {
           "filename": "union-flat-class/schema.bare",
-          "offset": 16,
+          "offset": 21,
           "line": 1,
-          "col": 17
+          "col": 22
         }
       },
       "loc": {
@@ -49,7 +49,7 @@
       }
     },
     {
-      "alias": "BoxedString",
+      "alias": "Boxedstr",
       "internal": false,
       "type": {
         "tag": "struct",
@@ -62,7 +62,7 @@
               "quoted": false,
               "loc": {
                 "filename": "union-flat-class/schema.bare",
-                "offset": 59,
+                "offset": 66,
                 "line": 6,
                 "col": 5
               }
@@ -76,7 +76,7 @@
             "types": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
-              "offset": 64,
+              "offset": 71,
               "line": 6,
               "col": 10
             }
@@ -84,14 +84,14 @@
         ],
         "loc": {
           "filename": "union-flat-class/schema.bare",
-          "offset": 53,
+          "offset": 60,
           "line": 5,
-          "col": 20
+          "col": 22
         }
       },
       "loc": {
         "filename": "union-flat-class/schema.bare",
-        "offset": 34,
+        "offset": 39,
         "line": 5,
         "col": 1
       }
@@ -123,35 +123,35 @@
             "types": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
-              "offset": 86,
+              "offset": 97,
               "line": 9,
-              "col": 13
+              "col": 20
             }
           },
           {
             "tag": "alias",
             "props": {
-              "alias": "BoxedString"
+              "alias": "Boxedstr"
             },
             "types": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
-              "offset": 97,
+              "offset": 108,
               "line": 9,
-              "col": 24
+              "col": 31
             }
           }
         ],
         "loc": {
           "filename": "union-flat-class/schema.bare",
-          "offset": 85,
+          "offset": 95,
           "line": 9,
-          "col": 12
+          "col": 18
         }
       },
       "loc": {
         "filename": "union-flat-class/schema.bare",
-        "offset": 74,
+        "offset": 78,
         "line": 9,
         "col": 1
       }

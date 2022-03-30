@@ -2,7 +2,7 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-no-prop-type-sep/schema.bare",
-    "offset": 26,
+    "offset": 31,
     "line": 3,
     "col": 10
   },

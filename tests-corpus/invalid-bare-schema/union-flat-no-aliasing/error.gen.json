@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-flat-no-aliasing/schema.bare",
-    "offset": 17,
+    "offset": 23,
     "line": 1,
-    "col": 18
+    "col": 24
   },
-  "message": "(union-flat-no-aliasing/schema.bare:1:18) the union cannot be flatten."
+  "message": "(union-flat-no-aliasing/schema.bare:1:24) the union cannot be flatten."
 }

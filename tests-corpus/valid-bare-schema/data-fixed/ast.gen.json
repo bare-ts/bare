@@ -10,8 +10,8 @@
             "val": 16,
             "loc": {
               "filename": "data-fixed/schema.bare",
-              "offset": 16,
-              "line": 2,
+              "offset": 15,
+              "line": 1,
               "col": 16
             }
           },
@@ -20,15 +20,15 @@
         "types": null,
         "loc": {
           "filename": "data-fixed/schema.bare",
-          "offset": 11,
-          "line": 2,
+          "offset": 10,
+          "line": 1,
           "col": 11
         }
       },
       "loc": {
         "filename": "data-fixed/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -36,8 +36,8 @@
   "main": [],
   "loc": {
     "filename": "data-fixed/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

@@ -1,7 +1,6 @@
-
-struct Person {
+type Person struct {
     bestFriend: optional<Person>
-    secondBestFriend: ( Person | void )
-    friends: []Person
-    friendNicknames: map[string]Person
+    secondBestFriend: union{ Person | void }
+    friends: list<Person>
+    friendNicknames: map<str><Person>
 }

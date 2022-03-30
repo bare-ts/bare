@@ -14,7 +14,7 @@
               "quoted": true,
               "loc": {
                 "filename": "struct-quoted-property/schema.bare",
-                "offset": 20,
+                "offset": 25,
                 "line": 2,
                 "col": 5
               }
@@ -25,7 +25,7 @@
               "quoted": true,
               "loc": {
                 "filename": "struct-quoted-property/schema.bare",
-                "offset": 37,
+                "offset": 39,
                 "line": 3,
                 "col": 5
               }
@@ -39,7 +39,7 @@
             "types": null,
             "loc": {
               "filename": "struct-quoted-property/schema.bare",
-              "offset": 26,
+              "offset": 31,
               "line": 2,
               "col": 11
             }
@@ -50,7 +50,7 @@
             "types": null,
             "loc": {
               "filename": "struct-quoted-property/schema.bare",
-              "offset": 42,
+              "offset": 44,
               "line": 3,
               "col": 10
             }
@@ -58,9 +58,9 @@
         ],
         "loc": {
           "filename": "struct-quoted-property/schema.bare",
-          "offset": 14,
+          "offset": 19,
           "line": 1,
-          "col": 15
+          "col": 20
         }
       },
       "loc": {

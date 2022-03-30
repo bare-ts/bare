@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "list-fixed-empty/schema.bare",
+    "offset": 27,
+    "line": 1,
+    "col": 28
+  },
+  "message": "(list-fixed-empty/schema.bare:1:28) a fixed list or data must have a length strictly greater than 0."
+}

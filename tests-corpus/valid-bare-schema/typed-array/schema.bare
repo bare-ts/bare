@@ -1,1 +1,1 @@
-type U8Array []u8
+type U8Array list<u8>

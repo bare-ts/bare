@@ -14,8 +14,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref/schema.bare",
-                "offset": 21,
-                "line": 3,
+                "offset": 25,
+                "line": 2,
                 "col": 5
               }
             }
@@ -30,23 +30,23 @@
             "types": null,
             "loc": {
               "filename": "struct-circular-ref/schema.bare",
-              "offset": 33,
-              "line": 3,
+              "offset": 37,
+              "line": 2,
               "col": 17
             }
           }
         ],
         "loc": {
           "filename": "struct-circular-ref/schema.bare",
-          "offset": 15,
-          "line": 2,
-          "col": 15
+          "offset": 19,
+          "line": 1,
+          "col": 20
         }
       },
       "loc": {
         "filename": "struct-circular-ref/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -54,8 +54,8 @@
   "main": [],
   "loc": {
     "filename": "struct-circular-ref/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

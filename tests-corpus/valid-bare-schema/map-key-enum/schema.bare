@@ -1,7 +1,7 @@
-enum Gender {
+type Gender enum {
     FLUID
     MALE
     FEMALE
 }
 
-type GenderNames map[Gender] string
+type GenderNames map<Gender><str>

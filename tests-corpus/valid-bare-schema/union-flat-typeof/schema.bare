@@ -1,1 +1,1 @@
-type TypeOfUnion (bool | u32 | string | void)
+type TypeOfUnion union { bool | u32 | str | void }

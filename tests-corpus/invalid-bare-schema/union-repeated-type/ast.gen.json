@@ -25,9 +25,9 @@
             "types": null,
             "loc": {
               "filename": "union-repeated-type/schema.bare",
-              "offset": 8,
+              "offset": 15,
               "line": 1,
-              "col": 9
+              "col": 16
             }
           },
           {
@@ -36,17 +36,17 @@
             "types": null,
             "loc": {
               "filename": "union-repeated-type/schema.bare",
-              "offset": 13,
+              "offset": 20,
               "line": 1,
-              "col": 14
+              "col": 21
             }
           }
         ],
         "loc": {
           "filename": "union-repeated-type/schema.bare",
-          "offset": 7,
+          "offset": 13,
           "line": 1,
-          "col": 8
+          "col": 14
         }
       },
       "loc": {

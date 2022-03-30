@@ -1,3 +1,3 @@
-type KeyType string
+type KeyType str
 
-type Dict map[KeyType] string
+type Dict map<KeyType><str>

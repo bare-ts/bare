@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-no-start-delim/schema.bare",
-    "offset": 17,
-    "line": 3,
+    "offset": 21,
+    "line": 2,
     "col": 5
   },
-  "message": "(enum-no-start-delim/schema.bare:3:5) '{' is expected."
+  "message": "(enum-no-start-delim/schema.bare:2:5) '{' is expected."
 }

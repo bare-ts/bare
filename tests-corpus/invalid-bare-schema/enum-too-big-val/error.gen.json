@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-too-big-val/schema.bare",
-    "offset": 47,
-    "line": 5,
+    "offset": 51,
+    "line": 4,
     "col": 5
   },
-  "message": "(enum-too-big-val/schema.bare:5:5) only enum values encoded as safe integers are supported."
+  "message": "(enum-too-big-val/schema.bare:4:5) only enum values encoded as safe integers are supported."
 }

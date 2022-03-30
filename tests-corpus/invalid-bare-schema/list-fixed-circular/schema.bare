@@ -1,0 +1,3 @@
+type Person struct {
+    bestFriends: list<Person>[2]
+}

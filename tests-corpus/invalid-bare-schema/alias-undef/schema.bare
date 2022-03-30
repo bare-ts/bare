@@ -1,4 +1,4 @@
-struct A {
+type A struct {
     field0: u8
-    field1: []UndefinedAlias
+    field1: list<UndefinedAlias>
 }

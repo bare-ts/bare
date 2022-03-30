@@ -1,4 +1,3 @@
-
-struct Person {
+type Person struct {
     bestFriend: Person
 }

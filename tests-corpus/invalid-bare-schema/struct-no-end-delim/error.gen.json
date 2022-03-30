@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-no-end-delim/schema.bare",
-    "offset": 46,
-    "line": 5,
+    "offset": 47,
+    "line": 4,
     "col": 1
   },
-  "message": "(struct-no-end-delim/schema.bare:5:1) '}' is expected."
+  "message": "(struct-no-end-delim/schema.bare:4:1) '}' is expected."
 }

@@ -37,9 +37,9 @@
             "types": null,
             "loc": {
               "filename": "union/schema.bare",
-              "offset": 18,
+              "offset": 25,
               "line": 1,
-              "col": 19
+              "col": 26
             }
           },
           {
@@ -48,9 +48,9 @@
             "types": null,
             "loc": {
               "filename": "union/schema.bare",
-              "offset": 23,
+              "offset": 30,
               "line": 1,
-              "col": 24
+              "col": 31
             }
           },
           {
@@ -59,39 +59,39 @@
             "types": null,
             "loc": {
               "filename": "union/schema.bare",
-              "offset": 29,
+              "offset": 36,
               "line": 1,
-              "col": 30
+              "col": 37
             }
           },
           {
-            "tag": "u64Safe",
+            "tag": "u64",
             "props": null,
             "types": null,
             "loc": {
               "filename": "union/schema.bare",
-              "offset": 35,
+              "offset": 42,
               "line": 1,
-              "col": 36
+              "col": 43
             }
           },
           {
-            "tag": "uintSafe",
+            "tag": "uint",
             "props": null,
             "types": null,
             "loc": {
               "filename": "union/schema.bare",
-              "offset": 41,
+              "offset": 48,
               "line": 1,
-              "col": 42
+              "col": 49
             }
           }
         ],
         "loc": {
           "filename": "union/schema.bare",
-          "offset": 17,
+          "offset": 23,
           "line": 1,
-          "col": 18
+          "col": 24
         }
       },
       "loc": {

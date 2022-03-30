@@ -61,9 +61,9 @@
             "types": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
-              "offset": 33,
+              "offset": 40,
               "line": 2,
-              "col": 19
+              "col": 26
             }
           },
           {
@@ -72,9 +72,9 @@
             "types": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
-              "offset": 38,
+              "offset": 45,
               "line": 2,
-              "col": 24
+              "col": 31
             }
           },
           {
@@ -83,20 +83,20 @@
             "types": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
-              "offset": 44,
+              "offset": 51,
               "line": 2,
-              "col": 30
+              "col": 37
             }
           },
           {
-            "tag": "u64Safe",
+            "tag": "u64",
             "props": null,
             "types": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
-              "offset": 50,
+              "offset": 57,
               "line": 2,
-              "col": 36
+              "col": 43
             }
           },
           {
@@ -107,17 +107,17 @@
             "types": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
-              "offset": 56,
+              "offset": 63,
               "line": 2,
-              "col": 42
+              "col": 49
             }
           }
         ],
         "loc": {
           "filename": "union-aliased-lax-void/schema.bare",
-          "offset": 32,
+          "offset": 38,
           "line": 2,
-          "col": 18
+          "col": 24
         }
       },
       "loc": {

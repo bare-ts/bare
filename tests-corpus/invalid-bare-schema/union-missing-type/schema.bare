@@ -1,1 +1,1 @@
-type UnfinishedUnion (u8 |)
+type UnfinishedUnion union { u8 |}

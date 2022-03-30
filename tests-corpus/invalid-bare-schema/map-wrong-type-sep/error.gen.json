@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "map-wrong-type-sep/schema.bare",
+    "offset": 17,
+    "line": 1,
+    "col": 18
+  },
+  "message": "(map-wrong-type-sep/schema.bare:1:18) every type must be enclosed with '<>'. e.g. 'map<Key><Val>'."
+}

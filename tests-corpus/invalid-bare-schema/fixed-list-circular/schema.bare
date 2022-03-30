@@ -1,3 +1,0 @@
-struct Person {
-    bestFriends: [2]Person
-}

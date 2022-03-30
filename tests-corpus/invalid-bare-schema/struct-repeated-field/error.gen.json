@@ -2,7 +2,7 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-repeated-field/schema.bare",
-    "offset": 50,
+    "offset": 52,
     "line": 5,
     "col": 5
   },

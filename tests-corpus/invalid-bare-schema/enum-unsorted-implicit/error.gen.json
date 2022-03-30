@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-unsorted-implicit/schema.bare",
-    "offset": 38,
-    "line": 5,
+    "offset": 42,
+    "line": 4,
     "col": 5
   },
-  "message": "(enum-unsorted-implicit/schema.bare:5:5) value '1' is assigned to a preceding member."
+  "message": "(enum-unsorted-implicit/schema.bare:4:5) value '1' is assigned to a preceding member."
 }

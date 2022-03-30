@@ -1,0 +1,84 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "bestFriends",
+              "quoted": false,
+              "loc": {
+                "filename": "list-fixed-circular/schema.bare",
+                "offset": 25,
+                "line": 2,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "list",
+            "props": {
+              "len": {
+                "val": 2,
+                "loc": {
+                  "filename": "list-fixed-circular/schema.bare",
+                  "offset": 51,
+                  "line": 2,
+                  "col": 31
+                }
+              },
+              "mut": false
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Person"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "list-fixed-circular/schema.bare",
+                  "offset": 43,
+                  "line": 2,
+                  "col": 23
+                }
+              }
+            ],
+            "loc": {
+              "filename": "list-fixed-circular/schema.bare",
+              "offset": 38,
+              "line": 2,
+              "col": 18
+            }
+          }
+        ],
+        "loc": {
+          "filename": "list-fixed-circular/schema.bare",
+          "offset": 19,
+          "line": 1,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "list-fixed-circular/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "list-fixed-circular/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

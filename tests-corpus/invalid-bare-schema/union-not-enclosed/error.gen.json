@@ -6,5 +6,5 @@
     "line": 1,
     "col": 15
   },
-  "message": "(union-not-enclosed/schema.bare:1:15) a union must be enclosed by '()'."
+  "message": "(union-not-enclosed/schema.bare:1:15) a union must be enclosed by 'union {}'."
 }

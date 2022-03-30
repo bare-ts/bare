@@ -1,2 +1,1 @@
-
-type Data data<16>
+type Data data[16]

@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "data-fixed-legacy/schema.bare",
+    "offset": 14,
+    "line": 1,
+    "col": 15
+  },
+  "message": "(data-fixed-legacy/schema.bare:1:15) use 'data[n]' or allow 'data<n>' with option '--legacy-syntax'."
+}

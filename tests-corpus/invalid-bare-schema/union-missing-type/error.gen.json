@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-missing-type/schema.bare",
-    "offset": 26,
+    "offset": 33,
     "line": 1,
-    "col": 27
+    "col": 34
   },
-  "message": "(union-missing-type/schema.bare:1:27) '|' must be followed by a type."
+  "message": "(union-missing-type/schema.bare:1:34) '|' must be followed by a type."
 }

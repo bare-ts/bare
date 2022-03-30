@@ -1,6 +1,6 @@
 
-struct Person {
-    name: string
+type Person struct {
+    name: str
     age: u8
-    name: string
+    name: str
 }

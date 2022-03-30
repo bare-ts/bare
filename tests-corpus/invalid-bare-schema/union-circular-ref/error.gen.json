@@ -2,7 +2,7 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-circular-ref/schema.bare",
-    "offset": 43,
+    "offset": 49,
     "line": 2,
     "col": 13
   },

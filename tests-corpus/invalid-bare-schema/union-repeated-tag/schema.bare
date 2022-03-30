@@ -1,2 +1,1 @@
-# last tag is Number.MAX_SAFE_INTEGER + 1
-type UnsignedInt (u8 = 0 | u16 = 1 | u32 = 1 | u64 = 2)
+type UnsignedInt union { u8 = 0 | u16 = 1 | u32 = 1 | u64 = 2 }

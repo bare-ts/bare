@@ -1,1 +1,1 @@
-type Other string
+type Other str

@@ -1,1 +1,1 @@
-type UnsignedInt ({ value: string } | { value: u32 })
+type UnsignedInt union { struct { value: str } | struct { value: u32 } }

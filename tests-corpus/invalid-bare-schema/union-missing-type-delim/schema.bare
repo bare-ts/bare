@@ -1,1 +1,1 @@
-type MIssingTypeDElim (u8 u16)
+type MIssingTypeDElim union { u8 u16 }

@@ -1,13 +1,12 @@
-
-struct Person {
-    name: string
+type Person struct {
+    name: str
     age: u8
-    address: {
-        country: string
-        city: {
-            name: string
+    address: struct {
+        country: str
+        city: struct {
+            name: str
             code: u16
         }
-        street: string
+        street: str
     }
 }

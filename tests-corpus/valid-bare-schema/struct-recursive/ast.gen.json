@@ -14,7 +14,7 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-recursive/schema.bare",
-                "offset": 18,
+                "offset": 23,
                 "line": 2,
                 "col": 5
               }
@@ -23,44 +23,29 @@
         },
         "types": [
           {
-            "tag": "optional",
+            "tag": "list",
             "props": {
-              "lax": false,
-              "undef": false
+              "len": null,
+              "mut": false
             },
             "types": [
               {
-                "tag": "list",
+                "tag": "alias",
                 "props": {
-                  "len": null,
-                  "mut": false
+                  "alias": "Node"
                 },
-                "types": [
-                  {
-                    "tag": "alias",
-                    "props": {
-                      "alias": "Node"
-                    },
-                    "types": null,
-                    "loc": {
-                      "filename": "struct-recursive/schema.bare",
-                      "offset": 39,
-                      "line": 2,
-                      "col": 26
-                    }
-                  }
-                ],
+                "types": null,
                 "loc": {
                   "filename": "struct-recursive/schema.bare",
-                  "offset": 37,
+                  "offset": 38,
                   "line": 2,
-                  "col": 24
+                  "col": 20
                 }
               }
             ],
             "loc": {
               "filename": "struct-recursive/schema.bare",
-              "offset": 28,
+              "offset": 33,
               "line": 2,
               "col": 15
             }
@@ -68,9 +53,9 @@
         ],
         "loc": {
           "filename": "struct-recursive/schema.bare",
-          "offset": 12,
+          "offset": 17,
           "line": 1,
-          "col": 13
+          "col": 18
         }
       },
       "loc": {

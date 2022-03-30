@@ -1,1 +1,0 @@
-type EmptyArray [0]bool

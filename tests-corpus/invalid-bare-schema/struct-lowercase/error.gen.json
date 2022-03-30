@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-lowercase/schema.bare",
-    "offset": 8,
-    "line": 2,
-    "col": 8
+    "offset": 5,
+    "line": 1,
+    "col": 6
   },
-  "message": "(struct-lowercase/schema.bare:2:8) the type name 'person' must be in UpperCamelCase."
+  "message": "(struct-lowercase/schema.bare:1:6) the type name 'person' must be in UpperCamelCase."
 }

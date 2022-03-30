@@ -1,0 +1,47 @@
+{
+  "defs": [
+    {
+      "alias": "U8List",
+      "internal": false,
+      "type": {
+        "tag": "list",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "list-legacy/schema.bare",
+              "offset": 14,
+              "line": 1,
+              "col": 15
+            }
+          }
+        ],
+        "loc": {
+          "filename": "list-legacy/schema.bare",
+          "offset": 12,
+          "line": 1,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "list-legacy/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "list-legacy/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

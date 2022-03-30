@@ -1,0 +1,81 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "quoted": false,
+              "loc": {
+                "filename": "alias-anonymous-struct-legacy/schema.bare",
+                "offset": 18,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "age",
+              "quoted": false,
+              "loc": {
+                "filename": "alias-anonymous-struct-legacy/schema.bare",
+                "offset": 32,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "alias-anonymous-struct-legacy/schema.bare",
+              "offset": 24,
+              "line": 2,
+              "col": 11
+            }
+          },
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "alias-anonymous-struct-legacy/schema.bare",
+              "offset": 37,
+              "line": 3,
+              "col": 10
+            }
+          }
+        ],
+        "loc": {
+          "filename": "alias-anonymous-struct-legacy/schema.bare",
+          "offset": 12,
+          "line": 1,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "alias-anonymous-struct-legacy/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "alias-anonymous-struct-legacy/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

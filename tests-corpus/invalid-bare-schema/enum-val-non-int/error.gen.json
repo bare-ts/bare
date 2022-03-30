@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "enum-val-non-int/schema.bare",
-    "offset": 27,
-    "line": 3,
+    "offset": 31,
+    "line": 2,
     "col": 13
   },
-  "message": "(enum-val-non-int/schema.bare:3:13) an unsigned integer without leading zeroes is expected."
+  "message": "(enum-val-non-int/schema.bare:2:13) an unsigned integer is expected."
 }

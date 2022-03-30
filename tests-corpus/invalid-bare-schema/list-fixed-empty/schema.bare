@@ -1,0 +1,1 @@
+type EmptyArray list<bool>[0]

@@ -1,5 +1,5 @@
 
-struct Person {
-    Name: string
+type Person struct {
+    Name: str
     age: u8
 }

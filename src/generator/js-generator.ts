@@ -197,7 +197,9 @@ function genListType(g: Gen, type: ast.ListType): string {
 
 function genEnumType(_g: Gen, type: ast.EnumType): string {
     const { intEnum, vals } = type.props
-    return vals.map(({ name, val }) => (intEnum ? `${val}` : name)).join(" | ")
+    return vals
+        .map(({ name, val }) => (intEnum ? `${val}` : rpr(name)))
+        .join(" | ")
 }
 
 function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {

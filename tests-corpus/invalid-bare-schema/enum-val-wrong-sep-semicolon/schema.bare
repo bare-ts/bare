@@ -1,5 +1,4 @@
-
-enum Gender {
+type Gender enum {
     FLUID;
     MALE;
     FEMALE;

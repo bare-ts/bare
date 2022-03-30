@@ -14,8 +14,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct/schema.bare",
-                "offset": 21,
-                "line": 3,
+                "offset": 25,
+                "line": 2,
                 "col": 5
               }
             },
@@ -25,8 +25,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct/schema.bare",
-                "offset": 38,
-                "line": 4,
+                "offset": 39,
+                "line": 3,
                 "col": 5
               }
             }
@@ -39,8 +39,8 @@
             "types": null,
             "loc": {
               "filename": "struct/schema.bare",
-              "offset": 27,
-              "line": 3,
+              "offset": 31,
+              "line": 2,
               "col": 11
             }
           },
@@ -50,23 +50,23 @@
             "types": null,
             "loc": {
               "filename": "struct/schema.bare",
-              "offset": 43,
-              "line": 4,
+              "offset": 44,
+              "line": 3,
               "col": 10
             }
           }
         ],
         "loc": {
           "filename": "struct/schema.bare",
-          "offset": 15,
-          "line": 2,
-          "col": 15
+          "offset": 19,
+          "line": 1,
+          "col": 20
         }
       },
       "loc": {
         "filename": "struct/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -74,8 +74,8 @@
   "main": [],
   "loc": {
     "filename": "struct/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

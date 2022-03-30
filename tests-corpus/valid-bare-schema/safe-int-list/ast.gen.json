@@ -16,9 +16,9 @@
             "types": null,
             "loc": {
               "filename": "safe-int-list/schema.bare",
-              "offset": 15,
+              "offset": 18,
               "line": 1,
-              "col": 16
+              "col": 19
             }
           }
         ],

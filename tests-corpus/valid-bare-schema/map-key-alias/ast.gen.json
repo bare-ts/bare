@@ -38,7 +38,7 @@
             "types": null,
             "loc": {
               "filename": "map-key-alias/schema.bare",
-              "offset": 35,
+              "offset": 32,
               "line": 3,
               "col": 15
             }
@@ -49,7 +49,7 @@
             "types": null,
             "loc": {
               "filename": "map-key-alias/schema.bare",
-              "offset": 44,
+              "offset": 41,
               "line": 3,
               "col": 24
             }
@@ -57,14 +57,14 @@
         ],
         "loc": {
           "filename": "map-key-alias/schema.bare",
-          "offset": 31,
+          "offset": 28,
           "line": 3,
           "col": 11
         }
       },
       "loc": {
         "filename": "map-key-alias/schema.bare",
-        "offset": 21,
+        "offset": 18,
         "line": 3,
         "col": 1
       }

@@ -1,20 +1,20 @@
-enum Gender {
+type Gender enum {
     FEMALE
     FLUID
     MALE
 }
 
-struct Person {
-    name: string
-    email: string
+type Person struct {
+    name: str
+    email: str
     gender: optional<Gender>
 }
 
-struct Organization {
-    name: string
-    email: string
+type Organization struct {
+    name: str
+    email: str
 }
 
-type Contact (Person | Organization)
+type Contact union { Person | Organization }
 
-type Message []Contact
+type Message list<Contact>

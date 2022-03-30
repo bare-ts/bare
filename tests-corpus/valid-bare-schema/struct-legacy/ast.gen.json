@@ -1,0 +1,81 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "quoted": false,
+              "loc": {
+                "filename": "struct-legacy/schema.bare",
+                "offset": 20,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "age",
+              "quoted": false,
+              "loc": {
+                "filename": "struct-legacy/schema.bare",
+                "offset": 34,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-legacy/schema.bare",
+              "offset": 26,
+              "line": 2,
+              "col": 11
+            }
+          },
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-legacy/schema.bare",
+              "offset": 39,
+              "line": 3,
+              "col": 10
+            }
+          }
+        ],
+        "loc": {
+          "filename": "struct-legacy/schema.bare",
+          "offset": 14,
+          "line": 1,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "struct-legacy/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "struct-legacy/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

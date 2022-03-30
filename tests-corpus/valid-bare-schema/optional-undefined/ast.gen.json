@@ -16,23 +16,23 @@
             "types": null,
             "loc": {
               "filename": "optional-undefined/schema.bare",
-              "offset": 25,
-              "line": 2,
+              "offset": 24,
+              "line": 1,
               "col": 25
             }
           }
         ],
         "loc": {
           "filename": "optional-undefined/schema.bare",
-          "offset": 16,
-          "line": 2,
+          "offset": 15,
+          "line": 1,
           "col": 16
         }
       },
       "loc": {
         "filename": "optional-undefined/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -40,8 +40,8 @@
   "main": [],
   "loc": {
     "filename": "optional-undefined/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

@@ -1,1 +1,1 @@
-type UnsignedInt (u8 | u16 | u32 | u64
+type UnsignedInt union { u8 | u16 | u32 | u64

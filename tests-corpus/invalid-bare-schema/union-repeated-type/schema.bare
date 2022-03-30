@@ -1,1 +1,1 @@
-type X (u8 | u8)
+type X union { u8 | u8 }

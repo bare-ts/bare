@@ -12,15 +12,15 @@
         "types": null,
         "loc": {
           "filename": "data/schema.bare",
-          "offset": 11,
-          "line": 2,
+          "offset": 10,
+          "line": 1,
           "col": 11
         }
       },
       "loc": {
         "filename": "data/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -28,8 +28,8 @@
   "main": [],
   "loc": {
     "filename": "data/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

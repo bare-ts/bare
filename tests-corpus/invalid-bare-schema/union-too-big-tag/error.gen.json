@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-too-big-tag/schema.bare",
-    "offset": 95,
+    "offset": 102,
     "line": 2,
-    "col": 54
+    "col": 61
   },
-  "message": "(union-too-big-tag/schema.bare:2:54) only tags encoded as safe integer are supported."
+  "message": "(union-too-big-tag/schema.bare:2:61) only tags encoded as safe integer are supported."
 }

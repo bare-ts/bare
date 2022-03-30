@@ -14,7 +14,7 @@
               "quoted": false,
               "loc": {
                 "filename": "alias-undef/schema.bare",
-                "offset": 15,
+                "offset": 20,
                 "line": 2,
                 "col": 5
               }
@@ -25,7 +25,7 @@
               "quoted": false,
               "loc": {
                 "filename": "alias-undef/schema.bare",
-                "offset": 30,
+                "offset": 35,
                 "line": 3,
                 "col": 5
               }
@@ -39,7 +39,7 @@
             "types": null,
             "loc": {
               "filename": "alias-undef/schema.bare",
-              "offset": 23,
+              "offset": 28,
               "line": 2,
               "col": 13
             }
@@ -59,15 +59,15 @@
                 "types": null,
                 "loc": {
                   "filename": "alias-undef/schema.bare",
-                  "offset": 40,
+                  "offset": 48,
                   "line": 3,
-                  "col": 15
+                  "col": 18
                 }
               }
             ],
             "loc": {
               "filename": "alias-undef/schema.bare",
-              "offset": 38,
+              "offset": 43,
               "line": 3,
               "col": 13
             }
@@ -75,9 +75,9 @@
         ],
         "loc": {
           "filename": "alias-undef/schema.bare",
-          "offset": 9,
+          "offset": 14,
           "line": 1,
-          "col": 10
+          "col": 15
         }
       },
       "loc": {

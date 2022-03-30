@@ -1,0 +1,57 @@
+{
+  "defs": [
+    {
+      "alias": "Dict",
+      "internal": false,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map-legacy/schema.bare",
+              "offset": 14,
+              "line": 1,
+              "col": 15
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map-legacy/schema.bare",
+              "offset": 19,
+              "line": 1,
+              "col": 20
+            }
+          }
+        ],
+        "loc": {
+          "filename": "map-legacy/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "map-legacy/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "map-legacy/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

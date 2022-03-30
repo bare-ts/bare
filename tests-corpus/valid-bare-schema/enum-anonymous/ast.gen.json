@@ -1,0 +1,115 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": false,
+              "name": "name",
+              "quoted": false,
+              "loc": {
+                "filename": "enum-anonymous/schema.bare",
+                "offset": 25,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": false,
+              "name": "gender",
+              "quoted": false,
+              "loc": {
+                "filename": "enum-anonymous/schema.bare",
+                "offset": 39,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "enum-anonymous/schema.bare",
+              "offset": 31,
+              "line": 2,
+              "col": 11
+            }
+          },
+          {
+            "tag": "enum",
+            "props": {
+              "intEnum": false,
+              "vals": [
+                {
+                  "name": "FLUID",
+                  "val": 0,
+                  "loc": {
+                    "filename": "enum-anonymous/schema.bare",
+                    "offset": 62,
+                    "line": 4,
+                    "col": 9
+                  }
+                },
+                {
+                  "name": "MALE",
+                  "val": 1,
+                  "loc": {
+                    "filename": "enum-anonymous/schema.bare",
+                    "offset": 76,
+                    "line": 5,
+                    "col": 9
+                  }
+                },
+                {
+                  "name": "FEMALE",
+                  "val": 2,
+                  "loc": {
+                    "filename": "enum-anonymous/schema.bare",
+                    "offset": 89,
+                    "line": 6,
+                    "col": 9
+                  }
+                }
+              ]
+            },
+            "types": null,
+            "loc": {
+              "filename": "enum-anonymous/schema.bare",
+              "offset": 47,
+              "line": 3,
+              "col": 13
+            }
+          }
+        ],
+        "loc": {
+          "filename": "enum-anonymous/schema.bare",
+          "offset": 19,
+          "line": 1,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "enum-anonymous/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "enum-anonymous/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

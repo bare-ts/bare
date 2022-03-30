@@ -12,36 +12,36 @@
               "val": 0,
               "loc": {
                 "filename": "union-big-tag/schema.bare",
-                "offset": 61,
+                "offset": 68,
                 "line": 2,
-                "col": 24
+                "col": 31
               }
             },
             {
               "val": 1,
               "loc": {
                 "filename": "union-big-tag/schema.bare",
-                "offset": 71,
+                "offset": 78,
                 "line": 2,
-                "col": 34
+                "col": 41
               }
             },
             {
               "val": 2,
               "loc": {
                 "filename": "union-big-tag/schema.bare",
-                "offset": 81,
+                "offset": 88,
                 "line": 2,
-                "col": 44
+                "col": 51
               }
             },
             {
               "val": 9007199254740991,
               "loc": {
                 "filename": "union-big-tag/schema.bare",
-                "offset": 91,
+                "offset": 98,
                 "line": 2,
-                "col": 54
+                "col": 61
               }
             }
           ]
@@ -53,9 +53,9 @@
             "types": null,
             "loc": {
               "filename": "union-big-tag/schema.bare",
-              "offset": 56,
+              "offset": 63,
               "line": 2,
-              "col": 19
+              "col": 26
             }
           },
           {
@@ -64,9 +64,9 @@
             "types": null,
             "loc": {
               "filename": "union-big-tag/schema.bare",
-              "offset": 65,
+              "offset": 72,
               "line": 2,
-              "col": 28
+              "col": 35
             }
           },
           {
@@ -75,9 +75,9 @@
             "types": null,
             "loc": {
               "filename": "union-big-tag/schema.bare",
-              "offset": 75,
+              "offset": 82,
               "line": 2,
-              "col": 38
+              "col": 45
             }
           },
           {
@@ -86,17 +86,17 @@
             "types": null,
             "loc": {
               "filename": "union-big-tag/schema.bare",
-              "offset": 85,
+              "offset": 92,
               "line": 2,
-              "col": 48
+              "col": 55
             }
           }
         ],
         "loc": {
           "filename": "union-big-tag/schema.bare",
-          "offset": 55,
+          "offset": 61,
           "line": 2,
-          "col": 18
+          "col": 24
         }
       },
       "loc": {

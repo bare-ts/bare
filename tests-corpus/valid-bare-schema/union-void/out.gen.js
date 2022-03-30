@@ -11,7 +11,7 @@ export function readUnsignedInt(bc) {
         case 2:
             return { tag, val: bare.readU32(bc) }
         case 3:
-            return { tag, val: bare.readU64Safe(bc) }
+            return { tag, val: bare.readU64(bc) }
         case 4:
             return { tag, val: null }
         default: {
@@ -34,7 +34,7 @@ export function writeUnsignedInt(bc, x) {
             bare.writeU32(bc, x.val)
             break
         case 3:
-            bare.writeU64Safe(bc, x.val)
+            bare.writeU64(bc, x.val)
             break
     }
 }

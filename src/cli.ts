@@ -62,13 +62,14 @@ program
             "ts",
         ])
     )
-    .option(
-        "--pedantic",
-        "require enum and union types to set all tags in-order"
-    )
+    .option("--legacy-syntax", "allow legacy BARE syntax")
     .option(
         "--main <aliases...>",
         "space-separated list of types used to encode and decode messages"
+    )
+    .option(
+        "--pedantic",
+        "require enum and union types to set all tags in-order"
     )
     .option("--import-config", "import custom runtime config")
     .option("--import-factory", "import custom struct factory")

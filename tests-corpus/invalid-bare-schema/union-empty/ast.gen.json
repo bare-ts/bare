@@ -1,0 +1,35 @@
+{
+  "defs": [
+    {
+      "alias": "EmptyUnion",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": []
+        },
+        "types": [],
+        "loc": {
+          "filename": "union-empty/schema.bare",
+          "offset": 22,
+          "line": 1,
+          "col": 23
+        }
+      },
+      "loc": {
+        "filename": "union-empty/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "union-empty/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

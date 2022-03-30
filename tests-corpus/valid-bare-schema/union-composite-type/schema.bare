@@ -1,1 +1,3 @@
-type Composite (map[string]optional<string> | [4]optional<string> | [4]u8)
+type Composite union {
+    map<str><optional<str>> | list<optional<str>>[4] | list<u8>[4]
+}

@@ -2,6 +2,16 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+* Update BARE syntax
+
+    The [new syntax](https://datatracker.ietf.org/doc/draft-devault-bare/03/)
+    for BARE schema is now supported.
+
+    Legacy syntax is now reported as an error.
+    To allow legacy syntax use the option `--legacy-syntax`.
+
 ## 0.5.0 (2022-03-30)
 
 * Forbid circular references with fixed lists

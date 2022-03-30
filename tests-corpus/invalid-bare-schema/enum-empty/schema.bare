@@ -1,2 +1,2 @@
 
-enum Gender {}
+type Gender enum {}

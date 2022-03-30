@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-no-end-delim/schema.bare",
-    "offset": 39,
-    "line": 2,
-    "col": 1
+    "offset": 45,
+    "line": 1,
+    "col": 46
   },
-  "message": "(union-no-end-delim/schema.bare:2:1) ')' is expected."
+  "message": "(union-no-end-delim/schema.bare:1:46) '}' is expected."
 }

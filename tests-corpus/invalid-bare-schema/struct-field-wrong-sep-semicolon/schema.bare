@@ -1,5 +1,4 @@
-
-struct Person {
-    name: string;
+type Person struct {
+    name: str;
     age: u8;
 }

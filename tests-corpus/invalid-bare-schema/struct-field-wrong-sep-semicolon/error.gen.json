@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "struct-field-wrong-sep-semicolon/schema.bare",
-    "offset": 33,
-    "line": 3,
-    "col": 17
+    "offset": 34,
+    "line": 2,
+    "col": 14
   },
-  "message": "(struct-field-wrong-sep-semicolon/schema.bare:3:17) fields cannot be separated by ';'."
+  "message": "(struct-field-wrong-sep-semicolon/schema.bare:2:14) fields cannot be separated by ';'."
 }

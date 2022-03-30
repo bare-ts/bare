@@ -14,8 +14,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 21,
-                "line": 3,
+                "offset": 25,
+                "line": 2,
                 "col": 5
               }
             },
@@ -25,8 +25,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 54,
-                "line": 4,
+                "offset": 58,
+                "line": 3,
                 "col": 5
               }
             },
@@ -36,8 +36,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 94,
-                "line": 5,
+                "offset": 103,
+                "line": 4,
                 "col": 5
               }
             },
@@ -47,8 +47,8 @@
               "quoted": false,
               "loc": {
                 "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 116,
-                "line": 6,
+                "offset": 129,
+                "line": 5,
                 "col": 5
               }
             }
@@ -70,16 +70,16 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 42,
-                  "line": 3,
+                  "offset": 46,
+                  "line": 2,
                   "col": 26
                 }
               }
             ],
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 33,
-              "line": 3,
+              "offset": 37,
+              "line": 2,
               "col": 17
             }
           },
@@ -107,9 +107,9 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 74,
-                  "line": 4,
-                  "col": 25
+                  "offset": 83,
+                  "line": 3,
+                  "col": 30
                 }
               },
               {
@@ -121,17 +121,17 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 83,
-                  "line": 4,
-                  "col": 34
+                  "offset": 92,
+                  "line": 3,
+                  "col": 39
                 }
               }
             ],
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 72,
-              "line": 4,
-              "col": 23
+              "offset": 81,
+              "line": 3,
+              "col": 28
             }
           },
           {
@@ -149,16 +149,16 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 105,
-                  "line": 5,
-                  "col": 16
+                  "offset": 117,
+                  "line": 4,
+                  "col": 19
                 }
               }
             ],
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 103,
-              "line": 5,
+              "offset": 112,
+              "line": 4,
               "col": 14
             }
           },
@@ -174,8 +174,8 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 137,
-                  "line": 6,
+                  "offset": 150,
+                  "line": 5,
                   "col": 26
                 }
               },
@@ -187,31 +187,31 @@
                 "types": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 144,
-                  "line": 6,
-                  "col": 33
+                  "offset": 155,
+                  "line": 5,
+                  "col": 31
                 }
               }
             ],
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 133,
-              "line": 6,
+              "offset": 146,
+              "line": 5,
               "col": 22
             }
           }
         ],
         "loc": {
           "filename": "struct-circular-ref-allowed/schema.bare",
-          "offset": 15,
-          "line": 2,
-          "col": 15
+          "offset": 19,
+          "line": 1,
+          "col": 20
         }
       },
       "loc": {
         "filename": "struct-circular-ref-allowed/schema.bare",
-        "offset": 1,
-        "line": 2,
+        "offset": 0,
+        "line": 1,
         "col": 1
       }
     }
@@ -219,8 +219,8 @@
   "main": [],
   "loc": {
     "filename": "struct-circular-ref-allowed/schema.bare",
-    "offset": 1,
-    "line": 2,
+    "offset": 0,
+    "line": 1,
     "col": 1
   }
 }

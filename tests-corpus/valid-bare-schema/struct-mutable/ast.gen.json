@@ -1,0 +1,81 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "props": {
+          "class": false,
+          "fields": [
+            {
+              "mut": true,
+              "name": "name",
+              "quoted": false,
+              "loc": {
+                "filename": "struct-mutable/schema.bare",
+                "offset": 25,
+                "line": 2,
+                "col": 5
+              }
+            },
+            {
+              "mut": true,
+              "name": "age",
+              "quoted": false,
+              "loc": {
+                "filename": "struct-mutable/schema.bare",
+                "offset": 39,
+                "line": 3,
+                "col": 5
+              }
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-mutable/schema.bare",
+              "offset": 31,
+              "line": 2,
+              "col": 11
+            }
+          },
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "struct-mutable/schema.bare",
+              "offset": 44,
+              "line": 3,
+              "col": 10
+            }
+          }
+        ],
+        "loc": {
+          "filename": "struct-mutable/schema.bare",
+          "offset": 19,
+          "line": 1,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "struct-mutable/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "struct-mutable/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

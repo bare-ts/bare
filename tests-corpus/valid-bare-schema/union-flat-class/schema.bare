@@ -1,9 +1,9 @@
-struct BoxedU32 {
+type BoxedU32 struct {
     val: u32
 }
 
-struct BoxedString {
-    val: string
+type Boxedstr struct {
+    val: str
 }
 
-type Boxed (BoxedU32 | BoxedString)
+type Boxed union { BoxedU32 | Boxedstr }
