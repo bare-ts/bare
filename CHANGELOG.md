@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.5.0 (2022-03-30)
 
 * Forbid circular references with fixed lists
 
