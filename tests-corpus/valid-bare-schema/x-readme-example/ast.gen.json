@@ -295,7 +295,7 @@
       }
     },
     {
-      "alias": "Message",
+      "alias": "Contacts",
       "internal": false,
       "type": {
         "tag": "list",
@@ -312,17 +312,17 @@
             "types": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
-              "offset": 257,
+              "offset": 258,
               "line": 20,
-              "col": 19
+              "col": 20
             }
           }
         ],
         "loc": {
           "filename": "x-readme-example/schema.bare",
-          "offset": 252,
+          "offset": 253,
           "line": 20,
-          "col": 14
+          "col": 15
         }
       },
       "loc": {
@@ -334,7 +334,7 @@
     }
   ],
   "main": [
-    "Message"
+    "Contacts"
   ],
   "loc": {
     "filename": "x-readme-example/schema.bare",

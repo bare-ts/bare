@@ -37,12 +37,12 @@ export function readContact(bc: bare.ByteCursor): Contact
 
 export function writeContact(bc: bare.ByteCursor, x: Contact): void
 
-export type Message = readonly Contact[]
+export type Contacts = readonly Contact[]
 
-export function readMessage(bc: bare.ByteCursor): Message
+export function readContacts(bc: bare.ByteCursor): Contacts
 
-export function writeMessage(bc: bare.ByteCursor, x: Message): void
+export function writeContacts(bc: bare.ByteCursor, x: Contacts): void
 
-export function encodeMessage(x: Message): Uint8Array
+export function encodeContacts(x: Contacts): Uint8Array
 
-export function decodeMessage(bytes: Uint8Array): Message
+export function decodeContacts(bytes: Uint8Array): Contacts

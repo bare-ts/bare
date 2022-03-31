@@ -1,8 +1,8 @@
 import { default as test } from "oletus"
-import { decodeMessage, encodeMessage, Gender } from "./out.gen.js"
+import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
 
 test("x-readme-example", (t) => {
-    const payload = encodeMessage([
+    const payload = encodeContacts([
         {
             tag: 0,
             val: {
@@ -19,7 +19,7 @@ test("x-readme-example", (t) => {
             },
         },
     ])
-    const msg = decodeMessage(payload)
+    const msg = decodeContacts(payload)
 
     t.deepEqual(msg, [
         {

@@ -50,7 +50,7 @@ type Organization struct {
 
 type Contact union { Person | Organization }
 
-type Message list<Contact>
+type Contacts list<Contact>
 ```
 
 Next, you have to compile your schema into code:

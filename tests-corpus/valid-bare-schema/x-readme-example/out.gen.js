@@ -92,7 +92,7 @@ export function writeContact(bc, x) {
     }
 }
 
-export function readMessage(bc) {
+export function readContacts(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [readContact(bc)]
@@ -102,25 +102,25 @@ export function readMessage(bc) {
     return result
 }
 
-export function writeMessage(bc, x) {
+export function writeContacts(bc, x) {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         writeContact(bc, x[i])
     }
 }
 
-export function encodeMessage(x) {
+export function encodeContacts(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
         config
     )
-    writeMessage(bc, x)
+    writeContacts(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function decodeMessage(bytes) {
+export function decodeContacts(bytes) {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = readMessage(bc)
+    const result = readContacts(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }

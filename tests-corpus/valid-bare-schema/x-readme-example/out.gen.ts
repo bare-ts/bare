@@ -107,9 +107,9 @@ export function writeContact(bc: bare.ByteCursor, x: Contact): void {
     }
 }
 
-export type Message = readonly Contact[]
+export type Contacts = readonly Contact[]
 
-export function readMessage(bc: bare.ByteCursor): Message {
+export function readContacts(bc: bare.ByteCursor): Contacts {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [readContact(bc)]
@@ -119,25 +119,25 @@ export function readMessage(bc: bare.ByteCursor): Message {
     return result
 }
 
-export function writeMessage(bc: bare.ByteCursor, x: Message): void {
+export function writeContacts(bc: bare.ByteCursor, x: Contacts): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         writeContact(bc, x[i])
     }
 }
 
-export function encodeMessage(x: Message): Uint8Array {
+export function encodeContacts(x: Contacts): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
         config
     )
-    writeMessage(bc, x)
+    writeContacts(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function decodeMessage(bytes: Uint8Array): Message {
+export function decodeContacts(bytes: Uint8Array): Contacts {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = readMessage(bc)
+    const result = readContacts(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }

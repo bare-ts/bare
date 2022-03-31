@@ -17,4 +17,4 @@ type Organization struct {
 
 type Contact union { Person | Organization }
 
-type Message list<Contact>
+type Contacts list<Contact>
