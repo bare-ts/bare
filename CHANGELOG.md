@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.6.0 (2022-03-31)
 
 * Update BARE syntax
 
