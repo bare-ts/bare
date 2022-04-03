@@ -22,7 +22,7 @@ interface Context {
 }
 
 function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
-    if (type.types != null && type.types.length > 0) {
+    if (type.types !== null && type.types.length > 0) {
         const types = type.types.map((t) => maybeAlias(n, t))
         if (type.types.some((t, i) => t !== types[i])) {
             const { tag, props, loc } = type

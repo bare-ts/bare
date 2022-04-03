@@ -218,7 +218,7 @@ function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
 function genOptionalType(g: Gen, type: ast.OptionalType): string {
     const typedef = genType(g, type.types[0])
     const optionalValue = type.props.lax
-        ? "undefined | null"
+        ? "null | undefined"
         : type.props.undef
         ? "undefined"
         : "null"
@@ -459,7 +459,7 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
 
 function genListReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
-        type.props.len != null
+        type.props.len !== null
             ? `${type.props.len.val}`
             : `bare.readUintSafe(bc)\nif (len === 0) return []`
     const valReading = genReading(g, type.types[0])
@@ -719,7 +719,7 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
 
 function genListWriter(g: Gen, type: ast.ListType): string {
     const lenEncoding =
-        type.props.len != null
+        type.props.len !== null
             ? `assert($x.length === ${type.props.len.val}, "Unmatched length")`
             : `bare.writeUintSafe(bc, $x.length)`
     const writingElt = genWriting(g, type.types[0], "$x[i]")
@@ -781,9 +781,14 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
+    const presenceCmp = type.props.lax
+        ? "!= null"
+        : type.props.undef
+        ? "!== undefined"
+        : "!== null"
     return unindent(`{
-        bare.writeBool(bc, $x != null)
-        if ($x != null) {
+        bare.writeBool(bc, $x ${presenceCmp})
+        if ($x ${presenceCmp}) {
             ${indent(genWriting(g, type.types[0], "$x"), 3)}
         }
     }`)
@@ -859,7 +864,7 @@ function genAliasFlatUnionWriter(
         body = body.slice(0, -6) // remove last 'else '
     } else if (
         resolved.every((t) => !t.props.class) &&
-        discriminators != null
+        discriminators !== null
     ) {
         const leadingFieldName = resolved[0].props.fields[0].name
         let switchBody = ""

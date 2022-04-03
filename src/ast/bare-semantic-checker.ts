@@ -91,7 +91,7 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
             checkUnionInvariants(c, type)
             break
     }
-    if (type.types != null) {
+    if (type.types !== null) {
         for (const subtype of type.types) {
             if (type.tag !== "union") {
                 checkNonVoid(c, subtype)
@@ -143,13 +143,13 @@ function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
 }
 
 function checkLengthInvariants(len: ast.Integer | null): void {
-    if (len != null && len.val <= 0) {
+    if (len !== null && len.val <= 0) {
         throw new CompilerError(
             "a fixed list or data must have a length strictly greater than 0.",
             len.loc
         )
     }
-    if (len != null && len.val >>> 0 !== len.val) {
+    if (len !== null && len.val >>> 0 !== len.val) {
         throw new CompilerError(
             "only length encoded as a u32 are supported.",
             len.loc
@@ -278,7 +278,7 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
                 // every struct is unique (no double aliasing)
                 isFlatUnion = resolved.every((t) => t.props.class)
                 if (!isFlatUnion) {
-                    isFlatUnion = ast.leadingDiscriminators(resolved) != null
+                    isFlatUnion = ast.leadingDiscriminators(resolved) !== null
                 }
             }
         }
@@ -309,12 +309,12 @@ function checkCircularRef(
             )
         }
         const aliased = c.symbols.get(alias)
-        if (aliased != null) {
+        if (aliased !== undefined) {
             const subTraversed = new Set(traversed).add(alias)
             checkCircularRef(c, aliased.type, subTraversed)
         }
     }
-    if (type.types != null) {
+    if (type.types !== null) {
         for (const subtype of type.types) {
             if (type.tag === "struct") {
                 checkStructFieldCircularRef(c, subtype, traversed)
@@ -356,7 +356,7 @@ function checkStructFieldCircularRef(
                 circularCount++
             }
         }
-        if (circularCount === fieldType.types.length && firstCycle != null) {
+        if (circularCount === fieldType.types.length && firstCycle !== null) {
             throw new CompilerError(
                 "circular references are not allowed.",
                 firstCycle.loc

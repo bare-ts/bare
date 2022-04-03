@@ -9,8 +9,8 @@ export function readMaybeBool(bc: bare.ByteCursor): MaybeBool {
 }
 
 export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         bare.writeBool(bc, x)
     }
 }

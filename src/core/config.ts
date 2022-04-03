@@ -34,7 +34,7 @@ export interface Config {
  *  when the schema format is not a supported.
  */
 export function Config({
-    generator = undefined,
+    generator,
     importConfig = false,
     importFactory = false,
     legacySyntax = false,

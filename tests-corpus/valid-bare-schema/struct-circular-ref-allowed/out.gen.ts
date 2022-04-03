@@ -32,8 +32,8 @@ function read0(bc: bare.ByteCursor): Person | null {
 }
 
 function write0(bc: bare.ByteCursor, x: Person | null): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         writePerson(bc, x)
     }
 }

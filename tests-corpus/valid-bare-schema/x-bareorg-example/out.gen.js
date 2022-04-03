@@ -248,8 +248,8 @@ function read2(bc) {
 }
 
 function write2(bc, x) {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         writePublicKey(bc, x)
     }
 }

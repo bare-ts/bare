@@ -11,7 +11,7 @@ export class CompilerError extends Error {
 }
 
 function locationRpr(loc: Location | null): string {
-    return loc != null ? `(${loc.filename}:${loc.line}:${loc.col}) ` : ""
+    return loc !== null ? `(${loc.filename}:${loc.line}:${loc.col}) ` : ""
 }
 
 export interface Location {

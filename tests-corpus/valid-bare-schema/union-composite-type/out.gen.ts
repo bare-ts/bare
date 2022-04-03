@@ -87,8 +87,8 @@ function read2(bc: bare.ByteCursor): string | null {
 }
 
 function write2(bc: bare.ByteCursor, x: string | null): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         bare.writeString(bc, x)
     }
 }

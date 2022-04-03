@@ -151,8 +151,8 @@ function read0(bc: bare.ByteCursor): Gender | null {
 }
 
 function write0(bc: bare.ByteCursor, x: Gender | null): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         writeGender(bc, x)
     }
 }

@@ -5,17 +5,16 @@ import { ConfigError } from "../core/config.js"
  * @invariant commentMark == null || commentMark.length === 1
  */
 export interface LexConfig {
-    readonly commentMark: string | undefined
+    readonly commentMark: string | null
 }
 
-export function LexConfig(config: Partial<LexConfig>): LexConfig {
-    const result = {
-        commentMark: config.commentMark,
-    }
-    if (result.commentMark != null && result.commentMark.length !== 1) {
+export function LexConfig({
+    commentMark = null,
+}: Partial<LexConfig>): LexConfig {
+    if (commentMark !== null && commentMark.length !== 1) {
         throw new ConfigError("A comment mark must be a single char.")
     }
-    return result
+    return { commentMark }
 }
 
 const WHITE_SPACE_PATTERN = /\s/

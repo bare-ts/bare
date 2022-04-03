@@ -296,8 +296,8 @@ function read2(bc: bare.ByteCursor): PublicKey | null {
 }
 
 function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
-    bare.writeBool(bc, x != null)
-    if (x != null) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
         writePublicKey(bc, x)
     }
 }
