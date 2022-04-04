@@ -1,5 +1,15 @@
 import type { Location } from "../core/compiler-error.js"
 
+// The AST must be serializable in JSON.
+//
+// The serialization of an AST should preserve the structure and data types.
+// For instance, if X is an AST, then it verifies the following predicate:
+//     deepEqual(X, JSON.parse(JSON.stringify(X)))
+//
+// To ensure this:
+// - do not use undefined values. Use null instead.
+// - do not use bigint values.
+
 export interface Ast {
     readonly defs: readonly AliasedType[]
     readonly main: readonly string[]
@@ -8,10 +18,17 @@ export interface Ast {
 
 export interface AliasedType {
     readonly alias: string
+    // The normalization phase uses this to create internal-only aliases.
     readonly internal: boolean
     readonly type: Type
     readonly loc: Location | null
 }
+
+// All types have the same object's shape
+// { tag, props, types, loc }
+//
+// All nested types are held in `types`.
+// This simplifies normalization / semantic checking
 
 export type Type =
     | Alias // Named user type
@@ -27,11 +44,6 @@ export type Type =
     | UnionType // (type | ...)
     | VoidType // void
 
-export interface Integer {
-    readonly val: number
-    readonly loc: Location | null
-}
-
 export interface Alias {
     readonly tag: "alias"
     readonly props: {
@@ -41,13 +53,10 @@ export interface Alias {
     readonly loc: Location | null
 }
 
-export interface ListType {
-    readonly tag: "list" | "set"
-    readonly props: {
-        readonly len: Integer | null
-        readonly mut: boolean
-    }
-    readonly types: readonly [valType: Type]
+export interface BaseType {
+    readonly tag: BaseTag
+    readonly props: null
+    readonly types: null
     readonly loc: Location | null
 }
 
@@ -77,6 +86,23 @@ export interface EnumVal {
     readonly loc: Location | null
 }
 
+export interface FixedNumberType {
+    readonly tag: FixedNumberTag
+    readonly props: null
+    readonly types: null
+    readonly loc: Location | null
+}
+
+export interface ListType {
+    readonly tag: "list" | "set"
+    readonly props: {
+        readonly len: Integer | null
+        readonly mut: boolean
+    }
+    readonly types: readonly [valType: Type]
+    readonly loc: Location | null
+}
+
 export interface LiteralType {
     readonly tag: "literal"
     readonly props: LiteralVal
@@ -90,7 +116,9 @@ export type Literal = bigint | boolean | null | number | string | undefined
  * JSON representation of a literal type
  */
 export type LiteralVal =
-    | { type: "bigint"; val: string } // bigint values are not serializable
+    // bigint values are not serializable,
+    // thus we use a string of digits to represent the number. e.g. "10".
+    | { type: "bigint"; val: string }
     | { type: "number"; val: number }
     | { type: "string"; val: string }
     // `type` is the literal value, `val` has no meaning
@@ -115,20 +143,6 @@ export interface OptionalType {
         readonly undef: boolean
     }
     readonly types: readonly [type: Type]
-    readonly loc: Location | null
-}
-
-export interface FixedNumberType {
-    readonly tag: FixedNumberTag
-    readonly props: null
-    readonly types: null
-    readonly loc: Location | null
-}
-
-export interface BaseType {
-    readonly tag: BaseTag
-    readonly props: null
-    readonly types: null
     readonly loc: Location | null
 }
 
@@ -176,6 +190,11 @@ export interface VoidType {
         readonly undef: boolean
     }
     readonly types: null
+    readonly loc: Location | null
+}
+
+export interface Integer {
+    readonly val: number
     readonly loc: Location | null
 }
 
@@ -299,6 +318,7 @@ export function leadingDiscriminators(
         const type0LeadingField = structs[0].props.fields[0]
         for (const struct of structs) {
             const fields = struct.props.fields
+            // FIXME: props.val is no longer the literal value...
             if (
                 fields.length === 0 ||
                 fields[0].name !== type0LeadingField.name ||
