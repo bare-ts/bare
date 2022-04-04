@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+//! Copyright (c) 2022 Victorien Elvinger
+//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+
 import { Argument, Option, program } from "commander"
 import * as fs from "node:fs"
 import { Config, transform } from "./index.js"

@@ -1,3 +1,6 @@
+//! Copyright (c) 2022 Victorien Elvinger
+//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+
 import * as ast from "../ast/bare-ast.js"
 import type { Config } from "../core/config.js"
 import { CompilerError, type Location } from "../core/compiler-error.js"

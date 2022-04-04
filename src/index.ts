@@ -1,3 +1,6 @@
+//! Copyright (c) 2022 Victorien Elvinger
+//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+
 import { normalize } from "./ast/bare-normalization.js"
 import { checkSemantic } from "./ast/bare-semantic-checker.js"
 import { generate } from "./generator/js-generator.js"
