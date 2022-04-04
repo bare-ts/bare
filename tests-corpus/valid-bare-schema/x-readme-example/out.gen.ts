@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-const config = bare.Config({})
+const config = /* @__PURE__ */ bare.Config({})
 
 export enum Gender {
     FEMALE = "FEMALE",

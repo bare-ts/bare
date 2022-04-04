@@ -1,7 +1,7 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
-const config = bare.Config({})
+const config = /* @__PURE__ */ bare.Config({})
 
 export type i32 = number
 export type i64 = bigint

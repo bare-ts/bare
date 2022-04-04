@@ -66,7 +66,7 @@ export function generate(schema: ast.Ast, config: Config): string {
         !g.config.importConfig &&
         g.config.generator !== "dts"
     ) {
-        head += "\nconst config = bare.Config({})\n"
+        head += "\nconst config = /* @__PURE__ */ bare.Config({})\n"
     }
     if (g.config.generator !== "js") {
         head += "\n"

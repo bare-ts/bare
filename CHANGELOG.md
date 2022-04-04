@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+* Add pure annotation in generated code
+
+    Pure annotations enables to bundler to detect pure function calls.
+    @bare-ts/tools adds now these annotations in top-level function calls.
+
 ## 0.6.0 (2022-03-31)
 
 * Update BARE syntax
