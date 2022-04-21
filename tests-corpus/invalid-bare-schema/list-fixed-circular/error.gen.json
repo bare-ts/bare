@@ -6,5 +6,5 @@
     "line": 2,
     "col": 23
   },
-  "message": "(list-fixed-circular/schema.bare:2:23) circular references are not allowed."
+  "message": "(list-fixed-circular/schema.bare:2:23) non-terminable circular references are not allowed."
 }

@@ -17,7 +17,7 @@
             },
             "types": null,
             "loc": {
-              "filename": "optional-circular-ref/schema.bare",
+              "filename": "optional-circular/schema.bare",
               "offset": 20,
               "line": 1,
               "col": 21
@@ -25,14 +25,14 @@
           }
         ],
         "loc": {
-          "filename": "optional-circular-ref/schema.bare",
+          "filename": "optional-circular/schema.bare",
           "offset": 11,
           "line": 1,
           "col": 12
         }
       },
       "loc": {
-        "filename": "optional-circular-ref/schema.bare",
+        "filename": "optional-circular/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -41,7 +41,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "optional-circular-ref/schema.bare",
+    "filename": "optional-circular/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

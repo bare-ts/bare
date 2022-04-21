@@ -301,13 +301,45 @@ function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
 function checkCircularRef(
     c: Checker,
     type: ast.Type,
-    traversed: Set<string>
+    traversed: ReadonlySet<string>
 ): void {
-    if (type.tag === "alias") {
+    if (
+        ((type.tag === "list" || type.tag === "set") &&
+            type.props.len === null) ||
+        type.tag === "map" ||
+        type.tag === "optional"
+    ) {
+        return // allowed circular refs
+    } else if (type.tag === "union") {
+        let circularCount = 0
+        let firstError: CompilerError | null = null
+        for (const subtype of type.types) {
+            try {
+                checkCircularRef(c, subtype, traversed)
+            } catch (e) {
+                if (e instanceof CompilerError) {
+                    firstError = firstError ?? e
+                }
+                circularCount++
+            }
+        }
+        if (circularCount === type.types.length && firstError !== null) {
+            throw firstError
+        }
+        return // allowed circular refs
+    } else if (
+        type.tag === "struct" ||
+        type.tag === "list" ||
+        type.tag === "set"
+    ) {
+        for (const subtype of type.types) {
+            checkCircularRef(c, subtype, traversed)
+        }
+    } else if (type.tag === "alias") {
         const alias = type.props.alias
         if (traversed.has(type.props.alias)) {
             throw new CompilerError(
-                "circular references are not allowed.",
+                "non-terminable circular references are not allowed.",
                 type.loc
             )
         }
@@ -317,55 +349,4 @@ function checkCircularRef(
             checkCircularRef(c, aliased.type, subTraversed)
         }
     }
-    if (type.types !== null) {
-        for (const subtype of type.types) {
-            if (type.tag === "struct") {
-                checkStructFieldCircularRef(c, subtype, traversed)
-            } else {
-                checkCircularRef(c, subtype, traversed)
-            }
-        }
-    }
-}
-
-/**
- *
- * @param fieldType
- * @param symbols
- * @param traversed
- * @throws CompilerError if a forbidden circular reference is discovered.
- */
-function checkStructFieldCircularRef(
-    c: Checker,
-    fieldType: ast.Type,
-    traversed: Set<string>
-): void {
-    if (
-        ((fieldType.tag === "list" || fieldType.tag === "set") &&
-            fieldType.props.len === null) ||
-        fieldType.tag === "map" ||
-        fieldType.tag === "optional"
-    ) {
-        return // allowed circular refs
-    }
-    if (fieldType.tag === "union") {
-        let circularCount = 0
-        let firstCycle: ast.Type | null = null
-        for (const subtype of fieldType.types) {
-            try {
-                checkCircularRef(c, subtype, traversed)
-            } catch (_e) {
-                firstCycle = firstCycle ?? subtype
-                circularCount++
-            }
-        }
-        if (circularCount === fieldType.types.length && firstCycle !== null) {
-            throw new CompilerError(
-                "circular references are not allowed.",
-                firstCycle.loc
-            )
-        }
-        return // allowed circular refs
-    }
-    checkCircularRef(c, fieldType, traversed)
 }

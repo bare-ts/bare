@@ -3,6 +3,7 @@
 
 import * as ast from "../ast/bare-ast.js"
 import type { Config } from "../core/config.js"
+import * as utils from "./bare-ast-utils.js"
 
 export function generate(schema: ast.Ast, config: Config): string {
     const g: Gen = { config, symbols: ast.symbols(schema) }
@@ -219,13 +220,19 @@ function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
 }
 
 function genOptionalType(g: Gen, type: ast.OptionalType): string {
-    const typedef = genType(g, type.types[0])
-    const optionalValue = type.props.lax
-        ? "null | undefined"
-        : type.props.undef
-        ? "undefined"
-        : "null"
-    return `${typedef} | ${optionalValue}`
+    const simplified = utils.unrecursive(type, g.symbols)
+    if (simplified.tag === "optional") {
+        type = simplified
+        const typedef = genType(g, type.types[0])
+        const optionalValue = type.props.lax
+            ? "null | undefined"
+            : type.props.undef
+            ? "undefined"
+            : "null"
+        return `${typedef} | ${optionalValue}`
+    } else {
+        return genType(g, simplified)
+    }
 }
 
 function genLiteralType(_g: Gen, type: ast.LiteralType): string {

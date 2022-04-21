@@ -26,7 +26,7 @@
             },
             "types": null,
             "loc": {
-              "filename": "union-circular-ref/schema.bare",
+              "filename": "union-circular/schema.bare",
               "offset": 19,
               "line": 1,
               "col": 20
@@ -39,7 +39,7 @@
             },
             "types": null,
             "loc": {
-              "filename": "union-circular-ref/schema.bare",
+              "filename": "union-circular/schema.bare",
               "offset": 28,
               "line": 1,
               "col": 29
@@ -47,14 +47,14 @@
           }
         ],
         "loc": {
-          "filename": "union-circular-ref/schema.bare",
+          "filename": "union-circular/schema.bare",
           "offset": 17,
           "line": 1,
           "col": 18
         }
       },
       "loc": {
-        "filename": "union-circular-ref/schema.bare",
+        "filename": "union-circular/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -70,14 +70,14 @@
         },
         "types": null,
         "loc": {
-          "filename": "union-circular-ref/schema.bare",
+          "filename": "union-circular/schema.bare",
           "offset": 49,
           "line": 2,
           "col": 13
         }
       },
       "loc": {
-        "filename": "union-circular-ref/schema.bare",
+        "filename": "union-circular/schema.bare",
         "offset": 37,
         "line": 2,
         "col": 1
@@ -91,14 +91,14 @@
         "props": null,
         "types": null,
         "loc": {
-          "filename": "union-circular-ref/schema.bare",
+          "filename": "union-circular/schema.bare",
           "offset": 67,
           "line": 3,
           "col": 13
         }
       },
       "loc": {
-        "filename": "union-circular-ref/schema.bare",
+        "filename": "union-circular/schema.bare",
         "offset": 55,
         "line": 3,
         "col": 1
@@ -107,7 +107,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "union-circular-ref/schema.bare",
+    "filename": "union-circular/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

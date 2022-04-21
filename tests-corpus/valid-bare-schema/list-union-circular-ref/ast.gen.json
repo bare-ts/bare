@@ -1,0 +1,92 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "internal": false,
+      "type": {
+        "tag": "list",
+        "props": {
+          "len": {
+            "val": 2,
+            "loc": {
+              "filename": "list-union-circular-ref/schema.bare",
+              "offset": 39,
+              "line": 1,
+              "col": 40
+            }
+          },
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "union",
+            "props": {
+              "flat": false,
+              "tags": [
+                {
+                  "val": 0,
+                  "loc": null
+                },
+                {
+                  "val": 1,
+                  "loc": null
+                }
+              ]
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Alias"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "list-union-circular-ref/schema.bare",
+                  "offset": 24,
+                  "line": 1,
+                  "col": 25
+                }
+              },
+              {
+                "tag": "string",
+                "props": null,
+                "types": null,
+                "loc": {
+                  "filename": "list-union-circular-ref/schema.bare",
+                  "offset": 32,
+                  "line": 1,
+                  "col": 33
+                }
+              }
+            ],
+            "loc": {
+              "filename": "list-union-circular-ref/schema.bare",
+              "offset": 22,
+              "line": 1,
+              "col": 23
+            }
+          }
+        ],
+        "loc": {
+          "filename": "list-union-circular-ref/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "list-union-circular-ref/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "list-union-circular-ref/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

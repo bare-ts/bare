@@ -1,0 +1,49 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "internal": false,
+      "type": {
+        "tag": "list",
+        "props": {
+          "len": null,
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Alias"
+            },
+            "types": null,
+            "loc": {
+              "filename": "list-circular-ref/schema.bare",
+              "offset": 16,
+              "line": 1,
+              "col": 17
+            }
+          }
+        ],
+        "loc": {
+          "filename": "list-circular-ref/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "list-circular-ref/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "list-circular-ref/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

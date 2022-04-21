@@ -1,0 +1,3 @@
+type Alias union { Alias1 | Alias2 }
+type Alias1 Alias
+type Alias2 Alias

@@ -6,5 +6,5 @@
     "line": 1,
     "col": 12
   },
-  "message": "(alias-itself/schema.bare:1:12) circular references are not allowed."
+  "message": "(alias-itself/schema.bare:1:12) non-terminable circular references are not allowed."
 }

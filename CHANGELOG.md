@@ -9,6 +9,29 @@ This project adheres to [Semantic Versioning][semver].
     Pure annotations enables to bundler to detect pure function calls.
     @bare-ts/tools adds now these annotations in top-level function calls.
 
+* Allow circular references where possible
+
+    @bare-ts/tools was previously conservative about circular references.
+    It now allows all circular references that can encode at least one
+    finite message. The following circular references are now allowed:
+
+    ```bare
+    type A list<A>
+    type B map<str><B>
+    type C list<optional<C>>[2]
+    type D list<union { D | str }>[2]
+    type E optional<E>
+    type F union { F | str }
+    ```
+
+    The following circular references are still rejected:
+
+    ```bare
+    type X list<A>[2]
+    type Y union { Y }
+    type Z struct { field: Z }
+    ```
+
 ## 0.6.0 (2022-03-31)
 
 * Update BARE syntax

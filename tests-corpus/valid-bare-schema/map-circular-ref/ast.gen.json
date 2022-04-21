@@ -1,0 +1,59 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "internal": false,
+      "type": {
+        "tag": "map",
+        "props": {
+          "mut": false
+        },
+        "types": [
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "map-circular-ref/schema.bare",
+              "offset": 15,
+              "line": 1,
+              "col": 16
+            }
+          },
+          {
+            "tag": "alias",
+            "props": {
+              "alias": "Alias"
+            },
+            "types": null,
+            "loc": {
+              "filename": "map-circular-ref/schema.bare",
+              "offset": 20,
+              "line": 1,
+              "col": 21
+            }
+          }
+        ],
+        "loc": {
+          "filename": "map-circular-ref/schema.bare",
+          "offset": 11,
+          "line": 1,
+          "col": 12
+        }
+      },
+      "loc": {
+        "filename": "map-circular-ref/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "map-circular-ref/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "defs": [
+    {
+      "alias": "Alias",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            {
+              "val": 0,
+              "loc": null
+            },
+            {
+              "val": 1,
+              "loc": null
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "optional",
+            "props": {
+              "lax": false,
+              "undef": false
+            },
+            "types": [
+              {
+                "tag": "alias",
+                "props": {
+                  "alias": "Alias"
+                },
+                "types": null,
+                "loc": {
+                  "filename": "union-optional-circular/schema.bare",
+                  "offset": 28,
+                  "line": 1,
+                  "col": 29
+                }
+              }
+            ],
+            "loc": {
+              "filename": "union-optional-circular/schema.bare",
+              "offset": 19,
+              "line": 1,
+              "col": 20
+            }
+          },
+          {
+            "tag": "string",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-optional-circular/schema.bare",
+              "offset": 37,
+              "line": 1,
+              "col": 38
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-optional-circular/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-optional-circular/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "union-optional-circular/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
