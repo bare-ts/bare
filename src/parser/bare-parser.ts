@@ -41,14 +41,14 @@ function parseAliased(p: Parser): ast.AliasedType {
     if (!UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         throw new CompilerError(
             `the type name '${alias}' must be in UpperCamelCase.`,
-            p.lex.location()
+            p.lex.location(),
         )
     }
     p.lex.forth()
     if (p.lex.token() === "=") {
         throw new CompilerError(
             "a type definition and its body cannot be separated by '='.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     if (
@@ -57,7 +57,7 @@ function parseAliased(p: Parser): ast.AliasedType {
     ) {
         throw new CompilerError(
             `use 'type ${alias} ${keyword} { ... }' or allow '${keyword} ${alias} { ... }' with option '--legacy-syntax'.`,
-            p.lex.location()
+            p.lex.location(),
         )
     }
     const type =
@@ -81,7 +81,7 @@ function parseType(p: Parser): ast.Type {
             if (!p.config.legacySyntax) {
                 throw new CompilerError(
                     "use 'struct { ... } or allow '{ ... }' with option '--legacy-syntax'.",
-                    p.lex.location()
+                    p.lex.location(),
                 )
             }
             return parseStructBody(p)
@@ -109,7 +109,7 @@ function parseTypeCheckUnion(p: Parser): ast.Type {
     if (p.lex.token() === "|" || p.lex.token() === "=") {
         throw new CompilerError(
             "a union must be enclosed by 'union {}'.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     return result
@@ -134,7 +134,7 @@ function parseTypeName(p: Parser): ast.Type {
         if (alias === "string" && !p.config.legacySyntax) {
             throw new CompilerError(
                 "use 'str' or allow 'string' with option '--legacy-syntax'.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         const safeTypeName = `${alias}Safe`
@@ -150,7 +150,7 @@ function parseTypeName(p: Parser): ast.Type {
     } else {
         throw new CompilerError(
             "a type name is either in UpperCamelCase or is a predefined types.",
-            loc
+            loc,
         )
     }
 }
@@ -163,7 +163,7 @@ function parseData(p: Parser): ast.Type {
         if (!p.config.legacySyntax) {
             throw new CompilerError(
                 "use 'data[n]' or allow 'data<n>' with option '--legacy-syntax'.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         p.lex.forth()
@@ -201,7 +201,7 @@ function parseLegacyList(p: Parser): ast.Type {
     if (!p.config.legacySyntax) {
         throw new CompilerError(
             "use 'list<A>[n]' or allow '[n]A' with option '--legacy-syntax'.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     let len: ast.Integer | null = null
@@ -255,7 +255,7 @@ function parseMap(p: Parser): ast.Type {
         if (!p.config.legacySyntax) {
             throw new CompilerError(
                 "use 'map<A><B>' or allow 'map[A]B' with option '--legacy-syntax'.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         p.lex.forth()
@@ -294,7 +294,7 @@ function parseLegacyUnion(p: Parser): ast.Type {
     if (!p.config.legacySyntax) {
         throw new CompilerError(
             "use 'union { A | B } or allow '( A | B )' with option '--legacy-syntax'.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     if (p.lex.token() !== "(") {
@@ -316,7 +316,7 @@ function parseUnionBody(p: Parser): ast.Type {
             if (tags.length !== 0) {
                 throw new CompilerError(
                     "'|' must be followed by a type.",
-                    p.lex.location()
+                    p.lex.location(),
                 )
             }
             break // empty union
@@ -330,7 +330,7 @@ function parseUnionBody(p: Parser): ast.Type {
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all union tag must be set. '=' is expected.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         tags.push({ val: tagVal, loc })
@@ -339,7 +339,7 @@ function parseUnionBody(p: Parser): ast.Type {
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
                 "union members must be separated with '|'.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
     } while (p.lex.token() === "|")
@@ -364,7 +364,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         if (!UPPER_SNAKE_CASE_PATTERN.test(name)) {
             throw new CompilerError(
                 "the name of an enum member must be in UPPER_SNAKE_CASE.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         names.add(name)
@@ -376,7 +376,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         } else if (p.config.pedantic) {
             throw new CompilerError(
                 "in pedantic mode, all enum tag must be set. '=' is expected.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         vals.push({ name, val, loc: valLoc })
@@ -384,7 +384,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
                 `enum members cannot be separated by '${p.lex.token()}'.`,
-                p.lex.location()
+                p.lex.location(),
             )
         }
     }
@@ -411,7 +411,7 @@ function parseStructBody(p: Parser): ast.Type {
         if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
             throw new CompilerError(
                 "the name of a field must be in lowerCamelCase.",
-                p.lex.location()
+                p.lex.location(),
             )
         }
         names.add(name)
@@ -422,7 +422,7 @@ function parseStructBody(p: Parser): ast.Type {
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
                 `fields cannot be separated by '${p.lex.token()}'.`,
-                p.lex.location()
+                p.lex.location(),
             )
         }
         fields.push({ mut, name, quoted, loc: fieldLoc })
@@ -455,7 +455,7 @@ function parseTypeParameter(p: Parser): ast.Type {
     if (p.lex.token() === "," || p.lex.token() === ";") {
         throw new CompilerError(
             "every type must be enclosed with '<>'. e.g. 'map<Key><Val>'.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     expect(p, ">")
@@ -467,7 +467,7 @@ function parseUnsignedNumber(p: Parser): number {
     if (!DIGIT_PATTERN.test(p.lex.token())) {
         throw new CompilerError(
             "an unsigned integer is expected.",
-            p.lex.location()
+            p.lex.location(),
         )
     }
     p.lex.forth()

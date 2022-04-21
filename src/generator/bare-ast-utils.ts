@@ -17,13 +17,13 @@ import { CompilerError } from "../core/compiler-error.js"
  */
 export function unrecursive(
     type: ast.Type,
-    symbols: ast.SymbolTable
+    symbols: ast.SymbolTable,
 ): ast.Type {
     const result = innerUnrecursive(type, symbols, new Set())
     if (result === null) {
         throw new CompilerError(
             "The recursive type cannot be simplified. This is likely an internal error. The recursive type may be invalid or the symbol table incomplete.",
-            type.loc
+            type.loc,
         )
     }
     return result
@@ -41,7 +41,7 @@ export function unrecursive(
 function innerUnrecursive(
     type: ast.Type,
     symbols: ast.SymbolTable,
-    traversed: ReadonlySet<string>
+    traversed: ReadonlySet<string>,
 ): ast.Type | null {
     if (type.tag === "optional") {
         const simplified = innerUnrecursive(type.types[0], symbols, traversed)
@@ -67,7 +67,7 @@ function innerUnrecursive(
             const simplified = innerUnrecursive(
                 aliased.type,
                 symbols,
-                subTraversed
+                subTraversed,
             )
             if (aliased.type !== simplified) {
                 return simplified

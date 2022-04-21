@@ -114,7 +114,7 @@ function genAliasedType(g: Gen, { alias, type }: ast.AliasedType): string {
                 `export declare class ${alias} {
                     ${indent(genStructTypeClassBody(g, type), 5)}
                 }`,
-                4
+                4,
             )
         }
     }
@@ -367,7 +367,7 @@ function genAliasedEnumCode(g: Gen, alias: string, type: ast.EnumType): string {
         .map(({ name, val }) =>
             type.props.intEnum
                 ? `${name}: ${val},\n${val}: "${name}"`
-                : `${name}: "${name}"`
+                : `${name}: "${name}"`,
         )
         .join(",\n")
     const constAssert = g.config.generator !== "js" ? "as const" : ""
@@ -379,14 +379,15 @@ function genAliasedEnumCode(g: Gen, alias: string, type: ast.EnumType): string {
 function genAliasedStructCode(
     g: Gen,
     alias: string,
-    type: ast.StructType
+    type: ast.StructType,
 ): string {
     const ts = g.config.generator === "ts"
     const members = ts ? "\n" + genStructTypeBody(g, type) : ""
     const params = type.props.fields
         .map(
             ({ name }, i) =>
-                `${jsId(name)}` + (ts ? `: ${genType(g, type.types[i])},` : ",")
+                `${jsId(name)}` +
+                (ts ? `: ${genType(g, type.types[i])},` : ","),
         )
         .join("\n")
     const assignments = type.props.fields
@@ -847,7 +848,7 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
 
 function genAliasFlatUnionWriter(
     g: Gen,
-    union: ast.UnionType<ast.Alias>
+    union: ast.UnionType<ast.Alias>,
 ): string {
     const resolved = union.types.map((t) => ast.resolveAlias(t, g.symbols))
     if (!resolved.every((t): t is ast.StructType => t.tag === "struct")) {
@@ -899,7 +900,7 @@ function genAliasFlatUnionWriter(
 
 function genBaseFlatUnionWriter(
     g: Gen,
-    union: ast.UnionType<ast.BaseType | ast.VoidType>
+    union: ast.UnionType<ast.BaseType | ast.VoidType>,
 ): string {
     if (!ast.haveDistinctTypeof(union.types)) {
         throw new Error("all types should have distinct typeof values.")

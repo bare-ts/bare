@@ -95,7 +95,7 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
                 ...config,
                 generator: "ts",
                 schema: schemaRelPath,
-            })
+            }),
         )
 
         const tsComputed = transform(schema, {

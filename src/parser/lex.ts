@@ -36,7 +36,7 @@ export class Lex {
     constructor(
         content: string,
         filename: string | number,
-        config: Partial<LexConfig> = {}
+        config: Partial<LexConfig> = {},
     ) {
         this.config = LexConfig(config)
         this.content = content
@@ -110,7 +110,7 @@ export class Lex {
                 } else {
                     throw new CompilerError(
                         `character '${c}' cannot be handled. BARE only supports ASCII characters for identifiers.`,
-                        this.location()
+                        this.location(),
                     )
                 }
             }

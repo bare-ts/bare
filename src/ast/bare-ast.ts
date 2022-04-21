@@ -314,7 +314,7 @@ export const BASE_TAG_TO_TYPEOF = {
  *  result is null.
  */
 export function leadingDiscriminators(
-    structs: readonly StructType[]
+    structs: readonly StructType[],
 ): Literal[] | null {
     if (structs.length > 0) {
         const literals: Set<Literal> = new Set()
@@ -342,10 +342,10 @@ export function leadingDiscriminators(
  * @returns have `types` distinct typeof values?
  */
 export function haveDistinctTypeof(
-    types: readonly (BaseType | VoidType)[]
+    types: readonly (BaseType | VoidType)[],
 ): boolean {
     const typeofValues = types.map((t) =>
-        isBaseType(t) ? BASE_TAG_TO_TYPEOF[t.tag] : null
+        isBaseType(t) ? BASE_TAG_TO_TYPEOF[t.tag] : null,
     ) // null for 'object' or 'undefined'
     return types.length === new Set(typeofValues).size
 }
@@ -357,6 +357,6 @@ export function haveDistinctTypeof(
  */
 export function withoutLoc(type: Type): Type {
     return JSON.parse(
-        JSON.stringify(type, (name, val) => (name === "loc" ? null : val))
+        JSON.stringify(type, (name, val) => (name === "loc" ? null : val)),
     )
 }

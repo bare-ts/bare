@@ -50,29 +50,29 @@ program
     .command("compile")
     .description("Compile a bare schema into a Typescript or JavaScript file")
     .addArgument(
-        new Argument("[schema]", "bare schema file").default(0, "stdin")
+        new Argument("[schema]", "bare schema file").default(0, "stdin"),
     )
     .addOption(
         new Option("-o, --out <file>", "destination of output").default(
             1,
-            "stdout"
-        )
+            "stdout",
+        ),
     )
     .addOption(
         new Option("--generator <generator>", "output generator").choices([
             "dts",
             "js",
             "ts",
-        ])
+        ]),
     )
     .option("--legacy-syntax", "allow legacy BARE syntax")
     .option(
         "--main <aliases...>",
-        "space-separated list of types used to encode and decode messages"
+        "space-separated list of types used to encode and decode messages",
     )
     .option(
         "--pedantic",
-        "require enum and union types to set all tags in-order"
+        "require enum and union types to set all tags in-order",
     )
     .option("--import-config", "import custom runtime config")
     .option("--import-factory", "import custom struct factory")
@@ -83,15 +83,15 @@ program
     .option("--use-mutable", "use mutable types")
     .option(
         "--use-quoted-property",
-        "use quoted property instead of unquoted property"
+        "use quoted property instead of unquoted property",
     )
     .option(
         "--use-lax-optional",
-        "accept null and undefined values for optional types"
+        "accept null and undefined values for optional types",
     )
     .option(
         "--use-undefined",
-        "return undefined instead of null for optional types"
+        "return undefined instead of null for optional types",
     )
     .option("--use-safe-int", "use safe integers instead of bigint")
     .addHelpText("after", COMPILE_EXTRA_HELP)
