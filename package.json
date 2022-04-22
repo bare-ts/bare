@@ -53,7 +53,7 @@
     "clean": "rm -rf dist",
     "prepare": "validate-commit-msg",
     "prepublishOnly": "npm run clean && npm test",
-    "test": "npm run build && tsc -b tests tests-corpus && oletus tests/*.test.js tests-corpus/**/**/*.test.js",
+    "test": "sh ./scripts/test.sh",
     "test:coverage": "c8 --reporter=lcovonly npm test"
   },
   "devDependencies": {
