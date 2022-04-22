@@ -4,12 +4,12 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
-* Add pure annotation in generated code
+-   Add pure annotation in generated code
 
     Pure annotations enables to bundler to detect pure function calls.
     @bare-ts/tools adds now these annotations in top-level function calls.
 
-* Allow circular references where possible
+-   Allow circular references where possible
 
     @bare-ts/tools was previously conservative about circular references.
     It now allows all circular references that can encode at least one
@@ -34,7 +34,7 @@ This project adheres to [Semantic Versioning][semver].
 
 ## 0.6.0 (2022-03-31)
 
-* Update BARE syntax
+-   Update BARE syntax
 
     The [new syntax](https://datatracker.ietf.org/doc/draft-devault-bare/03/)
     for BARE schema is now supported.
@@ -44,7 +44,7 @@ This project adheres to [Semantic Versioning][semver].
 
 ## 0.5.0 (2022-03-30)
 
-* Forbid circular references with fixed lists
+-   Forbid circular references with fixed lists
 
     The following schema is now correctly rejected:
 
@@ -54,7 +54,7 @@ This project adheres to [Semantic Versioning][semver].
     }
     ```
 
-* Allow enum type and aliased types for map key type
+-   Allow enum type and aliased types for map key type
 
     The following schema is now valid:
 
@@ -68,7 +68,7 @@ This project adheres to [Semantic Versioning][semver].
     type GenderNames map[Gender] string
     ```
 
-* Allow unsorted tags for unions and enums
+-   Allow unsorted tags for unions and enums
 
     The following schemas was previously rejected because of unsorted tags.
 
@@ -91,7 +91,7 @@ This project adheres to [Semantic Versioning][semver].
 
 ## 0.4.0 (2022-03-26)
 
-* Forbid main codecs resolving to void type
+-   Forbid main codecs resolving to void type
 
     The following BARE schema is no longer valid when 'Message' is
     a main codec (using --main CLI option):
@@ -101,22 +101,23 @@ This project adheres to [Semantic Versioning][semver].
          ^ error is now reported here
     ```
 
-* Forbid flat unions which cannot be automatically flatten
+-   Forbid flat unions which cannot be automatically flatten
 
     bare-ts is able to automatically compute the tag of simple flat unions
     without any help. A simple union is either:
-    - a union of base or void types that can be discriminated by their
-      *typeof value*, or
-    - a union of classes (requires the option `--use-class`).
+
+    -   a union of base or void types that can be discriminated by their
+        _typeof value_, or
+    -   a union of classes (requires the option `--use-class`).
 
     Previously, bare-ts asked to the user to provide a tagging function for
     other cases (complex flat unions).
     Now, bare-ts throws an error when it encounters a complex flat union.
     Complex flat unions are no longer supported.
 
-* Add pedantic mode (option --pedantic)
+-   Add pedantic mode (option --pedantic)
 
-* Better code generation
+-   Better code generation
 
     bare-ts has a normalization step where it alias some types,
     including anonymous structs, data arrays, and typed arrays.
@@ -126,7 +127,7 @@ This project adheres to [Semantic Versioning][semver].
 
 ## 0.3.0 (2022-03-02)
 
-* Fix regression: Forbid bare schema in which a type is repeated in an union
+-   Fix regression: Forbid bare schema in which a type is repeated in an union
 
     The following schema is now correctly reported as invalid:
 
@@ -134,19 +135,19 @@ This project adheres to [Semantic Versioning][semver].
     type X (u8 | u8)
     ```
 
-* Deduplicate readers and writers of complex non-aliased types
+-   Deduplicate readers and writers of complex non-aliased types
 
     @bare-ts/tools generates readers and writers for complex non-aliased types.
     These reader and writer are now de-duplicated.
 
-* Default to null instead of undefined for optional types
+-   Default to null instead of undefined for optional types
 
     The use of `null` seems more common than the use of `undefined`.
 
     The option `--use-null` is removed.
     A new option `--use-undefined` is added.
 
-* Make configurable the emitted type for void type
+-   Make configurable the emitted type for void type
 
     BARE schema enable use of void types in unions. For example:
 
@@ -159,7 +160,7 @@ This project adheres to [Semantic Versioning][semver].
     choose between `null`, `undefined`, and `null | undefined`.
     Note that these options also modify the emitted types for optionals.
 
-* Support for quoted properties
+-   Support for quoted properties
 
     The option `--use-quoted-property` enables to output
     quoted properties instead of unquoted properties.
@@ -169,14 +170,14 @@ This project adheres to [Semantic Versioning][semver].
 
 ## 0.2.0 (2022-02-20)
 
-* Fix invalid code generation for big tags in enums and unions
+-   Fix invalid code generation for big tags in enums and unions
 
     bare-ts applies an optimization when tags can be encoded on 7bits.
     The general case was not tested yet.
     The addition of tests enabled to catch typo errors.
     The generated code imported non-existing readers and writers.
 
-* Fix generator choice
+-   Fix generator choice
 
     The option `--generator` enables to specify which generator is used to
     produce the output.
@@ -186,7 +187,7 @@ This project adheres to [Semantic Versioning][semver].
 
     Previously the option did not override the default.
 
-* Fix location report upon compilation errors
+-   Fix location report upon compilation errors
 
     Upon errors the compiler reports the error and a file location.
     Previously, the reported location was shifted by 1 column and at
@@ -204,16 +205,16 @@ This project adheres to [Semantic Versioning][semver].
          ^ error is now reported here
     ```
 
-* Make @bare-ts/tools library platform-agnostic
+-   Make @bare-ts/tools library platform-agnostic
 
     Use your favorite ESM-ready CDN and simply import @bare-ts/tools.
     This was made possible by removing the dependency over node:assert.
 
-* Add `--use-class` option
+-   Add `--use-class` option
 
     This generates classes instead of interfaces for struct types.
 
-* Automatically handle simple flat unions
+-   Automatically handle simple flat unions
 
     By default bare-ts generates tagged unions.
     For instance, the following BARE schema:
@@ -226,8 +227,8 @@ This project adheres to [Semantic Versioning][semver].
 
     ```ts
     type Union =
-        | { readonly tag: 0, readonly val: A }
-        | { readonly tag: 1, readonly val: B }
+        | { readonly tag: 0; readonly val: A }
+        | { readonly tag: 1; readonly val: B }
     ```
 
     You can force the use of flat unions with the option `--use-flat-union`.
@@ -243,17 +244,18 @@ This project adheres to [Semantic Versioning][semver].
 
     bare-ts is now able to compute the tag of simple flat unions without
     your help. A simple union is either:
-    - a union of types that can be discriminated by their *typeof value*, or
-    - a union of classes (requires the option `--use-class`).
 
-* Add @bare-ts/lib as peer dependency
+    -   a union of types that can be discriminated by their _typeof value_, or
+    -   a union of classes (requires the option `--use-class`).
+
+-   Add @bare-ts/lib as peer dependency
 
     This enables to inform the user of @bare-ts/tools which version of
     @bare-ts/lib is expected.
 
-* Forbid bare schema with undefined aliases
+-   Forbid bare schema with undefined aliases
 
-* Forbid bare schema in which length and tags are too large
+-   Forbid bare schema in which length and tags are too large
 
     Length of fixed data and (typed) array must be a u32.
     This is a limitation of the ECMAScript standard.
@@ -262,7 +264,7 @@ This project adheres to [Semantic Versioning][semver].
     In the future, this requirement could be relaxed by switching to
     bigint for larger integers.
 
-* Forbid bare schema in which the length of a fixed data is 0
+-   Forbid bare schema in which the length of a fixed data is 0
 
     The following schema is now invalid:
 
@@ -270,7 +272,7 @@ This project adheres to [Semantic Versioning][semver].
     type EmptyData data<0>
     ```
 
-* Forbid bare schema in which a type is repeated in an union
+-   Forbid bare schema in which a type is repeated in an union
 
     The following schema is now invalid:
 
@@ -287,7 +289,7 @@ This project adheres to [Semantic Versioning][semver].
 
     `Y` is a user-defined type.
 
-* Forbid bare schema in which an enum have several members with the same name
+-   Forbid bare schema in which an enum have several members with the same name
 
     The following schema is now invalid:
 
@@ -300,7 +302,7 @@ This project adheres to [Semantic Versioning][semver].
     }
     ```
 
-* Forbid bare schema in which a struct have several fields with the same name
+-   Forbid bare schema in which a struct have several fields with the same name
 
     The following schema is now invalid:
 
@@ -311,29 +313,29 @@ This project adheres to [Semantic Versioning][semver].
     }
     ```
 
-* Forbid bare schema with circular references
+-   Forbid bare schema with circular references
 
-* Better diagnostics when semicolons are used to separate enum or
+-   Better diagnostics when semicolons are used to separate enum or
     struct members
 
-* BREAKING CHANGE: adapt to @bare-ts/lib@0.2.0
+-   BREAKING CHANGE: adapt to @bare-ts/lib@0.2.0
 
     @bare-ts/lib@0.2.0 introduces several breaking change.
     As a consequence:
-    - all decode/encode are renamed into read/write
-    - all pack/unpack are renamed into encode/decode
-    - decoders (previously unpackers) no longer accept `ArrayBuffer` as 
-    type of read buffer
+
+    -   all decode/encode are renamed into read/write
+    -   all pack/unpack are renamed into encode/decode
+    -   decoders (previously unpackers) no longer accept `ArrayBuffer` as
+        type of read buffer
 
 ## 0.1.1 (2022-01-05)
 
-* Fix array encoders
+-   Fix array encoders
 
     Previously array encoders did not encode the first item of a generic array.
 
 ## 0.1.0 (2022-01-03)
 
-* BARE schema compiler supports all types
-
+-   BARE schema compiler supports all types
 
 [semver]: https://semver.org/spec/v2.0.0.html

@@ -12,12 +12,12 @@
 Warning: BARE specification is currently a IEF draft.
 The specification is likely to evolve before its final release. [bare-ts](#) implements an ongoing draft that is not published yet.
 
-
 ## Getting started
 
 bare-ts provides two npm packages:
-- @bare-ts/tools enables to generate decoders and encoders from a schema
-- @bare-ts/lib provides basic decoders and encoders
+
+-   @bare-ts/tools enables to generate decoders and encoders from a schema
+-   @bare-ts/lib provides basic decoders and encoders
 
 Install @bare-ts/tools as a dev dependency and @bare-ts/lib as a dependency:
 
@@ -68,11 +68,14 @@ import { decodeContacts, encodeContacts, Gender } from "./code.js"
 import { strict } from "assert"
 
 const contacts = [
-    { tag: /* Person */ 0, val: {
-        name: "Seldon",
-        email: "seldon@foundation.org",
-        gender: Gender.MALE
-    } },
+    {
+        tag: /* Person */ 0,
+        val: {
+            name: "Seldon",
+            email: "seldon@foundation.org",
+            gender: Gender.MALE,
+        },
+    },
 ]
 
 const payload = encodeContacts(contacts)
@@ -80,7 +83,6 @@ const contacts2 = decodeContacts(payload)
 
 strict.deepEqual(contacts, contacts2)
 ```
-
 
 ## Why BARE?
 
@@ -93,7 +95,6 @@ strict.deepEqual(contacts, contacts2)
 **Simple**: In contrast to Protocol Buffer and Flat Buffer, BARE does not constraint its binary format in order to support schema evolution.
 In Protocol Buffer, this leads to embed some kind of schema inside messages and to make optional every field.
 Bare propose a simple way to support backward compatibility: the root type of a message should be the union of all versions of the schema.
-
 
 ## Why bare-ts?
 
