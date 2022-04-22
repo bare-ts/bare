@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   BREAKING CHANGES: require node versions that support ESM
+
+    @bare-ts/tools requires now a node versions that support
+    ECMAScript Modules.
+
+    Note that, @bare-ts/tools still exports a CommonJS build.
+
 -   Add pure annotation in generated code
 
     Pure annotations enables to bundler to detect pure function calls.
