@@ -1,0 +1,1 @@
+type U8 union { u8 }
