@@ -1,4 +1,5 @@
 {
+  "noMain": true,
   "useClass": true,
   "useFlatUnion": true
 }

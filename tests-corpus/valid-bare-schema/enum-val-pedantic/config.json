@@ -1,3 +1,4 @@
 {
-  "pedantic": true
+  "pedantic": true,
+  "noMain": true
 }

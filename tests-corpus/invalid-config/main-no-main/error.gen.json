@@ -1,0 +1,4 @@
+{
+  "name": "ConfigError",
+  "message": "options 'main' and 'no-main' cannot be both set."
+}

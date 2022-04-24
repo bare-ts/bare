@@ -56,10 +56,8 @@ type Contacts list<Contact>
 Next, you have to compile your schema into code:
 
 ```sh
-bare-ts compile schema.bare -o code.ts --main Contacts
+bare-ts compile schema.bare -o code.ts
 ```
-
-The option `--main` specifies which type is used to encode and decode messages.
 
 Once the code generated, you can encode and decode messages:
 

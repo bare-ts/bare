@@ -1,3 +1,4 @@
 {
-  "legacySyntax": true
+  "legacySyntax": true,
+  "noMain": true
 }

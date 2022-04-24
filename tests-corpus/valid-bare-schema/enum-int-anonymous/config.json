@@ -1,3 +1,4 @@
 {
-  "useIntEnum": true
+  "useIntEnum": true,
+  "noMain": true
 }

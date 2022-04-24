@@ -16,6 +16,7 @@ export interface Config {
     readonly importFactory: boolean
     readonly legacySyntax: boolean
     readonly main: readonly string[]
+    readonly noMain: boolean
     readonly out: string | number
     readonly pedantic: boolean
     readonly schema: string | number
@@ -42,6 +43,7 @@ export function Config({
     importFactory = false,
     legacySyntax = false,
     main = [],
+    noMain = false,
     out = "",
     pedantic = false,
     schema = "",
@@ -84,12 +86,23 @@ export function Config({
             "the code generator to use cannot be determinate. Please set the option 'generator'.",
         )
     }
+    if (noMain && main.length > 0) {
+        throw new ConfigError(
+            "options 'main' and 'no-main' cannot be both set.",
+        )
+    }
+    if (noMain && importConfig) {
+        throw new ConfigError(
+            "options 'importConfig' and 'no-main' cannot be both set.",
+        )
+    }
     return {
         generator: inferredGenerator,
         importConfig,
         importFactory,
         legacySyntax,
         main,
+        noMain,
         out,
         pedantic,
         schema,

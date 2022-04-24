@@ -4,6 +4,36 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   Automatically promote root type aliases as main type aliases
+
+    @bare-ts/tool generates encoders and decoders for main type aliases.
+    Main type aliases can be selected with the option `--main`:
+
+        bare-ts compile schema.bare --main Post
+
+    ```bare
+    # schema.bare
+    type Person struct { name: str }
+    type Post struct { author: Person }
+    ```
+
+    If the option `--main` is not set, then @bare-ts/tool promotes now
+    root type aliases as main type aliases. Root type aliases are type aliases
+    that are not referred by a type in the schema.
+
+    In the previous schema, `Post` is a root type alias, while `Person` is not.
+    The following command has now the same effect as the previous one:
+
+        bare-ts compile schema.bare
+
+    It promotes `Post` as a main type aliases.
+
+    To avoid the promotion of root types, you must use the option `--no-main`:
+
+        bare-ts compile schema.bare --no-main
+
+    `--no-main` and `--main` cannot be both set.
+
 -   Do not emit trailing spaces in code generation
 
 ## 0.7.0 (2022-04-24)

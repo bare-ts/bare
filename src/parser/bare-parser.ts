@@ -16,7 +16,11 @@ export function parse(content: string, config: Config): ast.Ast {
     while (p.lex.token() !== "") {
         defs.push(parseAliased(p))
     }
-    return { defs, main: config.main, loc }
+    const main =
+        config.noMain || config.main.length > 0
+            ? config.main
+            : ast.rootAliases(defs)
+    return { defs, main, loc }
 }
 
 interface Parser {

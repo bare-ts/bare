@@ -1,3 +1,4 @@
 {
-  "importFactory": true
+  "importFactory": true,
+  "noMain": true
 }

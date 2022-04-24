@@ -70,6 +70,7 @@ program
         "--main <aliases...>",
         "space-separated list of types used to encode and decode messages",
     )
+    .option("--no-main", "do not emit procedures to encode and decode messages")
     .option(
         "--pedantic",
         "require enum and union types to set all tags in-order",

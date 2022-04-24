@@ -285,6 +285,28 @@ export function resolveAlias(type: Type, symbols: SymbolTable): Type {
     return type
 }
 
+/**
+ * @param defs
+ * @returns aliases that are not referred by any types of `defs`.
+ */
+export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
+    const referred = new Set(defs.flatMap((x) => referredAliases(x.type)))
+    return defs.filter((x) => !referred.has(x.alias)).map((x) => x.alias)
+}
+
+/**
+ * @param type
+ * @returns all aliases present in the tree represented by `type`.
+ */
+function referredAliases(type: Type): readonly string[] {
+    if (type.tag === "alias") {
+        return [type.props.alias]
+    } else if (type.types !== null) {
+        return type.types.flatMap((t) => referredAliases(t))
+    }
+    return []
+}
+
 export const BASE_TAG_TO_TYPEOF = {
     "bool": "boolean",
     "f32": "number",

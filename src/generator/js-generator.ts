@@ -36,7 +36,7 @@ export function generate(schema: ast.Ast, config: Config): string {
                 break
             }
         }
-        if (g.config.main.indexOf(aliased.alias) !== -1) {
+        if (schema.main.indexOf(aliased.alias) !== -1) {
             switch (g.config.generator) {
                 case "dts":
                     body += `export ${genEncoderHead(g, aliased.alias)}\n\n`
@@ -66,7 +66,7 @@ export function generate(schema: ast.Ast, config: Config): string {
         head += 'import * as ext from "./ext.js"\n'
     }
     if (
-        g.config.main.length !== 0 &&
+        schema.main.length !== 0 &&
         !g.config.importConfig &&
         g.config.generator !== "dts"
     ) {

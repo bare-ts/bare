@@ -1,4 +1,5 @@
 {
   "legacySyntax": true,
+  "noMain": true,
   "useGenericArray": true
 }
