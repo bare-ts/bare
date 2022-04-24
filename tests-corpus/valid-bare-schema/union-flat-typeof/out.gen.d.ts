@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 export type u32 = number
 
-export type TypeOfUnion = 
+export type TypeOfUnion =
     | boolean
     | u32
     | string

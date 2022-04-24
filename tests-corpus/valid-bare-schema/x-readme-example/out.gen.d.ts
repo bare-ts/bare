@@ -29,7 +29,7 @@ export function readOrganization(bc: bare.ByteCursor): Organization
 
 export function writeOrganization(bc: bare.ByteCursor, x: Organization): void
 
-export type Contact = 
+export type Contact =
     | { readonly tag: 0; readonly val: Person }
     | { readonly tag: 1; readonly val: Organization }
 

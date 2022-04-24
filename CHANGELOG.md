@@ -2,6 +2,10 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Do not emit trailing spaces in code generation
+
 ## 0.7.0 (2022-04-24)
 
 -   BREAKING CHANGES: require node versions that support ESM

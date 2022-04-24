@@ -118,7 +118,10 @@ function genAliasedType(g: Gen, { alias, type }: ast.AliasedType): string {
             )
         }
     }
-    return `export type ${alias} = ${genType(g, type)}`
+    const def = genType(g, type)
+    return def[0] === "\n"
+        ? `export type ${alias} =${def}`
+        : `export type ${alias} = ${def}`
 }
 
 function typeAliasOrDef(g: Gen, type: ast.Type, alias: string): string {

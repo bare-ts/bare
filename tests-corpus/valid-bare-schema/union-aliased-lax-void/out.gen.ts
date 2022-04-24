@@ -15,7 +15,7 @@ export function writeVoid(bc: bare.ByteCursor, x: Void): void {
     // do nothing
 }
 
-export type UnsignedInt = 
+export type UnsignedInt =
     | { readonly tag: 0; readonly val: u8 }
     | { readonly tag: 1; readonly val: u16 }
     | { readonly tag: 2; readonly val: u32 }

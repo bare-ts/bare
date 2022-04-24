@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export type Alias = 
+export type Alias =
     | { readonly tag: 0; readonly val: Alias | null }
     | { readonly tag: 1; readonly val: string }
 

@@ -56,7 +56,7 @@ export function readEmployee(bc: bare.ByteCursor): Employee
 
 export function writeEmployee(bc: bare.ByteCursor, x: Employee): void
 
-export type Person = 
+export type Person =
     | { readonly tag: 0; readonly val: Customer }
     | { readonly tag: 1; readonly val: Employee }
 
@@ -75,7 +75,7 @@ export function readAddress(bc: bare.ByteCursor): Address
 
 export function writeAddress(bc: bare.ByteCursor, x: Address): void
 
-export type Message = 
+export type Message =
     | { readonly tag: 0; readonly val: Person }
 
 export function readMessage(bc: bare.ByteCursor): Message

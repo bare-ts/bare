@@ -1,7 +1,7 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
-export type Composite = 
+export type Composite =
     | { readonly tag: 0; readonly val: ReadonlyMap<string, string | null> }
     | { readonly tag: 1; readonly val: readonly (string | null)[] }
     | { readonly tag: 2; readonly val: Uint8Array }

@@ -12,7 +12,7 @@ export function writeY(bc: bare.ByteCursor, x: Y): void {
     bare.writeU8(bc, x)
 }
 
-export type X = 
+export type X =
     | { readonly tag: 0; readonly val: u8 }
     | { readonly tag: 1; readonly val: Y }
 

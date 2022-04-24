@@ -76,7 +76,7 @@ export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
     bare.writeString(bc, x.email)
 }
 
-export type Contact = 
+export type Contact =
     | { readonly tag: 0; readonly val: Person }
     | { readonly tag: 1; readonly val: Organization }
 

@@ -24,7 +24,7 @@ export function readBoxedstr(bc: bare.ByteCursor): Boxedstr
 
 export function writeBoxedstr(bc: bare.ByteCursor, x: Boxedstr): void
 
-export type Boxed = 
+export type Boxed =
     | BoxedU32
     | Boxedstr
 

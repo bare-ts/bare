@@ -38,7 +38,7 @@ export function writeBoxedstr(bc: bare.ByteCursor, x: Boxedstr): void {
     bare.writeString(bc, x.val)
 }
 
-export type Boxed = 
+export type Boxed =
     | BoxedU32
     | Boxedstr
 
