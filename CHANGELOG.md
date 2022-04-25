@@ -34,6 +34,32 @@ This project adheres to [Semantic Versioning][semver].
 
     `--no-main` and `--main` cannot be both set.
 
+-   BREAKING CHANGES: forbid f32 and f64 as map key type
+
+    According to IEEE-754 2019:
+    NaN (Not a Number) is not equal to any value, including itself.
+
+    This inequality leads to different implementations:
+
+    1.  Implementations that "follows" the standard
+
+        In this case, an unbounded number of values may be bind to the key NaN
+        and cannot be accessed.
+
+        This is the implementation chosen by Golang.
+
+    2.  Implementations that normalize NaNs and consider that NaN
+        is equal to itself
+
+        This is the implementation chosen by JavaScript
+
+    3.  Implementations that rely on the binary comparison of NaNs
+
+    This makes complex the support of f32 and f64 as map key type.
+
+    To avoid this complexity the ongoing BARE draft forbids their usage as
+    map key type.
+
 -   Do not emit trailing spaces in code generation
 
 ## 0.7.0 (2022-04-24)

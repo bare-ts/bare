@@ -6,5 +6,5 @@
     "line": 3,
     "col": 15
   },
-  "message": "(map-invalid-key-alias/schema.bare:3:15) the key type must be a base type or an enum type."
+  "message": "(map-invalid-key-alias/schema.bare:3:15) the key type must be a base type (except f32, f64) or an enum type."
 }

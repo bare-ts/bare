@@ -17,7 +17,7 @@
             },
             "types": null,
             "loc": {
-              "filename": "map-invalid-key/schema.bare",
+              "filename": "map-invalid-key-data/schema.bare",
               "offset": 14,
               "line": 1,
               "col": 15
@@ -28,7 +28,7 @@
             "props": null,
             "types": null,
             "loc": {
-              "filename": "map-invalid-key/schema.bare",
+              "filename": "map-invalid-key-data/schema.bare",
               "offset": 20,
               "line": 1,
               "col": 21
@@ -36,14 +36,14 @@
           }
         ],
         "loc": {
-          "filename": "map-invalid-key/schema.bare",
+          "filename": "map-invalid-key-data/schema.bare",
           "offset": 10,
           "line": 1,
           "col": 11
         }
       },
       "loc": {
-        "filename": "map-invalid-key/schema.bare",
+        "filename": "map-invalid-key-data/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -52,7 +52,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "map-invalid-key/schema.bare",
+    "filename": "map-invalid-key-data/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

@@ -163,9 +163,14 @@ function checkLengthInvariants(len: ast.Integer | null): void {
 function checkMapInvariants(c: Checker, type: ast.MapType): void {
     const keyType = type.types[0]
     const resolvedKeyType = ast.resolveAlias(keyType, c.symbols)
-    if (!ast.isBaseTag(resolvedKeyType.tag) && resolvedKeyType.tag !== "enum") {
+    if (
+        (!ast.isBaseTag(resolvedKeyType.tag) &&
+            resolvedKeyType.tag !== "enum") ||
+        resolvedKeyType.tag === "f32" ||
+        resolvedKeyType.tag === "f64"
+    ) {
         throw new CompilerError(
-            "the key type must be a base type or an enum type.",
+            "the key type must be a base type (except f32, f64) or an enum type.",
             keyType.loc,
         )
     }
