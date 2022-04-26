@@ -61,9 +61,9 @@
             ],
             "loc": {
               "filename": "list-union-circular-ref/schema.bare",
-              "offset": 22,
+              "offset": 16,
               "line": 1,
-              "col": 23
+              "col": 17
             }
           }
         ],

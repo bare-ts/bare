@@ -160,9 +160,9 @@
         ],
         "loc": {
           "filename": "union-composite-type/schema.bare",
-          "offset": 21,
+          "offset": 15,
           "line": 1,
-          "col": 22
+          "col": 16
         }
       },
       "loc": {

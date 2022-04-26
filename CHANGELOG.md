@@ -60,6 +60,20 @@ This project adheres to [Semantic Versioning][semver].
     To avoid this complexity the ongoing BARE draft forbids their usage as
     map key type.
 
+-   Allow leading and trailing pipes in unions
+
+    The following schema is now valid:
+
+    ```bare
+    type LeadingPipe union {
+        | u8
+    }
+
+    type TrailingPipe union {
+        u8 |
+    }
+    ```
+
 -   Do not emit trailing spaces in code generation
 
 ## 0.7.0 (2022-04-24)

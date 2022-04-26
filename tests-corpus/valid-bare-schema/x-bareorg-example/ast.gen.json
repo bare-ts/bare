@@ -637,9 +637,9 @@
         ],
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 530,
+          "offset": 524,
           "line": 35,
-          "col": 19
+          "col": 13
         }
       },
       "loc": {
@@ -822,9 +822,9 @@
         ],
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 663,
+          "offset": 657,
           "line": 44,
-          "col": 20
+          "col": 14
         }
       },
       "loc": {

@@ -12,9 +12,9 @@
         "types": [],
         "loc": {
           "filename": "union-empty/schema.bare",
-          "offset": 22,
+          "offset": 16,
           "line": 1,
-          "col": 23
+          "col": 17
         }
       },
       "loc": {

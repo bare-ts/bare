@@ -282,9 +282,9 @@
         ],
         "loc": {
           "filename": "x-readme-example/schema.bare",
-          "offset": 212,
+          "offset": 206,
           "line": 18,
-          "col": 20
+          "col": 14
         }
       },
       "loc": {

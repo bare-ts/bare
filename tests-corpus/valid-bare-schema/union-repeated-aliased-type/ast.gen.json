@@ -67,9 +67,9 @@
         ],
         "loc": {
           "filename": "union-repeated-aliased-type/schema.bare",
-          "offset": 23,
+          "offset": 17,
           "line": 2,
-          "col": 14
+          "col": 8
         }
       },
       "loc": {

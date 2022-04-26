@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-flat-same-typeof/schema.bare",
-    "offset": 23,
+    "offset": 17,
     "line": 1,
-    "col": 24
+    "col": 18
   },
-  "message": "(union-flat-same-typeof/schema.bare:1:24) the union cannot be flatten."
+  "message": "(union-flat-same-typeof/schema.bare:1:18) the union cannot be flatten."
 }

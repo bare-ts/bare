@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "union-empty/schema.bare",
-    "offset": 22,
+    "offset": 16,
     "line": 1,
-    "col": 23
+    "col": 17
   },
-  "message": "(union-empty/schema.bare:1:23) a union must include at least one type."
+  "message": "(union-empty/schema.bare:1:17) a union must include at least one type."
 }

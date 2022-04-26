@@ -44,9 +44,9 @@
         ],
         "loc": {
           "filename": "union-repeated-type/schema.bare",
-          "offset": 13,
+          "offset": 7,
           "line": 1,
-          "col": 14
+          "col": 8
         }
       },
       "loc": {

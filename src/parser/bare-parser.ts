@@ -285,11 +285,10 @@ function parseMap(p: Parser): ast.Type {
 }
 
 function parseUnion(p: Parser): ast.Type {
+    const loc = p.lex.location()
     expect(p, "union")
-    if (p.lex.token() !== "{") {
-        throw new CompilerError("'{' is expected.", p.lex.location())
-    }
-    const result = parseUnionBody(p)
+    expect(p, "{")
+    const result = parseUnionBody(p, loc)
     expect(p, "}")
     return result
 }
@@ -301,29 +300,23 @@ function parseLegacyUnion(p: Parser): ast.Type {
             p.lex.location(),
         )
     }
-    if (p.lex.token() !== "(") {
-        throw new CompilerError("'(' is expected.", p.lex.location())
-    }
-    const result = parseUnionBody(p)
+    const loc = p.lex.location()
+    expect(p, "(")
+    const result = parseUnionBody(p, loc)
     expect(p, ")")
     return result
 }
 
-function parseUnionBody(p: Parser): ast.Type {
-    const loc = p.lex.location()
+function parseUnionBody(p: Parser, loc: Location): ast.Type {
     const tags: ast.Integer[] = []
     const types: ast.Type[] = []
     let tagVal = 0
     do {
-        p.lex.forth()
+        if (p.lex.token() === "|") {
+            p.lex.forth()
+        }
         if (p.lex.token() === ")" || p.lex.token() === "}") {
-            if (tags.length !== 0) {
-                throw new CompilerError(
-                    "'|' must be followed by a type.",
-                    p.lex.location(),
-                )
-            }
-            break // empty union
+            break
         }
         const type = parseType(p)
         let loc: Location | null = null

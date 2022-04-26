@@ -1,0 +1,93 @@
+{
+  "defs": [
+    {
+      "alias": "LeadingPipe",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            {
+              "val": 0,
+              "loc": null
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-leading-trailing-pipes/schema.bare",
+              "offset": 31,
+              "line": 2,
+              "col": 7
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-leading-trailing-pipes/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "union-leading-trailing-pipes/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "TrailingPipe",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "props": {
+          "flat": false,
+          "tags": [
+            {
+              "val": 0,
+              "loc": null
+            }
+          ]
+        },
+        "types": [
+          {
+            "tag": "u8",
+            "props": null,
+            "types": null,
+            "loc": {
+              "filename": "union-leading-trailing-pipes/schema.bare",
+              "offset": 67,
+              "line": 6,
+              "col": 5
+            }
+          }
+        ],
+        "loc": {
+          "filename": "union-leading-trailing-pipes/schema.bare",
+          "offset": 55,
+          "line": 5,
+          "col": 19
+        }
+      },
+      "loc": {
+        "filename": "union-leading-trailing-pipes/schema.bare",
+        "offset": 37,
+        "line": 5,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "union-leading-trailing-pipes/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

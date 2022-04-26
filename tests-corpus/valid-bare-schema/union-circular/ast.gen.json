@@ -48,9 +48,9 @@
         ],
         "loc": {
           "filename": "union-circular/schema.bare",
-          "offset": 17,
+          "offset": 11,
           "line": 1,
-          "col": 18
+          "col": 12
         }
       },
       "loc": {

@@ -129,9 +129,9 @@
             ],
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 81,
+              "offset": 76,
               "line": 3,
-              "col": 28
+              "col": 23
             }
           },
           {

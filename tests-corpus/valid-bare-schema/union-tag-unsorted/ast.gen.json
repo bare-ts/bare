@@ -94,9 +94,9 @@
         ],
         "loc": {
           "filename": "union-tag-unsorted/schema.bare",
-          "offset": 23,
+          "offset": 17,
           "line": 1,
-          "col": 24
+          "col": 18
         }
       },
       "loc": {

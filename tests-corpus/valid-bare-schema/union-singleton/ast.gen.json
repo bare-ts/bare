@@ -29,9 +29,9 @@
         ],
         "loc": {
           "filename": "union-singleton/schema.bare",
-          "offset": 14,
+          "offset": 8,
           "line": 1,
-          "col": 15
+          "col": 9
         }
       },
       "loc": {
