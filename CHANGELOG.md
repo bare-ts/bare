@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.8.0 (2022-04-29)
 
 -   Require @bare-ts/lib v0.3.x
 
