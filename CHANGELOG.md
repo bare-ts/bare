@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   Require @bare-ts/lib v0.3.x
+
 -   Automatically promote root type aliases as main type aliases
 
     @bare-ts/tool generates encoders and decoders for main type aliases.

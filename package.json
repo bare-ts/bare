@@ -57,7 +57,7 @@
     "test:coverage": "c8 --reporter=lcovonly npm test"
   },
   "devDependencies": {
-    "@bare-ts/lib": "~0.2.0",
+    "@bare-ts/lib": "^0.3.0",
     "@types/node": "^17.0.7",
     "esbuild": "^0.14.38",
     "oletus": "=3.2.0",
@@ -69,6 +69,6 @@
     "commander": "^9.2.0"
   },
   "peerDependencies": {
-    "@bare-ts/lib": "~0.2.0"
+    "@bare-ts/lib": "~0.3.0"
   }
 }
