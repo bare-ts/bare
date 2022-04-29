@@ -3,6 +3,7 @@
     {
       "alias": "Main",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "void",
         "data": null,

@@ -8,6 +8,7 @@
         "data": {
           "name": null,
           "val": 4294967296,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "list-fixed-too-large/schema.bare",
@@ -42,6 +43,7 @@
           "col": 16
         }
       },
+      "comment": null,
       "loc": {
         "filename": "list-fixed-too-large/schema.bare",
         "offset": 0,

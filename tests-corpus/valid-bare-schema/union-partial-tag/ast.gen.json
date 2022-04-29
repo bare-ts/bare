@@ -3,18 +3,21 @@
     {
       "alias": "UnsignedInt",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 5,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "union-partial-tag/schema.bare",
@@ -26,12 +29,14 @@
           {
             "name": null,
             "val": 6,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 7,
+            "comment": null,
             "extra": null,
             "loc": null
           }

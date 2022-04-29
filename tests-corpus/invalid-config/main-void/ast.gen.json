@@ -3,6 +3,7 @@
     {
       "alias": "Main",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "AliasedVoid",
@@ -25,6 +26,7 @@
     {
       "alias": "AliasedVoid",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "void",
         "data": null,

@@ -3,12 +3,14 @@
     {
       "alias": "Gender",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "enum",
         "data": [
           {
             "name": "FLUID",
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "map-key-enum/schema.bare",
@@ -20,6 +22,7 @@
           {
             "name": "MALE",
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "map-key-enum/schema.bare",
@@ -31,6 +34,7 @@
           {
             "name": "FEMALE",
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "map-key-enum/schema.bare",
@@ -59,6 +63,7 @@
     {
       "alias": "GenderNames",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "map",
         "data": null,

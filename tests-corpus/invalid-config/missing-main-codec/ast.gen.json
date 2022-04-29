@@ -3,6 +3,7 @@
     {
       "alias": "Other",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "str",
         "data": null,

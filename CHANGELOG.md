@@ -2,6 +2,46 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Annotate your schema with doc-comments
+
+    @bare-ts/tool is now able to recognize a doc-comment and to document
+    the generated code with them.
+
+    A BARE doc-comment consists in two comment marks `##`.
+    Doc-comments can only document:
+
+    -   type definitions
+    -   enum values
+    -   struct fields
+
+    The following schema documents these three kinds of object:
+
+    ```bare
+    type Gender enum {
+        ## Be inclusive :)
+        FLUID
+        MALE
+        ## One is not born, but becomes a woman
+        ##                  -- Simone de Beauvoir
+        FEMALE
+    }
+
+    ## A Person with:
+    ## - a name
+    ## - a gender
+    type Person {
+        ## person's name
+        name: str
+        ## person's gender
+        gender: optional<Gender>
+    }
+    ```
+
+    Note that this syntax is not part of the BARE specification.
+    Thus, this is not portable between distinct implementations.
+
 ## 0.8.0 (2022-04-29)
 
 -   Require @bare-ts/lib v0.3.x

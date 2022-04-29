@@ -3,6 +3,7 @@
     {
       "alias": "Gender",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "enum",
         "data": [],

@@ -9,8 +9,8 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
     for (let i = 0; i < defs.length; i++) {
         const type = configureType(defs[i].type, config)
         if (defs[i].type !== type) {
-            const { alias, internal, loc } = defs[i]
-            defs[i] = { alias, internal, type, loc }
+            const { alias, internal, comment, loc } = defs[i]
+            defs[i] = { alias, internal, type, comment, loc }
         }
     }
     const main =
@@ -119,8 +119,8 @@ function configureField(
     const mut = config.useMutable
     const quoted = config.useQuotedProperty
     if (field.extra === null && (mut || quoted)) {
-        const { name, val, loc } = field
-        return { name, val, extra: { mut, quoted }, loc }
+        const { name, val, comment, loc } = field
+        return { name, val, extra: { mut, quoted }, comment, loc }
     }
     return field
 }

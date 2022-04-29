@@ -21,6 +21,7 @@
           "col": 11
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-aliased-lax-void/schema.bare",
         "offset": 0,
@@ -31,36 +32,42 @@
     {
       "alias": "UnsignedInt",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 3,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 4,
+            "comment": null,
             "extra": null,
             "loc": null
           }

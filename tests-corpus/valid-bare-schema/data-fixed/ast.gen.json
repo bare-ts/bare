@@ -3,11 +3,13 @@
     {
       "alias": "Data",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "data",
         "data": {
           "name": null,
           "val": 16,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "data-fixed/schema.bare",

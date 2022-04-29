@@ -3,6 +3,7 @@
     {
       "alias": "EmptyUnion",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [],

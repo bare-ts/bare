@@ -3,12 +3,14 @@
     {
       "alias": "U8",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           }

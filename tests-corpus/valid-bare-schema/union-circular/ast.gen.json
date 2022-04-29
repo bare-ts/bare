@@ -3,18 +3,21 @@
     {
       "alias": "Alias",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           }
@@ -63,6 +66,7 @@
     {
       "alias": "Alias1",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "Alias",
@@ -85,6 +89,7 @@
     {
       "alias": "Alias2",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "u8",
         "data": null,

@@ -217,9 +217,7 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
     // check type uniqueness
     const stringifiedTypes = new Set()
     for (let i = 0; i < tags.length; i++) {
-        const stringifiedType = JSON.stringify(
-            ast.withoutExtraLoc(type.types[i]),
-        )
+        const stringifiedType = JSON.stringify(ast.withoutTrivia(type.types[i]))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {

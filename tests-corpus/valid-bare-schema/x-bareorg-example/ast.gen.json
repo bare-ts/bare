@@ -3,11 +3,13 @@
     {
       "alias": "PublicKey",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "data",
         "data": {
           "name": null,
           "val": 128,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "x-bareorg-example/schema.bare",
@@ -35,6 +37,7 @@
     {
       "alias": "Time",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "str",
         "data": null,
@@ -57,12 +60,14 @@
     {
       "alias": "Department",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "enum",
         "data": [
           {
             "name": "ACCOUNTING",
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -74,6 +79,7 @@
           {
             "name": "ADMINISTRATION",
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -85,6 +91,7 @@
           {
             "name": "CUSTOMER_SERVICE",
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -96,6 +103,7 @@
           {
             "name": "DEVELOPMENT",
             "val": 3,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -107,6 +115,7 @@
           {
             "name": "JSMITH",
             "val": 99,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -135,12 +144,14 @@
     {
       "alias": "Customer",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "ame",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -152,6 +163,7 @@
           {
             "name": "email",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -163,6 +175,7 @@
           {
             "name": "address",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -174,6 +187,7 @@
           {
             "name": "orders",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -185,6 +199,7 @@
           {
             "name": "metadata",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -241,6 +256,7 @@
                   {
                     "name": "orderId",
                     "val": null,
+                    "comment": null,
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
@@ -252,6 +268,7 @@
                   {
                     "name": "quantity",
                     "val": null,
+                    "comment": null,
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
@@ -360,12 +377,14 @@
     {
       "alias": "Employee",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -377,6 +396,7 @@
           {
             "name": "email",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -388,6 +408,7 @@
           {
             "name": "address",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -399,6 +420,7 @@
           {
             "name": "department",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -410,6 +432,7 @@
           {
             "name": "hireDate",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -421,6 +444,7 @@
           {
             "name": "publicKey",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -432,6 +456,7 @@
           {
             "name": "metadata",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -583,18 +608,21 @@
     {
       "alias": "Person",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           }
@@ -643,12 +671,14 @@
     {
       "alias": "Address",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "address",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -660,6 +690,7 @@
           {
             "name": "city",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -671,6 +702,7 @@
           {
             "name": "state",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -682,6 +714,7 @@
           {
             "name": "country",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
@@ -697,6 +730,7 @@
             "data": {
               "name": null,
               "val": 4,
+              "comment": null,
               "extra": null,
               "loc": {
                 "filename": "x-bareorg-example/schema.bare",
@@ -782,12 +816,14 @@
     {
       "alias": "Message",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",

@@ -3,11 +3,13 @@
     {
       "alias": "U8Array",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "list",
         "data": {
           "name": null,
           "val": 4,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "list-fixed-legacy/schema.bare",

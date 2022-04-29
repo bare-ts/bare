@@ -3,12 +3,14 @@
     {
       "alias": "Gender",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "enum",
         "data": [
           {
             "name": "FLUID",
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-pedantic-unsorted/schema.bare",
@@ -20,6 +22,7 @@
           {
             "name": "MALE",
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-pedantic-unsorted/schema.bare",
@@ -31,6 +34,7 @@
           {
             "name": "FEMALE",
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-pedantic-unsorted/schema.bare",

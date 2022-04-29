@@ -1,0 +1,57 @@
+{
+  "defs": [
+    {
+      "alias": "U8Alias",
+      "internal": false,
+      "comment": " First doctring\n",
+      "type": {
+        "tag": "u8",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "alias-doccomment/schema.bare",
+          "offset": 31,
+          "line": 2,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "alias-doccomment/schema.bare",
+        "offset": 18,
+        "line": 2,
+        "col": 1
+      }
+    },
+    {
+      "alias": "U8Alias2",
+      "internal": false,
+      "comment": " Second\n\n multiline\n doctring\n",
+      "type": {
+        "tag": "u8",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "alias-doccomment/schema.bare",
+          "offset": 87,
+          "line": 8,
+          "col": 15
+        }
+      },
+      "loc": {
+        "filename": "alias-doccomment/schema.bare",
+        "offset": 73,
+        "line": 8,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "alias-doccomment/schema.bare",
+    "offset": 18,
+    "line": 2,
+    "col": 1
+  }
+}

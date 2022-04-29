@@ -3,6 +3,7 @@
     {
       "alias": "Message",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "u8",
         "data": null,

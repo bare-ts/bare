@@ -3,11 +3,13 @@
     {
       "alias": "EmptyArray",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "list",
         "data": {
           "name": null,
           "val": 0,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "list-fixed-empty/schema.bare",

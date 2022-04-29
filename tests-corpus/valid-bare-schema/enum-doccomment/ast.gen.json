@@ -1,0 +1,71 @@
+{
+  "defs": [
+    {
+      "alias": "Gender",
+      "internal": false,
+      "comment": " An enum to model Genders\n",
+      "type": {
+        "tag": "enum",
+        "data": [
+          {
+            "name": "FLUID",
+            "val": 0,
+            "comment": " Be inclusive :)\n",
+            "extra": null,
+            "loc": {
+              "filename": "enum-doccomment/schema.bare",
+              "offset": 74,
+              "line": 4,
+              "col": 5
+            }
+          },
+          {
+            "name": "MALE",
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "enum-doccomment/schema.bare",
+              "offset": 84,
+              "line": 5,
+              "col": 5
+            }
+          },
+          {
+            "name": "FEMALE",
+            "val": 2,
+            "comment": " One is not born, but becomes a woman\n                  -- Simone de Beauvoir\n",
+            "extra": null,
+            "loc": {
+              "filename": "enum-doccomment/schema.bare",
+              "offset": 183,
+              "line": 8,
+              "col": 5
+            }
+          }
+        ],
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "enum-doccomment/schema.bare",
+          "offset": 40,
+          "line": 2,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "enum-doccomment/schema.bare",
+        "offset": 28,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "enum-doccomment/schema.bare",
+    "offset": 28,
+    "line": 2,
+    "col": 1
+  }
+}

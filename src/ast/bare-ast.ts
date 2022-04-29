@@ -23,6 +23,7 @@ export interface AliasedType {
     readonly alias: string
     // The normalization phase uses this to create internal-only aliases.
     readonly internal: boolean
+    readonly comment: string | null
     readonly type: Type
     readonly loc: Location | null
 }
@@ -186,6 +187,7 @@ export interface VoidType {
 export interface EnumVal {
     readonly name: string
     readonly val: number
+    readonly comment: string | null
     readonly extra: null
     readonly loc: Location | null
 }
@@ -193,6 +195,7 @@ export interface EnumVal {
 export interface Length {
     readonly name: null
     readonly val: number
+    readonly comment: null
     readonly extra: null
     readonly loc: Location | null
 }
@@ -200,6 +203,7 @@ export interface Length {
 export interface StructField {
     readonly name: string
     readonly val: null
+    readonly comment: string | null
     readonly extra: {
         readonly mut: boolean
         readonly quoted: boolean
@@ -210,6 +214,7 @@ export interface StructField {
 export interface UnionTag {
     readonly name: null
     readonly val: number
+    readonly comment: string | null
     readonly extra: null
     readonly loc: Location | null
 }
@@ -449,14 +454,16 @@ export function withoutLoc(type: Type): Type {
 }
 
 /**
- * Recursively traverse the ast and set `extra` and `loc` to null
+ * Recursively traverse the ast and set `comment`, `extra`, and `loc` to null
  * @param type
- * @returns type with all `extra` and `loc` set to null
+ * @returns type with all `comment`, `extra` and `loc` set to null
  */
-export function withoutExtraLoc(type: Type): Type {
+export function withoutTrivia(type: Type): Type {
     return JSON.parse(
         JSON.stringify(type, (name, val) =>
-            name === "loc" || name === "extra" ? null : val,
+            name === "comment" || name === "extra" || name === "loc"
+                ? null
+                : val,
         ),
     )
 }

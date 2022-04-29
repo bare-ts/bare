@@ -17,6 +17,7 @@
           "col": 10
         }
       },
+      "comment": null,
       "loc": {
         "filename": "safe-int/schema.bare",
         "offset": 0,
@@ -41,6 +42,7 @@
           "col": 10
         }
       },
+      "comment": null,
       "loc": {
         "filename": "safe-int/schema.bare",
         "offset": 13,

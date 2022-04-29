@@ -3,6 +3,7 @@
     {
       "alias": "MultiList",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "list",
         "data": null,

@@ -8,6 +8,7 @@
         "data": {
           "name": null,
           "val": 4,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "typed-array-fixed/schema.bare",
@@ -42,6 +43,7 @@
           "col": 14
         }
       },
+      "comment": null,
       "loc": {
         "filename": "typed-array-fixed/schema.bare",
         "offset": 0,

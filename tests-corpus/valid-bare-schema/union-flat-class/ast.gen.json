@@ -9,6 +9,7 @@
           {
             "name": "val",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
@@ -42,6 +43,7 @@
           "col": 22
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-flat-class/schema.bare",
         "offset": 0,
@@ -58,6 +60,7 @@
           {
             "name": "val",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
@@ -91,6 +94,7 @@
           "col": 22
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-flat-class/schema.bare",
         "offset": 39,
@@ -107,12 +111,14 @@
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           }
@@ -153,6 +159,7 @@
           "col": 12
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-flat-class/schema.bare",
         "offset": 78,

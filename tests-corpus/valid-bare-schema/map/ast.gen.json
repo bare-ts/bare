@@ -3,6 +3,7 @@
     {
       "alias": "Dict",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "map",
         "data": null,

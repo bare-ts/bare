@@ -3,6 +3,7 @@
     {
       "alias": "Person",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [],

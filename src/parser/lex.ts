@@ -9,15 +9,22 @@ import { ConfigError } from "../core/config.js"
  */
 export interface LexConfig {
     readonly commentMark: string | null
+    readonly docMark: string | null
 }
 
 export function LexConfig({
     commentMark = null,
+    docMark = null,
 }: Partial<LexConfig>): LexConfig {
     if (commentMark !== null && commentMark.length !== 1) {
         throw new ConfigError("A comment mark must be a single char.")
     }
-    return { commentMark }
+    if (docMark !== null && docMark.length > 0 && docMark[0] !== commentMark) {
+        throw new ConfigError(
+            "A doc mark must consists in two char. The first char must be the same as the commentMark",
+        )
+    }
+    return { commentMark, docMark }
 }
 
 const WHITE_SPACE_PATTERN = /\s/
@@ -31,6 +38,7 @@ export class Lex {
     private declare offset: number
     private declare line: number
     private declare col: number
+    private declare _docComment: string
     private declare _token: string
 
     constructor(
@@ -44,11 +52,25 @@ export class Lex {
         this.offset = 0
         this.line = 1
         this.col = 1
+        this._docComment = ""
         this.forth()
     }
 
     token(): string {
         return this._token
+    }
+
+    /**
+     * @returns collected comment since the last comment' consumption.
+     *  Null if no collected comment or empty comment.
+     */
+    consumeDocComment(): string | null {
+        const comment = this._docComment
+        if (comment !== "") {
+            this._docComment = ""
+            return comment
+        }
+        return null
     }
 
     location(): Location {
@@ -77,6 +99,17 @@ export class Lex {
                 if (index === -1) {
                     // EOF
                     index = content.length
+                }
+                const docMark = this.config.docMark
+                if (
+                    docMark !== null &&
+                    content.slice(this.offset, this.offset + docMark.length) ===
+                        docMark
+                ) {
+                    this._docComment += content.slice(
+                        this.offset + docMark.length,
+                        index + 1,
+                    )
                 }
                 const len = index - this.offset
                 this.col += len

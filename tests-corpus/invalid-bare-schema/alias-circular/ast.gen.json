@@ -3,6 +3,7 @@
     {
       "alias": "Alias0",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "Alias1",
@@ -25,6 +26,7 @@
     {
       "alias": "Alias1",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "Alias2",
@@ -47,6 +49,7 @@
     {
       "alias": "Alias2",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "Alias3",
@@ -69,6 +72,7 @@
     {
       "alias": "Alias3",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "alias",
         "data": "Alias0",

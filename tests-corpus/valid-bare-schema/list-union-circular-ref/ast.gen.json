@@ -3,11 +3,13 @@
     {
       "alias": "Alias",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "list",
         "data": {
           "name": null,
           "val": 2,
+          "comment": null,
           "extra": null,
           "loc": {
             "filename": "list-union-circular-ref/schema.bare",
@@ -23,12 +25,14 @@
               {
                 "name": null,
                 "val": 0,
+                "comment": null,
                 "extra": null,
                 "loc": null
               },
               {
                 "name": null,
                 "val": 1,
+                "comment": null,
                 "extra": null,
                 "loc": null
               }

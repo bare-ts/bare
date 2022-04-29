@@ -9,18 +9,21 @@
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": null
           }
@@ -81,6 +84,7 @@
             "data": {
               "name": null,
               "val": 4,
+              "comment": null,
               "extra": null,
               "loc": {
                 "filename": "union-composite-type/schema.bare",
@@ -129,6 +133,7 @@
             "data": {
               "name": null,
               "val": 4,
+              "comment": null,
               "extra": null,
               "loc": {
                 "filename": "union-composite-type/schema.bare",
@@ -172,6 +177,7 @@
           "col": 16
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-composite-type/schema.bare",
         "offset": 0,

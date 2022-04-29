@@ -3,12 +3,14 @@
     {
       "alias": "Gender",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "enum",
         "data": [
           {
             "name": "MALE",
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-too-big-val/schema.bare",
@@ -20,6 +22,7 @@
           {
             "name": "FEMALE",
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-too-big-val/schema.bare",
@@ -31,6 +34,7 @@
           {
             "name": "FLUID",
             "val": 9007199254740992,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-too-big-val/schema.bare",

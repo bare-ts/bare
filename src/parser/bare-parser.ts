@@ -9,7 +9,10 @@ import { Lex } from "./lex.js"
 export function parse(content: string, config: Config): ast.Ast {
     const p = {
         config,
-        lex: new Lex(content, config.schema, { commentMark: "#" }),
+        lex: new Lex(content, config.schema, {
+            commentMark: "#",
+            docMark: "##",
+        }),
     }
     const loc = p.lex.location()
     const defs: ast.AliasedType[] = []
@@ -31,6 +34,7 @@ const UPPER_CAMEL_CASE_PATTERN = /^[A-Z][A-Za-z0-9]*$/
 const DIGIT_PATTERN = /^([0-9]+)$/
 
 function parseAliased(p: Parser): ast.AliasedType {
+    const comment = p.lex.consumeDocComment()
     const keyword = p.lex.token()
     const loc = p.lex.location()
     if (keyword !== "enum" && keyword !== "struct" && keyword !== "type") {
@@ -66,7 +70,7 @@ function parseAliased(p: Parser): ast.AliasedType {
             : keyword === "struct"
             ? parseStructBody(p)
             : parseTypeCheckUnion(p)
-    return { alias, internal: false, type, loc }
+    return { alias, internal: false, comment, type, loc }
 }
 
 function parseType(p: Parser): ast.Type {
@@ -152,7 +156,13 @@ function parseData(p: Parser): ast.Type {
         }
         p.lex.forth()
         const loc = p.lex.location()
-        len = { name: null, val: parseUnsignedNumber(p), extra: null, loc }
+        len = {
+            name: null,
+            val: parseUnsignedNumber(p),
+            comment: null,
+            extra: null,
+            loc,
+        }
         expect(p, ">")
     } else {
         len = parseOptionalLength(p)
@@ -186,7 +196,13 @@ function parseLegacyList(p: Parser): ast.Type {
     expect(p, "[")
     if (p.lex.token() !== "]") {
         const loc = p.lex.location()
-        len = { name: null, val: parseUnsignedNumber(p), extra: null, loc }
+        len = {
+            name: null,
+            val: parseUnsignedNumber(p),
+            comment: null,
+            extra: null,
+            loc,
+        }
         expect(p, "]")
     } else {
         p.lex.forth()
@@ -265,7 +281,7 @@ function parseLegacyUnion(p: Parser): ast.Type {
 }
 
 function parseUnionBody(p: Parser, loc: Location): ast.Type {
-    const tags: ast.Length[] = []
+    const tags: ast.UnionTag[] = []
     const types: ast.Type[] = []
     let tagVal = 0
     do {
@@ -275,6 +291,7 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
         if (p.lex.token() === ")" || p.lex.token() === "}") {
             break
         }
+        const comment = p.lex.consumeDocComment()
         const type = parseType(p)
         let loc: Location | null = null
         if (p.lex.token() === "=") {
@@ -287,7 +304,13 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
                 p.lex.location(),
             )
         }
-        tags.push({ name: null, val: tagVal, extra: null, loc })
+        tags.push({
+            name: null,
+            val: tagVal,
+            comment,
+            extra: null,
+            loc,
+        })
         types.push(type)
         tagVal++
         if (p.lex.token() === "," || p.lex.token() === ";") {
@@ -313,6 +336,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
     const names = new Set()
     let val = 0
     while (ALL_CASE_PATTERN.test(p.lex.token())) {
+        const comment = p.lex.consumeDocComment()
         const name = p.lex.token()
         if (!UPPER_SNAKE_CASE_PATTERN.test(name)) {
             throw new CompilerError(
@@ -332,7 +356,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
                 p.lex.location(),
             )
         }
-        vals.push({ name, val, extra: null, loc: valLoc })
+        vals.push({ name, val, comment, extra: null, loc: valLoc })
         val++
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
@@ -357,6 +381,7 @@ function parseStructBody(p: Parser): ast.Type {
     const types: ast.Type[] = []
     const names = new Set()
     while (ALL_CASE_PATTERN.test(p.lex.token())) {
+        const comment = p.lex.consumeDocComment()
         const name = p.lex.token()
         if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
             throw new CompilerError(
@@ -375,7 +400,7 @@ function parseStructBody(p: Parser): ast.Type {
                 p.lex.location(),
             )
         }
-        fields.push({ name, val: null, extra: null, loc: fieldLoc })
+        fields.push({ name, val: null, comment, extra: null, loc: fieldLoc })
         types.push(type)
     }
     expect(p, "}")
@@ -388,7 +413,7 @@ function parseOptionalLength(p: Parser): ast.Length | null {
         const loc = p.lex.location()
         const val = parseUnsignedNumber(p)
         expect(p, "]")
-        return { name: null, val, extra: null, loc }
+        return { name: null, val, comment: null, extra: null, loc }
     } else {
         return null
     }

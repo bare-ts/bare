@@ -94,25 +94,28 @@ interface Gen {
 
 // TS type generation
 
-function genAliasedType(g: Gen, { alias, type }: ast.AliasedType): string {
+function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
+    const { alias, comment, type } = aliased
+    const doc = genDocComment(comment)
     switch (type.tag) {
         case "enum":
-            return "export " + genAliasedEnumType(g, alias, type)
+            return doc + "export " + genAliasedEnumType(g, alias, type)
         case "struct": {
             const isClass = type.extra?.class
             if (g.config.importFactory) {
                 const extType = isClass
                     ? `ext.${alias}`
                     : `ReturnType<typeof ext.${alias}>`
-                return `export type ${alias} = ${extType}`
+                return `${doc}export type ${alias} = ${extType}`
             }
             if (!isClass) {
-                return `export interface ${alias} ${genStructType(g, type)}`
+                const structDef = genStructType(g, type)
+                return `${doc}export interface ${alias} ${structDef}`
             } else if (g.config.generator !== "dts") {
                 return "" // A non-ambient class will be generated
             }
             return unindent(
-                `export declare class ${alias} {
+                `${doc}export declare class ${alias} {
                     ${indent(genStructTypeClassBody(g, type), 5)}
                 }`,
                 4,
@@ -121,8 +124,8 @@ function genAliasedType(g: Gen, { alias, type }: ast.AliasedType): string {
     }
     const def = genType(g, type)
     return def[0] === "\n"
-        ? `export type ${alias} =${def}`
-        : `export type ${alias} = ${def}`
+        ? `${doc}export type ${alias} =${def}`
+        : `${doc}export type ${alias} = ${def}`
 }
 
 function typeAliasOrDef(g: Gen, type: ast.Type, alias: string): string {
@@ -203,9 +206,10 @@ function genEnumType(_g: Gen, type: ast.EnumType): string {
 
 function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
     let body = ""
-    for (const { name, val } of type.data) {
+    for (const { name, val, comment } of type.data) {
         const enumJsVal = type.extra?.intEnum ? `${val}` : `"${name}"`
-        body += `${name} = ${enumJsVal},\n`
+        const doc = genDocComment(comment)
+        body += `${doc}${name} = ${enumJsVal},\n`
     }
     body = body.slice(0, -1) // remove last newline
     const modifier = g.config.generator === "dts" ? "declare " : ""
@@ -252,9 +256,10 @@ function genStructTypeBody(g: Gen, type: ast.StructType): string {
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const field = type.data[i]
+        const doc = genDocComment(field.comment)
         const modifier = field.extra?.mut ? "" : "readonly "
         const prop = field.extra?.quoted ? `"${field.name}"` : field.name
-        result += `${modifier}${prop}: ${genType(g, type.types[i])}\n`
+        result += `${doc}${modifier}${prop}: ${genType(g, type.types[i])}\n`
     }
     return result.trim()
 }
@@ -285,11 +290,12 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
+        const doc = genDocComment(type.data[i].comment)
         const valType = genType(g, type.types[i])
         const tagVal = type.data[i].val
         result += type.extra?.flat
-            ? `\n| ${valType}`
-            : `\n| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
+            ? `\n${doc}| ${valType}`
+            : `\n${doc}| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
     }
     return indent(result)
 }
@@ -999,6 +1005,14 @@ function genEncoder(g: Gen, alias: string): string {
 }
 
 // utils
+
+function genDocComment(content: string | null): string {
+    if (content === null) {
+        return ""
+    }
+    const docBody = content.trimEnd().split("\n").join("\n *")
+    return `/**\n *${docBody}\n */\n`
+}
 
 function capitalize(s: string): string {
     return s.replace(/^\w/, (c) => c.toUpperCase())

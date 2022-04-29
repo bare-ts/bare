@@ -1,0 +1,84 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "comment": " A struct to model persons\n",
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "comment": " person's name\n",
+            "extra": null,
+            "loc": {
+              "filename": "struct-doccomment/schema.bare",
+              "offset": 75,
+              "line": 4,
+              "col": 5
+            }
+          },
+          {
+            "name": "age",
+            "val": null,
+            "comment": " person's age\n",
+            "extra": null,
+            "loc": {
+              "filename": "struct-doccomment/schema.bare",
+              "offset": 109,
+              "line": 6,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-doccomment/schema.bare",
+              "offset": 81,
+              "line": 4,
+              "col": 11
+            }
+          },
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-doccomment/schema.bare",
+              "offset": 114,
+              "line": 6,
+              "col": 10
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "struct-doccomment/schema.bare",
+          "offset": 48,
+          "line": 2,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "struct-doccomment/schema.bare",
+        "offset": 29,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "struct-doccomment/schema.bare",
+    "offset": 29,
+    "line": 2,
+    "col": 1
+  }
+}

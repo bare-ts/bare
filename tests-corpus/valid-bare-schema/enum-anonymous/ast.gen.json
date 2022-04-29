@@ -3,12 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-anonymous/schema.bare",
@@ -20,6 +22,7 @@
           {
             "name": "gender",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "enum-anonymous/schema.bare",
@@ -48,6 +51,7 @@
               {
                 "name": "FLUID",
                 "val": 0,
+                "comment": null,
                 "extra": null,
                 "loc": {
                   "filename": "enum-anonymous/schema.bare",
@@ -59,6 +63,7 @@
               {
                 "name": "MALE",
                 "val": 1,
+                "comment": null,
                 "extra": null,
                 "loc": {
                   "filename": "enum-anonymous/schema.bare",
@@ -70,6 +75,7 @@
               {
                 "name": "FEMALE",
                 "val": 2,
+                "comment": null,
                 "extra": null,
                 "loc": {
                   "filename": "enum-anonymous/schema.bare",

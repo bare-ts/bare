@@ -3,12 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "bestFriends",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "list-fixed-circular/schema.bare",
@@ -24,6 +26,7 @@
             "data": {
               "name": null,
               "val": 2,
+              "comment": null,
               "extra": null,
               "loc": {
                 "filename": "list-fixed-circular/schema.bare",

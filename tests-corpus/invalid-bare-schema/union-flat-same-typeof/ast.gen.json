@@ -9,24 +9,28 @@
           {
             "name": null,
             "val": 0,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 2,
+            "comment": null,
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 3,
+            "comment": null,
             "extra": null,
             "loc": null
           }
@@ -91,6 +95,7 @@
           "col": 18
         }
       },
+      "comment": null,
       "loc": {
         "filename": "union-flat-same-typeof/schema.bare",
         "offset": 0,

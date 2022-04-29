@@ -3,12 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "alias-anonymous-struct-legacy/schema.bare",
@@ -20,6 +22,7 @@
           {
             "name": "age",
             "val": null,
+            "comment": null,
             "extra": null,
             "loc": {
               "filename": "alias-anonymous-struct-legacy/schema.bare",
