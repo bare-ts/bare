@@ -5,69 +5,62 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "bestFriend",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 25,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "secondBestFriend",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 58,
-                "line": 3,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "friends",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 103,
-                "line": 4,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "friendNicknames",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-circular-ref-allowed/schema.bare",
-                "offset": 129,
-                "line": 5,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "bestFriend",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "secondBestFriend",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 58,
+              "line": 3,
+              "col": 5
+            }
+          },
+          {
+            "name": "friends",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 103,
+              "line": 4,
+              "col": 5
+            }
+          },
+          {
+            "name": "friendNicknames",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-circular-ref-allowed/schema.bare",
+              "offset": 129,
+              "line": 5,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
             "tag": "optional",
-            "props": {
-              "lax": false,
-              "undef": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Person"
-                },
+                "data": "Person",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 46,
@@ -76,6 +69,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
               "offset": 37,
@@ -85,26 +79,26 @@
           },
           {
             "tag": "union",
-            "props": {
-              "flat": false,
-              "tags": [
-                {
-                  "val": 0,
-                  "loc": null
-                },
-                {
-                  "val": 1,
-                  "loc": null
-                }
-              ]
-            },
+            "data": [
+              {
+                "name": null,
+                "val": 0,
+                "extra": null,
+                "loc": null
+              },
+              {
+                "name": null,
+                "val": 1,
+                "extra": null,
+                "loc": null
+              }
+            ],
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Person"
-                },
+                "data": "Person",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 83,
@@ -114,11 +108,9 @@
               },
               {
                 "tag": "void",
-                "props": {
-                  "lax": false,
-                  "undef": false
-                },
+                "data": null,
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 92,
@@ -127,6 +119,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
               "offset": 76,
@@ -136,17 +129,13 @@
           },
           {
             "tag": "list",
-            "props": {
-              "len": null,
-              "mut": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Person"
-                },
+                "data": "Person",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 117,
@@ -155,6 +144,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
               "offset": 112,
@@ -164,14 +154,13 @@
           },
           {
             "tag": "map",
-            "props": {
-              "mut": false
-            },
+            "data": null,
             "types": [
               {
-                "tag": "string",
-                "props": null,
+                "tag": "str",
+                "data": null,
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 150,
@@ -181,10 +170,9 @@
               },
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Person"
-                },
+                "data": "Person",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-circular-ref-allowed/schema.bare",
                   "offset": 155,
@@ -193,6 +181,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
               "offset": 146,
@@ -201,6 +190,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "struct-circular-ref-allowed/schema.bare",
           "offset": 19,

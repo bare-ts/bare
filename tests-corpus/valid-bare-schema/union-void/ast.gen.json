@@ -5,36 +5,44 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            },
-            {
-              "val": 2,
-              "loc": null
-            },
-            {
-              "val": 3,
-              "loc": null
-            },
-            {
-              "val": 4,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 2,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 3,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 4,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-void/schema.bare",
               "offset": 25,
@@ -44,8 +52,9 @@
           },
           {
             "tag": "u16",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-void/schema.bare",
               "offset": 30,
@@ -55,8 +64,9 @@
           },
           {
             "tag": "u32",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-void/schema.bare",
               "offset": 36,
@@ -66,8 +76,9 @@
           },
           {
             "tag": "u64",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-void/schema.bare",
               "offset": 42,
@@ -77,11 +88,9 @@
           },
           {
             "tag": "void",
-            "props": {
-              "lax": false,
-              "undef": false
-            },
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-void/schema.bare",
               "offset": 48,
@@ -90,6 +99,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-void/schema.bare",
           "offset": 17,

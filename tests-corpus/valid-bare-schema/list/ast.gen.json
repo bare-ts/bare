@@ -5,15 +5,13 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "list/schema.bare",
               "offset": 17,
@@ -22,6 +20,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "list/schema.bare",
           "offset": 12,

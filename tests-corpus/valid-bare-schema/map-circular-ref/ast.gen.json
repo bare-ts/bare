@@ -5,14 +5,13 @@
       "internal": false,
       "type": {
         "tag": "map",
-        "props": {
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-circular-ref/schema.bare",
               "offset": 15,
@@ -22,10 +21,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Alias"
-            },
+            "data": "Alias",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-circular-ref/schema.bare",
               "offset": 20,
@@ -34,6 +32,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "map-circular-ref/schema.bare",
           "offset": 11,

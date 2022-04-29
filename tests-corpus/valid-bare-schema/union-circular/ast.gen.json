@@ -5,26 +5,26 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "Alias1"
-            },
+            "data": "Alias1",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-circular/schema.bare",
               "offset": 19,
@@ -34,10 +34,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Alias2"
-            },
+            "data": "Alias2",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-circular/schema.bare",
               "offset": 28,
@@ -46,6 +45,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-circular/schema.bare",
           "offset": 11,
@@ -65,10 +65,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias"
-        },
+        "data": "Alias",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "union-circular/schema.bare",
           "offset": 49,
@@ -88,8 +87,9 @@
       "internal": false,
       "type": {
         "tag": "u8",
-        "props": null,
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "union-circular/schema.bare",
           "offset": 67,

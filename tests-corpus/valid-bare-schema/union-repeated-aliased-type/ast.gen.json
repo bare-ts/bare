@@ -5,8 +5,9 @@
       "internal": false,
       "type": {
         "tag": "u8",
-        "props": null,
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "union-repeated-aliased-type/schema.bare",
           "offset": 7,
@@ -26,24 +27,26 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-aliased-type/schema.bare",
               "offset": 25,
@@ -53,10 +56,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Y"
-            },
+            "data": "Y",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-aliased-type/schema.bare",
               "offset": 30,
@@ -65,6 +67,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-repeated-aliased-type/schema.bare",
           "offset": 17,

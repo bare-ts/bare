@@ -5,11 +5,15 @@
       "internal": false,
       "type": {
         "tag": "void",
-        "props": {
-          "lax": true,
-          "undef": false
-        },
+        "data": null,
         "types": null,
+        "extra": {
+          "lax": true,
+          "literal": {
+            "type": "null",
+            "val": null
+          }
+        },
         "loc": {
           "filename": "union-aliased-lax-void/schema.bare",
           "offset": 10,
@@ -29,36 +33,44 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            },
-            {
-              "val": 2,
-              "loc": null
-            },
-            {
-              "val": 3,
-              "loc": null
-            },
-            {
-              "val": 4,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 2,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 3,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 4,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
               "offset": 40,
@@ -68,8 +80,9 @@
           },
           {
             "tag": "u16",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
               "offset": 45,
@@ -79,8 +92,9 @@
           },
           {
             "tag": "u32",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
               "offset": 51,
@@ -90,8 +104,9 @@
           },
           {
             "tag": "u64",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
               "offset": 57,
@@ -101,10 +116,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Void"
-            },
+            "data": "Void",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-aliased-lax-void/schema.bare",
               "offset": 63,
@@ -113,6 +127,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-aliased-lax-void/schema.bare",
           "offset": 32,

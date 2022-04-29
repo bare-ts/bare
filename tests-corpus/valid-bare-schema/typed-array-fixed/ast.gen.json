@@ -4,24 +4,24 @@
       "alias": "U8Array",
       "internal": false,
       "type": {
-        "tag": "typedarray",
-        "props": {
-          "len": {
-            "val": 4,
-            "loc": {
-              "filename": "typed-array-fixed/schema.bare",
-              "offset": 22,
-              "line": 1,
-              "col": 23
-            }
-          },
-          "mut": false
+        "tag": "list",
+        "data": {
+          "name": null,
+          "val": 4,
+          "extra": null,
+          "loc": {
+            "filename": "typed-array-fixed/schema.bare",
+            "offset": 22,
+            "line": 1,
+            "col": 23
+          }
         },
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "typed-array-fixed/schema.bare",
               "offset": 18,
@@ -30,6 +30,11 @@
             }
           }
         ],
+        "extra": {
+          "mut": false,
+          "typedArray": true,
+          "unique": false
+        },
         "loc": {
           "filename": "typed-array-fixed/schema.bare",
           "offset": 13,

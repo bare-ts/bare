@@ -5,52 +5,58 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": {
-                "filename": "union-repeated-tag/schema.bare",
-                "offset": 30,
-                "line": 1,
-                "col": 31
-              }
-            },
-            {
-              "val": 1,
-              "loc": {
-                "filename": "union-repeated-tag/schema.bare",
-                "offset": 40,
-                "line": 1,
-                "col": 41
-              }
-            },
-            {
-              "val": 1,
-              "loc": {
-                "filename": "union-repeated-tag/schema.bare",
-                "offset": 50,
-                "line": 1,
-                "col": 51
-              }
-            },
-            {
-              "val": 2,
-              "loc": {
-                "filename": "union-repeated-tag/schema.bare",
-                "offset": 60,
-                "line": 1,
-                "col": 61
-              }
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": {
+              "filename": "union-repeated-tag/schema.bare",
+              "offset": 30,
+              "line": 1,
+              "col": 31
             }
-          ]
-        },
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": {
+              "filename": "union-repeated-tag/schema.bare",
+              "offset": 40,
+              "line": 1,
+              "col": 41
+            }
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": {
+              "filename": "union-repeated-tag/schema.bare",
+              "offset": 50,
+              "line": 1,
+              "col": 51
+            }
+          },
+          {
+            "name": null,
+            "val": 2,
+            "extra": null,
+            "loc": {
+              "filename": "union-repeated-tag/schema.bare",
+              "offset": 60,
+              "line": 1,
+              "col": 61
+            }
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-tag/schema.bare",
               "offset": 25,
@@ -60,8 +66,9 @@
           },
           {
             "tag": "u16",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-tag/schema.bare",
               "offset": 34,
@@ -71,8 +78,9 @@
           },
           {
             "tag": "u32",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-tag/schema.bare",
               "offset": 44,
@@ -82,8 +90,9 @@
           },
           {
             "tag": "u64",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-repeated-tag/schema.bare",
               "offset": 54,
@@ -92,6 +101,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-repeated-tag/schema.bare",
           "offset": 17,

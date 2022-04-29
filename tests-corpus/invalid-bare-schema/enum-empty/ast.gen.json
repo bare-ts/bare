@@ -5,11 +5,9 @@
       "internal": false,
       "type": {
         "tag": "enum",
-        "props": {
-          "intEnum": false,
-          "vals": []
-        },
+        "data": [],
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "enum-empty/schema.bare",
           "offset": 13,

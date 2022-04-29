@@ -5,10 +5,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias"
-        },
+        "data": "Alias",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "alias-itself/schema.bare",
           "offset": 11,

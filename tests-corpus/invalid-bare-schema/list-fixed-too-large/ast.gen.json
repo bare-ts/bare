@@ -4,24 +4,24 @@
       "alias": "EmptyData",
       "internal": false,
       "type": {
-        "tag": "typedarray",
-        "props": {
-          "len": {
-            "val": 4294967296,
-            "loc": {
-              "filename": "list-fixed-too-large/schema.bare",
-              "offset": 24,
-              "line": 1,
-              "col": 25
-            }
-          },
-          "mut": false
+        "tag": "list",
+        "data": {
+          "name": null,
+          "val": 4294967296,
+          "extra": null,
+          "loc": {
+            "filename": "list-fixed-too-large/schema.bare",
+            "offset": 24,
+            "line": 1,
+            "col": 25
+          }
         },
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "list-fixed-too-large/schema.bare",
               "offset": 20,
@@ -30,6 +30,11 @@
             }
           }
         ],
+        "extra": {
+          "mut": false,
+          "typedArray": true,
+          "unique": false
+        },
         "loc": {
           "filename": "list-fixed-too-large/schema.bare",
           "offset": 15,

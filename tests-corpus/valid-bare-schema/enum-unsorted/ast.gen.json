@@ -5,42 +5,43 @@
       "internal": false,
       "type": {
         "tag": "enum",
-        "props": {
-          "intEnum": false,
-          "vals": [
-            {
-              "name": "FLUID",
-              "val": 1,
-              "loc": {
-                "filename": "enum-unsorted/schema.bare",
-                "offset": 23,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "name": "MALE",
-              "val": 0,
-              "loc": {
-                "filename": "enum-unsorted/schema.bare",
-                "offset": 37,
-                "line": 3,
-                "col": 5
-              }
-            },
-            {
-              "name": "FEMALE",
-              "val": 2,
-              "loc": {
-                "filename": "enum-unsorted/schema.bare",
-                "offset": 50,
-                "line": 4,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "FLUID",
+            "val": 1,
+            "extra": null,
+            "loc": {
+              "filename": "enum-unsorted/schema.bare",
+              "offset": 23,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "MALE",
+            "val": 0,
+            "extra": null,
+            "loc": {
+              "filename": "enum-unsorted/schema.bare",
+              "offset": 37,
+              "line": 3,
+              "col": 5
+            }
+          },
+          {
+            "name": "FEMALE",
+            "val": 2,
+            "extra": null,
+            "loc": {
+              "filename": "enum-unsorted/schema.bare",
+              "offset": 50,
+              "line": 4,
+              "col": 5
+            }
+          }
+        ],
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "enum-unsorted/schema.bare",
           "offset": 12,

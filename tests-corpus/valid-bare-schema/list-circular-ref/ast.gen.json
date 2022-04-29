@@ -5,17 +5,13 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "Alias"
-            },
+            "data": "Alias",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "list-circular-ref/schema.bare",
               "offset": 16,
@@ -24,6 +20,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "list-circular-ref/schema.bare",
           "offset": 11,

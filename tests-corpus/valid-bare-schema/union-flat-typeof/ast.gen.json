@@ -5,32 +5,38 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": true,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            },
-            {
-              "val": 2,
-              "loc": null
-            },
-            {
-              "val": 3,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 2,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 3,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "bool",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
               "offset": 25,
@@ -40,8 +46,9 @@
           },
           {
             "tag": "u32",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
               "offset": 32,
@@ -50,9 +57,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
               "offset": 38,
@@ -62,11 +70,9 @@
           },
           {
             "tag": "void",
-            "props": {
-              "lax": false,
-              "undef": false
-            },
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-typeof/schema.bare",
               "offset": 44,
@@ -75,6 +81,9 @@
             }
           }
         ],
+        "extra": {
+          "flat": true
+        },
         "loc": {
           "filename": "union-flat-typeof/schema.bare",
           "offset": 17,

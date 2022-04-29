@@ -5,29 +5,25 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "bestFriend",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-circular-ref/schema.bare",
-                "offset": 25,
-                "line": 2,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "bestFriend",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-circular-ref/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          }
+        ],
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "Person"
-            },
+            "data": "Person",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "struct-circular-ref/schema.bare",
               "offset": 37,
@@ -36,6 +32,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "struct-circular-ref/schema.bare",
           "offset": 19,

@@ -5,20 +5,20 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-leading-trailing-pipes/schema.bare",
               "offset": 31,
@@ -27,6 +27,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-leading-trailing-pipes/schema.bare",
           "offset": 17,
@@ -46,20 +47,20 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-leading-trailing-pipes/schema.bare",
               "offset": 67,
@@ -68,6 +69,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "union-leading-trailing-pipes/schema.bare",
           "offset": 55,

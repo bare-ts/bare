@@ -5,10 +5,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias1"
-        },
+        "data": "Alias1",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "alias-circular/schema.bare",
           "offset": 12,
@@ -28,10 +27,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias2"
-        },
+        "data": "Alias2",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "alias-circular/schema.bare",
           "offset": 31,
@@ -51,10 +49,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias3"
-        },
+        "data": "Alias3",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "alias-circular/schema.bare",
           "offset": 50,
@@ -74,10 +71,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "Alias0"
-        },
+        "data": "Alias0",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "alias-circular/schema.bare",
           "offset": 69,

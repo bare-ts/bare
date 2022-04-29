@@ -5,15 +5,13 @@
       "internal": false,
       "type": {
         "tag": "optional",
-        "props": {
-          "lax": false,
-          "undef": true
-        },
+        "data": null,
         "types": [
           {
             "tag": "bool",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "optional-undefined/schema.bare",
               "offset": 24,
@@ -22,6 +20,13 @@
             }
           }
         ],
+        "extra": {
+          "lax": false,
+          "literal": {
+            "type": "undefined",
+            "val": null
+          }
+        },
         "loc": {
           "filename": "optional-undefined/schema.bare",
           "offset": 15,

@@ -5,38 +5,36 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "factory-struct/schema.bare",
-                "offset": 25,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "age",
-              "quoted": false,
-              "loc": {
-                "filename": "factory-struct/schema.bare",
-                "offset": 39,
-                "line": 3,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "factory-struct/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "age",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "factory-struct/schema.bare",
+              "offset": 39,
+              "line": 3,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "factory-struct/schema.bare",
               "offset": 31,
@@ -46,8 +44,9 @@
           },
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "factory-struct/schema.bare",
               "offset": 44,
@@ -56,6 +55,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "factory-struct/schema.bare",
           "offset": 19,

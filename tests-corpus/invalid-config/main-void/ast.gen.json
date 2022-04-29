@@ -5,10 +5,9 @@
       "internal": false,
       "type": {
         "tag": "alias",
-        "props": {
-          "alias": "AliasedVoid"
-        },
+        "data": "AliasedVoid",
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "main-void/schema.bare",
           "offset": 10,
@@ -28,11 +27,9 @@
       "internal": false,
       "type": {
         "tag": "void",
-        "props": {
-          "lax": false,
-          "undef": false
-        },
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "main-void/schema.bare",
           "offset": 39,

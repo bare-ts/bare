@@ -5,29 +5,21 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "list",
-            "props": {
-              "len": null,
-              "mut": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "list",
-                "props": {
-                  "len": null,
-                  "mut": false
-                },
+                "data": null,
                 "types": [
                   {
-                    "tag": "string",
-                    "props": null,
+                    "tag": "str",
+                    "data": null,
                     "types": null,
+                    "extra": null,
                     "loc": {
                       "filename": "multi-list-legacy/schema.bare",
                       "offset": 21,
@@ -36,6 +28,7 @@
                     }
                   }
                 ],
+                "extra": null,
                 "loc": {
                   "filename": "multi-list-legacy/schema.bare",
                   "offset": 19,
@@ -44,6 +37,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "multi-list-legacy/schema.bare",
               "offset": 17,
@@ -52,6 +46,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "multi-list-legacy/schema.bare",
           "offset": 15,

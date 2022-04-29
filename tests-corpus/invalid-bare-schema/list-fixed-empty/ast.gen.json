@@ -5,23 +5,23 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": {
-            "val": 0,
-            "loc": {
-              "filename": "list-fixed-empty/schema.bare",
-              "offset": 27,
-              "line": 1,
-              "col": 28
-            }
-          },
-          "mut": false
+        "data": {
+          "name": null,
+          "val": 0,
+          "extra": null,
+          "loc": {
+            "filename": "list-fixed-empty/schema.bare",
+            "offset": 27,
+            "line": 1,
+            "col": 28
+          }
         },
         "types": [
           {
             "tag": "bool",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "list-fixed-empty/schema.bare",
               "offset": 21,
@@ -30,6 +30,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "list-fixed-empty/schema.bare",
           "offset": 16,

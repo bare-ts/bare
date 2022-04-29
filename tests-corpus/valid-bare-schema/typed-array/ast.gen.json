@@ -4,16 +4,14 @@
       "alias": "U8Array",
       "internal": false,
       "type": {
-        "tag": "typedarray",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "tag": "list",
+        "data": null,
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "typed-array/schema.bare",
               "offset": 18,
@@ -22,6 +20,11 @@
             }
           }
         ],
+        "extra": {
+          "mut": false,
+          "typedArray": true,
+          "unique": false
+        },
         "loc": {
           "filename": "typed-array/schema.bare",
           "offset": 13,

@@ -5,49 +5,47 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-repeated-field/schema.bare",
-                "offset": 26,
-                "line": 3,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "age",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-repeated-field/schema.bare",
-                "offset": 40,
-                "line": 4,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-repeated-field/schema.bare",
-                "offset": 52,
-                "line": 5,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 26,
+              "line": 3,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "age",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 40,
+              "line": 4,
+              "col": 5
+            }
+          },
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-repeated-field/schema.bare",
+              "offset": 52,
+              "line": 5,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",
               "offset": 32,
@@ -57,8 +55,9 @@
           },
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",
               "offset": 45,
@@ -67,9 +66,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",
               "offset": 58,
@@ -78,6 +78,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "struct-repeated-field/schema.bare",
           "offset": 20,

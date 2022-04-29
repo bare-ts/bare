@@ -5,38 +5,36 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "enum-int-anonymous/schema.bare",
-                "offset": 25,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "gender",
-              "quoted": false,
-              "loc": {
-                "filename": "enum-int-anonymous/schema.bare",
-                "offset": 39,
-                "line": 3,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "enum-int-anonymous/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "gender",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "enum-int-anonymous/schema.bare",
+              "offset": 39,
+              "line": 3,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "enum-int-anonymous/schema.bare",
               "offset": 31,
@@ -46,42 +44,45 @@
           },
           {
             "tag": "enum",
-            "props": {
-              "intEnum": true,
-              "vals": [
-                {
-                  "name": "FLUID",
-                  "val": 0,
-                  "loc": {
-                    "filename": "enum-int-anonymous/schema.bare",
-                    "offset": 62,
-                    "line": 4,
-                    "col": 9
-                  }
-                },
-                {
-                  "name": "MALE",
-                  "val": 1,
-                  "loc": {
-                    "filename": "enum-int-anonymous/schema.bare",
-                    "offset": 76,
-                    "line": 5,
-                    "col": 9
-                  }
-                },
-                {
-                  "name": "FEMALE",
-                  "val": 2,
-                  "loc": {
-                    "filename": "enum-int-anonymous/schema.bare",
-                    "offset": 89,
-                    "line": 6,
-                    "col": 9
-                  }
+            "data": [
+              {
+                "name": "FLUID",
+                "val": 0,
+                "extra": null,
+                "loc": {
+                  "filename": "enum-int-anonymous/schema.bare",
+                  "offset": 62,
+                  "line": 4,
+                  "col": 9
                 }
-              ]
-            },
+              },
+              {
+                "name": "MALE",
+                "val": 1,
+                "extra": null,
+                "loc": {
+                  "filename": "enum-int-anonymous/schema.bare",
+                  "offset": 76,
+                  "line": 5,
+                  "col": 9
+                }
+              },
+              {
+                "name": "FEMALE",
+                "val": 2,
+                "extra": null,
+                "loc": {
+                  "filename": "enum-int-anonymous/schema.bare",
+                  "offset": 89,
+                  "line": 6,
+                  "col": 9
+                }
+              }
+            ],
             "types": null,
+            "extra": {
+              "intEnum": true
+            },
             "loc": {
               "filename": "enum-int-anonymous/schema.bare",
               "offset": 47,
@@ -90,6 +91,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "enum-int-anonymous/schema.bare",
           "offset": 19,

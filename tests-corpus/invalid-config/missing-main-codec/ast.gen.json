@@ -4,9 +4,10 @@
       "alias": "Other",
       "internal": false,
       "type": {
-        "tag": "string",
-        "props": null,
+        "tag": "str",
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "missing-main-codec/schema.bare",
           "offset": 11,

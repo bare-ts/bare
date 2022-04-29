@@ -5,11 +5,9 @@
       "internal": false,
       "type": {
         "tag": "void",
-        "props": {
-          "lax": false,
-          "undef": false
-        },
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "main-resolved-void/schema.bare",
           "offset": 10,

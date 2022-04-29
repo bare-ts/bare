@@ -4,9 +4,12 @@
       "alias": "I64",
       "internal": false,
       "type": {
-        "tag": "i64Safe",
-        "props": null,
+        "tag": "i64",
+        "data": null,
         "types": null,
+        "extra": {
+          "safe": true
+        },
         "loc": {
           "filename": "safe-int/schema.bare",
           "offset": 9,
@@ -25,9 +28,12 @@
       "alias": "U64",
       "internal": false,
       "type": {
-        "tag": "u64Safe",
-        "props": null,
+        "tag": "u64",
+        "data": null,
         "types": null,
+        "extra": {
+          "safe": true
+        },
         "loc": {
           "filename": "safe-int/schema.bare",
           "offset": 22,

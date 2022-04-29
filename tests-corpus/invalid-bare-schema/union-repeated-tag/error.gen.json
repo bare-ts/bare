@@ -6,5 +6,5 @@
     "line": 1,
     "col": 51
   },
-  "message": "(union-repeated-tag/schema.bare:1:51) tag '1' is assigned to a preceding type."
+  "message": "(union-repeated-tag/schema.bare:1:51) tag '1' is assigned to a preceding member."
 }

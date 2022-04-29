@@ -28,10 +28,10 @@ function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
     if (type.types !== null && type.types.length > 0) {
         const types = type.types.map((t) => maybeAlias(n, t))
         if (type.types.some((t, i) => t !== types[i])) {
-            const { tag, props, loc } = type
+            const { tag, data, extra, loc } = type
             // we don't use spread operator to preserve the object's shape
             // Indeed: shapeOf({ x, y }) != shapeOf({ ...{ x, y } })
-            return { tag, props, types, loc } as ast.Type
+            return { tag, data, types, extra, loc } as ast.Type
         }
     }
     return type
@@ -40,14 +40,16 @@ function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
 function maybeAlias(n: Context, type: ast.Type): ast.Type {
     switch (type.tag) {
         case "list":
+            if (!type.extra?.typedArray) {
+                return genAlias(n, type)
+            }
+            break
         case "map":
         case "optional":
-        case "set":
         case "union":
             return genAlias(n, type)
-        default:
-            return normalizeSubtypes(n, type)
     }
+    return normalizeSubtypes(n, type)
 }
 
 function genAlias(n: Context, type: ast.Type): ast.Alias {
@@ -55,10 +57,10 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
     // every object in the same way (properties are in the same order)
     const stringifiedType = JSON.stringify(ast.withoutLoc(type))
     let alias = n.dedup.get(stringifiedType)
-    if (alias == null) {
+    if (alias === undefined) {
         alias = `${n.aliasCount++}`
         n.mutSchema.push({ alias, internal: true, type, loc: null })
         n.dedup.set(stringifiedType, alias)
     }
-    return { tag: "alias", props: { alias }, types: null, loc: null }
+    return { tag: "alias", data: alias, types: null, extra: null, loc: null }
 }

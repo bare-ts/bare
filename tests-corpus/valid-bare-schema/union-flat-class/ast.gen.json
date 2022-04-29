@@ -5,27 +5,25 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": true,
-          "fields": [
-            {
-              "mut": false,
-              "name": "val",
-              "quoted": false,
-              "loc": {
-                "filename": "union-flat-class/schema.bare",
-                "offset": 27,
-                "line": 2,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "val",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 27,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          }
+        ],
         "types": [
           {
             "tag": "u32",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
               "offset": 32,
@@ -34,6 +32,9 @@
             }
           }
         ],
+        "extra": {
+          "class": true
+        },
         "loc": {
           "filename": "union-flat-class/schema.bare",
           "offset": 21,
@@ -53,27 +54,25 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": true,
-          "fields": [
-            {
-              "mut": false,
-              "name": "val",
-              "quoted": false,
-              "loc": {
-                "filename": "union-flat-class/schema.bare",
-                "offset": 66,
-                "line": 6,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "val",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-class/schema.bare",
+              "offset": 66,
+              "line": 6,
+              "col": 5
             }
-          ]
-        },
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
               "offset": 71,
@@ -82,6 +81,9 @@
             }
           }
         ],
+        "extra": {
+          "class": true
+        },
         "loc": {
           "filename": "union-flat-class/schema.bare",
           "offset": 60,
@@ -101,26 +103,26 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": true,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "BoxedU32"
-            },
+            "data": "BoxedU32",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
               "offset": 97,
@@ -130,10 +132,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Boxedstr"
-            },
+            "data": "Boxedstr",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "union-flat-class/schema.bare",
               "offset": 108,
@@ -142,6 +143,9 @@
             }
           }
         ],
+        "extra": {
+          "flat": true
+        },
         "loc": {
           "filename": "union-flat-class/schema.bare",
           "offset": 89,

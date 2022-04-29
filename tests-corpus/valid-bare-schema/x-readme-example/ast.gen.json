@@ -5,42 +5,43 @@
       "internal": false,
       "type": {
         "tag": "enum",
-        "props": {
-          "intEnum": false,
-          "vals": [
-            {
-              "name": "FEMALE",
-              "val": 0,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 23,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "name": "FLUID",
-              "val": 1,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 34,
-                "line": 3,
-                "col": 5
-              }
-            },
-            {
-              "name": "MALE",
-              "val": 2,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 44,
-                "line": 4,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "FEMALE",
+            "val": 0,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 23,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "FLUID",
+            "val": 1,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 34,
+              "line": 3,
+              "col": 5
+            }
+          },
+          {
+            "name": "MALE",
+            "val": 2,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 44,
+              "line": 4,
+              "col": 5
+            }
+          }
+        ],
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "x-readme-example/schema.bare",
           "offset": 12,
@@ -60,49 +61,47 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 77,
-                "line": 8,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "email",
-              "quoted": false,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 91,
-                "line": 9,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "gender",
-              "quoted": false,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 106,
-                "line": 10,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 77,
+              "line": 8,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "email",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 91,
+              "line": 9,
+              "col": 5
+            }
+          },
+          {
+            "name": "gender",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 106,
+              "line": 10,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 83,
@@ -111,9 +110,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 98,
@@ -123,17 +123,13 @@
           },
           {
             "tag": "optional",
-            "props": {
-              "lax": false,
-              "undef": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Gender"
-                },
+                "data": "Gender",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "x-readme-example/schema.bare",
                   "offset": 123,
@@ -142,6 +138,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 114,
@@ -150,6 +147,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "x-readme-example/schema.bare",
           "offset": 71,
@@ -169,38 +167,36 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "name",
-              "quoted": false,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 165,
-                "line": 14,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "email",
-              "quoted": false,
-              "loc": {
-                "filename": "x-readme-example/schema.bare",
-                "offset": 179,
-                "line": 15,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 165,
+              "line": 14,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "email",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-readme-example/schema.bare",
+              "offset": 179,
+              "line": 15,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 171,
@@ -209,9 +205,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 186,
@@ -220,6 +217,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "x-readme-example/schema.bare",
           "offset": 159,
@@ -239,26 +237,26 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": false,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "Person"
-            },
+            "data": "Person",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 214,
@@ -268,10 +266,9 @@
           },
           {
             "tag": "alias",
-            "props": {
-              "alias": "Organization"
-            },
+            "data": "Organization",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 223,
@@ -280,6 +277,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "x-readme-example/schema.bare",
           "offset": 206,
@@ -299,17 +297,13 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "Contact"
-            },
+            "data": "Contact",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
               "offset": 258,
@@ -318,6 +312,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "x-readme-example/schema.bare",
           "offset": 253,

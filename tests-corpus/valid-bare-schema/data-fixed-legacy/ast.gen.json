@@ -5,19 +5,19 @@
       "internal": false,
       "type": {
         "tag": "data",
-        "props": {
-          "len": {
-            "val": 16,
-            "loc": {
-              "filename": "data-fixed-legacy/schema.bare",
-              "offset": 15,
-              "line": 1,
-              "col": 16
-            }
-          },
-          "mut": false
+        "data": {
+          "name": null,
+          "val": 16,
+          "extra": null,
+          "loc": {
+            "filename": "data-fixed-legacy/schema.bare",
+            "offset": 15,
+            "line": 1,
+            "col": 16
+          }
         },
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "data-fixed-legacy/schema.bare",
           "offset": 10,

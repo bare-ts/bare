@@ -5,33 +5,30 @@
       "internal": false,
       "type": {
         "tag": "optional",
-        "props": {
-          "lax": false,
-          "undef": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "union",
-            "props": {
-              "flat": false,
-              "tags": [
-                {
-                  "val": 0,
-                  "loc": null
-                },
-                {
-                  "val": 1,
-                  "loc": null
-                }
-              ]
-            },
+            "data": [
+              {
+                "name": null,
+                "val": 0,
+                "extra": null,
+                "loc": null
+              },
+              {
+                "name": null,
+                "val": 1,
+                "extra": null,
+                "loc": null
+              }
+            ],
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Alias"
-                },
+                "data": "Alias",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "optional-union-circular/schema.bare",
                   "offset": 28,
@@ -40,9 +37,10 @@
                 }
               },
               {
-                "tag": "string",
-                "props": null,
+                "tag": "str",
+                "data": null,
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "optional-union-circular/schema.bare",
                   "offset": 36,
@@ -51,6 +49,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "optional-union-circular/schema.bare",
               "offset": 20,
@@ -59,6 +58,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "optional-union-circular/schema.bare",
           "offset": 11,

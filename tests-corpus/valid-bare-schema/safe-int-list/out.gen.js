@@ -1,18 +1,9 @@
 import * as bare from "@bare-ts/lib"
 
 export function readU64List(bc) {
-    const len = bare.readUintSafe(bc)
-    if (len === 0) return []
-    const result = [bare.readU64Safe(bc)]
-    for (let i = 1; i < len; i++) {
-        result[i] = bare.readU64Safe(bc)
-    }
-    return result
+    return bare.readU64Array(bc)
 }
 
 export function writeU64List(bc, x) {
-    bare.writeUintSafe(bc, x.length)
-    for (let i = 0; i < x.length; i++) {
-        bare.writeU64Safe(bc, x[i])
-    }
+    bare.writeU64Array(bc, x)
 }

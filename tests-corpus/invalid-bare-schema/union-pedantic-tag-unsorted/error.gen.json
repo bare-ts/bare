@@ -6,5 +6,5 @@
     "line": 1,
     "col": 41
   },
-  "message": "(union-pedantic-tag-unsorted/schema.bare:1:41) in pedantic mode, all tags must be in order."
+  "message": "(union-pedantic-tag-unsorted/schema.bare:1:41) in pedantic mode, all union tags must be in order."
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Config, transform, parse } from "@bare-ts/tools"
+import { Config, configure, transform, parse } from "@bare-ts/tools"
 import * as fs from "node:fs"
 import * as path from "node:path"
 
@@ -32,7 +32,11 @@ for (let category of fs.readdirSync(CORPUS_DIR)) {
         const schema = path.relative(category, schemaPath)
         const content = fs.readFileSync(schemaPath).toString()
         try {
-            const ast = parse(content, Config({ ...config, schema }))
+            const completedConfig = Config({ ...config, schema })
+            const ast = configure(
+                parse(content, completedConfig),
+                completedConfig,
+            )
             fs.writeFileSync(astPath, JSON.stringify(ast, null, 2))
             let out
             out = transform(content, { ...config, schema, generator: "ts" })

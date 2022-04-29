@@ -10,8 +10,8 @@ import type { Location } from "../core/compiler-error.js"
 //     deepEqual(X, JSON.parse(JSON.stringify(X)))
 //
 // To ensure this:
-// - do not use undefined values. Use null instead.
-// - do not use bigint values.
+// - do not use undefined. Use null instead.
+// - do not use bigint.
 
 export interface Ast {
     readonly defs: readonly AliasedType[]
@@ -27,98 +27,201 @@ export interface AliasedType {
     readonly loc: Location | null
 }
 
-// All types have the same object's shape
-// { tag, props, types, loc }
-//
-// All nested types are held in `types`.
-// This simplifies normalization / semantic checking
-
+/**
+ * All types have the same object's shape: { tag, data, types, extra, loc }
+ * - `tag` enables to discriminate types
+ * - `data` contains type-specific info
+ * - `types` contains nested types
+ * - `extra` contains information that are not part of BARE specification
+ * - `loc` is the location of the AST node in the source
+ */
 export type Type =
     | Alias // Named user type
-    | ListType // []type, [n]type
+    | BoolType // Named user type
     | DataType // data, data<length>
     | EnumType
-    | LiteralType // map[type]type
+    | ListType // []type, [n]type
     | MapType // map[type]type
+    | NumericType
     | OptionalType // optional<type>
-    | BaseType
+    | StrType // str
     | StructType // { fields... }
-    | TypedArrayType
     | UnionType // (type | ...)
     | VoidType // void
 
 export interface Alias {
     readonly tag: "alias"
-    readonly props: {
-        readonly alias: string
-    }
+    readonly data: string
     readonly types: null
+    readonly extra: null
     readonly loc: Location | null
 }
 
-export interface BaseType {
-    readonly tag: BaseTag
-    readonly props: null
+export type BaseType = BoolType | NumericType | StrType
+
+export interface BoolType {
+    readonly tag: "bool"
+    readonly data: null
     readonly types: null
+    readonly extra: null
     readonly loc: Location | null
 }
 
 export interface DataType {
     readonly tag: "data"
-    readonly props: {
-        readonly len: Integer | null
-        readonly mut: boolean
-    }
+    readonly data: Length | null
     readonly types: null
+    readonly extra: {
+        readonly mut: boolean
+    } | null
     readonly loc: Location | null
 }
 
 export interface EnumType {
     readonly tag: "enum"
-    readonly props: {
+    readonly data: readonly EnumVal[]
+    readonly types: null
+    readonly extra: {
         readonly intEnum: boolean
-        readonly vals: readonly EnumVal[]
-    }
-    readonly types: null
-    readonly loc: Location | null
-}
-
-export interface EnumVal {
-    readonly name: string
-    readonly val: number
-    readonly loc: Location | null
-}
-
-export interface FixedNumberType {
-    readonly tag: FixedNumberTag
-    readonly props: null
-    readonly types: null
+    } | null
     readonly loc: Location | null
 }
 
 export interface ListType {
-    readonly tag: "list" | "set"
-    readonly props: {
-        readonly len: Integer | null
-        readonly mut: boolean
-    }
+    readonly tag: "list"
+    readonly data: Length | null
     readonly types: readonly [valType: Type]
+    readonly extra: {
+        readonly mut: boolean
+        readonly typedArray: boolean
+        readonly unique: boolean
+    } | null
     readonly loc: Location | null
 }
 
-export interface LiteralType {
-    readonly tag: "literal"
-    readonly props: LiteralVal
+export interface MapType {
+    readonly tag: "map"
+    readonly data: null
+    readonly types: readonly [keyType: Type, valType: Type]
+    readonly extra: {
+        readonly mut: boolean
+    } | null
+    readonly loc: Location | null
+}
+
+export interface NumericType {
+    readonly tag: NumericTag
+    readonly data: null
     readonly types: null
+    readonly extra: {
+        readonly safe: boolean
+    } | null
     readonly loc: Location | null
 }
 
-export type Literal = bigint | boolean | null | number | string | undefined
+export interface FixedNumericType {
+    readonly tag: FixedNumericTag
+    readonly data: null
+    readonly types: null
+    readonly extra: {
+        readonly safe: boolean
+    } | null
+    readonly loc: Location | null
+}
+
+export interface OptionalType {
+    readonly tag: "optional"
+    readonly data: null
+    readonly types: readonly [type: Type]
+    readonly extra: {
+        readonly lax: boolean
+        readonly literal: Literal
+    } | null
+    readonly loc: Location | null
+}
+
+export interface StrType {
+    readonly tag: "str"
+    readonly data: null
+    readonly types: null
+    readonly extra: null
+    readonly loc: Location | null
+}
+
+export interface StructType {
+    readonly tag: "struct"
+    readonly data: readonly StructField[]
+    readonly types: readonly Type[]
+    readonly extra: {
+        readonly class: boolean
+    } | null
+    readonly loc: Location | null
+}
+
+export interface UnionType<T = Type> {
+    readonly tag: "union"
+    readonly data: readonly UnionTag[]
+    readonly types: readonly T[]
+    readonly extra: {
+        readonly flat: boolean
+    } | null
+    readonly loc: Location | null
+}
+
+export interface VoidType {
+    readonly tag: "void"
+    readonly data: null
+    readonly types: null
+    readonly extra: {
+        readonly lax: boolean
+        readonly literal: Literal
+    } | null
+    readonly loc: Location | null
+}
+
+/**
+ * All type's data have the same shape: { name, val, extra, loc }
+ */
+
+export interface EnumVal {
+    readonly name: string
+    readonly val: number
+    readonly extra: null
+    readonly loc: Location | null
+}
+
+export interface Length {
+    readonly name: null
+    readonly val: number
+    readonly extra: null
+    readonly loc: Location | null
+}
+
+export interface StructField {
+    readonly name: string
+    readonly val: null
+    readonly extra: {
+        readonly mut: boolean
+        readonly quoted: boolean
+    } | null
+    readonly loc: Location | null
+}
+
+export interface UnionTag {
+    readonly name: null
+    readonly val: number
+    readonly extra: null
+    readonly loc: Location | null
+}
+
+// Literals
+
+export type LiteralVal = bigint | boolean | null | number | string | undefined
 
 /**
  * JSON representation of a literal type
  */
-export type LiteralVal =
+export type Literal =
     // bigint values are not serializable,
     // thus we use a string of digits to represent the number. e.g. "10".
     | { type: "bigint"; val: string }
@@ -130,76 +233,28 @@ export type LiteralVal =
     | { type: "true"; val: null }
     | { type: "undefined"; val: null }
 
-export interface MapType {
-    readonly tag: "map"
-    readonly props: {
-        readonly mut: boolean
+export const NULL_LITERAL_VAL = { type: "null", val: null } as const
+export const UNDEFINED_LITERAL_VAL = { type: "undefined", val: null } as const
+
+export function literalVal(literal: Literal): LiteralVal {
+    switch (literal.type) {
+        case "bigint":
+            return BigInt(literal.val)
+        case "number":
+        case "string":
+            return literal.val
+        case "false":
+            return false
+        case "null":
+            return null
+        case "true":
+            return true
+        case "undefined":
+            return undefined
     }
-    readonly types: readonly [keyType: Type, valType: Type]
-    readonly loc: Location | null
 }
 
-export interface OptionalType {
-    readonly tag: "optional"
-    readonly props: {
-        readonly lax: boolean
-        readonly undef: boolean
-    }
-    readonly types: readonly [type: Type]
-    readonly loc: Location | null
-}
-
-export interface StructType {
-    readonly tag: "struct"
-    readonly props: {
-        readonly class: boolean
-        readonly fields: StructField[]
-    }
-    readonly types: readonly Type[]
-    readonly loc: Location | null
-}
-
-export interface StructField {
-    readonly mut: boolean
-    readonly name: string
-    readonly quoted: boolean
-    readonly loc: Location | null
-}
-
-export interface TypedArrayType {
-    readonly tag: "typedarray"
-    readonly props: {
-        readonly len: Integer | null
-        readonly mut: boolean
-    }
-    readonly types: readonly [FixedNumberType]
-    readonly loc: Location | null
-}
-
-export interface UnionType<T = Type> {
-    readonly tag: "union"
-    readonly props: {
-        readonly flat: boolean
-        readonly tags: readonly Integer[]
-    }
-    readonly types: readonly T[]
-    readonly loc: Location | null
-}
-
-export interface VoidType {
-    readonly tag: "void"
-    readonly props: {
-        readonly lax: boolean
-        readonly undef: boolean
-    }
-    readonly types: null
-    readonly loc: Location | null
-}
-
-export interface Integer {
-    readonly val: number
-    readonly loc: Location | null
-}
+// Utility functions and types
 
 export type BaseTag = typeof BASE_TAG[number]
 
@@ -215,13 +270,33 @@ export function isBaseOrVoidType(type: Type): type is BaseType | VoidType {
     return isBaseTag(type.tag) || type.tag === "void"
 }
 
-export type FixedNumberTag = typeof FIXED_NUMBER_TAG[number]
+export type FixedNumericTag = typeof FIXED_NUMERIC_TAG[number]
 
-export function isFixedNumberType(type: Type): type is FixedNumberType {
-    return FIXED_NUMBER_TAG_SET.has(type.tag)
+export function isFixedNumericType(type: Type): type is FixedNumericType {
+    return FIXED_NUMERIC_TAG_SET.has(type.tag)
 }
 
-export const FIXED_NUMBER_TAG = [
+export type NumericTag = typeof NUMERIC_TAG[number]
+
+export type Integer64Tag = typeof INTEGER64_TAG[number]
+
+export function isNumericTag(tag: string): tag is NumericTag {
+    return NUMERIC_TAG_SET.has(tag)
+}
+
+export function isNumericType(type: Type): type is NumericType {
+    return NUMERIC_TAG_SET.has(type.tag)
+}
+
+export function isInteger64Tag(tag: string): tag is Integer64Tag {
+    return INTEGER64_TAG_SET.has(tag)
+}
+
+export function isInteger64Type(type: Type): type is NumericType {
+    return isInteger64Tag(type.tag)
+}
+
+export const FIXED_NUMERIC_TAG = [
     "f32",
     "f64",
     "i8",
@@ -229,29 +304,26 @@ export const FIXED_NUMBER_TAG = [
     "i32",
     "i64",
     "u8",
-    "u8Clamped",
     "u16",
     "u32",
     "u64",
 ] as const
 
-const FIXED_NUMBER_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMBER_TAG)
+export const INTEGER64_TAG = ["i64", "int", "u64", "uint"] as const
 
-export const BASE_TAG = [
-    ...FIXED_NUMBER_TAG,
-    "bool",
-    "i64Safe",
-    "int",
-    "intSafe",
-    "string",
-    "u64Safe",
-    "uint",
-    "uintSafe",
-] as const
+const INTEGER64_TAG_SET: ReadonlySet<string> = new Set(INTEGER64_TAG)
+
+const FIXED_NUMERIC_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMERIC_TAG)
+
+export const NUMERIC_TAG = [...FIXED_NUMERIC_TAG, "int", "uint"] as const
+
+const NUMERIC_TAG_SET: ReadonlySet<string> = new Set(NUMERIC_TAG)
+
+export const BASE_TAG = [...NUMERIC_TAG, "bool", "str"] as const
 
 const BASE_TAG_SET: ReadonlySet<string> = new Set(BASE_TAG)
 
-export const FIXED_NUMBER_TYPE_TO_TYPED_ARRAY = {
+export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY = {
     "f32": "Float32Array",
     "f64": "Float64Array",
     "i8": "Int8Array",
@@ -259,7 +331,6 @@ export const FIXED_NUMBER_TYPE_TO_TYPED_ARRAY = {
     "i32": "Int32Array",
     "i64": "BigInt64Array",
     "u8": "Uint8Array",
-    "u8Clamped": "Uint8ClampedArray",
     "u16": "Uint16Array",
     "u32": "Uint32Array",
     "u64": "BigUint64Array",
@@ -277,7 +348,7 @@ export function symbols(schema: Ast): SymbolTable {
 
 export function resolveAlias(type: Type, symbols: SymbolTable): Type {
     if (type.tag === "alias") {
-        const aliasedType = symbols.get(type.props.alias)
+        const aliasedType = symbols.get(type.data)
         if (aliasedType !== undefined) {
             return resolveAlias(aliasedType.type, symbols)
         }
@@ -300,34 +371,26 @@ export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
  */
 function referredAliases(type: Type): readonly string[] {
     if (type.tag === "alias") {
-        return [type.props.alias]
+        return [type.data]
     } else if (type.types !== null) {
         return type.types.flatMap((t) => referredAliases(t))
     }
     return []
 }
 
-export const BASE_TAG_TO_TYPEOF = {
-    "bool": "boolean",
-    "f32": "number",
-    "f64": "number",
-    "i8": "number",
-    "i16": "number",
-    "i32": "number",
-    "i64": "bigint",
-    "i64Safe": "number",
-    "int": "bigint",
-    "intSafe": "number",
-    "string": "string",
-    "u8": "number",
-    "u8Clamped": "number",
-    "u16": "number",
-    "u32": "number",
-    "u64": "bigint",
-    "u64Safe": "number",
-    "uint": "bigint",
-    "uintSafe": "number",
-} as const
+export function typeofValue(type: BoolType | NumericType | StrType): string {
+    switch (type.tag) {
+        case "bool":
+            return "boolean"
+        case "str":
+            return "string"
+        default:
+            return INTEGER64_TAG_SET.has(type.tag) &&
+                (type.extra === null || !type.extra.safe)
+                ? "bigint"
+                : "number"
+    }
+}
 
 /**
  * @param structs
@@ -337,22 +400,24 @@ export const BASE_TAG_TO_TYPEOF = {
  */
 export function leadingDiscriminators(
     structs: readonly StructType[],
-): Literal[] | null {
+): LiteralVal[] | null {
     if (structs.length > 0) {
-        const literals: Set<Literal> = new Set()
-        const type0LeadingField = structs[0].props.fields[0]
+        const literals: Set<LiteralVal> = new Set()
+        const type0LeadingField = structs[0].data[0]
         for (const struct of structs) {
-            const fields = struct.props.fields
-            // FIXME: props.val is no longer the literal value...
+            const fields = struct.data
+            // FIXME: extra.literal.val is no longer the literal value...
             if (
                 fields.length === 0 ||
                 fields[0].name !== type0LeadingField.name ||
-                struct.types[0].tag !== "literal" ||
-                literals.has(struct.types[0].props.val)
+                struct.types[0].tag !== "void" ||
+                struct.types[0].extra === null ||
+                struct.types[0].extra.lax ||
+                literals.has(literalVal(struct.types[0].extra.literal))
             ) {
                 return null
             }
-            literals.add(struct.types[0].props.val)
+            literals.add(literalVal(struct.types[0].extra.literal))
         }
         return Array.from(literals.values()) // literals in insertion order
     }
@@ -367,18 +432,31 @@ export function haveDistinctTypeof(
     types: readonly (BaseType | VoidType)[],
 ): boolean {
     const typeofValues = types.map((t) =>
-        isBaseType(t) ? BASE_TAG_TO_TYPEOF[t.tag] : null,
+        isBaseType(t) ? typeofValue(t) : null,
     ) // null for 'object' or 'undefined'
     return types.length === new Set(typeofValues).size
 }
 
 /**
- * Recursively traverse the ast and set loc to null
+ * Recursively traverse the ast and set `loc` to null
  * @param type
- * @returns type with loc set to null
+ * @returns type with all `loc` set to null
  */
 export function withoutLoc(type: Type): Type {
     return JSON.parse(
         JSON.stringify(type, (name, val) => (name === "loc" ? null : val)),
+    )
+}
+
+/**
+ * Recursively traverse the ast and set `extra` and `loc` to null
+ * @param type
+ * @returns type with all `extra` and `loc` set to null
+ */
+export function withoutExtraLoc(type: Type): Type {
+    return JSON.parse(
+        JSON.stringify(type, (name, val) =>
+            name === "loc" || name === "extra" ? null : val,
+        ),
     )
 }

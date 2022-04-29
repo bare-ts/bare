@@ -1,7 +1,13 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
-import { CompilerError, Config, parse, transform } from "@bare-ts/tools"
+import {
+    CompilerError,
+    Config,
+    configure,
+    parse,
+    transform,
+} from "@bare-ts/tools"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { default as test } from "oletus"
@@ -33,7 +39,7 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
         })
         const error = JSON.parse(fs.readFileSync(errorPath).toString())
         try {
-            const astComputed = parse(schema, config)
+            const astComputed = configure(parse(schema, config), config)
             t.deepEqual(astComputed, astExpected)
             void transform(schema, config)
             t.ok(false) // must be unreachable
@@ -88,14 +94,14 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
         const tsExpected = fs.readFileSync(tsPath).toString()
         const dtsExpected = fs.readFileSync(dtsPath).toString()
         const jsExpected = fs.readFileSync(jsPath).toString()
-
-        const astComputed = parse(
-            schema,
-            Config({
-                ...config,
-                generator: "ts",
-                schema: schemaRelPath,
-            }),
+        const completedConfig = Config({
+            ...config,
+            generator: "ts",
+            schema: schemaRelPath,
+        })
+        const astComputed = configure(
+            parse(schema, completedConfig),
+            completedConfig,
         )
 
         const tsComputed = transform(schema, {

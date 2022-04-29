@@ -5,23 +5,23 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": {
-            "val": 4,
-            "loc": {
-              "filename": "list-fixed-leading-0/schema.bare",
-              "offset": 22,
-              "line": 1,
-              "col": 23
-            }
-          },
-          "mut": false
+        "data": {
+          "name": null,
+          "val": 4,
+          "extra": null,
+          "loc": {
+            "filename": "list-fixed-leading-0/schema.bare",
+            "offset": 22,
+            "line": 1,
+            "col": 23
+          }
         },
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "list-fixed-leading-0/schema.bare",
               "offset": 18,
@@ -30,6 +30,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "list-fixed-leading-0/schema.bare",
           "offset": 13,

@@ -5,17 +5,13 @@
       "internal": false,
       "type": {
         "tag": "map",
-        "props": {
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "data",
-            "props": {
-              "len": null,
-              "mut": false
-            },
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-invalid-key-data/schema.bare",
               "offset": 14,
@@ -24,9 +20,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-invalid-key-data/schema.bare",
               "offset": 20,
@@ -35,6 +32,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "map-invalid-key-data/schema.bare",
           "offset": 10,

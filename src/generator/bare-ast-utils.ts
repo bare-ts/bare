@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
-import type * as ast from "../ast/bare-ast.js"
+import * as ast from "../ast/bare-ast.js"
 import { CompilerError } from "../core/compiler-error.js"
 
 // This file is separated from ast folder because these utils are used for
@@ -45,20 +45,21 @@ function innerUnrecursive(
 ): ast.Type | null {
     if (type.tag === "optional") {
         const simplified = innerUnrecursive(type.types[0], symbols, traversed)
-        const props = type.props
+        const extra = type.extra
         if (simplified === null) {
-            return { tag: "void", props, types: null, loc: null }
+            return { tag: "void", data: null, types: null, extra, loc: null }
         } else if (type.types[0] !== simplified) {
             return simplifyOptional({
                 tag: "optional",
-                props,
+                data: null,
                 types: [simplified],
+                extra,
                 loc: null,
             })
         }
     } else if (type.tag === "alias") {
-        const alias = type.props.alias
-        if (traversed.has(type.props.alias)) {
+        const alias = type.data
+        if (traversed.has(alias)) {
             return null
         }
         const aliased = symbols.get(alias)
@@ -88,21 +89,23 @@ function innerUnrecursive(
 function simplifyOptional(type: ast.OptionalType): ast.Type {
     const subtype = type.types[0]
     if (subtype.tag === "void" || subtype.tag === "optional") {
-        const lax =
-            type.props.lax ||
-            subtype.props.lax ||
-            type.props.undef !== subtype.props.undef
-        const undef = type.props.undef && subtype.props.undef
-        const props = { lax, undef }
-        if (subtype.tag === "void") {
-            return { tag: "void", props, types: null, loc: null }
-        } else if (subtype.tag === "optional") {
-            return simplifyOptional({
-                tag: "optional",
-                props,
-                types: subtype.types,
-                loc: null,
-            })
+        const literal1 = type.extra?.literal ?? ast.NULL_LITERAL_VAL
+        const literal2 = subtype.extra?.literal ?? ast.NULL_LITERAL_VAL
+        if (literal1.type === literal2.type && literal1.val === literal2.val) {
+            const lax =
+                (type.extra !== null && type.extra.lax) ||
+                (subtype.extra !== null && subtype.extra.lax)
+            const extra = { lax, literal: literal1 }
+            if (subtype.types !== null) {
+                return simplifyOptional({
+                    tag: "optional",
+                    data: null,
+                    types: subtype.types,
+                    extra,
+                    loc: null,
+                })
+            }
+            return { tag: "void", data: null, types: null, extra, loc: null }
         }
     }
     return type

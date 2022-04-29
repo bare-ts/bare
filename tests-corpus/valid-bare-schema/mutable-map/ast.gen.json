@@ -5,14 +5,13 @@
       "internal": false,
       "type": {
         "tag": "map",
-        "props": {
-          "mut": true
-        },
+        "data": null,
         "types": [
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "mutable-map/schema.bare",
               "offset": 14,
@@ -21,9 +20,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "mutable-map/schema.bare",
               "offset": 19,
@@ -32,6 +32,9 @@
             }
           }
         ],
+        "extra": {
+          "mut": true
+        },
         "loc": {
           "filename": "mutable-map/schema.bare",
           "offset": 10,

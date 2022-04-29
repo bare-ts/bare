@@ -5,43 +5,42 @@
       "internal": false,
       "type": {
         "tag": "union",
-        "props": {
-          "flat": true,
-          "tags": [
-            {
-              "val": 0,
-              "loc": null
-            },
-            {
-              "val": 1,
-              "loc": null
-            }
-          ]
-        },
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "extra": null,
+            "loc": null
+          }
+        ],
         "types": [
           {
             "tag": "struct",
-            "props": {
-              "class": true,
-              "fields": [
-                {
-                  "mut": false,
-                  "name": "value",
-                  "quoted": false,
-                  "loc": {
-                    "filename": "union-flat-no-aliasing/schema.bare",
-                    "offset": 34,
-                    "line": 1,
-                    "col": 35
-                  }
+            "data": [
+              {
+                "name": "value",
+                "val": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-no-aliasing/schema.bare",
+                  "offset": 34,
+                  "line": 1,
+                  "col": 35
                 }
-              ]
-            },
+              }
+            ],
             "types": [
               {
-                "tag": "string",
-                "props": null,
+                "tag": "str",
+                "data": null,
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "union-flat-no-aliasing/schema.bare",
                   "offset": 41,
@@ -50,6 +49,9 @@
                 }
               }
             ],
+            "extra": {
+              "class": true
+            },
             "loc": {
               "filename": "union-flat-no-aliasing/schema.bare",
               "offset": 32,
@@ -59,27 +61,25 @@
           },
           {
             "tag": "struct",
-            "props": {
-              "class": true,
-              "fields": [
-                {
-                  "mut": false,
-                  "name": "value",
-                  "quoted": false,
-                  "loc": {
-                    "filename": "union-flat-no-aliasing/schema.bare",
-                    "offset": 58,
-                    "line": 1,
-                    "col": 59
-                  }
+            "data": [
+              {
+                "name": "value",
+                "val": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-no-aliasing/schema.bare",
+                  "offset": 58,
+                  "line": 1,
+                  "col": 59
                 }
-              ]
-            },
+              }
+            ],
             "types": [
               {
                 "tag": "u32",
-                "props": null,
+                "data": null,
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "union-flat-no-aliasing/schema.bare",
                   "offset": 65,
@@ -88,6 +88,9 @@
                 }
               }
             ],
+            "extra": {
+              "class": true
+            },
             "loc": {
               "filename": "union-flat-no-aliasing/schema.bare",
               "offset": 56,
@@ -96,6 +99,9 @@
             }
           }
         ],
+        "extra": {
+          "flat": true
+        },
         "loc": {
           "filename": "union-flat-no-aliasing/schema.bare",
           "offset": 17,

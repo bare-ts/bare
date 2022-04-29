@@ -23,7 +23,6 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
             )
         }
         aliases.add(alias)
-        checkAliasedInvariants(aliased)
         checkTypeInvariants(c, type)
         checkCircularRef(c, type, new Set([alias]))
     }
@@ -61,36 +60,26 @@ function checkMainCodecs(c: Checker, schema: ast.Ast): void {
     }
 }
 
-function checkAliasedInvariants(aliased: ast.AliasedType): void {
-    if (aliased.type.tag === "literal") {
-        throw new CompilerError(
-            "a literal type cannot be aliased.",
-            aliased.loc,
-        )
-    }
-}
-
 function checkTypeInvariants(c: Checker, type: ast.Type): void {
     switch (type.tag) {
         case "alias":
             checkUndefinedAlias(c, type)
             break
         case "data":
-        case "list":
-        case "set":
-        case "typedarray":
-            checkLengthInvariants(type.props.len)
+            checkLengthInvariants(type.data)
             break
-        case "enum":
-            checkEnumInvariants(c, type)
+        case "list":
+            checkListInvariants(type)
             break
         case "map":
             checkMapInvariants(c, type)
             break
+        case "enum":
         case "struct":
-            checkStructInvariants(type)
+            checkMembersInvariants(c, type)
             break
         case "union":
+            checkMembersInvariants(c, type)
             checkUnionInvariants(c, type)
             break
     }
@@ -104,48 +93,62 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
     }
 }
 
-function checkEnumInvariants(c: Checker, type: ast.EnumType): void {
-    if (type.props.vals.length === 0) {
+function checkMembersInvariants(
+    c: Checker,
+    type: ast.EnumType | ast.StructType | ast.UnionType,
+): void {
+    const data = type.data
+    if (data.length === 0) {
         throw new CompilerError(
-            "an enum must include at least one member.",
+            `a ${type.tag} must include at least one member.`,
             type.loc,
         )
     }
-    const valNames: Set<string> = new Set()
-    const tagVals: Set<number> = new Set()
+    if (type.types !== null && type.types.length !== data.length) {
+        throw new CompilerError(
+            "the number of types is not equal to the number of members. This is likely an internal error.",
+            null,
+        )
+    }
+    const names: Set<string> = new Set()
+    const tags: Set<number> = new Set()
     let prevVal = -1
-    for (const enumVal of type.props.vals) {
-        if (valNames.has(enumVal.name)) {
-            throw new CompilerError(
-                "the name of an enum member must be unique.",
-                enumVal.loc,
-            )
+    for (const elt of data) {
+        if (elt.name !== null) {
+            if (names.has(elt.name)) {
+                throw new CompilerError(
+                    `name of a ${type.tag} member must be unique.`,
+                    elt.loc,
+                )
+            }
+            names.add(elt.name)
         }
-        if (!Number.isSafeInteger(enumVal.val)) {
-            throw new CompilerError(
-                "only enum values encoded as safe integers are supported.",
-                enumVal.loc,
-            )
+        if (elt.val !== null) {
+            if (!Number.isSafeInteger(elt.val)) {
+                throw new CompilerError(
+                    "only safe integers are supported.",
+                    elt.loc,
+                )
+            }
+            if (tags.has(elt.val)) {
+                throw new CompilerError(
+                    `tag '${elt.val}' is assigned to a preceding member.`,
+                    elt.loc,
+                )
+            }
+            tags.add(elt.val)
+            if (c.config.pedantic && elt.val < prevVal) {
+                throw new CompilerError(
+                    `in pedantic mode, all ${type.tag} tags must be in order.`,
+                    elt.loc,
+                )
+            }
+            prevVal = elt.val
         }
-        if (tagVals.has(enumVal.val)) {
-            throw new CompilerError(
-                `value '${enumVal.val}' is assigned to a preceding member.`,
-                enumVal.loc,
-            )
-        }
-        if (c.config.pedantic && enumVal.val < prevVal) {
-            throw new CompilerError(
-                "in pedantic mode, all enum values must be in order.",
-                enumVal.loc,
-            )
-        }
-        valNames.add(enumVal.name)
-        tagVals.add(enumVal.val)
-        prevVal = enumVal.val
     }
 }
 
-function checkLengthInvariants(len: ast.Integer | null): void {
+function checkLengthInvariants(len: ast.Length | null): void {
     if (len !== null && len.val <= 0) {
         throw new CompilerError(
             "a fixed list or data must have a length strictly greater than 0.",
@@ -156,6 +159,23 @@ function checkLengthInvariants(len: ast.Integer | null): void {
         throw new CompilerError(
             "only length encoded as a u32 are supported.",
             len.loc,
+        )
+    }
+}
+
+function checkListInvariants(type: ast.ListType): void {
+    checkLengthInvariants(type.data)
+    if (type.extra !== null && type.extra.unique && type.extra.typedArray) {
+        throw new CompilerError(
+            "A list cannot be both typed (typedArray) and unique (Set).",
+            type.loc,
+        )
+    }
+    const valType = type.types[0]
+    if (type.extra?.typedArray && !ast.isFixedNumericType(valType)) {
+        throw new CompilerError(
+            `value type of a typed array cannot be '${valType.tag}'. This is likely an internal error.`,
+            valType.loc,
         )
     }
 }
@@ -178,7 +198,7 @@ function checkMapInvariants(c: Checker, type: ast.MapType): void {
 
 function checkNonVoid(c: Checker, type: ast.Type): void {
     if (type.tag === "alias") {
-        const aliased = c.symbols.get(type.props.alias)
+        const aliased = c.symbols.get(type.data)
         type =
             aliased !== undefined
                 ? ast.resolveAlias(aliased.type, c.symbols)
@@ -192,74 +212,14 @@ function checkNonVoid(c: Checker, type: ast.Type): void {
     }
 }
 
-function checkStructInvariants(type: ast.StructType): void {
-    if (type.props.fields.length === 0) {
-        throw new CompilerError(
-            "a struct must include at least one member.",
-            type.loc,
-        )
-    }
-    if (type.types.length !== type.props.fields.length) {
-        throw new CompilerError(
-            "the number of fields is not equal to the number of registered types. This is likely an internal error.",
-            null,
-        )
-    }
-    const fieldNames: Set<string> = new Set()
-    for (const field of type.props.fields) {
-        if (fieldNames.has(field.name)) {
-            throw new CompilerError(
-                "the name of a field must be unique.",
-                field.loc,
-            )
-        }
-        fieldNames.add(field.name)
-    }
-}
-
 function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
-    if (type.types.length === 0) {
-        throw new CompilerError(
-            "a union must include at least one type.",
-            type.loc,
-        )
-    }
-    if (type.types.length !== type.props.tags.length) {
-        throw new CompilerError(
-            "the number of tags is not equal to the number of types of the union. This is likely an internal error.",
-            null,
-        )
-    }
-    for (let i = 0; i < type.types.length; i++) {
-        const tag = type.props.tags[i]
-        if (!Number.isSafeInteger(tag.val)) {
-            throw new CompilerError(
-                "only tags encoded as safe integer are supported.",
-                tag.loc,
-            )
-        }
-    }
+    const tags = type.data
     // check type uniqueness
     const stringifiedTypes = new Set()
-    const tagVals: Set<number> = new Set()
-    let prevTagVal = -1
-    for (let i = 0; i < type.props.tags.length; i++) {
-        const tag = type.props.tags[i]
-        if (tagVals.has(tag.val)) {
-            throw new CompilerError(
-                `tag '${tag.val}' is assigned to a preceding type.`,
-                tag.loc,
-            )
-        }
-        if (c.config.pedantic && tag.val < prevTagVal) {
-            throw new CompilerError(
-                "in pedantic mode, all tags must be in order.",
-                tag.loc,
-            )
-        }
-        tagVals.add(tag.val)
-        prevTagVal = tag.val
-        const stringifiedType = JSON.stringify(ast.withoutLoc(type.types[i]))
+    for (let i = 0; i < tags.length; i++) {
+        const stringifiedType = JSON.stringify(
+            ast.withoutExtraLoc(type.types[i]),
+        )
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {
@@ -271,7 +231,7 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
         stringifiedTypes.add(stringifiedType)
     }
     // check that flat unions can be automatically flatten
-    if (type.props.flat) {
+    if (type.extra?.flat) {
         let isFlatUnion =
             type.types.every(ast.isBaseOrVoidType) &&
             ast.haveDistinctTypeof(type.types)
@@ -284,7 +244,7 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
                 resolved.every((t): t is ast.StructType => t.tag === "struct")
             ) {
                 // every struct is unique (no double aliasing)
-                isFlatUnion = resolved.every((t) => t.props.class)
+                isFlatUnion = resolved.every((t) => t.extra?.class)
                 if (!isFlatUnion) {
                     isFlatUnion = ast.leadingDiscriminators(resolved) !== null
                 }
@@ -297,8 +257,8 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
 }
 
 function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
-    if (!c.symbols.has(type.props.alias)) {
-        const alias = type.props.alias
+    if (!c.symbols.has(type.data)) {
+        const alias = type.data
         throw new CompilerError(`alias '${alias}' is not defined.`, type.loc)
     }
 }
@@ -309,8 +269,7 @@ function checkCircularRef(
     traversed: ReadonlySet<string>,
 ): void {
     if (
-        ((type.tag === "list" || type.tag === "set") &&
-            type.props.len === null) ||
+        (type.tag === "list" && type.data === null) ||
         type.tag === "map" ||
         type.tag === "optional"
     ) {
@@ -332,17 +291,13 @@ function checkCircularRef(
             throw firstError
         }
         return // allowed circular refs
-    } else if (
-        type.tag === "struct" ||
-        type.tag === "list" ||
-        type.tag === "set"
-    ) {
+    } else if (type.tag === "struct" || type.tag === "list") {
         for (const subtype of type.types) {
             checkCircularRef(c, subtype, traversed)
         }
     } else if (type.tag === "alias") {
-        const alias = type.props.alias
-        if (traversed.has(type.props.alias)) {
+        const alias = type.data
+        if (traversed.has(alias)) {
             throw new CompilerError(
                 "non-terminable circular references are not allowed.",
                 type.loc,

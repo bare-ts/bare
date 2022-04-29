@@ -16,11 +16,7 @@ export function parse(content: string, config: Config): ast.Ast {
     while (p.lex.token() !== "") {
         defs.push(parseAliased(p))
     }
-    const main =
-        config.noMain || config.main.length > 0
-            ? config.main
-            : ast.rootAliases(defs)
-    return { defs, main, loc }
+    return { defs, main: [], loc }
 }
 
 interface Parser {
@@ -123,34 +119,18 @@ function parseTypeName(p: Parser): ast.Type {
     const alias = p.lex.token()
     const loc = p.lex.location()
     p.lex.forth()
-    if (alias === "void") {
-        return {
-            tag: "void",
-            props: {
-                lax: p.config.useLaxOptional,
-                undef: p.config.useUndefined,
-            },
-            types: null,
-            loc,
-        }
+    if (UPPER_CAMEL_CASE_PATTERN.test(alias)) {
+        return { tag: "alias", data: alias, types: null, extra: null, loc }
     }
-    if (ast.isBaseTag(alias) || alias === "str") {
-        if (alias === "string" && !p.config.legacySyntax) {
-            throw new CompilerError(
-                "use 'str' or allow 'string' with option '--legacy-syntax'.",
-                p.lex.location(),
-            )
-        }
-        const safeTypeName = `${alias}Safe`
-        const tag =
-            p.config.useSafeInt && ast.isBaseTag(safeTypeName)
-                ? safeTypeName
-                : alias === "str"
-                ? "string"
-                : alias
-        return { tag, props: null, types: null, loc }
-    } else if (UPPER_CAMEL_CASE_PATTERN.test(alias)) {
-        return { tag: "alias", props: { alias }, types: null, loc }
+    if (alias === "string" && !p.config.legacySyntax) {
+        throw new CompilerError(
+            "use 'str' or allow 'string' with option '--legacy-syntax'.",
+            p.lex.location(),
+        )
+    }
+    const tag = alias === "string" ? "str" : alias
+    if (ast.isBaseTag(tag) || tag === "void") {
+        return { tag, data: null, types: null, extra: null, loc }
     } else {
         throw new CompilerError(
             "a type name is either in UpperCamelCase or is a predefined types.",
@@ -160,7 +140,7 @@ function parseTypeName(p: Parser): ast.Type {
 }
 
 function parseData(p: Parser): ast.Type {
-    let len: ast.Integer | null
+    let len: ast.Length | null
     const loc = p.lex.location()
     expect(p, "data")
     if (p.lex.token() === "<") {
@@ -172,12 +152,12 @@ function parseData(p: Parser): ast.Type {
         }
         p.lex.forth()
         const loc = p.lex.location()
-        len = { val: parseUnsignedNumber(p), loc }
+        len = { name: null, val: parseUnsignedNumber(p), extra: null, loc }
         expect(p, ">")
     } else {
         len = parseOptionalLength(p)
     }
-    return { tag: "data", props: { len, mut: false }, types: null, loc }
+    return { tag: "data", data: len, types: null, extra: null, loc }
 }
 
 function parseList(p: Parser): ast.Type {
@@ -185,18 +165,11 @@ function parseList(p: Parser): ast.Type {
     expect(p, "list")
     const valType = parseTypeParameter(p)
     const len = parseOptionalLength(p)
-    if (!p.config.useGenericArray && ast.isFixedNumberType(valType)) {
-        return {
-            tag: "typedarray",
-            props: { len, mut: p.config.useMutable },
-            types: [valType],
-            loc,
-        }
-    }
     return {
         tag: "list",
-        props: { len, mut: p.config.useMutable },
+        data: len,
         types: [valType],
+        extra: null,
         loc,
     }
 }
@@ -208,29 +181,21 @@ function parseLegacyList(p: Parser): ast.Type {
             p.lex.location(),
         )
     }
-    let len: ast.Integer | null = null
+    let len: ast.Length | null = null
     const loc = p.lex.location()
     expect(p, "[")
     if (p.lex.token() !== "]") {
         const loc = p.lex.location()
-        len = { val: parseUnsignedNumber(p), loc }
+        len = { name: null, val: parseUnsignedNumber(p), extra: null, loc }
         expect(p, "]")
     } else {
         p.lex.forth()
     }
-    const valType = parseType(p)
-    if (!p.config.useGenericArray && ast.isFixedNumberType(valType)) {
-        return {
-            tag: "typedarray",
-            props: { len, mut: p.config.useMutable },
-            types: [valType],
-            loc,
-        }
-    }
     return {
         tag: "list",
-        props: { len, mut: p.config.useMutable },
-        types: [valType],
+        data: len,
+        types: [parseType(p)],
+        extra: null,
         loc,
     }
 }
@@ -238,14 +203,11 @@ function parseLegacyList(p: Parser): ast.Type {
 function parseOptional(p: Parser): ast.Type {
     const loc = p.lex.location()
     expect(p, "optional")
-    const type = parseTypeParameter(p)
     return {
         tag: "optional",
-        props: {
-            lax: p.config.useLaxOptional,
-            undef: p.config.useUndefined,
-        },
-        types: [type],
+        data: null,
+        types: [parseTypeParameter(p)],
+        extra: null,
         loc,
     }
 }
@@ -266,20 +228,15 @@ function parseMap(p: Parser): ast.Type {
         keyType = parseType(p)
         expect(p, "]")
         valType = parseType(p)
-        return {
-            tag: "map",
-            props: { mut: p.config.useMutable },
-            types: [keyType, valType],
-            loc,
-        }
     } else {
         keyType = parseTypeParameter(p)
         valType = parseTypeParameter(p)
     }
     return {
         tag: "map",
-        props: { mut: p.config.useMutable },
+        data: null,
         types: [keyType, valType],
+        extra: null,
         loc,
     }
 }
@@ -308,7 +265,7 @@ function parseLegacyUnion(p: Parser): ast.Type {
 }
 
 function parseUnionBody(p: Parser, loc: Location): ast.Type {
-    const tags: ast.Integer[] = []
+    const tags: ast.Length[] = []
     const types: ast.Type[] = []
     let tagVal = 0
     do {
@@ -330,7 +287,7 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
                 p.lex.location(),
             )
         }
-        tags.push({ val: tagVal, loc })
+        tags.push({ name: null, val: tagVal, extra: null, loc })
         types.push(type)
         tagVal++
         if (p.lex.token() === "," || p.lex.token() === ";") {
@@ -340,8 +297,7 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
             )
         }
     } while (p.lex.token() === "|")
-    const flat = p.config.useFlatUnion
-    return { tag: "union", props: { flat, tags }, types, loc }
+    return { tag: "union", data: tags, types, extra: null, loc }
 }
 
 function parseEnum(p: Parser): ast.Type {
@@ -376,7 +332,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
                 p.lex.location(),
             )
         }
-        vals.push({ name, val, loc: valLoc })
+        vals.push({ name, val, extra: null, loc: valLoc })
         val++
         if (p.lex.token() === "," || p.lex.token() === ";") {
             throw new CompilerError(
@@ -386,8 +342,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         }
     }
     expect(p, "}")
-    const intEnum = p.config.useIntEnum
-    return { tag: "enum", props: { intEnum, vals }, types: null, loc }
+    return { tag: "enum", data: vals, types: null, extra: null, loc }
 }
 
 function parseStruct(p: Parser): ast.Type {
@@ -398,8 +353,6 @@ function parseStruct(p: Parser): ast.Type {
 function parseStructBody(p: Parser): ast.Type {
     const loc = p.lex.location()
     expect(p, "{")
-    const mut = p.config.useMutable
-    const quoted = p.config.useQuotedProperty
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
     const names = new Set()
@@ -422,25 +375,20 @@ function parseStructBody(p: Parser): ast.Type {
                 p.lex.location(),
             )
         }
-        fields.push({ mut, name, quoted, loc: fieldLoc })
+        fields.push({ name, val: null, extra: null, loc: fieldLoc })
         types.push(type)
     }
     expect(p, "}")
-    return {
-        tag: "struct",
-        props: { class: p.config.useClass, fields },
-        types,
-        loc,
-    }
+    return { tag: "struct", data: fields, types, extra: null, loc }
 }
 
-function parseOptionalLength(p: Parser): ast.Integer | null {
+function parseOptionalLength(p: Parser): ast.Length | null {
     if (p.lex.token() === "[") {
         p.lex.forth()
         const loc = p.lex.location()
         const val = parseUnsignedNumber(p)
         expect(p, "]")
-        return { val, loc }
+        return { name: null, val, extra: null, loc }
     } else {
         return null
     }

@@ -5,15 +5,15 @@
       "internal": false,
       "type": {
         "tag": "list",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
-            "tag": "u64Safe",
-            "props": null,
+            "tag": "u64",
+            "data": null,
             "types": null,
+            "extra": {
+              "safe": true
+            },
             "loc": {
               "filename": "safe-int-list/schema.bare",
               "offset": 18,
@@ -22,6 +22,11 @@
             }
           }
         ],
+        "extra": {
+          "mut": false,
+          "typedArray": true,
+          "unique": false
+        },
         "loc": {
           "filename": "safe-int-list/schema.bare",
           "offset": 13,

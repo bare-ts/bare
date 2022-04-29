@@ -5,36 +5,29 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "children",
-              "quoted": false,
-              "loc": {
-                "filename": "struct-recursive/schema.bare",
-                "offset": 23,
-                "line": 2,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "children",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-recursive/schema.bare",
+              "offset": 23,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          }
+        ],
         "types": [
           {
             "tag": "list",
-            "props": {
-              "len": null,
-              "mut": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "Node"
-                },
+                "data": "Node",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "struct-recursive/schema.bare",
                   "offset": 38,
@@ -43,6 +36,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "struct-recursive/schema.bare",
               "offset": 33,
@@ -51,6 +45,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "struct-recursive/schema.bare",
           "offset": 17,

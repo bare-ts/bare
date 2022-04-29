@@ -4,9 +4,10 @@
       "alias": "KeyType",
       "internal": false,
       "type": {
-        "tag": "string",
-        "props": null,
+        "tag": "str",
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "map-key-alias/schema.bare",
           "offset": 13,
@@ -26,16 +27,13 @@
       "internal": false,
       "type": {
         "tag": "map",
-        "props": {
-          "mut": false
-        },
+        "data": null,
         "types": [
           {
             "tag": "alias",
-            "props": {
-              "alias": "KeyType"
-            },
+            "data": "KeyType",
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-key-alias/schema.bare",
               "offset": 32,
@@ -44,9 +42,10 @@
             }
           },
           {
-            "tag": "string",
-            "props": null,
+            "tag": "str",
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "map-key-alias/schema.bare",
               "offset": 41,
@@ -55,6 +54,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "map-key-alias/schema.bare",
           "offset": 28,

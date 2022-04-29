@@ -5,11 +5,9 @@
       "internal": false,
       "type": {
         "tag": "data",
-        "props": {
-          "len": null,
-          "mut": false
-        },
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "data/schema.bare",
           "offset": 10,

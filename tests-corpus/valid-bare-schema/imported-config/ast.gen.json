@@ -5,8 +5,9 @@
       "internal": false,
       "type": {
         "tag": "u8",
-        "props": null,
+        "data": null,
         "types": null,
+        "extra": null,
         "loc": {
           "filename": "imported-config/schema.bare",
           "offset": 13,

@@ -5,38 +5,36 @@
       "internal": false,
       "type": {
         "tag": "struct",
-        "props": {
-          "class": false,
-          "fields": [
-            {
-              "mut": false,
-              "name": "field0",
-              "quoted": false,
-              "loc": {
-                "filename": "alias-undef/schema.bare",
-                "offset": 20,
-                "line": 2,
-                "col": 5
-              }
-            },
-            {
-              "mut": false,
-              "name": "field1",
-              "quoted": false,
-              "loc": {
-                "filename": "alias-undef/schema.bare",
-                "offset": 35,
-                "line": 3,
-                "col": 5
-              }
+        "data": [
+          {
+            "name": "field0",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "alias-undef/schema.bare",
+              "offset": 20,
+              "line": 2,
+              "col": 5
             }
-          ]
-        },
+          },
+          {
+            "name": "field1",
+            "val": null,
+            "extra": null,
+            "loc": {
+              "filename": "alias-undef/schema.bare",
+              "offset": 35,
+              "line": 3,
+              "col": 5
+            }
+          }
+        ],
         "types": [
           {
             "tag": "u8",
-            "props": null,
+            "data": null,
             "types": null,
+            "extra": null,
             "loc": {
               "filename": "alias-undef/schema.bare",
               "offset": 28,
@@ -46,17 +44,13 @@
           },
           {
             "tag": "list",
-            "props": {
-              "len": null,
-              "mut": false
-            },
+            "data": null,
             "types": [
               {
                 "tag": "alias",
-                "props": {
-                  "alias": "UndefinedAlias"
-                },
+                "data": "UndefinedAlias",
                 "types": null,
+                "extra": null,
                 "loc": {
                   "filename": "alias-undef/schema.bare",
                   "offset": 48,
@@ -65,6 +59,7 @@
                 }
               }
             ],
+            "extra": null,
             "loc": {
               "filename": "alias-undef/schema.bare",
               "offset": 43,
@@ -73,6 +68,7 @@
             }
           }
         ],
+        "extra": null,
         "loc": {
           "filename": "alias-undef/schema.bare",
           "offset": 14,
