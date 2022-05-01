@@ -78,8 +78,14 @@ export function generate(schema: ast.Ast, config: Config): string {
         const predefinedTypes: string[] = ast.NUMERIC_TAG.slice()
         predefinedTypes.push("i64Safe", "intSafe", "u64Safe", "uintSafe")
         for (const tag of predefinedTypes) {
-            const typeofVal = ast.isInteger64Tag(tag) ? "bigint" : "number"
             if (RegExp(`\\b${tag}\\b`).test(body)) {
+                const typeofVal =
+                    tag === "i64" ||
+                    tag === "int" ||
+                    tag === "u64" ||
+                    tag === "uint"
+                        ? "bigint"
+                        : "number"
                 head += `export type ${tag} = ${typeofVal}\n`
             }
         }
@@ -139,11 +145,6 @@ function namespaced(g: Gen, alias: string): string {
 }
 
 function genType(g: Gen, type: ast.Type): string {
-    if (ast.isInteger64Type(type) && type.extra?.safe) {
-        return `${type.tag}Safe`
-    } else if (ast.isNumericType(type)) {
-        return type.tag
-    }
     switch (type.tag) {
         case "alias":
             return genAliasType(g, type)
@@ -167,6 +168,11 @@ function genType(g: Gen, type: ast.Type): string {
             return genUnionType(g, type)
         case "void":
             return genVoidType(g, type)
+    }
+    if (type.extra?.safe) {
+        return `${type.tag}Safe`
+    } else {
+        return type.tag
     }
 }
 
@@ -266,7 +272,7 @@ function genStructTypeBody(g: Gen, type: ast.StructType): string {
 
 function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
     const params = type.data
-        .map(({ name }, i) => `${jsId(name)}: ${genType(g, type.types[i])},`)
+        .map(({ name }, i) => `${name}_: ${genType(g, type.types[i])},`)
         .join("\n")
     return unindent(`${indent(genStructTypeBody(g, type))}
     constructor(
@@ -276,7 +282,7 @@ function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
 
 function genTypedArrayType(_g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
-    if (!ast.isFixedNumericType(valType)) {
+    if (!ast.isFixedNumericTag(valType.tag)) {
         throw new CompilerError(
             `value type of a typed array cannot be '${valType.tag}'. This is likely an internal error.`,
             valType.loc,
@@ -389,12 +395,11 @@ function genAliasedStructCode(
     const params = type.data
         .map(
             ({ name }, i) =>
-                `${jsId(name)}` +
-                (ts ? `: ${genType(g, type.types[i])},` : ","),
+                `${name}_` + (ts ? `: ${genType(g, type.types[i])},` : ","),
         )
         .join("\n")
     const assignments = type.data
-        .map(({ name }) => `this.${name} = ${jsId(name)}`)
+        .map(({ name }) => `this.${name} = ${name}_`)
         .join("\n")
     return unindent(`class ${alias} {${indent(members, 2)}
         constructor(
@@ -420,9 +425,8 @@ function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
             body = body.slice(1, -1) // remove parenthesis
             return `${mod}${head} {${ret}${indent(body)}\n}`
         }
-        default:
-            throw Error("[internal] invalid reader template")
     }
+    throw Error("[internal] invalid reader template")
 }
 
 function genReading(g: Gen, type: ast.Type): string {
@@ -432,17 +436,11 @@ function genReading(g: Gen, type: ast.Type): string {
             return `(() => ${indent(body)})()`
         case "(": // expression
             return body.slice(1, -1) // remove parenthesis
-        default:
-            throw Error("[internal] invalid reader template")
     }
+    throw Error("[internal] invalid reader template")
 }
 
 function genReader(g: Gen, type: ast.Type, alias = ""): string {
-    if (ast.isInteger64Type(type) && type.extra?.safe) {
-        return `(bare.read${capitalize(type.tag)}Safe(bc))`
-    } else if (ast.isNumericType(type)) {
-        return `(bare.read${capitalize(type.tag)}(bc))`
-    }
     switch (type.tag) {
         case "alias":
             return `(${namespaced(g, type.data)}read${type.data}(bc))`
@@ -466,6 +464,11 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
             return genUnionReader(g, type)
         case "void":
             return genVoidReader(g, type)
+    }
+    if (type.extra?.safe) {
+        return `(bare.read${capitalize(type.tag)}Safe(bc))`
+    } else {
+        return `(bare.read${capitalize(type.tag)}(bc))`
     }
 }
 
@@ -689,9 +692,8 @@ function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
             body = body.slice(1, -1) // remove parenthesis
             body = "\n" + (body === "" ? "// do nothing" : body)
             return `${mod}${head} {${indent(body)}\n}`
-        default:
-            throw Error("[internal] invalid writer template")
     }
+    throw Error("[internal] invalid writer template")
 }
 
 function genWriting(g: Gen, type: ast.Type, x: string): string {
@@ -702,17 +704,11 @@ function genWriting(g: Gen, type: ast.Type, x: string): string {
         case "(":
             body = body.slice(1, -1) // remove parenthesis
             return `${body}`
-        default:
-            throw Error("[internal] invalid writer template")
     }
+    throw Error("[internal] invalid writer template")
 }
 
 function genWriter(g: Gen, type: ast.Type, alias = ""): string {
-    if (ast.isInteger64Type(type) && type.extra?.safe) {
-        return `(bare.write${capitalize(type.tag)}Safe(bc, $x))`
-    } else if (ast.isNumericType(type)) {
-        return `(bare.write${capitalize(type.tag)}(bc, $x))`
-    }
     switch (type.tag) {
         case "alias":
             return `(${namespaced(g, type.data)}write${type.data}(bc, $x))`
@@ -736,6 +732,11 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
             return genUnionWriter(g, type)
         case "void":
             return "()"
+    }
+    if (type.extra?.safe) {
+        return `(bare.write${capitalize(type.tag)}Safe(bc, $x))`
+    } else {
+        return `(bare.write${capitalize(type.tag)}(bc, $x))`
     }
 }
 
@@ -1034,20 +1035,6 @@ function rpr(v: ast.LiteralVal): string {
         : `${v}`
 }
 
-/**
- * @param s identifier
- * @returns valid JS identifier
- */
-function jsId(s: string): string {
-    return JS_RESERVED_WORD.indexOf(s) !== -1 ? "_" + s : s
-}
-
 function max(vals: readonly number[]): number {
     return Math.max(...vals)
 }
-
-const JS_RESERVED_WORD: readonly string[] =
-    `await break case catch class const continue debugger default delete do else
-    enum export extends false finally for function if implements import in
-    instance interface of new null package private protected public return super
-    switch this throw true try typeof var void while with yield`.split(/\s+/g)

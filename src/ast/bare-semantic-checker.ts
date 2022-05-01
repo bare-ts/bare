@@ -172,7 +172,7 @@ function checkListInvariants(type: ast.ListType): void {
         )
     }
     const valType = type.types[0]
-    if (type.extra?.typedArray && !ast.isFixedNumericType(valType)) {
+    if (type.extra?.typedArray && !ast.isFixedNumericTag(valType.tag)) {
         throw new CompilerError(
             `value type of a typed array cannot be '${valType.tag}'. This is likely an internal error.`,
             valType.loc,

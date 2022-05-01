@@ -5,7 +5,7 @@ export type u32 = number
 export declare class BoxedU32 {
     readonly val: u32
     constructor(
-        val: u32,
+        val_: u32,
     )
 }
 
@@ -16,7 +16,7 @@ export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void
 export declare class Boxedstr {
     readonly val: string
     constructor(
-        val: string,
+        val_: string,
     )
 }
 

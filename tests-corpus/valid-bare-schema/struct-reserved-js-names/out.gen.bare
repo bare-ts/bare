@@ -1,0 +1,7 @@
+type Operation struct {
+    await: str
+    class: str
+    extends: str
+    typeof: str
+    for: str
+}

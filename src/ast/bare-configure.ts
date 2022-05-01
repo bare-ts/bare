@@ -40,7 +40,7 @@ function configureType(type: ast.Type, config: Config): ast.Type {
             case "list": {
                 const typedArray =
                     !config.useGenericArray &&
-                    ast.isFixedNumericType(type.types[0])
+                    ast.isFixedNumericTag(type.types[0].tag)
                 if (mut || typedArray) {
                     extra = { mut, typedArray, unique: false }
                 }
@@ -95,9 +95,8 @@ function configureTypes(
     const configuredTypes = types.map((t) => configureType(t, config))
     if (configuredTypes.some((t, i) => t !== types[i])) {
         return configuredTypes
-    } else {
-        return types
     }
+    return types
 }
 
 function configureFields(
@@ -107,9 +106,8 @@ function configureFields(
     const configuredFields = fields.map((f) => configureField(f, config))
     if (configuredFields.some((f, i) => f !== fields[i])) {
         return configuredFields
-    } else {
-        return fields
     }
+    return fields
 }
 
 function configureField(

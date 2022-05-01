@@ -4,15 +4,12 @@
 import * as ast from "../ast/bare-ast.js"
 import type { Config } from "../core/config.js"
 import { CompilerError, type Location } from "../core/compiler-error.js"
-import { Lex } from "./lex.js"
+import { Lex } from "./bare-lex.js"
 
 export function parse(content: string, config: Config): ast.Ast {
     const p = {
         config,
-        lex: new Lex(content, config.schema, {
-            commentMark: "#",
-            docMark: "##",
-        }),
+        lex: new Lex(content, config.schema),
     }
     const loc = p.lex.location()
     const defs: ast.AliasedType[] = []

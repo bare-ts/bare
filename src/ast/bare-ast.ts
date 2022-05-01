@@ -38,14 +38,12 @@ export interface AliasedType {
  */
 export type Type =
     | Alias // Named user type
-    | BoolType // Named user type
+    | BaseType // Named user type
     | DataType // data, data<length>
     | EnumType
     | ListType // []type, [n]type
     | MapType // map[type]type
-    | NumericType
     | OptionalType // optional<type>
-    | StrType // str
     | StructType // { fields... }
     | UnionType // (type | ...)
     | VoidType // void
@@ -58,13 +56,11 @@ export interface Alias {
     readonly loc: Location | null
 }
 
-export type BaseType = BoolType | NumericType | StrType
-
-export interface BoolType {
-    readonly tag: "bool"
+export interface BaseType {
+    readonly tag: BaseTag
     readonly data: null
     readonly types: null
-    readonly extra: null
+    readonly extra: { readonly safe: boolean } | null
     readonly loc: Location | null
 }
 
@@ -72,9 +68,7 @@ export interface DataType {
     readonly tag: "data"
     readonly data: Length | null
     readonly types: null
-    readonly extra: {
-        readonly mut: boolean
-    } | null
+    readonly extra: { readonly mut: boolean } | null
     readonly loc: Location | null
 }
 
@@ -82,9 +76,7 @@ export interface EnumType {
     readonly tag: "enum"
     readonly data: readonly EnumVal[]
     readonly types: null
-    readonly extra: {
-        readonly intEnum: boolean
-    } | null
+    readonly extra: { readonly intEnum: boolean } | null
     readonly loc: Location | null
 }
 
@@ -104,29 +96,7 @@ export interface MapType {
     readonly tag: "map"
     readonly data: null
     readonly types: readonly [keyType: Type, valType: Type]
-    readonly extra: {
-        readonly mut: boolean
-    } | null
-    readonly loc: Location | null
-}
-
-export interface NumericType {
-    readonly tag: NumericTag
-    readonly data: null
-    readonly types: null
-    readonly extra: {
-        readonly safe: boolean
-    } | null
-    readonly loc: Location | null
-}
-
-export interface FixedNumericType {
-    readonly tag: FixedNumericTag
-    readonly data: null
-    readonly types: null
-    readonly extra: {
-        readonly safe: boolean
-    } | null
+    readonly extra: { readonly mut: boolean } | null
     readonly loc: Location | null
 }
 
@@ -134,18 +104,7 @@ export interface OptionalType {
     readonly tag: "optional"
     readonly data: null
     readonly types: readonly [type: Type]
-    readonly extra: {
-        readonly lax: boolean
-        readonly literal: Literal
-    } | null
-    readonly loc: Location | null
-}
-
-export interface StrType {
-    readonly tag: "str"
-    readonly data: null
-    readonly types: null
-    readonly extra: null
+    readonly extra: { readonly lax: boolean; readonly literal: Literal } | null
     readonly loc: Location | null
 }
 
@@ -153,9 +112,7 @@ export interface StructType {
     readonly tag: "struct"
     readonly data: readonly StructField[]
     readonly types: readonly Type[]
-    readonly extra: {
-        readonly class: boolean
-    } | null
+    readonly extra: { readonly class: boolean } | null
     readonly loc: Location | null
 }
 
@@ -163,9 +120,7 @@ export interface UnionType<T = Type> {
     readonly tag: "union"
     readonly data: readonly UnionTag[]
     readonly types: readonly T[]
-    readonly extra: {
-        readonly flat: boolean
-    } | null
+    readonly extra: { readonly flat: boolean } | null
     readonly loc: Location | null
 }
 
@@ -173,10 +128,7 @@ export interface VoidType {
     readonly tag: "void"
     readonly data: null
     readonly types: null
-    readonly extra: {
-        readonly lax: boolean
-        readonly literal: Literal
-    } | null
+    readonly extra: { readonly lax: boolean; readonly literal: Literal } | null
     readonly loc: Location | null
 }
 
@@ -204,10 +156,7 @@ export interface StructField {
     readonly name: string
     readonly val: null
     readonly comment: string | null
-    readonly extra: {
-        readonly mut: boolean
-        readonly quoted: boolean
-    } | null
+    readonly extra: { readonly mut: boolean; readonly quoted: boolean } | null
     readonly loc: Location | null
 }
 
@@ -272,33 +221,13 @@ export function isBaseType(type: Type): type is BaseType {
 }
 
 export function isBaseOrVoidType(type: Type): type is BaseType | VoidType {
-    return isBaseTag(type.tag) || type.tag === "void"
+    return isBaseType(type) || type.tag === "void"
 }
 
 export type FixedNumericTag = typeof FIXED_NUMERIC_TAG[number]
 
-export function isFixedNumericType(type: Type): type is FixedNumericType {
-    return FIXED_NUMERIC_TAG_SET.has(type.tag)
-}
-
-export type NumericTag = typeof NUMERIC_TAG[number]
-
-export type Integer64Tag = typeof INTEGER64_TAG[number]
-
-export function isNumericTag(tag: string): tag is NumericTag {
-    return NUMERIC_TAG_SET.has(tag)
-}
-
-export function isNumericType(type: Type): type is NumericType {
-    return NUMERIC_TAG_SET.has(type.tag)
-}
-
-export function isInteger64Tag(tag: string): tag is Integer64Tag {
-    return INTEGER64_TAG_SET.has(tag)
-}
-
-export function isInteger64Type(type: Type): type is NumericType {
-    return isInteger64Tag(type.tag)
+export function isFixedNumericTag(tag: string): tag is FixedNumericTag {
+    return FIXED_NUMERIC_TAG_SET.has(tag)
 }
 
 export const FIXED_NUMERIC_TAG = [
@@ -314,17 +243,11 @@ export const FIXED_NUMERIC_TAG = [
     "u64",
 ] as const
 
-export const INTEGER64_TAG = ["i64", "int", "u64", "uint"] as const
-
-const INTEGER64_TAG_SET: ReadonlySet<string> = new Set(INTEGER64_TAG)
-
-const FIXED_NUMERIC_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMERIC_TAG)
-
 export const NUMERIC_TAG = [...FIXED_NUMERIC_TAG, "int", "uint"] as const
 
-const NUMERIC_TAG_SET: ReadonlySet<string> = new Set(NUMERIC_TAG)
-
 export const BASE_TAG = [...NUMERIC_TAG, "bool", "str"] as const
+
+const FIXED_NUMERIC_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMERIC_TAG)
 
 const BASE_TAG_SET: ReadonlySet<string> = new Set(BASE_TAG)
 
@@ -383,18 +306,19 @@ function referredAliases(type: Type): readonly string[] {
     return []
 }
 
-export function typeofValue(type: BoolType | NumericType | StrType): string {
+export function typeofValue(type: BaseType): string {
     switch (type.tag) {
         case "bool":
             return "boolean"
         case "str":
             return "string"
-        default:
-            return INTEGER64_TAG_SET.has(type.tag) &&
-                (type.extra === null || !type.extra.safe)
-                ? "bigint"
-                : "number"
+        case "i64":
+        case "int":
+        case "u64":
+        case "uint":
+            return type.extra?.safe ? "number" : "bigint"
     }
+    return "number"
 }
 
 /**

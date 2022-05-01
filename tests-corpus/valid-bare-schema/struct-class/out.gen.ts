@@ -6,11 +6,11 @@ export class Person {
     readonly name: string
     readonly age: u8
     constructor(
-        name: string,
-        age: u8,
+        name_: string,
+        age_: u8,
     ) {
-        this.name = name
-        this.age = age
+        this.name = name_
+        this.age = age_
     }
 }
 

@@ -2,11 +2,11 @@ import * as bare from "@bare-ts/lib"
 
 export class Person {
     constructor(
-        name,
-        age,
+        name_,
+        age_,
     ) {
-        this.name = name
-        this.age = age
+        this.name = name_
+        this.age = age_
     }
 }
 

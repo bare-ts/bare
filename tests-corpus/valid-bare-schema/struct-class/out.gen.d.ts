@@ -6,8 +6,8 @@ export declare class Person {
     readonly name: string
     readonly age: u8
     constructor(
-        name: string,
-        age: u8,
+        name_: string,
+        age_: u8,
     )
 }
 

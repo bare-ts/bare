@@ -2,9 +2,9 @@ import * as bare from "@bare-ts/lib"
 
 export class BoxedU32 {
     constructor(
-        val,
+        val_,
     ) {
-        this.val = val
+        this.val = val_
     }
 }
 
@@ -19,9 +19,9 @@ export function writeBoxedU32(bc, x) {
 
 export class Boxedstr {
     constructor(
-        val,
+        val_,
     ) {
-        this.val = val
+        this.val = val_
     }
 }
 

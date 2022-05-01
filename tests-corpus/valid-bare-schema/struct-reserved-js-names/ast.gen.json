@@ -1,0 +1,158 @@
+{
+  "defs": [
+    {
+      "alias": "Operation",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "await",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 28,
+              "line": 2,
+              "col": 5
+            }
+          },
+          {
+            "name": "class",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 43,
+              "line": 3,
+              "col": 5
+            }
+          },
+          {
+            "name": "extends",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 58,
+              "line": 4,
+              "col": 5
+            }
+          },
+          {
+            "name": "typeof",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 75,
+              "line": 5,
+              "col": 5
+            }
+          },
+          {
+            "name": "for",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 91,
+              "line": 6,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 35,
+              "line": 2,
+              "col": 12
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 50,
+              "line": 3,
+              "col": 12
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 67,
+              "line": 4,
+              "col": 14
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 83,
+              "line": 5,
+              "col": 13
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "struct-reserved-js-names/schema.bare",
+              "offset": 96,
+              "line": 6,
+              "col": 10
+            }
+          }
+        ],
+        "extra": {
+          "class": true
+        },
+        "loc": {
+          "filename": "struct-reserved-js-names/schema.bare",
+          "offset": 22,
+          "line": 1,
+          "col": 23
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "struct-reserved-js-names/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "main": [],
+  "loc": {
+    "filename": "struct-reserved-js-names/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
