@@ -11,8 +11,15 @@ type Department enum {
   JSMITH = 99
 }
 
+type Address struct {
+  address: str
+  city: str
+  state: str
+  country: str
+}
+
 type Customer struct {
-  ame: str
+  name: str
   email: str
   address: Address
   orders: list<struct {
@@ -32,13 +39,6 @@ type Employee struct {
   metadata: map<str><data>
 }
 
-type Person union { Customer | Employee }
+type TerminatedEmployee void
 
-type Address struct {
-  address: list<str>[4]
-  city: str
-  state: str
-  country: str
-}
-
-type Message union { Person = 0 }
+type Person union {Customer | Employee | TerminatedEmployee}

@@ -4,7 +4,7 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export type i32 = number
-export type i64 = bigint
+export type i64Safe = number
 
 export type PublicKey = ArrayBuffer
 
@@ -76,12 +76,35 @@ export function writeDepartment(bc: bare.ByteCursor, x: Department): void {
     }
 }
 
+export interface Address {
+    readonly address: string
+    readonly city: string
+    readonly state: string
+    readonly country: string
+}
+
+export function readAddress(bc: bare.ByteCursor): Address {
+    return {
+        address: bare.readString(bc),
+        city: bare.readString(bc),
+        state: bare.readString(bc),
+        country: bare.readString(bc),
+    }
+}
+
+export function writeAddress(bc: bare.ByteCursor, x: Address): void {
+    bare.writeString(bc, x.address)
+    bare.writeString(bc, x.city)
+    bare.writeString(bc, x.state)
+    bare.writeString(bc, x.country)
+}
+
 export interface Customer {
-    readonly ame: string
+    readonly name: string
     readonly email: string
     readonly address: Address
     readonly orders: readonly ({
-        readonly orderId: i64
+        readonly orderId: i64Safe
         readonly quantity: i32
     })[]
     readonly metadata: ReadonlyMap<string, ArrayBuffer>
@@ -89,7 +112,7 @@ export interface Customer {
 
 export function readCustomer(bc: bare.ByteCursor): Customer {
     return {
-        ame: bare.readString(bc),
+        name: bare.readString(bc),
         email: bare.readString(bc),
         address: readAddress(bc),
         orders: read0(bc),
@@ -98,7 +121,7 @@ export function readCustomer(bc: bare.ByteCursor): Customer {
 }
 
 export function writeCustomer(bc: bare.ByteCursor, x: Customer): void {
-    bare.writeString(bc, x.ame)
+    bare.writeString(bc, x.name)
     bare.writeString(bc, x.email)
     writeAddress(bc, x.address)
     write0(bc, x.orders)
@@ -137,9 +160,20 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
     write1(bc, x.metadata)
 }
 
+export type TerminatedEmployee = null
+
+export function readTerminatedEmployee(bc: bare.ByteCursor): TerminatedEmployee {
+    return null
+}
+
+export function writeTerminatedEmployee(bc: bare.ByteCursor, x: TerminatedEmployee): void {
+    // do nothing
+}
+
 export type Person =
     | { readonly tag: 0; readonly val: Customer }
     | { readonly tag: 1; readonly val: Employee }
+    | { readonly tag: 2; readonly val: TerminatedEmployee }
 
 export function readPerson(bc: bare.ByteCursor): Person {
     const offset = bc.offset
@@ -149,6 +183,8 @@ export function readPerson(bc: bare.ByteCursor): Person {
             return { tag, val: readCustomer(bc) }
         case 1:
             return { tag, val: readEmployee(bc) }
+        case 2:
+            return { tag, val: readTerminatedEmployee(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -165,69 +201,24 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
         case 1:
             writeEmployee(bc, x.val)
             break
-    }
-}
-
-export interface Address {
-    readonly address: readonly string[]
-    readonly city: string
-    readonly state: string
-    readonly country: string
-}
-
-export function readAddress(bc: bare.ByteCursor): Address {
-    return {
-        address: read3(bc),
-        city: bare.readString(bc),
-        state: bare.readString(bc),
-        country: bare.readString(bc),
-    }
-}
-
-export function writeAddress(bc: bare.ByteCursor, x: Address): void {
-    write3(bc, x.address)
-    bare.writeString(bc, x.city)
-    bare.writeString(bc, x.state)
-    bare.writeString(bc, x.country)
-}
-
-export type Message =
-    | { readonly tag: 0; readonly val: Person }
-
-export function readMessage(bc: bare.ByteCursor): Message {
-    const offset = bc.offset
-    const tag = bare.readU8(bc)
-    switch (tag) {
-        case 0:
-            return { tag, val: readPerson(bc) }
-        default: {
-            bc.offset = offset
-            throw new bare.BareError(offset, "invalid tag")
-        }
-    }
-}
-
-export function writeMessage(bc: bare.ByteCursor, x: Message): void {
-    bare.writeU8(bc, x.tag)
-    switch (x.tag) {
-        case 0:
-            writePerson(bc, x.val)
+        case 2:
+            writeTerminatedEmployee(bc, x.val)
             break
     }
 }
 
-export function encodeMessage(x: Message): Uint8Array {
+export function encodePerson(x: Person): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
         config
     )
-    writeMessage(bc, x)
+    writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function decodeMessage(bytes: Uint8Array): Message {
+export function decodePerson(bytes: Uint8Array): Person {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = readMessage(bc)
+    const result = readPerson(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
@@ -235,18 +226,18 @@ export function decodeMessage(bytes: Uint8Array): Message {
 }
 
 function read0(bc: bare.ByteCursor): readonly ({
-    readonly orderId: i64
+    readonly orderId: i64Safe
     readonly quantity: i32
 })[] {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
     const result = [{
-        orderId: bare.readI64(bc),
+        orderId: bare.readI64Safe(bc),
         quantity: bare.readI32(bc),
     }]
     for (let i = 1; i < len; i++) {
         result[i] = {
-            orderId: bare.readI64(bc),
+            orderId: bare.readI64Safe(bc),
             quantity: bare.readI32(bc),
         }
     }
@@ -254,13 +245,13 @@ function read0(bc: bare.ByteCursor): readonly ({
 }
 
 function write0(bc: bare.ByteCursor, x: readonly ({
-    readonly orderId: i64
+    readonly orderId: i64Safe
     readonly quantity: i32
 })[]): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
         {
-            bare.writeI64(bc, x[i].orderId)
+            bare.writeI64Safe(bc, x[i].orderId)
             bare.writeI32(bc, x[i].quantity)
         }
     }
@@ -299,21 +290,5 @@ function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
     bare.writeBool(bc, x !== null)
     if (x !== null) {
         writePublicKey(bc, x)
-    }
-}
-
-function read3(bc: bare.ByteCursor): readonly string[] {
-    const len = 4
-    const result = [bare.readString(bc)]
-    for (let i = 1; i < len; i++) {
-        result[i] = bare.readString(bc)
-    }
-    return result
-}
-
-function write3(bc: bare.ByteCursor, x: readonly string[]): void {
-    assert(x.length === 4, "Unmatched length")
-    for (let i = 0; i < x.length; i++) {
-        bare.writeString(bc, x[i])
     }
 }

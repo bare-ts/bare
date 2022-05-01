@@ -142,36 +142,12 @@
       }
     },
     {
-      "alias": "Customer",
+      "alias": "Address",
       "internal": false,
       "comment": null,
       "type": {
         "tag": "struct",
         "data": [
-          {
-            "name": "ame",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 205,
-              "line": 15,
-              "col": 3
-            }
-          },
-          {
-            "name": "email",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 216,
-              "line": 16,
-              "col": 3
-            }
-          },
           {
             "name": "address",
             "val": null,
@@ -179,32 +155,44 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 229,
+              "offset": 204,
+              "line": 15,
+              "col": 3
+            }
+          },
+          {
+            "name": "city",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 219,
+              "line": 16,
+              "col": 3
+            }
+          },
+          {
+            "name": "state",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 231,
               "line": 17,
               "col": 3
             }
           },
           {
-            "name": "orders",
+            "name": "country",
             "val": null,
             "comment": null,
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 248,
+              "offset": 244,
               "line": 18,
-              "col": 3
-            }
-          },
-          {
-            "name": "metadata",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 312,
-              "line": 22,
               "col": 3
             }
           }
@@ -217,9 +205,9 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 210,
+              "offset": 213,
               "line": 15,
-              "col": 8
+              "col": 12
             }
           },
           {
@@ -229,8 +217,140 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 223,
+              "offset": 225,
               "line": 16,
+              "col": 9
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 238,
+              "line": 17,
+              "col": 10
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 253,
+              "line": 18,
+              "col": 12
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 200,
+          "line": 14,
+          "col": 21
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 180,
+        "line": 14,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Customer",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 285,
+              "line": 22,
+              "col": 3
+            }
+          },
+          {
+            "name": "email",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 297,
+              "line": 23,
+              "col": 3
+            }
+          },
+          {
+            "name": "address",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 310,
+              "line": 24,
+              "col": 3
+            }
+          },
+          {
+            "name": "orders",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 329,
+              "line": 25,
+              "col": 3
+            }
+          },
+          {
+            "name": "metadata",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 393,
+              "line": 29,
+              "col": 3
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 291,
+              "line": 22,
+              "col": 9
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 304,
+              "line": 23,
               "col": 10
             }
           },
@@ -241,8 +361,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 238,
-              "line": 17,
+              "offset": 319,
+              "line": 24,
               "col": 12
             }
           },
@@ -260,8 +380,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 274,
-                      "line": 19,
+                      "offset": 355,
+                      "line": 26,
                       "col": 5
                     }
                   },
@@ -272,8 +392,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 291,
-                      "line": 20,
+                      "offset": 372,
+                      "line": 27,
                       "col": 5
                     }
                   }
@@ -283,11 +403,13 @@
                     "tag": "i64",
                     "data": null,
                     "types": null,
-                    "extra": null,
+                    "extra": {
+                      "safe": true
+                    },
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 283,
-                      "line": 19,
+                      "offset": 364,
+                      "line": 26,
                       "col": 14
                     }
                   },
@@ -298,8 +420,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 301,
-                      "line": 20,
+                      "offset": 382,
+                      "line": 27,
                       "col": 15
                     }
                   }
@@ -307,8 +429,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 268,
-                  "line": 18,
+                  "offset": 349,
+                  "line": 25,
                   "col": 23
                 }
               }
@@ -316,8 +438,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 256,
-              "line": 18,
+              "offset": 337,
+              "line": 25,
               "col": 11
             }
           },
@@ -332,8 +454,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 326,
-                  "line": 22,
+                  "offset": 407,
+                  "line": 29,
                   "col": 17
                 }
               },
@@ -344,8 +466,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 331,
-                  "line": 22,
+                  "offset": 412,
+                  "line": 29,
                   "col": 22
                 }
               }
@@ -353,8 +475,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 322,
-              "line": 22,
+              "offset": 403,
+              "line": 29,
               "col": 13
             }
           }
@@ -362,15 +484,16 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 201,
-          "line": 14,
+          "offset": 281,
+          "line": 21,
           "col": 22
         }
       },
+      "comment": null,
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 180,
-        "line": 14,
+        "offset": 260,
+        "line": 21,
         "col": 1
       }
     },
@@ -388,8 +511,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 365,
-              "line": 26,
+              "offset": 446,
+              "line": 33,
               "col": 3
             }
           },
@@ -400,8 +523,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 377,
-              "line": 27,
+              "offset": 458,
+              "line": 34,
               "col": 3
             }
           },
@@ -412,8 +535,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 390,
-              "line": 28,
+              "offset": 471,
+              "line": 35,
               "col": 3
             }
           },
@@ -424,8 +547,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 409,
-              "line": 29,
+              "offset": 490,
+              "line": 36,
               "col": 3
             }
           },
@@ -436,8 +559,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 434,
-              "line": 30,
+              "offset": 515,
+              "line": 37,
               "col": 3
             }
           },
@@ -448,8 +571,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 451,
-              "line": 31,
+              "offset": 532,
+              "line": 38,
               "col": 3
             }
           },
@@ -460,8 +583,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 484,
-              "line": 32,
+              "offset": 565,
+              "line": 39,
               "col": 3
             }
           }
@@ -474,8 +597,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 371,
-              "line": 26,
+              "offset": 452,
+              "line": 33,
               "col": 9
             }
           },
@@ -486,8 +609,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 384,
-              "line": 27,
+              "offset": 465,
+              "line": 34,
               "col": 10
             }
           },
@@ -498,8 +621,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 399,
-              "line": 28,
+              "offset": 480,
+              "line": 35,
               "col": 12
             }
           },
@@ -510,8 +633,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 421,
-              "line": 29,
+              "offset": 502,
+              "line": 36,
               "col": 15
             }
           },
@@ -522,8 +645,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 444,
-              "line": 30,
+              "offset": 525,
+              "line": 37,
               "col": 13
             }
           },
@@ -538,8 +661,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 471,
-                  "line": 31,
+                  "offset": 552,
+                  "line": 38,
                   "col": 23
                 }
               }
@@ -547,8 +670,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 462,
-              "line": 31,
+              "offset": 543,
+              "line": 38,
               "col": 14
             }
           },
@@ -563,8 +686,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 498,
-                  "line": 32,
+                  "offset": 579,
+                  "line": 39,
                   "col": 17
                 }
               },
@@ -575,8 +698,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 503,
-                  "line": 32,
+                  "offset": 584,
+                  "line": 39,
                   "col": 22
                 }
               }
@@ -584,8 +707,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 494,
-              "line": 32,
+              "offset": 575,
+              "line": 39,
               "col": 13
             }
           }
@@ -593,15 +716,38 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 361,
-          "line": 25,
+          "offset": 442,
+          "line": 32,
           "col": 22
         }
       },
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 340,
-        "line": 25,
+        "offset": 421,
+        "line": 32,
+        "col": 1
+      }
+    },
+    {
+      "alias": "TerminatedEmployee",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "void",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "x-bareorg-example/schema.bare",
+          "offset": 617,
+          "line": 42,
+          "col": 25
+        }
+      },
+      "loc": {
+        "filename": "x-bareorg-example/schema.bare",
+        "offset": 593,
+        "line": 42,
         "col": 1
       }
     },
@@ -625,6 +771,13 @@
             "comment": null,
             "extra": null,
             "loc": null
+          },
+          {
+            "name": null,
+            "val": 2,
+            "comment": null,
+            "extra": null,
+            "loc": null
           }
         ],
         "types": [
@@ -635,9 +788,9 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 532,
-              "line": 35,
-              "col": 21
+              "offset": 642,
+              "line": 44,
+              "col": 20
             }
           },
           {
@@ -647,224 +800,42 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 543,
-              "line": 35,
-              "col": 32
+              "offset": 653,
+              "line": 44,
+              "col": 31
+            }
+          },
+          {
+            "tag": "alias",
+            "data": "TerminatedEmployee",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "x-bareorg-example/schema.bare",
+              "offset": 664,
+              "line": 44,
+              "col": 42
             }
           }
         ],
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 524,
-          "line": 35,
+          "offset": 635,
+          "line": 44,
           "col": 13
         }
       },
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 512,
-        "line": 35,
-        "col": 1
-      }
-    },
-    {
-      "alias": "Address",
-      "internal": false,
-      "comment": null,
-      "type": {
-        "tag": "struct",
-        "data": [
-          {
-            "name": "address",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 579,
-              "line": 38,
-              "col": 3
-            }
-          },
-          {
-            "name": "city",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 603,
-              "line": 39,
-              "col": 3
-            }
-          },
-          {
-            "name": "state",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 615,
-              "line": 40,
-              "col": 3
-            }
-          },
-          {
-            "name": "country",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 628,
-              "line": 41,
-              "col": 3
-            }
-          }
-        ],
-        "types": [
-          {
-            "tag": "list",
-            "data": {
-              "name": null,
-              "val": 4,
-              "comment": null,
-              "extra": null,
-              "loc": {
-                "filename": "x-bareorg-example/schema.bare",
-                "offset": 598,
-                "line": 38,
-                "col": 22
-              }
-            },
-            "types": [
-              {
-                "tag": "str",
-                "data": null,
-                "types": null,
-                "extra": null,
-                "loc": {
-                  "filename": "x-bareorg-example/schema.bare",
-                  "offset": 593,
-                  "line": 38,
-                  "col": 17
-                }
-              }
-            ],
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 588,
-              "line": 38,
-              "col": 12
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 609,
-              "line": 39,
-              "col": 9
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 622,
-              "line": 40,
-              "col": 10
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 637,
-              "line": 41,
-              "col": 12
-            }
-          }
-        ],
-        "extra": null,
-        "loc": {
-          "filename": "x-bareorg-example/schema.bare",
-          "offset": 575,
-          "line": 37,
-          "col": 21
-        }
-      },
-      "loc": {
-        "filename": "x-bareorg-example/schema.bare",
-        "offset": 555,
-        "line": 37,
-        "col": 1
-      }
-    },
-    {
-      "alias": "Message",
-      "internal": false,
-      "comment": null,
-      "type": {
-        "tag": "union",
-        "data": [
-          {
-            "name": null,
-            "val": 0,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 674,
-              "line": 44,
-              "col": 31
-            }
-          }
-        ],
-        "types": [
-          {
-            "tag": "alias",
-            "data": "Person",
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 665,
-              "line": 44,
-              "col": 22
-            }
-          }
-        ],
-        "extra": null,
-        "loc": {
-          "filename": "x-bareorg-example/schema.bare",
-          "offset": 657,
-          "line": 44,
-          "col": 14
-        }
-      },
-      "loc": {
-        "filename": "x-bareorg-example/schema.bare",
-        "offset": 644,
+        "offset": 623,
         "line": 44,
         "col": 1
       }
     }
   ],
   "main": [
-    "Message"
+    "Person"
   ],
   "loc": {
     "filename": "x-bareorg-example/schema.bare",
