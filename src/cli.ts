@@ -65,7 +65,7 @@ program
             "ts",
         ]),
     )
-    .option("--legacy-syntax", "allow legacy BARE syntax")
+    .option("--legacy", "allow legacy BARE syntax and features")
     .option(
         "--main <aliases...>",
         "space-separated list of types used to encode and decode messages",

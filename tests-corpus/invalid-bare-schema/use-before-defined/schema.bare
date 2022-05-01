@@ -1,0 +1,11 @@
+type Person struct {
+    name: str
+    email: str
+    gender: optional<Gender>
+}
+
+type Gender enum {
+    FEMALE
+    FLUID
+    MALE
+}

@@ -1,0 +1,183 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "name",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 25,
+              "line": 2,
+              "col": 5
+            }
+          },
+          {
+            "name": "email",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 39,
+              "line": 3,
+              "col": 5
+            }
+          },
+          {
+            "name": "gender",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 54,
+              "line": 4,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 31,
+              "line": 2,
+              "col": 11
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 46,
+              "line": 3,
+              "col": 12
+            }
+          },
+          {
+            "tag": "optional",
+            "data": null,
+            "types": [
+              {
+                "tag": "alias",
+                "data": "Gender",
+                "types": null,
+                "extra": null,
+                "loc": {
+                  "filename": "use-before-defined/schema.bare",
+                  "offset": 71,
+                  "line": 4,
+                  "col": 22
+                }
+              }
+            ],
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 62,
+              "line": 4,
+              "col": 13
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "use-before-defined/schema.bare",
+          "offset": 19,
+          "line": 1,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "use-before-defined/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Gender",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "enum",
+        "data": [
+          {
+            "name": "FEMALE",
+            "val": 0,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 105,
+              "line": 8,
+              "col": 5
+            }
+          },
+          {
+            "name": "FLUID",
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 116,
+              "line": 9,
+              "col": 5
+            }
+          },
+          {
+            "name": "MALE",
+            "val": 2,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "use-before-defined/schema.bare",
+              "offset": 126,
+              "line": 10,
+              "col": 5
+            }
+          }
+        ],
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "use-before-defined/schema.bare",
+          "offset": 94,
+          "line": 7,
+          "col": 13
+        }
+      },
+      "loc": {
+        "filename": "use-before-defined/schema.bare",
+        "offset": 82,
+        "line": 7,
+        "col": 1
+      }
+    }
+  ],
+  "main": [
+    "Person"
+  ],
+  "loc": {
+    "filename": "use-before-defined/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

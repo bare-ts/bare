@@ -14,7 +14,7 @@ export interface Config {
     readonly generator: "dts" | "js" | "ts"
     readonly importConfig: boolean
     readonly importFactory: boolean
-    readonly legacySyntax: boolean
+    readonly legacy: boolean
     readonly main: readonly string[]
     readonly noMain: boolean
     readonly out: string | number
@@ -41,7 +41,7 @@ export function Config({
     generator,
     importConfig = false,
     importFactory = false,
-    legacySyntax = false,
+    legacy = false,
     main = [],
     noMain = false,
     out = "",
@@ -100,7 +100,7 @@ export function Config({
         generator: inferredGenerator,
         importConfig,
         importFactory,
-        legacySyntax,
+        legacy,
         main,
         noMain,
         out,

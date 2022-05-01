@@ -6,5 +6,5 @@
     "line": 1,
     "col": 15
   },
-  "message": "(struct-legacy/schema.bare:1:15) use 'type Person struct { ... }' or allow 'struct Person { ... }' with option '--legacy-syntax'."
+  "message": "(struct-legacy/schema.bare:1:15) use 'type Person struct { ... }' or allow 'struct Person { ... }' with option '----legacy'."
 }

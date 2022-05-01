@@ -6,5 +6,5 @@
     "line": 1,
     "col": 14
   },
-  "message": "(map-legacy/schema.bare:1:14) use 'map<A><B>' or allow 'map[A]B' with option '--legacy-syntax'."
+  "message": "(map-legacy/schema.bare:1:14) use 'map<A><B>' or allow 'map[A]B' with option '----legacy'."
 }

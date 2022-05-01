@@ -6,5 +6,5 @@
     "line": 1,
     "col": 13
   },
-  "message": "(alias-anonymous-struct-legacy/schema.bare:1:13) use 'struct { ... } or allow '{ ... }' with option '--legacy-syntax'."
+  "message": "(alias-anonymous-struct-legacy/schema.bare:1:13) use 'struct { ... } or allow '{ ... }' with option '----legacy'."
 }

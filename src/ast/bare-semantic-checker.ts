@@ -22,9 +22,13 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
                 aliased.loc,
             )
         }
-        aliases.add(alias)
         checkTypeInvariants(c, type)
-        checkCircularRef(c, type, new Set([alias]))
+        if (c.config.legacy) {
+            checkCircularRef(c, type, new Set([alias]))
+        } else {
+            checkUsedBeforeDefined(c, type, aliases)
+        }
+        aliases.add(alias)
     }
     checkMainCodecs(c, schema)
     return schema
@@ -258,6 +262,23 @@ function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
     if (!c.symbols.has(type.data)) {
         const alias = type.data
         throw new CompilerError(`alias '${alias}' is not defined.`, type.loc)
+    }
+}
+
+function checkUsedBeforeDefined(
+    c: Checker,
+    type: ast.Type,
+    defined: ReadonlySet<string>,
+): void {
+    if (type.tag === "alias" && !defined.has(type.data)) {
+        throw new CompilerError(
+            `Alias '${type.data}' is used before its definition. To allow use-before-definition and recursive types set the option '--legacy'.`,
+            type.loc,
+        )
+    } else if (type.types !== null) {
+        for (const subtype of type.types) {
+            checkUsedBeforeDefined(c, subtype, defined)
+        }
     }
 }
 

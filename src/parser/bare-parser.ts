@@ -52,12 +52,9 @@ function parseAliased(p: Parser): ast.AliasedType {
             p.lex.location(),
         )
     }
-    if (
-        (keyword === "enum" || keyword === "struct") &&
-        !p.config.legacySyntax
-    ) {
+    if ((keyword === "enum" || keyword === "struct") && !p.config.legacy) {
         throw new CompilerError(
-            `use 'type ${alias} ${keyword} { ... }' or allow '${keyword} ${alias} { ... }' with option '--legacy-syntax'.`,
+            `use 'type ${alias} ${keyword} { ... }' or allow '${keyword} ${alias} { ... }' with option '----legacy'.`,
             p.lex.location(),
         )
     }
@@ -79,9 +76,9 @@ function parseType(p: Parser): ast.Type {
         case "(": // union (obsolete syntax)
             return parseLegacyUnion(p)
         case "{": // struct (obsolete syntax)
-            if (!p.config.legacySyntax) {
+            if (!p.config.legacy) {
                 throw new CompilerError(
-                    "use 'struct { ... } or allow '{ ... }' with option '--legacy-syntax'.",
+                    "use 'struct { ... } or allow '{ ... }' with option '----legacy'.",
                     p.lex.location(),
                 )
             }
@@ -123,9 +120,9 @@ function parseTypeName(p: Parser): ast.Type {
     if (UPPER_CAMEL_CASE_PATTERN.test(alias)) {
         return { tag: "alias", data: alias, types: null, extra: null, loc }
     }
-    if (alias === "string" && !p.config.legacySyntax) {
+    if (alias === "string" && !p.config.legacy) {
         throw new CompilerError(
-            "use 'str' or allow 'string' with option '--legacy-syntax'.",
+            "use 'str' or allow 'string' with option '----legacy'.",
             p.lex.location(),
         )
     }
@@ -145,9 +142,9 @@ function parseData(p: Parser): ast.Type {
     const loc = p.lex.location()
     expect(p, "data")
     if (p.lex.token() === "<") {
-        if (!p.config.legacySyntax) {
+        if (!p.config.legacy) {
             throw new CompilerError(
-                "use 'data[n]' or allow 'data<n>' with option '--legacy-syntax'.",
+                "use 'data[n]' or allow 'data<n>' with option '----legacy'.",
                 p.lex.location(),
             )
         }
@@ -182,9 +179,9 @@ function parseList(p: Parser): ast.Type {
 }
 
 function parseLegacyList(p: Parser): ast.Type {
-    if (!p.config.legacySyntax) {
+    if (!p.config.legacy) {
         throw new CompilerError(
-            "use 'list<A>[n]' or allow '[n]A' with option '--legacy-syntax'.",
+            "use 'list<A>[n]' or allow '[n]A' with option '----legacy'.",
             p.lex.location(),
         )
     }
@@ -231,9 +228,9 @@ function parseMap(p: Parser): ast.Type {
     let keyType: ast.Type
     let valType: ast.Type
     if (p.lex.token() === "[") {
-        if (!p.config.legacySyntax) {
+        if (!p.config.legacy) {
             throw new CompilerError(
-                "use 'map<A><B>' or allow 'map[A]B' with option '--legacy-syntax'.",
+                "use 'map<A><B>' or allow 'map[A]B' with option '----legacy'.",
                 p.lex.location(),
             )
         }
@@ -264,9 +261,9 @@ function parseUnion(p: Parser): ast.Type {
 }
 
 function parseLegacyUnion(p: Parser): ast.Type {
-    if (!p.config.legacySyntax) {
+    if (!p.config.legacy) {
         throw new CompilerError(
-            "use 'union { A | B } or allow '( A | B )' with option '--legacy-syntax'.",
+            "use 'union { A | B } or allow '( A | B )' with option '----legacy'.",
             p.lex.location(),
         )
     }

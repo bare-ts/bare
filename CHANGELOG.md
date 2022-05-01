@@ -4,6 +4,23 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   Forbid use-before-definition
+
+    In the last BARE draft, use-before-definition are disallowed.
+    As a consequence, recursive types are also disallowed.
+
+    The following schema is now rejected:
+
+    ```bare
+    type Y X
+    type X u8
+    ```
+
+    This schema and recursive types are still allowed under the
+    option `--legacy`.
+
+-   Rename `--legacy-syntax` to `--legacy`
+
 -   Annotate your schema with doc-comments
 
     @bare-ts/tool is now able to recognize a doc-comment and to document
