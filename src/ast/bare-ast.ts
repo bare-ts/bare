@@ -264,6 +264,10 @@ export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY = {
     "u64": "BigUint64Array",
 } as const
 
+export function maxVal(data: readonly (EnumVal | UnionTag)[]): number {
+    return data.reduce((max, v) => Math.max(max, v.val), 0)
+}
+
 export type SymbolTable = ReadonlyMap<string, AliasedType>
 
 export function symbols(schema: Ast): SymbolTable {

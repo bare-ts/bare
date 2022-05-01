@@ -59,6 +59,16 @@ This project adheres to [Semantic Versioning][semver].
     Note that this syntax is not part of the BARE specification.
     Thus, this is not portable between distinct implementations.
 
+-   Add BARE code generator
+
+    @bare-ts/tools is now able to output BARE schemas.
+
+    This gives a basic way to format a schema.
+    Note that comments (except doc comments) are stripped out.
+
+        bare-ts compile schema.bare -o schema.bare
+        bare-ts compile schema.bare --generator 'bare'
+
 ## 0.8.0 (2022-04-29)
 
 -   Require @bare-ts/lib v0.3.x

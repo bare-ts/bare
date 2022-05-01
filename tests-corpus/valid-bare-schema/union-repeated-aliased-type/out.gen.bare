@@ -1,0 +1,6 @@
+type Y u8
+
+type X union {
+    | u8 = 0
+    | Y = 1
+}

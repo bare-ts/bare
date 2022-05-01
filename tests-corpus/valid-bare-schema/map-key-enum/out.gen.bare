@@ -1,0 +1,7 @@
+type Gender enum {
+    FLUID = 0
+    MALE = 1
+    FEMALE = 2
+}
+
+type GenderNames map<Gender><str>

@@ -60,6 +60,7 @@ program
     )
     .addOption(
         new Option("--generator <generator>", "output generator").choices([
+            "bare",
             "dts",
             "js",
             "ts",

@@ -1,0 +1,5 @@
+type Gender enum {
+    FLUID = 0
+    MALE = 1
+    FEMALE = 2
+}

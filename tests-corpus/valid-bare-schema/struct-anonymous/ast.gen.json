@@ -13,7 +13,7 @@
             "comment": null,
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 25,
               "line": 2,
               "col": 5
@@ -25,7 +25,7 @@
             "comment": null,
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 39,
               "line": 3,
               "col": 5
@@ -37,7 +37,7 @@
             "comment": null,
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 51,
               "line": 4,
               "col": 5
@@ -51,7 +51,7 @@
             "types": null,
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 31,
               "line": 2,
               "col": 11
@@ -63,7 +63,7 @@
             "types": null,
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 44,
               "line": 3,
               "col": 10
@@ -78,7 +78,7 @@
                 "comment": null,
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 77,
                   "line": 5,
                   "col": 9
@@ -90,7 +90,7 @@
                 "comment": null,
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 98,
                   "line": 6,
                   "col": 9
@@ -102,7 +102,7 @@
                 "comment": null,
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 175,
                   "line": 10,
                   "col": 9
@@ -116,7 +116,7 @@
                 "types": null,
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 86,
                   "line": 5,
                   "col": 18
@@ -131,7 +131,7 @@
                     "comment": null,
                     "extra": null,
                     "loc": {
-                      "filename": "struct anonymous/schema.bare",
+                      "filename": "struct-anonymous/schema.bare",
                       "offset": 125,
                       "line": 7,
                       "col": 13
@@ -143,7 +143,7 @@
                     "comment": null,
                     "extra": null,
                     "loc": {
-                      "filename": "struct anonymous/schema.bare",
+                      "filename": "struct-anonymous/schema.bare",
                       "offset": 147,
                       "line": 8,
                       "col": 13
@@ -157,7 +157,7 @@
                     "types": null,
                     "extra": null,
                     "loc": {
-                      "filename": "struct anonymous/schema.bare",
+                      "filename": "struct-anonymous/schema.bare",
                       "offset": 131,
                       "line": 7,
                       "col": 19
@@ -169,7 +169,7 @@
                     "types": null,
                     "extra": null,
                     "loc": {
-                      "filename": "struct anonymous/schema.bare",
+                      "filename": "struct-anonymous/schema.bare",
                       "offset": 153,
                       "line": 8,
                       "col": 19
@@ -178,7 +178,7 @@
                 ],
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 111,
                   "line": 6,
                   "col": 22
@@ -190,7 +190,7 @@
                 "types": null,
                 "extra": null,
                 "loc": {
-                  "filename": "struct anonymous/schema.bare",
+                  "filename": "struct-anonymous/schema.bare",
                   "offset": 183,
                   "line": 10,
                   "col": 17
@@ -199,7 +199,7 @@
             ],
             "extra": null,
             "loc": {
-              "filename": "struct anonymous/schema.bare",
+              "filename": "struct-anonymous/schema.bare",
               "offset": 67,
               "line": 4,
               "col": 21
@@ -208,14 +208,14 @@
         ],
         "extra": null,
         "loc": {
-          "filename": "struct anonymous/schema.bare",
+          "filename": "struct-anonymous/schema.bare",
           "offset": 19,
           "line": 1,
           "col": 20
         }
       },
       "loc": {
-        "filename": "struct anonymous/schema.bare",
+        "filename": "struct-anonymous/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -224,7 +224,7 @@
   ],
   "main": [],
   "loc": {
-    "filename": "struct anonymous/schema.bare",
+    "filename": "struct-anonymous/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

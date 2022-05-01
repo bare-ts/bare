@@ -1,0 +1,23 @@
+type Gender enum {
+    FEMALE = 0
+    FLUID = 1
+    MALE = 2
+}
+
+type Person struct {
+    name: str
+    email: str
+    gender: optional<Gender>
+}
+
+type Organization struct {
+    name: str
+    email: str
+}
+
+type Contact union {
+    | Person = 0
+    | Organization = 1
+}
+
+type Contacts list<Contact>

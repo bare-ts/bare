@@ -1,0 +1,9 @@
+type Person struct {
+    bestFriend: optional<Person>
+    secondBestFriend: union {
+        | Person = 0
+        | void = 1
+    }
+    friends: list<Person>
+    friendNicknames: map<str><Person>
+}

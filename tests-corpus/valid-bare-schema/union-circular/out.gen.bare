@@ -1,0 +1,8 @@
+type Alias union {
+    | Alias1 = 0
+    | Alias2 = 1
+}
+
+type Alias1 Alias
+
+type Alias2 u8

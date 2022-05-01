@@ -1,0 +1,47 @@
+type PublicKey data[128]
+
+type Time str
+
+type Department enum {
+    ACCOUNTING = 0
+    ADMINISTRATION = 1
+    CUSTOMER_SERVICE = 2
+    DEVELOPMENT = 3
+    JSMITH = 99
+}
+
+type Address struct {
+    address: str
+    city: str
+    state: str
+    country: str
+}
+
+type Customer struct {
+    name: str
+    email: str
+    address: Address
+    orders: list<struct {
+        orderId: i64
+        quantity: i32
+    }>
+    metadata: map<str><data>
+}
+
+type Employee struct {
+    name: str
+    email: str
+    address: Address
+    department: Department
+    hireDate: Time
+    publicKey: optional<PublicKey>
+    metadata: map<str><data>
+}
+
+type TerminatedEmployee void
+
+type Person union {
+    | Customer = 0
+    | Employee = 1
+    | TerminatedEmployee = 2
+}

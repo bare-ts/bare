@@ -4,6 +4,13 @@
 import * as ast from "../ast/bare-ast.js"
 import { CompilerError } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
+import {
+    capitalize,
+    indent,
+    jsDoc,
+    jsRpr,
+    unindent,
+} from "../utils/formatting.js"
 import * as utils from "./bare-ast-utils.js"
 
 export function generate(schema: ast.Ast, config: Config): string {
@@ -102,7 +109,7 @@ interface Gen {
 
 function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
     const { alias, comment, type } = aliased
-    const doc = genDocComment(comment)
+    const doc = jsDoc(comment)
     switch (type.tag) {
         case "enum":
             return doc + "export " + genAliasedEnumType(g, alias, type)
@@ -206,7 +213,7 @@ function genListRawType(g: Gen, type: ast.ListType): string {
 
 function genEnumType(_g: Gen, type: ast.EnumType): string {
     return type.data
-        .map(({ name, val }) => (type.extra?.intEnum ? `${val}` : rpr(name)))
+        .map(({ name, val }) => (type.extra?.intEnum ? `${val}` : jsRpr(name)))
         .join(" | ")
 }
 
@@ -214,7 +221,7 @@ function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
     let body = ""
     for (const { name, val, comment } of type.data) {
         const enumJsVal = type.extra?.intEnum ? `${val}` : `"${name}"`
-        const doc = genDocComment(comment)
+        const doc = jsDoc(comment)
         body += `${doc}${name} = ${enumJsVal},\n`
     }
     body = body.slice(0, -1) // remove last newline
@@ -231,7 +238,7 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
         const noneType = simplified.extra?.lax
             ? "null | undefined"
             : simplified.extra !== null
-            ? rpr(ast.literalVal(simplified.extra.literal))
+            ? jsRpr(ast.literalVal(simplified.extra.literal))
             : "null"
         return `${typedef} | ${noneType}`
     } else {
@@ -262,7 +269,7 @@ function genStructTypeBody(g: Gen, type: ast.StructType): string {
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const field = type.data[i]
-        const doc = genDocComment(field.comment)
+        const doc = jsDoc(field.comment)
         const modifier = field.extra?.mut ? "" : "readonly "
         const prop = field.extra?.quoted ? `"${field.name}"` : field.name
         result += `${doc}${modifier}${prop}: ${genType(g, type.types[i])}\n`
@@ -296,7 +303,7 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
-        const doc = genDocComment(type.data[i].comment)
+        const doc = jsDoc(type.data[i].comment)
         const valType = genType(g, type.types[i])
         const tagVal = type.data[i].val
         result += type.extra?.flat
@@ -310,7 +317,7 @@ function genVoidType(_g: Gen, type: ast.VoidType): string {
     return type.extra?.lax
         ? "undefined | null"
         : type.extra !== null && type.extra.literal
-        ? rpr(ast.literalVal(type.extra.literal))
+        ? jsRpr(ast.literalVal(type.extra.literal))
         : "null"
 }
 
@@ -507,7 +514,7 @@ function genDataReader(_g: Gen, type: ast.DataType): string {
 
 function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
     let body: string
-    const maxTag = max(type.data.map((v) => v.val))
+    const maxTag = ast.maxVal(type.data)
     const tagReader = maxTag < 128 ? "readU8" : "readUintSafe"
     const intEnum = type.extra?.intEnum
     if (intEnum && maxTag === type.data.length - 1) {
@@ -567,7 +574,7 @@ function genMapReader(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalReader(g: Gen, type: ast.OptionalType): string {
-    const noneVal = rpr(
+    const noneVal = jsRpr(
         type.extra !== null ? ast.literalVal(type.extra.literal) : null,
     )
     return unindent(`(bare.readBool(bc)
@@ -641,8 +648,7 @@ function genTypedArrayReader(_g: Gen, type: ast.ListType): string {
 }
 
 function genUnionReader(g: Gen, type: ast.UnionType): string {
-    const tagReader =
-        max(type.data.map((v) => v.val)) < 128 ? "readU8" : "readUintSafe"
+    const tagReader = ast.maxVal(type.data) < 128 ? "readU8" : "readUintSafe"
     const flat = type.extra?.flat
     let switchBody = ""
     const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
@@ -673,7 +679,7 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
 }
 
 function genVoidReader(_g: Gen, type: ast.VoidType): string {
-    const val = rpr(
+    const val = jsRpr(
         type.extra !== null ? ast.literalVal(type.extra.literal) : null,
     )
     return `(${val})`
@@ -778,8 +784,8 @@ function genEnumWriter(_g: Gen, type: ast.EnumType, alias: string): string {
     let body: string
     const intEnum = type.extra?.intEnum
     if (intEnum) {
-        const maxTag = max(type.data.map((v) => v.val))
-        const tagWriter = maxTag < 128 ? "writeU8" : "writeUintSafe"
+        const tagWriter =
+            ast.maxVal(type.data) < 128 ? "writeU8" : "writeUintSafe"
         body = `bare.${tagWriter}(bc, $x)`
     } else {
         let switchBody = ""
@@ -814,7 +820,7 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
-    const val = rpr(
+    const val = jsRpr(
         type.extra !== null ? ast.literalVal(type.extra.literal) : null,
     )
     const presenceCmp = type.extra?.lax ? "!= null" : `!== ${val}`
@@ -906,7 +912,7 @@ function genAliasFlatUnionWriter(
             const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
             const valWriting = genWriting(g, union.types[i], "$x")
             switchBody += `
-            case ${rpr(discriminators[i])}:
+            case ${jsRpr(discriminators[i])}:
                 bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
                 break`
@@ -955,8 +961,7 @@ function genBaseFlatUnionWriter(
 }
 
 function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
-    const tagWriter =
-        max(type.data.map((v) => v.val)) < 128 ? "writeU8" : "writeUintSafe"
+    const tagWriter = ast.maxVal(type.data) < 128 ? "writeU8" : "writeUintSafe"
     const tagPropAccess = g.config.useQuotedProperty ? '["tag"]' : ".tag"
     const valProp = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
@@ -1003,38 +1008,4 @@ function genEncoder(g: Gen, alias: string): string {
         write${alias}(bc, x)
         return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
     }`)
-}
-
-// utils
-
-function genDocComment(content: string | null): string {
-    if (content === null) {
-        return ""
-    }
-    const docBody = content.trimEnd().split("\n").join("\n *")
-    return `/**\n *${docBody}\n */\n`
-}
-
-function capitalize(s: string): string {
-    return s.replace(/^\w/, (c) => c.toUpperCase())
-}
-
-function indent(s: string, n = 1): string {
-    return s.replace(/\n/g, "\n" + "    ".repeat(n))
-}
-
-function unindent(s: string, n = 1): string {
-    return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
-}
-
-function rpr(v: ast.LiteralVal): string {
-    return typeof v === "string"
-        ? `"${v}"`
-        : typeof v === "bigint"
-        ? `${v}n`
-        : `${v}`
-}
-
-function max(vals: readonly number[]): number {
-    return Math.max(...vals)
 }

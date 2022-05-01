@@ -1,0 +1,5 @@
+type Composite union {
+    | map<str><optional<str>> = 0
+    | list<optional<str>>[4] = 1
+    | list<u8>[4] = 2
+}

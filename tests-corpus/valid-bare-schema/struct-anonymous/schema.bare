@@ -1,0 +1,12 @@
+type Person struct {
+    name: str
+    age: u8
+    address: struct {
+        country: str
+        city: struct {
+            name: str
+            code: u16
+        }
+        street: str
+    }
+}

@@ -85,6 +85,7 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
         const tsPath = resolve(dir, "out.gen.ts")
         const dtsPath = resolve(dir, "out.gen.d.ts")
         const jsPath = resolve(dir, "out.gen.js")
+        const barePath = resolve(dir, "out.gen.bare")
 
         const schema = fs.readFileSync(schemaPath).toString()
         const config = fs.existsSync(configPath)
@@ -94,6 +95,7 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
         const tsExpected = fs.readFileSync(tsPath).toString()
         const dtsExpected = fs.readFileSync(dtsPath).toString()
         const jsExpected = fs.readFileSync(jsPath).toString()
+        const bareExpected = fs.readFileSync(barePath).toString()
         const completedConfig = Config({
             ...config,
             generator: "ts",
@@ -119,10 +121,16 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
             generator: "js",
             schema: schemaRelPath,
         })
+        const bareComputed = transform(schema, {
+            ...config,
+            generator: "bare",
+            schema: schemaRelPath,
+        })
 
         t.deepEqual(astComputed, astExpected)
         t.deepEqual(tsComputed, tsExpected)
         t.deepEqual(dtsComputed, dtsExpected)
         t.deepEqual(jsComputed, jsExpected)
+        t.deepEqual(bareComputed, bareExpected)
     })
 }

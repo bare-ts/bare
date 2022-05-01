@@ -19,6 +19,7 @@ for (let category of fs.readdirSync(CORPUS_DIR)) {
         const tsPath = path.resolve(dir, "out.gen.ts")
         const jsPath = path.resolve(dir, "out.gen.js")
         const dtsPath = path.resolve(dir, "out.gen.d.ts")
+        const barePath = path.resolve(dir, "out.gen.bare")
         for (const f of [errorPath, astPath, tsPath, dtsPath, jsPath]) {
             if (fs.existsSync(f)) {
                 fs.unlinkSync(f) // clean-up
@@ -45,6 +46,8 @@ for (let category of fs.readdirSync(CORPUS_DIR)) {
             fs.writeFileSync(jsPath, out)
             out = transform(content, { ...config, schema, generator: "dts" })
             fs.writeFileSync(dtsPath, out)
+            out = transform(content, { ...config, schema, generator: "bare" })
+            fs.writeFileSync(barePath, out)
         } catch (e) {
             if (e instanceof Error) {
                 // Error#message is not enumerable => is not serializable

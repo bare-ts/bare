@@ -1,0 +1,6 @@
+type TypeOfUnion union {
+    | bool = 0
+    | u32 = 1
+    | str = 2
+    | void = 3
+}

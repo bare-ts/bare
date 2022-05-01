@@ -1,0 +1,7 @@
+type LeadingPipe union {
+    | u8 = 0
+}
+
+type TrailingPipe union {
+    | u8 = 0
+}

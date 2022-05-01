@@ -5,6 +5,7 @@ import { configure } from "./ast/bare-configure.js"
 import { normalize } from "./ast/bare-normalization.js"
 import { checkSemantic } from "./ast/bare-semantic-checker.js"
 import { Config } from "./core/config.js"
+import { generateBare } from "./generator/bare-generator.js"
 import { generate } from "./generator/js-generator.js"
 import { parse } from "./parser/bare-parser.js"
 
@@ -30,6 +31,9 @@ export function transform(content: string, conf: Partial<Config> = {}): string {
     const schema = parse(content, completedConfig)
     const configured = configure(schema, completedConfig)
     checkSemantic(configured, completedConfig)
+    if (completedConfig.generator === "bare") {
+        return generateBare(schema)
+    }
     const normalizedSchema = normalize(configured)
     return generate(normalizedSchema, completedConfig)
 }

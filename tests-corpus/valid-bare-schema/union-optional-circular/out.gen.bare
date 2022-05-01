@@ -1,0 +1,4 @@
+type Alias union {
+    | optional<Alias> = 0
+    | str = 1
+}

@@ -11,7 +11,7 @@ export class ConfigError extends Error {
 }
 
 export interface Config {
-    readonly generator: "dts" | "js" | "ts"
+    readonly generator: "bare" | "dts" | "js" | "ts"
     readonly importConfig: boolean
     readonly importFactory: boolean
     readonly legacy: boolean
@@ -67,7 +67,9 @@ export function Config({
         )
     }
     const inferredGenerator =
-        typeof out === "string" && out.endsWith(".d.ts")
+        typeof out === "string" && out.endsWith(".bare")
+            ? "bare"
+            : typeof out === "string" && out.endsWith(".d.ts")
             ? "dts"
             : typeof out === "string" && out.endsWith(".ts")
             ? "ts"
