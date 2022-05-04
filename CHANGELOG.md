@@ -96,6 +96,8 @@ This project adheres to [Semantic Versioning][semver].
 
     This is not part of the BARE specification.
 
+-   Do not emit read/write for types resolving to void
+
 ## 0.8.0 (2022-04-29)
 
 -   Require @bare-ts/lib v0.3.x

@@ -125,14 +125,6 @@ export function writeEmployee(bc, x) {
     write1(bc, x.metadata)
 }
 
-export function readTerminatedEmployee(bc) {
-    return null
-}
-
-export function writeTerminatedEmployee(bc, x) {
-    // do nothing
-}
-
 export function readPerson(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
@@ -142,7 +134,7 @@ export function readPerson(bc) {
         case 1:
             return { tag, val: readEmployee(bc) }
         case 2:
-            return { tag, val: readTerminatedEmployee(bc) }
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -158,9 +150,6 @@ export function writePerson(bc, x) {
             break
         case 1:
             writeEmployee(bc, x.val)
-            break
-        case 2:
-            writeTerminatedEmployee(bc, x.val)
             break
     }
 }

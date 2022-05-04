@@ -2,14 +2,6 @@ import * as bare from "@bare-ts/lib"
 
 const config = /* @__PURE__ */ bare.Config({})
 
-export function readVoid(bc) {
-    return null
-}
-
-export function writeVoid(bc, x) {
-    // do nothing
-}
-
 export function readUnsignedInt(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
@@ -23,7 +15,7 @@ export function readUnsignedInt(bc) {
         case 3:
             return { tag, val: bare.readU64(bc) }
         case 4:
-            return { tag, val: readVoid(bc) }
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -45,9 +37,6 @@ export function writeUnsignedInt(bc, x) {
             break
         case 3:
             bare.writeU64(bc, x.val)
-            break
-        case 4:
-            writeVoid(bc, x.val)
             break
     }
 }

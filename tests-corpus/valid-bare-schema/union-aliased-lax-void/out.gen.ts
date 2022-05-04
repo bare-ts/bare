@@ -9,14 +9,6 @@ export type u64 = bigint
 
 export type Void = undefined | null
 
-export function readVoid(bc: bare.ByteCursor): Void {
-    return null
-}
-
-export function writeVoid(bc: bare.ByteCursor, x: Void): void {
-    // do nothing
-}
-
 export type UnsignedInt =
     | { readonly tag: 0; readonly val: u8 }
     | { readonly tag: 1; readonly val: u16 }
@@ -37,7 +29,7 @@ export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
         case 3:
             return { tag, val: bare.readU64(bc) }
         case 4:
-            return { tag, val: readVoid(bc) }
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -59,9 +51,6 @@ export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
             break
         case 3:
             bare.writeU64(bc, x.val)
-            break
-        case 4:
-            writeVoid(bc, x.val)
             break
     }
 }

@@ -18,19 +18,24 @@ export function generate(schema: ast.Ast, config: Config): string {
     let body = ""
     const rootAliases = ast.rootAliases(schema.defs)
     for (const aliased of schema.defs) {
+        const isVoid = ast.resolveAlias(aliased.type, g.symbols).tag === "void"
         switch (g.config.generator) {
             case "dts":
                 if (!aliased.internal) {
                     body += `${genAliasedType(g, aliased)}\n\n`
-                    body += `${genAliasedReaderHead(g, aliased)}\n\n`
-                    body += `${genAliasedWriterHead(g, aliased)}\n\n`
+                    if (!isVoid) {
+                        body += `${genAliasedReaderHead(g, aliased)}\n\n`
+                        body += `${genAliasedWriterHead(g, aliased)}\n\n`
+                    }
                 }
                 break
             case "js": {
                 const code = genCode(g, aliased)
                 body += code !== "" ? code + "\n\n" : ""
-                body += `${genAliasedReader(g, aliased)}\n\n`
-                body += `${genAliasedWriter(g, aliased)}\n\n`
+                if (!isVoid) {
+                    body += `${genAliasedReader(g, aliased)}\n\n`
+                    body += `${genAliasedWriter(g, aliased)}\n\n`
+                }
                 break
             }
             case "ts": {
@@ -40,8 +45,10 @@ export function generate(schema: ast.Ast, config: Config): string {
                 }
                 const code = genCode(g, aliased)
                 body += code !== "" ? code + "\n\n" : ""
-                body += `${genAliasedReader(g, aliased)}\n\n`
-                body += `${genAliasedWriter(g, aliased)}\n\n`
+                if (!isVoid) {
+                    body += `${genAliasedReader(g, aliased)}\n\n`
+                    body += `${genAliasedWriter(g, aliased)}\n\n`
+                }
                 break
             }
         }
@@ -655,7 +662,11 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
     const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     for (let i = 0; i < type.types.length; i++) {
-        const valExpr = genReading(g, type.types[i])
+        const resolvedType = ast.resolveAlias(type.types[i], g.symbols)
+        const valExpr =
+            resolvedType.tag === "void"
+                ? genReading(g, resolvedType)
+                : genReading(g, type.types[i])
         if (flat) {
             switchBody += `
             case ${type.data[i].val}:
@@ -967,7 +978,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
     const valProp = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
     for (let i = 0; i < type.types.length; i++) {
-        if (type.types[i].tag !== "void") {
+        if (ast.resolveAlias(type.types[i], g.symbols).tag !== "void") {
             const valWriting = genWriting(g, type.types[i], `$x${valProp}`)
             switchBody += `
             case ${type.data[i].val}:

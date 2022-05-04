@@ -157,14 +157,6 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
 
 export type TerminatedEmployee = null
 
-export function readTerminatedEmployee(bc: bare.ByteCursor): TerminatedEmployee {
-    return null
-}
-
-export function writeTerminatedEmployee(bc: bare.ByteCursor, x: TerminatedEmployee): void {
-    // do nothing
-}
-
 export type Person =
     | { readonly tag: 0; readonly val: Customer }
     | { readonly tag: 1; readonly val: Employee }
@@ -179,7 +171,7 @@ export function readPerson(bc: bare.ByteCursor): Person {
         case 1:
             return { tag, val: readEmployee(bc) }
         case 2:
-            return { tag, val: readTerminatedEmployee(bc) }
+            return { tag, val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -195,9 +187,6 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
             break
         case 1:
             writeEmployee(bc, x.val)
-            break
-        case 2:
-            writeTerminatedEmployee(bc, x.val)
             break
     }
 }
