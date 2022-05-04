@@ -10,14 +10,14 @@
         "types": null,
         "extra": null,
         "loc": {
-          "filename": "main-void/schema.bare",
+          "filename": "root-resolved-void/schema.bare",
           "offset": 17,
           "line": 1,
           "col": 18
         }
       },
       "loc": {
-        "filename": "main-void/schema.bare",
+        "filename": "root-resolved-void/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
@@ -33,25 +33,22 @@
         "types": null,
         "extra": null,
         "loc": {
-          "filename": "main-void/schema.bare",
+          "filename": "root-resolved-void/schema.bare",
           "offset": 32,
           "line": 2,
           "col": 11
         }
       },
       "loc": {
-        "filename": "main-void/schema.bare",
+        "filename": "root-resolved-void/schema.bare",
         "offset": 22,
         "line": 2,
         "col": 1
       }
     }
   ],
-  "main": [
-    "Main"
-  ],
   "loc": {
-    "filename": "main-void/schema.bare",
+    "filename": "root-resolved-void/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

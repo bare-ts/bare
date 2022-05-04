@@ -16,6 +16,7 @@ import * as utils from "./bare-ast-utils.js"
 export function generate(schema: ast.Ast, config: Config): string {
     const g: Gen = { config, symbols: ast.symbols(schema) }
     let body = ""
+    const rootAliases = ast.rootAliases(schema.defs)
     for (const aliased of schema.defs) {
         switch (g.config.generator) {
             case "dts":
@@ -44,7 +45,7 @@ export function generate(schema: ast.Ast, config: Config): string {
                 break
             }
         }
-        if (schema.main.indexOf(aliased.alias) !== -1) {
+        if (rootAliases.indexOf(aliased.alias) !== -1) {
             switch (g.config.generator) {
                 case "dts":
                     body += `export ${genEncoderHead(g, aliased.alias)}\n\n`
@@ -66,7 +67,7 @@ export function generate(schema: ast.Ast, config: Config): string {
         head += // Are values imported?
             g.config.generator !== "ts" ||
             /bare\.[a-z]/.test(body) ||
-            g.config.main.length !== 0 // encoder/decoder import values
+            rootAliases.length !== 0 // encoder/decoder import values
                 ? 'import * as bare from "@bare-ts/lib"\n'
                 : 'import type * as bare from "@bare-ts/lib"\n'
     }
@@ -74,7 +75,7 @@ export function generate(schema: ast.Ast, config: Config): string {
         head += 'import * as ext from "./ext.js"\n'
     }
     if (
-        schema.main.length !== 0 &&
+        rootAliases.length !== 0 &&
         !g.config.importConfig &&
         g.config.generator !== "dts"
     ) {

@@ -47,7 +47,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "duplicated-alias/schema.bare",
     "offset": 0,

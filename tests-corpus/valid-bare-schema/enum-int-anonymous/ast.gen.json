@@ -113,7 +113,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-int-anonymous/schema.bare",
     "offset": 0,

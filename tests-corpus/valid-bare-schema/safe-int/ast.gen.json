@@ -51,7 +51,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "safe-int/schema.bare",
     "offset": 0,

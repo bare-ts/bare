@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export type KeyType = string
 
 export function readKeyType(bc: bare.ByteCursor): KeyType {
@@ -33,4 +35,22 @@ export function writeDict(bc: bare.ByteCursor, x: Dict): void {
         writeKeyType(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
+}
+
+export function encodeDict(x: Dict): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeDict(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeDict(bytes: Uint8Array): Dict {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readDict(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

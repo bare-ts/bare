@@ -43,7 +43,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "safe-int-list/schema.bare",
     "offset": 0,

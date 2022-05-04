@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export function readVoid(bc) {
     return null
 }
@@ -48,4 +50,22 @@ export function writeUnsignedInt(bc, x) {
             writeVoid(bc, x.val)
             break
     }
+}
+
+export function encodeUnsignedInt(x) {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeUnsignedInt(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeUnsignedInt(bytes) {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readUnsignedInt(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

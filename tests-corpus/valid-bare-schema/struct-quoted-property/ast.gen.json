@@ -80,7 +80,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-quoted-property/schema.bare",
     "offset": 0,

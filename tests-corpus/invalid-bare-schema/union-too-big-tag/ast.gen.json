@@ -122,7 +122,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-too-big-tag/schema.bare",
     "offset": 42,

@@ -18,3 +18,7 @@ export declare class Operation {
 export function readOperation(bc: bare.ByteCursor): Operation
 
 export function writeOperation(bc: bare.ByteCursor, x: Operation): void
+
+export function encodeOperation(x: Operation): Uint8Array
+
+export function decodeOperation(bytes: Uint8Array): Operation

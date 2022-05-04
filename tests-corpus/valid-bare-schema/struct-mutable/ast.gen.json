@@ -80,7 +80,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-mutable/schema.bare",
     "offset": 0,

@@ -87,7 +87,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-repeated-aliased-type/schema.bare",
     "offset": 0,

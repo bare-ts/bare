@@ -49,7 +49,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "map-circular-ref/schema.bare",
     "offset": 0,

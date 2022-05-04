@@ -45,7 +45,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-singleton/schema.bare",
     "offset": 0,

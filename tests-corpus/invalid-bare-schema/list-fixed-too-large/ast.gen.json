@@ -52,7 +52,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "list-fixed-too-large/schema.bare",
     "offset": 0,

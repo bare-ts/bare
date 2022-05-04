@@ -61,7 +61,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-unsorted-implicit/schema.bare",
     "offset": 0,

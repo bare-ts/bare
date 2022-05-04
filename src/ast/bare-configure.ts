@@ -13,12 +13,8 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
             defs[i] = { alias, internal, type, comment, loc }
         }
     }
-    const main =
-        config.noMain || config.main.length > 0
-            ? config.main
-            : ast.rootAliases(defs)
-    if (schema.defs.some((def, i) => def !== defs[i]) || schema.main !== main) {
-        return { defs, main, loc: schema.loc }
+    if (schema.defs.some((def, i) => def !== defs[i])) {
+        return { defs, loc: schema.loc }
     }
     return schema
 }

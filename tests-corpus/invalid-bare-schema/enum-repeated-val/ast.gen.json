@@ -73,7 +73,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-repeated-val/schema.bare",
     "offset": 0,

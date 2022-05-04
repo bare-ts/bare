@@ -1,34 +1,31 @@
 {
   "defs": [
     {
-      "alias": "Other",
+      "alias": "Main",
       "internal": false,
       "comment": null,
       "type": {
-        "tag": "str",
+        "tag": "void",
         "data": null,
         "types": null,
         "extra": null,
         "loc": {
-          "filename": "missing-main-codec/schema.bare",
-          "offset": 11,
+          "filename": "root-void/schema.bare",
+          "offset": 10,
           "line": 1,
-          "col": 12
+          "col": 11
         }
       },
       "loc": {
-        "filename": "missing-main-codec/schema.bare",
+        "filename": "root-void/schema.bare",
         "offset": 0,
         "line": 1,
         "col": 1
       }
     }
   ],
-  "main": [
-    "Main"
-  ],
   "loc": {
-    "filename": "missing-main-codec/schema.bare",
+    "filename": "root-void/schema.bare",
     "offset": 0,
     "line": 1,
     "col": 1

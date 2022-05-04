@@ -122,7 +122,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-repeated-tag/schema.bare",
     "offset": 0,

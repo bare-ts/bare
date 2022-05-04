@@ -52,7 +52,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "typed-array-fixed/schema.bare",
     "offset": 0,

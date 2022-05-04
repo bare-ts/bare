@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export type u8 = number
 export type u16 = number
 export type u32 = number
@@ -53,4 +55,22 @@ export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
             bare.writeUint(bc, x["val"])
             break
     }
+}
+
+export function encodeUnsignedInt(x: UnsignedInt): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeUnsignedInt(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeUnsignedInt(bytes: Uint8Array): UnsignedInt {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readUnsignedInt(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

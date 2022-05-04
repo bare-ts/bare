@@ -150,7 +150,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-aliased-lax-void/schema.bare",
     "offset": 0,

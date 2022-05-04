@@ -77,7 +77,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "optional-union-circular/schema.bare",
     "offset": 0,

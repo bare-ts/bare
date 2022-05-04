@@ -61,7 +61,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-too-big-val/schema.bare",
     "offset": 0,

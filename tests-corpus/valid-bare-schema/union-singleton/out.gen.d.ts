@@ -8,3 +8,7 @@ export type U8 =
 export function readU8(bc: bare.ByteCursor): U8
 
 export function writeU8(bc: bare.ByteCursor, x: U8): void
+
+export function encodeU8(x: U8): Uint8Array
+
+export function decodeU8(bytes: Uint8Array): U8

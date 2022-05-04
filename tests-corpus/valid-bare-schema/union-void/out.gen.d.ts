@@ -15,3 +15,7 @@ export type UnsignedInt =
 export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt
 
 export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void
+
+export function encodeUnsignedInt(x: UnsignedInt): Uint8Array
+
+export function decodeUnsignedInt(bytes: Uint8Array): UnsignedInt

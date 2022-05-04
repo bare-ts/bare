@@ -43,7 +43,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "optional-undefined/schema.bare",
     "offset": 0,

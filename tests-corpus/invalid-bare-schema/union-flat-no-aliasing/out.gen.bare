@@ -1,0 +1,8 @@
+type UnsignedInt union {
+    | struct {
+        value: str
+    } = 0
+    | struct {
+        value: u32
+    } = 1
+}

@@ -146,7 +146,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-keyword-names/schema.bare",
     "offset": 0,

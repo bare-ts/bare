@@ -834,9 +834,6 @@
       }
     }
   ],
-  "main": [
-    "Person"
-  ],
   "loc": {
     "filename": "x-bareorg-example/schema.bare",
     "offset": 0,

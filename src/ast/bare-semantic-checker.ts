@@ -40,23 +40,14 @@ interface Checker {
 }
 
 function checkMainCodecs(c: Checker, schema: ast.Ast): void {
-    for (const alias of schema.main) {
+    const rootAliases = ast.rootAliases(schema.defs)
+    for (const alias of rootAliases) {
         const aliased = c.symbols.get(alias)
-        if (aliased === undefined) {
-            throw new CompilerError(
-                `main codec '${alias}' does not exist.`,
-                null,
-            )
-        } else if (aliased.internal) {
-            throw new CompilerError(
-                `main codec '${alias}' must be exported.`,
-                null,
-            )
-        } else {
+        if (aliased !== undefined) {
             const resolved = ast.resolveAlias(aliased.type, c.symbols)
             if (resolved.tag === "void") {
                 throw new CompilerError(
-                    `main codec '${alias}' must not be resolved to void type.`,
+                    `a root type must not resolve to void.`,
                     null,
                 )
             }

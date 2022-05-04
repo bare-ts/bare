@@ -13,9 +13,7 @@ export function normalize(schema: ast.Ast): ast.Ast {
             defs[i] = { alias, internal, type, comment, loc }
         }
     }
-    return defs.length > schema.defs.length
-        ? { defs, main: schema.main, loc: schema.loc }
-        : schema
+    return defs.length > schema.defs.length ? { defs, loc: schema.loc } : schema
 }
 
 interface Context {

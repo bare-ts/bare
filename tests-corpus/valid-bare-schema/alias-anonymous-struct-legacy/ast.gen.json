@@ -74,7 +74,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "alias-anonymous-struct-legacy/schema.bare",
     "offset": 0,

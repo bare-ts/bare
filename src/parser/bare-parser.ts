@@ -16,7 +16,7 @@ export function parse(content: string, config: Config): ast.Ast {
     while (p.lex.token() !== "") {
         defs.push(parseAliased(p))
     }
-    return { defs, main: [], loc }
+    return { defs, loc }
 }
 
 interface Parser {

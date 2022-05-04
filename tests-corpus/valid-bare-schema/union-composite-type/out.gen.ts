@@ -1,6 +1,8 @@
 import assert from "assert"
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export type Composite =
     | { readonly tag: 0; readonly val: ReadonlyMap<string, string | null> }
     | { readonly tag: 1; readonly val: readonly (string | null)[] }
@@ -39,6 +41,24 @@ export function writeComposite(bc: bare.ByteCursor, x: Composite): void {
             }
             break
     }
+}
+
+export function encodeComposite(x: Composite): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeComposite(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeComposite(bytes: Uint8Array): Composite {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readComposite(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }
 
 function read0(bc: bare.ByteCursor): ReadonlyMap<string, string | null> {

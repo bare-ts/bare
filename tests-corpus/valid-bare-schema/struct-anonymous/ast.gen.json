@@ -222,7 +222,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-anonymous/schema.bare",
     "offset": 0,

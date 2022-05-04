@@ -31,3 +31,7 @@ export type Boxed =
 export function readBoxed(bc: bare.ByteCursor): Boxed
 
 export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void
+
+export function encodeBoxed(x: Boxed): Uint8Array
+
+export function decodeBoxed(bytes: Uint8Array): Boxed

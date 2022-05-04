@@ -24,9 +24,6 @@
       }
     }
   ],
-  "main": [
-    "Message"
-  ],
   "loc": {
     "filename": "imported-config/schema.bare",
     "offset": 0,

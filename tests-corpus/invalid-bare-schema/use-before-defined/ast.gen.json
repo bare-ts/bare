@@ -171,9 +171,6 @@
       }
     }
   ],
-  "main": [
-    "Person"
-  ],
   "loc": {
     "filename": "use-before-defined/schema.bare",
     "offset": 0,

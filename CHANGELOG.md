@@ -69,6 +69,33 @@ This project adheres to [Semantic Versioning][semver].
         bare-ts compile schema.bare -o schema.bare
         bare-ts compile schema.bare --generator 'bare'
 
+-   Remove options `--main` and `--no-main`
+
+    The previous version introduced automatic promotion of root type aliases
+    as main type aliases. Root type aliases are type aliases that are not
+    referred by a type in the schema. Main type aliases are types used
+    to decode and encode messages.
+
+    For the sake of simplicity, main type aliases and root types aliases
+    are now identical.
+
+    In the following schema, `Post` is the only root/main type alias.
+
+    ```bare
+    type Person struct { name: str }
+    type Post struct { author: Person }
+    ```
+
+-   Forbid root types that resolve to void
+
+    The following schema is now invalid:
+
+    ```bare
+    type Root void
+    ```
+
+    This is not part of the BARE specification.
+
 ## 0.8.0 (2022-04-29)
 
 -   Require @bare-ts/lib v0.3.x

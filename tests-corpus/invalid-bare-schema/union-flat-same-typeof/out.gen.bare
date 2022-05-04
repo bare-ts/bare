@@ -1,0 +1,6 @@
+type UnsignedInt union {
+    | u8 = 0
+    | u16 = 1
+    | u32 = 2
+    | u64 = 3
+}

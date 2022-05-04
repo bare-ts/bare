@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export type MultiList = readonly (readonly (readonly string[])[])[]
 
 export function readMultiList(bc: bare.ByteCursor): MultiList {
@@ -17,6 +19,24 @@ export function writeMultiList(bc: bare.ByteCursor, x: MultiList): void {
     for (let i = 0; i < x.length; i++) {
         write0(bc, x[i])
     }
+}
+
+export function encodeMultiList(x: MultiList): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeMultiList(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeMultiList(bytes: Uint8Array): MultiList {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readMultiList(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }
 
 function read0(bc: bare.ByteCursor): readonly (readonly string[])[] {

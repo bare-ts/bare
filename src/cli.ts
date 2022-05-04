@@ -33,9 +33,6 @@ Examples:
   bare-ts compile --generator dts < schema.bare > output.d.ts
   bare-ts compile --generator js < schema.bare > output.js
 
-  # Specify types that can be packed into and unpacked from messages
-  bare-ts compile schema.bare -o output.ts --main Alias1 Alias2
-
 ${REPOSITORY_HELP}
 `
 
@@ -67,11 +64,6 @@ program
         ]),
     )
     .option("--legacy", "allow legacy BARE syntax and features")
-    .option(
-        "--main <aliases...>",
-        "space-separated list of types used to encode and decode messages",
-    )
-    .option("--no-main", "do not emit procedures to encode and decode messages")
     .option(
         "--pedantic",
         "require enum and union types to set all tags in-order",

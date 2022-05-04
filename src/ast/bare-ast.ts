@@ -15,7 +15,6 @@ import type { Location } from "../core/compiler-error.js"
 
 export interface Ast {
     readonly defs: readonly AliasedType[]
-    readonly main: readonly string[]
     readonly loc: Location | null
 }
 

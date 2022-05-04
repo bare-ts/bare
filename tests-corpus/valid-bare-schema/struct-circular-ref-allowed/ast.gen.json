@@ -213,7 +213,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-circular-ref-allowed/schema.bare",
     "offset": 0,

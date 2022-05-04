@@ -49,7 +49,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "map-invalid-key-float/schema.bare",
     "offset": 0,

@@ -8,3 +8,7 @@ export type Composite =
 export function readComposite(bc: bare.ByteCursor): Composite
 
 export function writeComposite(bc: bare.ByteCursor, x: Composite): void
+
+export function encodeComposite(x: Composite): Uint8Array
+
+export function decodeComposite(bytes: Uint8Array): Composite

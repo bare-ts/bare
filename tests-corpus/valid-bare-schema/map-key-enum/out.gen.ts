@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export enum Gender {
     FLUID = "FLUID",
     MALE = "MALE",
@@ -60,4 +62,22 @@ export function writeGenderNames(bc: bare.ByteCursor, x: GenderNames): void {
         writeGender(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
+}
+
+export function encodeGenderNames(x: GenderNames): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeGenderNames(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeGenderNames(bytes: Uint8Array): GenderNames {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readGenderNames(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

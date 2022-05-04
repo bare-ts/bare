@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 export type u32 = number
 
 export class BoxedU32 {
@@ -65,4 +67,22 @@ export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void {
             bare.writeU8(bc, 1)
             writeBoxedstr(bc, x)
         }
+}
+
+export function encodeBoxed(x: Boxed): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeBoxed(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeBoxed(bytes: Uint8Array): Boxed {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readBoxed(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

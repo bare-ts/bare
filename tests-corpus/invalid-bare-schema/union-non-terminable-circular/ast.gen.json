@@ -110,7 +110,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-non-terminable-circular/schema.bare",
     "offset": 0,

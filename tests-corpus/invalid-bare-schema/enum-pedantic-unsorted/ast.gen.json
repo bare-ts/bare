@@ -61,7 +61,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-pedantic-unsorted/schema.bare",
     "offset": 0,

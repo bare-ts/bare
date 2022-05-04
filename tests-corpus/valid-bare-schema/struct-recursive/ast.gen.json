@@ -63,7 +63,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-recursive/schema.bare",
     "offset": 0,

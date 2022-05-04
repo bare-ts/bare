@@ -51,7 +51,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "mutable-map/schema.bare",
     "offset": 0,

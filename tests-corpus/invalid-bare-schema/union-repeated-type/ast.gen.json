@@ -64,7 +64,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "union-repeated-type/schema.bare",
     "offset": 0,

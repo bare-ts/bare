@@ -61,7 +61,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "enum-legacy/schema.bare",
     "offset": 0,

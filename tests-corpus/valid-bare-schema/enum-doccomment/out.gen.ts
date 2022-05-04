@@ -1,5 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
+const config = /* @__PURE__ */ bare.Config({})
+
 /**
  * An enum to model Genders
  */
@@ -45,4 +47,22 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void {
             bare.writeU8(bc, 2)
             break
     }
+}
+
+export function encodeGender(x: Gender): Uint8Array {
+    const bc = new bare.ByteCursor(
+        new Uint8Array(config.initialBufferLength),
+        config
+    )
+    writeGender(bc, x)
+    return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeGender(bytes: Uint8Array): Gender {
+    const bc = new bare.ByteCursor(bytes, config)
+    const result = readGender(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
 }

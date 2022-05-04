@@ -11,3 +11,7 @@ export type TypeOfUnion =
 export function readTypeOfUnion(bc: bare.ByteCursor): TypeOfUnion
 
 export function writeTypeOfUnion(bc: bare.ByteCursor, x: TypeOfUnion): void
+
+export function encodeTypeOfUnion(x: TypeOfUnion): Uint8Array
+
+export function decodeTypeOfUnion(bytes: Uint8Array): TypeOfUnion

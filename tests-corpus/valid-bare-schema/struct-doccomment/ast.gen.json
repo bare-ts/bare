@@ -74,7 +74,6 @@
       }
     }
   ],
-  "main": [],
   "loc": {
     "filename": "struct-doccomment/schema.bare",
     "offset": 29,

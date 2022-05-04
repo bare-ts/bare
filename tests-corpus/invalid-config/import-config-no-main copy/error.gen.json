@@ -1,4 +1,0 @@
-{
-  "name": "ConfigError",
-  "message": "options 'importConfig' and 'no-main' cannot be both set."
-}
