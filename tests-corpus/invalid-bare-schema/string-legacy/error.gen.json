@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "string-legacy/schema.bare",
+    "offset": 16,
+    "line": 1,
+    "col": 17
+  },
+  "message": "(string-legacy/schema.bare:1:17) use 'str' or allow 'string' with option '----legacy'."
+}

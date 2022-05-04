@@ -146,57 +146,19 @@
       "internal": false,
       "comment": null,
       "type": {
-        "tag": "struct",
-        "data": [
-          {
-            "name": "address",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 204,
-              "line": 15,
-              "col": 3
-            }
-          },
-          {
-            "name": "city",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 219,
-              "line": 16,
-              "col": 3
-            }
-          },
-          {
-            "name": "state",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 231,
-              "line": 17,
-              "col": 3
-            }
-          },
-          {
-            "name": "country",
-            "val": null,
-            "comment": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 244,
-              "line": 18,
-              "col": 3
-            }
+        "tag": "list",
+        "data": {
+          "name": null,
+          "val": 4,
+          "comment": null,
+          "extra": null,
+          "loc": {
+            "filename": "x-bareorg-example/schema.bare",
+            "offset": 203,
+            "line": 14,
+            "col": 24
           }
-        ],
+        },
         "types": [
           {
             "tag": "str",
@@ -205,54 +167,18 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 213,
-              "line": 15,
-              "col": 12
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 225,
-              "line": 16,
-              "col": 9
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 238,
-              "line": 17,
-              "col": 10
-            }
-          },
-          {
-            "tag": "str",
-            "data": null,
-            "types": null,
-            "extra": null,
-            "loc": {
-              "filename": "x-bareorg-example/schema.bare",
-              "offset": 253,
-              "line": 18,
-              "col": 12
+              "offset": 198,
+              "line": 14,
+              "col": 19
             }
           }
         ],
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 200,
+          "offset": 193,
           "line": 14,
-          "col": 21
+          "col": 14
         }
       },
       "loc": {
@@ -275,8 +201,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 285,
-              "line": 22,
+              "offset": 232,
+              "line": 17,
               "col": 3
             }
           },
@@ -287,8 +213,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 297,
-              "line": 23,
+              "offset": 244,
+              "line": 18,
               "col": 3
             }
           },
@@ -299,8 +225,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 310,
-              "line": 24,
+              "offset": 257,
+              "line": 19,
               "col": 3
             }
           },
@@ -311,8 +237,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 329,
-              "line": 25,
+              "offset": 276,
+              "line": 20,
               "col": 3
             }
           },
@@ -323,8 +249,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 393,
-              "line": 29,
+              "offset": 340,
+              "line": 24,
               "col": 3
             }
           }
@@ -337,8 +263,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 291,
-              "line": 22,
+              "offset": 238,
+              "line": 17,
               "col": 9
             }
           },
@@ -349,8 +275,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 304,
-              "line": 23,
+              "offset": 251,
+              "line": 18,
               "col": 10
             }
           },
@@ -361,8 +287,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 319,
-              "line": 24,
+              "offset": 266,
+              "line": 19,
               "col": 12
             }
           },
@@ -380,8 +306,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 355,
-                      "line": 26,
+                      "offset": 302,
+                      "line": 21,
                       "col": 5
                     }
                   },
@@ -392,8 +318,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 372,
-                      "line": 27,
+                      "offset": 319,
+                      "line": 22,
                       "col": 5
                     }
                   }
@@ -408,8 +334,8 @@
                     },
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 364,
-                      "line": 26,
+                      "offset": 311,
+                      "line": 21,
                       "col": 14
                     }
                   },
@@ -420,8 +346,8 @@
                     "extra": null,
                     "loc": {
                       "filename": "x-bareorg-example/schema.bare",
-                      "offset": 382,
-                      "line": 27,
+                      "offset": 329,
+                      "line": 22,
                       "col": 15
                     }
                   }
@@ -429,8 +355,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 349,
-                  "line": 25,
+                  "offset": 296,
+                  "line": 20,
                   "col": 23
                 }
               }
@@ -438,8 +364,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 337,
-              "line": 25,
+              "offset": 284,
+              "line": 20,
               "col": 11
             }
           },
@@ -454,8 +380,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 407,
-                  "line": 29,
+                  "offset": 354,
+                  "line": 24,
                   "col": 17
                 }
               },
@@ -466,8 +392,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 412,
-                  "line": 29,
+                  "offset": 359,
+                  "line": 24,
                   "col": 22
                 }
               }
@@ -475,8 +401,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 403,
-              "line": 29,
+              "offset": 350,
+              "line": 24,
               "col": 13
             }
           }
@@ -484,16 +410,16 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 281,
-          "line": 21,
+          "offset": 228,
+          "line": 16,
           "col": 22
         }
       },
       "comment": null,
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 260,
-        "line": 21,
+        "offset": 207,
+        "line": 16,
         "col": 1
       }
     },
@@ -511,8 +437,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 446,
-              "line": 33,
+              "offset": 393,
+              "line": 28,
               "col": 3
             }
           },
@@ -523,8 +449,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 458,
-              "line": 34,
+              "offset": 405,
+              "line": 29,
               "col": 3
             }
           },
@@ -535,8 +461,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 471,
-              "line": 35,
+              "offset": 418,
+              "line": 30,
               "col": 3
             }
           },
@@ -547,8 +473,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 490,
-              "line": 36,
+              "offset": 437,
+              "line": 31,
               "col": 3
             }
           },
@@ -559,8 +485,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 515,
-              "line": 37,
+              "offset": 462,
+              "line": 32,
               "col": 3
             }
           },
@@ -571,8 +497,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 532,
-              "line": 38,
+              "offset": 479,
+              "line": 33,
               "col": 3
             }
           },
@@ -583,8 +509,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 565,
-              "line": 39,
+              "offset": 512,
+              "line": 34,
               "col": 3
             }
           }
@@ -597,8 +523,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 452,
-              "line": 33,
+              "offset": 399,
+              "line": 28,
               "col": 9
             }
           },
@@ -609,8 +535,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 465,
-              "line": 34,
+              "offset": 412,
+              "line": 29,
               "col": 10
             }
           },
@@ -621,8 +547,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 480,
-              "line": 35,
+              "offset": 427,
+              "line": 30,
               "col": 12
             }
           },
@@ -633,8 +559,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 502,
-              "line": 36,
+              "offset": 449,
+              "line": 31,
               "col": 15
             }
           },
@@ -645,8 +571,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 525,
-              "line": 37,
+              "offset": 472,
+              "line": 32,
               "col": 13
             }
           },
@@ -661,8 +587,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 552,
-                  "line": 38,
+                  "offset": 499,
+                  "line": 33,
                   "col": 23
                 }
               }
@@ -670,8 +596,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 543,
-              "line": 38,
+              "offset": 490,
+              "line": 33,
               "col": 14
             }
           },
@@ -686,8 +612,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 579,
-                  "line": 39,
+                  "offset": 526,
+                  "line": 34,
                   "col": 17
                 }
               },
@@ -698,8 +624,8 @@
                 "extra": null,
                 "loc": {
                   "filename": "x-bareorg-example/schema.bare",
-                  "offset": 584,
-                  "line": 39,
+                  "offset": 531,
+                  "line": 34,
                   "col": 22
                 }
               }
@@ -707,8 +633,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 575,
-              "line": 39,
+              "offset": 522,
+              "line": 34,
               "col": 13
             }
           }
@@ -716,15 +642,15 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 442,
-          "line": 32,
+          "offset": 389,
+          "line": 27,
           "col": 22
         }
       },
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 421,
-        "line": 32,
+        "offset": 368,
+        "line": 27,
         "col": 1
       }
     },
@@ -739,15 +665,15 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 617,
-          "line": 42,
+          "offset": 564,
+          "line": 37,
           "col": 25
         }
       },
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 593,
-        "line": 42,
+        "offset": 540,
+        "line": 37,
         "col": 1
       }
     },
@@ -788,8 +714,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 642,
-              "line": 44,
+              "offset": 589,
+              "line": 39,
               "col": 20
             }
           },
@@ -800,8 +726,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 653,
-              "line": 44,
+              "offset": 600,
+              "line": 39,
               "col": 31
             }
           },
@@ -812,8 +738,8 @@
             "extra": null,
             "loc": {
               "filename": "x-bareorg-example/schema.bare",
-              "offset": 664,
-              "line": 44,
+              "offset": 611,
+              "line": 39,
               "col": 42
             }
           }
@@ -821,15 +747,15 @@
         "extra": null,
         "loc": {
           "filename": "x-bareorg-example/schema.bare",
-          "offset": 635,
-          "line": 44,
+          "offset": 582,
+          "line": 39,
           "col": 13
         }
       },
       "loc": {
         "filename": "x-bareorg-example/schema.bare",
-        "offset": 623,
-        "line": 44,
+        "offset": 570,
+        "line": 39,
         "col": 1
       }
     }

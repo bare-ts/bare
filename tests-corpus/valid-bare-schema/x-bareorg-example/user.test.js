@@ -10,12 +10,7 @@ test("x-readme-example", (t) => {
         val: {
             name: "James Smith",
             email: "jsmith@example.org",
-            address: {
-                address: "123 Main St",
-                city: "Philadelphia",
-                state: "PA",
-                country: "United States",
-            },
+            address: ["123 Main St", "Philadelphia", "PA", "United States"],
             orders: [
                 {
                     orderId: 4242424242,
@@ -30,32 +25,27 @@ test("x-readme-example", (t) => {
         val: {
             name: "Tiffany Doe",
             email: "tiffanyd@acme.corp",
-            address: {
-                address: "123 Main St",
-                city: "Philadelphia",
-                state: "PA",
-                country: "United States",
-            },
+            address: ["123 Main St", "Philadelphia", "PA", "United States"],
             department: Department.ADMINISTRATION,
             hireDate: "2020-06-21T21:18:05Z",
             publicKey: null,
-            metadata: new Map(),
+            metadata: new Map([["photo", new ArrayBuffer(5)]]),
         },
+    })
+    const payload3 = encodePerson({
+        tag: /* Terminated Employee *: */ 2,
+        val: null,
     })
     const msg1 = decodePerson(payload1)
     const msg2 = decodePerson(payload2)
+    const msg3 = decodePerson(payload3)
 
     t.deepEqual(msg1, {
         tag: /* Customer *: */ 0,
         val: {
             name: "James Smith",
             email: "jsmith@example.org",
-            address: {
-                address: "123 Main St",
-                city: "Philadelphia",
-                state: "PA",
-                country: "United States",
-            },
+            address: ["123 Main St", "Philadelphia", "PA", "United States"],
             orders: [
                 {
                     orderId: 4242424242,
@@ -71,16 +61,16 @@ test("x-readme-example", (t) => {
         val: {
             name: "Tiffany Doe",
             email: "tiffanyd@acme.corp",
-            address: {
-                address: "123 Main St",
-                city: "Philadelphia",
-                state: "PA",
-                country: "United States",
-            },
+            address: ["123 Main St", "Philadelphia", "PA", "United States"],
             department: Department.ADMINISTRATION,
             hireDate: "2020-06-21T21:18:05Z",
             publicKey: null,
-            metadata: new Map(),
+            metadata: new Map([["photo", new ArrayBuffer(5)]]),
         },
+    })
+
+    t.deepEqual(msg3, {
+        tag: /* Terminated Employee *: */ 2,
+        val: null,
     })
 })

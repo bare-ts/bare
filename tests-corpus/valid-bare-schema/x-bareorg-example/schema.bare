@@ -11,12 +11,7 @@ type Department enum {
   JSMITH = 99
 }
 
-type Address struct {
-  address: str
-  city: str
-  state: str
-  country: str
-}
+type Address list<str>[4]
 
 type Customer struct {
   name: str

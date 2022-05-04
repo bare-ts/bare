@@ -1,0 +1,33 @@
+{
+  "defs": [
+    {
+      "alias": "Name",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "str",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "string-legacy/schema.bare",
+          "offset": 10,
+          "line": 1,
+          "col": 11
+        }
+      },
+      "loc": {
+        "filename": "string-legacy/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "string-legacy/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

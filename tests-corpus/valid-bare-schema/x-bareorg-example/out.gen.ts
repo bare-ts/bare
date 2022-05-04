@@ -76,27 +76,22 @@ export function writeDepartment(bc: bare.ByteCursor, x: Department): void {
     }
 }
 
-export interface Address {
-    readonly address: string
-    readonly city: string
-    readonly state: string
-    readonly country: string
-}
+export type Address = readonly string[]
 
 export function readAddress(bc: bare.ByteCursor): Address {
-    return {
-        address: bare.readString(bc),
-        city: bare.readString(bc),
-        state: bare.readString(bc),
-        country: bare.readString(bc),
+    const len = 4
+    const result = [bare.readString(bc)]
+    for (let i = 1; i < len; i++) {
+        result[i] = bare.readString(bc)
     }
+    return result
 }
 
 export function writeAddress(bc: bare.ByteCursor, x: Address): void {
-    bare.writeString(bc, x.address)
-    bare.writeString(bc, x.city)
-    bare.writeString(bc, x.state)
-    bare.writeString(bc, x.country)
+    assert(x.length === 4, "Unmatched length")
+    for (let i = 0; i < x.length; i++) {
+        bare.writeString(bc, x[i])
+    }
 }
 
 export interface Customer {

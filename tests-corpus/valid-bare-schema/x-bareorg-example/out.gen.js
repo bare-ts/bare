@@ -70,19 +70,19 @@ export function writeDepartment(bc, x) {
 }
 
 export function readAddress(bc) {
-    return {
-        address: bare.readString(bc),
-        city: bare.readString(bc),
-        state: bare.readString(bc),
-        country: bare.readString(bc),
+    const len = 4
+    const result = [bare.readString(bc)]
+    for (let i = 1; i < len; i++) {
+        result[i] = bare.readString(bc)
     }
+    return result
 }
 
 export function writeAddress(bc, x) {
-    bare.writeString(bc, x.address)
-    bare.writeString(bc, x.city)
-    bare.writeString(bc, x.state)
-    bare.writeString(bc, x.country)
+    assert(x.length === 4, "Unmatched length")
+    for (let i = 0; i < x.length; i++) {
+        bare.writeString(bc, x[i])
+    }
 }
 
 export function readCustomer(bc) {

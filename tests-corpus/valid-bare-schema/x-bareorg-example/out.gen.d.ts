@@ -27,12 +27,7 @@ export function readDepartment(bc: bare.ByteCursor): Department
 
 export function writeDepartment(bc: bare.ByteCursor, x: Department): void
 
-export interface Address {
-    readonly address: string
-    readonly city: string
-    readonly state: string
-    readonly country: string
-}
+export type Address = readonly string[]
 
 export function readAddress(bc: bare.ByteCursor): Address
 
