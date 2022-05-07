@@ -13,7 +13,7 @@ const REPOSITORY_HELP = `Repository:
 const EXTRA_HELP = `
 Examples:
   # Compile schema.bare into Typescript
-  bare-ts compile schema.bare -o output.ts
+  bare compile schema.bare -o output.ts
 
   # more examples
   bare-ts <command> --help
@@ -24,20 +24,20 @@ ${REPOSITORY_HELP}
 const COMPILE_EXTRA_HELP = `
 Examples:
   # Compile schema.bare into Typescript, TypeScript Declaration, or JavaScript
-  bare-ts compile schema.bare -o output.ts
-  bare-ts compile schema.bare -o output.d.ts
-  bare-ts compile schema.bare -o output.js
+  bare compile schema.bare -o output.ts
+  bare compile schema.bare -o output.d.ts
+  bare compile schema.bare -o output.js
 
   # Provide input via stdin, get output via stdout
-  bare-ts compile < schema.bare > output.ts
-  bare-ts compile --generator dts < schema.bare > output.d.ts
-  bare-ts compile --generator js < schema.bare > output.js
+  bare compile < schema.bare > output.ts
+  bare compile --generator dts < schema.bare > output.d.ts
+  bare compile --generator js < schema.bare > output.js
 
 ${REPOSITORY_HELP}
 `
 
 program
-    .name("bare-ts")
+    .name("bare")
     .description("Tools for BARE (Binary Application Record Encoding)")
     .version("0.8.0", "--version", "output the version number and exit")
     .addHelpText("after", EXTRA_HELP)

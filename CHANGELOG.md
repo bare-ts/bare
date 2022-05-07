@@ -4,6 +4,8 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   Rename `bare-ts` CLI to `bare`
+
 -   Forbid use-before-definition
 
     In the last BARE draft, use-before-definition are disallowed.
