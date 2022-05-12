@@ -7,7 +7,7 @@ sh scripts/build.sh "$@"
 npx tsc --build tests tests-corpus
 
 # unit tests
-npx oletus tests/*.test.js tests-corpus/**/**/*.test.js
+npx oletus tests/*.test.js tests-corpus/*/*/*.test.js
 
 # style check
 npx prettier --loglevel 'warn' --check src/ tests/ *.md *.json
