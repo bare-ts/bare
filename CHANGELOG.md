@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.9.0 (2022-05-12)
 
 -   Rename `bare-ts` CLI to `bare`
 

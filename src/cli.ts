@@ -39,7 +39,7 @@ ${REPOSITORY_HELP}
 program
     .name("bare")
     .description("Tools for BARE (Binary Application Record Encoding)")
-    .version("0.8.0", "--version", "output the version number and exit")
+    .version("0.9.0", "--version", "output the version number and exit")
     .addHelpText("after", EXTRA_HELP)
     .action(() => program.help())
 
