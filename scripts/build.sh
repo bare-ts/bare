@@ -15,7 +15,7 @@ npx esbuild src/index.ts \
     --log-level='warning'
 
 # build ESM
-npx esbuild src/**/*.ts src/*.ts \
+npx esbuild src/*/*.ts src/*.ts \
     --bundle \
     --external:'*.js' --external:'commander' \
     --platform='node' --main-fields='module' \
