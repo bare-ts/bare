@@ -1,10 +1,13 @@
-# bare-ts
+<p align="center">
+    <img align="center" alt="bare-ts logo" height="128" src="./logo.webp"/>
+</p>
+<h1 align="center">bare-ts</h1>
 
-[![CI status][ci-img]][ci-url]
-[![Coverage percentage][coveralls-img]][coveralls-url]
-[![dependency count][bundlephobia-dep-img]][bundlephobia-url]
-[![minified and zipped size][bundlephobia-minzip-img]][bundlephobia-url]
+[![CI][ci-img]][ci-url]
+[![Coverage][coveralls-img]][coveralls-url]
 [![NPM version][npm-version-img]][npm-url]
+[![minzipped][bundlephobia-minzip-img]][bundlephobia-url]
+[![dependency][bundlephobia-dep-img]][bundlephobia-url]
 
 [BARE][bare] (Binary Application Record Encoding) is a schema-based binary format that favors compactness and simplicity.
 [bare-ts/tools](#) provides a compiler to generate Typescript or Javascript code from a BARE schema.
