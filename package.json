@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.3.0",
+    "@node-rs/deno-lint": "~1.13.1",
     "@types/node": "~16.7.11",
     "esbuild": "~0.14.39",
     "oletus": "3.2.0",

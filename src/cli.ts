@@ -5,6 +5,7 @@
 
 import { Argument, Option, program } from "commander"
 import * as fs from "node:fs"
+import * as process from "node:process"
 import { Config, transform } from "./index.js"
 
 const REPOSITORY_HELP = `Repository:

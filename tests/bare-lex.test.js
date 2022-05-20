@@ -22,7 +22,7 @@ test("valid-tokens", (t) => {
 })
 
 test("invalid-tokens", (t) => {
-    const lex = new Lex("d à", "inline")
+    const lex = new Lex("d ^", "inline")
     t.throws(() => lex.forth(), {
         name: "CompilerError",
     })

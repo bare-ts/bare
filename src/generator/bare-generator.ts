@@ -14,7 +14,7 @@ export function generateBare(schema: ast.Ast): string {
     return result.trim()
 }
 
-function generateAliased(aliased: ast.AliasedType) {
+function generateAliased(aliased: ast.AliasedType): string {
     const docComment = generateDocComment(aliased.comment)
     const typedef = generateType(aliased.type)
     return `${docComment}type ${aliased.alias} ${typedef}`
