@@ -4,6 +4,8 @@ set -eu
 # build .d.ts
 npx tsc --build src
 
+cp -f dist/index.d.ts dist/index.d.cts
+
 # build ESM
 npx esbuild src/index.ts src/*/*.ts --outdir=dist --log-level=warning
 

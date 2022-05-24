@@ -29,7 +29,7 @@
   "bin": {
     "bare": "./dist/cli.js"
   },
-  "types": "./dist/",
+  "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "es2015": "./dist/index.js",
@@ -40,6 +40,7 @@
   "sideEffects": false,
   "files": [
     "dist/*.cjs",
+    "dist/*.d.cts",
     "dist/*.d.ts",
     "dist/*.js",
     "dist/**/*.d.ts",
