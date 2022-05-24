@@ -12,7 +12,7 @@
     "serialization",
     "schema"
   ],
-  "author": "Victorien Elvinger (victorien.elvinger.fr)",
+  "author": "Victorien Elvinger (https://victorien.elvinger.fr)",
   "license": "Apache-2.0",
   "homepage": "https://baremessages.org",
   "repository": {
@@ -27,7 +27,7 @@
   },
   "type": "module",
   "bin": {
-    "bare": "dist/cli.js"
+    "bare": "./dist/cli.js"
   },
   "types": "./dist/",
   "main": "./dist/index.cjs",
@@ -51,11 +51,11 @@
   "scripts": {
     "build": "sh ./scripts/build.sh",
     "clean": "rm -rf dist coverage",
+    "coverage": "c8 --reporter=lcovonly npm test",
     "prepare": "validate-commit-msg",
-    "check-git": "test -z \"$(git status --porcelain)\"",
-    "prepublishOnly": "npm run check-git && npm run clean && npm test",
+    "prepublishOnly": "npm run clean && npm test",
     "test": "sh ./scripts/test.sh",
-    "test:coverage": "c8 --reporter=lcovonly npm test"
+    "version": "sh ./scripts/version.sh"
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.3.0",

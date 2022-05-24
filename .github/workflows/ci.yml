@@ -16,9 +16,11 @@ jobs:
               with:
                   node-version: "12.x"
                   cache: npm
-            - run: npm ci
-            - run: npm install c8
-            - run: npm run test:coverage
+            - name: Build and test coverage
+              run: |
+                  npm ci
+                  npm install c8
+                  npm run coverage
             - name: Coveralls
               uses: coverallsapp/github-action@master
               with:

@@ -8,6 +8,11 @@ import * as fs from "node:fs"
 import * as process from "node:process"
 import { Config, transform } from "./index.js"
 
+/**
+ * This constant MUST be defined at build time.
+ */
+declare const VERSION: string
+
 const REPOSITORY_HELP = `Repository:
   https://github.com/bare-ts/compiler`
 
@@ -40,7 +45,7 @@ ${REPOSITORY_HELP}
 program
     .name("bare")
     .description("Tools for BARE (Binary Application Record Encoding)")
-    .version("0.9.0", "--version", "output the version number and exit")
+    .version(VERSION, "--version", "output the version number and exit")
     .addHelpText("after", EXTRA_HELP)
     .action(() => program.help())
 

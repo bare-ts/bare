@@ -1,13 +1,13 @@
 #!/bin/sh
 set -eu
 
-sh scripts/build.sh "$@"
-
-# type check
-npx tsc --build tests tests-corpus
+npm run build
 
 # unit tests
 npx oletus tests/*.test.js tests-corpus/*/*/*.test.js
+
+# type check
+npx tsc --build tests tests-corpus
 
 # lint
 npx denolint src
@@ -16,4 +16,4 @@ npx denolint scripts
 npx denolint tests-corpus
 
 # style check
-npx prettier --loglevel 'warn' --check src/ tests/ *.md *.json
+npx prettier --loglevel=warn --check src/ tests/ *.md *.json
