@@ -24,8 +24,8 @@ export function generate(schema: ast.Ast, config: Config): string {
                 if (!aliased.internal) {
                     body += `${genAliasedType(g, aliased)}\n\n`
                     if (!isVoid) {
-                        body += `${genAliasedReaderHead(g, aliased)}\n\n`
-                        body += `${genAliasedWriterHead(g, aliased)}\n\n`
+                        body += `export ${genReaderHead(g, aliased)}\n\n`
+                        body += `export ${genWriterHead(g, aliased)}\n\n`
                     }
                 }
                 break
@@ -147,12 +147,6 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
     return def[0] === "\n"
         ? `${doc}export type ${alias} =${def}`
         : `${doc}export type ${alias} = ${def}`
-}
-
-function typeAliasOrDef(g: Gen, type: ast.Type, alias: string): string {
-    const aliased = g.symbols.get(alias)
-    return aliased !== undefined && !aliased.internal ? alias : genType(g, type)
-    // TODO: just genType?
 }
 
 function namespaced(g: Gen, alias: string): string {
@@ -329,28 +323,20 @@ function genVoidType(_g: Gen, type: ast.VoidType): string {
         : "null"
 }
 
-function genAliasedReaderHead(g: Gen, aliased: ast.AliasedType): string {
-    return "export " + genReaderHead(g, aliased.type, `${aliased.alias}`)
-}
-
-function genReaderHead(g: Gen, type: ast.Type, alias: string): string {
-    const rType = typeAliasOrDef(g, type, alias)
-    const fname = alias !== "" ? `read${alias}` : ""
+function genReaderHead(g: Gen, aliased: ast.AliasedType): string {
+    const alias = aliased.alias
+    const rType = aliased.internal ? genType(g, aliased.type) : alias
     return g.config.generator === "js"
-        ? `function ${fname}(bc)`
-        : `function ${fname}(bc: bare.ByteCursor): ${rType}`
+        ? `function read${alias}(bc)`
+        : `function read${alias}(bc: bare.ByteCursor): ${rType}`
 }
 
-function genAliasedWriterHead(g: Gen, aliased: ast.AliasedType): string {
-    return "export " + genWriterHead(g, aliased.type, `${aliased.alias}`)
-}
-
-function genWriterHead(g: Gen, type: ast.Type, alias: string): string {
-    const xType = typeAliasOrDef(g, type, alias)
-    const fname = alias !== "" ? `write${alias}` : ""
+function genWriterHead(g: Gen, aliased: ast.AliasedType): string {
+    const alias = aliased.alias
+    const xType = aliased.internal ? genType(g, aliased.type) : alias
     return g.config.generator === "js"
-        ? `function ${fname}(bc, x)`
-        : `function ${fname}(bc: bare.ByteCursor, x: ${xType}): void`
+        ? `function write${alias}(bc, x)`
+        : `function write${alias}(bc: bare.ByteCursor, x: ${xType}): void`
 }
 
 function genDecoderHead(g: Gen, alias: string): string {
@@ -430,7 +416,7 @@ function genAliasedStructCode(
 function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
     let body = genReader(g, aliased.type, aliased.alias)
     const mod = !aliased.internal ? "export " : ""
-    const head = genReaderHead(g, aliased.type, aliased.alias)
+    const head = genReaderHead(g, aliased)
     switch (body[0]) {
         case "{": // block
             return `${mod}${head} ${body}`
@@ -526,7 +512,7 @@ function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
     const tagReader = maxTag < 128 ? "readU8" : "readUintSafe"
     const intEnum = type.extra?.intEnum
     if (intEnum && maxTag === type.data.length - 1) {
-        const rType = typeAliasOrDef(g, type, alias)
+        const rType = alias === "" ? genType(g, type) : alias
         const typeAssert = g.config.generator === "js" ? "" : ` as ${rType}`
         body = `if (tag > ${maxTag}) {
             bc.offset = offset
@@ -702,7 +688,7 @@ function genVoidReader(_g: Gen, type: ast.VoidType): string {
 function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
     let body = genWriter(g, aliased.type, aliased.alias).replace(/\$x\b/g, "x")
     const mod = aliased.internal ? "" : "export "
-    const head = genWriterHead(g, aliased.type, aliased.alias)
+    const head = genWriterHead(g, aliased)
     switch (body[0]) {
         case "{": // block
             return `${mod}${head} ${body}`
