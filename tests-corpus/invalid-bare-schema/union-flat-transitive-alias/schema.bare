@@ -1,0 +1,11 @@
+type BoxedU32 struct {
+    val: u32
+}
+
+type BoxedStr struct {
+    val: str
+}
+
+type BoxedTransStr BoxedStr
+
+type Boxed union { BoxedU32 | BoxedTransStr }

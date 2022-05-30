@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "union-flat-transitive-alias/schema.bare",
+    "offset": 118,
+    "line": 11,
+    "col": 12
+  },
+  "message": "(union-flat-transitive-alias/schema.bare:11:12) the union cannot be flatten."
+}

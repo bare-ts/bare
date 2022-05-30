@@ -2,6 +2,19 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Forbid flat unions of transitively aliased classes
+
+    @bare-ts previously allowed flat unions of transitively aliased classes.
+    It now rejects the following schema under the option `--use-flat-union`:
+
+    ```bare
+    type Named struct { name: str }
+    type Person Named
+    type Message union { Person }
+    ```
+
 ## 0.9.0 (2022-05-12)
 
 -   Rename `bare-ts` CLI to `bare`
