@@ -5,6 +5,10 @@ import { CompilerError } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
 import * as ast from "./bare-ast.js"
 
+const LOWER_CAMEL_CASE_RE = /^[a-z][A-Za-z0-9]*$/
+const UPPER_CAMEL_CASE_RE = /^[A-Z][A-Za-z0-9]*$/
+const UPPER_SNAKE_CASE_RE = /^[A-Z][A-Z0-9_]*$/
+
 export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {
         throw new CompilerError("a schema cannot be empty.", schema.loc)
@@ -16,9 +20,10 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     const aliases: Set<string> = new Set()
     for (const aliased of schema.defs) {
         const { alias, type } = aliased
+        checkTypeName(aliased)
         if (aliases.has(alias)) {
             throw new CompilerError(
-                `alias '${alias}' is already defined.`,
+                `alias '${aliased.alias}' is already defined.`,
                 aliased.loc,
             )
         }
@@ -37,6 +42,23 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
 interface Checker {
     readonly config: Config
     readonly symbols: ast.SymbolTable
+}
+
+function checkTypeName(aliased: ast.AliasedType): void {
+    const { alias, internal } = aliased
+    if (alias.length !== 0 && /^\d/.test(alias[0])) {
+        if (!internal) {
+            throw new CompilerError(
+                `the type name '${alias}' must not start with a figure or must be internal.`,
+                aliased.loc,
+            )
+        }
+    } else if (alias.length === 0 || !UPPER_CAMEL_CASE_RE.test(alias)) {
+        throw new CompilerError(
+            `the type name '${alias}' must be in UpperCamelCase.`,
+            aliased.loc,
+        )
+    }
 }
 
 function checkMainCodecs(c: Checker, schema: ast.Ast): void {
@@ -110,6 +132,18 @@ function checkMembersInvariants(
     let prevVal = -1
     for (const elt of data) {
         if (elt.name !== null) {
+            if (type.tag === "enum" && !UPPER_SNAKE_CASE_RE.test(elt.name)) {
+                throw new CompilerError(
+                    "the name of an enum member must be in UPPER_SNAKE_CASE.",
+                    elt.loc,
+                )
+            }
+            if (type.tag === "struct" && !LOWER_CAMEL_CASE_RE.test(elt.name)) {
+                throw new CompilerError(
+                    "the name of a field must be in lowerCamelCase.",
+                    elt.loc,
+                )
+            }
             if (names.has(elt.name)) {
                 throw new CompilerError(
                     `name of a ${type.tag} member must be unique.`,

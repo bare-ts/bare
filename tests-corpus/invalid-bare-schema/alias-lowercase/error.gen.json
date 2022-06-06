@@ -2,9 +2,9 @@
   "name": "CompilerError",
   "location": {
     "filename": "alias-lowercase/schema.bare",
-    "offset": 5,
+    "offset": 0,
     "line": 1,
-    "col": 6
+    "col": 1
   },
-  "message": "(alias-lowercase/schema.bare:1:6) the type name 'lowerCase' must be in UpperCamelCase."
+  "message": "(alias-lowercase/schema.bare:1:1) the type name 'lowerCase' must be in UpperCamelCase."
 }

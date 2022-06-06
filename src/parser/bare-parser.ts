@@ -24,11 +24,8 @@ interface Parser {
     readonly lex: Lex
 }
 
-const ALL_CASE_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/
-const UPPER_SNAKE_CASE_PATTERN = /^[A-Z][A-Z0-9_]*$/
-const LOWER_CAMEL_CASE_PATTERN = /^[a-z][A-Za-z0-9]*$/
-const UPPER_CAMEL_CASE_PATTERN = /^[A-Z][A-Za-z0-9]*$/
-const DIGIT_PATTERN = /^([0-9]+)$/
+const ALL_CASE_RE = /^[A-Za-z_][A-Za-z0-9_]*$/
+const NUMBER_RE = /^([0-9]+)$/
 
 function parseAliased(p: Parser): ast.AliasedType {
     const comment = p.lex.consumeDocComment()
@@ -39,12 +36,6 @@ function parseAliased(p: Parser): ast.AliasedType {
     }
     p.lex.forth()
     const alias = p.lex.token()
-    if (!UPPER_CAMEL_CASE_PATTERN.test(alias)) {
-        throw new CompilerError(
-            `the type name '${alias}' must be in UpperCamelCase.`,
-            p.lex.location(),
-        )
-    }
     p.lex.forth()
     if (p.lex.token() === "=") {
         throw new CompilerError(
@@ -64,6 +55,7 @@ function parseAliased(p: Parser): ast.AliasedType {
             : keyword === "struct"
             ? parseStructBody(p)
             : parseTypeCheckUnion(p)
+    checkSeparator(p)
     return { alias, internal: false, comment, type, loc }
 }
 
@@ -117,9 +109,6 @@ function parseTypeName(p: Parser): ast.Type {
     const alias = p.lex.token()
     const loc = p.lex.location()
     p.lex.forth()
-    if (UPPER_CAMEL_CASE_PATTERN.test(alias)) {
-        return { tag: "alias", data: alias, types: null, extra: null, loc }
-    }
     if (alias === "string" && !p.config.legacy) {
         throw new CompilerError(
             "use 'str' or allow 'string' with option '----legacy'.",
@@ -130,10 +119,7 @@ function parseTypeName(p: Parser): ast.Type {
     if (ast.isBaseTag(tag) || tag === "void") {
         return { tag, data: null, types: null, extra: null, loc }
     } else {
-        throw new CompilerError(
-            "a type name is either in UpperCamelCase or is a predefined types.",
-            loc,
-        )
+        return { tag: "alias", data: alias, types: null, extra: null, loc }
     }
 }
 
@@ -329,15 +315,9 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
     const vals: ast.EnumVal[] = []
     const names = new Set()
     let val = 0
-    while (ALL_CASE_PATTERN.test(p.lex.token())) {
+    while (ALL_CASE_RE.test(p.lex.token())) {
         const comment = p.lex.consumeDocComment()
         const name = p.lex.token()
-        if (!UPPER_SNAKE_CASE_PATTERN.test(name)) {
-            throw new CompilerError(
-                "the name of an enum member must be in UPPER_SNAKE_CASE.",
-                p.lex.location(),
-            )
-        }
         names.add(name)
         const valLoc = p.lex.location()
         p.lex.forth()
@@ -352,12 +332,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         }
         vals.push({ name, val, comment, extra: null, loc: valLoc })
         val++
-        if (p.lex.token() === "," || p.lex.token() === ";") {
-            throw new CompilerError(
-                `enum members cannot be separated by '${p.lex.token()}'.`,
-                p.lex.location(),
-            )
-        }
+        checkSeparator(p)
     }
     expect(p, "}")
     return { tag: "enum", data: vals, types: null, extra: null, loc }
@@ -374,26 +349,15 @@ function parseStructBody(p: Parser): ast.Type {
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
     const names = new Set()
-    while (ALL_CASE_PATTERN.test(p.lex.token())) {
+    while (ALL_CASE_RE.test(p.lex.token())) {
         const comment = p.lex.consumeDocComment()
         const name = p.lex.token()
-        if (!LOWER_CAMEL_CASE_PATTERN.test(name)) {
-            throw new CompilerError(
-                "the name of a field must be in lowerCamelCase.",
-                p.lex.location(),
-            )
-        }
         names.add(name)
         const fieldLoc = p.lex.location()
         p.lex.forth()
         expect(p, ":")
         const type = parseTypeCheckUnion(p)
-        if (p.lex.token() === "," || p.lex.token() === ";") {
-            throw new CompilerError(
-                `fields cannot be separated by '${p.lex.token()}'.`,
-                p.lex.location(),
-            )
-        }
+        checkSeparator(p)
         fields.push({ name, val: null, comment, extra: null, loc: fieldLoc })
         types.push(type)
     }
@@ -426,9 +390,18 @@ function parseTypeParameter(p: Parser): ast.Type {
     return result
 }
 
+function checkSeparator(p: Parser): void {
+    if (p.lex.token() === "," || p.lex.token() === ";") {
+        throw new CompilerError(
+            `members cannot be separated by '${p.lex.token()}'.`,
+            p.lex.location(),
+        )
+    }
+}
+
 function parseUnsignedNumber(p: Parser): number {
     const result = Number.parseInt(p.lex.token(), 10)
-    if (!DIGIT_PATTERN.test(p.lex.token())) {
+    if (!NUMBER_RE.test(p.lex.token())) {
         throw new CompilerError(
             "an unsigned integer is expected.",
             p.lex.location(),

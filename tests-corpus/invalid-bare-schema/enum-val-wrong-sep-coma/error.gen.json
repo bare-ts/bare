@@ -6,5 +6,5 @@
     "line": 2,
     "col": 10
   },
-  "message": "(enum-val-wrong-sep-coma/schema.bare:2:10) enum members cannot be separated by ','."
+  "message": "(enum-val-wrong-sep-coma/schema.bare:2:10) members cannot be separated by ','."
 }

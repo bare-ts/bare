@@ -1,5 +1,0 @@
-type gender enum {
-    fluid
-    male
-    female
-}
