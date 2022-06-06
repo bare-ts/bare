@@ -1,19 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-export interface Node {
-    readonly children: readonly Node[]
-}
-
-export function readNode(bc: bare.ByteCursor): Node {
-    return {
-        children: read0(bc),
-    }
-}
-
-export function writeNode(bc: bare.ByteCursor, x: Node): void {
-    write0(bc, x.children)
-}
-
 function read0(bc: bare.ByteCursor): readonly Node[] {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
@@ -29,4 +15,18 @@ function write0(bc: bare.ByteCursor, x: readonly Node[]): void {
     for (let i = 0; i < x.length; i++) {
         writeNode(bc, x[i])
     }
+}
+
+export interface Node {
+    readonly children: readonly Node[]
+}
+
+export function readNode(bc: bare.ByteCursor): Node {
+    return {
+        children: read0(bc),
+    }
+}
+
+export function writeNode(bc: bare.ByteCursor, x: Node): void {
+    write0(bc, x.children)
 }

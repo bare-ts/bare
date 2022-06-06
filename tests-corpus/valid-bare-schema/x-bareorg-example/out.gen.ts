@@ -94,6 +94,61 @@ export function writeAddress(bc: bare.ByteCursor, x: Address): void {
     }
 }
 
+function read0(bc: bare.ByteCursor): readonly ({
+    readonly orderId: i64Safe
+    readonly quantity: i32
+})[] {
+    const len = bare.readUintSafe(bc)
+    if (len === 0) return []
+    const result = [{
+        orderId: bare.readI64Safe(bc),
+        quantity: bare.readI32(bc),
+    }]
+    for (let i = 1; i < len; i++) {
+        result[i] = {
+            orderId: bare.readI64Safe(bc),
+            quantity: bare.readI32(bc),
+        }
+    }
+    return result
+}
+
+function write0(bc: bare.ByteCursor, x: readonly ({
+    readonly orderId: i64Safe
+    readonly quantity: i32
+})[]): void {
+    bare.writeUintSafe(bc, x.length)
+    for (let i = 0; i < x.length; i++) {
+        {
+            bare.writeI64Safe(bc, x[i].orderId)
+            bare.writeI32(bc, x[i].quantity)
+        }
+    }
+}
+
+function read1(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
+    const len = bare.readUintSafe(bc)
+    const result = new Map<string, ArrayBuffer>()
+    for (let i = 0; i < len; i++) {
+        const offset = bc.offset
+        const key = bare.readString(bc)
+        if (result.has(key)) {
+            bc.offset = offset
+            throw new bare.BareError(offset, "duplicated key")
+        }
+        result.set(key, bare.readData(bc))
+    }
+    return result
+}
+
+function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
+    bare.writeUintSafe(bc, x.size)
+    for(const kv of x) {
+        bare.writeString(bc, kv[0])
+        bare.writeData(bc, kv[1])
+    }
+}
+
 export interface Customer {
     readonly name: string
     readonly email: string
@@ -121,6 +176,19 @@ export function writeCustomer(bc: bare.ByteCursor, x: Customer): void {
     writeAddress(bc, x.address)
     write0(bc, x.orders)
     write1(bc, x.metadata)
+}
+
+function read2(bc: bare.ByteCursor): PublicKey | null {
+    return bare.readBool(bc)
+        ? readPublicKey(bc)
+        : null
+}
+
+function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writePublicKey(bc, x)
+    }
 }
 
 export interface Employee {
@@ -207,72 +275,4 @@ export function decodePerson(bytes: Uint8Array): Person {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
-}
-
-function read0(bc: bare.ByteCursor): readonly ({
-    readonly orderId: i64Safe
-    readonly quantity: i32
-})[] {
-    const len = bare.readUintSafe(bc)
-    if (len === 0) return []
-    const result = [{
-        orderId: bare.readI64Safe(bc),
-        quantity: bare.readI32(bc),
-    }]
-    for (let i = 1; i < len; i++) {
-        result[i] = {
-            orderId: bare.readI64Safe(bc),
-            quantity: bare.readI32(bc),
-        }
-    }
-    return result
-}
-
-function write0(bc: bare.ByteCursor, x: readonly ({
-    readonly orderId: i64Safe
-    readonly quantity: i32
-})[]): void {
-    bare.writeUintSafe(bc, x.length)
-    for (let i = 0; i < x.length; i++) {
-        {
-            bare.writeI64Safe(bc, x[i].orderId)
-            bare.writeI32(bc, x[i].quantity)
-        }
-    }
-}
-
-function read1(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
-    const len = bare.readUintSafe(bc)
-    const result = new Map<string, ArrayBuffer>()
-    for (let i = 0; i < len; i++) {
-        const offset = bc.offset
-        const key = bare.readString(bc)
-        if (result.has(key)) {
-            bc.offset = offset
-            throw new bare.BareError(offset, "duplicated key")
-        }
-        result.set(key, bare.readData(bc))
-    }
-    return result
-}
-
-function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
-    bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
-        bare.writeString(bc, kv[0])
-        bare.writeData(bc, kv[1])
-    }
-}
-
-function read2(bc: bare.ByteCursor): PublicKey | null {
-    return bare.readBool(bc)
-        ? readPublicKey(bc)
-        : null
-}
-
-function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writePublicKey(bc, x)
-    }
 }

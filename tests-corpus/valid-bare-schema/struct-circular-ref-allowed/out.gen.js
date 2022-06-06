@@ -1,21 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-export function readPerson(bc) {
-    return {
-        bestFriend: read0(bc),
-        secondBestFriend: read1(bc),
-        friends: read2(bc),
-        friendNicknames: read3(bc),
-    }
-}
-
-export function writePerson(bc, x) {
-    write0(bc, x.bestFriend)
-    write1(bc, x.secondBestFriend)
-    write2(bc, x.friends)
-    write3(bc, x.friendNicknames)
-}
-
 function read0(bc) {
     return bare.readBool(bc)
         ? readPerson(bc)
@@ -91,4 +75,20 @@ function write3(bc, x) {
         bare.writeString(bc, kv[0])
         writePerson(bc, kv[1])
     }
+}
+
+export function readPerson(bc) {
+    return {
+        bestFriend: read0(bc),
+        secondBestFriend: read1(bc),
+        friends: read2(bc),
+        friendNicknames: read3(bc),
+    }
+}
+
+export function writePerson(bc, x) {
+    write0(bc, x.bestFriend)
+    write1(bc, x.secondBestFriend)
+    write2(bc, x.friends)
+    write3(bc, x.friendNicknames)
 }

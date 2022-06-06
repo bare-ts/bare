@@ -1,5 +1,18 @@
 import * as bare from "@bare-ts/lib"
 
+function read0(bc) {
+    return bare.readBool(bc)
+        ? readAlias(bc)
+        : null
+}
+
+function write0(bc, x) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writeAlias(bc, x)
+    }
+}
+
 export function readAlias(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
@@ -24,18 +37,5 @@ export function writeAlias(bc, x) {
         case 1:
             bare.writeString(bc, x.val)
             break
-    }
-}
-
-function read0(bc) {
-    return bare.readBool(bc)
-        ? readAlias(bc)
-        : null
-}
-
-function write0(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writeAlias(bc, x)
     }
 }

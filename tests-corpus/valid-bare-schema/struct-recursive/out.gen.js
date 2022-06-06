@@ -1,15 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-export function readNode(bc) {
-    return {
-        children: read0(bc),
-    }
-}
-
-export function writeNode(bc, x) {
-    write0(bc, x.children)
-}
-
 function read0(bc) {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
@@ -25,4 +15,14 @@ function write0(bc, x) {
     for (let i = 0; i < x.length; i++) {
         writeNode(bc, x[i])
     }
+}
+
+export function readNode(bc) {
+    return {
+        children: read0(bc),
+    }
+}
+
+export function writeNode(bc, x) {
+    write0(bc, x.children)
 }

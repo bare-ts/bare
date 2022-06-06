@@ -85,6 +85,55 @@ export function writeAddress(bc, x) {
     }
 }
 
+function read0(bc) {
+    const len = bare.readUintSafe(bc)
+    if (len === 0) return []
+    const result = [{
+        orderId: bare.readI64Safe(bc),
+        quantity: bare.readI32(bc),
+    }]
+    for (let i = 1; i < len; i++) {
+        result[i] = {
+            orderId: bare.readI64Safe(bc),
+            quantity: bare.readI32(bc),
+        }
+    }
+    return result
+}
+
+function write0(bc, x) {
+    bare.writeUintSafe(bc, x.length)
+    for (let i = 0; i < x.length; i++) {
+        {
+            bare.writeI64Safe(bc, x[i].orderId)
+            bare.writeI32(bc, x[i].quantity)
+        }
+    }
+}
+
+function read1(bc) {
+    const len = bare.readUintSafe(bc)
+    const result = new Map()
+    for (let i = 0; i < len; i++) {
+        const offset = bc.offset
+        const key = bare.readString(bc)
+        if (result.has(key)) {
+            bc.offset = offset
+            throw new bare.BareError(offset, "duplicated key")
+        }
+        result.set(key, bare.readData(bc))
+    }
+    return result
+}
+
+function write1(bc, x) {
+    bare.writeUintSafe(bc, x.size)
+    for(const kv of x) {
+        bare.writeString(bc, kv[0])
+        bare.writeData(bc, kv[1])
+    }
+}
+
 export function readCustomer(bc) {
     return {
         name: bare.readString(bc),
@@ -101,6 +150,19 @@ export function writeCustomer(bc, x) {
     writeAddress(bc, x.address)
     write0(bc, x.orders)
     write1(bc, x.metadata)
+}
+
+function read2(bc) {
+    return bare.readBool(bc)
+        ? readPublicKey(bc)
+        : null
+}
+
+function write2(bc, x) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writePublicKey(bc, x)
+    }
 }
 
 export function readEmployee(bc) {
@@ -170,66 +232,4 @@ export function decodePerson(bytes) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
-}
-
-function read0(bc) {
-    const len = bare.readUintSafe(bc)
-    if (len === 0) return []
-    const result = [{
-        orderId: bare.readI64Safe(bc),
-        quantity: bare.readI32(bc),
-    }]
-    for (let i = 1; i < len; i++) {
-        result[i] = {
-            orderId: bare.readI64Safe(bc),
-            quantity: bare.readI32(bc),
-        }
-    }
-    return result
-}
-
-function write0(bc, x) {
-    bare.writeUintSafe(bc, x.length)
-    for (let i = 0; i < x.length; i++) {
-        {
-            bare.writeI64Safe(bc, x[i].orderId)
-            bare.writeI32(bc, x[i].quantity)
-        }
-    }
-}
-
-function read1(bc) {
-    const len = bare.readUintSafe(bc)
-    const result = new Map()
-    for (let i = 0; i < len; i++) {
-        const offset = bc.offset
-        const key = bare.readString(bc)
-        if (result.has(key)) {
-            bc.offset = offset
-            throw new bare.BareError(offset, "duplicated key")
-        }
-        result.set(key, bare.readData(bc))
-    }
-    return result
-}
-
-function write1(bc, x) {
-    bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
-        bare.writeString(bc, kv[0])
-        bare.writeData(bc, kv[1])
-    }
-}
-
-function read2(bc) {
-    return bare.readBool(bc)
-        ? readPublicKey(bc)
-        : null
-}
-
-function write2(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writePublicKey(bc, x)
-    }
 }

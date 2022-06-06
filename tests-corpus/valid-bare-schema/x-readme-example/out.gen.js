@@ -39,6 +39,19 @@ export function writeGender(bc, x) {
     }
 }
 
+function read0(bc) {
+    return bare.readBool(bc)
+        ? readGender(bc)
+        : null
+}
+
+function write0(bc, x) {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writeGender(bc, x)
+    }
+}
+
 export function readPerson(bc) {
     return {
         name: bare.readString(bc),
@@ -125,17 +138,4 @@ export function decodeContacts(bytes) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
-}
-
-function read0(bc) {
-    return bare.readBool(bc)
-        ? readGender(bc)
-        : null
-}
-
-function write0(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writeGender(bc, x)
-    }
 }

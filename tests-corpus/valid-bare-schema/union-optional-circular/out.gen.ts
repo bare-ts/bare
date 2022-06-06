@@ -1,5 +1,18 @@
 import * as bare from "@bare-ts/lib"
 
+function read0(bc: bare.ByteCursor): Alias | null {
+    return bare.readBool(bc)
+        ? readAlias(bc)
+        : null
+}
+
+function write0(bc: bare.ByteCursor, x: Alias | null): void {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writeAlias(bc, x)
+    }
+}
+
 export type Alias =
     | { readonly tag: 0; readonly val: Alias | null }
     | { readonly tag: 1; readonly val: string }
@@ -28,18 +41,5 @@ export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
         case 1:
             bare.writeString(bc, x.val)
             break
-    }
-}
-
-function read0(bc: bare.ByteCursor): Alias | null {
-    return bare.readBool(bc)
-        ? readAlias(bc)
-        : null
-}
-
-function write0(bc: bare.ByteCursor, x: Alias | null): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writeAlias(bc, x)
     }
 }

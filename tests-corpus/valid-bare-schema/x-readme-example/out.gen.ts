@@ -39,6 +39,19 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     }
 }
 
+function read0(bc: bare.ByteCursor): Gender | null {
+    return bare.readBool(bc)
+        ? readGender(bc)
+        : null
+}
+
+function write0(bc: bare.ByteCursor, x: Gender | null): void {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        writeGender(bc, x)
+    }
+}
+
 export interface Person {
     readonly name: string
     readonly email: string
@@ -142,17 +155,4 @@ export function decodeContacts(bytes: Uint8Array): Contacts {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }
     return result
-}
-
-function read0(bc: bare.ByteCursor): Gender | null {
-    return bare.readBool(bc)
-        ? readGender(bc)
-        : null
-}
-
-function write0(bc: bare.ByteCursor, x: Gender | null): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        writeGender(bc, x)
-    }
 }

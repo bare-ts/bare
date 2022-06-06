@@ -4,20 +4,22 @@
 import * as ast from "./bare-ast.js"
 
 export function normalize(schema: ast.Ast): ast.Ast {
-    const defs = schema.defs.slice()
-    const n: Context = { mutSchema: defs, dedup: new Map(), aliasCount: 0 }
-    for (let i = 0; i < defs.length; i++) {
-        const type = normalizeSubtypes(n, defs[i].type)
-        if (defs[i].type !== type) {
-            const { alias, internal, comment, loc } = defs[i]
-            defs[i] = { alias, internal, type, comment, loc }
+    const n: Context = { defs: [], dedup: new Map(), aliasCount: 0 }
+    const defs = n.defs
+    for (const def of schema.defs) {
+        const type = normalizeSubtypes(n, def.type)
+        if (def.type !== type) {
+            const { alias, internal, comment, loc } = def
+            defs.push({ alias, internal, type, comment, loc })
+        } else {
+            defs.push(def)
         }
     }
     return defs.length > schema.defs.length ? { defs, loc: schema.loc } : schema
 }
 
 interface Context {
-    readonly mutSchema: ast.AliasedType[]
+    readonly defs: ast.AliasedType[]
     readonly dedup: Map<unknown, string>
     aliasCount: number
 }
@@ -56,15 +58,17 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
     const stringifiedType = JSON.stringify(ast.withoutLoc(type))
     let alias = n.dedup.get(stringifiedType)
     if (alias === undefined) {
+        const normalized = normalizeSubtypes(n, type)
         alias = `${n.aliasCount++}`
-        n.mutSchema.push({
+        n.defs.push({
             alias,
             internal: true,
-            type,
+            type: normalized,
             comment: null,
-            loc: null,
+            loc: normalized.loc,
         })
         n.dedup.set(stringifiedType, alias)
     }
-    return { tag: "alias", data: alias, types: null, extra: null, loc: null }
+    const loc = type.loc
+    return { tag: "alias", data: alias, types: null, extra: null, loc }
 }

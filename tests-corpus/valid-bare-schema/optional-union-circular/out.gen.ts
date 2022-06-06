@@ -1,22 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-export type Alias =
-    | { readonly tag: 0; readonly val: Alias }
-    | { readonly tag: 1; readonly val: string } | null
-
-export function readAlias(bc: bare.ByteCursor): Alias {
-    return bare.readBool(bc)
-        ? read0(bc)
-        : null
-}
-
-export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
-        write0(bc, x)
-    }
-}
-
 function read0(bc: bare.ByteCursor): 
     | { readonly tag: 0; readonly val: Alias }
     | { readonly tag: 1; readonly val: string } {
@@ -45,5 +28,22 @@ function write0(bc: bare.ByteCursor, x:
         case 1:
             bare.writeString(bc, x.val)
             break
+    }
+}
+
+export type Alias =
+    | { readonly tag: 0; readonly val: Alias }
+    | { readonly tag: 1; readonly val: string } | null
+
+export function readAlias(bc: bare.ByteCursor): Alias {
+    return bare.readBool(bc)
+        ? read0(bc)
+        : null
+}
+
+export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
+    bare.writeBool(bc, x !== null)
+    if (x !== null) {
+        write0(bc, x)
     }
 }

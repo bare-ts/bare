@@ -1,30 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-export interface Person {
-    readonly bestFriend: Person | null
-    readonly secondBestFriend: 
-        | { readonly tag: 0; readonly val: Person }
-        | { readonly tag: 1; readonly val: null }
-    readonly friends: readonly Person[]
-    readonly friendNicknames: ReadonlyMap<string, Person>
-}
-
-export function readPerson(bc: bare.ByteCursor): Person {
-    return {
-        bestFriend: read0(bc),
-        secondBestFriend: read1(bc),
-        friends: read2(bc),
-        friendNicknames: read3(bc),
-    }
-}
-
-export function writePerson(bc: bare.ByteCursor, x: Person): void {
-    write0(bc, x.bestFriend)
-    write1(bc, x.secondBestFriend)
-    write2(bc, x.friends)
-    write3(bc, x.friendNicknames)
-}
-
 function read0(bc: bare.ByteCursor): Person | null {
     return bare.readBool(bc)
         ? readPerson(bc)
@@ -104,4 +79,29 @@ function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, Person>): void {
         bare.writeString(bc, kv[0])
         writePerson(bc, kv[1])
     }
+}
+
+export interface Person {
+    readonly bestFriend: Person | null
+    readonly secondBestFriend: 
+        | { readonly tag: 0; readonly val: Person }
+        | { readonly tag: 1; readonly val: null }
+    readonly friends: readonly Person[]
+    readonly friendNicknames: ReadonlyMap<string, Person>
+}
+
+export function readPerson(bc: bare.ByteCursor): Person {
+    return {
+        bestFriend: read0(bc),
+        secondBestFriend: read1(bc),
+        friends: read2(bc),
+        friendNicknames: read3(bc),
+    }
+}
+
+export function writePerson(bc: bare.ByteCursor, x: Person): void {
+    write0(bc, x.bestFriend)
+    write1(bc, x.secondBestFriend)
+    write2(bc, x.friends)
+    write3(bc, x.friendNicknames)
 }
