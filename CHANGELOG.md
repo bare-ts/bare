@@ -15,6 +15,12 @@ This project adheres to [Semantic Versioning][semver].
     type Message union { Person }
     ```
 
+-   Require Node 14.18.0 or above
+
+    @bare-ts now requires Node 14.18.0 or above.
+    This enables bare-ts/tools to internally use `node:` prefixes
+    for importing nodes' built-ins.
+
 ## 0.9.0 (2022-05-12)
 
 -   Rename `bare-ts` CLI to `bare`
