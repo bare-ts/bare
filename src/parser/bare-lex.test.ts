@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
-import { Lex } from "@bare-ts/tools"
+import { Lex } from "./bare-lex.js"
 import { default as test } from "oletus"
 
 const SAMPLE = `

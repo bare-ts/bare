@@ -39,16 +39,13 @@
   },
   "sideEffects": false,
   "files": [
-    "dist/*.cjs",
-    "dist/*.d.cts",
-    "dist/*.d.ts",
-    "dist/*.js",
+    "dist/**/*.cjs",
+    "dist/**/*.d.cts",
     "dist/**/*.d.ts",
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "!dist/**/*.test.js",
+    "!dist/**/*.spec.js"
   ],
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "build": "sh ./scripts/build.sh",
     "clean": "rm -rf dist coverage",

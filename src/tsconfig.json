@@ -8,5 +8,5 @@
     "composite": true
   },
   "include": ["./**/*.ts"],
-  "exclude": ["./cli.ts"]
+  "exclude": ["./cli.ts", "./**/*.spec.ts", "./**/*.test.ts"]
 }
