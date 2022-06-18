@@ -233,7 +233,10 @@ function checkNonVoid(c: Checker, type: ast.Type): void {
                 ? ast.resolveAlias(aliased.type, c.symbols)
                 : type
     }
-    if (type.tag === "void") {
+    if (
+        type.tag === "void" &&
+        (type.extra === null || type.extra.literal.type !== "string")
+    ) {
         throw new CompilerError(
             `types that resolve to 'void' are only allowed in unions.`,
             type.loc,

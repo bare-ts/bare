@@ -2,49 +2,31 @@ import * as bare from "@bare-ts/lib"
 
 const config = /* @__PURE__ */ bare.Config({})
 
-export type u32 = number
-
-export class BoxedU32 {
-    readonly val: u32
-    constructor(
-        val_: u32,
-    ) {
-        this.val = val_
+export function readBoxedU32(bc) {
+    return {
+        tag: "BOXED_U32",
+        val: bare.readU32(bc),
     }
 }
 
-export function readBoxedU32(bc: bare.ByteCursor): BoxedU32 {
-    return new BoxedU32(
-        bare.readU32(bc))
-}
-
-export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void {
+export function writeBoxedU32(bc, x) {
+    
     bare.writeU32(bc, x.val)
 }
 
-export class BoxedStr {
-    readonly val: string
-    constructor(
-        val_: string,
-    ) {
-        this.val = val_
+export function readBoxedStr(bc) {
+    return {
+        tag: "BOXED_STR",
+        val: bare.readString(bc),
     }
 }
 
-export function readBoxedStr(bc: bare.ByteCursor): BoxedStr {
-    return new BoxedStr(
-        bare.readString(bc))
-}
-
-export function writeBoxedStr(bc: bare.ByteCursor, x: BoxedStr): void {
+export function writeBoxedStr(bc, x) {
+    
     bare.writeString(bc, x.val)
 }
 
-export type Boxed =
-    | BoxedU32
-    | BoxedStr
-
-export function readBoxed(bc: bare.ByteCursor): Boxed {
+export function readBoxed(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
@@ -59,17 +41,20 @@ export function readBoxed(bc: bare.ByteCursor): Boxed {
     }
 }
 
-export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void {
-    if (x instanceof BoxedU32) {
+export function writeBoxed(bc, x) {
+    switch (x.tag) {
+        case "BOXED_U32":
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
-        } else if (x instanceof BoxedStr) {
+            break
+        case "BOXED_STR":
             bare.writeU8(bc, 1)
             writeBoxedStr(bc, x)
-        }
+            break
+    }
 }
 
-export function encodeBoxed(x: Boxed): Uint8Array {
+export function encodeBoxed(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
         config
@@ -78,7 +63,7 @@ export function encodeBoxed(x: Boxed): Uint8Array {
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function decodeBoxed(bytes: Uint8Array): Boxed {
+export function decodeBoxed(bytes) {
     const bc = new bare.ByteCursor(bytes, config)
     const result = readBoxed(bc)
     if (bc.offset < bc.view.byteLength) {

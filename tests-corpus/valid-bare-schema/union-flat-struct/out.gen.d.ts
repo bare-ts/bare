@@ -2,22 +2,18 @@ import * as bare from "@bare-ts/lib"
 
 export type u32 = number
 
-export declare class BoxedU32 {
+export interface BoxedU32 {
+    readonly tag: "BOXED_U32"
     readonly val: u32
-    constructor(
-        val_: u32,
-    )
 }
 
 export function readBoxedU32(bc: bare.ByteCursor): BoxedU32
 
 export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void
 
-export declare class BoxedStr {
+export interface BoxedStr {
+    readonly tag: "BOXED_STR"
     readonly val: string
-    constructor(
-        val_: string,
-    )
 }
 
 export function readBoxedStr(bc: bare.ByteCursor): BoxedStr

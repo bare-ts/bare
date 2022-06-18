@@ -19,7 +19,7 @@ export function writeBoxedU32(bc, x) {
     bare.writeU32(bc, x.val)
 }
 
-export class Boxedstr {
+export class BoxedStr {
     constructor(
         val_,
     ) {
@@ -27,12 +27,12 @@ export class Boxedstr {
     }
 }
 
-export function readBoxedstr(bc) {
-    return new Boxedstr(
+export function readBoxedStr(bc) {
+    return new BoxedStr(
         bare.readString(bc))
 }
 
-export function writeBoxedstr(bc, x) {
+export function writeBoxedStr(bc, x) {
     bare.writeString(bc, x.val)
 }
 
@@ -43,7 +43,7 @@ export function readBoxed(bc) {
         case 0:
             return readBoxedU32(bc)
         case 1:
-            return readBoxedstr(bc)
+            return readBoxedStr(bc)
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -55,9 +55,9 @@ export function writeBoxed(bc, x) {
     if (x instanceof BoxedU32) {
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
-        } else if (x instanceof Boxedstr) {
+        } else if (x instanceof BoxedStr) {
             bare.writeU8(bc, 1)
-            writeBoxedstr(bc, x)
+            writeBoxedStr(bc, x)
         }
 }
 

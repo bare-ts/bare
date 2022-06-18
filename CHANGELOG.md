@@ -4,6 +4,31 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   Automatically discriminate aliased structs in flat unions
+
+    @bare-ts is now able to automatically add a discriminator field for
+    aliased structs in flat union.
+
+    The name of the discriminator field is `tag`.
+    For now, it is not possible to flatten aliased structs with at least
+    one field named `tag`.
+
+    Thus, under the option `--use-flat-union`, the following BARE types:
+
+    ```bare
+    type X struct { ... }
+    type Y struct { ... }
+    type XY union { X | Y }
+    ```
+
+    translate to the following TypeScript types:
+
+    ```ts
+    export interface X { readonly tag: "X"; ... }
+    export interface Y { readonly tag: "Y"; ... }
+    export type XY = X | Y
+    ```
+
 -   Forbid flat unions of transitively aliased classes
 
     @bare-ts previously allowed flat unions of transitively aliased classes.

@@ -28,3 +28,8 @@ export function jsRpr(v: unknown): string {
         ? `${v}n`
         : `${v}`
 }
+
+export function underscoreCase(camelCase: string): string {
+    const result = camelCase.replace(/([A-Z])/g, "_$1").toUpperCase()
+    return result[0] === "_" ? result.slice(1) : result
+}

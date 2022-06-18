@@ -1,0 +1,263 @@
+{
+  "defs": [
+    {
+      "alias": "BoxedU32",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "tag",
+            "val": null,
+            "comment": null,
+            "extra": {
+              "mut": false,
+              "quoted": false
+            },
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          },
+          {
+            "name": "tag",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 27,
+              "line": 2,
+              "col": 5
+            }
+          },
+          {
+            "name": "val",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 40,
+              "line": 3,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "void",
+            "data": null,
+            "types": null,
+            "extra": {
+              "lax": false,
+              "literal": {
+                "type": "string",
+                "val": "BOXED_U32"
+              }
+            },
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 32,
+              "line": 2,
+              "col": 10
+            }
+          },
+          {
+            "tag": "u32",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 45,
+              "line": 3,
+              "col": 10
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "union-flat-struct-repeated-tag/schema.bare",
+          "offset": 21,
+          "line": 1,
+          "col": 22
+        }
+      },
+      "loc": {
+        "filename": "union-flat-struct-repeated-tag/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "BoxedStr",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "tag",
+            "val": null,
+            "comment": null,
+            "extra": {
+              "mut": false,
+              "quoted": false
+            },
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 73,
+              "line": 6,
+              "col": 22
+            }
+          },
+          {
+            "name": "val",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 79,
+              "line": 7,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "void",
+            "data": null,
+            "types": null,
+            "extra": {
+              "lax": false,
+              "literal": {
+                "type": "string",
+                "val": "BOXED_STR"
+              }
+            },
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 73,
+              "line": 6,
+              "col": 22
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 84,
+              "line": 7,
+              "col": 10
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "union-flat-struct-repeated-tag/schema.bare",
+          "offset": 73,
+          "line": 6,
+          "col": 22
+        }
+      },
+      "loc": {
+        "filename": "union-flat-struct-repeated-tag/schema.bare",
+        "offset": 52,
+        "line": 6,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Boxed",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          }
+        ],
+        "types": [
+          {
+            "tag": "alias",
+            "data": "BoxedU32",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 110,
+              "line": 10,
+              "col": 20
+            }
+          },
+          {
+            "tag": "alias",
+            "data": "BoxedStr",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-repeated-tag/schema.bare",
+              "offset": 121,
+              "line": 10,
+              "col": 31
+            }
+          }
+        ],
+        "extra": {
+          "flat": true
+        },
+        "loc": {
+          "filename": "union-flat-struct-repeated-tag/schema.bare",
+          "offset": 102,
+          "line": 10,
+          "col": 12
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "union-flat-struct-repeated-tag/schema.bare",
+        "offset": 91,
+        "line": 10,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-struct-repeated-tag/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

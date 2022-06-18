@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "union-flat-struct-repeated-tag/schema.bare",
+    "offset": 27,
+    "line": 2,
+    "col": 5
+  },
+  "message": "(union-flat-struct-repeated-tag/schema.bare:2:5) name of a struct member must be unique."
+}

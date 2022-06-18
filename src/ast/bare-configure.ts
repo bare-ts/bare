@@ -2,15 +2,29 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 import type { Config } from "../core/config.js"
+import { underscoreCase } from "../utils/formatting.js"
 import * as ast from "./bare-ast.js"
 
 export function configure(schema: ast.Ast, config: Config): ast.Ast {
+    const c: Configurator = { config, aliasesInFlatUnion: new Set() }
     const defs = schema.defs.slice()
     for (let i = 0; i < defs.length; i++) {
-        const type = configureType(defs[i].type, config)
+        const type = configureType(c, defs[i].type)
         if (defs[i].type !== type) {
             const { alias, internal, comment, loc } = defs[i]
             defs[i] = { alias, internal, type, comment, loc }
+        }
+    }
+    for (let i = 0; i < defs.length; i++) {
+        let type = defs[i].type
+        if (
+            c.aliasesInFlatUnion.has(defs[i].alias) &&
+            type.tag === "struct" &&
+            !type.extra?.class
+        ) {
+            const { alias, internal, comment, loc } = defs[i]
+            type = embeddedTag(c, type, underscoreCase(defs[i].alias))
+            defs[i] = { alias, internal, comment, type, loc }
         }
     }
     if (schema.defs.some((def, i) => def !== defs[i])) {
@@ -19,10 +33,16 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
     return schema
 }
 
-function configureType(type: ast.Type, config: Config): ast.Type {
+interface Configurator {
+    readonly config: Config
+    readonly aliasesInFlatUnion: Set<string>
+}
+
+function configureType(c: Configurator, type: ast.Type): ast.Type {
+    const config = c.config
     let { data, extra } = type
     const types =
-        type.types !== null ? configureTypes(type.types, config) : type.types
+        type.types !== null ? configureTypes(c, type.types) : type.types
     if (extra === null) {
         const mut = config.useMutable
         const lax = config.useLaxOptional
@@ -66,6 +86,11 @@ function configureType(type: ast.Type, config: Config): ast.Type {
             case "union":
                 if (config.useFlatUnion) {
                     extra = { flat: true }
+                    for (const subtype of type.types) {
+                        if (subtype.tag === "alias") {
+                            c.aliasesInFlatUnion.add(subtype.data)
+                        }
+                    }
                 }
                 break
             case "i64":
@@ -85,10 +110,10 @@ function configureType(type: ast.Type, config: Config): ast.Type {
 }
 
 function configureTypes(
+    c: Configurator,
     types: readonly ast.Type[],
-    config: Config,
 ): readonly ast.Type[] {
-    const configuredTypes = types.map((t) => configureType(t, config))
+    const configuredTypes = types.map((t) => configureType(c, t))
     if (configuredTypes.some((t, i) => t !== types[i])) {
         return configuredTypes
     }
@@ -117,4 +142,29 @@ function configureField(
         return { name, val, extra: { mut, quoted }, comment, loc }
     }
     return field
+}
+
+function embeddedTag(
+    n: Configurator,
+    type: ast.StructType,
+    val: string,
+): ast.StructType {
+    const { extra, loc } = type
+    const data = type.data.slice()
+    data.splice(0, 0, {
+        name: "tag",
+        val: null,
+        comment: null,
+        extra: { mut: false, quoted: n.config.useQuotedProperty },
+        loc,
+    })
+    const types = type.types.slice()
+    types.splice(0, 0, {
+        tag: "void",
+        data: null,
+        types: null,
+        extra: { lax: false, literal: { type: "string", val } },
+        loc,
+    })
+    return { tag: "struct", data, types, extra, loc }
 }
