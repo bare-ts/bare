@@ -1,0 +1,157 @@
+{
+  "defs": [
+    {
+      "alias": "BoxedU32",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "tag",
+            "val": null,
+            "comment": null,
+            "extra": {
+              "mut": false,
+              "quoted": false
+            },
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          },
+          {
+            "name": "val",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 27,
+              "line": 2,
+              "col": 5
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "void",
+            "data": null,
+            "types": null,
+            "extra": {
+              "lax": false,
+              "literal": {
+                "type": "string",
+                "val": "BOXED_U32"
+              }
+            },
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          },
+          {
+            "tag": "u32",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 32,
+              "line": 2,
+              "col": 10
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "flat-union-undef-alias/schema.bare",
+          "offset": 21,
+          "line": 1,
+          "col": 22
+        }
+      },
+      "loc": {
+        "filename": "flat-union-undef-alias/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Boxed",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          }
+        ],
+        "types": [
+          {
+            "tag": "alias",
+            "data": "BoxedU32",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 58,
+              "line": 5,
+              "col": 20
+            }
+          },
+          {
+            "tag": "alias",
+            "data": "BoxedStr",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "flat-union-undef-alias/schema.bare",
+              "offset": 69,
+              "line": 5,
+              "col": 31
+            }
+          }
+        ],
+        "extra": {
+          "flat": true
+        },
+        "loc": {
+          "filename": "flat-union-undef-alias/schema.bare",
+          "offset": 50,
+          "line": 5,
+          "col": 12
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "flat-union-undef-alias/schema.bare",
+        "offset": 39,
+        "line": 5,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "flat-union-undef-alias/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

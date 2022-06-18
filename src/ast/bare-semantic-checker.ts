@@ -78,6 +78,14 @@ function checkMainCodecs(c: Checker, schema: ast.Ast): void {
 }
 
 function checkTypeInvariants(c: Checker, type: ast.Type): void {
+    if (type.types !== null) {
+        for (const subtype of type.types) {
+            if (type.tag !== "union") {
+                checkNonVoid(c, subtype)
+            }
+            checkTypeInvariants(c, subtype)
+        }
+    }
     switch (type.tag) {
         case "alias":
             checkUndefinedAlias(c, type)
@@ -99,14 +107,6 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
             checkMembersInvariants(c, type)
             checkUnionInvariants(c, type)
             break
-    }
-    if (type.types !== null) {
-        for (const subtype of type.types) {
-            if (type.tag !== "union") {
-                checkNonVoid(c, subtype)
-            }
-            checkTypeInvariants(c, subtype)
-        }
     }
 }
 

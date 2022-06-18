@@ -1,0 +1,10 @@
+{
+  "name": "CompilerError",
+  "location": {
+    "filename": "flat-union-undef-alias/schema.bare",
+    "offset": 69,
+    "line": 5,
+    "col": 31
+  },
+  "message": "(flat-union-undef-alias/schema.bare:5:31) alias 'BoxedStr' is not defined."
+}
