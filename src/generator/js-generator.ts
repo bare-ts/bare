@@ -2,7 +2,6 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 import * as ast from "../ast/bare-ast.js"
-import { CompilerError } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
 import {
     capitalize,
@@ -195,8 +194,9 @@ function genAliasType(g: Gen, type: ast.Alias): string {
 }
 
 function genListType(g: Gen, type: ast.ListType): string {
-    if (type.extra?.typedArray) {
-        return genTypedArrayType(g, type)
+    const valType = type.types[0]
+    if (type.extra?.typedArray && ast.isFixedNumericTag(valType.tag)) {
+        return ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY[valType.tag]
     } else if (type.extra?.unique) {
         return genSetType(g, type)
     } else {
@@ -239,9 +239,7 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
         const typedef = genType(g, simplified.types[0])
         const noneType = simplified.extra?.lax
             ? "null | undefined"
-            : simplified.extra !== null
-            ? jsRpr(ast.literalVal(simplified.extra.literal))
-            : "null"
+            : noneVal(simplified)
         return `${typedef} | ${noneType}`
     } else {
         return genType(g, simplified)
@@ -289,17 +287,6 @@ function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
     )`)
 }
 
-function genTypedArrayType(_g: Gen, type: ast.ListType): string {
-    const valType = type.types[0]
-    if (!ast.isFixedNumericTag(valType.tag)) {
-        throw new CompilerError(
-            `value type of a typed array cannot be '${valType.tag}'. This is likely an internal error.`,
-            valType.loc,
-        )
-    }
-    return ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY[valType.tag]
-}
-
 function genUnionType(g: Gen, type: ast.UnionType): string {
     const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
@@ -316,11 +303,7 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
 }
 
 function genVoidType(_g: Gen, type: ast.VoidType): string {
-    return type.extra?.lax
-        ? "undefined | null"
-        : type.extra !== null && type.extra.literal
-        ? jsRpr(ast.literalVal(type.extra.literal))
-        : "null"
+    return type.extra?.lax ? "undefined | null" : noneVal(type)
 }
 
 function genReaderHead(g: Gen, aliased: ast.AliasedType): string {
@@ -568,12 +551,9 @@ function genMapReader(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalReader(g: Gen, type: ast.OptionalType): string {
-    const noneVal = jsRpr(
-        type.extra !== null ? ast.literalVal(type.extra.literal) : null,
-    )
     return unindent(`(bare.readBool(bc)
         ? ${indent(genReading(g, type.types[0]), 3)}
-        : ${noneVal})`)
+        : ${noneVal(type)})`)
 }
 
 function genSetReader(g: Gen, type: ast.ListType): string {
@@ -677,10 +657,7 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
 }
 
 function genVoidReader(_g: Gen, type: ast.VoidType): string {
-    const val = jsRpr(
-        type.extra !== null ? ast.literalVal(type.extra.literal) : null,
-    )
-    return `(${val})`
+    return `(${noneVal(type)})`
 }
 
 // JS/TS writers generation
@@ -818,10 +795,7 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
-    const val = jsRpr(
-        type.extra !== null ? ast.literalVal(type.extra.literal) : null,
-    )
-    const presenceCmp = type.extra?.lax ? "!= null" : `!== ${val}`
+    const presenceCmp = type.extra?.lax ? "!= null" : `!== ${noneVal(type)}`
     return unindent(`{
         bare.writeBool(bc, $x ${presenceCmp})
         if ($x ${presenceCmp}) {
@@ -1006,4 +980,12 @@ function genEncoder(g: Gen, alias: string): string {
         write${alias}(bc, x)
         return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
     }`)
+}
+
+// utils
+
+export function noneVal(type: ast.OptionalType | ast.VoidType): string {
+    return type.extra !== null
+        ? jsRpr(ast.literalVal(type.extra.literal))
+        : "null"
 }
