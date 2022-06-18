@@ -17,7 +17,6 @@ export function readBoxedU32(bc: bare.ByteCursor): BoxedU32 {
 }
 
 export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void {
-    
     bare.writeU32(bc, x.val)
 }
 
@@ -34,7 +33,6 @@ export function readBoxedStr(bc: bare.ByteCursor): BoxedStr {
 }
 
 export function writeBoxedStr(bc: bare.ByteCursor, x: BoxedStr): void {
-    
     bare.writeString(bc, x.val)
 }
 

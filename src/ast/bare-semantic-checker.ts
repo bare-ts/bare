@@ -235,7 +235,9 @@ function checkNonVoid(c: Checker, type: ast.Type): void {
     }
     if (
         type.tag === "void" &&
-        (type.extra === null || type.extra.literal.type !== "string")
+        (type.extra === null ||
+            type.extra.literal.type === "null" ||
+            type.extra.literal.type === "undefined")
     ) {
         throw new CompilerError(
             `types that resolve to 'void' are only allowed in unions.`,
@@ -278,6 +280,11 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
                 ) &&
                 (resolved.every((t) => t.extra?.class) ||
                     ast.leadingDiscriminators(resolved) !== null)
+        } else if (
+            !isFlatUnion &&
+            type.types.every((t): t is ast.StructType => t.tag === "struct")
+        ) {
+            isFlatUnion = ast.leadingDiscriminators(type.types) !== null
         }
         if (!isFlatUnion) {
             throw new CompilerError("the union cannot be flatten.", type.loc)

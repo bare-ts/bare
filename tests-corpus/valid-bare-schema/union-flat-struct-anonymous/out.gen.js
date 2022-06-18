@@ -2,36 +2,20 @@ import * as bare from "@bare-ts/lib"
 
 const config = /* @__PURE__ */ bare.Config({})
 
-export function readBoxedU32(bc) {
-    return {
-        tag: "BOXED_U32",
-        val: bare.readU32(bc),
-    }
-}
-
-export function writeBoxedU32(bc, x) {
-    bare.writeU32(bc, x.val)
-}
-
-export function readBoxedStr(bc) {
-    return {
-        tag: "BOXED_STR",
-        val: bare.readString(bc),
-    }
-}
-
-export function writeBoxedStr(bc, x) {
-    bare.writeString(bc, x.val)
-}
-
-export function readBoxed(bc) {
+export function readUnsignedInt(bc) {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return readBoxedU32(bc)
+            return {
+                tag: 0,
+                value: bare.readString(bc),
+            }
         case 1:
-            return readBoxedStr(bc)
+            return {
+                tag: 1,
+                value: bare.readU32(bc),
+            }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -39,31 +23,35 @@ export function readBoxed(bc) {
     }
 }
 
-export function writeBoxed(bc, x) {
+export function writeUnsignedInt(bc, x) {
     switch (x.tag) {
-        case "BOXED_U32":
+        case 0:
             bare.writeU8(bc, 0)
-            writeBoxedU32(bc, x)
+            {
+                bare.writeString(bc, x.value)
+            }
             break
-        case "BOXED_STR":
+        case 1:
             bare.writeU8(bc, 1)
-            writeBoxedStr(bc, x)
+            {
+                bare.writeU32(bc, x.value)
+            }
             break
     }
 }
 
-export function encodeBoxed(x) {
+export function encodeUnsignedInt(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
         config
     )
-    writeBoxed(bc, x)
+    writeUnsignedInt(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
-export function decodeBoxed(bytes) {
+export function decodeUnsignedInt(bytes) {
     const bc = new bare.ByteCursor(bytes, config)
-    const result = readBoxed(bc)
+    const result = readUnsignedInt(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }

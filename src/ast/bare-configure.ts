@@ -9,7 +9,7 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
     const c: Configurator = { config, aliasesInFlatUnion: new Set() }
     const defs = schema.defs.slice()
     for (let i = 0; i < defs.length; i++) {
-        const type = configureType(c, defs[i].type)
+        const type = configureType(c, defs[i].type, true)
         if (defs[i].type !== type) {
             const { alias, internal, comment, loc } = defs[i]
             defs[i] = { alias, internal, type, comment, loc }
@@ -38,11 +38,14 @@ interface Configurator {
     readonly aliasesInFlatUnion: Set<string>
 }
 
-function configureType(c: Configurator, type: ast.Type): ast.Type {
+function configureType(
+    c: Configurator,
+    type: ast.Type,
+    isAliased = false,
+): ast.Type {
     const config = c.config
     let { data, extra } = type
-    const types =
-        type.types !== null ? configureTypes(c, type.types) : type.types
+    let types = type.types !== null ? configureTypes(c, type.types) : type.types
     if (extra === null) {
         const mut = config.useMutable
         const lax = config.useLaxOptional
@@ -79,18 +82,28 @@ function configureType(c: Configurator, type: ast.Type): ast.Type {
             }
             case "struct":
                 data = configureFields(type.data, config)
-                if (config.useClass) {
+                if (isAliased && config.useClass) {
                     extra = { class: true }
                 }
                 break
             case "union":
-                if (config.useFlatUnion) {
+                if (config.useFlatUnion && types !== null) {
                     extra = { flat: true }
-                    for (const subtype of type.types) {
+                    const newTypes: ast.Type[] = []
+                    for (let i = 0; i < types.length; i++) {
+                        let subtype = types[i]
                         if (subtype.tag === "alias") {
                             c.aliasesInFlatUnion.add(subtype.data)
+                        } else if (subtype.tag === "struct") {
+                            subtype = embeddedTag(c, subtype, type.data[i].val)
                         }
+                        newTypes.push(subtype)
                     }
+                    types = newTypes.every(
+                        (t, i) => types !== null && t === types[i],
+                    )
+                        ? types
+                        : newTypes
                 }
                 break
             case "i64":
@@ -147,7 +160,7 @@ function configureField(
 function embeddedTag(
     n: Configurator,
     type: ast.StructType,
-    val: string,
+    val: string | number,
 ): ast.StructType {
     const { extra, loc } = type
     const data = type.data.slice()
@@ -158,12 +171,16 @@ function embeddedTag(
         extra: { mut: false, quoted: n.config.useQuotedProperty },
         loc,
     })
+    const literal: ast.Literal =
+        typeof val === "string"
+            ? { type: "string", val }
+            : { type: "number", val }
     const types = type.types.slice()
     types.splice(0, 0, {
         tag: "void",
         data: null,
         types: null,
-        extra: { lax: false, literal: { type: "string", val } },
+        extra: { lax: false, literal },
         loc,
     })
     return { tag: "struct", data, types, extra, loc }

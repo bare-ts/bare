@@ -29,6 +29,23 @@ This project adheres to [Semantic Versioning][semver].
     export type XY = X | Y
     ```
 
+-   Allow flat unions of anonymous structs
+
+    @bare-ts now accepts flat unions of anonymous structs.
+    It automatically uses the union tags to discriminate the structs.
+
+    Under the option `--use-flat-union`, the following BARE types:
+
+    ```bare
+    type XY union { struct { ... } | struct { ... } }
+    ```
+
+    translate to the following TypeScript types:
+
+    ```ts
+    export type XY = { readonly tag: 0, ... } | { readonly tag: 1, ... }
+    ```
+
 -   Forbid flat unions of transitively aliased classes
 
     @bare-ts previously allowed flat unions of transitively aliased classes.

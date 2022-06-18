@@ -636,11 +636,11 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
         if (flat) {
             switchBody += `
             case ${type.data[i].val}:
-                return ${valExpr}`
+                return ${indent(valExpr, 4)}`
         } else {
             switchBody += `
             case ${type.data[i].val}:
-                return { ${tagPropSet}, ${valProp}: ${valExpr} }`
+                return { ${tagPropSet}, ${valProp}: ${indent(valExpr, 4)} }`
         }
     }
     return unindent(`{
@@ -814,10 +814,12 @@ function genSetWriter(g: Gen, type: ast.ListType): string {
 }
 
 function genStructWriter(g: Gen, type: ast.StructType): string {
-    const fieldEncoding = type.data.map(({ extra, name }, i) => {
-        const propAccess = extra?.quoted ? `["${name}"]` : `.${name}`
-        return genWriting(g, type.types[i], `$x${propAccess}`)
-    })
+    const fieldEncoding = type.data
+        .map(({ extra, name }, i) => {
+            const propAccess = extra?.quoted ? `["${name}"]` : `.${name}`
+            return genWriting(g, type.types[i], `$x${propAccess}`)
+        })
+        .filter((s) => s !== "")
     return unindent(`{
         ${indent(fieldEncoding.join("\n"), 2)}
     }`)
@@ -839,7 +841,10 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
         const baseUnion = union as ast.UnionType<ast.BaseType | ast.VoidType>
         return genBaseFlatUnionWriter(g, baseUnion)
     }
-    if (union.extra?.flat && union.types.every((t) => t.tag === "alias")) {
+    if (
+        union.extra?.flat &&
+        union.types.every((t) => t.tag === "alias" || t.tag === "struct")
+    ) {
         const aliasesUnion = union as ast.UnionType<ast.Alias>
         return genAliasFlatUnionWriter(g, aliasesUnion)
     }
@@ -848,7 +853,7 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
 
 function genAliasFlatUnionWriter(
     g: Gen,
-    union: ast.UnionType<ast.Alias>,
+    union: ast.UnionType<ast.Alias> | ast.UnionType<ast.StructType>,
 ): string {
     const resolved = union.types.map((t) => ast.resolveAlias(t, g.symbols))
     if (!resolved.every((t): t is ast.StructType => t.tag === "struct")) {

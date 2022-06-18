@@ -1,0 +1,193 @@
+{
+  "defs": [
+    {
+      "alias": "UnsignedInt",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          }
+        ],
+        "types": [
+          {
+            "tag": "struct",
+            "data": [
+              {
+                "name": "tag",
+                "val": null,
+                "comment": null,
+                "extra": {
+                  "mut": false,
+                  "quoted": false
+                },
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 32,
+                  "line": 1,
+                  "col": 33
+                }
+              },
+              {
+                "name": "value",
+                "val": null,
+                "comment": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 34,
+                  "line": 1,
+                  "col": 35
+                }
+              }
+            ],
+            "types": [
+              {
+                "tag": "void",
+                "data": null,
+                "types": null,
+                "extra": {
+                  "lax": false,
+                  "literal": {
+                    "type": "number",
+                    "val": 0
+                  }
+                },
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 32,
+                  "line": 1,
+                  "col": 33
+                }
+              },
+              {
+                "tag": "str",
+                "data": null,
+                "types": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 41,
+                  "line": 1,
+                  "col": 42
+                }
+              }
+            ],
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-anonymous/schema.bare",
+              "offset": 32,
+              "line": 1,
+              "col": 33
+            }
+          },
+          {
+            "tag": "struct",
+            "data": [
+              {
+                "name": "tag",
+                "val": null,
+                "comment": null,
+                "extra": {
+                  "mut": false,
+                  "quoted": false
+                },
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 56,
+                  "line": 1,
+                  "col": 57
+                }
+              },
+              {
+                "name": "value",
+                "val": null,
+                "comment": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 58,
+                  "line": 1,
+                  "col": 59
+                }
+              }
+            ],
+            "types": [
+              {
+                "tag": "void",
+                "data": null,
+                "types": null,
+                "extra": {
+                  "lax": false,
+                  "literal": {
+                    "type": "number",
+                    "val": 1
+                  }
+                },
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 56,
+                  "line": 1,
+                  "col": 57
+                }
+              },
+              {
+                "tag": "u32",
+                "data": null,
+                "types": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-struct-anonymous/schema.bare",
+                  "offset": 65,
+                  "line": 1,
+                  "col": 66
+                }
+              }
+            ],
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-struct-anonymous/schema.bare",
+              "offset": 56,
+              "line": 1,
+              "col": 57
+            }
+          }
+        ],
+        "extra": {
+          "flat": true
+        },
+        "loc": {
+          "filename": "union-flat-struct-anonymous/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "union-flat-struct-anonymous/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-struct-anonymous/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
