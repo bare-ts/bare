@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.10.0 (2022-06-22)
 
 -   Automatically discriminate aliased structs in flat unions
 
