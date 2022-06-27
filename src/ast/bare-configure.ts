@@ -48,7 +48,6 @@ function configureType(
     let types = type.types !== null ? configureTypes(c, type.types) : type.types
     if (extra === null) {
         const mut = config.useMutable
-        const lax = config.useLaxOptional
         const undef = config.useUndefined
         switch (type.tag) {
             case "enum":
@@ -72,11 +71,11 @@ function configureType(
                 break
             case "optional":
             case "void": {
-                if (lax || undef) {
+                if (undef) {
                     const literal: ast.Literal = undef
                         ? ast.UNDEFINED_LITERAL_VAL
                         : ast.NULL_LITERAL_VAL
-                    extra = { lax, literal }
+                    extra = { literal }
                 }
                 break
             }
@@ -180,7 +179,7 @@ function embeddedTag(
         tag: "void",
         data: null,
         types: null,
-        extra: { lax: false, literal },
+        extra: { literal },
         loc,
     })
     return { tag: "struct", data, types, extra, loc }

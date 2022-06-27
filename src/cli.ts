@@ -86,10 +86,6 @@ program
         "use quoted property instead of unquoted property",
     )
     .option(
-        "--use-lax-optional",
-        "accept null and undefined values for optional types",
-    )
-    .option(
         "--use-undefined",
         "return undefined instead of null for optional types",
     )

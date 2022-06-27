@@ -59,7 +59,6 @@
                 "data": null,
                 "types": null,
                 "extra": {
-                  "lax": false,
                   "literal": {
                     "type": "number",
                     "val": 0
@@ -130,7 +129,6 @@
                 "data": null,
                 "types": null,
                 "extra": {
-                  "lax": false,
                   "literal": {
                     "type": "number",
                     "val": 1

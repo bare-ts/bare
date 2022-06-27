@@ -41,7 +41,6 @@
             "data": null,
             "types": null,
             "extra": {
-              "lax": false,
               "literal": {
                 "type": "string",
                 "val": "BOXED_U32"
@@ -123,7 +122,6 @@
             "data": null,
             "types": null,
             "extra": {
-              "lax": false,
               "literal": {
                 "type": "string",
                 "val": "BOXED_STR"

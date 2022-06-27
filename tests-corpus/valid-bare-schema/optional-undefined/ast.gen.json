@@ -21,7 +21,6 @@
           }
         ],
         "extra": {
-          "lax": false,
           "literal": {
             "type": "undefined",
             "val": null

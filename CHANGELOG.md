@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Remove option `--use-lax-optional`
+
+    This avoids to break bijective encoding.
+
 ## 0.10.0 (2022-06-22)
 
 -   Automatically discriminate aliased structs in flat unions

@@ -175,7 +175,7 @@ function genType(g: Gen, type: ast.Type): string {
         case "union":
             return genUnionType(g, type)
         case "void":
-            return genVoidType(g, type)
+            return noneVal(type)
     }
     if (type.extra?.safe) {
         return `${type.tag}Safe`
@@ -237,10 +237,7 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
     const simplified = utils.unrecursive(type, g.symbols)
     if (simplified.tag === "optional") {
         const typedef = genType(g, simplified.types[0])
-        const noneType = simplified.extra?.lax
-            ? "null | undefined"
-            : noneVal(simplified)
-        return `${typedef} | ${noneType}`
+        return `${typedef} | ${noneVal(simplified)}`
     } else {
         return genType(g, simplified)
     }
@@ -300,10 +297,6 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
             : `\n${doc}| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
     }
     return indent(result)
-}
-
-function genVoidType(_g: Gen, type: ast.VoidType): string {
-    return type.extra?.lax ? "undefined | null" : noneVal(type)
 }
 
 function genReaderHead(g: Gen, aliased: ast.AliasedType): string {
@@ -795,10 +788,10 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
-    const presenceCmp = type.extra?.lax ? "!= null" : `!== ${noneVal(type)}`
+    const cmp = `$x !== ${noneVal(type)}`
     return unindent(`{
-        bare.writeBool(bc, $x ${presenceCmp})
-        if ($x ${presenceCmp}) {
+        bare.writeBool(bc, ${cmp})
+        if (${cmp}) {
             ${indent(genWriting(g, type.types[0], "$x"), 3)}
         }
     }`)

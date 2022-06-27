@@ -103,7 +103,7 @@ export interface OptionalType {
     readonly tag: "optional"
     readonly data: null
     readonly types: readonly [type: Type]
-    readonly extra: { readonly lax: boolean; readonly literal: Literal } | null
+    readonly extra: { readonly literal: Literal } | null
     readonly loc: Location | null
 }
 
@@ -127,7 +127,7 @@ export interface VoidType {
     readonly tag: "void"
     readonly data: null
     readonly types: null
-    readonly extra: { readonly lax: boolean; readonly literal: Literal } | null
+    readonly extra: { readonly literal: Literal } | null
     readonly loc: Location | null
 }
 
@@ -338,13 +338,11 @@ export function leadingDiscriminators(
         const type0LeadingField = structs[0].data[0]
         for (const struct of structs) {
             const fields = struct.data
-            // FIXME: extra.literal.val is no longer the literal value...
             if (
                 fields.length === 0 ||
                 fields[0].name !== type0LeadingField.name ||
                 struct.types[0].tag !== "void" ||
                 struct.types[0].extra === null ||
-                struct.types[0].extra.lax ||
                 literals.has(literalVal(struct.types[0].extra.literal))
             ) {
                 return null

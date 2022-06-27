@@ -22,7 +22,6 @@ export interface Config {
     readonly useFlatUnion: boolean
     readonly useGenericArray: boolean
     readonly useIntEnum: boolean
-    readonly useLaxOptional: boolean
     readonly useMutable: boolean
     readonly useQuotedProperty: boolean
     readonly useSafeInt: boolean
@@ -47,7 +46,6 @@ export function Config({
     useFlatUnion = false,
     useGenericArray = false,
     useIntEnum = false,
-    useLaxOptional = false,
     useMutable = false,
     useQuotedProperty = false,
     useSafeInt = false,
@@ -96,7 +94,6 @@ export function Config({
         useFlatUnion,
         useGenericArray,
         useIntEnum,
-        useLaxOptional,
         useMutable,
         useQuotedProperty,
         useSafeInt,

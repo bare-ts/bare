@@ -89,13 +89,10 @@ function innerUnrecursive(
 function simplifyOptional(type: ast.OptionalType): ast.Type {
     const subtype = type.types[0]
     if (subtype.tag === "void" || subtype.tag === "optional") {
-        const literal1 = type.extra?.literal ?? ast.NULL_LITERAL_VAL
+        const literal = type.extra?.literal ?? ast.NULL_LITERAL_VAL
         const literal2 = subtype.extra?.literal ?? ast.NULL_LITERAL_VAL
-        if (literal1.type === literal2.type && literal1.val === literal2.val) {
-            const lax =
-                (type.extra !== null && type.extra.lax) ||
-                (subtype.extra !== null && subtype.extra.lax)
-            const extra = { lax, literal: literal1 }
+        if (literal.type === literal2.type && literal.val === literal2.val) {
+            const extra = { literal }
             if (subtype.types !== null) {
                 return simplifyOptional({
                     tag: "optional",
