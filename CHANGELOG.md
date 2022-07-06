@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.11.0 (2022-07-06)
 
 -   Remove option `--use-lax-optional`
 

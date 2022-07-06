@@ -1,6 +1,6 @@
 {
   "name": "@bare-ts/tools",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Compiler and tools for BARE schema",
   "keywords": [
     "bare",
