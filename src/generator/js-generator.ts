@@ -440,7 +440,7 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
         case "union":
             return genUnionReader(g, type)
         case "void":
-            return genVoidReader(g, type)
+            return `(${noneVal(type)})`
     }
     if (type.extra?.safe) {
         return `(bare.read${capitalize(type.tag)}Safe(bc))`
@@ -647,10 +647,6 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
             }
         }
     }`)
-}
-
-function genVoidReader(_g: Gen, type: ast.VoidType): string {
-    return `(${noneVal(type)})`
 }
 
 // JS/TS writers generation
