@@ -14,6 +14,7 @@
         "no-await-in-loop",
         "no-const-assign",
         "no-eval",
+        "no-implicit-declare-namespace-export",
         "no-non-null-asserted-optional-chain",
         "no-non-null-assertion",
         "no-sparse-arrays",
