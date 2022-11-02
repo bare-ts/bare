@@ -3,6 +3,7 @@
     "files": {
       "include": ["src/", "tests-corpus"]
     },
+    "report": "compact",
     "rules": {
       "tags": ["recommended"],
       "include": [
