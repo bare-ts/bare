@@ -87,7 +87,7 @@ program
     )
     .option(
         "--use-undefined",
-        "return undefined instead of null for optional types",
+        "use undefined instead of null for optional types",
     )
     .option("--use-safe-int", "use safe integers instead of bigint")
     .addHelpText("after", COMPILE_EXTRA_HELP)
