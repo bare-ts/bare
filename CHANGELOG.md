@@ -2,6 +2,14 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Emit ES2020
+
+    bare-ts now publishes ES2020 builds.
+    This allows to output smaller builds.
+    This should cause no issue since we require a node version ^14.18 or >=16.
+
 ## 0.11.0 (2022-07-06)
 
 -   Remove option `--use-lax-optional`

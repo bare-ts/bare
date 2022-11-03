@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    // https://node.green/#ES2019
+    // https://node.green/#ES2020
     // https://kangax.github.io/compat-table/es2016plus
     "lib": ["ES2020"],
     "moduleResolution": "node",
     "module": "ES2020",
-    "target": "ES2019",
+    "target": "ES2020",
 
     // Does not implicitly import @types/*
     "types": [],
