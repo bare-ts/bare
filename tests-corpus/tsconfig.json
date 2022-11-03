@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig-base.json",
   "compilerOptions": {
+    "moduleResolution": "node",
     "paths": { "@bare-ts/tools": ["../src/index.js"] },
     "types": ["node"]
   },

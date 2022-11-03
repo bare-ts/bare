@@ -3,31 +3,26 @@
     // https://node.green/#ES2020
     // https://kangax.github.io/compat-table/es2016plus
     "lib": ["ES2020"],
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "module": "ES2020",
     "target": "ES2020",
 
-    // Does not implicitly import @types/*
+    // Don't implicitly import @types/*
     "types": [],
 
     "noEmit": true,
-
     "sourceMap": true,
-
-    "newLine": "lf",
     "stripInternal": true,
     "useDefineForClassFields": true,
-    "resolveJsonModule": true,
 
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
     "isolatedModules": true,
-    "preserveValueImports": true,
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
 
     "allowUnreachableCode": false,
     "checkJs": true,
     "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
