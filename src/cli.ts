@@ -14,7 +14,7 @@ import { Config, transform } from "./index.js"
 declare const VERSION: string
 
 const REPOSITORY_HELP = `Repository:
-  https://github.com/bare-ts/compiler`
+  https://github.com/bare-ts/tools`
 
 const EXTRA_HELP = `
 Examples:
