@@ -24,7 +24,8 @@ export function readOperation(bc) {
         bare.readString(bc),
         bare.readString(bc),
         bare.readString(bc),
-        bare.readString(bc))
+        bare.readString(bc)
+    )
 }
 
 export function writeOperation(bc, x) {

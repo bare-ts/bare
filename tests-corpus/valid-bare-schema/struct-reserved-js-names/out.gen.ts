@@ -29,7 +29,8 @@ export function readOperation(bc: bare.ByteCursor): Operation {
         bare.readString(bc),
         bare.readString(bc),
         bare.readString(bc),
-        bare.readString(bc))
+        bare.readString(bc)
+    )
 }
 
 export function writeOperation(bc: bare.ByteCursor, x: Operation): void {

@@ -15,7 +15,8 @@ export class Person {
 export function readPerson(bc) {
     return new Person(
         bare.readString(bc),
-        bare.readU8(bc))
+        bare.readU8(bc)
+    )
 }
 
 export function writePerson(bc, x) {

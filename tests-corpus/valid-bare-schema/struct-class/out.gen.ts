@@ -19,7 +19,8 @@ export class Person {
 export function readPerson(bc: bare.ByteCursor): Person {
     return new Person(
         bare.readString(bc),
-        bare.readU8(bc))
+        bare.readU8(bc)
+    )
 }
 
 export function writePerson(bc: bare.ByteCursor, x: Person): void {

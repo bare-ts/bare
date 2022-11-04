@@ -585,7 +585,7 @@ function genStructReader(g: Gen, type: ast.StructType, alias: string): string {
                 objCreation = `new ` + objCreation
             }
         } else {
-            objCreation = `new ${alias}(${indent(factoryArgs)})`
+            objCreation = `new ${alias}(${indent(factoryArgs)}\n)`
         }
         objCreation = `(${objCreation})`
     } else {

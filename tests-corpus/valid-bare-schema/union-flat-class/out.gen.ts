@@ -15,7 +15,8 @@ export class BoxedU32 {
 
 export function readBoxedU32(bc: bare.ByteCursor): BoxedU32 {
     return new BoxedU32(
-        bare.readU32(bc))
+        bare.readU32(bc)
+    )
 }
 
 export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void {
@@ -33,7 +34,8 @@ export class BoxedStr {
 
 export function readBoxedStr(bc: bare.ByteCursor): BoxedStr {
     return new BoxedStr(
-        bare.readString(bc))
+        bare.readString(bc)
+    )
 }
 
 export function writeBoxedStr(bc: bare.ByteCursor, x: BoxedStr): void {
