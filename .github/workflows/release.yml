@@ -1,6 +1,3 @@
-# based on esbuild release script (MIT licensed):
-# https://github.com/evanw/esbuild/blob/master/.github/workflows/release.yml
-
 name: Release
 on:
     push:
@@ -10,6 +7,8 @@ jobs:
     test:
         uses: ./.github/workflows/ci.yml
     release:
+        # based on esbuild release script (MIT licensed):
+        # https://github.com/evanw/esbuild/blob/master/.github/workflows/release.yml
         needs: test
         permissions:
             contents: write
