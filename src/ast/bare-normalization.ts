@@ -18,7 +18,7 @@ export function normalize(schema: ast.Ast): ast.Ast {
     return defs.length > schema.defs.length ? { defs, loc: schema.loc } : schema
 }
 
-interface Context {
+type Context = {
     readonly defs: ast.AliasedType[]
     readonly dedup: Map<unknown, string>
     aliasCount: number

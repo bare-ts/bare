@@ -107,7 +107,7 @@ export function generate(schema: ast.Ast, config: Config): string {
     return head.trim() + "\n\n" + body.trim() + "\n"
 }
 
-interface Gen {
+type Gen = {
     readonly config: Config
     readonly symbols: ast.SymbolTable
 }
@@ -827,23 +827,18 @@ function genTypedArrayWriter(_g: Gen, type: ast.ListType): string {
 
 function genUnionWriter(g: Gen, union: ast.UnionType): string {
     if (union.extra?.flat && union.types.every(ast.isBaseOrVoidType)) {
-        const baseUnion = union as ast.UnionType<ast.BaseType | ast.VoidType>
-        return genBaseFlatUnionWriter(g, baseUnion)
+        return genBaseFlatUnionWriter(g, union)
     }
     if (
         union.extra?.flat &&
         union.types.every((t) => t.tag === "alias" || t.tag === "struct")
     ) {
-        const aliasesUnion = union as ast.UnionType<ast.Alias>
-        return genAliasFlatUnionWriter(g, aliasesUnion)
+        return genStructFlatUnionWriter(g, union)
     }
     return genTaggedUnionWriter(g, union)
 }
 
-function genAliasFlatUnionWriter(
-    g: Gen,
-    union: ast.UnionType<ast.Alias> | ast.UnionType<ast.StructType>,
-): string {
+function genStructFlatUnionWriter(g: Gen, union: ast.UnionType): string {
     const resolved = union.types.map((t) => ast.resolveAlias(t, g.symbols))
     if (!resolved.every((t): t is ast.StructType => t.tag === "struct")) {
         throw new Error("all types should be structs.")
@@ -859,7 +854,7 @@ function genAliasFlatUnionWriter(
         for (let i = 0; i < union.types.length; i++) {
             const tagVal = union.data[i].val
             const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
-            const className = union.types[i].data
+            const className = union.types[i].data as string
             const valWriting = genWriting(g, union.types[i], "$x")
             body += `if ($x instanceof ${className}) {
                 bare.${tagWriter}(bc, ${tagVal})
@@ -892,10 +887,7 @@ function genAliasFlatUnionWriter(
     }`)
 }
 
-function genBaseFlatUnionWriter(
-    g: Gen,
-    union: ast.UnionType<ast.BaseType | ast.VoidType>,
-): string {
+function genBaseFlatUnionWriter(g: Gen, union: ast.UnionType): string {
     if (!ast.haveDistinctTypeof(union.types)) {
         throw new Error("all types should have distinct typeof values.")
     } // every typeof value is unique => this discriminates the union
@@ -913,7 +905,7 @@ function genBaseFlatUnionWriter(
         } else {
             const valWriting = genWriting(g, type, "$x")
             switchBody += `
-            case "${ast.typeofValue(type)}":
+            case "${ast.typeofValue(type as ast.BaseType)}":
                 bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
                 break`

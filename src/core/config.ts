@@ -10,7 +10,7 @@ export class ConfigError extends Error {
     }
 }
 
-export interface Config {
+export type Config = {
     readonly generator: "bare" | "dts" | "js" | "ts"
     readonly importConfig: boolean
     readonly importFactory: boolean

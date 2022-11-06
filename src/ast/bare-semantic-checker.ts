@@ -39,7 +39,7 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     return schema
 }
 
-interface Checker {
+type Checker = {
     readonly config: Config
     readonly symbols: ast.SymbolTable
 }

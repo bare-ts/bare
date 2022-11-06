@@ -17,7 +17,7 @@ function locationRpr(loc: Location | null): string {
     return loc !== null ? `(${loc.filename}:${loc.line}:${loc.col}) ` : ""
 }
 
-export interface Location {
+export type Location = {
     readonly filename: string | number
     /**
      * 0-based index

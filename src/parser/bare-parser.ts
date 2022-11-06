@@ -19,7 +19,7 @@ export function parse(content: string, config: Config): ast.Ast {
     return { defs, loc }
 }
 
-interface Parser {
+type Parser = {
     readonly config: Config
     readonly lex: Lex
 }

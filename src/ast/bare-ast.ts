@@ -13,12 +13,12 @@ import type { Location } from "../core/compiler-error.js"
 // - do not use undefined. Use null instead.
 // - do not use bigint.
 
-export interface Ast {
+export type Ast = {
     readonly defs: readonly AliasedType[]
     readonly loc: Location | null
 }
 
-export interface AliasedType {
+export type AliasedType = {
     readonly alias: string
     // The normalization phase uses this to create internal-only aliases.
     readonly internal: boolean
@@ -47,7 +47,7 @@ export type Type =
     | UnionType // (type | ...)
     | VoidType // void
 
-export interface Alias {
+export type Alias = {
     readonly tag: "alias"
     readonly data: string
     readonly types: null
@@ -55,7 +55,7 @@ export interface Alias {
     readonly loc: Location | null
 }
 
-export interface BaseType {
+export type BaseType = {
     readonly tag: BaseTag
     readonly data: null
     readonly types: null
@@ -63,7 +63,7 @@ export interface BaseType {
     readonly loc: Location | null
 }
 
-export interface DataType {
+export type DataType = {
     readonly tag: "data"
     readonly data: Length | null
     readonly types: null
@@ -71,7 +71,7 @@ export interface DataType {
     readonly loc: Location | null
 }
 
-export interface EnumType {
+export type EnumType = {
     readonly tag: "enum"
     readonly data: readonly EnumVal[]
     readonly types: null
@@ -79,7 +79,7 @@ export interface EnumType {
     readonly loc: Location | null
 }
 
-export interface ListType {
+export type ListType = {
     readonly tag: "list"
     readonly data: Length | null
     readonly types: readonly [valType: Type]
@@ -91,7 +91,7 @@ export interface ListType {
     readonly loc: Location | null
 }
 
-export interface MapType {
+export type MapType = {
     readonly tag: "map"
     readonly data: null
     readonly types: readonly [keyType: Type, valType: Type]
@@ -99,7 +99,7 @@ export interface MapType {
     readonly loc: Location | null
 }
 
-export interface OptionalType {
+export type OptionalType = {
     readonly tag: "optional"
     readonly data: null
     readonly types: readonly [type: Type]
@@ -107,7 +107,7 @@ export interface OptionalType {
     readonly loc: Location | null
 }
 
-export interface StructType {
+export type StructType = {
     readonly tag: "struct"
     readonly data: readonly StructField[]
     readonly types: readonly Type[]
@@ -115,15 +115,15 @@ export interface StructType {
     readonly loc: Location | null
 }
 
-export interface UnionType<T = Type> {
+export type UnionType = {
     readonly tag: "union"
     readonly data: readonly UnionTag[]
-    readonly types: readonly T[]
+    readonly types: readonly Type[]
     readonly extra: { readonly flat: boolean } | null
     readonly loc: Location | null
 }
 
-export interface VoidType {
+export type VoidType = {
     readonly tag: "void"
     readonly data: null
     readonly types: null
@@ -135,7 +135,7 @@ export interface VoidType {
  * All type's data have the same shape: { name, val, extra, loc }
  */
 
-export interface EnumVal {
+export type EnumVal = {
     readonly name: string
     readonly val: number
     readonly comment: string | null
@@ -143,7 +143,7 @@ export interface EnumVal {
     readonly loc: Location | null
 }
 
-export interface Length {
+export type Length = {
     readonly name: null
     readonly val: number
     readonly comment: null
@@ -151,7 +151,7 @@ export interface Length {
     readonly loc: Location | null
 }
 
-export interface StructField {
+export type StructField = {
     readonly name: string
     readonly val: null
     readonly comment: string | null
@@ -159,7 +159,7 @@ export interface StructField {
     readonly loc: Location | null
 }
 
-export interface UnionTag {
+export type UnionTag = {
     readonly name: null
     readonly val: number
     readonly comment: string | null
@@ -358,9 +358,7 @@ export function leadingDiscriminators(
  * @param types
  * @returns have `types` distinct typeof values?
  */
-export function haveDistinctTypeof(
-    types: readonly (BaseType | VoidType)[],
-): boolean {
+export function haveDistinctTypeof(types: readonly Type[]): boolean {
     const typeofValues = types.map((t) =>
         isBaseType(t) ? typeofValue(t) : null,
     ) // null for 'object' or 'undefined'

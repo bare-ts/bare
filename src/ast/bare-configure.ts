@@ -33,7 +33,7 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
     return schema
 }
 
-interface Configurator {
+type Configurator = {
     readonly config: Config
     readonly aliasesInFlatUnion: Set<string>
 }
