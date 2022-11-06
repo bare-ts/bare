@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type U8 =
-    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 0, readonly val: u8 }
 
 export function readU8(bc: bare.ByteCursor): U8 {
     const offset = bc.offset

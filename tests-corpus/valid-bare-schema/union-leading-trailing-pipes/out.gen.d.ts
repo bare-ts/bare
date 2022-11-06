@@ -3,7 +3,7 @@ import * as bare from "@bare-ts/lib"
 export type u8 = number
 
 export type LeadingPipe =
-    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 0, readonly val: u8 }
 
 export function readLeadingPipe(bc: bare.ByteCursor): LeadingPipe
 
@@ -14,7 +14,7 @@ export function encodeLeadingPipe(x: LeadingPipe): Uint8Array
 export function decodeLeadingPipe(bytes: Uint8Array): LeadingPipe
 
 export type TrailingPipe =
-    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 0, readonly val: u8 }
 
 export function readTrailingPipe(bc: bare.ByteCursor): TrailingPipe
 

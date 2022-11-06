@@ -14,8 +14,8 @@ function write0(bc: bare.ByteCursor, x: Alias | null): void {
 }
 
 export type Alias =
-    | { readonly tag: 0; readonly val: Alias | null }
-    | { readonly tag: 1; readonly val: string }
+    | { readonly tag: 0, readonly val: Alias | null }
+    | { readonly tag: 1, readonly val: string }
 
 export function readAlias(bc: bare.ByteCursor): Alias {
     const offset = bc.offset

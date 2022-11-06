@@ -4,12 +4,12 @@ export type u32 = number
 
 export type UnsignedInt =
     | {
-        readonly tag: 0
-        readonly value: string
+        readonly tag: 0,
+        readonly value: string,
     }
     | {
-        readonly tag: 1
-        readonly value: u32
+        readonly tag: 1,
+        readonly value: u32,
     }
 
 export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt

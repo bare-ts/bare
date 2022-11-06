@@ -3,8 +3,8 @@ import * as bare from "@bare-ts/lib"
 export type u8 = number
 
 export type Alias =
-    | { readonly tag: 0; readonly val: Alias1 }
-    | { readonly tag: 1; readonly val: Alias2 }
+    | { readonly tag: 0, readonly val: Alias1 }
+    | { readonly tag: 1, readonly val: Alias2 }
 
 export function readAlias(bc: bare.ByteCursor): Alias {
     const offset = bc.offset

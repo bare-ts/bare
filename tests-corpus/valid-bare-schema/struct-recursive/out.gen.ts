@@ -18,7 +18,7 @@ function write0(bc: bare.ByteCursor, x: readonly Node[]): void {
 }
 
 export type Node = {
-    readonly children: readonly Node[]
+    readonly children: readonly Node[],
 }
 
 export function readNode(bc: bare.ByteCursor): Node {

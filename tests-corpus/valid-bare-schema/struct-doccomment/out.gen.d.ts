@@ -9,11 +9,11 @@ export type Person = {
     /**
      * person's name
      */
-    readonly name: string
+    readonly name: string,
     /**
      * person's age
      */
-    readonly age: u8
+    readonly age: u8,
 }
 
 export function readPerson(bc: bare.ByteCursor): Person

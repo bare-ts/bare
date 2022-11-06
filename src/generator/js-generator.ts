@@ -258,18 +258,21 @@ function genSetType(g: Gen, type: ast.ListType): string {
 
 function genStructType(g: Gen, type: ast.StructType): string {
     return unindent(`{
-        ${indent(genStructTypeBody(g, type), 2)}
+        ${indent(genStructTypeBody(g, type, ","), 2)}
     }`)
 }
 
-function genStructTypeBody(g: Gen, type: ast.StructType): string {
+function genStructTypeBody(g: Gen, type: ast.StructType, sep = ""): string {
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const field = type.data[i]
         const doc = jsDoc(field.comment)
         const modifier = field.extra?.mut ? "" : "readonly "
         const prop = field.extra?.quoted ? `"${field.name}"` : field.name
-        result += `${doc}${modifier}${prop}: ${genType(g, type.types[i])}\n`
+        result += `${doc}${modifier}${prop}: ${genType(
+            g,
+            type.types[i],
+        )}${sep}\n`
     }
     return result.trim()
 }
@@ -294,7 +297,7 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
         const tagVal = type.data[i].val
         result += type.extra?.flat
             ? `\n${doc}| ${valType}`
-            : `\n${doc}| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
+            : `\n${doc}| { readonly ${tagProp}: ${tagVal}, readonly ${valProp}: ${valType} }`
     }
     return indent(result)
 }

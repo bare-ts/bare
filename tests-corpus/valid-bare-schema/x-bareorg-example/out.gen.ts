@@ -95,8 +95,8 @@ export function writeAddress(bc: bare.ByteCursor, x: Address): void {
 }
 
 function read0(bc: bare.ByteCursor): readonly ({
-    readonly orderId: i64Safe
-    readonly quantity: i32
+    readonly orderId: i64Safe,
+    readonly quantity: i32,
 })[] {
     const len = bare.readUintSafe(bc)
     if (len === 0) return []
@@ -114,8 +114,8 @@ function read0(bc: bare.ByteCursor): readonly ({
 }
 
 function write0(bc: bare.ByteCursor, x: readonly ({
-    readonly orderId: i64Safe
-    readonly quantity: i32
+    readonly orderId: i64Safe,
+    readonly quantity: i32,
 })[]): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
@@ -150,14 +150,14 @@ function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void 
 }
 
 export type Customer = {
-    readonly name: string
-    readonly email: string
-    readonly address: Address
+    readonly name: string,
+    readonly email: string,
+    readonly address: Address,
     readonly orders: readonly ({
-        readonly orderId: i64Safe
-        readonly quantity: i32
-    })[]
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>
+        readonly orderId: i64Safe,
+        readonly quantity: i32,
+    })[],
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
 }
 
 export function readCustomer(bc: bare.ByteCursor): Customer {
@@ -192,13 +192,13 @@ function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
 }
 
 export type Employee = {
-    readonly name: string
-    readonly email: string
-    readonly address: Address
-    readonly department: Department
-    readonly hireDate: Time
-    readonly publicKey: PublicKey | null
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>
+    readonly name: string,
+    readonly email: string,
+    readonly address: Address,
+    readonly department: Department,
+    readonly hireDate: Time,
+    readonly publicKey: PublicKey | null,
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
 }
 
 export function readEmployee(bc: bare.ByteCursor): Employee {
@@ -226,9 +226,9 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
 export type TerminatedEmployee = null
 
 export type Person =
-    | { readonly tag: 0; readonly val: Customer }
-    | { readonly tag: 1; readonly val: Employee }
-    | { readonly tag: 2; readonly val: TerminatedEmployee }
+    | { readonly tag: 0, readonly val: Customer }
+    | { readonly tag: 1, readonly val: Employee }
+    | { readonly tag: 2, readonly val: TerminatedEmployee }
 
 export function readPerson(bc: bare.ByteCursor): Person {
     const offset = bc.offset

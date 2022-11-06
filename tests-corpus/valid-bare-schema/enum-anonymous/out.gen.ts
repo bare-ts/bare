@@ -3,8 +3,8 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export type Person = {
-    readonly name: string
-    readonly gender: "FLUID" | "MALE" | "FEMALE"
+    readonly name: string,
+    readonly gender: "FLUID" | "MALE" | "FEMALE",
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {

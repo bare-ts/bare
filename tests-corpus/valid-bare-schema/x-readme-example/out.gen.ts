@@ -53,9 +53,9 @@ function write0(bc: bare.ByteCursor, x: Gender | null): void {
 }
 
 export type Person = {
-    readonly name: string
-    readonly email: string
-    readonly gender: Gender | null
+    readonly name: string,
+    readonly email: string,
+    readonly gender: Gender | null,
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -73,8 +73,8 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 }
 
 export type Organization = {
-    readonly name: string
-    readonly email: string
+    readonly name: string,
+    readonly email: string,
 }
 
 export function readOrganization(bc: bare.ByteCursor): Organization {
@@ -90,8 +90,8 @@ export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
 }
 
 export type Contact =
-    | { readonly tag: 0; readonly val: Person }
-    | { readonly tag: 1; readonly val: Organization }
+    | { readonly tag: 0, readonly val: Person }
+    | { readonly tag: 1, readonly val: Organization }
 
 export function readContact(bc: bare.ByteCursor): Contact {
     const offset = bc.offset

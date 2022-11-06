@@ -5,11 +5,11 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type Operation = {
-    readonly type: string
-    readonly struct: string
-    readonly enum: string
-    readonly const: boolean
-    readonly bc: u8
+    readonly type: string,
+    readonly struct: string,
+    readonly enum: string,
+    readonly const: boolean,
+    readonly bc: u8,
 }
 
 export function readOperation(bc: bare.ByteCursor): Operation {

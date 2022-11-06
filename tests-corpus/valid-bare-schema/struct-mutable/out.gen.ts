@@ -5,8 +5,8 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type Person = {
-    name: string
-    age: u8
+    name: string,
+    age: u8,
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {

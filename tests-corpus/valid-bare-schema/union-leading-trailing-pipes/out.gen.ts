@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type LeadingPipe =
-    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 0, readonly val: u8 }
 
 export function readLeadingPipe(bc: bare.ByteCursor): LeadingPipe {
     const offset = bc.offset
@@ -48,7 +48,7 @@ export function decodeLeadingPipe(bytes: Uint8Array): LeadingPipe {
 }
 
 export type TrailingPipe =
-    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: 0, readonly val: u8 }
 
 export function readTrailingPipe(bc: bare.ByteCursor): TrailingPipe {
     const offset = bc.offset
