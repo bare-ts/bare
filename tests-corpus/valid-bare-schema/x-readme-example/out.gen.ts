@@ -52,7 +52,7 @@ function write0(bc: bare.ByteCursor, x: Gender | null): void {
     }
 }
 
-export interface Person {
+export type Person = {
     readonly name: string
     readonly email: string
     readonly gender: Gender | null
@@ -72,7 +72,7 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
     write0(bc, x.gender)
 }
 
-export interface Organization {
+export type Organization = {
     readonly name: string
     readonly email: string
 }

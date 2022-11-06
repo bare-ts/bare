@@ -4,7 +4,7 @@ const config = /* @__PURE__ */ bare.Config({})
 
 export type u8 = number
 
-export interface Person {
+export type Person = {
     name: string
     age: u8
 }

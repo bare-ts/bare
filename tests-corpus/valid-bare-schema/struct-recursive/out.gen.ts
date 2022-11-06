@@ -17,7 +17,7 @@ function write0(bc: bare.ByteCursor, x: readonly Node[]): void {
     }
 }
 
-export interface Node {
+export type Node = {
     readonly children: readonly Node[]
 }
 

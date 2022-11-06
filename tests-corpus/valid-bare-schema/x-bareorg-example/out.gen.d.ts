@@ -33,7 +33,7 @@ export function readAddress(bc: bare.ByteCursor): Address
 
 export function writeAddress(bc: bare.ByteCursor, x: Address): void
 
-export interface Customer {
+export type Customer = {
     readonly name: string
     readonly email: string
     readonly address: Address
@@ -48,7 +48,7 @@ export function readCustomer(bc: bare.ByteCursor): Customer
 
 export function writeCustomer(bc: bare.ByteCursor, x: Customer): void
 
-export interface Employee {
+export type Employee = {
     readonly name: string
     readonly email: string
     readonly address: Address

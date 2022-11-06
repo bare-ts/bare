@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 export type u8 = number
 
-export interface Operation {
+export type Operation = {
     readonly type: string
     readonly struct: string
     readonly enum: string

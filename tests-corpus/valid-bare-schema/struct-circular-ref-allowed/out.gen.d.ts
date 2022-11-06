@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export interface Person {
+export type Person = {
     readonly bestFriend: Person | null
     readonly secondBestFriend: 
         | { readonly tag: 0; readonly val: Person }

@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 export type u16 = number
 
-export interface Person {
+export type Person = {
     readonly name: string
     readonly age: u8
     readonly address: {

@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export interface Node {
+export type Node = {
     readonly children: readonly Node[]
 }
 

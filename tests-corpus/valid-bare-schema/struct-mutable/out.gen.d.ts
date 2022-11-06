@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 export type u8 = number
 
-export interface Person {
+export type Person = {
     name: string
     age: u8
 }

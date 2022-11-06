@@ -149,7 +149,7 @@ function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void 
     }
 }
 
-export interface Customer {
+export type Customer = {
     readonly name: string
     readonly email: string
     readonly address: Address
@@ -191,7 +191,7 @@ function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
     }
 }
 
-export interface Employee {
+export type Employee = {
     readonly name: string
     readonly email: string
     readonly address: Address

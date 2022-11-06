@@ -5,7 +5,7 @@ export type u8 = number
 /**
  * A struct to model persons
  */
-export interface Person {
+export type Person = {
     /**
      * person's name
      */

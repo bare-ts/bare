@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 const config = /* @__PURE__ */ bare.Config({})
 
-export interface Person {
+export type Person = {
     readonly name: string
     readonly gender: 0 | 1 | 2
 }

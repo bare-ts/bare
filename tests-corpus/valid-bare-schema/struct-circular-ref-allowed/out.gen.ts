@@ -81,7 +81,7 @@ function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, Person>): void {
     }
 }
 
-export interface Person {
+export type Person = {
     readonly bestFriend: Person | null
     readonly secondBestFriend: 
         | { readonly tag: 0; readonly val: Person }

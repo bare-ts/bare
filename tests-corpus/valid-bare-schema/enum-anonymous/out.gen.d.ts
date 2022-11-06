@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-export interface Person {
+export type Person = {
     readonly name: string
     readonly gender: "FLUID" | "MALE" | "FEMALE"
 }

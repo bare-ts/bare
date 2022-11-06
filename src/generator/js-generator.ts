@@ -130,7 +130,7 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
             }
             if (!isClass) {
                 const structDef = genStructType(g, type)
-                return `${doc}export interface ${alias} ${structDef}`
+                return `${doc}export type ${alias} = ${structDef}`
             } else if (g.config.generator !== "dts") {
                 return "" // A non-ambient class will be generated
             }
