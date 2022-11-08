@@ -31,15 +31,16 @@ function read1(bc) {
 function write1(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writePerson(bc, x.val)
             break
+        }
     }
 }
 
 function read2(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [readPerson(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readPerson(bc)

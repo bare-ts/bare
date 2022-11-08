@@ -23,9 +23,10 @@ export function readU8(bc: bare.ByteCursor): U8 {
 export function writeU8(bc: bare.ByteCursor, x: U8): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 

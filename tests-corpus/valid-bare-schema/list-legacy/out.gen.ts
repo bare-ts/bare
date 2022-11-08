@@ -8,7 +8,7 @@ export type U8List = readonly u8[]
 
 export function readU8List(bc: bare.ByteCursor): U8List {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [bare.readU8(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = bare.readU8(bc)

@@ -4,7 +4,7 @@ const config = /* @__PURE__ */ bare.Config({})
 
 export function readU8List(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [bare.readU8(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = bare.readU8(bc)

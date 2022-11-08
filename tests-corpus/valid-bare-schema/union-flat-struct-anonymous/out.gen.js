@@ -25,18 +25,20 @@ export function readUnsignedInt(bc) {
 
 export function writeUnsignedInt(bc, x) {
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, 0)
             {
                 bare.writeString(bc, x.value)
             }
             break
-        case 1:
+        }
+        case 1: {
             bare.writeU8(bc, 1)
             {
                 bare.writeU32(bc, x.value)
             }
             break
+        }
     }
 }
 

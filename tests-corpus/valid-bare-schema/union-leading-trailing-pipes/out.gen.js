@@ -18,9 +18,10 @@ export function readLeadingPipe(bc) {
 export function writeLeadingPipe(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 
@@ -58,9 +59,10 @@ export function readTrailingPipe(bc) {
 export function writeTrailingPipe(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 

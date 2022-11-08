@@ -27,15 +27,18 @@ export function readGender(bc) {
 
 export function writeGender(bc, x) {
     switch (x) {
-        case Gender.FEMALE:
+        case Gender.FEMALE: {
             bare.writeU8(bc, 0)
             break
-        case Gender.FLUID:
+        }
+        case Gender.FLUID: {
             bare.writeU8(bc, 1)
             break
-        case Gender.MALE:
+        }
+        case Gender.MALE: {
             bare.writeU8(bc, 2)
             break
+        }
     }
 }
 
@@ -96,18 +99,20 @@ export function readContact(bc) {
 export function writeContact(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writePerson(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeOrganization(bc, x.val)
             break
+        }
     }
 }
 
 export function readContacts(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [readContact(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readContact(bc)

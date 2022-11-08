@@ -28,15 +28,18 @@ export function writePerson(bc, x) {
     bare.writeString(bc, x.name)
     {
         switch (x.gender) {
-            case "FLUID":
+            case "FLUID": {
                 bare.writeU8(bc, 0)
                 break
-            case "MALE":
+            }
+            case "MALE": {
                 bare.writeU8(bc, 1)
                 break
-            case "FEMALE":
+            }
+            case "FEMALE": {
                 bare.writeU8(bc, 2)
                 break
+            }
         }
     }
 }

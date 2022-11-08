@@ -19,12 +19,14 @@ function read0(bc) {
 function write0(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writeAlias(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             bare.writeString(bc, x.val)
             break
+        }
     }
 }
 

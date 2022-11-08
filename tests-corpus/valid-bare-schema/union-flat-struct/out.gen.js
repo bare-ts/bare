@@ -41,14 +41,16 @@ export function readBoxed(bc) {
 
 export function writeBoxed(bc, x) {
     switch (x.tag) {
-        case "BOXED_U32":
+        case "BOXED_U32": {
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
             break
-        case "BOXED_STR":
+        }
+        case "BOXED_STR": {
             bare.writeU8(bc, 1)
             writeBoxedStr(bc, x)
             break
+        }
     }
 }
 

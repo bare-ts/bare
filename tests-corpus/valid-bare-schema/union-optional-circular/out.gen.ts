@@ -35,11 +35,13 @@ export function readAlias(bc: bare.ByteCursor): Alias {
 export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             write0(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             bare.writeString(bc, x.val)
             break
+        }
     }
 }

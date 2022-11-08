@@ -23,9 +23,10 @@ export function readLeadingPipe(bc: bare.ByteCursor): LeadingPipe {
 export function writeLeadingPipe(bc: bare.ByteCursor, x: LeadingPipe): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 
@@ -66,9 +67,10 @@ export function readTrailingPipe(bc: bare.ByteCursor): TrailingPipe {
 export function writeTrailingPipe(bc: bare.ByteCursor, x: TrailingPipe): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 

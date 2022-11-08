@@ -42,21 +42,26 @@ export function readUnsignedInt(bc: bare.ByteCursor): UnsignedInt {
 export function writeUnsignedInt(bc: bare.ByteCursor, x: UnsignedInt): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             bare.writeU16(bc, x.val)
             break
-        case 2:
+        }
+        case 2: {
             bare.writeU32(bc, x.val)
             break
-        case 3:
+        }
+        case 3: {
             bare.writeU64(bc, x.val)
             break
-        case 4:
+        }
+        case 4: {
             bare.writeUint(bc, x.val)
             break
+        }
     }
 }
 

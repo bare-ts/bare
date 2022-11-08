@@ -27,15 +27,18 @@ export function readGender(bc) {
 
 export function writeGender(bc, x) {
     switch (x) {
-        case Gender.FLUID:
+        case Gender.FLUID: {
             bare.writeU8(bc, 0)
             break
-        case Gender.MALE:
+        }
+        case Gender.MALE: {
             bare.writeU8(bc, 3)
             break
-        case Gender.FEMALE:
+        }
+        case Gender.FEMALE: {
             bare.writeU8(bc, 4)
             break
+        }
     }
 }
 

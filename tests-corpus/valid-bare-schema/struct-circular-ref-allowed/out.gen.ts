@@ -35,15 +35,16 @@ function write1(bc: bare.ByteCursor, x:
     | { readonly tag: 1, readonly val: null }): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writePerson(bc, x.val)
             break
+        }
     }
 }
 
 function read2(bc: bare.ByteCursor): readonly Person[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [readPerson(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readPerson(bc)

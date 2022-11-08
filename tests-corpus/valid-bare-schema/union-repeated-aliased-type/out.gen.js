@@ -28,12 +28,14 @@ export function readX(bc) {
 export function writeX(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeY(bc, x.val)
             break
+        }
     }
 }
 

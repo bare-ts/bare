@@ -24,12 +24,14 @@ export function readAlias(bc: bare.ByteCursor): Alias {
 export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writeAlias1(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeAlias2(bc, x.val)
             break
+        }
     }
 }
 

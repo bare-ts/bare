@@ -23,18 +23,21 @@ export function readTypeOfUnion(bc) {
 
 export function writeTypeOfUnion(bc, x) {
     switch (typeof x) {
-        case "boolean":
+        case "boolean": {
             bare.writeU8(bc, 0)
             bare.writeBool(bc, x)
             break
-        case "number":
+        }
+        case "number": {
             bare.writeU8(bc, 1)
             bare.writeU32(bc, x)
             break
-        case "string":
+        }
+        case "string": {
             bare.writeU8(bc, 2)
             bare.writeString(bc, x)
             break
+        }
         default:
             bare.writeU8(bc, 3)
             break

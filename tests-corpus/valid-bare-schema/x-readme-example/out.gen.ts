@@ -27,15 +27,18 @@ export function readGender(bc: bare.ByteCursor): Gender {
 
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
-        case Gender.FEMALE:
+        case Gender.FEMALE: {
             bare.writeU8(bc, 0)
             break
-        case Gender.FLUID:
+        }
+        case Gender.FLUID: {
             bare.writeU8(bc, 1)
             break
-        case Gender.MALE:
+        }
+        case Gender.MALE: {
             bare.writeU8(bc, 2)
             break
+        }
     }
 }
 
@@ -111,12 +114,14 @@ export function readContact(bc: bare.ByteCursor): Contact {
 export function writeContact(bc: bare.ByteCursor, x: Contact): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writePerson(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeOrganization(bc, x.val)
             break
+        }
     }
 }
 
@@ -124,7 +129,7 @@ export type Contacts = readonly Contact[]
 
 export function readContacts(bc: bare.ByteCursor): Contacts {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [readContact(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readContact(bc)

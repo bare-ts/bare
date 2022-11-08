@@ -18,9 +18,10 @@ export function readU8(bc) {
 export function writeU8(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             bare.writeU8(bc, x.val)
             break
+        }
     }
 }
 

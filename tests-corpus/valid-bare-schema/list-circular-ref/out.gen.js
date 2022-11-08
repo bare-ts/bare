@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 export function readAlias(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [readAlias(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readAlias(bc)

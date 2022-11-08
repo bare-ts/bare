@@ -43,7 +43,9 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
             void transform(schema, config)
             t.ok(false) // must be unreachable
         } catch (e) {
-            if (!(e instanceof CompilerError)) throw e
+            if (!(e instanceof CompilerError)) {
+                throw e
+            }
             t.deepEqual({ ...e, message: e.message }, error)
         }
     })

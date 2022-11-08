@@ -80,18 +80,21 @@ export function readComposite(bc: bare.ByteCursor): Composite {
 export function writeComposite(bc: bare.ByteCursor, x: Composite): void {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             write1(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             write2(bc, x.val)
             break
-        case 2:
+        }
+        case 2: {
             {
                 assert(x.val.length === 4)
                 bare.writeU8FixedArray(bc, x.val)
             }
             break
+        }
     }
 }
 

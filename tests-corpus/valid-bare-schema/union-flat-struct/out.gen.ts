@@ -57,14 +57,16 @@ export function readBoxed(bc: bare.ByteCursor): Boxed {
 
 export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void {
     switch (x.tag) {
-        case "BOXED_U32":
+        case "BOXED_U32": {
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
             break
-        case "BOXED_STR":
+        }
+        case "BOXED_STR": {
             bare.writeU8(bc, 1)
             writeBoxedStr(bc, x)
             break
+        }
     }
 }
 

@@ -51,21 +51,26 @@ export function readDepartment(bc) {
 
 export function writeDepartment(bc, x) {
     switch (x) {
-        case Department.ACCOUNTING:
+        case Department.ACCOUNTING: {
             bare.writeU8(bc, 0)
             break
-        case Department.ADMINISTRATION:
+        }
+        case Department.ADMINISTRATION: {
             bare.writeU8(bc, 1)
             break
-        case Department.CUSTOMER_SERVICE:
+        }
+        case Department.CUSTOMER_SERVICE: {
             bare.writeU8(bc, 2)
             break
-        case Department.DEVELOPMENT:
+        }
+        case Department.DEVELOPMENT: {
             bare.writeU8(bc, 3)
             break
-        case Department.JSMITH:
+        }
+        case Department.JSMITH: {
             bare.writeU8(bc, 99)
             break
+        }
     }
 }
 
@@ -87,7 +92,7 @@ export function writeAddress(bc, x) {
 
 function read0(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [{
         orderId: bare.readI64Safe(bc),
         quantity: bare.readI32(bc),
@@ -207,12 +212,14 @@ export function readPerson(bc) {
 export function writePerson(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writeCustomer(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeEmployee(bc, x.val)
             break
+        }
     }
 }
 

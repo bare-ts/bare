@@ -4,7 +4,7 @@ const config = /* @__PURE__ */ bare.Config({})
 
 function read0(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [bare.readString(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = bare.readString(bc)
@@ -21,7 +21,7 @@ function write0(bc, x) {
 
 function read1(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [read0(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = read0(bc)
@@ -38,7 +38,7 @@ function write1(bc, x) {
 
 export function readMultiList(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) return []
+    if (len === 0) { return [] }
     const result = [read1(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = read1(bc)

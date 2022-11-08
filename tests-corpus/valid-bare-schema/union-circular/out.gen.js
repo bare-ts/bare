@@ -18,12 +18,14 @@ export function readAlias(bc) {
 export function writeAlias(bc, x) {
     bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0:
+        case 0: {
             writeAlias1(bc, x.val)
             break
-        case 1:
+        }
+        case 1: {
             writeAlias2(bc, x.val)
             break
+        }
     }
 }
 
