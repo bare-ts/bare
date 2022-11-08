@@ -67,7 +67,8 @@ function parseType(p: Parser): ast.Type {
             return parseLegacyList(p)
         case "(": // union (obsolete syntax)
             return parseLegacyUnion(p)
-        case "{": // struct (obsolete syntax)
+        case "{": {
+            // struct (obsolete syntax)
             if (!p.config.legacy) {
                 throw new CompilerError(
                     "use 'struct { ... } or allow '{ ... }' with option '----legacy'.",
@@ -75,6 +76,7 @@ function parseType(p: Parser): ast.Type {
                 )
             }
             return parseStructBody(p)
+        }
         case "data":
             return parseData(p)
         case "enum":

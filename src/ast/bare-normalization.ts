@@ -39,11 +39,12 @@ function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
 
 function maybeAlias(n: Context, type: ast.Type): ast.Type {
     switch (type.tag) {
-        case "list":
+        case "list": {
             if (!type.extra?.typedArray) {
                 return genAlias(n, type)
             }
             break
+        }
         case "map":
         case "optional":
         case "union":

@@ -112,6 +112,6 @@ function generateOptionalLength(length: ast.Length | null): string {
 
 function generateDocComment(comment: string | null): string {
     return comment !== null
-        ? "##" + comment.trimEnd().split("\n").join("\n##") + "\n"
+        ? `##${comment.trimEnd().split("\n").join("\n##")}\n`
         : ""
 }

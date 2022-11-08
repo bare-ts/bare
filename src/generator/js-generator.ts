@@ -19,7 +19,7 @@ export function generate(schema: ast.Ast, config: Config): string {
     for (const aliased of schema.defs) {
         const isVoid = ast.resolveAlias(aliased.type, g.symbols).tag === "void"
         switch (g.config.generator) {
-            case "dts":
+            case "dts": {
                 if (!aliased.internal) {
                     body += `${genAliasedType(g, aliased)}\n\n`
                     if (!isVoid) {
@@ -28,6 +28,7 @@ export function generate(schema: ast.Ast, config: Config): string {
                     }
                 }
                 break
+            }
             case "js": {
                 const code = genCode(g, aliased)
                 body += code !== "" ? code + "\n\n" : ""
@@ -53,15 +54,17 @@ export function generate(schema: ast.Ast, config: Config): string {
         }
         if (rootAliases.indexOf(aliased.alias) !== -1) {
             switch (g.config.generator) {
-                case "dts":
+                case "dts": {
                     body += `export ${genEncoderHead(g, aliased.alias)}\n\n`
                     body += `export ${genDecoderHead(g, aliased.alias)}\n\n`
                     break
+                }
                 case "js":
-                case "ts":
+                case "ts": {
                     body += `export ${genEncoder(g, aliased.alias)}\n\n`
                     body += `export ${genDecoder(g, aliased.alias)}\n\n`
                     break
+                }
             }
         }
     }
@@ -119,7 +122,7 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
     const doc = jsDoc(comment)
     switch (type.tag) {
         case "enum":
-            return doc + "export " + genAliasedEnumType(g, alias, type)
+            return `${doc}export ${genAliasedEnumType(g, alias, type)}`
         case "struct": {
             const isClass = type.extra?.class
             if (g.config.importFactory) {
@@ -333,7 +336,7 @@ function genEncoderHead(g: Gen, alias: string): string {
 // JS/TS code
 
 function genCode(g: Gen, aliased: ast.AliasedType): string {
-    const modifier = !aliased.internal ? "export " : ""
+    const modifier = aliased.internal ? "" : "export "
     if (aliased.type.tag === "enum" && g.config.generator === "js") {
         return modifier + genAliasedEnumCode(g, aliased.alias, aliased.type)
     }
@@ -375,7 +378,7 @@ function genAliasedStructCode(
     const params = type.data
         .map(
             ({ name }, i) =>
-                `${name}_` + (ts ? `: ${genType(g, type.types[i])},` : ","),
+                `${name}_${ts ? `: ${genType(g, type.types[i])},` : ","}`,
         )
         .join("\n")
     const assignments = type.data
@@ -394,7 +397,7 @@ function genAliasedStructCode(
 
 function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
     let body = genReader(g, aliased.type, aliased.alias)
-    const mod = !aliased.internal ? "export " : ""
+    const mod = aliased.internal ? "" : "export "
     const head = genReaderHead(g, aliased)
     switch (body[0]) {
         case "{": // block
@@ -466,7 +469,7 @@ function genListRawReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
         type.data !== null
             ? `${type.data.val}`
-            : `bare.readUintSafe(bc)\nif (len === 0) return []`
+            : "bare.readUintSafe(bc)\nif (len === 0) { return [] }"
     const valReading = genReading(g, type.types[0])
     return unindent(`{
         const len = ${indent(lenDecoding, 2)}
@@ -482,7 +485,7 @@ function genDataReader(_g: Gen, type: ast.DataType): string {
     if (type.data !== null) {
         return `(bare.readFixedData(bc, ${type.data.val}))`
     }
-    return `(bare.readData(bc))`
+    return "(bare.readData(bc))"
 }
 
 function genEnumReader(g: Gen, type: ast.EnumType, alias: string): string {
@@ -585,7 +588,7 @@ function genStructReader(g: Gen, type: ast.StructType, alias: string): string {
         if (g.config.importFactory) {
             objCreation = `ext.${alias}(${indent(factoryArgs)}\n)`
             if (type.extra?.class) {
-                objCreation = `new ` + objCreation
+                objCreation = `new ${objCreation}`
             }
         } else {
             objCreation = `new ${alias}(${indent(factoryArgs)}\n)`
@@ -661,22 +664,22 @@ function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
     switch (body[0]) {
         case "{": // block
             return `${mod}${head} ${body}`
-        case "(":
+        case "(": {
             body = body.slice(1, -1) // remove parenthesis
-            body = "\n" + (body === "" ? "// do nothing" : body)
+            body = body === "" ? "\n// do nothing" : `\n${body}`
             return `${mod}${head} {${indent(body)}\n}`
+        }
     }
     throw Error("[internal] invalid writer template")
 }
 
 function genWriting(g: Gen, type: ast.Type, x: string): string {
-    let body = genWriter(g, type).replace(/\$x\b/g, x)
+    const body = genWriter(g, type).replace(/\$x\b/g, x)
     switch (body[0]) {
         case "{": // block
             return body
         case "(":
-            body = body.slice(1, -1) // remove parenthesis
-            return `${body}`
+            return body.slice(1, -1) // remove parenthesis
     }
     throw Error("[internal] invalid writer template")
 }
@@ -727,7 +730,7 @@ function genListRawWriter(g: Gen, type: ast.ListType): string {
     const lenEncoding =
         type.data !== null
             ? `assert($x.length === ${type.data.val}, "Unmatched length")`
-            : `bare.writeUintSafe(bc, $x.length)`
+            : "bare.writeUintSafe(bc, $x.length)"
     const writingElt = genWriting(g, type.types[0], "$x[i]")
     return unindent(`{
         ${lenEncoding}
@@ -739,7 +742,7 @@ function genListRawWriter(g: Gen, type: ast.ListType): string {
 
 function genDataWriter(_g: Gen, type: ast.DataType): string {
     if (type.data === null) {
-        return `(bare.writeData(bc, $x))`
+        return "(bare.writeData(bc, $x))"
     }
     return unindent(`{
         assert($x.byteLength === ${type.data.val})
@@ -761,9 +764,10 @@ function genEnumWriter(_g: Gen, type: ast.EnumType, alias: string): string {
             const enumVal =
                 alias !== "" ? `${alias}.${name}` : intEnum ? val : `"${name}"`
             switchBody += `
-            case ${enumVal}:
+            case ${enumVal}: {
                 bare.${tagWriter}(bc, ${val})
-                break`
+                break
+            }`
         }
         body = `switch ($x) {
             ${switchBody.trim()}
@@ -876,10 +880,11 @@ function genStructFlatUnionWriter(g: Gen, union: ast.UnionType): string {
             const tagWriter = tagVal < 128 ? "writeU8" : "writeUintSafe"
             const valWriting = genWriting(g, union.types[i], "$x")
             switchBody += `
-            case ${jsRpr(discriminators[i])}:
+            case ${jsRpr(discriminators[i])}: {
                 bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
-                break`
+                break
+            }`
         }
         body = `switch ($x.${leadingFieldName}) {
             ${switchBody.trim()}
@@ -908,10 +913,11 @@ function genBaseFlatUnionWriter(g: Gen, union: ast.UnionType): string {
         } else {
             const valWriting = genWriting(g, type, "$x")
             switchBody += `
-            case "${ast.typeofValue(type as ast.BaseType)}":
+            case "${ast.typeofValue(type as ast.BaseType)}": {
                 bare.${tagWriter}(bc, ${tagVal})
                 ${indent(valWriting, 4)}
-                break`
+                break
+            }`
         }
     }
     return unindent(`{
@@ -930,9 +936,10 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
         if (ast.resolveAlias(type.types[i], g.symbols).tag !== "void") {
             const valWriting = genWriting(g, type.types[i], `$x${valProp}`)
             switchBody += `
-            case ${type.data[i].val}:
+            case ${type.data[i].val}: {
                 ${indent(valWriting, 4)}
-                break`
+                break
+            }`
         }
     }
     return unindent(`{
@@ -946,7 +953,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
 // decode
 
 function genDecoder(g: Gen, alias: string): string {
-    const config = g.config.importConfig ? `ext.config` : "config"
+    const config = g.config.importConfig ? "ext.config" : "config"
     return unindent(`${genDecoderHead(g, alias)} {
         const bc = new bare.ByteCursor(bytes, ${config})
         const result = read${alias}(bc)
@@ -960,7 +967,7 @@ function genDecoder(g: Gen, alias: string): string {
 // encode
 
 function genEncoder(g: Gen, alias: string): string {
-    const config = g.config.importConfig ? `ext.config` : "config"
+    const config = g.config.importConfig ? "ext.config" : "config"
     return unindent(`${genEncoderHead(g, alias)} {
         const bc = new bare.ByteCursor(
             new Uint8Array(${config}.initialBufferLength),

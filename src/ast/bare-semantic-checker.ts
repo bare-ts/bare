@@ -69,7 +69,7 @@ function checkMainCodecs(c: Checker, schema: ast.Ast): void {
             const resolved = ast.resolveAlias(aliased.type, c.symbols)
             if (resolved.tag === "void") {
                 throw new CompilerError(
-                    `a root type must not resolve to void.`,
+                    "a root type must not resolve to void.",
                     null,
                 )
             }
@@ -87,26 +87,32 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
         }
     }
     switch (type.tag) {
-        case "alias":
+        case "alias": {
             checkUndefinedAlias(c, type)
             break
-        case "data":
+        }
+        case "data": {
             checkLengthInvariants(type.data)
             break
-        case "list":
+        }
+        case "list": {
             checkListInvariants(type)
             break
-        case "map":
+        }
+        case "map": {
             checkMapInvariants(c, type)
             break
+        }
         case "enum":
-        case "struct":
+        case "struct": {
             checkMembersInvariants(c, type)
             break
-        case "union":
+        }
+        case "union": {
             checkMembersInvariants(c, type)
             checkUnionInvariants(c, type)
             break
+        }
     }
 }
 
@@ -194,7 +200,7 @@ function checkLengthInvariants(len: ast.Length | null): void {
 
 function checkListInvariants(type: ast.ListType): void {
     checkLengthInvariants(type.data)
-    if (type.extra !== null && type.extra.unique && type.extra.typedArray) {
+    if (type.extra?.unique && type.extra.typedArray) {
         throw new CompilerError(
             "A list cannot be both typed (typedArray) and unique (Set).",
             type.loc,

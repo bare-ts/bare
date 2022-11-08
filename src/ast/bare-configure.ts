@@ -50,11 +50,12 @@ function configureType(
         const mut = config.useMutable
         const undef = config.useUndefined
         switch (type.tag) {
-            case "enum":
+            case "enum": {
                 if (config.useIntEnum) {
                     extra = { intEnum: true }
                 }
                 break
+            }
             case "list": {
                 const typedArray =
                     !config.useGenericArray &&
@@ -64,11 +65,12 @@ function configureType(
                 }
                 break
             }
-            case "map":
+            case "map": {
                 if (mut) {
                     extra = { mut }
                 }
                 break
+            }
             case "optional":
             case "void": {
                 if (undef) {
@@ -79,13 +81,14 @@ function configureType(
                 }
                 break
             }
-            case "struct":
+            case "struct": {
                 data = configureFields(type.data, config)
                 if (isAliased && config.useClass) {
                     extra = { class: true }
                 }
                 break
-            case "union":
+            }
+            case "union": {
                 if (config.useFlatUnion && types !== null) {
                     extra = { flat: true }
                     const newTypes: ast.Type[] = []
@@ -105,14 +108,16 @@ function configureType(
                         : newTypes
                 }
                 break
+            }
             case "i64":
             case "int":
             case "u64":
-            case "uint":
+            case "uint": {
                 if (config.useSafeInt) {
                     extra = { safe: true }
                 }
                 break
+            }
         }
     }
     if (type.data !== data || type.types !== types || type.extra !== extra) {
