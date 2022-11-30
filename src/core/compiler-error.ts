@@ -2,9 +2,7 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 export class CompilerError extends Error {
-    declare readonly name: "CompilerError"
-
-    declare readonly location: Location | null
+    readonly location: Location | null
 
     constructor(issue: string, loc: Location | null) {
         super(`${locationRpr(loc)}${issue}`)

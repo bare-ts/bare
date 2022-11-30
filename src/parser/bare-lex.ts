@@ -8,13 +8,13 @@ const PUNCTUATION_PATTERN = /[\{\}\[\]\(\)<>=\|:,;\.!?~+-\\/$@#]/
 const ID_PATTERN = /([A-Za-z0-9_]+)/
 
 export class Lex {
-    declare readonly content: string
-    declare readonly filename: string | number
-    private declare offset: number
-    private declare line: number
-    private declare col: number
-    private declare _docComment: string
-    private declare _token: string
+    readonly content: string
+    readonly filename: string | number
+    private offset: number
+    private line: number
+    private col: number
+    private _docComment: string
+    private _token: string
 
     constructor(content: string, filename: string | number) {
         this.content = content
@@ -23,6 +23,7 @@ export class Lex {
         this.line = 1
         this.col = 1
         this._docComment = ""
+        this._token = ""
         this.forth()
     }
 

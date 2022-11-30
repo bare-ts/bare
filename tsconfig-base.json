@@ -13,7 +13,6 @@
     "noEmit": true,
     "sourceMap": true,
     "stripInternal": true,
-    "useDefineForClassFields": true,
 
     "esModuleInterop": true,
     "isolatedModules": true,
