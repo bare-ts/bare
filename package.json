@@ -32,7 +32,6 @@
   "types": "./dist/index.d.ts",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "es2015": "./dist/index.js",
   "exports": {
     "module": "./dist/index.js",
     "require": "./dist/index.cjs",
