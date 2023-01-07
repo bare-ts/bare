@@ -34,6 +34,7 @@
   "module": "./dist/index.js",
   "es2015": "./dist/index.js",
   "exports": {
+    "module": "./dist/index.js",
     "require": "./dist/index.cjs",
     "default": "./dist/index.js"
   },
