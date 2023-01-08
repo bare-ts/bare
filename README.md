@@ -63,7 +63,7 @@ Compile your schema into code:
 bare compile schema.bare --out=code.ts
 ```
 
-Once the code generated encode and decode messages:
+Once the code generated, encode and decode messages:
 
 ```ts
 import { decodeContacts, encodeContacts, Gender } from "./code.js"
@@ -99,9 +99,9 @@ deduplication.
 representation.
 
 **Simple**: in contrast to _Protocol Buffer_ and _Flat Buffer_, _BARE_ doesn't
-constraint its binary format to support schema evolution.
-In _Protocol Buffer_, this leads to embed some kind of schema inside messages
-and to make optional every field.
+constrain its binary format to support schema evolution.
+_Protocol Buffer_ embeds metadata in every message and
+makes optional every field.
 _BARE_ recommends using a tagged union as message type
 to support backward compatibility.
 
@@ -118,10 +118,10 @@ This assumption reduces the number of API misuses to check.
 **Optimized bundle size**: [bare-ts](#) adopts a functional programming style.
 This enables to take advantage of modern _dead-code elimination_ techniques,
 such as _tree-shaking_.
-Using bundlers such as _Rollup_ or _Webpack_, your bundle can contain only the
-functions which are actually used.
-Moreover, [bare-ts](#) uses the node's `assert` module to express preconditions.
-You can use [dedicated tools][unassert] to remove them.
+Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle can
+contain only the functions which are actually used.
+Moreover, [bare-ts](#) uses assertions to express preconditions.
+You can use dedicated tools such as [unassert][unassert] to remove them.
 
 **Generation of efficient code** [bare-ts](#) takes care to generate code that
 modern JavaScript engines may optimize.
