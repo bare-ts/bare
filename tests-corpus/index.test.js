@@ -6,8 +6,9 @@ import {
     Config,
     configure,
     parse,
-    transform,
+    transform
 } from "@bare-ts/tools"
+import { strict as assert } from "node:assert"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { default as test } from "oletus"
@@ -19,7 +20,7 @@ const VALID_BARE_DIR = `${CORPUS_DIR}/valid-bare-schema`
 for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
     const dir = resolve(INVALID_BARE_DIR, relDir)
 
-    test(relative(CORPUS_DIR, dir), (t) => {
+    test(relative(CORPUS_DIR, dir), () => {
         const schemaPath = resolve(dir, "schema.bare")
         const configPath = resolve(dir, "config.json")
         const astPath = resolve(dir, "ast.gen.json")
@@ -39,14 +40,14 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
         const error = JSON.parse(fs.readFileSync(errorPath).toString())
         try {
             const astComputed = configure(parse(schema, config), config)
-            t.deepEqual(astComputed, astExpected)
+            assert.deepEqual(astComputed, astExpected)
             void transform(schema, config)
-            t.ok(false) // must be unreachable
+            assert.ok(false) // must be unreachable
         } catch (e) {
             if (!(e instanceof CompilerError)) {
                 throw e
             }
-            t.deepEqual({ ...e, message: e.message }, error)
+            assert.deepEqual({ ...e, message: e.message }, error)
         }
     })
 }
@@ -54,7 +55,7 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
 for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
     dir = resolve(VALID_BARE_DIR, dir)
 
-    test(relative(CORPUS_DIR, dir), (t) => {
+    test(relative(CORPUS_DIR, dir), () => {
         const schemaPath = resolve(dir, "schema.bare")
         const schemaRelPath = relative(VALID_BARE_DIR, schemaPath)
         const configPath = resolve(dir, "config.json")
@@ -104,10 +105,10 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
             schema: schemaRelPath,
         })
 
-        t.deepEqual(astComputed, astExpected)
-        t.deepEqual(tsComputed, tsExpected)
-        t.deepEqual(dtsComputed, dtsExpected)
-        t.deepEqual(jsComputed, jsExpected)
-        t.deepEqual(bareComputed, bareExpected)
+        assert.deepEqual(astComputed, astExpected)
+        assert.deepEqual(tsComputed, tsExpected)
+        assert.deepEqual(dtsComputed, dtsExpected)
+        assert.deepEqual(jsComputed, jsExpected)
+        assert.deepEqual(bareComputed, bareExpected)
     })
 }

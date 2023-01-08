@@ -2,6 +2,7 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 import { Lex } from "./bare-lex.js"
+import { strict as assert } from "node:assert"
 import { default as test } from "oletus"
 
 const SAMPLE = `
@@ -13,30 +14,30 @@ const SAMPLE = `
 
 const SAMPLE_TOKENS = "const C = { p1 : 1 , p2 : a , }".split(" ")
 
-test("valid-tokens", (t) => {
+test("valid-tokens", () => {
     const lex = new Lex(SAMPLE, "inline")
     for (let i = 0; i < SAMPLE_TOKENS.length; i++) {
-        t.deepEqual(lex.token(), SAMPLE_TOKENS[i])
-        t.doesNotThrow(() => lex.forth())
+        assert.deepEqual(lex.token(), SAMPLE_TOKENS[i])
+        assert.doesNotThrow(() => lex.forth())
     }
 })
 
-test("invalid-tokens", (t) => {
+test("invalid-tokens", () => {
     const lex = new Lex("d ^", "inline")
-    t.throws(() => lex.forth(), {
+    assert.throws(() => lex.forth(), {
         name: "CompilerError",
     })
 })
 
-test("comment-eof", (t) => {
+test("comment-eof", () => {
     const content = "# comment"
     const lex = new Lex(content, "inline")
-    t.deepEqual(lex.location().col, content.length + 1)
+    assert.deepEqual(lex.location().col, content.length + 1)
 })
 
-test("doc-comment", (t) => {
+test("doc-comment", () => {
     const content = "## doc-comment"
     const lex = new Lex(content, "inline")
-    t.deepEqual(lex.location().col, content.length + 1)
-    t.deepEqual(lex.consumeDocComment(), " doc-comment")
+    assert.deepEqual(lex.location().col, content.length + 1)
+    assert.deepEqual(lex.consumeDocComment(), " doc-comment")
 })
