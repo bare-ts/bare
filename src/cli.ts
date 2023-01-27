@@ -8,9 +8,7 @@ import * as fs from "node:fs"
 import * as process from "node:process"
 import { Config, transform } from "./index.js"
 
-/**
- * This constant MUST be defined at build time.
- */
+// WARNING: This constant MUST be defined at build time.
 declare const VERSION: string
 
 const REPOSITORY_HELP = `Repository:

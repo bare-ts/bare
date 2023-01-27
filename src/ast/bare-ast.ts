@@ -3,16 +3,19 @@
 
 import type { Location } from "../core/compiler-error.js"
 
-// The AST must be serializable in JSON.
-//
-// The serialization of an AST should preserve the structure and data types.
-// For instance, if X is an AST, then it verifies the following predicate:
-//     deepEqual(X, JSON.parse(JSON.stringify(X)))
-//
-// To ensure this:
-// - do not use undefined. Use null instead.
-// - do not use bigint.
-
+/**
+ * The AST is serializable in JSON.
+ *
+ * The serialization preserves the AST structure and its data types.
+ * This makes serialization and deserialization bijective:
+ *
+ * ```ts
+ * (x: Ast) => assert.deepEqual(x, JSON.parse(JSON.stringify(x)))
+ * ```
+ *
+ * To achieve this, the AST use `null` instead of `undefined` and
+ * use dedicated representations for types that cannot be serialized.
+ */
 export type Ast = {
     readonly defs: readonly AliasedType[]
     readonly loc: Location | null
@@ -29,7 +32,8 @@ export type AliasedType = {
 
 /**
  * All types have the same object's shape: { tag, data, types, extra, loc }
- * - `tag` enables to discriminate types
+ *
+ * - `tag` discriminates the type
  * - `data` contains type-specific info
  * - `types` contains nested types
  * - `extra` contains information that are not part of BARE specification
@@ -131,9 +135,7 @@ export type VoidType = {
     readonly loc: Location | null
 }
 
-/**
- * All type's data have the same shape: { name, val, extra, loc }
- */
+// All type's data have the same shape: { name, val, comment, extra, loc }
 
 export type EnumVal = {
     readonly name: string
@@ -172,7 +174,7 @@ export type UnionTag = {
 export type LiteralVal = bigint | boolean | null | number | string | undefined
 
 /**
- * JSON representation of a literal type
+ * JSON-serializable representation of a literal type.
  */
 export type Literal =
     // bigint values are not serializable,
@@ -288,8 +290,7 @@ export function resolveAlias(type: Type, symbols: SymbolTable): Type {
 }
 
 /**
- * @param defs
- * @returns aliases that are not referred by any types of `defs`.
+ * Aliases that are not referred by any types of `defs`.
  */
 export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
     const referred = new Set(defs.flatMap((x) => referredAliases(x.type)))
@@ -297,8 +298,7 @@ export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
 }
 
 /**
- * @param type
- * @returns all aliases present in the tree represented by `type`.
+ * All aliases present in the tree represented by `type`.
  */
 function referredAliases(type: Type): readonly string[] {
     if (type.tag === "alias") {
@@ -325,10 +325,9 @@ export function typeofValue(type: BaseType): string {
 }
 
 /**
- * @param structs
- * @return if the first field of every struct discriminates these structs in
- *  a union, then the returned value is their discriminators. Otherwise the
- *  result is null.
+ * If the first field of every struct discriminates these structs in a union,
+ * then the returned value is their discriminators.
+ * Otherwise the result is null.
  */
 export function leadingDiscriminators(
     structs: readonly StructType[],
@@ -355,8 +354,7 @@ export function leadingDiscriminators(
 }
 
 /**
- * @param types
- * @returns have `types` distinct typeof values?
+ * Have `types` distinct `typeof` values?
  */
 export function haveDistinctTypeof(types: readonly Type[]): boolean {
     const typeofValues = types.map((t) =>
@@ -366,9 +364,7 @@ export function haveDistinctTypeof(types: readonly Type[]): boolean {
 }
 
 /**
- * Recursively traverse the ast and set `loc` to null
- * @param type
- * @returns type with all `loc` set to null
+ * Recursively traverse `type` and set `loc` to null.
  */
 export function withoutLoc(type: Type): Type {
     return JSON.parse(
@@ -377,9 +373,7 @@ export function withoutLoc(type: Type): Type {
 }
 
 /**
- * Recursively traverse the ast and set `comment`, `extra`, and `loc` to null
- * @param type
- * @returns type with all `comment`, `extra` and `loc` set to null
+ * Recursively traverse `type` and set `comment`, `extra`, `loc` to null.
  */
 export function withoutTrivia(type: Type): Type {
     return JSON.parse(

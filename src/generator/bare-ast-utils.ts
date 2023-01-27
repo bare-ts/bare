@@ -8,12 +8,12 @@ import { CompilerError } from "../core/compiler-error.js"
 // facilitating code generation.
 
 /**
+ * A version of `type` that can be represented in _TypeScript_,
+ * or `null` if it doesn't exists.
  *
- * @param type
- * @param symbols
- * @returns a version of `type` that is a valid TypeScript type. Null otherwise.
- *  The returned type should only be used for type printing.
- *  Some metadata may be inconsistent for other usages.
+ * @remarks
+ * The returned type should only be used for type printing.
+ * Some metadata may be inconsistent for other usages.
  */
 export function unrecursive(
     type: ast.Type,
@@ -30,13 +30,8 @@ export function unrecursive(
 }
 
 /**
- *
- * @param type
- * @param symbols
- * @param traversed traversed aliases
- * @returns a version of `type` that is a valid TypeScript type. Null otherwise.
- *  The returned type should only be used for type printing.
- *  Some metadata may be inconsistent for other usages.
+ * @privateRemarks
+ * `traversed` contains all traversed aliases.
  */
 function innerUnrecursive(
     type: ast.Type,
@@ -79,12 +74,12 @@ function innerUnrecursive(
 }
 
 /**
- * Flatten optional<void> to void and
- * recursively optional<optional<>> to optional<>
+ * Simplified version of `type`.
  *
- * @param type
- * @returns simplified version of `type`.
- *  If `type` cannot be simplified, then returns `type`.
+ * The simplification (recursively) flatten:
+ *
+ * - `optional<void>` to `void`
+ * - `optional<optional<>>` to `optional<>`
  */
 function simplifyOptional(type: ast.OptionalType): ast.Type {
     const subtype = type.types[0]

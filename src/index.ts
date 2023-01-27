@@ -19,12 +19,23 @@ export * from "./parser/bare-parser.js"
 export * from "./parser/bare-lex.js"
 
 /**
+ * Turn the schema `content` into a target language, taking `conf` into account.
  *
- * @param content
- * @param conf
- * @return code
- * @throw {BareParserError} upon parsing error
- * @throw {ConfigError} upon error in config
+ * @example
+ * ```js
+ * const input = "type Person struct { name: str }"
+ * const tsOutput = transform(input)
+ * ```
+ *
+ * @example
+ * ```js
+ * const input = "type Person struct { name: str }"
+ * const dtsOutput = transform(input, { generator: "dts" })
+ * ```
+ *
+ * @throws {@link CompilerError} if parsing failed.
+ * @throws {@link ConfigError} if the code generator cannot be determinate or
+ * the format of the schema is not a supported.
  */
 export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)

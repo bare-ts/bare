@@ -1,6 +1,9 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
+/**
+ * @sealed
+ */
 export class ConfigError extends Error {
     constructor(message: string) {
         super(message)
@@ -13,8 +16,19 @@ export type Config = {
     readonly importConfig: boolean
     readonly importFactory: boolean
     readonly legacy: boolean
+    /**
+     * Output filename.
+     * An empty string means inline output.
+     *
+     * If `generator` is unspecified, then the output filename extension is used
+     * to determinate the generator.
+     */
     readonly out: string | number
     readonly pedantic: boolean
+    /**
+     * Input filename.
+     * An empty string means inline input.
+     */
     readonly schema: string | number
     readonly useClass: boolean
     readonly useFlatUnion: boolean
@@ -27,10 +41,10 @@ export type Config = {
 }
 
 /**
- * @param {Partial<Config>} part
- * @returns {Config} completed config
- * @throws {ConfigError} when the code generator cannot be determinate or
- *  when the schema format is not a supported.
+ * Complete the configuration by setting missing fields to their default values.
+ *
+ * @throws {@link ConfigError} if the code generator cannot be determinate or
+ * the format of the schema is not a supported.
  */
 export function Config({
     generator,

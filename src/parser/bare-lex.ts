@@ -32,8 +32,8 @@ export class Lex {
     }
 
     /**
-     * @returns collected comment since the last comment' consumption.
-     *  Null if no collected comment or empty comment.
+     * Collected comment since the last comment' consumption.
+     * `null` if no collected comment or empty comment.
      */
     consumeDocComment(): string | null {
         const comment = this._docComment
