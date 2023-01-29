@@ -1,6 +1,8 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
+const DEFAULT_GENERATOR = "ts"
+
 /**
  * @sealed
  */
@@ -23,13 +25,12 @@ export type Config = {
      * If `generator` is unspecified, then the output filename extension is used
      * to determinate the generator.
      */
-    readonly out: string | number
+    readonly out: string | number | null
     readonly pedantic: boolean
     /**
      * Input filename.
-     * An empty string means inline input.
      */
-    readonly schema: string | number
+    readonly schema: string | number | null
     readonly useClass: boolean
     readonly useFlatUnion: boolean
     readonly useGenericArray: boolean
@@ -51,9 +52,9 @@ export function Config({
     importConfig = false,
     importFactory = false,
     legacy = false,
-    out = "",
+    out = null,
     pedantic = false,
-    schema = "",
+    schema = null,
     useClass = false,
     useFlatUnion = false,
     useGenericArray = false,
@@ -63,26 +64,25 @@ export function Config({
     useSafeInt = false,
     useUndefined = false,
 }: Partial<Config>): Config {
-    if (
-        typeof schema === "string" &&
-        schema !== "" &&
-        !schema.endsWith(".bare")
-    ) {
+    if (typeof schema === "string" && !schema.endsWith(".bare")) {
         throw new ConfigError(
             "a file containing a BARE schema must end with extension '.bare'.",
         )
     }
     const inferredGenerator =
-        typeof out === "string" && out.endsWith(".bare")
-            ? "bare"
-            : typeof out === "string" && out.endsWith(".d.ts")
-            ? "dts"
-            : typeof out === "string" && out.endsWith(".ts")
-            ? "ts"
-            : typeof out === "string" && out.endsWith(".js")
-            ? "js"
-            : (typeof out === "number" || out === "") && generator === undefined
-            ? "ts"
+        typeof out === "string"
+            ? out.endsWith(".bare")
+                ? "bare"
+                : out.endsWith(".d.ts")
+                ? "dts"
+                : out.endsWith(".ts")
+                ? "ts"
+                : out.endsWith(".js")
+                ? "js"
+                : generator
+            : generator === undefined &&
+              (typeof out === "number" || out === null)
+            ? DEFAULT_GENERATOR
             : generator
     if (generator !== undefined && inferredGenerator !== generator) {
         throw new ConfigError(

@@ -9,14 +9,14 @@ const ID_PATTERN = /([A-Za-z0-9_]+)/
 
 export class Lex {
     readonly content: string
-    readonly filename: string | number
+    readonly filename: string | number | null
     private offset: number
     private line: number
     private col: number
     private _docComment: string
     private _token: string
 
-    constructor(content: string, filename: string | number) {
+    constructor(content: string, filename: string | number | null) {
         this.content = content
         this.filename = filename
         this.offset = 0

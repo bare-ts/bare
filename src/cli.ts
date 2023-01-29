@@ -98,7 +98,7 @@ function compileAction(schema: string | number, opts: Partial<Config>): void {
         const config = Config({ ...opts, schema })
         const content = fs.readFileSync(schema).toString()
         const compiled = transform(content, config)
-        fs.writeFileSync(config.out, compiled)
+        fs.writeFileSync(config.out ?? 1, compiled)
     } catch (e) {
         console.error(`error: ${e instanceof Error ? e.message : e}`)
         process.exit(1)
