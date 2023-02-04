@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.12.0 (2023-02-04)
 
 -   Emit ES2020
 
