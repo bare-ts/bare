@@ -10,6 +10,17 @@ This project adheres to [Semantic Versioning][semver].
     This allows to output smaller builds.
     This should cause no issue since we require a node version ^14.18 or >=16.
 
+-   Allow root types that resolve to `void`
+
+    Since the 0.9.0 version, root types that resolve to `void` are forbidden.
+
+    To conform with the bare specification, they are now allowed.
+    This makes valid the following schema:
+
+    ```bare
+    type Root = void
+    ```
+
 -   BREAKING CHANGES: emit type aliases instead of interfaces
 
     As a consequence, it is no longer possible to rely

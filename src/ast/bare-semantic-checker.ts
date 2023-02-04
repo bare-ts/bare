@@ -35,7 +35,6 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
         }
         aliases.add(alias)
     }
-    checkMainCodecs(c, schema)
     return schema
 }
 
@@ -58,22 +57,6 @@ function checkTypeName(aliased: ast.AliasedType): void {
             `the type name '${alias}' must be in UpperCamelCase.`,
             aliased.loc,
         )
-    }
-}
-
-function checkMainCodecs(c: Checker, schema: ast.Ast): void {
-    const rootAliases = ast.rootAliases(schema.defs)
-    for (const alias of rootAliases) {
-        const aliased = c.symbols.get(alias)
-        if (aliased !== undefined) {
-            const resolved = ast.resolveAlias(aliased.type, c.symbols)
-            if (resolved.tag === "void") {
-                throw new CompilerError(
-                    "a root type must not resolve to void.",
-                    null,
-                )
-            }
-        }
     }
 }
 

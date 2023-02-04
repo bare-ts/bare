@@ -1,5 +1,0 @@
-{
-  "name": "CompilerError",
-  "location": null,
-  "message": "a root type must not resolve to void."
-}
