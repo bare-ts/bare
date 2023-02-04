@@ -53,7 +53,10 @@ export function generate(schema: ast.Ast, config: Config): string {
                 break
             }
         }
-        if (!isVoid && rootAliases.indexOf(aliased.alias) !== -1) {
+        if (
+            !(isVoid || config.lib) &&
+            rootAliases.indexOf(aliased.alias) !== -1
+        ) {
             hasEncodeDecode = true
             switch (g.config.generator) {
                 case "dts": {

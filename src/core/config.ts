@@ -18,6 +18,7 @@ export type Config = {
     readonly importConfig: boolean
     readonly importFactory: boolean
     readonly legacy: boolean
+    readonly lib: boolean
     /**
      * Output filename.
      * An empty string means inline output.
@@ -52,6 +53,7 @@ export function Config({
     importConfig = false,
     importFactory = false,
     legacy = false,
+    lib = false,
     out = null,
     pedantic = false,
     schema = null,
@@ -99,6 +101,7 @@ export function Config({
         importConfig,
         importFactory,
         legacy,
+        lib,
         out,
         pedantic,
         schema,

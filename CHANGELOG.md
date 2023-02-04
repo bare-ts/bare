@@ -21,6 +21,13 @@ This project adheres to [Semantic Versioning][semver].
     type Root = void
     ```
 
+-   Add option `--lib` to prevent `decode` and `encode` generation
+
+    A decoder and encoder are generated for every root types that doesn't resolve to `void`.
+    The `--lib` flag prevents this generation.
+
+    This is particularly useful for libraries that export only readers and writers.
+
 -   BREAKING CHANGES: emit type aliases instead of interfaces
 
     As a consequence, it is no longer possible to rely

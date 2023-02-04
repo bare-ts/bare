@@ -68,6 +68,7 @@ program
         ]),
     )
     .option("--legacy", "allow legacy BARE syntax and features")
+    .option("--lib", "do not generate decoders and encoders of root types")
     .option(
         "--pedantic",
         "require enum and union types to set all tags in-order",
