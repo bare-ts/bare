@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning][semver].
     This makes valid the following schema:
 
     ```bare
-    type Root = void
+    type Root void
     ```
 
 -   Add option `--lib` to prevent `decode` and `encode` generation
