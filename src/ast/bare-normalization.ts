@@ -60,6 +60,8 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
     let alias = n.dedup.get(stringifiedType)
     if (alias === undefined) {
         const normalized = normalizeSubtypes(n, type)
+        // We use an integer as internal alias.
+        // This avoids conflicts with user aliases.
         alias = `${n.aliasCount++}`
         n.defs.push({
             alias,
