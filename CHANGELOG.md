@@ -2,6 +2,40 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   BREAKING CHANGES: use type alias as tag's value for flat unions of structs
+
+    _bare-ts_ allows flat unions of aliased structs.
+    Previously, it used the type alias in `underscore_case` as tag's value.
+    Now, it uses the type alias in its original case.
+
+    For instance, the following union:
+
+    ```bare
+    type BoxedU32 struct { val: u32 }
+    type BoxedStr struct { val: str }
+    type Boxed union { BoxedU32 | BoxedStr }
+    ```
+
+    can be flatten (under `--use-flat-union`) to:
+
+    ```diff
+    export type BoxedU32 = {
+    -   readonly tag: "BOXED_U32", // Previous output
+    +   readonly tag: "BoxedU32", // New output
+        readonly val: u32,
+    }
+
+    export type BoxedStr = {
+    -   readonly tag: "BOXED_STR", // Previous output
+    +   readonly tag: "BoxedStr", // New output
+        readonly val: string,
+    }
+
+    export type Boxed = BoxedU32 | BoxedStr
+    ```
+
 ## 0.12.0 (2023-02-04)
 
 -   Emit ES2020

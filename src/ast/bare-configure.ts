@@ -2,7 +2,6 @@
 //! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
 
 import type { Config } from "../core/config.js"
-import { underscoreCase } from "../utils/formatting.js"
 import * as ast from "./bare-ast.js"
 
 export function configure(schema: ast.Ast, config: Config): ast.Ast {
@@ -23,7 +22,7 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
             !type.extra?.class
         ) {
             const { alias, internal, comment, loc } = defs[i]
-            type = embeddedTag(c, type, underscoreCase(defs[i].alias))
+            type = embeddedTag(c, type, defs[i].alias)
             defs[i] = { alias, internal, comment, type, loc }
         }
     }

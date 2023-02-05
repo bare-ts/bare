@@ -4,7 +4,7 @@ const config = /* @__PURE__ */ bare.Config({})
 
 export function readBoxedU32(bc) {
     return {
-        tag: "BOXED_U32",
+        tag: "BoxedU32",
         val: bare.readU32(bc),
     }
 }
@@ -15,7 +15,7 @@ export function writeBoxedU32(bc, x) {
 
 export function readBoxedStr(bc) {
     return {
-        tag: "BOXED_STR",
+        tag: "BoxedStr",
         val: bare.readString(bc),
     }
 }
@@ -41,12 +41,12 @@ export function readBoxed(bc) {
 
 export function writeBoxed(bc, x) {
     switch (x.tag) {
-        case "BOXED_U32": {
+        case "BoxedU32": {
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
             break
         }
-        case "BOXED_STR": {
+        case "BoxedStr": {
             bare.writeU8(bc, 1)
             writeBoxedStr(bc, x)
             break

@@ -5,13 +5,13 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u32 = number
 
 export type BoxedU32 = {
-    readonly tag: "BOXED_U32",
+    readonly tag: "BoxedU32",
     readonly val: u32,
 }
 
 export function readBoxedU32(bc: bare.ByteCursor): BoxedU32 {
     return {
-        tag: "BOXED_U32",
+        tag: "BoxedU32",
         val: bare.readU32(bc),
     }
 }
@@ -21,13 +21,13 @@ export function writeBoxedU32(bc: bare.ByteCursor, x: BoxedU32): void {
 }
 
 export type BoxedStr = {
-    readonly tag: "BOXED_STR",
+    readonly tag: "BoxedStr",
     readonly val: string,
 }
 
 export function readBoxedStr(bc: bare.ByteCursor): BoxedStr {
     return {
-        tag: "BOXED_STR",
+        tag: "BoxedStr",
         val: bare.readString(bc),
     }
 }
@@ -57,12 +57,12 @@ export function readBoxed(bc: bare.ByteCursor): Boxed {
 
 export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void {
     switch (x.tag) {
-        case "BOXED_U32": {
+        case "BoxedU32": {
             bare.writeU8(bc, 0)
             writeBoxedU32(bc, x)
             break
         }
-        case "BOXED_STR": {
+        case "BoxedStr": {
             bare.writeU8(bc, 1)
             writeBoxedStr(bc, x)
             break

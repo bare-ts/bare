@@ -43,7 +43,7 @@
             "extra": {
               "literal": {
                 "type": "string",
-                "val": "BOXED_U32"
+                "val": "BoxedU32"
               }
             },
             "loc": {
