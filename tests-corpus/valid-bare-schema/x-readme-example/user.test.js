@@ -7,7 +7,7 @@ import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
 test("x-readme-example", (t) => {
     const payload = encodeContacts([
         {
-            tag: 0,
+            tag: "Person",
             val: {
                 name: "Seldon",
                 email: "seldon@foundation.org",
@@ -15,7 +15,7 @@ test("x-readme-example", (t) => {
             },
         },
         {
-            tag: 1,
+            tag: "Organization",
             val: {
                 name: "Foundation",
                 email: "contact@foundation.org",
@@ -26,7 +26,7 @@ test("x-readme-example", (t) => {
 
     t.deepEqual(msg, [
         {
-            tag: 0,
+            tag: "Person",
             val: {
                 name: "Seldon",
                 email: "seldon@foundation.org",
@@ -34,7 +34,7 @@ test("x-readme-example", (t) => {
             },
         },
         {
-            tag: 1,
+            tag: "Organization",
             val: {
                 name: "Foundation",
                 email: "contact@foundation.org",

@@ -18,7 +18,7 @@ function read1(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readPerson(bc) }
+            return { tag: "Person", val: readPerson(bc) }
         case 1:
             return { tag, val: null }
         default: {
@@ -29,9 +29,9 @@ function read1(bc) {
 }
 
 function write1(bc, x) {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Person": {
+            bare.writeU8(bc, 0)
             writePerson(bc, x.val)
             break
         }

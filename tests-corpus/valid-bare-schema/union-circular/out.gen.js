@@ -5,9 +5,9 @@ export function readAlias(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readAlias1(bc) }
+            return { tag: "Alias1", val: readAlias1(bc) }
         case 1:
-            return { tag, val: readAlias2(bc) }
+            return { tag: "Alias2", val: readAlias2(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -16,13 +16,14 @@ export function readAlias(bc) {
 }
 
 export function writeAlias(bc, x) {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Alias1": {
+            bare.writeU8(bc, 0)
             writeAlias1(bc, x.val)
             break
         }
-        case 1: {
+        case "Alias2": {
+            bare.writeU8(bc, 1)
             writeAlias2(bc, x.val)
             break
         }

@@ -79,16 +79,20 @@ program
     .option("--use-flat-union", "use flat unions instead of tagged unions")
     .option("--use-generic-array", "use generic arrays instead of typed arrays")
     .option("--use-int-enum", "use integers for enum values instead of strings")
+    .option(
+        "--use-int-tag",
+        "always use integers for union tags instead of strings",
+    )
     .option("--use-mutable", "use mutable types")
     .option(
         "--use-quoted-property",
         "use quoted property instead of unquoted property",
     )
+    .option("--use-safe-int", "use safe integers instead of bigint")
     .option(
         "--use-undefined",
         "use undefined instead of null for optional types",
     )
-    .option("--use-safe-int", "use safe integers instead of bigint")
     .addHelpText("after", COMPILE_EXTRA_HELP)
     .action(compileAction)
 

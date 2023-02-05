@@ -197,11 +197,11 @@ export function readPerson(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readCustomer(bc) }
+            return { tag: "Customer", val: readCustomer(bc) }
         case 1:
-            return { tag, val: readEmployee(bc) }
+            return { tag: "Employee", val: readEmployee(bc) }
         case 2:
-            return { tag, val: null }
+            return { tag: "TerminatedEmployee", val: null }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -210,14 +210,19 @@ export function readPerson(bc) {
 }
 
 export function writePerson(bc, x) {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Customer": {
+            bare.writeU8(bc, 0)
             writeCustomer(bc, x.val)
             break
         }
-        case 1: {
+        case "Employee": {
+            bare.writeU8(bc, 1)
             writeEmployee(bc, x.val)
+            break
+        }
+        case "TerminatedEmployee": {
+            bare.writeU8(bc, 2)
             break
         }
     }

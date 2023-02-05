@@ -300,9 +300,15 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
+        const subtype = type.types[i]
         const doc = jsDoc(type.data[i].comment)
-        const valType = genType(g, type.types[i])
-        const tagVal = type.data[i].val
+        const valType = genType(g, subtype)
+        const tagVal =
+            g.config.useIntTag ||
+            subtype.tag !== "alias" ||
+            g.symbols.get(subtype.data)?.internal
+                ? type.data[i].val
+                : jsRpr(subtype.data)
         result += type.extra?.flat
             ? `\n${doc}| ${valType}`
             : `\n${doc}| { readonly ${tagProp}: ${tagVal}, readonly ${valProp}: ${valType} }`
@@ -629,21 +635,34 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
     const tagReader = ast.maxVal(type.data) < 128 ? "readU8" : "readUintSafe"
     const flat = type.extra?.flat
     let switchBody = ""
+    const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
     const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
     const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     for (let i = 0; i < type.types.length; i++) {
-        const resolvedType = ast.resolveAlias(type.types[i], g.symbols)
+        const subtype = type.types[i]
+        const resolvedType = ast.resolveAlias(subtype, g.symbols)
         const valExpr =
             resolvedType.tag === "void"
                 ? genReading(g, resolvedType)
-                : genReading(g, type.types[i])
+                : genReading(g, subtype)
+        const tagEncodedVal = type.data[i].val
         if (flat) {
             switchBody += `
-            case ${type.data[i].val}:
+            case ${tagEncodedVal}:
                 return ${indent(valExpr, 4)}`
+        } else if (
+            !g.config.useIntTag &&
+            subtype.tag === "alias" &&
+            !g.symbols.get(subtype.data)?.internal
+        ) {
+            switchBody += `
+            case ${tagEncodedVal}:
+                return { ${tagProp}: ${jsRpr(
+                subtype.data,
+            )}, ${valProp}: ${indent(valExpr, 4)} }`
         } else {
             switchBody += `
-            case ${type.data[i].val}:
+            case ${tagEncodedVal}:
                 return { ${tagPropSet}, ${valProp}: ${indent(valExpr, 4)} }`
         }
     }
@@ -937,18 +956,43 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
     const tagPropAccess = g.config.useQuotedProperty ? '["tag"]' : ".tag"
     const valProp = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
+    let hasStrTags = false
     for (let i = 0; i < type.types.length; i++) {
-        if (ast.resolveAlias(type.types[i], g.symbols).tag !== "void") {
-            const valWriting = genWriting(g, type.types[i], `$x${valProp}`)
+        const subtype = type.types[i]
+        const tagEncodedVal = type.data[i].val
+        if (ast.resolveAlias(subtype, g.symbols).tag !== "void") {
+            const tagVal =
+                g.config.useIntTag ||
+                subtype.tag !== "alias" ||
+                g.symbols.get(subtype.data)?.internal
+                    ? tagEncodedVal
+                    : jsRpr(subtype.data)
+            const valWriting = genWriting(g, subtype, `$x${valProp}`)
+            const maybeTagWriting =
+                typeof tagVal === "string"
+                    ? `\nbare.${tagWriter}(bc, ${tagEncodedVal})`
+                    : ""
+            hasStrTags ||= typeof tagVal === "string"
             switchBody += `
-            case ${type.data[i].val}: {
+            case ${tagVal}: {${indent(maybeTagWriting, 4)}
                 ${indent(valWriting, 4)}
+                break
+            }`
+        } else if (
+            !g.config.useIntEnum &&
+            subtype.tag === "alias" &&
+            !g.symbols.get(subtype.data)?.internal
+        ) {
+            hasStrTags ||= true
+            switchBody += `
+            case ${jsRpr(subtype.data)}: {
+                bare.${tagWriter}(bc, ${tagEncodedVal})
                 break
             }`
         }
     }
-    return unindent(`{
-        bare.${tagWriter}(bc, $x.tag)
+    const maybeTagWriting = hasStrTags ? "" : `\nbare.${tagWriter}(bc, $x.tag)`
+    return unindent(`{${indent(maybeTagWriting, 2)}
         switch ($x${tagPropAccess}) {
             ${switchBody.trim()}
         }

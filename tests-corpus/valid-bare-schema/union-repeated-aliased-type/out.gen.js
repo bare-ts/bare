@@ -17,7 +17,7 @@ export function readX(bc) {
         case 0:
             return { tag, val: bare.readU8(bc) }
         case 1:
-            return { tag, val: readY(bc) }
+            return { tag: "Y", val: readY(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -26,13 +26,13 @@ export function readX(bc) {
 }
 
 export function writeX(bc, x) {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
         case 0: {
             bare.writeU8(bc, x.val)
             break
         }
-        case 1: {
+        case "Y": {
+            bare.writeU8(bc, 1)
             writeY(bc, x.val)
             break
         }

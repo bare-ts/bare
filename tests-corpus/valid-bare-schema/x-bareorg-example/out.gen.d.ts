@@ -65,9 +65,9 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void
 export type TerminatedEmployee = null
 
 export type Person =
-    | { readonly tag: 0, readonly val: Customer }
-    | { readonly tag: 1, readonly val: Employee }
-    | { readonly tag: 2, readonly val: TerminatedEmployee }
+    | { readonly tag: "Customer", readonly val: Customer }
+    | { readonly tag: "Employee", readonly val: Employee }
+    | { readonly tag: "TerminatedEmployee", readonly val: TerminatedEmployee }
 
 export function readPerson(bc: bare.ByteCursor): Person
 

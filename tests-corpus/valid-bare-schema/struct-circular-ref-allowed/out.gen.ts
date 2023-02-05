@@ -14,13 +14,13 @@ function write0(bc: bare.ByteCursor, x: Person | null): void {
 }
 
 function read1(bc: bare.ByteCursor): 
-    | { readonly tag: 0, readonly val: Person }
+    | { readonly tag: "Person", readonly val: Person }
     | { readonly tag: 1, readonly val: null } {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readPerson(bc) }
+            return { tag: "Person", val: readPerson(bc) }
         case 1:
             return { tag, val: null }
         default: {
@@ -31,11 +31,11 @@ function read1(bc: bare.ByteCursor):
 }
 
 function write1(bc: bare.ByteCursor, x: 
-    | { readonly tag: 0, readonly val: Person }
+    | { readonly tag: "Person", readonly val: Person }
     | { readonly tag: 1, readonly val: null }): void {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Person": {
+            bare.writeU8(bc, 0)
             writePerson(bc, x.val)
             break
         }
@@ -85,7 +85,7 @@ function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, Person>): void {
 export type Person = {
     readonly bestFriend: Person | null,
     readonly secondBestFriend: 
-        | { readonly tag: 0, readonly val: Person }
+        | { readonly tag: "Person", readonly val: Person }
         | { readonly tag: 1, readonly val: null },
     readonly friends: readonly Person[],
     readonly friendNicknames: ReadonlyMap<string, Person>,

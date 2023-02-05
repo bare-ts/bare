@@ -71,7 +71,7 @@ import { strict } from "node:assert"
 
 const contacts = [
     {
-        tag: /* Person */ 0,
+        tag: "Person",
         val: {
             name: "Seldon",
             email: "seldon@foundation.org",

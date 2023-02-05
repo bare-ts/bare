@@ -6,7 +6,7 @@ import { decodePerson, encodePerson, Department } from "./out.gen.js"
 
 test("x-readme-example", (t) => {
     const payload1 = encodePerson({
-        tag: /* Customer *: */ 0,
+        tag: "Customer",
         val: {
             name: "James Smith",
             email: "jsmith@example.org",
@@ -21,7 +21,7 @@ test("x-readme-example", (t) => {
         },
     })
     const payload2 = encodePerson({
-        tag: /* Employee *: */ 1,
+        tag: "Employee",
         val: {
             name: "Tiffany Doe",
             email: "tiffanyd@acme.corp",
@@ -33,7 +33,7 @@ test("x-readme-example", (t) => {
         },
     })
     const payload3 = encodePerson({
-        tag: /* Terminated Employee *: */ 2,
+        tag: "TerminatedEmployee",
         val: null,
     })
     const msg1 = decodePerson(payload1)
@@ -41,7 +41,7 @@ test("x-readme-example", (t) => {
     const msg3 = decodePerson(payload3)
 
     t.deepEqual(msg1, {
-        tag: /* Customer *: */ 0,
+        tag: "Customer",
         val: {
             name: "James Smith",
             email: "jsmith@example.org",
@@ -57,7 +57,7 @@ test("x-readme-example", (t) => {
     })
 
     t.deepEqual(msg2, {
-        tag: /* Employee *: */ 1,
+        tag: "Employee",
         val: {
             name: "Tiffany Doe",
             email: "tiffanyd@acme.corp",
@@ -70,7 +70,7 @@ test("x-readme-example", (t) => {
     })
 
     t.deepEqual(msg3, {
-        tag: /* Terminated Employee *: */ 2,
+        tag: "TerminatedEmployee",
         val: null,
     })
 })

@@ -4,6 +4,41 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+-   BREAKING CHANGES: use strings tags for union of aliases
+
+    _bare-ts_ outputs now string tags for unions of aliases.
+    You can obtain the previous behavior with the option `--use-int-tag`.
+
+    The following schema ...
+
+    ```bare
+    type Person struct { name: str }
+    type Organization struct { name: str }
+    type Contact union { Person | Organization }
+    ```
+
+    ... generates the following types:
+
+    ```ts
+    export type Person = { readonly name: string }
+    export type Organization = { readonly name: string }
+    export type Contact =
+        | { tag: "Person"; val: Person }
+        | { tag: "Organization"; val: Organization }
+    ```
+
+    This makes code more readable and allow assigning between compatible unions.
+
+    Using the option `--use-int-tag`, you obtain the previous output:
+
+    ```ts
+    export type Person = { readonly name: string }
+    export type Organization = { readonly name: string }
+    export type Contact =
+        | { tag: 0; val: Person }
+        | { tag: 1; val: Organization }
+    ```
+
 -   BREAKING CHANGES: use type alias as tag's value for flat unions of structs
 
     _bare-ts_ allows flat unions of aliased structs.

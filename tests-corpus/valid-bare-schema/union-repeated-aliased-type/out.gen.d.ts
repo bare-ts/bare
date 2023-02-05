@@ -10,7 +10,7 @@ export function writeY(bc: bare.ByteCursor, x: Y): void
 
 export type X =
     | { readonly tag: 0, readonly val: u8 }
-    | { readonly tag: 1, readonly val: Y }
+    | { readonly tag: "Y", readonly val: Y }
 
 export function readX(bc: bare.ByteCursor): X
 

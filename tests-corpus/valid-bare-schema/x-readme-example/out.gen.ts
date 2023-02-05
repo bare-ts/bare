@@ -93,17 +93,17 @@ export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
 }
 
 export type Contact =
-    | { readonly tag: 0, readonly val: Person }
-    | { readonly tag: 1, readonly val: Organization }
+    | { readonly tag: "Person", readonly val: Person }
+    | { readonly tag: "Organization", readonly val: Organization }
 
 export function readContact(bc: bare.ByteCursor): Contact {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readPerson(bc) }
+            return { tag: "Person", val: readPerson(bc) }
         case 1:
-            return { tag, val: readOrganization(bc) }
+            return { tag: "Organization", val: readOrganization(bc) }
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -112,13 +112,14 @@ export function readContact(bc: bare.ByteCursor): Contact {
 }
 
 export function writeContact(bc: bare.ByteCursor, x: Contact): void {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Person": {
+            bare.writeU8(bc, 0)
             writePerson(bc, x.val)
             break
         }
-        case 1: {
+        case "Organization": {
+            bare.writeU8(bc, 1)
             writeOrganization(bc, x.val)
             break
         }

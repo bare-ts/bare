@@ -5,7 +5,7 @@ function read0(bc) {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return { tag, val: readAlias(bc) }
+            return { tag: "Alias", val: readAlias(bc) }
         case 1:
             return { tag, val: bare.readString(bc) }
         default: {
@@ -16,9 +16,9 @@ function read0(bc) {
 }
 
 function write0(bc, x) {
-    bare.writeU8(bc, x.tag)
     switch (x.tag) {
-        case 0: {
+        case "Alias": {
+            bare.writeU8(bc, 0)
             writeAlias(bc, x.val)
             break
         }
