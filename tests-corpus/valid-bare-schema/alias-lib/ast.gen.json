@@ -1,0 +1,33 @@
+{
+  "defs": [
+    {
+      "alias": "U8Alias",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "u8",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "loc": {
+          "filename": "alias-lib/schema.bare",
+          "offset": 13,
+          "line": 1,
+          "col": 14
+        }
+      },
+      "loc": {
+        "filename": "alias-lib/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "alias-lib/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
