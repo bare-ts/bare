@@ -1,0 +1,7 @@
+type Person struct { name: str }
+
+type Entity union {
+    | Person
+    # Anonymous entity
+    | struct { name: str }
+}

@@ -33,13 +33,14 @@ export type Config = {
      */
     readonly schema: string | number | null
     readonly useClass: boolean
-    readonly useFlatUnion: boolean
     readonly useGenericArray: boolean
     readonly useIntEnum: boolean
     readonly useIntTag: boolean
     readonly useMutable: boolean
+    readonly usePrimitiveFlatUnion: boolean
     readonly useQuotedProperty: boolean
     readonly useSafeInt: boolean
+    readonly useStructFlatUnion: boolean
     readonly useUndefined: boolean
 }
 
@@ -59,13 +60,14 @@ export function Config({
     pedantic = false,
     schema = null,
     useClass = false,
-    useFlatUnion = false,
     useGenericArray = false,
     useIntEnum = false,
     useIntTag = false,
     useMutable = false,
+    usePrimitiveFlatUnion = false,
     useQuotedProperty = false,
     useSafeInt = false,
+    useStructFlatUnion = false,
     useUndefined = false,
 }: Partial<Config>): Config {
     if (typeof schema === "string" && !schema.endsWith(".bare")) {
@@ -108,13 +110,14 @@ export function Config({
         pedantic,
         schema,
         useClass,
-        useFlatUnion,
         useGenericArray,
         useIntEnum,
         useIntTag,
         useMutable,
+        usePrimitiveFlatUnion,
         useQuotedProperty,
         useSafeInt,
+        useStructFlatUnion,
         useUndefined,
     }
 }

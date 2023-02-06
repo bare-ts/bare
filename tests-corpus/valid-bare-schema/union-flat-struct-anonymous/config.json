@@ -1,4 +1,4 @@
 {
   "useClass": true,
-  "useFlatUnion": true
+  "useStructFlatUnion": true
 }

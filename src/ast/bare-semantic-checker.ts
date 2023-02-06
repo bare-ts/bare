@@ -258,10 +258,13 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
             ast.haveDistinctTypeof(type.types)
         if (
             !isFlatUnion &&
-            type.types.every((t): t is ast.Alias => t.tag === "alias")
+            type.types.every(
+                (t): t is ast.Alias | ast.StructType =>
+                    t.tag === "alias" || t.tag === "struct",
+            )
         ) {
-            const resolved = type.types.map(
-                (t) => c.symbols.get(t.data)?.type ?? t,
+            const resolved = type.types.map((t) =>
+                t.tag === "alias" ? c.symbols.get(t.data)?.type ?? t : t,
             )
             isFlatUnion =
                 resolved.every(
@@ -269,11 +272,6 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
                 ) &&
                 (resolved.every((t) => t.extra?.class) ||
                     ast.leadingDiscriminators(resolved) !== null)
-        } else if (
-            !isFlatUnion &&
-            type.types.every((t): t is ast.StructType => t.tag === "struct")
-        ) {
-            isFlatUnion = ast.leadingDiscriminators(type.types) !== null
         }
         if (!isFlatUnion) {
             throw new CompilerError("the union cannot be flatten.", type.loc)

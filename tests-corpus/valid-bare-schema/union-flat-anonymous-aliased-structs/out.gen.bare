@@ -1,0 +1,10 @@
+type Person struct {
+    name: str
+}
+
+type Entity union {
+    | Person = 0
+    | struct {
+        name: str
+    } = 1
+}

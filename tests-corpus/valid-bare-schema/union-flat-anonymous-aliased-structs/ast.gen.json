@@ -1,0 +1,214 @@
+{
+  "defs": [
+    {
+      "alias": "Person",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "tag",
+            "val": null,
+            "comment": null,
+            "extra": {
+              "mut": false,
+              "quoted": false
+            },
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 19,
+              "line": 1,
+              "col": 20
+            }
+          },
+          {
+            "name": "name",
+            "val": null,
+            "comment": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          }
+        ],
+        "types": [
+          {
+            "tag": "void",
+            "data": null,
+            "types": null,
+            "extra": {
+              "literal": {
+                "type": "string",
+                "val": "Person"
+              }
+            },
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 19,
+              "line": 1,
+              "col": 20
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 27,
+              "line": 1,
+              "col": 28
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+          "offset": 19,
+          "line": 1,
+          "col": 20
+        }
+      },
+      "loc": {
+        "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Entity",
+      "internal": false,
+      "type": {
+        "tag": "union",
+        "data": [
+          {
+            "name": null,
+            "val": 0,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          },
+          {
+            "name": null,
+            "val": 1,
+            "comment": null,
+            "extra": null,
+            "loc": null
+          }
+        ],
+        "types": [
+          {
+            "tag": "alias",
+            "data": "Person",
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 60,
+              "line": 4,
+              "col": 7
+            }
+          },
+          {
+            "tag": "struct",
+            "data": [
+              {
+                "name": "tag",
+                "val": null,
+                "comment": null,
+                "extra": {
+                  "mut": false,
+                  "quoted": false
+                },
+                "loc": {
+                  "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+                  "offset": 103,
+                  "line": 6,
+                  "col": 14
+                }
+              },
+              {
+                "name": "name",
+                "val": null,
+                "comment": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+                  "offset": 105,
+                  "line": 6,
+                  "col": 16
+                }
+              }
+            ],
+            "types": [
+              {
+                "tag": "void",
+                "data": null,
+                "types": null,
+                "extra": {
+                  "literal": {
+                    "type": "number",
+                    "val": 1
+                  }
+                },
+                "loc": {
+                  "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+                  "offset": 103,
+                  "line": 6,
+                  "col": 14
+                }
+              },
+              {
+                "tag": "str",
+                "data": null,
+                "types": null,
+                "extra": null,
+                "loc": {
+                  "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+                  "offset": 111,
+                  "line": 6,
+                  "col": 22
+                }
+              }
+            ],
+            "extra": null,
+            "loc": {
+              "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+              "offset": 103,
+              "line": 6,
+              "col": 14
+            }
+          }
+        ],
+        "extra": {
+          "flat": true
+        },
+        "loc": {
+          "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+          "offset": 46,
+          "line": 3,
+          "col": 13
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+        "offset": 34,
+        "line": 3,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "union-flat-anonymous-aliased-structs/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

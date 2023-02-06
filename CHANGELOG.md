@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning][semver].
 
 ## Unreleased
 
+This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.
+Union tags now use type alias as value.
+`--use-flat-union` is removed in favor of `--use-primitive-flat-union` and `--use-struct-flat-union`.
+Union flattening now uses a "best-effort approach".
+
 -   BREAKING CHANGES: use strings tags for union of aliases
 
     _bare-ts_ outputs now string tags for unions of aliases.
@@ -70,6 +75,96 @@ This project adheres to [Semantic Versioning][semver].
 
     export type Boxed = BoxedU32 | BoxedStr
     ```
+
+-   BREAKING CHANGES: split `--use-flat-union` into `--use-primitive-flat-union` and `--use-struct-flat-union`
+
+    Use `--use-primitive-flat-union` and `--use-struct-flat-union` instead of `--use-flat-union`.
+
+-   Flatten unions when possible under `--use-primitive-flat-union` and `--use-struct-flat-union`
+
+    _bare-ts_ is able to flatten unions that consist of:
+
+    1. basic types (bool, u8, str, ...) that have distinct `typeof` values
+    2. aliased structs
+    3. (anonymous) structs
+
+    Previously, `use-flat-union` required that all unions be flattened.
+    This avoided introducing a "best-effort approach".
+    However, this was too restrictive.
+    A "best-effort approach" seems acceptable since it is opted in.
+    Now, _bare-ts_ attempts to flatten a union and falls back to a tagged union.
+
+    Under `--use-struct-flat-union`, the following schema...
+
+    ```bare
+    type A union { bool | f64 | str }
+    type B union { f64 | i32 }
+    ```
+
+    ...compiles to the following types:
+
+    ```ts
+    type A = boolean | number | string
+    type B = { tag: 0; val: number } | { tag: 1; val: number }
+    ```
+
+    Note that `B` is not flatten because `f64` and `i32` have the same `typeof` value (`number`).
+
+    Under `--use-struct-flat-union`, the following schema...
+
+    ```bare
+    type X struct { ... }
+    type Y struct { ... }
+    type XY union { X | Y }
+    type Z Y
+    type XZ union { X | Z }
+    type Anonymous union { struct { ... } | struct { ... } }
+    ```
+
+    ...compiles to the following types:
+
+    ```ts
+    type X = { tag: "X", ... }
+    type Y = { tag: "Y", ... }
+    type XY = X | Y
+    type Z = Y
+    type XZ = { tag: "X", val: X } | { tag: "Z", val: "Z" }
+    type Anonymous = { tag: 0, ... } | { tag: 1, ... }
+    ```
+
+    Note that the union `XZ` is not flatten, because one of the elements is not a struct or an aliased struct.
+    Indeed, `Z` is an aliased alias.
+
+-   Support flat unions of aliased structs and anonymous structs
+
+    Under the option `--use-struct-flat-union`, the following schema...
+
+    ```bare
+    type Person struct { name: str }
+    type Entity union {
+        | Person
+        # Anonymous entity
+        | struct { name: str }
+    }
+    ```
+
+    ...compiles to the following types
+
+    ```ts
+    export type Person = {
+        readonly tag: "Person"
+        readonly name: string
+    }
+    export type Entity =
+        | Person
+        | {
+              readonly tag: 1
+              readonly name: string
+          }
+    ```
+
+    We introduce this change for consistency purpose.
+    You should avoid mixing aliased structs with anonymous structs
 
 ## 0.12.0 (2023-02-04)
 

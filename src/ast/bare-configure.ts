@@ -5,7 +5,11 @@ import type { Config } from "../core/config.js"
 import * as ast from "./bare-ast.js"
 
 export function configure(schema: ast.Ast, config: Config): ast.Ast {
-    const c: Configurator = { config, aliasesInFlatUnion: new Set() }
+    const c: Configurator = {
+        config,
+        aliasesInFlatUnion: new Set(),
+        symbols: ast.symbols(schema),
+    }
     const defs = schema.defs.slice()
     for (let i = 0; i < defs.length; i++) {
         const type = configureType(c, defs[i].type, true)
@@ -35,6 +39,7 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
 type Configurator = {
     readonly config: Config
     readonly aliasesInFlatUnion: Set<string>
+    readonly symbols: ast.SymbolTable
 }
 
 function configureType(
@@ -88,7 +93,32 @@ function configureType(
                 break
             }
             case "union": {
-                if (config.useFlatUnion && types !== null) {
+                if (
+                    config.usePrimitiveFlatUnion &&
+                    types !== null &&
+                    types.every(ast.isBaseOrVoidType) &&
+                    ast.haveDistinctTypeof(type.types)
+                ) {
+                    extra = { flat: true }
+                } else if (
+                    config.useStructFlatUnion &&
+                    types !== null &&
+                    types.every(
+                        (t): t is ast.Alias | ast.StructType =>
+                            t.tag === "alias" || t.tag === "struct",
+                    ) &&
+                    types
+                        .map((t) =>
+                            t.tag === "alias"
+                                ? c.symbols.get(t.data)?.type ?? t
+                                : t,
+                        )
+                        .every(
+                            (t) =>
+                                t.tag === "struct" &&
+                                t.data.every((f) => f.name !== "tag"),
+                        )
+                ) {
                     extra = { flat: true }
                     const newTypes: ast.Type[] = []
                     for (let i = 0; i < types.length; i++) {

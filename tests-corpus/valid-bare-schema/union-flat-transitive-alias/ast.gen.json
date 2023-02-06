@@ -128,6 +128,7 @@
     {
       "alias": "Boxed",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
@@ -172,9 +173,7 @@
             }
           }
         ],
-        "extra": {
-          "flat": true
-        },
+        "extra": null,
         "loc": {
           "filename": "union-flat-transitive-alias/schema.bare",
           "offset": 118,
@@ -182,7 +181,6 @@
           "col": 12
         }
       },
-      "comment": null,
       "loc": {
         "filename": "union-flat-transitive-alias/schema.bare",
         "offset": 107,

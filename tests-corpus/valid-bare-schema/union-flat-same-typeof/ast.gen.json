@@ -3,6 +3,7 @@
     {
       "alias": "UnsignedInt",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
@@ -85,9 +86,7 @@
             }
           }
         ],
-        "extra": {
-          "flat": true
-        },
+        "extra": null,
         "loc": {
           "filename": "union-flat-same-typeof/schema.bare",
           "offset": 17,
@@ -95,7 +94,6 @@
           "col": 18
         }
       },
-      "comment": null,
       "loc": {
         "filename": "union-flat-same-typeof/schema.bare",
         "offset": 0,

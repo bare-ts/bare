@@ -8,21 +8,6 @@
         "tag": "struct",
         "data": [
           {
-            "name": "tag",
-            "val": null,
-            "comment": null,
-            "extra": {
-              "mut": false,
-              "quoted": false
-            },
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 21,
-              "line": 1,
-              "col": 22
-            }
-          },
-          {
             "name": "val",
             "val": null,
             "comment": null,
@@ -36,23 +21,6 @@
           }
         ],
         "types": [
-          {
-            "tag": "void",
-            "data": null,
-            "types": null,
-            "extra": {
-              "literal": {
-                "type": "string",
-                "val": "BoxedU32"
-              }
-            },
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 21,
-              "line": 1,
-              "col": 22
-            }
-          },
           {
             "tag": "u32",
             "data": null,
@@ -84,6 +52,7 @@
     {
       "alias": "Boxed",
       "internal": false,
+      "comment": null,
       "type": {
         "tag": "union",
         "data": [
@@ -128,9 +97,7 @@
             }
           }
         ],
-        "extra": {
-          "flat": true
-        },
+        "extra": null,
         "loc": {
           "filename": "flat-union-undef-alias/schema.bare",
           "offset": 50,
@@ -138,7 +105,6 @@
           "col": 12
         }
       },
-      "comment": null,
       "loc": {
         "filename": "flat-union-undef-alias/schema.bare",
         "offset": 39,

@@ -41,7 +41,7 @@ export type AliasedType = {
  */
 export type Type =
     | Alias // Named user type
-    | BaseType // Named user type
+    | BaseType
     | DataType // data, data<length>
     | EnumType
     | ListType // []type, [n]type
