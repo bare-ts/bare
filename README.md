@@ -1,5 +1,5 @@
-<header style="text-align:center">
-<img alt="bare-ts logo" height="128" src="./logo.webp"/>
+<div align="center">
+<a href="#bare-ts"><img alt="bare-ts logo" height="128" src="./logo.webp"/></a>
 
 # bare-ts
 
@@ -17,7 +17,7 @@
 [bundlephobia-minzip-img]: https://flat.badgen.net/bundlephobia/minzip/@bare-ts/tools?label=minzipped
 [bundlephobia]: https://bundlephobia.com/package/@bare-ts/tools
 
-</header>
+</div>
 
 [Binary Application Record Encoding](https://baremessages.org/) (BARE) is a schema-based binary
 format that favors compactness and simplicity.
