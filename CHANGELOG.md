@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning][semver].
 
-## Unreleased
+## 0.13.0 (2023-02-20)
 
 This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.
 Union tags now use type alias as value.
