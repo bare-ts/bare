@@ -1,15 +1,25 @@
-<p align="center">
-    <img align="center" alt="bare-ts logo" height="128" src="./logo.webp"/>
-</p>
-<h1 align="center">bare-ts</h1>
+<header style="text-align:center">
+<img alt="bare-ts logo" height="128" src="./logo.webp"/>
+
+# bare-ts
 
 [![CI][ci-img]][ci]
 [![Coverage][coveralls-img]][coveralls]
 [![NPM version][npm-version-img]][npm]
 [![minzipped][bundlephobia-minzip-img]][bundlephobia]
-[![dependency][bundlephobia-dep-img]][bundlephobia]
 
-[Binary Application Record Encoding][bare] (BARE) is a schema-based binary
+[ci-img]: https://flat.badgen.net/github/checks/bare-ts/tools/?label=CI
+[ci]: https://github.com/bare-ts/tools/actions/workflows/ci.yml
+[npm-version-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
+[npm]: https://www.npmjs.com/package/@bare-ts/tools
+[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
+[coveralls]: https://coveralls.io/github/bare-ts/tools?branch=main
+[bundlephobia-minzip-img]: https://flat.badgen.net/bundlephobia/minzip/@bare-ts/tools?label=minzipped
+[bundlephobia]: https://bundlephobia.com/package/@bare-ts/tools
+
+</header>
+
+[Binary Application Record Encoding](https://baremessages.org/) (BARE) is a schema-based binary
 format that favors compactness and simplicity.
 [@bare-ts](#) provides a compiler to generate Typescript or JavaScript
 code from a BARE schema.
@@ -121,20 +131,7 @@ such as _tree-shaking_.
 Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle can
 contain only the functions which are actually used.
 Moreover, [bare-ts](#) uses assertions to express preconditions.
-You can use dedicated tools such as [unassert][unassert] to remove them.
+You can use dedicated tools such as [unassert](https://github.com/unassert-js) to remove them.
 
 **Generation of efficient code** [bare-ts](#) takes care to generate code that
 modern JavaScript engines may optimize.
-
-[bare]: https://baremessages.org
-[bare-ts-lib]: https://github.com/bare-ts/lib
-[unassert]: https://github.com/unassert-js
-[ci-img]: https://flat.badgen.net/github/checks/bare-ts/tools/?label=CI
-[ci]: https://github.com/bare-ts/tools/actions/workflows/ci.yml
-[npm-version-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
-[npm]: https://www.npmjs.com/package/@bare-ts/tools
-[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
-[coveralls]: https://coveralls.io/github/bare-ts/tools?branch=main
-[bundlephobia-minzip-img]: https://flat.badgen.net/bundlephobia/minzip/@bare-ts/tools?label=minzipped
-[bundlephobia-dep-img]: https://flat.badgen.net/bundlephobia/dependency-count/@bare-ts/tools?label=dependency
-[bundlephobia]: https://bundlephobia.com/package/@bare-ts/tools
