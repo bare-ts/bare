@@ -2,6 +2,13 @@
 
 This project adheres to [Semantic Versioning][semver].
 
+## Unreleased
+
+-   Fix name clashes
+
+    Previously, bare-ts did not support the use of aliases like `Map` or `Uint8Array`.
+    Now, it properly handles these aliases and uses `globalThis` when necessary.
+
 ## 0.13.0 (2023-02-20)
 
 This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.

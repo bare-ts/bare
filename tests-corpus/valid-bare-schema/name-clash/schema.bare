@@ -1,0 +1,2 @@
+type ReadonlyMap map<str><str>
+type Uint8Array list<u8>

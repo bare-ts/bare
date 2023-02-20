@@ -167,7 +167,7 @@ function genType(g: Gen, type: ast.Type): string {
         case "bool":
             return "boolean"
         case "data":
-            return "ArrayBuffer"
+            return global(g, "ArrayBuffer")
         case "enum":
             return genEnumType(g, type)
         case "list":
@@ -204,7 +204,7 @@ function genAliasType(g: Gen, type: ast.Alias): string {
 function genListType(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
     if (type.extra?.typedArray && ast.isFixedNumericTag(valType.tag)) {
-        return ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY[valType.tag]
+        return global(g, ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY[valType.tag])
     } else if (type.extra?.unique) {
         return genSetType(g, type)
     } else {
@@ -255,13 +255,13 @@ function genMapType(g: Gen, type: ast.MapType): string {
     const genKeyType = genType(g, type.types[0])
     const genValType = genType(g, type.types[1])
     const mapType = type.extra?.mut ? "Map" : "ReadonlyMap"
-    return `${mapType}<${genKeyType}, ${genValType}>`
+    return `${global(g, mapType)}<${genKeyType}, ${genValType}>`
 }
 
 function genSetType(g: Gen, type: ast.ListType): string {
     const typedef = genType(g, type.types[0])
     const setType = type.extra?.mut ? "Set" : "ReadonlySet"
-    return `${setType}<${typedef}>`
+    return `${global(g, setType)}<${typedef}>`
 }
 
 function genStructType(g: Gen, type: ast.StructType): string {
@@ -544,9 +544,10 @@ function genMapReader(g: Gen, type: ast.MapType): string {
         g.config.generator === "js"
             ? ""
             : `<${indent(kType, 2)}, ${indent(vType, 2)}>`
+    const map = global(g, "Map")
     return unindent(`{
         const len = bare.readUintSafe(bc)
-        const result = new Map${MapGenerics}()
+        const result = new ${map}${MapGenerics}()
         for (let i = 0; i < len; i++) {
             const offset = bc.offset
             const key = ${indent(genReading(g, keyType), 2)}
@@ -570,9 +571,10 @@ function genSetReader(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
     const SetGenerics =
         g.config.generator === "js" ? "" : `<${indent(genType(g, valType), 2)}>`
+    const set = global(g, "Set")
     return unindent(`{
         const len = bare.readUintSafe(bc)
-        const result = new Set${SetGenerics}()
+        const result = new ${set}${SetGenerics}()
         for (let i = 0; i < len; i++) {
             const offset = bc.offset
             const val = ${indent(genReading(g, valType), 2)}
@@ -1017,17 +1019,25 @@ function genDecoder(g: Gen, alias: string): string {
 
 function genEncoder(g: Gen, alias: string): string {
     const config = g.config.importConfig ? "ext.config" : "config"
+    const uint8Array = global(g, "Uint8Array")
     return unindent(`${genEncoderHead(g, alias)} {
         const bc = new bare.ByteCursor(
-            new Uint8Array(${config}.initialBufferLength),
+            new ${uint8Array}(${config}.initialBufferLength),
             ${config}
         )
         write${alias}(bc, x)
-        return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+        return new ${uint8Array}(bc.view.buffer, bc.view.byteOffset, bc.offset)
     }`)
 }
 
 // utils
+
+/**
+ * Ensure that `name` is resolved in the global scope.
+ */
+function global(g: Gen, name: string): string {
+    return g.symbols.has(name) ? `globalThis.${name}` : name
+}
 
 export function noneVal(type: ast.OptionalType | ast.VoidType): string {
     return type.extra !== null

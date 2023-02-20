@@ -1,0 +1,60 @@
+{
+  "defs": [
+    {
+      "alias": "Map",
+      "internal": false,
+      "type": {
+        "tag": "map",
+        "data": null,
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "name-clash-mutable/schema.bare",
+              "offset": 13,
+              "line": 1,
+              "col": 14
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "name-clash-mutable/schema.bare",
+              "offset": 18,
+              "line": 1,
+              "col": 19
+            }
+          }
+        ],
+        "extra": {
+          "mut": true
+        },
+        "loc": {
+          "filename": "name-clash-mutable/schema.bare",
+          "offset": 9,
+          "line": 1,
+          "col": 10
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "name-clash-mutable/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "name-clash-mutable/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}

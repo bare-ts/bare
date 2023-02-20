@@ -1,0 +1,98 @@
+{
+  "defs": [
+    {
+      "alias": "ReadonlyMap",
+      "internal": false,
+      "comment": null,
+      "type": {
+        "tag": "map",
+        "data": null,
+        "types": [
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "name-clash/schema.bare",
+              "offset": 21,
+              "line": 1,
+              "col": 22
+            }
+          },
+          {
+            "tag": "str",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "name-clash/schema.bare",
+              "offset": 26,
+              "line": 1,
+              "col": 27
+            }
+          }
+        ],
+        "extra": null,
+        "loc": {
+          "filename": "name-clash/schema.bare",
+          "offset": 17,
+          "line": 1,
+          "col": 18
+        }
+      },
+      "loc": {
+        "filename": "name-clash/schema.bare",
+        "offset": 0,
+        "line": 1,
+        "col": 1
+      }
+    },
+    {
+      "alias": "Uint8Array",
+      "internal": false,
+      "type": {
+        "tag": "list",
+        "data": null,
+        "types": [
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "loc": {
+              "filename": "name-clash/schema.bare",
+              "offset": 52,
+              "line": 2,
+              "col": 22
+            }
+          }
+        ],
+        "extra": {
+          "mut": false,
+          "typedArray": true,
+          "unique": false
+        },
+        "loc": {
+          "filename": "name-clash/schema.bare",
+          "offset": 47,
+          "line": 2,
+          "col": 17
+        }
+      },
+      "comment": null,
+      "loc": {
+        "filename": "name-clash/schema.bare",
+        "offset": 31,
+        "line": 2,
+        "col": 1
+      }
+    }
+  ],
+  "loc": {
+    "filename": "name-clash/schema.bare",
+    "offset": 0,
+    "line": 1,
+    "col": 1
+  }
+}
