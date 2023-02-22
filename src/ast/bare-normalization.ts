@@ -1,5 +1,5 @@
 //! Copyright (c) 2022 Victorien Elvinger
-//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+//! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./bare-ast.js"
 

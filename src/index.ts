@@ -1,5 +1,5 @@
 //! Copyright (c) 2022 Victorien Elvinger
-//! Licensed under Apache License 2.0 (https://apache.org/licenses/LICENSE-2.0)
+//! Licensed under the MIT License (https://mit-license.org/)
 
 import { configure } from "./ast/bare-configure.js"
 import { normalize } from "./ast/bare-normalization.js"

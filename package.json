@@ -13,7 +13,7 @@
     "schema"
   ],
   "author": "Victorien Elvinger (https://victorien.elvinger.fr)",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "homepage": "https://baremessages.org",
   "repository": {
     "type": "git",
