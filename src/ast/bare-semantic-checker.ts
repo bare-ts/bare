@@ -215,22 +215,16 @@ function checkMapInvariants(c: Checker, type: ast.MapType): void {
 }
 
 function checkNonVoid(c: Checker, type: ast.Type): void {
-    if (type.tag === "alias") {
-        const aliased = c.symbols.get(type.data)
-        type =
-            aliased !== undefined
-                ? ast.resolveAlias(aliased.type, c.symbols)
-                : type
-    }
+    const resolved = ast.resolveAlias(type, c.symbols)
     if (
-        type.tag === "void" &&
-        (type.extra === null ||
-            type.extra.literal.type === "null" ||
-            type.extra.literal.type === "undefined")
+        resolved.tag === "void" &&
+        (resolved.extra === null ||
+            resolved.extra.literal.type === "null" ||
+            resolved.extra.literal.type === "undefined")
     ) {
         throw new CompilerError(
             `types that resolve to 'void' are only allowed in unions.`,
-            type.loc,
+            resolved.loc,
         )
     }
 }
