@@ -203,8 +203,9 @@ function genAliasType(g: Gen, type: ast.Alias): string {
 
 function genListType(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
-    if (type.extra?.typedArray && ast.isFixedNumericTag(valType.tag)) {
-        return global(g, ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY[valType.tag])
+    const typedArray = ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY.get(valType.tag)
+    if (type.extra?.typedArray && typedArray != null) {
+        return global(g, typedArray)
     } else if (type.extra?.unique) {
         return genSetType(g, type)
     } else {

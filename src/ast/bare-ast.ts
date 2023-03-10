@@ -252,18 +252,18 @@ const FIXED_NUMERIC_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMERIC_TAG)
 
 const BASE_TAG_SET: ReadonlySet<string> = new Set(BASE_TAG)
 
-export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY = {
-    "f32": "Float32Array",
-    "f64": "Float64Array",
-    "i8": "Int8Array",
-    "i16": "Int16Array",
-    "i32": "Int32Array",
-    "i64": "BigInt64Array",
-    "u8": "Uint8Array",
-    "u16": "Uint16Array",
-    "u32": "Uint32Array",
-    "u64": "BigUint64Array",
-} as const
+export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY: Map<string, string> = new Map([
+    ["f32", "Float32Array"],
+    ["f64", "Float64Array"],
+    ["i8", "Int8Array"],
+    ["i16", "Int16Array"],
+    ["i32", "Int32Array"],
+    ["i64", "BigInt64Array"],
+    ["u8", "Uint8Array"],
+    ["u16", "Uint16Array"],
+    ["u32", "Uint32Array"],
+    ["u64", "BigUint64Array"],
+])
 
 export function maxVal(data: readonly (EnumVal | UnionTag)[]): number {
     return data.reduce((max, v) => Math.max(max, v.val), 0)
