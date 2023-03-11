@@ -20,7 +20,7 @@ Examples:
   bare compile schema.bare -o output.ts
 
   # more examples
-  bare-ts <command> --help
+  bare <command> --help
 
 ${REPOSITORY_HELP}
 `
@@ -49,9 +49,9 @@ program
 
 program
     .command("compile")
-    .description("Compile a bare schema into a Typescript or JavaScript file")
+    .description("Compile a BARE schema into a TypeScript or JavaScript file")
     .addArgument(
-        new Argument("[schema]", "bare schema file").default(0, "stdin"),
+        new Argument("[schema]", "BARE schema file").default(0, "stdin"),
     )
     .addOption(
         new Option("-o, --out <file>", "destination of output").default(

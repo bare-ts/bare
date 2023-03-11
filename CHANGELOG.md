@@ -1,25 +1,22 @@
 # Changelog
 
-This project adheres to [Semantic Versioning][semver].
+This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 
 -   Fix name clashes
 
-    Previously, bare-ts did not support the use of aliases like `Map` or `Uint8Array`.
+    Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.
     Now, it properly handles these aliases and uses `globalThis` when necessary.
 
 ## 0.13.0 (2023-02-20)
 
 This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.
-Union tags now use type alias as value.
-`--use-flat-union` is removed in favor of `--use-primitive-flat-union` and `--use-struct-flat-union`.
-Union flattening now uses a "best-effort approach".
 
 -   BREAKING CHANGES: use strings tags for union of aliases
 
-    _bare-ts_ outputs now string tags for unions of aliases.
-    You can obtain the previous behavior with the option `--use-int-tag`.
+    Now, _bare-ts_ outputs string tags for unions of aliases.
+    You can obtain the previous behavior using the option `--use-int-tag`.
 
     The following schema ...
 
@@ -39,7 +36,7 @@ Union flattening now uses a "best-effort approach".
         | { tag: "Organization"; val: Organization }
     ```
 
-    This makes code more readable and allow assigning between compatible unions.
+    This makes code more readable and allows assignments between compatible _unions_.
 
     Using the option `--use-int-tag`, you obtain the previous output:
 
@@ -57,7 +54,7 @@ Union flattening now uses a "best-effort approach".
     Previously, it used the type alias in `underscore_case` as tag's value.
     Now, it uses the type alias in its original case.
 
-    For instance, the following union:
+    For instance, the following union ...
 
     ```bare
     type BoxedU32 struct { val: u32 }
@@ -65,7 +62,7 @@ Union flattening now uses a "best-effort approach".
     type Boxed union { BoxedU32 | BoxedStr }
     ```
 
-    can be flatten (under `--use-flat-union`) to:
+    ... can be flatten (under `--use-flat-union`) to:
 
     ```diff
     export type BoxedU32 = {
@@ -95,20 +92,20 @@ Union flattening now uses a "best-effort approach".
     2. aliased structs
     3. (anonymous) structs
 
-    Previously, `use-flat-union` required that all unions be flattened.
-    This avoided introducing a "best-effort approach".
+    Previously, `use-flat-union` required that all unions could be flattened.
+    This avoided the introduction of a "best-effort approach".
     However, this was too restrictive.
     A "best-effort approach" seems acceptable since it is opted in.
     Now, _bare-ts_ attempts to flatten a union and falls back to a tagged union.
 
-    Under `--use-struct-flat-union`, the following schema...
+    Under `--use-struct-flat-union`, the following schema ...
 
     ```bare
     type A union { bool | f64 | str }
     type B union { f64 | i32 }
     ```
 
-    ...compiles to the following types:
+    ... compiles to the following types:
 
     ```ts
     type A = boolean | number | string
@@ -117,7 +114,7 @@ Union flattening now uses a "best-effort approach".
 
     Note that `B` is not flatten because `f64` and `i32` have the same `typeof` value (`number`).
 
-    Under `--use-struct-flat-union`, the following schema...
+    Under `--use-struct-flat-union`, the following schema ...
 
     ```bare
     type X struct { ... }
@@ -128,7 +125,7 @@ Union flattening now uses a "best-effort approach".
     type Anonymous union { struct { ... } | struct { ... } }
     ```
 
-    ...compiles to the following types:
+    ... compiles to the following types:
 
     ```ts
     type X = { tag: "X", ... }
@@ -139,12 +136,12 @@ Union flattening now uses a "best-effort approach".
     type Anonymous = { tag: 0, ... } | { tag: 1, ... }
     ```
 
-    Note that the union `XZ` is not flatten, because one of the elements is not a struct or an aliased struct.
-    Indeed, `Z` is an aliased alias.
+    Note that the union `XZ` is not flatten, because one of the elements is not a _struct_ or an _aliased struct_.
+    Indeed, `Z` is an _aliased alias_.
 
--   Support flat unions of aliased structs and anonymous structs
+-   Support flat unions of _aliased structs_ and _anonymous structs_
 
-    Under the option `--use-struct-flat-union`, the following schema...
+    Under the option `--use-struct-flat-union`, the following schema ...
 
     ```bare
     type Person struct { name: str }
@@ -155,7 +152,7 @@ Union flattening now uses a "best-effort approach".
     }
     ```
 
-    ...compiles to the following types
+    ... compiles to the following types
 
     ```ts
     export type Person = {
@@ -171,21 +168,21 @@ Union flattening now uses a "best-effort approach".
     ```
 
     We introduce this change for consistency purpose.
-    You should avoid mixing aliased structs with anonymous structs
+    You should avoid mixing _aliased structs_ with _anonymous structs_
 
 ## 0.12.0 (2023-02-04)
 
 -   Emit ES2020
 
-    bare-ts now publishes ES2020 builds.
-    This allows to output smaller builds.
-    This should cause no issue since we require a node version ^14.18 or >=16.
+    bare-ts now publishes _ES2020_ builds.
+    This outputs smaller builds.
+    This should cause no issue since we require a node version `^14.18` or `>=16`.
 
--   Allow root types that resolve to `void`
+-   Allow _root types_ that resolve to `void`
 
-    Since the 0.9.0 version, root types that resolve to `void` are forbidden.
+    Since the `0.9.0` version, _root types_ that resolve to `void` are forbidden.
 
-    To conform with the bare specification, they are now allowed.
+    To conform with the _BARE_ specification, they are now allowed.
     This makes valid the following schema:
 
     ```bare
@@ -194,34 +191,45 @@ Union flattening now uses a "best-effort approach".
 
 -   Add option `--lib` to prevent `decode` and `encode` generation
 
-    A decoder and encoder are generated for every root types that doesn't resolve to `void`.
+    A _decoder_ and an _encoder_ are generated for every _root type_ that doesn't resolve to `void`.
     The `--lib` flag prevents this generation.
 
-    This is particularly useful for libraries that export only readers and writers.
+    This is particularly useful for libraries that export only _readers_ and _writers_.
 
--   BREAKING CHANGES: emit type aliases instead of interfaces
+-   BREAKING CHANGES: emit _TypeSCript_'s type aliases instead of interfaces
 
-    As a consequence, it is no longer possible to rely
-    on interface-merging for augmenting an emitted type.
+    The following schema ...
+
+    ```bare
+    type Person struct { name: str }
+    ```
+
+    ... compiles to a type alias instead of an interface:
+
+    ```diff
+    - export interface Person {
+    + export type Person = {
+          readonly tag: "Person"
+          readonly name: string
+      }
+    ```
 
 ## 0.11.0 (2022-07-06)
 
 -   Remove option `--use-lax-optional`
 
-    This avoids to break bijective encoding.
+    This avoids breaking bijective encoding.
 
 ## 0.10.0 (2022-06-22)
 
--   Automatically discriminate aliased structs in flat unions
+-   Automatically discriminate _aliased structs_ in _flat unions_
 
-    @bare-ts is now able to automatically add a discriminator field for
-    aliased structs in flat union.
+    _bare-ts_ is now able to add a discriminator field for _aliased structs_ in _flat union_.
 
     The name of the discriminator field is `tag`.
-    For now, it is not possible to flatten aliased structs with at least
-    one field named `tag`.
+    For now, it is not possible to flatten aliased structs with at least one field named `tag`.
 
-    Thus, under the option `--use-flat-union`, the following BARE types:
+    Thus, under the option `--use-flat-union`, the following BARE schema ...
 
     ```bare
     type X struct { ... }
@@ -229,7 +237,7 @@ Union flattening now uses a "best-effort approach".
     type XY union { X | Y }
     ```
 
-    translate to the following TypeScript types:
+    ... compiles to the following types:
 
     ```ts
     export interface X { readonly tag: "X"; ... }
@@ -237,26 +245,26 @@ Union flattening now uses a "best-effort approach".
     export type XY = X | Y
     ```
 
--   Allow flat unions of anonymous structs
+-   Allow _flat unions_ of _anonymous structs_
 
-    @bare-ts now accepts flat unions of anonymous structs.
-    It automatically uses the union tags to discriminate the structs.
+    _bare-ts_ now accepts _flat unions_ of _anonymous structs_.
+    It automatically uses the _union tags_ to discriminate the _structs_.
 
-    Under the option `--use-flat-union`, the following BARE types:
+    Under the option `--use-flat-union`, the following _BARE_ schema ...
 
     ```bare
     type XY union { struct { ... } | struct { ... } }
     ```
 
-    translate to the following TypeScript types:
+    ... compiles to the following types:
 
     ```ts
     export type XY = { readonly tag: 0, ... } | { readonly tag: 1, ... }
     ```
 
--   Forbid flat unions of transitively aliased classes
+-   Forbid _flat unions_ of transitively _aliased classes_
 
-    @bare-ts previously allowed flat unions of transitively aliased classes.
+    Previously, _bare-ts_ allowed _flat unions_ of transitively _aliased classes_.
     It now rejects the following schema under the option `--use-flat-union`:
 
     ```bare
@@ -265,11 +273,9 @@ Union flattening now uses a "best-effort approach".
     type Message union { Person }
     ```
 
--   Require Node 14.18.0 or above
+-   Require Node `>=14.18.0`
 
-    @bare-ts now requires Node 14.18.0 or above.
-    This enables @bare-ts/tools to internally use `node:` prefixes
-    for importing nodes' built-ins.
+    This enables _bare-ts_ to internally use `node:` prefixes for importing nodes' built-ins.
 
 ## 0.9.0 (2022-05-12)
 
@@ -277,9 +283,9 @@ Union flattening now uses a "best-effort approach".
 
 -   Forbid use-before-definition
 
-    In the last BARE draft, use-before-definition are disallowed.
+    In the last _BARE_ draft, use-before-definition are disallowed.
     As a consequence, it also disallows recursive types.
-    @bare-ts now rejects the following schema:
+    _bare-ts_ now rejects the following schema:
 
     ```bare
     type Y X
@@ -290,12 +296,9 @@ Union flattening now uses a "best-effort approach".
 
 -   Rename `--legacy-syntax` to `--legacy`
 
--   Annotate your schema with doc-comments
+-   Annotate your schema with _doc-comments_
 
-    @bare-ts/tool is now able to recognize a doc-comment and to document
-    the generated code with them.
-
-    A BARE doc-comment consists in two comment marks `##`.
+    A _BARE_ _doc-comment_ consists in two comment marks `##`.
     Doc-comments can only document:
 
     -   type definitions
@@ -325,37 +328,38 @@ Union flattening now uses a "best-effort approach".
     }
     ```
 
-    Note that this syntax is not part of the BARE specification.
+    Note that this syntax is not part of the _BARE_ specification.
     Thus, this is not portable between distinct implementations.
 
 -   Add BARE code generator
 
-    @bare-ts is now able to output BARE schemas.
-
     This gives a basic way to format a schema.
-    Note that comments (except doc comments) are stripped out.
+    Note that comments (except _doc comments_) are stripped out.
 
-        @bare-ts compile schema.bare -o schema.bare
-        @bare-ts compile schema.bare --generator 'bare'
+    ```sh
+    bare-ts compile schema.bare -o schema.bare
+    ```
+
+    ```sh
+    bare-ts compile schema.bare --generator 'bare'
+    ```
 
 -   Remove options `--main` and `--no-main`
 
-    The previous version introduced automatic promotion of root type aliases
-    as main type aliases. Root type aliases are type aliases that are not
-    referred by a type in the schema. Main type aliases are types used
-    to decode and encode messages.
+    The previous version introduced automatic promotion of _root type_ aliases as _main type_ aliases.
+    _Root type_ aliases are type aliases that are not referred by a type in the schema.
+    _Main type_ aliases are types aliases used to decode and encode messages.
 
-    For the sake of simplicity, main type aliases and root types aliases
-    are now identical.
+    For the sake of simplicity, main type aliases and root types aliases are now identical.
 
-    In the following schema, `Post` is the only root/main type alias.
+    In the following schema, `Post` is the only root and main type alias.
 
     ```bare
     type Person struct { name: str }
     type Post struct { author: Person }
     ```
 
--   Forbid root types that resolve to void
+-   Forbid _root types_ that resolve to `void`
 
     The following schema is now invalid:
 
@@ -369,14 +373,16 @@ Union flattening now uses a "best-effort approach".
 
 ## 0.8.0 (2022-04-29)
 
--   Require @bare-ts/lib v0.3.x
+-   Require _@bare-ts/lib_ `v0.3.x`
 
--   Automatically promote root type aliases as main type aliases
+-   Automatically promote _root type_ as _main type_
 
-    @bare-ts/tool generates encoders and decoders for main type aliases.
-    Main type aliases can be selected with the option `--main`:
+    _bare-ts_ generates encoders and decoders for _main types_.
+    Main types can be selected with the option `--main`:
 
-        @bare-ts compile schema.bare --main Post
+    ```sh
+    bare-ts compile schema.bare --main Post
+    ```
 
     ```bare
     # schema.bare
@@ -384,48 +390,47 @@ Union flattening now uses a "best-effort approach".
     type Post struct { author: Person }
     ```
 
-    If the option `--main` is not set, then @bare-ts/tool promotes now
-    root type aliases as main type aliases. Root type aliases are type aliases
-    that are not referred by a type in the schema.
+    If the option `--main` is not set, then _bare-ts_ promotes _root types_ as _main types_.
+    _Root types_ are _type aliases_ that are not referred by a type in the schema.
 
-    In the previous schema, `Post` is a root type alias, while `Person` is not.
+    In the previous schema, `Post` is a _root type_, while `Person` is not.
     The following command has now the same effect as the previous one:
 
-        @bare-ts compile schema.bare
+    ```sh
+    bare-ts compile schema.bare
+    ```
 
-    It promotes `Post` as a main type aliases.
+    It promotes `Post` as a _main type_.
 
-    To avoid the promotion of root types, you must use the option `--no-main`:
+    To avoid the promotion of _root types_, you must use the option `--no-main`:
 
-        @bare-ts compile schema.bare --no-main
+    ```sh
+    bare-ts compile schema.bare --no-main
+    ```
 
     `--no-main` and `--main` cannot be both set.
 
--   BREAKING CHANGES: forbid f32 and f64 as map key type
+-   BREAKING CHANGES: forbid `f32` and `f64` as map key type
 
-    According to IEEE-754 2019:
-    NaN (Not a Number) is not equal to any value, including itself.
+    According to _IEEE-754 2019_:
+    _NaN_ (Not a Number) is not equal to any value, including itself.
 
     This inequality leads to different implementations:
 
     1.  Implementations that "follows" the standard
 
-        In this case, an unbounded number of values may be bind to the key NaN
-        and cannot be accessed.
+        An unbounded number of values may be bind to the key _NaN_ and cannot be accessed.
+        This is the implementation chosen by _Golang_.
 
-        This is the implementation chosen by Golang.
+    2.  Implementations that normalize _NaNs_ and consider that _NaN_ is equal to itself
 
-    2.  Implementations that normalize NaNs and consider that NaN
-        is equal to itself
+        This is the implementation chosen by _JavaScript_
 
-        This is the implementation chosen by JavaScript
+    3.  Implementations that rely on the binary comparison of _NaNs_
 
-    3.  Implementations that rely on the binary comparison of NaNs
+    These make complex the support of `f32` and `f64` as map key type.
 
-    These make complex the support of f32 and f64 as map key type.
-
-    To avoid this complexity the ongoing BARE draft forbids their usage as
-    map key type.
+    To avoid this complexity, the ongoing _BARE_ draft forbids their usage as map key type.
 
 -   Allow leading and trailing pipes in unions
 
@@ -445,23 +450,21 @@ Union flattening now uses a "best-effort approach".
 
 ## 0.7.0 (2022-04-24)
 
--   BREAKING CHANGES: require node versions that support ESM
+-   BREAKING CHANGES: require node versions that support _ESM_
 
-    @bare-ts requires now a node versions that support
-    ECMAScript Modules.
+    _bare-ts_ requires now a node versions that support _ECMAScript Modules_.
 
-    Note that, @bare-ts still exports a CommonJS build.
+    Note that, _bare-ts_ still exports a _CommonJS_ build.
 
--   Add pure annotation in generated code
+-   Add pure annotations in generated code
 
-    Pure annotations enable to bundler to detect pure function calls.
-    @bare-ts adds now these annotations in top-level function calls.
+    Pure annotations enable bundler to detect pure function calls.
+    _bare-ts_ adds now these annotations in top-level function calls.
 
 -   Allow circular references where possible
 
-    @bare-ts was previously conservative about circular references.
-    It now allows all circular references that can encode at least one
-    finite message.
+    _bare-ts_ was previously conservative about circular references.
+    It now allows all circular references that can encode at least one finite message.
     It now accepts the following circular references:
 
     ```bare
@@ -483,9 +486,9 @@ Union flattening now uses a "best-effort approach".
 
 ## 0.6.0 (2022-03-31)
 
--   Update BARE syntax
+-   Update _BARE_ syntax
 
-    @bare-ts now supports the [new syntax](https://datatracker.ietf.org/doc/draft-devault-bare/03/)
+    _bare-ts_ now supports the [new syntax](https://datatracker.ietf.org/doc/draft-devault-bare/03/)
     for BARE schema
     It reports legacy syntax as an error.
 
@@ -495,7 +498,7 @@ Union flattening now uses a "best-effort approach".
 
 -   Forbid circular references with fixed lists
 
-    @bare-ts now correctly rejects the following schema:
+    _bare-ts_ now correctly rejects the following schema:
 
     ```bare
     struct Person {
@@ -503,7 +506,7 @@ Union flattening now uses a "best-effort approach".
     }
     ```
 
--   Allow enum type and aliased types for map key type
+-   Allow _enums_ and _aliased types_ for map key type
 
     The following schema is now valid:
 
@@ -513,13 +516,12 @@ Union flattening now uses a "best-effort approach".
         MALE
         FEMALE
     }
-
     type GenderNames map[Gender] string
     ```
 
--   Allow unsorted tags for unions and enums
+-   Allow unsorted tags for _unions_ and _enums_
 
-    @bare-ts now accepts the following schemas:
+    _bare-ts_ now accepts the following schemas:
 
     ```bare
     enum Gender {
@@ -535,92 +537,87 @@ Union flattening now uses a "best-effort approach".
                                      ^ error was reported here
     ```
 
-    Use the option `--pedantic` for continuing to reject these schemas.
+    Use the option `--pedantic` for rejecting these schemas.
 
 ## 0.4.0 (2022-03-26)
 
--   Forbid main codecs resolving to void type
+-   Forbid _main codecs_ resolving to `void`
 
-    The following BARE schema is no longer valid when 'Message' is
-    a main codec (using --main CLI option):
+    The following _BARE_ schema is no longer valid when 'Message' is a _main codec_:
 
     ```bare
     type Message void
          ^ error is now reported here
     ```
 
--   Forbid flat unions which cannot be automatically flatten
+-   Forbid _flat unions_ which cannot be automatically flatten
 
-    @bare-ts is able to automatically compute the tag of simple flat unions
-    without any help. A simple union is either:
+    _bare-ts_ is able to automatically compute the tag of simple flat unions without any help.
+    A simple union is either:
 
     -   a union of base or void types that can be discriminated by their
         _typeof value_, or
     -   a union of classes (requires the option `--use-class`).
 
-    Previously, @bare-ts asked the user to provide a tagging function for
-    other cases (complex flat unions).
-    Now, @bare-ts throws an error when it encounters a complex flat union.
+    Previously, _bare-ts_ asked the user to provide a tagging function for complex flat unions.
+    Now, _bare-ts_ throws an error when it encounters a complex flat union.
     Thus, it no longer supports complex flat unions.
 
--   Add pedantic mode (option --pedantic)
+-   Add pedantic mode (option `--pedantic`)
+
+    The pedantic mode requires initializing _enum tags_ and _union tags_.
 
 -   Better code generation
 
-    @bare-ts has a normalization step where it alias some types,
-    including anonymous structs, data arrays, and typed arrays.
-
-    @bare-ts is now able to generate reader and writer without
-    aliasing these types.
+    _bare-ts_ has a normalization step where it alias some types, including anonymous structs, data arrays, and typed arrays.
+    _bare-ts_ is now able to generate reader and writer without aliasing these types.
 
 ## 0.3.0 (2022-03-02)
 
--   Fix regression: Forbid BARE schema in which a union repeats a type
+-   Fix regression: Forbid _BARE_ schema in which a union repeats a type
 
-    @bare-ts now correctly rejects the following schema:
+    Now, _bare-ts_ correctly rejects the following schema:
 
     ```bare
     type X (u8 | u8)
     ```
 
--   Deduplicate readers and writers of complex non-aliased types
+-   Deduplicate _readers_ and _writers_ of complex _non-aliased types_
 
-    @bare-ts generates readers and writers for complex non-aliased types.
+    _bare-ts_ generates _readers_ and _writers_ for complex _non-aliased types_.
     These readers and writers are now deduplicated.
 
--   Default to null instead of undefined for optional types
+-   Default to `null` instead of `undefined` for _optional types_
 
     The use of `null` seems more common than the use of `undefined`.
 
     The option `--use-null` is removed.
     A new option `--use-undefined` is added.
 
--   Make configurable the emitted type for void type
+-   Make configurable the emitted type for `void`
 
-    BARE schema enable use of void types in unions. For example:
+    _BARE_ allows `void` types in _unions_.
+    For example:
 
     ```bare
     type Union (u8 | void)
     ```
 
-    Previously, @bare-ts emitted the type `undefined` for `void`.
-    Now it relies on options `--use-undefined` and `--use-lax-optional` to
-    choose between `null`, `undefined`, and `null | undefined`.
-    Note that these options also modify the emitted types for optionals.
+    Previously, _bare-ts_ emitted the type `undefined` for `void`.
+    Now, it relies on options `--use-undefined` and `--use-lax-optional` to choose between `null`, `undefined`, and `null | undefined`.
+    Note that these options also modify the emitted types for _optionals_.
 
 -   Support for quoted properties
 
-    The option `--use-quoted-property` enables to output
-    quoted properties instead of unquoted properties.
+    The option `--use-quoted-property` enables to output quoted properties instead of unquoted properties.
 
-    This can be useful when using a JS minifier that differently handles
-    quoted and unquoted properties.
+    This can be useful when using a minifier that differently handles quoted and unquoted properties.
 
 ## 0.2.0 (2022-02-20)
 
--   Fix invalid code generation for big tags in enums and unions
+-   Fix invalid code generation for big tags in _enums_ and _unions_
 
-    @bare-ts applies an optimization when tags can be encoded on 7bits.
+    _bare-ts_ applies an optimization when tags can be encoded on 7 bits.
     It did not test the general case yet.
     The addition of tests enabled to catch typo errors.
     The generated code imported non-existing readers and writers.
@@ -629,14 +626,14 @@ Union flattening now uses a "best-effort approach".
 
     The option `--generator` specifies which generator to use for generating
     the output.
-    @bare-ts uses `ts` as default generator.
+    _bare-ts_ uses `ts` as default generator.
     The option `--generator` should override this default.
 
-    Previously the option did not override the default.
+    Previously, the option did not override the default.
 
 -   Fix location report upon compilation errors
 
-    Upon errors, @bare-ts reports the error and a file location.
+    Upon errors, _bare-ts_ reports the error and a file location.
     It previously reported the location at the end of the first involved token.
     It now reports the location at the start of the first involved token.
 
@@ -650,10 +647,10 @@ Union flattening now uses a "best-effort approach".
          ^ error is now reported here
     ```
 
--   Make @bare-ts library platform-agnostic
+-   Make _bare-ts_ library platform-agnostic
 
-    Use your favorite ESM-ready CDN and simply import @bare-ts.
-    This was made possible by removing the dependency over node:assert.
+    Use your favorite _ESM_-ready CDN and simply import _bare-ts_.
+    This was made possible by removing the dependency over `node:assert`.
 
 -   Add `--use-class` option
 
@@ -661,14 +658,14 @@ Union flattening now uses a "best-effort approach".
 
 -   Automatically handle simple flat unions
 
-    By default, @bare-ts generates tagged unions.
-    For instance, the following BARE schema:
+    By default, _bare-ts_ generates tagged unions.
+    For instance, the following schema ...
 
     ```rs
     type Union (A | B)
     ```
 
-    generates the TypeScript type:
+    ... compiles to the following types:
 
     ```ts
     type Union =
@@ -676,10 +673,10 @@ Union flattening now uses a "best-effort approach".
         | { readonly tag: 1; readonly val: B }
     ```
 
-    You can force the use of flat unions with the option `--use-flat-union`.
+    You can force the use of _flat unions_ with the option `--use-flat-union`.
     However, you have to provide a function that computes the tag of the object.
     This function must be exported from a file named `ext.{js,ts}` and placed
-    in the same directory as the file generated by @bare-ts.
+    in the same directory as the file generated by _bare-ts_.
 
     ```ts
     export function tagUnion(x: A | B): 0 | 1 {
@@ -687,26 +684,25 @@ Union flattening now uses a "best-effort approach".
     }
     ```
 
-    @bare-ts is now able to compute the tag of simple flat unions without
+    _bare-ts_ is now able to compute the tag of simple flat unions without
     your help. A simple union is either:
 
     -   a union of types that can be discriminated by their _typeof value_, or
     -   a union of classes (requires the option `--use-class`).
 
--   Add @bare-ts/lib as peer dependency
+-   Add _@bare-ts/lib_ as peer dependency
 
-    This informs the user of @bare-ts which version of @bare-ts/lib to use.
+    This informs the users of _bare-ts_ which version of _@bare-ts/lib_ to use.
 
 -   Forbid BARE schema with undefined aliases
 
--   Forbid BARE schema in which length and tags are too large
+-   Forbid _BARE_ schema in which length and tags are too large
 
     Length of fixed data and (typed) array must be an unsigned 32bits integer.
     This is a limitation of the ECMAScript standard.
 
     Tags of enums and unions must be safe integers.
-    In the future, this requirement could be relaxed by switching to
-    bigint for larger integers.
+    In the future, this requirement could be relaxed by switching to bigint for larger integers.
 
 -   Forbid BARE schema in which the length of a fixed data is 0
 
@@ -757,28 +753,27 @@ Union flattening now uses a "best-effort approach".
     }
     ```
 
--   Forbid BARE schema with circular references
+-   Forbid _BARE_ schema with circular references
 
 -   Better diagnostics for reporting unwanted semicolons
 
--   BREAKING CHANGE: adapt to @bare-ts/lib@0.2.0
+-   BREAKING CHANGE: adapt to _@bare-ts/lib@0.2.0_
 
-    @bare-ts/lib@0.2.0 introduces several breaking changes.
+    _@bare-ts/lib@0.2.0_ introduces several breaking changes.
     As a consequence:
 
     -   all decode/encode are renamed into read/write
     -   all pack/unpack are renamed into encode/decode
-    -   decoders (previously unpackers) no longer accept `ArrayBuffer` as
-        type of read buffer
+    -   decoders (previously unpackers) no longer accept `ArrayBuffer` as type of read buffer
 
 ## 0.1.1 (2022-01-05)
 
 -   Fix array encoders
 
-    Previously array encoders did not encode the first item of a generic array.
+    Previously, array encoders did not encode the first item of a generic array.
 
 ## 0.1.0 (2022-01-03)
 
--   BARE schema compiler supports all types
+-   _BARE_ schema compiler supports all types
 
 [semver]: https://semver.org/spec/v2.0.0.html
