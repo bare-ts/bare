@@ -1,33 +1,27 @@
+<p align="center">
+<a href="#bare-ts"><img alt="bare-ts" height="200" src="./logo.svg"/></a>
+</p>
+<p align="center">
+A <em>TypeScript</em> code generator for the <em>BARE</em> binary format
+</p>
 <div align="center">
-<a href="#bare-ts"><img alt="bare-ts logo" height="128" src="./logo.webp"/></a>
 
-# bare-ts
-
-[![CI][ci-img]][ci]
+[![NPM package][npm-img]][npm-bare-ts-tools]
+[![bundle size - minified and gzipped][bundlejs-img]][bundlejs]
 [![Coverage][coveralls-img]][coveralls]
-[![NPM version][npm-version-img]][npm]
-[![minzipped][bundlephobia-minzip-img]][bundlephobia]
-
-[ci-img]: https://flat.badgen.net/github/checks/bare-ts/tools/?label=CI
-[ci]: https://github.com/bare-ts/tools/actions/workflows/ci.yml
-[npm-version-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
-[npm]: https://www.npmjs.com/package/@bare-ts/tools
-[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
-[coveralls]: https://coveralls.io/github/bare-ts/tools?branch=main
-[bundlephobia-minzip-img]: https://flat.badgen.net/bundlephobia/minzip/@bare-ts/tools?label=minzipped
-[bundlephobia]: https://bundlephobia.com/package/@bare-ts/tools
-
 </div>
 
-[Binary Application Record Encoding](https://baremessages.org/) (BARE) is a schema-based binary
+[Binary Application Record Encoding](https://baremessages.org/) (_BARE_) is a schema-based binary
 format that favors compactness and simplicity.
-[@bare-ts](#) provides a compiler to generate Typescript or JavaScript
-code from a BARE schema.
+_@bare-ts/tools_ provides a compiler to generate Typescript or JavaScript code from a _BARE_ schema.
 
 Warning: _BARE_ specification is currently an _IEF_ draft.
 The specification may evolve before its final release.
 
 ## Getting started
+
+[![@bare-ts/tools NPM version][npm-bare-ts-tools-img]][npm-bare-ts-tools]
+[![@bare-ts/lib NPM version][npm-bare-ts-lib-img]][npm-bare-ts-lib]
 
 First, install _@bare-ts/tools_ and _@bare-ts/lib_:
 
@@ -37,10 +31,10 @@ npm install @bare-ts/lib
 ```
 
 -   _@bare-ts/tools_ enables to generate decoders and encoders from a schema
+
 -   _@bare-ts/lib_ provides basic decoders and encoders
 
-Alternatively, you can download a bundled and executable version of
-_@bare-ts/tools_ named `bare` in the section _Assets_ of every release.
+Alternatively, you can download a bundled and executable version of _@bare-ts/tools_ named `bare` in the section _Assets_ of every [release on _GitHub_](https://github.com/bare-ts/tools/releases).
 
 Then, write a schema:
 
@@ -73,10 +67,10 @@ Compile your schema into code:
 bare compile schema.bare --out=code.ts
 ```
 
-Once the code generated, encode and decode messages:
+Once the code is generated, encode and decode messages:
 
 ```ts
-import { decodeContacts, encodeContacts, Gender } from "./code.js"
+import { Gender, decodeContacts, encodeContacts } from "./code.js"
 import { strict } from "node:assert"
 
 const contacts = [
@@ -98,40 +92,43 @@ strict.deepEqual(contacts, contacts2)
 
 ## Why BARE?
 
-**Compact messages**: in contrast to _BSON_, _CBOR_, and _MessagePack_,
-_BARE_ messages do not embed schema information.
+**Compact messages**: in contrast to _BSON_, _CBOR_, and _MessagePack_, _BARE_ messages do not embed schema information.
 
-**Bijective encoding when possible**: most of BARE values have a single binary
-representation. This makes easier the support of use-cases such as message
-deduplication.
+**Bijective encoding when possible**: most of BARE values have a single binary representation.
+This makes easier the support of use-cases such as message deduplication.
 
-**Focus on modern platforms**: messages are octet-aligned and use little-endian
-representation.
+**Focus on modern platforms**: messages are octet-aligned and use little-endian representation.
 
-**Simple**: in contrast to _Protocol Buffer_ and _Flat Buffer_, _BARE_ doesn't
-constrain its binary format to support schema evolution.
-_Protocol Buffer_ embeds metadata in every message and
-makes optional every field.
-_BARE_ recommends using a tagged union as message type
-to support backward compatibility.
+**Simple**: in contrast to _Protocol Buffer_ and _Flat Buffer_, _BARE_ doesn't constrain its binary format to support schema evolution.
+_Protocol Buffer_ embeds metadata in every message and makes optional every field.
+_BARE_ recommends using a tagged union as message type to support backward compatibility.
 
 ## Why bare-ts?
 
-**Pragmatic error reporting**: [bare-ts](#) distinguishes recoverable errors
-from API misuses.
-Decoders may emit recoverable errors (`BareError`) and provide enough
-information to understand why the message is malformed.
-An API misuse emits a `AssertionError`.
-[@bare-ts](#) assumes the use of TypeScript.
+**Pragmatic error reporting**: _bare-ts_ distinguishes recoverable errors from API misuses.
+Decoders may emit recoverable errors (`BareError`) and provide enough information to understand why the message is malformed.
+An API misuse emits an `AssertionError`.
+_bare-ts_ assumes the use of TypeScript.
 This assumption reduces the number of API misuses to check.
 
-**Optimized bundle size**: [bare-ts](#) adopts a functional programming style.
-This enables to take advantage of modern _dead-code elimination_ techniques,
-such as _tree-shaking_.
-Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle can
-contain only the functions which are actually used.
-Moreover, [bare-ts](#) uses assertions to express preconditions.
+**Optimized bundle size**: _bare-ts_ adopts functional and procedural programming styles.
+This enables to take advantage of modern _dead-code elimination_ techniques, such as _tree-shaking_.
+Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle contains only the functions which are actually used.
+Moreover, _bare-ts_ uses assertions to express preconditions.
 You can use dedicated tools such as [unassert](https://github.com/unassert-js) to remove them.
 
-**Generation of efficient code** [bare-ts](#) takes care to generate code that
-modern JavaScript engines may optimize.
+**Generation of efficient code** _bare-ts_ takes care to generate code that modern JavaScript engines may optimize.
+
+[npm-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
+[npm-bare-ts-tools-img]: https://flat.badgen.net/npm/v/@bare-ts/tools?label=npm:@bare-ts/tools
+[npm-bare-ts-tools]: https://www.npmjs.com/package/@bare-ts/tools
+
+[npm-bare-ts-lib-img]: https://flat.badgen.net/npm/v/@bare-ts/lib?label=npm:@bare-ts/lib
+[npm-bare-ts-lib]: https://www.npmjs.com/package/@bare-ts/lib
+
+[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
+[coveralls]: https://coveralls.io/github/bare-ts/tools?branch=main
+
+[bundlejs-img]: https://img.shields.io/badge/dynamic/json?style=flat-square&label=minzipped&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=@bare-ts/tools
+[bundlejs-img]: https://deno.bundlejs.com/?q=@bare-ts/tools&badge-style=flat&badge=
+[bundlejs]: https://bundlejs.com/?q=%40bare-ts%2Ftools
