@@ -9,6 +9,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.
     Now, it properly handles these aliases and uses `globalThis` when necessary.
 
+-   BREAKING CHANGES: remove option `--import-factory`
+
+    Previously, _bare-ts_ allowed external factory functions to build struct objects.
+    For now, there is no replacement for this feature.
+
 ## 0.13.0 (2023-02-20)
 
 This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.

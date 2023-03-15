@@ -130,12 +130,6 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
             return `${doc}export ${genAliasedEnumType(g, alias, type)}`
         case "struct": {
             const isClass = type.extra?.class
-            if (g.config.importFactory) {
-                const extType = isClass
-                    ? `ext.${alias}`
-                    : `ReturnType<typeof ext.${alias}>`
-                return `${doc}export type ${alias} = ${extType}`
-            }
             if (!isClass) {
                 const structDef = genStructType(g, type)
                 return `${doc}export type ${alias} = ${structDef}`
@@ -355,8 +349,7 @@ function genCode(g: Gen, aliased: ast.AliasedType): string {
     if (
         aliased.type.tag === "struct" &&
         aliased.type.extra?.class &&
-        !aliased.internal &&
-        !g.config.importFactory
+        !aliased.internal
     ) {
         return modifier + genAliasedStructCode(g, aliased.alias, aliased.type)
     }
@@ -593,21 +586,13 @@ function genStructReader(g: Gen, type: ast.StructType, alias: string): string {
     let objCreation: string
     if (
         alias !== "" &&
-        ((type.extra?.class && g.symbols.get(alias)?.internal === false) ||
-            g.config.importFactory)
+        type.extra?.class &&
+        g.symbols.get(alias)?.internal === false
     ) {
         const factoryArgs = type.data
             .map((_f, i) => `\n${genReading(g, type.types[i])}`)
             .join(",")
-        if (g.config.importFactory) {
-            objCreation = `ext.${alias}(${indent(factoryArgs)}\n)`
-            if (type.extra?.class) {
-                objCreation = `new ${objCreation}`
-            }
-        } else {
-            objCreation = `new ${alias}(${indent(factoryArgs)}\n)`
-        }
-        objCreation = `(${objCreation})`
+        objCreation = `(new ${alias}(${indent(factoryArgs)}\n))`
     } else {
         objCreation = genObjectReader(g, type)
     }
