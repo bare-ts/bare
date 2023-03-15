@@ -16,7 +16,6 @@ export class ConfigError extends Error {
 export type Config = {
     readonly generator: "bare" | "dts" | "js" | "ts"
     readonly importConfig: boolean
-    readonly importFactory: boolean
     readonly legacy: boolean
     readonly lib: boolean
     /**
@@ -53,7 +52,6 @@ export type Config = {
 export function Config({
     generator,
     importConfig = false,
-    importFactory = false,
     legacy = false,
     lib = false,
     out = null,
@@ -103,7 +101,6 @@ export function Config({
     return {
         generator: inferredGenerator,
         importConfig,
-        importFactory,
         legacy,
         lib,
         out,
