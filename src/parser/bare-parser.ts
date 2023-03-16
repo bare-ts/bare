@@ -2,8 +2,8 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "../ast/bare-ast.js"
-import type { Config } from "../core/config.js"
 import { CompilerError, type Location } from "../core/compiler-error.js"
+import type { Config } from "../core/config.js"
 import { Lex } from "./bare-lex.js"
 
 export function parse(content: string, config: Config): ast.Ast {

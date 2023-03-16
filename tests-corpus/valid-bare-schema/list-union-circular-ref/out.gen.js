@@ -1,5 +1,5 @@
-import assert from "assert"
 import * as bare from "@bare-ts/lib"
+import assert from "node:assert"
 
 function read0(bc) {
     const offset = bc.offset
