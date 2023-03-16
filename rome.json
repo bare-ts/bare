@@ -1,12 +1,16 @@
 {
+	"$schema": "https://docs.rome.tools/schemas/12.1.3/schema.json",
   "formatter": {
     "indentStyle": "space",
-    "indentSize": 4
+    "indentSize": 4,
+    "ignore": ["*.json", "tests-corpus/"]
   },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true
+      "all": true,
+      "nursery": {
+        "useLiteralKeys": "off"
+      }
     }
   },
   "javascript": {
@@ -14,5 +18,13 @@
       "quoteProperties": "preserve",
       "semicolons": "asNeeded"
     }
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   }
 }

@@ -2,7 +2,8 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import { default as test } from "oletus"
-import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
+
+import { Gender, decodeContacts, encodeContacts } from "./out.gen.js"
 
 test("x-readme-example", (t) => {
     const payload = encodeContacts([

@@ -74,9 +74,6 @@ export function generate(schema: ast.Ast, config: Config): string {
         }
     }
     let head = ""
-    if (/\bassert\(/.test(body)) {
-        head += 'import assert from "assert"\n'
-    }
     if (/bare\./.test(body)) {
         head += // Are values imported?
             g.config.generator !== "ts" ||
@@ -85,8 +82,11 @@ export function generate(schema: ast.Ast, config: Config): string {
                 ? 'import * as bare from "@bare-ts/lib"\n'
                 : 'import type * as bare from "@bare-ts/lib"\n'
     }
+    if (/\bassert\(/.test(body)) {
+        head += 'import assert from "node:assert"\n'
+    }
     if (/ext\./.test(body)) {
-        head += 'import * as ext from "./ext.js"\n'
+        head += '\nimport * as ext from "./ext.js"\n'
     }
     if (
         hasEncodeDecode &&
@@ -919,9 +919,10 @@ function genBaseFlatUnionWriter(g: Gen, union: ast.UnionType): string {
         const type = union.types[i]
         if (type.tag === "void") {
             defaultCase = `
-            default:
+            default: {
                 bare.${tagWriter}(bc, ${tagVal})
-                break`
+                break
+            }`
         } else {
             const valWriting = genWriting(g, type, "$x")
             switchBody += `

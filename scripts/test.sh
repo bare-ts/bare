@@ -1,14 +1,12 @@
 #!/bin/sh
-set -eu
 
-npm run build
+. scripts/build.sh
 
 # unit tests
-npx oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
+oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
 
 # lint
-npx rome ci src scripts
-npx rome check tests-corpus
+rome ci .
 
 # type check
-npx tsc --build src/tsconfig-*.json tests-corpus
+tsc --build src/tsconfig-test.json tests-corpus/

@@ -46,9 +46,10 @@ export function writeTypeOfUnion(bc: bare.ByteCursor, x: TypeOfUnion): void {
             bare.writeString(bc, x)
             break
         }
-        default:
+        default: {
             bare.writeU8(bc, 3)
             break
+        }
     }
 }
 

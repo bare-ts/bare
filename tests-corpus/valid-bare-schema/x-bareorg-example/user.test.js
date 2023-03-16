@@ -2,7 +2,8 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import { default as test } from "oletus"
-import { decodePerson, encodePerson, Department } from "./out.gen.js"
+
+import { Department, decodePerson, encodePerson } from "./out.gen.js"
 
 test("x-readme-example", (t) => {
     const payload1 = encodePerson({

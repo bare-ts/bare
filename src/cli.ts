@@ -3,10 +3,10 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
+import { Config, transform } from "./index.js"
 import { Argument, Option, program } from "commander"
 import * as fs from "node:fs"
 import * as process from "node:process"
-import { Config, transform } from "./index.js"
 
 // WARNING: This constant MUST be defined at build time.
 declare const VERSION: string

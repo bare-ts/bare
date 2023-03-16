@@ -38,9 +38,10 @@ export function writeTypeOfUnion(bc, x) {
             bare.writeString(bc, x)
             break
         }
-        default:
+        default: {
             bare.writeU8(bc, 3)
             break
+        }
     }
 }
 
