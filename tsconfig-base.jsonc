@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     // https://node.green/#ES2020
     // https://kangax.github.io/compat-table/es2016plus
@@ -17,6 +18,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "verbatimModuleSyntax": true,
 
     "allowUnreachableCode": false,
