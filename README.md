@@ -12,11 +12,12 @@ A <em>TypeScript</em> code generator for the <em>BARE</em> binary format
 </div>
 
 [Binary Application Record Encoding](https://baremessages.org/) (_BARE_) is a schema-based binary
-format that favors compactness and simplicity.
-_@bare-ts/tools_ provides a compiler to generate Typescript or JavaScript code from a _BARE_ schema.
+format that favors compactness and composability.
+_@bare-ts/tools_ provides a compiler to generate _Typescript_ and _JavaScript_ codes from a _BARE_ schema.
 
 Warning: _BARE_ specification is currently an _IEF_ draft.
-The specification may evolve before its final release.
+The specification is now pretty stable.
+However, it may still evolve before its final release.
 
 ## Getting started
 
