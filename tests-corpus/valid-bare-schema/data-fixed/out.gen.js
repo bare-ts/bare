@@ -15,7 +15,7 @@ export function writeData(bc, x) {
 export function encodeData(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeData(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

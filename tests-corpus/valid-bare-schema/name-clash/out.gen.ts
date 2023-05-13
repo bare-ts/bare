@@ -21,7 +21,7 @@ export function readReadonlyMap(bc: bare.ByteCursor): ReadonlyMap {
 
 export function writeReadonlyMap(bc: bare.ByteCursor, x: ReadonlyMap): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
@@ -30,7 +30,7 @@ export function writeReadonlyMap(bc: bare.ByteCursor, x: ReadonlyMap): void {
 export function encodeReadonlyMap(x: ReadonlyMap): Uint8Array {
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeReadonlyMap(bc, x)
     return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
@@ -58,7 +58,7 @@ export function writeUint8Array(bc: bare.ByteCursor, x: Uint8Array): void {
 export function encodeUint8Array(x: Uint8Array): Uint8Array {
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeUint8Array(bc, x)
     return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

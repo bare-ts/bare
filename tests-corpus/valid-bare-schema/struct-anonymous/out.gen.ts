@@ -6,16 +6,16 @@ export type u8 = number
 export type u16 = number
 
 export type Person = {
-    readonly name: string,
-    readonly age: u8,
+    readonly name: string
+    readonly age: u8
     readonly address: {
-        readonly country: string,
+        readonly country: string
         readonly city: {
-            readonly name: string,
-            readonly code: u16,
-        },
-        readonly street: string,
-    },
+            readonly name: string
+            readonly code: u16
+        }
+        readonly street: string
+    }
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -49,7 +49,7 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 export function encodePerson(x: Person): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

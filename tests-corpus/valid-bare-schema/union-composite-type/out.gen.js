@@ -4,9 +4,7 @@ import assert from "node:assert"
 const config = /* @__PURE__ */ bare.Config({})
 
 function read0(bc) {
-    return bare.readBool(bc)
-        ? bare.readString(bc)
-        : null
+    return bare.readBool(bc) ? bare.readString(bc) : null
 }
 
 function write0(bc, x) {
@@ -33,7 +31,7 @@ function read1(bc) {
 
 function write1(bc, x) {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         write0(bc, kv[1])
     }
@@ -96,7 +94,7 @@ export function writeComposite(bc, x) {
 export function encodeComposite(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeComposite(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

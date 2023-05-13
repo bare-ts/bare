@@ -2,7 +2,9 @@ import * as bare from "@bare-ts/lib"
 
 function read0(bc: bare.ByteCursor): readonly Node[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [readNode(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readNode(bc)
@@ -18,7 +20,7 @@ function write0(bc: bare.ByteCursor, x: readonly Node[]): void {
 }
 
 export type Node = {
-    readonly children: readonly Node[],
+    readonly children: readonly Node[]
 }
 
 export function readNode(bc: bare.ByteCursor): Node {

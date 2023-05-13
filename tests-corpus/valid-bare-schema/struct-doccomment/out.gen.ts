@@ -11,11 +11,11 @@ export type Person = {
     /**
      * person's name
      */
-    readonly name: string,
+    readonly name: string
     /**
      * person's age
      */
-    readonly age: u8,
+    readonly age: u8
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -33,7 +33,7 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 export function encodePerson(x: Person): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

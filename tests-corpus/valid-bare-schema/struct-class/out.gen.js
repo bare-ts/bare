@@ -15,7 +15,7 @@ export class Person {
 export function readPerson(bc) {
     return new Person(
         bare.readString(bc),
-        bare.readU8(bc)
+        bare.readU8(bc),
     )
 }
 
@@ -27,7 +27,7 @@ export function writePerson(bc, x) {
 export function encodePerson(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

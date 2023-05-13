@@ -23,7 +23,7 @@ export function writeOperation(bc, x) {
 export function encodeOperation(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeOperation(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

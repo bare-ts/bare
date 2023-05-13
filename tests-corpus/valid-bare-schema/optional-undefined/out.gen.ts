@@ -5,9 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type MaybeBool = boolean | undefined
 
 export function readMaybeBool(bc: bare.ByteCursor): MaybeBool {
-    return bare.readBool(bc)
-        ? bare.readBool(bc)
-        : undefined
+    return bare.readBool(bc) ? bare.readBool(bc) : undefined
 }
 
 export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {
@@ -20,7 +18,7 @@ export function writeMaybeBool(bc: bare.ByteCursor, x: MaybeBool): void {
 export function encodeMaybeBool(x: MaybeBool): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeMaybeBool(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

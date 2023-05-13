@@ -29,7 +29,7 @@ export function readOperation(bc: bare.ByteCursor): Operation {
         bare.readString(bc),
         bare.readString(bc),
         bare.readString(bc),
-        bare.readString(bc)
+        bare.readString(bc),
     )
 }
 
@@ -44,7 +44,7 @@ export function writeOperation(bc: bare.ByteCursor, x: Operation): void {
 export function encodeOperation(x: Operation): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeOperation(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -51,7 +51,7 @@ export function writeEntity(bc, x) {
 export function encodeEntity(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeEntity(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

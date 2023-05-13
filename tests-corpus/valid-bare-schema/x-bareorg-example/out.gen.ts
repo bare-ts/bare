@@ -100,11 +100,13 @@ export function writeAddress(bc: bare.ByteCursor, x: Address): void {
 }
 
 function read0(bc: bare.ByteCursor): readonly ({
-    readonly orderId: i64Safe,
-    readonly quantity: i32,
+    readonly orderId: i64Safe
+    readonly quantity: i32
 })[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [{
         orderId: bare.readI64Safe(bc),
         quantity: bare.readI32(bc),
@@ -119,8 +121,8 @@ function read0(bc: bare.ByteCursor): readonly ({
 }
 
 function write0(bc: bare.ByteCursor, x: readonly ({
-    readonly orderId: i64Safe,
-    readonly quantity: i32,
+    readonly orderId: i64Safe
+    readonly quantity: i32
 })[]): void {
     bare.writeUintSafe(bc, x.length)
     for (let i = 0; i < x.length; i++) {
@@ -148,21 +150,21 @@ function read1(bc: bare.ByteCursor): ReadonlyMap<string, ArrayBuffer> {
 
 function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, ArrayBuffer>): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         bare.writeData(bc, kv[1])
     }
 }
 
 export type Customer = {
-    readonly name: string,
-    readonly email: string,
-    readonly address: Address,
+    readonly name: string
+    readonly email: string
+    readonly address: Address
     readonly orders: readonly ({
-        readonly orderId: i64Safe,
-        readonly quantity: i32,
-    })[],
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
+        readonly orderId: i64Safe
+        readonly quantity: i32
+    })[]
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
 export function readCustomer(bc: bare.ByteCursor): Customer {
@@ -184,9 +186,7 @@ export function writeCustomer(bc: bare.ByteCursor, x: Customer): void {
 }
 
 function read2(bc: bare.ByteCursor): PublicKey | null {
-    return bare.readBool(bc)
-        ? readPublicKey(bc)
-        : null
+    return bare.readBool(bc) ? readPublicKey(bc) : null
 }
 
 function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
@@ -197,13 +197,13 @@ function write2(bc: bare.ByteCursor, x: PublicKey | null): void {
 }
 
 export type Employee = {
-    readonly name: string,
-    readonly email: string,
-    readonly address: Address,
-    readonly department: Department,
-    readonly hireDate: Time,
-    readonly publicKey: PublicKey | null,
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
+    readonly name: string
+    readonly email: string
+    readonly address: Address
+    readonly department: Department
+    readonly hireDate: Time
+    readonly publicKey: PublicKey | null
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
 export function readEmployee(bc: bare.ByteCursor): Employee {
@@ -231,9 +231,9 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void {
 export type TerminatedEmployee = null
 
 export type Person =
-    | { readonly tag: "Customer", readonly val: Customer }
-    | { readonly tag: "Employee", readonly val: Employee }
-    | { readonly tag: "TerminatedEmployee", readonly val: TerminatedEmployee }
+    | { readonly tag: "Customer"; readonly val: Customer }
+    | { readonly tag: "Employee"; readonly val: Employee }
+    | { readonly tag: "TerminatedEmployee"; readonly val: TerminatedEmployee }
 
 export function readPerson(bc: bare.ByteCursor): Person {
     const offset = bc.offset
@@ -274,7 +274,7 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 export function encodePerson(x: Person): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

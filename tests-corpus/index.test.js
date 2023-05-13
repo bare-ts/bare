@@ -6,7 +6,7 @@ import {
     Config,
     configure,
     parse,
-    transform
+    transform,
 } from "@bare-ts/tools"
 import { strict as assert } from "node:assert"
 import fs from "node:fs"

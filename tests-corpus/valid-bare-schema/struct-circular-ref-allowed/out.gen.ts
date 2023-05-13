@@ -1,9 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 function read0(bc: bare.ByteCursor): Person | null {
-    return bare.readBool(bc)
-        ? readPerson(bc)
-        : null
+    return bare.readBool(bc) ? readPerson(bc) : null
 }
 
 function write0(bc: bare.ByteCursor, x: Person | null): void {
@@ -13,9 +11,9 @@ function write0(bc: bare.ByteCursor, x: Person | null): void {
     }
 }
 
-function read1(bc: bare.ByteCursor): 
-    | { readonly tag: "Person", readonly val: Person }
-    | { readonly tag: 1, readonly val: null } {
+function read1(bc: bare.ByteCursor):
+    | { readonly tag: "Person"; readonly val: Person }
+    | { readonly tag: 1; readonly val: null } {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
@@ -30,9 +28,9 @@ function read1(bc: bare.ByteCursor):
     }
 }
 
-function write1(bc: bare.ByteCursor, x: 
-    | { readonly tag: "Person", readonly val: Person }
-    | { readonly tag: 1, readonly val: null }): void {
+function write1(bc: bare.ByteCursor, x:
+    | { readonly tag: "Person"; readonly val: Person }
+    | { readonly tag: 1; readonly val: null }): void {
     switch (x.tag) {
         case "Person": {
             bare.writeU8(bc, 0)
@@ -44,7 +42,9 @@ function write1(bc: bare.ByteCursor, x:
 
 function read2(bc: bare.ByteCursor): readonly Person[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [readPerson(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readPerson(bc)
@@ -76,19 +76,19 @@ function read3(bc: bare.ByteCursor): ReadonlyMap<string, Person> {
 
 function write3(bc: bare.ByteCursor, x: ReadonlyMap<string, Person>): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         writePerson(bc, kv[1])
     }
 }
 
 export type Person = {
-    readonly bestFriend: Person | null,
-    readonly secondBestFriend: 
-        | { readonly tag: "Person", readonly val: Person }
-        | { readonly tag: 1, readonly val: null },
-    readonly friends: readonly Person[],
-    readonly friendNicknames: ReadonlyMap<string, Person>,
+    readonly bestFriend: Person | null
+    readonly secondBestFriend:
+        | { readonly tag: "Person"; readonly val: Person }
+        | { readonly tag: 1; readonly val: null }
+    readonly friends: readonly Person[]
+    readonly friendNicknames: ReadonlyMap<string, Person>
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {

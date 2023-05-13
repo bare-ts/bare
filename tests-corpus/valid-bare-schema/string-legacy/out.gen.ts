@@ -15,7 +15,7 @@ export function writeName(bc: bare.ByteCursor, x: Name): void {
 export function encodeName(x: Name): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeName(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

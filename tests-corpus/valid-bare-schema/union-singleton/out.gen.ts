@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type U8 =
-    | { readonly tag: 0, readonly val: u8 }
+    | { readonly tag: 0; readonly val: u8 }
 
 export function readU8(bc: bare.ByteCursor): U8 {
     const offset = bc.offset
@@ -33,7 +33,7 @@ export function writeU8(bc: bare.ByteCursor, x: U8): void {
 export function encodeU8(x: U8): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU8(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

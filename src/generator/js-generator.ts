@@ -8,6 +8,7 @@ import {
     indent,
     jsDoc,
     jsRpr,
+    softSpace,
     unindent,
 } from "../utils/formatting.js"
 import * as utils from "./bare-ast-utils.js"
@@ -112,7 +113,7 @@ export function generate(schema: ast.Ast, config: Config): string {
             }
         }
     }
-    return head.trim() + "\n\n" + body.trim() + "\n"
+    return (head.trim() + "\n\n" + body).trim() + "\n"
 }
 
 type Gen = {
@@ -145,9 +146,7 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
         }
     }
     const def = genType(g, type)
-    return def[0] === "\n"
-        ? `${doc}export type ${alias} =${def}`
-        : `${doc}export type ${alias} = ${def}`
+    return `${doc}export type ${alias} =${softSpace(def)}`
 }
 
 function namespaced(g: Gen, alias: string): string {
@@ -261,28 +260,30 @@ function genSetType(g: Gen, type: ast.ListType): string {
 
 function genStructType(g: Gen, type: ast.StructType): string {
     return unindent(`{
-        ${indent(genStructTypeBody(g, type, ","), 2)}
+        ${indent(genStructTypeBody(g, type), 2)}
     }`)
 }
 
-function genStructTypeBody(g: Gen, type: ast.StructType, sep = ""): string {
+function genStructTypeBody(g: Gen, type: ast.StructType): string {
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const field = type.data[i]
         const doc = jsDoc(field.comment)
         const modifier = field.extra?.mut ? "" : "readonly "
         const prop = field.extra?.quoted ? `"${field.name}"` : field.name
-        result += `${doc}${modifier}${prop}: ${genType(
-            g,
-            type.types[i],
-        )}${sep}\n`
+        result += `${doc}${modifier}${prop}:${softSpace(
+            genType(g, type.types[i]),
+        )}\n`
     }
     return result.trim()
 }
 
 function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
     const params = type.data
-        .map(({ name }, i) => `${name}_: ${genType(g, type.types[i])},`)
+        .map(
+            ({ name }, i) =>
+                `${name}_:${softSpace(genType(g, type.types[i]))},`,
+        )
         .join("\n")
     return unindent(`${indent(genStructTypeBody(g, type))}
     constructor(
@@ -306,7 +307,7 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
                 : jsRpr(subtype.data)
         result += type.extra?.flat
             ? `\n${doc}| ${valType}`
-            : `\n${doc}| { readonly ${tagProp}: ${tagVal}, readonly ${valProp}: ${valType} }`
+            : `\n${doc}| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
     }
     return indent(result)
 }
@@ -316,7 +317,7 @@ function genReaderHead(g: Gen, aliased: ast.AliasedType): string {
     const rType = aliased.internal ? genType(g, aliased.type) : alias
     return g.config.generator === "js"
         ? `function read${alias}(bc)`
-        : `function read${alias}(bc: bare.ByteCursor): ${rType}`
+        : `function read${alias}(bc: bare.ByteCursor):${softSpace(rType)}`
 }
 
 function genWriterHead(g: Gen, aliased: ast.AliasedType): string {
@@ -324,7 +325,9 @@ function genWriterHead(g: Gen, aliased: ast.AliasedType): string {
     const xType = aliased.internal ? genType(g, aliased.type) : alias
     return g.config.generator === "js"
         ? `function write${alias}(bc, x)`
-        : `function write${alias}(bc: bare.ByteCursor, x: ${xType}): void`
+        : `function write${alias}(bc: bare.ByteCursor, x:${softSpace(
+              xType,
+          )}): void`
 }
 
 function genDecoderHead(g: Gen, alias: string): string {
@@ -363,10 +366,10 @@ function genAliasedEnumCode(g: Gen, alias: string, type: ast.EnumType): string {
     const body = type.data
         .map(({ name, val }) =>
             type.extra?.intEnum
-                ? `${name}: ${val},\n${val}: "${name}"`
-                : `${name}: "${name}"`,
+                ? `${name}: ${val},\n${val}: "${name}",`
+                : `${name}: "${name}",`,
         )
-        .join(",\n")
+        .join("\n")
     const constAssert = g.config.generator !== "js" ? "as const" : ""
     return unindent(`const ${alias} = {
         ${indent(body, 2)}
@@ -383,7 +386,9 @@ function genAliasedStructCode(
     const params = type.data
         .map(
             ({ name }, i) =>
-                `${name}_${ts ? `: ${genType(g, type.types[i])},` : ","}`,
+                `${name}_${
+                    ts ? `:${softSpace(genType(g, type.types[i]))},` : ","
+                }`,
         )
         .join("\n")
     const assignments = type.data
@@ -421,7 +426,7 @@ function genReading(g: Gen, type: ast.Type): string {
     const body = genReader(g, type)
     switch (body[0]) {
         case "{": // function body
-            return `(() => ${indent(body)})()`
+            return `(() => ${body})()`
         case "(": // expression
             return body.slice(1, -1) // remove parenthesis
     }
@@ -474,7 +479,7 @@ function genListRawReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
         type.data !== null
             ? `${type.data.val}`
-            : "bare.readUintSafe(bc)\nif (len === 0) { return [] }"
+            : "bare.readUintSafe(bc)\nif (len === 0) {\n    return []\n}"
     const valReading = genReading(g, type.types[0])
     return unindent(`{
         const len = ${indent(lenDecoding, 2)}
@@ -556,9 +561,12 @@ function genMapReader(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalReader(g: Gen, type: ast.OptionalType): string {
-    return unindent(`(bare.readBool(bc)
-        ? ${indent(genReading(g, type.types[0]), 3)}
-        : ${noneVal(type)})`)
+    return unindent(
+        `(bare.readBool(bc) ? ${indent(
+            genReading(g, type.types[0]),
+            3,
+        )} : ${noneVal(type)})`,
+    )
 }
 
 function genSetReader(g: Gen, type: ast.ListType): string {
@@ -590,8 +598,8 @@ function genStructReader(g: Gen, type: ast.StructType, alias: string): string {
         g.symbols.get(alias)?.internal === false
     ) {
         const factoryArgs = type.data
-            .map((_f, i) => `\n${genReading(g, type.types[i])}`)
-            .join(",")
+            .map((_f, i) => `\n${genReading(g, type.types[i])},`)
+            .join("")
         objCreation = `(new ${alias}(${indent(factoryArgs)}\n))`
     } else {
         objCreation = genObjectReader(g, type)
@@ -795,7 +803,7 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
     const writingVal = genWriting(g, type.types[1], "kv[1]")
     return unindent(`{
         bare.writeUintSafe(bc, $x.size)
-        for(const kv of $x) {
+        for (const kv of $x) {
             ${indent(writingKey, 2)}
             ${indent(writingVal, 2)}
         }
@@ -880,7 +888,7 @@ function genStructFlatUnionWriter(g: Gen, union: ast.UnionType): string {
                 ${indent(valWriting, 4)}
             } else `
         }
-        body = body.slice(0, -6) // remove last 'else '
+        body = unindent(body.slice(0, -6)) // remove last 'else '
     } else if (
         resolved.every((t) => !t.extra?.class) &&
         discriminators !== null
@@ -1010,7 +1018,7 @@ function genEncoder(g: Gen, alias: string): string {
     return unindent(`${genEncoderHead(g, alias)} {
         const bc = new bare.ByteCursor(
             new ${uint8Array}(${config}.initialBufferLength),
-            ${config}
+            ${config},
         )
         write${alias}(bc, x)
         return new ${uint8Array}(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -13,7 +13,7 @@ export function writeU8Alias(bc, x) {
 export function encodeU8Alias(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU8Alias(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
@@ -39,7 +39,7 @@ export function writeU8Alias2(bc, x) {
 export function encodeU8Alias2(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU8Alias2(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

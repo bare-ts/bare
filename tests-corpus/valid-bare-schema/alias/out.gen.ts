@@ -17,7 +17,7 @@ export function writeU8Alias(bc: bare.ByteCursor, x: U8Alias): void {
 export function encodeU8Alias(x: U8Alias): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU8Alias(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

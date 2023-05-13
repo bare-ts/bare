@@ -1,8 +1,8 @@
 import * as bare from "@bare-ts/lib"
 
 export type Person = {
-    readonly name: string,
-    readonly gender: 0 | 1 | 2,
+    readonly name: string
+    readonly gender: 0 | 1 | 2
 }
 
 export function readPerson(bc: bare.ByteCursor): Person

@@ -57,7 +57,7 @@ export function writeBoxed(bc, x) {
 export function encodeBoxed(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeBoxed(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

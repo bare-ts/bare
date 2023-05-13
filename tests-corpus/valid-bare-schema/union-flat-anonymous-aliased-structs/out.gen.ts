@@ -3,8 +3,8 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export type Person = {
-    readonly tag: "Person",
-    readonly name: string,
+    readonly tag: "Person"
+    readonly name: string
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -21,8 +21,8 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 export type Entity =
     | Person
     | {
-        readonly tag: 1,
-        readonly name: string,
+        readonly tag: 1
+        readonly name: string
     }
 
 export function readEntity(bc: bare.ByteCursor): Entity {
@@ -63,7 +63,7 @@ export function writeEntity(bc: bare.ByteCursor, x: Entity): void {
 export function encodeEntity(x: Entity): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeEntity(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -1,3 +1,1 @@
-
-
 export type Main = null

@@ -61,7 +61,7 @@ export function readGenderNames(bc: bare.ByteCursor): GenderNames {
 
 export function writeGenderNames(bc: bare.ByteCursor, x: GenderNames): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         writeGender(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
@@ -70,7 +70,7 @@ export function writeGenderNames(bc: bare.ByteCursor, x: GenderNames): void {
 export function encodeGenderNames(x: GenderNames): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeGenderNames(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

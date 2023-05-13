@@ -1,8 +1,8 @@
 import * as bare from "@bare-ts/lib"
 
 export type Person = {
-    readonly tag: "Person",
-    readonly name: string,
+    readonly tag: "Person"
+    readonly name: string
 }
 
 export function readPerson(bc: bare.ByteCursor): Person
@@ -12,8 +12,8 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void
 export type Entity =
     | Person
     | {
-        readonly tag: 1,
-        readonly name: string,
+        readonly tag: 1
+        readonly name: string
     }
 
 export function readEntity(bc: bare.ByteCursor): Entity

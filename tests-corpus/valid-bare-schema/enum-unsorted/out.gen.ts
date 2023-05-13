@@ -45,7 +45,7 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void {
 export function encodeGender(x: Gender): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeGender(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -43,9 +43,7 @@ export function writeGender(bc: bare.ByteCursor, x: Gender): void {
 }
 
 function read0(bc: bare.ByteCursor): Gender | null {
-    return bare.readBool(bc)
-        ? readGender(bc)
-        : null
+    return bare.readBool(bc) ? readGender(bc) : null
 }
 
 function write0(bc: bare.ByteCursor, x: Gender | null): void {
@@ -56,9 +54,9 @@ function write0(bc: bare.ByteCursor, x: Gender | null): void {
 }
 
 export type Person = {
-    readonly name: string,
-    readonly email: string,
-    readonly gender: Gender | null,
+    readonly name: string
+    readonly email: string
+    readonly gender: Gender | null
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -76,8 +74,8 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 }
 
 export type Organization = {
-    readonly name: string,
-    readonly email: string,
+    readonly name: string
+    readonly email: string
 }
 
 export function readOrganization(bc: bare.ByteCursor): Organization {
@@ -93,8 +91,8 @@ export function writeOrganization(bc: bare.ByteCursor, x: Organization): void {
 }
 
 export type Contact =
-    | { readonly tag: "Person", readonly val: Person }
-    | { readonly tag: "Organization", readonly val: Organization }
+    | { readonly tag: "Person"; readonly val: Person }
+    | { readonly tag: "Organization"; readonly val: Organization }
 
 export function readContact(bc: bare.ByteCursor): Contact {
     const offset = bc.offset
@@ -130,7 +128,9 @@ export type Contacts = readonly Contact[]
 
 export function readContacts(bc: bare.ByteCursor): Contacts {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [readContact(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readContact(bc)
@@ -148,7 +148,7 @@ export function writeContacts(bc: bare.ByteCursor, x: Contacts): void {
 export function encodeContacts(x: Contacts): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeContacts(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

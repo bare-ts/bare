@@ -13,6 +13,10 @@ export function unindent(s: string, n = 1): string {
     return s.replace(new RegExp(`\n[ ]{${4 * n}}`, "g"), "\n")
 }
 
+export function softSpace(s: string): string {
+    return s[0] === "\n" ? s : ` ${s}`
+}
+
 export function jsDoc(content: string | null): string {
     if (content === null) {
         return ""

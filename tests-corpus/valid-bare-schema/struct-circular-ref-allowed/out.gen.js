@@ -1,9 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 function read0(bc) {
-    return bare.readBool(bc)
-        ? readPerson(bc)
-        : null
+    return bare.readBool(bc) ? readPerson(bc) : null
 }
 
 function write0(bc, x) {
@@ -40,7 +38,9 @@ function write1(bc, x) {
 
 function read2(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [readPerson(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readPerson(bc)
@@ -72,7 +72,7 @@ function read3(bc) {
 
 function write3(bc, x) {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         writePerson(bc, kv[1])
     }

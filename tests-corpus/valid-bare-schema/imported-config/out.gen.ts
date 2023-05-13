@@ -17,7 +17,7 @@ export function writeMessage(bc: bare.ByteCursor, x: Message): void {
 export function encodeMessage(x: Message): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(ext.config.initialBufferLength),
-        ext.config
+        ext.config,
     )
     writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -17,7 +17,7 @@ export function readAlias(bc) {
 
 export function writeAlias(bc, x) {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         writeAlias(bc, kv[1])
     }

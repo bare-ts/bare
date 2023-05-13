@@ -31,8 +31,8 @@ export function readBoxedTransStr(bc: bare.ByteCursor): BoxedTransStr
 export function writeBoxedTransStr(bc: bare.ByteCursor, x: BoxedTransStr): void
 
 export type Boxed =
-    | { readonly tag: "BoxedU32", readonly val: BoxedU32 }
-    | { readonly tag: "BoxedTransStr", readonly val: BoxedTransStr }
+    | { readonly tag: "BoxedU32"; readonly val: BoxedU32 }
+    | { readonly tag: "BoxedTransStr"; readonly val: BoxedTransStr }
 
 export function readBoxed(bc: bare.ByteCursor): Boxed
 

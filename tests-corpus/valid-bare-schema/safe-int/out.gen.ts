@@ -18,7 +18,7 @@ export function writeI64(bc: bare.ByteCursor, x: I64): void {
 export function encodeI64(x: I64): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeI64(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
@@ -46,7 +46,7 @@ export function writeU64(bc: bare.ByteCursor, x: U64): void {
 export function encodeU64(x: U64): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU64(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
