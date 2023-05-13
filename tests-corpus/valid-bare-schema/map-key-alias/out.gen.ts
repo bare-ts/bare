@@ -31,7 +31,7 @@ export function readDict(bc: bare.ByteCursor): Dict {
 
 export function writeDict(bc: bare.ByteCursor, x: Dict): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         writeKeyType(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
@@ -40,7 +40,7 @@ export function writeDict(bc: bare.ByteCursor, x: Dict): void {
 export function encodeDict(x: Dict): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeDict(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

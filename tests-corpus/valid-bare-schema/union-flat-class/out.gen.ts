@@ -15,7 +15,7 @@ export class BoxedU32 {
 
 export function readBoxedU32(bc: bare.ByteCursor): BoxedU32 {
     return new BoxedU32(
-        bare.readU32(bc)
+        bare.readU32(bc),
     )
 }
 
@@ -34,7 +34,7 @@ export class BoxedStr {
 
 export function readBoxedStr(bc: bare.ByteCursor): BoxedStr {
     return new BoxedStr(
-        bare.readString(bc)
+        bare.readString(bc),
     )
 }
 
@@ -63,18 +63,18 @@ export function readBoxed(bc: bare.ByteCursor): Boxed {
 
 export function writeBoxed(bc: bare.ByteCursor, x: Boxed): void {
     if (x instanceof BoxedU32) {
-            bare.writeU8(bc, 0)
-            writeBoxedU32(bc, x)
-        } else if (x instanceof BoxedStr) {
-            bare.writeU8(bc, 1)
-            writeBoxedStr(bc, x)
-        }
+        bare.writeU8(bc, 0)
+        writeBoxedU32(bc, x)
+    } else if (x instanceof BoxedStr) {
+        bare.writeU8(bc, 1)
+        writeBoxedStr(bc, x)
+    }
 }
 
 export function encodeBoxed(x: Boxed): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeBoxed(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

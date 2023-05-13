@@ -4,9 +4,7 @@ import assert from "node:assert"
 const config = /* @__PURE__ */ bare.Config({})
 
 function read0(bc: bare.ByteCursor): string | null {
-    return bare.readBool(bc)
-        ? bare.readString(bc)
-        : null
+    return bare.readBool(bc) ? bare.readString(bc) : null
 }
 
 function write0(bc: bare.ByteCursor, x: string | null): void {
@@ -33,7 +31,7 @@ function read1(bc: bare.ByteCursor): ReadonlyMap<string, string | null> {
 
 function write1(bc: bare.ByteCursor, x: ReadonlyMap<string, string | null>): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         write0(bc, kv[1])
     }
@@ -56,9 +54,9 @@ function write2(bc: bare.ByteCursor, x: readonly (string | null)[]): void {
 }
 
 export type Composite =
-    | { readonly tag: 0, readonly val: ReadonlyMap<string, string | null> }
-    | { readonly tag: 1, readonly val: readonly (string | null)[] }
-    | { readonly tag: 2, readonly val: Uint8Array }
+    | { readonly tag: 0; readonly val: ReadonlyMap<string, string | null> }
+    | { readonly tag: 1; readonly val: readonly (string | null)[] }
+    | { readonly tag: 2; readonly val: Uint8Array }
 
 export function readComposite(bc: bare.ByteCursor): Composite {
     const offset = bc.offset
@@ -101,7 +99,7 @@ export function writeComposite(bc: bare.ByteCursor, x: Composite): void {
 export function encodeComposite(x: Composite): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeComposite(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

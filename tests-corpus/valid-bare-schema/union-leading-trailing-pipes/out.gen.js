@@ -28,7 +28,7 @@ export function writeLeadingPipe(bc, x) {
 export function encodeLeadingPipe(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeLeadingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
@@ -69,7 +69,7 @@ export function writeTrailingPipe(bc, x) {
 export function encodeTrailingPipe(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeTrailingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

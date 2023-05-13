@@ -25,7 +25,7 @@ export const Department = {
     ADMINISTRATION: "ADMINISTRATION",
     CUSTOMER_SERVICE: "CUSTOMER_SERVICE",
     DEVELOPMENT: "DEVELOPMENT",
-    JSMITH: "JSMITH"
+    JSMITH: "JSMITH",
 }
 
 export function readDepartment(bc) {
@@ -92,7 +92,9 @@ export function writeAddress(bc, x) {
 
 function read0(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [{
         orderId: bare.readI64Safe(bc),
         quantity: bare.readI32(bc),
@@ -133,7 +135,7 @@ function read1(bc) {
 
 function write1(bc, x) {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         bare.writeData(bc, kv[1])
     }
@@ -158,9 +160,7 @@ export function writeCustomer(bc, x) {
 }
 
 function read2(bc) {
-    return bare.readBool(bc)
-        ? readPublicKey(bc)
-        : null
+    return bare.readBool(bc) ? readPublicKey(bc) : null
 }
 
 function write2(bc, x) {
@@ -231,7 +231,7 @@ export function writePerson(bc, x) {
 export function encodePerson(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

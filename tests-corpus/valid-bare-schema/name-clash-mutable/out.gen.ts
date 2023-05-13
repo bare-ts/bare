@@ -21,7 +21,7 @@ export function readMap(bc: bare.ByteCursor): Map {
 
 export function writeMap(bc: bare.ByteCursor, x: Map): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
@@ -30,7 +30,7 @@ export function writeMap(bc: bare.ByteCursor, x: Map): void {
 export function encodeMap(x: Map): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeMap(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

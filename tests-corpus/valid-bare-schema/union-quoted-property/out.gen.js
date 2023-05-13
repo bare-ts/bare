@@ -52,7 +52,7 @@ export function writeUnsignedInt(bc, x) {
 export function encodeUnsignedInt(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeUnsignedInt(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

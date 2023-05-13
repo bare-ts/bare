@@ -4,7 +4,9 @@ const config = /* @__PURE__ */ bare.Config({})
 
 function read0(bc: bare.ByteCursor): readonly string[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [bare.readString(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = bare.readString(bc)
@@ -21,7 +23,9 @@ function write0(bc: bare.ByteCursor, x: readonly string[]): void {
 
 function read1(bc: bare.ByteCursor): readonly (readonly string[])[] {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [read0(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = read0(bc)
@@ -40,7 +44,9 @@ export type MultiList = readonly (readonly (readonly string[])[])[]
 
 export function readMultiList(bc: bare.ByteCursor): MultiList {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [read1(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = read1(bc)
@@ -58,7 +64,7 @@ export function writeMultiList(bc: bare.ByteCursor, x: MultiList): void {
 export function encodeMultiList(x: MultiList): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeMultiList(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

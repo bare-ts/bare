@@ -8,7 +8,7 @@ export const Gender = {
     MALE: 1,
     1: "MALE",
     FEMALE: 2,
-    2: "FEMALE"
+    2: "FEMALE",
 }
 
 export function readGender(bc) {
@@ -28,7 +28,7 @@ export function writeGender(bc, x) {
 export function encodeGender(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeGender(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

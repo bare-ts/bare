@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export type u8 = number
 
 export type LeadingPipe =
-    | { readonly tag: 0, readonly val: u8 }
+    | { readonly tag: 0; readonly val: u8 }
 
 export function readLeadingPipe(bc: bare.ByteCursor): LeadingPipe {
     const offset = bc.offset
@@ -33,7 +33,7 @@ export function writeLeadingPipe(bc: bare.ByteCursor, x: LeadingPipe): void {
 export function encodeLeadingPipe(x: LeadingPipe): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeLeadingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
@@ -49,7 +49,7 @@ export function decodeLeadingPipe(bytes: Uint8Array): LeadingPipe {
 }
 
 export type TrailingPipe =
-    | { readonly tag: 0, readonly val: u8 }
+    | { readonly tag: 0; readonly val: u8 }
 
 export function readTrailingPipe(bc: bare.ByteCursor): TrailingPipe {
     const offset = bc.offset
@@ -77,7 +77,7 @@ export function writeTrailingPipe(bc: bare.ByteCursor, x: TrailingPipe): void {
 export function encodeTrailingPipe(x: TrailingPipe): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeTrailingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

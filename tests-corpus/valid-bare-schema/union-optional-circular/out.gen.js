@@ -1,9 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 function read0(bc) {
-    return bare.readBool(bc)
-        ? readAlias(bc)
-        : null
+    return bare.readBool(bc) ? readAlias(bc) : null
 }
 
 function write0(bc, x) {

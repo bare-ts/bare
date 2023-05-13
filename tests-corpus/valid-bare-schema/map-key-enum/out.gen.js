@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export const Gender = {
     FLUID: "FLUID",
     MALE: "MALE",
-    FEMALE: "FEMALE"
+    FEMALE: "FEMALE",
 }
 
 export function readGender(bc) {
@@ -59,7 +59,7 @@ export function readGenderNames(bc) {
 
 export function writeGenderNames(bc, x) {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         writeGender(bc, kv[0])
         bare.writeString(bc, kv[1])
     }
@@ -68,7 +68,7 @@ export function writeGenderNames(bc, x) {
 export function encodeGenderNames(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeGenderNames(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

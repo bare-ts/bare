@@ -34,14 +34,14 @@ export function readAddress(bc: bare.ByteCursor): Address
 export function writeAddress(bc: bare.ByteCursor, x: Address): void
 
 export type Customer = {
-    readonly name: string,
-    readonly email: string,
-    readonly address: Address,
+    readonly name: string
+    readonly email: string
+    readonly address: Address
     readonly orders: readonly ({
-        readonly orderId: i64Safe,
-        readonly quantity: i32,
-    })[],
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
+        readonly orderId: i64Safe
+        readonly quantity: i32
+    })[]
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
 export function readCustomer(bc: bare.ByteCursor): Customer
@@ -49,13 +49,13 @@ export function readCustomer(bc: bare.ByteCursor): Customer
 export function writeCustomer(bc: bare.ByteCursor, x: Customer): void
 
 export type Employee = {
-    readonly name: string,
-    readonly email: string,
-    readonly address: Address,
-    readonly department: Department,
-    readonly hireDate: Time,
-    readonly publicKey: PublicKey | null,
-    readonly metadata: ReadonlyMap<string, ArrayBuffer>,
+    readonly name: string
+    readonly email: string
+    readonly address: Address
+    readonly department: Department
+    readonly hireDate: Time
+    readonly publicKey: PublicKey | null
+    readonly metadata: ReadonlyMap<string, ArrayBuffer>
 }
 
 export function readEmployee(bc: bare.ByteCursor): Employee
@@ -65,9 +65,9 @@ export function writeEmployee(bc: bare.ByteCursor, x: Employee): void
 export type TerminatedEmployee = null
 
 export type Person =
-    | { readonly tag: "Customer", readonly val: Customer }
-    | { readonly tag: "Employee", readonly val: Employee }
-    | { readonly tag: "TerminatedEmployee", readonly val: TerminatedEmployee }
+    | { readonly tag: "Customer"; readonly val: Customer }
+    | { readonly tag: "Employee"; readonly val: Employee }
+    | { readonly tag: "TerminatedEmployee"; readonly val: TerminatedEmployee }
 
 export function readPerson(bc: bare.ByteCursor): Person
 

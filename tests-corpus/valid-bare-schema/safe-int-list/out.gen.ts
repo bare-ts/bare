@@ -15,7 +15,7 @@ export function writeU64List(bc: bare.ByteCursor, x: U64List): void {
 export function encodeU64List(x: U64List): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU64List(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

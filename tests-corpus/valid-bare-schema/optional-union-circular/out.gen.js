@@ -30,9 +30,7 @@ function write0(bc, x) {
 }
 
 export function readAlias(bc) {
-    return bare.readBool(bc)
-        ? read0(bc)
-        : null
+    return bare.readBool(bc) ? read0(bc) : null
 }
 
 export function writeAlias(bc, x) {

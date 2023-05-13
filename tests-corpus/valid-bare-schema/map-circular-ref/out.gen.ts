@@ -19,7 +19,7 @@ export function readAlias(bc: bare.ByteCursor): Alias {
 
 export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
     bare.writeUintSafe(bc, x.size)
-    for(const kv of x) {
+    for (const kv of x) {
         bare.writeString(bc, kv[0])
         writeAlias(bc, kv[1])
     }

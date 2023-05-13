@@ -1,9 +1,9 @@
 import * as bare from "@bare-ts/lib"
 import assert from "node:assert"
 
-function read0(bc: bare.ByteCursor): 
-    | { readonly tag: "Alias", readonly val: Alias }
-    | { readonly tag: 1, readonly val: string } {
+function read0(bc: bare.ByteCursor):
+    | { readonly tag: "Alias"; readonly val: Alias }
+    | { readonly tag: 1; readonly val: string } {
     const offset = bc.offset
     const tag = bare.readU8(bc)
     switch (tag) {
@@ -18,9 +18,9 @@ function read0(bc: bare.ByteCursor):
     }
 }
 
-function write0(bc: bare.ByteCursor, x: 
-    | { readonly tag: "Alias", readonly val: Alias }
-    | { readonly tag: 1, readonly val: string }): void {
+function write0(bc: bare.ByteCursor, x:
+    | { readonly tag: "Alias"; readonly val: Alias }
+    | { readonly tag: 1; readonly val: string }): void {
     switch (x.tag) {
         case "Alias": {
             bare.writeU8(bc, 0)
@@ -35,8 +35,8 @@ function write0(bc: bare.ByteCursor, x:
 }
 
 export type Alias = readonly (
-    | { readonly tag: "Alias", readonly val: Alias }
-    | { readonly tag: 1, readonly val: string })[]
+    | { readonly tag: "Alias"; readonly val: Alias }
+    | { readonly tag: 1; readonly val: string })[]
 
 export function readAlias(bc: bare.ByteCursor): Alias {
     const len = 2

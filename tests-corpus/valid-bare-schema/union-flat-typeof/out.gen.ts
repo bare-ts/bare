@@ -56,7 +56,7 @@ export function writeTypeOfUnion(bc: bare.ByteCursor, x: TypeOfUnion): void {
 export function encodeTypeOfUnion(x: TypeOfUnion): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeTypeOfUnion(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

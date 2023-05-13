@@ -5,7 +5,7 @@ const config = /* @__PURE__ */ bare.Config({})
 export const Gender = {
     FEMALE: "FEMALE",
     FLUID: "FLUID",
-    MALE: "MALE"
+    MALE: "MALE",
 }
 
 export function readGender(bc) {
@@ -43,9 +43,7 @@ export function writeGender(bc, x) {
 }
 
 function read0(bc) {
-    return bare.readBool(bc)
-        ? readGender(bc)
-        : null
+    return bare.readBool(bc) ? readGender(bc) : null
 }
 
 function write0(bc, x) {
@@ -113,7 +111,9 @@ export function writeContact(bc, x) {
 
 export function readContacts(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [readContact(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = readContact(bc)
@@ -131,7 +131,7 @@ export function writeContacts(bc, x) {
 export function encodeContacts(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeContacts(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

@@ -42,7 +42,7 @@ export function writeX(bc, x) {
 export function encodeX(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeX(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

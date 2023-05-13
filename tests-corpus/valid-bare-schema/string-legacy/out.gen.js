@@ -13,7 +13,7 @@ export function writeName(bc, x) {
 export function encodeName(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeName(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

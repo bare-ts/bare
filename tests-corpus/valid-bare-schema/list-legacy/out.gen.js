@@ -4,7 +4,9 @@ const config = /* @__PURE__ */ bare.Config({})
 
 export function readU8List(bc) {
     const len = bare.readUintSafe(bc)
-    if (len === 0) { return [] }
+    if (len === 0) {
+        return []
+    }
     const result = [bare.readU8(bc)]
     for (let i = 1; i < len; i++) {
         result[i] = bare.readU8(bc)
@@ -22,7 +24,7 @@ export function writeU8List(bc, x) {
 export function encodeU8List(x) {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeU8List(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)

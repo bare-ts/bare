@@ -1,9 +1,7 @@
 import * as bare from "@bare-ts/lib"
 
 function read0(bc: bare.ByteCursor): Alias | null {
-    return bare.readBool(bc)
-        ? readAlias(bc)
-        : null
+    return bare.readBool(bc) ? readAlias(bc) : null
 }
 
 function write0(bc: bare.ByteCursor, x: Alias | null): void {
@@ -14,8 +12,8 @@ function write0(bc: bare.ByteCursor, x: Alias | null): void {
 }
 
 export type Alias =
-    | { readonly tag: 0, readonly val: Alias | null }
-    | { readonly tag: 1, readonly val: string }
+    | { readonly tag: 0; readonly val: Alias | null }
+    | { readonly tag: 1; readonly val: string }
 
 export function readAlias(bc: bare.ByteCursor): Alias {
     const offset = bc.offset

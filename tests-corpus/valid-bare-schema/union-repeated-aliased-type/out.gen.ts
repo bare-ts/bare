@@ -15,8 +15,8 @@ export function writeY(bc: bare.ByteCursor, x: Y): void {
 }
 
 export type X =
-    | { readonly tag: 0, readonly val: u8 }
-    | { readonly tag: "Y", readonly val: Y }
+    | { readonly tag: 0; readonly val: u8 }
+    | { readonly tag: "Y"; readonly val: Y }
 
 export function readX(bc: bare.ByteCursor): X {
     const offset = bc.offset
@@ -50,7 +50,7 @@ export function writeX(bc: bare.ByteCursor, x: X): void {
 export function encodeX(x: X): Uint8Array {
     const bc = new bare.ByteCursor(
         new Uint8Array(config.initialBufferLength),
-        config
+        config,
     )
     writeX(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
