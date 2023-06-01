@@ -29,13 +29,19 @@
   "bin": {
     "bare": "./dist/cli.js"
   },
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "exports": {
-    "module": "./dist/index.js",
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.js"
+    "./package.json": "./package.json",
+    ".": {
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "types": "./dist/index.d.ts",
+      "module": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   },
   "sideEffects": false,
   "files": [
