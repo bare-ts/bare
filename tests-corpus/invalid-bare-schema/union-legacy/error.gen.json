@@ -6,5 +6,5 @@
     "line": 1,
     "col": 18
   },
-  "message": "(union-legacy/schema.bare:1:18) use 'union { A | B } or allow '( A | B )' with option '----legacy'."
+  "message": "(union-legacy/schema.bare:1:18) use 'union { A | B } or allow '( A | B )' with option '--legacy'."
 }

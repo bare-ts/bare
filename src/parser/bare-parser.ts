@@ -45,7 +45,7 @@ function parseAliased(p: Parser): ast.AliasedType {
     }
     if ((keyword === "enum" || keyword === "struct") && !p.config.legacy) {
         throw new CompilerError(
-            `use 'type ${alias} ${keyword} { ... }' or allow '${keyword} ${alias} { ... }' with option '----legacy'.`,
+            `use 'type ${alias} ${keyword} { ... }' or allow '${keyword} ${alias} { ... }' with option '--legacy'.`,
             p.lex.location(),
         )
     }
@@ -71,7 +71,7 @@ function parseType(p: Parser): ast.Type {
             // struct (obsolete syntax)
             if (!p.config.legacy) {
                 throw new CompilerError(
-                    "use 'struct { ... } or allow '{ ... }' with option '----legacy'.",
+                    "use 'struct { ... } or allow '{ ... }' with option '--legacy'.",
                     p.lex.location(),
                 )
             }
@@ -113,7 +113,7 @@ function parseTypeName(p: Parser): ast.Type {
     p.lex.forth()
     if (alias === "string" && !p.config.legacy) {
         throw new CompilerError(
-            "use 'str' or allow 'string' with option '----legacy'.",
+            "use 'str' or allow 'string' with option '--legacy'.",
             p.lex.location(),
         )
     }
@@ -132,7 +132,7 @@ function parseData(p: Parser): ast.Type {
     if (p.lex.token() === "<") {
         if (!p.config.legacy) {
             throw new CompilerError(
-                "use 'data[n]' or allow 'data<n>' with option '----legacy'.",
+                "use 'data[n]' or allow 'data<n>' with option '--legacy'.",
                 p.lex.location(),
             )
         }
@@ -169,7 +169,7 @@ function parseList(p: Parser): ast.Type {
 function parseLegacyList(p: Parser): ast.Type {
     if (!p.config.legacy) {
         throw new CompilerError(
-            "use 'list<A>[n]' or allow '[n]A' with option '----legacy'.",
+            "use 'list<A>[n]' or allow '[n]A' with option '--legacy'.",
             p.lex.location(),
         )
     }
@@ -218,7 +218,7 @@ function parseMap(p: Parser): ast.Type {
     if (p.lex.token() === "[") {
         if (!p.config.legacy) {
             throw new CompilerError(
-                "use 'map<A><B>' or allow 'map[A]B' with option '----legacy'.",
+                "use 'map<A><B>' or allow 'map[A]B' with option '--legacy'.",
                 p.lex.location(),
             )
         }
@@ -251,7 +251,7 @@ function parseUnion(p: Parser): ast.Type {
 function parseLegacyUnion(p: Parser): ast.Type {
     if (!p.config.legacy) {
         throw new CompilerError(
-            "use 'union { A | B } or allow '( A | B )' with option '----legacy'.",
+            "use 'union { A | B } or allow '( A | B )' with option '--legacy'.",
             p.lex.location(),
         )
     }
@@ -282,7 +282,7 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
             tagVal = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
             throw new CompilerError(
-                "in pedantic mode, all union tag must be set. '=' is expected.",
+                "in pedantic mode, all union tags must be set. '=' is expected.",
                 p.lex.location(),
             )
         }
@@ -328,7 +328,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
             val = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
             throw new CompilerError(
-                "in pedantic mode, all enum tag must be set. '=' is expected.",
+                "in pedantic mode, all enum tags must be set. '=' is expected.",
                 p.lex.location(),
             )
         }

@@ -6,5 +6,5 @@
     "line": 1,
     "col": 13
   },
-  "message": "(list-legacy/schema.bare:1:13) use 'list<A>[n]' or allow '[n]A' with option '----legacy'."
+  "message": "(list-legacy/schema.bare:1:13) use 'list<A>[n]' or allow '[n]A' with option '--legacy'."
 }
