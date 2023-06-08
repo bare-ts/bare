@@ -539,14 +539,14 @@ function genMapReader(g: Gen, type: ast.MapType): string {
     const [keyType, valType] = type.types
     const kType = genType(g, keyType)
     const vType = genType(g, valType)
-    const MapGenerics =
+    const mapGenerics =
         g.config.generator === "js"
             ? ""
             : `<${indent(kType, 2)}, ${indent(vType, 2)}>`
     const map = global(g, "Map")
     return unindent(`{
         const len = bare.readUintSafe(bc)
-        const result = new ${map}${MapGenerics}()
+        const result = new ${map}${mapGenerics}()
         for (let i = 0; i < len; i++) {
             const offset = bc.offset
             const key = ${indent(genReading(g, keyType), 2)}
@@ -571,12 +571,12 @@ function genOptionalReader(g: Gen, type: ast.OptionalType): string {
 
 function genSetReader(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
-    const SetGenerics =
+    const setGenerics =
         g.config.generator === "js" ? "" : `<${indent(genType(g, valType), 2)}>`
     const set = global(g, "Set")
     return unindent(`{
         const len = bare.readUintSafe(bc)
-        const result = new ${set}${SetGenerics}()
+        const result = new ${set}${setGenerics}()
         for (let i = 0; i < len; i++) {
             const offset = bc.offset
             const val = ${indent(genReading(g, valType), 2)}
