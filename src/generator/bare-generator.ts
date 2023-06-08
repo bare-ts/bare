@@ -56,8 +56,8 @@ function generateEnum(type: ast.EnumType): string {
 }
 
 function generateEnumVal(enumVal: ast.EnumVal): string {
-    const docCOmment = generateDocComment(enumVal.comment)
-    return `${docCOmment}${enumVal.name} = ${enumVal.val}`
+    const docComment = generateDocComment(enumVal.comment)
+    return `${docComment}${enumVal.name} = ${enumVal.val}`
 }
 
 function generateList(type: ast.ListType): string {
