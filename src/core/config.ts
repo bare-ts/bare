@@ -7,10 +7,7 @@ const DEFAULT_GENERATOR = "ts"
  * @sealed
  */
 export class ConfigError extends Error {
-    constructor(message: string) {
-        super(message)
-        this.name = "ConfigError"
-    }
+    override name = "ConfigError"
 }
 
 export type Config = {

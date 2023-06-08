@@ -5,11 +5,12 @@
  * @sealed
  */
 export class CompilerError extends Error {
+    override name = "CompilerError"
+
     readonly location: Location | null
 
     constructor(issue: string, loc: Location | null) {
         super(`${locationRpr(loc)}${issue}`)
-        this.name = "CompilerError"
         this.location = loc
     }
 }
