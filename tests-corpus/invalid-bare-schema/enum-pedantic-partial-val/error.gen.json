@@ -6,5 +6,5 @@
     "line": 4,
     "col": 5
   },
-  "message": "(enum-pedantic-partial-val/schema.bare:4:5) in pedantic mode, all enum tag must be set. '=' is expected."
+  "message": "(enum-pedantic-partial-val/schema.bare:4:5) in pedantic mode, all enum tags must be set. '=' is expected."
 }
