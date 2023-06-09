@@ -7,11 +7,10 @@ import {
     configure,
     parse,
     transform,
-} from "@bare-ts/tools"
-import { strict as assert } from "node:assert"
+} from "../src/index.js"
+import { expect, test } from "bun:test"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
-import { default as test } from "oletus"
 
 const CORPUS_DIR = "./tests-corpus"
 const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`
@@ -40,14 +39,14 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
         const error = JSON.parse(fs.readFileSync(errorPath).toString())
         try {
             const astComputed = configure(parse(schema, config), config)
-            assert.deepEqual(astComputed, astExpected)
+            expect(astComputed).toEqual(astExpected)
             void transform(schema, config)
-            assert.ok(false) // must be unreachable
+            throw new Error("unreachable") // must be unreachable
         } catch (e) {
             if (!(e instanceof CompilerError)) {
                 throw e
             }
-            assert.deepEqual({ ...e, message: e.message }, error)
+            expect({ ...e, message: e.message }).toEqual(error)
         }
     })
 }
@@ -105,10 +104,10 @@ for (let dir of fs.readdirSync(VALID_BARE_DIR)) {
             schema: schemaRelPath,
         })
 
-        assert.deepEqual(astComputed, astExpected)
-        assert.deepEqual(tsComputed, tsExpected)
-        assert.deepEqual(dtsComputed, dtsExpected)
-        assert.deepEqual(jsComputed, jsExpected)
-        assert.deepEqual(bareComputed, bareExpected)
+        expect(astComputed).toEqual(astExpected)
+        expect(tsComputed).toEqual(tsExpected)
+        expect(dtsComputed).toEqual(dtsExpected)
+        expect(jsComputed).toEqual(jsExpected)
+        expect(bareComputed).toEqual(bareExpected)
     })
 }

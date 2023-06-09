@@ -1,11 +1,11 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { default as test } from "oletus"
+import { expect, test } from "bun:test"
 
 import { Gender, decodeContacts, encodeContacts } from "./out.gen.js"
 
-test("x-readme-example", (t) => {
+test("x-readme-example", () => {
     const payload = encodeContacts([
         {
             tag: "Person",
@@ -25,7 +25,7 @@ test("x-readme-example", (t) => {
     ])
     const msg = decodeContacts(payload)
 
-    t.deepEqual(msg, [
+    expect(msg).toEqual([
         {
             tag: "Person",
             val: {

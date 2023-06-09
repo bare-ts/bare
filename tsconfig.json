@@ -8,12 +8,10 @@
     "module": "ES2020",
     "target": "ES2020",
 
-    // Don't implicitly import @types/*
-    "types": [],
+    // include node's types
+    "types": ["bun-types"],
 
     "noEmit": true,
-    "sourceMap": true,
-    "stripInternal": true,
 
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -29,5 +27,6 @@
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "strict": true
-  }
+  },
+  "exclude": ["./dist/"]
 }

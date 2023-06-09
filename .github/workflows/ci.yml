@@ -14,15 +14,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v3
+            - uses: oven-sh/setup-bun@v1
               with:
-                  node-version: "14.18"
-                  cache: npm
+                  bun-version: latest
             - name: Build and test coverage
               run: |
-                  npm ci
-                  npm install c8
-                  npm run coverage
+                  bun install
+                  bun add c8
+                  bun run coverage
             - name: Coveralls
               uses: coverallsapp/github-action@master
               with:

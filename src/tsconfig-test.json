@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig-base.jsonc",
-  "compilerOptions": {
-    "moduleResolution": "node",
-    "types": ["node"]
-  },
-  "include": ["./**/*.test.ts"],
-  "references": [{ "path": "." }]
-}

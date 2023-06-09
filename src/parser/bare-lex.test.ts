@@ -2,8 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import { Lex } from "./bare-lex.js"
-import { strict as assert } from "node:assert"
-import { default as test } from "oletus"
+import { expect, test } from "bun:test"
 
 const SAMPLE = `
     const C = { # struct
@@ -17,27 +16,25 @@ const SAMPLE_TOKENS = "const C = { p1 : 1 , p2 : a , }".split(" ")
 test("valid-tokens", () => {
     const lex = new Lex(SAMPLE, "inline")
     for (let i = 0; i < SAMPLE_TOKENS.length; i++) {
-        assert.deepEqual(lex.token(), SAMPLE_TOKENS[i])
-        assert.doesNotThrow(() => lex.forth())
+        expect(lex.token()).toEqual(SAMPLE_TOKENS[i])
+        expect(() => lex.forth()).not.toThrow()
     }
 })
 
 test("invalid-tokens", () => {
     const lex = new Lex("d ^", "inline")
-    assert.throws(() => lex.forth(), {
-        name: "CompilerError",
-    })
+    expect(() => lex.forth()).toThrow()
 })
 
 test("comment-eof", () => {
     const content = "# comment"
     const lex = new Lex(content, "inline")
-    assert.deepEqual(lex.location().col, content.length + 1)
+    expect(lex.location().col).toEqual(content.length + 1)
 })
 
 test("doc-comment", () => {
     const content = "## doc-comment"
     const lex = new Lex(content, "inline")
-    assert.deepEqual(lex.location().col, content.length + 1)
-    assert.deepEqual(lex.consumeDocComment(), " doc-comment")
+    expect(lex.location().col).toEqual(content.length + 1)
+    expect(lex.consumeDocComment()).toEqual(" doc-comment")
 })

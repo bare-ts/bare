@@ -1,11 +1,11 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { default as test } from "oletus"
+import { expect, test } from "bun:test"
 
 import { Department, decodePerson, encodePerson } from "./out.gen.js"
 
-test("x-readme-example", (t) => {
+test("x-readme-example", () => {
     const payload1 = encodePerson({
         tag: "Customer",
         val: {
@@ -41,7 +41,7 @@ test("x-readme-example", (t) => {
     const msg2 = decodePerson(payload2)
     const msg3 = decodePerson(payload3)
 
-    t.deepEqual(msg1, {
+    expect(msg1).toEqual({
         tag: "Customer",
         val: {
             name: "James Smith",
@@ -57,7 +57,7 @@ test("x-readme-example", (t) => {
         },
     })
 
-    t.deepEqual(msg2, {
+    expect(msg2).toEqual({
         tag: "Employee",
         val: {
             name: "Tiffany Doe",
@@ -70,7 +70,7 @@ test("x-readme-example", (t) => {
         },
     })
 
-    t.deepEqual(msg3, {
+    expect(msg3).toEqual({
         tag: "TerminatedEmployee",
         val: null,
     })

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Config, configure, parse, transform } from "@bare-ts/tools"
+import { Config, configure, parse, transform } from "../src/index.js"
 import * as fs from "node:fs"
 import * as path from "node:path"
 

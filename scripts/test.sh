@@ -1,13 +1,12 @@
 #!/bin/sh
-
-. scripts/build.sh
+set -eu
 
 # unit tests
-oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
+bun test src/ tests-corpus/
 
 # lint
-rome ci src scripts
-rome check tests-corpus
+rome ci src/ scripts/
+rome check tests-corpus/
 
 # type check
-tsc --build src/tsconfig-*.json tests-corpus
+tsc --noEmit

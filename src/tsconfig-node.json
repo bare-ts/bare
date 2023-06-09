@@ -1,8 +1,0 @@
-{
-  "extends": "../tsconfig-base.jsonc",
-  "compilerOptions": {
-    "types": ["node"]
-  },
-  "include": ["./cli.ts"],
-  "references": [{ "path": "./" }]
-}

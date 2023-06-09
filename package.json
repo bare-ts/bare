@@ -57,15 +57,14 @@
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
     "prepare": "validate-commit-msg",
-    "prepublishOnly": "npm run clean && npm test",
+    "prepublishOnly": "npm run clean && npm run build && npm test",
     "test": "sh ./scripts/test.sh",
     "version": "sh ./scripts/version.sh"
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.3.0",
-    "@types/node": "~14.18.47",
+    "bun-types": "0.6.7",
     "esbuild": "0.17.19",
-    "oletus": "3.3.0",
     "rome": "12.1.0",
     "typescript": "5.0.4",
     "validate-commit-message": "3.2.0"

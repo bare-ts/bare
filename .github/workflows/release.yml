@@ -7,22 +7,21 @@ jobs:
     test:
         uses: ./.github/workflows/ci.yml
     release:
-        # based on esbuild release script (MIT licensed):
-        # https://github.com/evanw/esbuild/blob/master/.github/workflows/release.yml
         needs: test
         permissions:
             contents: write
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@v2
+            - uses: oven-sh/setup-bun@v1
               with:
-                  node-version: "14.18"
-                  cache: npm
+                  bun-version: latest
             - name: Build
               run: |
-                  npm ci
-                  npm run build
+                  bun install
+                  bun run build
+            # based on esbuild release script (MIT licensed):
+            # https://github.com/evanw/esbuild/blob/master/.github/workflows/release.yml
             - name: Extract changelog
               run: |
                   VERSION="${GITHUB_REF_NAME#v}"
