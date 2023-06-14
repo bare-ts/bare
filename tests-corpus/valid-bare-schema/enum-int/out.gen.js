@@ -3,12 +3,12 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export const Gender = {
-    FLUID: 0,
-    0: "FLUID",
-    MALE: 1,
-    1: "MALE",
-    FEMALE: 2,
-    2: "FEMALE",
+    Fluid: 0,
+    0: "Fluid",
+    Male: 1,
+    1: "Male",
+    Female: 2,
+    2: "Female",
 }
 
 export function readGender(bc) {

@@ -80,7 +80,7 @@ const contacts = [
         val: {
             name: "Seldon",
             email: "seldon@foundation.org",
-            gender: Gender.MALE,
+            gender: Gender.Male,
         },
     },
 ]

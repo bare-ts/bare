@@ -3,9 +3,9 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export const Gender = {
-    MALE: "MALE",
-    FEMALE: "FEMALE",
-    FLUID: "FLUID",
+    Male: "Male",
+    Female: "Female",
+    Fluid: "Fluid",
 }
 
 export function readGender(bc) {
@@ -13,11 +13,11 @@ export function readGender(bc) {
     const tag = bare.readUintSafe(bc)
     switch (tag) {
         case 1:
-            return Gender.MALE
+            return Gender.Male
         case 2:
-            return Gender.FEMALE
+            return Gender.Female
         case 9007199254740991:
-            return Gender.FLUID
+            return Gender.Fluid
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -27,15 +27,15 @@ export function readGender(bc) {
 
 export function writeGender(bc, x) {
     switch (x) {
-        case Gender.MALE: {
+        case Gender.Male: {
             bare.writeU8(bc, 1)
             break
         }
-        case Gender.FEMALE: {
+        case Gender.Female: {
             bare.writeU8(bc, 2)
             break
         }
-        case Gender.FLUID: {
+        case Gender.Fluid: {
             bare.writeUintSafe(bc, 9007199254740991)
             break
         }

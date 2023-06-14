@@ -4,6 +4,12 @@
 import * as ast from "../ast/bare-ast.js"
 import { CompilerError, type Location } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
+import {
+    ALL_CASE_RE,
+    CONSTANT_CASE_RE,
+    NUMBER_RE,
+    toPascalCase,
+} from "../utils/formatting.js"
 import { Lex } from "./bare-lex.js"
 
 export function parse(content: string, config: Config): ast.Ast {
@@ -23,9 +29,6 @@ type Parser = {
     readonly config: Config
     readonly lex: Lex
 }
-
-const ALL_CASE_RE = /^[A-Za-z_][A-Za-z0-9_]*$/
-const NUMBER_RE = /^([0-9]+)$/
 
 function parseAliased(p: Parser): ast.AliasedType {
     const comment = p.lex.consumeDocComment()
@@ -315,12 +318,16 @@ function parseEnum(p: Parser): ast.Type {
 function parseEnumBody(p: Parser, loc: Location): ast.Type {
     expect(p, "{")
     const vals: ast.EnumVal[] = []
-    const names = new Set()
     let val = 0
     while (ALL_CASE_RE.test(p.lex.token())) {
         const comment = p.lex.consumeDocComment()
-        const name = p.lex.token()
-        names.add(name)
+        let name = p.lex.token()
+        if (!CONSTANT_CASE_RE.test(name)) {
+            throw new CompilerError(
+                "the name of an enum member must be in CONSTANT_CASE.",
+                p.lex.location(),
+            )
+        }
         const valLoc = p.lex.location()
         p.lex.forth()
         if (p.lex.token() === "=") {
@@ -332,6 +339,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
                 p.lex.location(),
             )
         }
+        name = toPascalCase(name)
         vals.push({ name, val, comment, extra: null, loc: valLoc })
         val++
         checkSeparator(p)
@@ -350,11 +358,9 @@ function parseStructBody(p: Parser): ast.Type {
     expect(p, "{")
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
-    const names = new Set()
     while (ALL_CASE_RE.test(p.lex.token())) {
         const comment = p.lex.consumeDocComment()
         const name = p.lex.token()
-        names.add(name)
         const fieldLoc = p.lex.location()
         p.lex.forth()
         expect(p, ":")

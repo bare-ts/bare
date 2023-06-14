@@ -9,13 +9,13 @@ export enum Gender {
     /**
      * Be inclusive :)
      */
-    FLUID = "FLUID",
-    MALE = "MALE",
+    Fluid = "Fluid",
+    Male = "Male",
     /**
      * One is not born, but becomes a woman
      *                  -- Simone de Beauvoir
      */
-    FEMALE = "FEMALE",
+    Female = "Female",
 }
 
 export function readGender(bc: bare.ByteCursor): Gender {
@@ -23,11 +23,11 @@ export function readGender(bc: bare.ByteCursor): Gender {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return Gender.FLUID
+            return Gender.Fluid
         case 1:
-            return Gender.MALE
+            return Gender.Male
         case 2:
-            return Gender.FEMALE
+            return Gender.Female
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -37,15 +37,15 @@ export function readGender(bc: bare.ByteCursor): Gender {
 
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
-        case Gender.FLUID: {
+        case Gender.Fluid: {
             bare.writeU8(bc, 0)
             break
         }
-        case Gender.MALE: {
+        case Gender.Male: {
             bare.writeU8(bc, 1)
             break
         }
-        case Gender.FEMALE: {
+        case Gender.Female: {
             bare.writeU8(bc, 2)
             break
         }

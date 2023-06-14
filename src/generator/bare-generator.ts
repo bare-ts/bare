@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import type * as ast from "../ast/bare-ast.js"
-import { indent, unindent } from "../utils/formatting.js"
+import { indent, toConstantCase, unindent } from "../utils/formatting.js"
 
 export function generateBare(schema: ast.Ast): string {
     let result = ""
@@ -57,7 +57,7 @@ function generateEnum(type: ast.EnumType): string {
 
 function generateEnumVal(enumVal: ast.EnumVal): string {
     const docComment = generateDocComment(enumVal.comment)
-    return `${docComment}${enumVal.name} = ${enumVal.val}`
+    return `${docComment}${toConstantCase(enumVal.name)} = ${enumVal.val}`
 }
 
 function generateList(type: ast.ListType): string {

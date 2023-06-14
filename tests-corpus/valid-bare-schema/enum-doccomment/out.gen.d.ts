@@ -7,13 +7,13 @@ export declare enum Gender {
     /**
      * Be inclusive :)
      */
-    FLUID = "FLUID",
-    MALE = "MALE",
+    Fluid = "Fluid",
+    Male = "Male",
     /**
      * One is not born, but becomes a woman
      *                  -- Simone de Beauvoir
      */
-    FEMALE = "FEMALE",
+    Female = "Female",
 }
 
 export function readGender(bc: bare.ByteCursor): Gender

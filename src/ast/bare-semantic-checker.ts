@@ -3,11 +3,12 @@
 
 import { CompilerError } from "../core/compiler-error.js"
 import type { Config } from "../core/config.js"
+import {
+    CAMEL_CASE_RE,
+    CONSTANT_CASE_RE,
+    PASCAL_CASE_RE,
+} from "../utils/formatting.js"
 import * as ast from "./bare-ast.js"
-
-const LOWER_CAMEL_CASE_RE = /^[a-z][A-Za-z0-9]*$/
-const UPPER_CAMEL_CASE_RE = /^[A-Z][A-Za-z0-9]*$/
-const UPPER_SNAKE_CASE_RE = /^[A-Z][A-Z0-9_]*$/
 
 export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {
@@ -52,9 +53,9 @@ function checkTypeName(aliased: ast.AliasedType): void {
                 aliased.loc,
             )
         }
-    } else if (alias.length === 0 || !UPPER_CAMEL_CASE_RE.test(alias)) {
+    } else if (alias.length === 0 || !PASCAL_CASE_RE.test(alias)) {
         throw new CompilerError(
-            `the type name '${alias}' must be in UpperCamelCase.`,
+            `the type name '${alias}' must be in PascalCase.`,
             aliased.loc,
         )
     }
@@ -121,15 +122,19 @@ function checkMembersInvariants(
     let prevVal = -1
     for (const elt of data) {
         if (elt.name !== null) {
-            if (type.tag === "enum" && !UPPER_SNAKE_CASE_RE.test(elt.name)) {
+            if (
+                type.tag === "enum" &&
+                !CONSTANT_CASE_RE.test(elt.name) &&
+                !PASCAL_CASE_RE.test(elt.name)
+            ) {
                 throw new CompilerError(
-                    "the name of an enum member must be in UPPER_SNAKE_CASE.",
+                    "the name of an enum member must be in CONSTANT_CASE or PascalCase.",
                     elt.loc,
                 )
             }
-            if (type.tag === "struct" && !LOWER_CAMEL_CASE_RE.test(elt.name)) {
+            if (type.tag === "struct" && !CAMEL_CASE_RE.test(elt.name)) {
                 throw new CompilerError(
-                    "the name of a field must be in lowerCamelCase.",
+                    "the name of a field must be in camelCase.",
                     elt.loc,
                 )
             }

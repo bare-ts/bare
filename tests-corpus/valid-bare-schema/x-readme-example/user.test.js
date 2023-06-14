@@ -12,7 +12,7 @@ test("x-readme-example", (t) => {
             val: {
                 name: "Seldon",
                 email: "seldon@foundation.org",
-                gender: Gender.MALE,
+                gender: Gender.Male,
             },
         },
         {
@@ -31,7 +31,7 @@ test("x-readme-example", (t) => {
             val: {
                 name: "Seldon",
                 email: "seldon@foundation.org",
-                gender: Gender.MALE,
+                gender: Gender.Male,
             },
         },
         {

@@ -9,6 +9,36 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.
     Now, it properly handles these aliases and uses `globalThis` when necessary.
 
+-   BREAKING CHANGES: enum member names in `PascalCase` instead of `CONSTANT_CASE`
+
+    In a bare schema, an `enum` variant must be in `CONSTANT_CASE`:
+
+    ```bare
+    type Status enum {
+        OPEN = 0
+        CLOSE = 1
+    }
+    ```
+
+    Previously, _bare-ts_ preserved the case:
+
+    ```ts
+    export enum Status {
+        OPEN = "OPEN",
+        CLOSE = "CLOSE",
+    }
+    ```
+
+    To follow the _TypeScript_ convention, the case is now in `PascalCase`.
+    Thus, _bare-ts_ generates the following code:
+
+    ```ts
+    export enum Status {
+        Open = "Open",
+        Close = "Close",
+    }
+    ```
+
 -   BREAKING CHANGES: remove option `--import-factory`
 
     Previously, _bare-ts_ allowed external factory functions to build struct objects.

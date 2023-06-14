@@ -4,7 +4,7 @@ const config = /* @__PURE__ */ bare.Config({})
 
 export type Person = {
     readonly name: string
-    readonly gender: "FLUID" | "MALE" | "FEMALE"
+    readonly gender: "Fluid" | "Male" | "Female"
 }
 
 export function readPerson(bc: bare.ByteCursor): Person {
@@ -15,11 +15,11 @@ export function readPerson(bc: bare.ByteCursor): Person {
             const tag = bare.readU8(bc)
             switch (tag) {
                 case 0:
-                    return "FLUID"
+                    return "Fluid"
                 case 1:
-                    return "MALE"
+                    return "Male"
                 case 2:
-                    return "FEMALE"
+                    return "Female"
                 default: {
                     bc.offset = offset
                     throw new bare.BareError(offset, "invalid tag")
@@ -33,15 +33,15 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
     bare.writeString(bc, x.name)
     {
         switch (x.gender) {
-            case "FLUID": {
+            case "Fluid": {
                 bare.writeU8(bc, 0)
                 break
             }
-            case "MALE": {
+            case "Male": {
                 bare.writeU8(bc, 1)
                 break
             }
-            case "FEMALE": {
+            case "Female": {
                 bare.writeU8(bc, 2)
                 break
             }

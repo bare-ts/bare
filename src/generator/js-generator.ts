@@ -364,11 +364,11 @@ function genAliasedEnumCode(g: Gen, alias: string, type: ast.EnumType): string {
         return ""
     }
     const body = type.data
-        .map(({ name, val }) =>
-            type.extra?.intEnum
+        .map(({ name, val }) => {
+            return type.extra?.intEnum
                 ? `${name}: ${val},\n${val}: "${name}",`
-                : `${name}: "${name}",`,
-        )
+                : `${name}: "${name}",`
+        })
         .join("\n")
     const constAssert = g.config.generator !== "js" ? "as const" : ""
     return unindent(`const ${alias} = {

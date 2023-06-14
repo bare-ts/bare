@@ -28,11 +28,11 @@ export function writeTime(bc: bare.ByteCursor, x: Time): void {
 }
 
 export enum Department {
-    ACCOUNTING = "ACCOUNTING",
-    ADMINISTRATION = "ADMINISTRATION",
-    CUSTOMER_SERVICE = "CUSTOMER_SERVICE",
-    DEVELOPMENT = "DEVELOPMENT",
-    JSMITH = "JSMITH",
+    Accounting = "Accounting",
+    Administration = "Administration",
+    CustomerService = "CustomerService",
+    Development = "Development",
+    Jsmith = "Jsmith",
 }
 
 export function readDepartment(bc: bare.ByteCursor): Department {
@@ -40,15 +40,15 @@ export function readDepartment(bc: bare.ByteCursor): Department {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return Department.ACCOUNTING
+            return Department.Accounting
         case 1:
-            return Department.ADMINISTRATION
+            return Department.Administration
         case 2:
-            return Department.CUSTOMER_SERVICE
+            return Department.CustomerService
         case 3:
-            return Department.DEVELOPMENT
+            return Department.Development
         case 99:
-            return Department.JSMITH
+            return Department.Jsmith
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -58,23 +58,23 @@ export function readDepartment(bc: bare.ByteCursor): Department {
 
 export function writeDepartment(bc: bare.ByteCursor, x: Department): void {
     switch (x) {
-        case Department.ACCOUNTING: {
+        case Department.Accounting: {
             bare.writeU8(bc, 0)
             break
         }
-        case Department.ADMINISTRATION: {
+        case Department.Administration: {
             bare.writeU8(bc, 1)
             break
         }
-        case Department.CUSTOMER_SERVICE: {
+        case Department.CustomerService: {
             bare.writeU8(bc, 2)
             break
         }
-        case Department.DEVELOPMENT: {
+        case Department.Development: {
             bare.writeU8(bc, 3)
             break
         }
-        case Department.JSMITH: {
+        case Department.Jsmith: {
             bare.writeU8(bc, 99)
             break
         }

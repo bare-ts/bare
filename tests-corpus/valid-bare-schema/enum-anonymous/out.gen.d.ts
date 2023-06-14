@@ -2,7 +2,7 @@ import * as bare from "@bare-ts/lib"
 
 export type Person = {
     readonly name: string
-    readonly gender: "FLUID" | "MALE" | "FEMALE"
+    readonly gender: "Fluid" | "Male" | "Female"
 }
 
 export function readPerson(bc: bare.ByteCursor): Person

@@ -3,9 +3,9 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export enum Gender {
-    FLUID = 0,
-    MALE = 1,
-    FEMALE = 2,
+    Fluid = 0,
+    Male = 1,
+    Female = 2,
 }
 
 export function readGender(bc: bare.ByteCursor): Gender {

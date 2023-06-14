@@ -1,9 +1,9 @@
 import * as bare from "@bare-ts/lib"
 
 export declare enum Gender {
-    MALE = "MALE",
-    FEMALE = "FEMALE",
-    FLUID = "FLUID",
+    Male = "Male",
+    Female = "Female",
+    Fluid = "Fluid",
 }
 
 export function readGender(bc: bare.ByteCursor): Gender

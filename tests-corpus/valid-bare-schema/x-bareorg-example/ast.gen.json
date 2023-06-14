@@ -65,7 +65,7 @@
         "tag": "enum",
         "data": [
           {
-            "name": "ACCOUNTING",
+            "name": "Accounting",
             "val": 0,
             "comment": null,
             "extra": null,
@@ -77,7 +77,7 @@
             }
           },
           {
-            "name": "ADMINISTRATION",
+            "name": "Administration",
             "val": 1,
             "comment": null,
             "extra": null,
@@ -89,7 +89,7 @@
             }
           },
           {
-            "name": "CUSTOMER_SERVICE",
+            "name": "CustomerService",
             "val": 2,
             "comment": null,
             "extra": null,
@@ -101,7 +101,7 @@
             }
           },
           {
-            "name": "DEVELOPMENT",
+            "name": "Development",
             "val": 3,
             "comment": null,
             "extra": null,
@@ -113,7 +113,7 @@
             }
           },
           {
-            "name": "JSMITH",
+            "name": "Jsmith",
             "val": 99,
             "comment": null,
             "extra": null,

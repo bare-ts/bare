@@ -3,9 +3,9 @@ import * as bare from "@bare-ts/lib"
 const config = /* @__PURE__ */ bare.Config({})
 
 export enum Gender {
-    FLUID = "FLUID",
-    MALE = "MALE",
-    FEMALE = "FEMALE",
+    Fluid = "Fluid",
+    Male = "Male",
+    Female = "Female",
 }
 
 export function readGender(bc: bare.ByteCursor): Gender {
@@ -13,11 +13,11 @@ export function readGender(bc: bare.ByteCursor): Gender {
     const tag = bare.readU8(bc)
     switch (tag) {
         case 0:
-            return Gender.FLUID
+            return Gender.Fluid
         case 3:
-            return Gender.MALE
+            return Gender.Male
         case 4:
-            return Gender.FEMALE
+            return Gender.Female
         default: {
             bc.offset = offset
             throw new bare.BareError(offset, "invalid tag")
@@ -27,15 +27,15 @@ export function readGender(bc: bare.ByteCursor): Gender {
 
 export function writeGender(bc: bare.ByteCursor, x: Gender): void {
     switch (x) {
-        case Gender.FLUID: {
+        case Gender.Fluid: {
             bare.writeU8(bc, 0)
             break
         }
-        case Gender.MALE: {
+        case Gender.Male: {
             bare.writeU8(bc, 3)
             break
         }
-        case Gender.FEMALE: {
+        case Gender.Female: {
             bare.writeU8(bc, 4)
             break
         }

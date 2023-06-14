@@ -8,7 +8,7 @@
         "tag": "enum",
         "data": [
           {
-            "name": "MALE",
+            "name": "Male",
             "val": 1,
             "comment": null,
             "extra": null,
@@ -20,7 +20,7 @@
             }
           },
           {
-            "name": "FEMALE",
+            "name": "Female",
             "val": 2,
             "comment": null,
             "extra": null,
@@ -32,7 +32,7 @@
             }
           },
           {
-            "name": "FLUID",
+            "name": "Fluid",
             "val": 9007199254740992,
             "comment": null,
             "extra": null,
