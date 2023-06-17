@@ -4,11 +4,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## Unreleased
 
--   Fix name clashes
-
-    Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.
-    Now, it properly handles these aliases and uses `globalThis` when necessary.
-
 -   BREAKING CHANGES: enum member names in `PascalCase` instead of `CONSTANT_CASE`
 
     In a bare schema, an `enum` variant must be in `CONSTANT_CASE`:
@@ -43,6 +38,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
     Previously, _bare-ts_ allowed external factory functions to build struct objects.
     For now, there is no replacement for this feature.
+
+-   Fix name clashes
+
+    Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.
+    Now, it properly handles these aliases and uses `globalThis` when necessary.
 
 ## 0.13.0 (2023-02-20)
 
@@ -207,30 +207,6 @@ This release introduces several breaking changes that widely **improve the usage
 
 ## 0.12.0 (2023-02-04)
 
--   Emit ES2020
-
-    bare-ts now publishes _ES2020_ builds.
-    This outputs smaller builds.
-    This should cause no issue since we require a node version `^14.18` or `>=16`.
-
--   Allow _root types_ that resolve to `void`
-
-    Since the `0.9.0` version, _root types_ that resolve to `void` are forbidden.
-
-    To conform with the _BARE_ specification, they are now allowed.
-    This makes valid the following schema:
-
-    ```bare
-    type Root void
-    ```
-
--   Add option `--lib` to prevent `decode` and `encode` generation
-
-    A _decoder_ and an _encoder_ are generated for every _root type_ that doesn't resolve to `void`.
-    The `--lib` flag prevents this generation.
-
-    This is particularly useful for libraries that export only _readers_ and _writers_.
-
 -   BREAKING CHANGES: emit _TypeSCript_'s type aliases instead of interfaces
 
     The following schema ...
@@ -249,13 +225,52 @@ This release introduces several breaking changes that widely **improve the usage
       }
     ```
 
+-   BREAKING CHANGES: Emit ES2020
+
+    bare-ts now publishes _ES2020_ builds.
+    This outputs smaller builds.
+    This should cause no issue since we require a node version `^14.18` or `>=16`.
+
+-   Add option `--lib` to prevent `decode` and `encode` generation
+
+    A _decoder_ and an _encoder_ are generated for every _root type_ that doesn't resolve to `void`.
+    The `--lib` flag prevents this generation.
+
+    This is particularly useful for libraries that export only _readers_ and _writers_.
+
+-   Allow _root types_ that resolve to `void`
+
+    Since the `0.9.0` version, _root types_ that resolve to `void` are forbidden.
+
+    To conform with the _BARE_ specification, they are now allowed.
+    This makes valid the following schema:
+
+    ```bare
+    type Root void
+    ```
+
 ## 0.11.0 (2022-07-06)
 
--   Remove option `--use-lax-optional`
+-   BREAKING CHANGES: Remove option `--use-lax-optional`
 
     This avoids breaking bijective encoding.
 
 ## 0.10.0 (2022-06-22)
+
+-   BREAKING CHANGES: Forbid _flat unions_ of transitively _aliased classes_
+
+    Previously, _bare-ts_ allowed _flat unions_ of transitively _aliased classes_.
+    It now rejects the following schema under the option `--use-flat-union`:
+
+    ```bare
+    type Named struct { name: str }
+    type Person Named
+    type Message union { Person }
+    ```
+
+-   BREAKING CHANGES: Require Node `>=14.18.0`
+
+    This enables _bare-ts_ to internally use `node:` prefixes for importing nodes' built-ins.
 
 -   Automatically discriminate _aliased structs_ in _flat unions_
 
@@ -297,26 +312,28 @@ This release introduces several breaking changes that widely **improve the usage
     export type XY = { readonly tag: 0, ... } | { readonly tag: 1, ... }
     ```
 
--   Forbid _flat unions_ of transitively _aliased classes_
-
-    Previously, _bare-ts_ allowed _flat unions_ of transitively _aliased classes_.
-    It now rejects the following schema under the option `--use-flat-union`:
-
-    ```bare
-    type Named struct { name: str }
-    type Person Named
-    type Message union { Person }
-    ```
-
--   Require Node `>=14.18.0`
-
-    This enables _bare-ts_ to internally use `node:` prefixes for importing nodes' built-ins.
-
 ## 0.9.0 (2022-05-12)
 
--   Rename `bare-ts` CLI to `bare`
+-   BREAKING CHANGES: Rename `bare-ts` CLI to `bare`
 
--   Forbid use-before-definition
+-   BREAKING CHANGES: Rename `--legacy-syntax` to `--legacy`
+
+-   BREAKING CHANGES: Remove options `--main` and `--no-main`
+
+    The previous version introduced automatic promotion of _root type_ aliases as _main type_ aliases.
+    _Root type_ aliases are type aliases that are not referred by a type in the schema.
+    _Main type_ aliases are types aliases used to decode and encode messages.
+
+    For the sake of simplicity, main type aliases and root types aliases are now identical.
+
+    In the following schema, `Post` is the only root and main type alias.
+
+    ```bare
+    type Person struct { name: str }
+    type Post struct { author: Person }
+    ```
+
+-   BREAKING CHANGES: Forbid use-before-definition
 
     In the last _BARE_ draft, use-before-definition are disallowed.
     As a consequence, it also disallows recursive types.
@@ -329,7 +346,17 @@ This release introduces several breaking changes that widely **improve the usage
 
     To enable this schema and recursive types, use the option `--legacy`.
 
--   Rename `--legacy-syntax` to `--legacy`
+-   BREAKING CHANGES: Forbid _root types_ that resolve to `void`
+
+    The following schema is now invalid:
+
+    ```bare
+    type Root void
+    ```
+
+    This is not part of the BARE specification.
+
+-   BREAKING CHANGES: Do not emit read/write for types resolving to void
 
 -   Annotate your schema with _doc-comments_
 
@@ -379,36 +406,31 @@ This release introduces several breaking changes that widely **improve the usage
     bare-ts compile schema.bare --generator 'bare'
     ```
 
--   Remove options `--main` and `--no-main`
-
-    The previous version introduced automatic promotion of _root type_ aliases as _main type_ aliases.
-    _Root type_ aliases are type aliases that are not referred by a type in the schema.
-    _Main type_ aliases are types aliases used to decode and encode messages.
-
-    For the sake of simplicity, main type aliases and root types aliases are now identical.
-
-    In the following schema, `Post` is the only root and main type alias.
-
-    ```bare
-    type Person struct { name: str }
-    type Post struct { author: Person }
-    ```
-
--   Forbid _root types_ that resolve to `void`
-
-    The following schema is now invalid:
-
-    ```bare
-    type Root void
-    ```
-
-    This is not part of the BARE specification.
-
--   Do not emit read/write for types resolving to void
-
 ## 0.8.0 (2022-04-29)
 
--   Require _@bare-ts/lib_ `v0.3.x`
+-   BREAKING CHANGES: Require _@bare-ts/lib_ `v0.3.x`
+
+-   BREAKING CHANGES: Forbid `f32` and `f64` as map key type
+
+    According to _IEEE-754 2019_:
+    _NaN_ (Not a Number) is not equal to any value, including itself.
+
+    This inequality leads to different implementations:
+
+    1.  Implementations that "follows" the standard
+
+        An unbounded number of values may be bind to the key _NaN_ and cannot be accessed.
+        This is the implementation chosen by _Golang_.
+
+    2.  Implementations that normalize _NaNs_ and consider that _NaN_ is equal to itself
+
+        This is the implementation chosen by _JavaScript_
+
+    3.  Implementations that rely on the binary comparison of _NaNs_
+
+    These make complex the support of `f32` and `f64` as map key type.
+
+    To avoid this complexity, the ongoing _BARE_ draft forbids their usage as map key type.
 
 -   Automatically promote _root type_ as _main type_
 
@@ -444,28 +466,6 @@ This release introduces several breaking changes that widely **improve the usage
     ```
 
     `--no-main` and `--main` cannot be both set.
-
--   BREAKING CHANGES: forbid `f32` and `f64` as map key type
-
-    According to _IEEE-754 2019_:
-    _NaN_ (Not a Number) is not equal to any value, including itself.
-
-    This inequality leads to different implementations:
-
-    1.  Implementations that "follows" the standard
-
-        An unbounded number of values may be bind to the key _NaN_ and cannot be accessed.
-        This is the implementation chosen by _Golang_.
-
-    2.  Implementations that normalize _NaNs_ and consider that _NaN_ is equal to itself
-
-        This is the implementation chosen by _JavaScript_
-
-    3.  Implementations that rely on the binary comparison of _NaNs_
-
-    These make complex the support of `f32` and `f64` as map key type.
-
-    To avoid this complexity, the ongoing _BARE_ draft forbids their usage as map key type.
 
 -   Allow leading and trailing pipes in unions
 
@@ -521,7 +521,7 @@ This release introduces several breaking changes that widely **improve the usage
 
 ## 0.6.0 (2022-03-31)
 
--   Update _BARE_ syntax
+-   BREAKING CHANGES: Update _BARE_ syntax
 
     _bare-ts_ now supports the [new syntax](https://datatracker.ietf.org/doc/draft-devault-bare/03/)
     for BARE schema
@@ -576,7 +576,7 @@ This release introduces several breaking changes that widely **improve the usage
 
 ## 0.4.0 (2022-03-26)
 
--   Forbid _main codecs_ resolving to `void`
+-   BREAKING CHANGES: Forbid _main codecs_ resolving to `void`
 
     The following _BARE_ schema is no longer valid when 'Message' is a _main codec_:
 
@@ -585,7 +585,7 @@ This release introduces several breaking changes that widely **improve the usage
          ^ error is now reported here
     ```
 
--   Forbid _flat unions_ which cannot be automatically flatten
+-   BREAKING CHANGES: Forbid _flat unions_ which cannot be automatically flatten
 
     _bare-ts_ is able to automatically compute the tag of simple flat unions without any help.
     A simple union is either:
@@ -609,7 +609,7 @@ This release introduces several breaking changes that widely **improve the usage
 
 ## 0.3.0 (2022-03-02)
 
--   Fix regression: Forbid _BARE_ schema in which a union repeats a type
+-   BREAKING CHANGES: Forbid _BARE_ schema in which a union repeats a type
 
     Now, _bare-ts_ correctly rejects the following schema:
 
@@ -617,17 +617,17 @@ This release introduces several breaking changes that widely **improve the usage
     type X (u8 | u8)
     ```
 
--   Deduplicate _readers_ and _writers_ of complex _non-aliased types_
-
-    _bare-ts_ generates _readers_ and _writers_ for complex _non-aliased types_.
-    These readers and writers are now deduplicated.
-
--   Default to `null` instead of `undefined` for _optional types_
+-   BREAKING CHANGES: Default to `null` instead of `undefined` for _optional types_
 
     The use of `null` seems more common than the use of `undefined`.
 
     The option `--use-null` is removed.
     A new option `--use-undefined` is added.
+
+-   Deduplicate _readers_ and _writers_ of complex _non-aliased types_
+
+    _bare-ts_ generates _readers_ and _writers_ for complex _non-aliased types_.
+    These readers and writers are now deduplicated.
 
 -   Make configurable the emitted type for `void`
 
@@ -650,37 +650,75 @@ This release introduces several breaking changes that widely **improve the usage
 
 ## 0.2.0 (2022-02-20)
 
--   Fix invalid code generation for big tags in _enums_ and _unions_
+-   BREAKING CHANGES: Forbid BARE schema with undefined aliases
 
-    _bare-ts_ applies an optimization when tags can be encoded on 7 bits.
-    It did not test the general case yet.
-    The addition of tests enabled to catch typo errors.
-    The generated code imported non-existing readers and writers.
+-   BREAKING CHANGES: Forbid _BARE_ schema in which length and tags are too large
 
--   Fix generator choice
+    Length of fixed data and (typed) array must be an unsigned 32bits integer.
+    This is a limitation of the ECMAScript standard.
 
-    The option `--generator` specifies which generator to use for generating
-    the output.
-    _bare-ts_ uses `ts` as default generator.
-    The option `--generator` should override this default.
+    Tags of enums and unions must be safe integers.
+    In the future, this requirement could be relaxed by switching to bigint for larger integers.
 
-    Previously, the option did not override the default.
+-   BREAKING CHANGES: Forbid BARE schema in which the length of a fixed data is 0
 
--   Fix location report upon compilation errors
-
-    Upon errors, _bare-ts_ reports the error and a file location.
-    It previously reported the location at the end of the first involved token.
-    It now reports the location at the start of the first involved token.
-
-    For instance, if a type alias is in lowercase in a BARE schema,
-    then the parser reported an error at the end of the alias.
-    It now reports the error at the start of the alias:
+    The following schema is now invalid:
 
     ```bare
-    type lowerCaseAlias u8
-                      ^ error was previously reported here
-         ^ error is now reported here
+    type EmptyData data<0>
     ```
+
+-   BREAKING CHANGES: Forbid BARE schema in which a union repeats a type
+
+    The following schema is now invalid:
+
+    ```bare
+    type X (u8 | u8)
+    ```
+
+    Note that the following schema is still valid:
+
+    ```bare
+    type Y u8
+    type X (u8 | Y)
+    ```
+
+    `Y` is a user-defined type.
+
+-   BREAKING CHANGES: Forbid enum members with the same name
+
+    The following schema is now invalid:
+
+    ```bare
+    enum Gender {
+        FLUID
+        FEMALE
+        MALE
+        FLUID
+    }
+    ```
+
+-   BREAKING CHANGES: Forbid struct that has several fields with the same name
+
+    The following schema is now invalid:
+
+    ```bare
+    struct Person {
+        name: string
+        name: string
+    }
+    ```
+
+-   BREAKING CHANGES: Forbid _BARE_ schema with circular references
+
+-   BREAKING CHANGE: adapt to _@bare-ts/lib@0.2.0_
+
+    _@bare-ts/lib@0.2.0_ introduces several breaking changes.
+    As a consequence:
+
+    -   all decode/encode are renamed into read/write
+    -   all pack/unpack are renamed into encode/decode
+    -   decoders (previously unpackers) no longer accept `ArrayBuffer` as type of read buffer
 
 -   Make _bare-ts_ library platform-agnostic
 
@@ -729,77 +767,39 @@ This release introduces several breaking changes that widely **improve the usage
 
     This informs the users of _bare-ts_ which version of _@bare-ts/lib_ to use.
 
--   Forbid BARE schema with undefined aliases
+-   Fix invalid code generation for big tags in _enums_ and _unions_
 
--   Forbid _BARE_ schema in which length and tags are too large
+    _bare-ts_ applies an optimization when tags can be encoded on 7 bits.
+    It did not test the general case yet.
+    The addition of tests enabled to catch typo errors.
+    The generated code imported non-existing readers and writers.
 
-    Length of fixed data and (typed) array must be an unsigned 32bits integer.
-    This is a limitation of the ECMAScript standard.
+-   Fix generator choice
 
-    Tags of enums and unions must be safe integers.
-    In the future, this requirement could be relaxed by switching to bigint for larger integers.
+    The option `--generator` specifies which generator to use for generating
+    the output.
+    _bare-ts_ uses `ts` as default generator.
+    The option `--generator` should override this default.
 
--   Forbid BARE schema in which the length of a fixed data is 0
+    Previously, the option did not override the default.
 
-    The following schema is now invalid:
+-   Fix location report upon compilation errors
 
-    ```bare
-    type EmptyData data<0>
-    ```
+    Upon errors, _bare-ts_ reports the error and a file location.
+    It previously reported the location at the end of the first involved token.
+    It now reports the location at the start of the first involved token.
 
--   Forbid BARE schema in which a union repeats a type
-
-    The following schema is now invalid:
-
-    ```bare
-    type X (u8 | u8)
-    ```
-
-    Note that the following schema is still valid:
+    For instance, if a type alias is in lowercase in a BARE schema,
+    then the parser reported an error at the end of the alias.
+    It now reports the error at the start of the alias:
 
     ```bare
-    type Y u8
-    type X (u8 | Y)
+    type lowerCaseAlias u8
+                      ^ error was previously reported here
+         ^ error is now reported here
     ```
-
-    `Y` is a user-defined type.
-
--   Forbid BARE schema in which an enum have several members with the same name
-
-    The following schema is now invalid:
-
-    ```bare
-    enum Gender {
-        FLUID
-        FEMALE
-        MALE
-        FLUID
-    }
-    ```
-
--   Forbid BARE schema in which a struct has several fields with the same name
-
-    The following schema is now invalid:
-
-    ```bare
-    struct Person {
-        name: string
-        name: string
-    }
-    ```
-
--   Forbid _BARE_ schema with circular references
 
 -   Better diagnostics for reporting unwanted semicolons
-
--   BREAKING CHANGE: adapt to _@bare-ts/lib@0.2.0_
-
-    _@bare-ts/lib@0.2.0_ introduces several breaking changes.
-    As a consequence:
-
-    -   all decode/encode are renamed into read/write
-    -   all pack/unpack are renamed into encode/decode
-    -   decoders (previously unpackers) no longer accept `ArrayBuffer` as type of read buffer
 
 ## 0.1.1 (2022-01-05)
 
