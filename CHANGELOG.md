@@ -2,6 +2,27 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+-   BREAKING CHANGES: remove option `--import-config`
+
+    Instead of importing a custom config, you can now pass the config through any encode function.
+
+    For instance, using the example of the README:
+
+    ```js
+    const payload = encodeContacts(contacts, {
+        initialBufferLength: 256 /* bytes */,
+        maxBufferLength: 512 /* bytes */,
+    })
+    ```
+
+    A default configuration is applied if no one is passed:
+
+    ```js
+    const payload = encodeContacts(contacts) // use the default config
+    ```
+
 ## 0.14.0 (2023-06-19)
 
 -   BREAKING CHANGES: enum member names in `PascalCase` instead of `CONSTANT_CASE`

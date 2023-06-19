@@ -73,7 +73,6 @@ program
         "--pedantic",
         "require enum and union types to set all tags in-order",
     )
-    .option("--import-config", "import custom runtime config")
     .option("--use-class", "use classes instead of interfaces for structs")
     .option("--use-generic-array", "use generic arrays instead of typed arrays")
     .option("--use-int-enum", "use integers for enum values instead of strings")

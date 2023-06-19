@@ -6,6 +6,6 @@ export function readMap(bc: bare.ByteCursor): Map
 
 export function writeMap(bc: bare.ByteCursor, x: Map): void
 
-export function encodeMap(x: Map): Uint8Array
+export function encodeMap(x: Map, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeMap(bytes: Uint8Array): Map

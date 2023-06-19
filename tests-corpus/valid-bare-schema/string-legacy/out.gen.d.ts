@@ -6,6 +6,6 @@ export function readName(bc: bare.ByteCursor): Name
 
 export function writeName(bc: bare.ByteCursor, x: Name): void
 
-export function encodeName(x: Name): Uint8Array
+export function encodeName(x: Name, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeName(bytes: Uint8Array): Name

@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-const config = /* @__PURE__ */ bare.Config({})
+const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 
 export type Person = {
     readonly tag: "Person"
@@ -60,17 +60,18 @@ export function writeEntity(bc: bare.ByteCursor, x: Entity): void {
     }
 }
 
-export function encodeEntity(x: Entity): Uint8Array {
+export function encodeEntity(x: Entity, config?: Partial<bare.Config>): Uint8Array {
+    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
-        new Uint8Array(config.initialBufferLength),
-        config,
+        new Uint8Array(fullConfig.initialBufferLength),
+        fullConfig,
     )
     writeEntity(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeEntity(bytes: Uint8Array): Entity {
-    const bc = new bare.ByteCursor(bytes, config)
+    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
     const result = readEntity(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

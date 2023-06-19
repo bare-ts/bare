@@ -1,7 +1,7 @@
 import * as bare from "@bare-ts/lib"
 import assert from "node:assert"
 
-const config = /* @__PURE__ */ bare.Config({})
+const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 
 function read0(bc) {
     return bare.readBool(bc) ? bare.readString(bc) : null
@@ -91,17 +91,18 @@ export function writeComposite(bc, x) {
     }
 }
 
-export function encodeComposite(x) {
+export function encodeComposite(x, config = DEFAULT_CONFIG) {
+    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
-        new Uint8Array(config.initialBufferLength),
-        config,
+        new Uint8Array(fullConfig.initialBufferLength),
+        fullConfig,
     )
     writeComposite(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeComposite(bytes) {
-    const bc = new bare.ByteCursor(bytes, config)
+    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
     const result = readComposite(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

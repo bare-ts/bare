@@ -89,12 +89,8 @@ export function generate(schema: ast.Ast, config: Config): string {
     if (/ext\./.test(body)) {
         head += '\nimport * as ext from "./ext.js"\n'
     }
-    if (
-        hasEncodeDecode &&
-        !g.config.importConfig &&
-        g.config.generator !== "dts"
-    ) {
-        head += "\nconst config = /* @__PURE__ */ bare.Config({})\n"
+    if (hasEncodeDecode && g.config.generator !== "dts") {
+        head += "\nconst DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})\n"
     }
     if (g.config.generator !== "js") {
         head += "\n"
@@ -335,8 +331,10 @@ function genDecoderHead(g: Gen, alias: string): string {
 
 function genEncoderHead(g: Gen, alias: string): string {
     return g.config.generator === "js"
-        ? `function encode${alias}(x)`
-        : `function encode${alias}(x: ${alias}): Uint8Array`
+        ? `function encode${alias}(x, config = DEFAULT_CONFIG)`
+        : g.config.generator === "ts"
+        ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+        : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
 }
 
 // JS/TS code
@@ -990,9 +988,8 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
 // decode
 
 function genDecoder(g: Gen, alias: string): string {
-    const config = g.config.importConfig ? "ext.config" : "config"
     return unindent(`${genDecoderHead(g, alias)} {
-        const bc = new bare.ByteCursor(bytes, ${config})
+        const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
         const result = read${alias}(bc)
         if (bc.offset < bc.view.byteLength) {
             throw new bare.BareError(bc.offset, "remaining bytes")
@@ -1004,12 +1001,12 @@ function genDecoder(g: Gen, alias: string): string {
 // encode
 
 function genEncoder(g: Gen, alias: string): string {
-    const config = g.config.importConfig ? "ext.config" : "config"
     const uint8Array = global(g, "Uint8Array")
     return unindent(`${genEncoderHead(g, alias)} {
+        const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
         const bc = new bare.ByteCursor(
-            new ${uint8Array}(${config}.initialBufferLength),
-            ${config},
+            new ${uint8Array}(fullConfig.initialBufferLength),
+            fullConfig,
         )
         write${alias}(bc, x)
         return new ${uint8Array}(bc.view.buffer, bc.view.byteOffset, bc.offset)

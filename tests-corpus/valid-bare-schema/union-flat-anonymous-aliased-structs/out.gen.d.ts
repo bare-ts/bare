@@ -20,6 +20,6 @@ export function readEntity(bc: bare.ByteCursor): Entity
 
 export function writeEntity(bc: bare.ByteCursor, x: Entity): void
 
-export function encodeEntity(x: Entity): Uint8Array
+export function encodeEntity(x: Entity, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeEntity(bytes: Uint8Array): Entity

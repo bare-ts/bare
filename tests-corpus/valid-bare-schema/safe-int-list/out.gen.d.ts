@@ -6,6 +6,6 @@ export function readU64List(bc: bare.ByteCursor): U64List
 
 export function writeU64List(bc: bare.ByteCursor, x: U64List): void
 
-export function encodeU64List(x: U64List): Uint8Array
+export function encodeU64List(x: U64List, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeU64List(bytes: Uint8Array): U64List

@@ -9,7 +9,7 @@ export function readLeadingPipe(bc: bare.ByteCursor): LeadingPipe
 
 export function writeLeadingPipe(bc: bare.ByteCursor, x: LeadingPipe): void
 
-export function encodeLeadingPipe(x: LeadingPipe): Uint8Array
+export function encodeLeadingPipe(x: LeadingPipe, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeLeadingPipe(bytes: Uint8Array): LeadingPipe
 
@@ -20,6 +20,6 @@ export function readTrailingPipe(bc: bare.ByteCursor): TrailingPipe
 
 export function writeTrailingPipe(bc: bare.ByteCursor, x: TrailingPipe): void
 
-export function encodeTrailingPipe(x: TrailingPipe): Uint8Array
+export function encodeTrailingPipe(x: TrailingPipe, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeTrailingPipe(bytes: Uint8Array): TrailingPipe

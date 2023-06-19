@@ -1,7 +1,7 @@
 import * as bare from "@bare-ts/lib"
 import assert from "node:assert"
 
-const config = /* @__PURE__ */ bare.Config({})
+const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 
 export function readPublicKey(bc) {
     return bare.readFixedData(bc, 128)
@@ -228,17 +228,18 @@ export function writePerson(bc, x) {
     }
 }
 
-export function encodePerson(x) {
+export function encodePerson(x, config = DEFAULT_CONFIG) {
+    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
-        new Uint8Array(config.initialBufferLength),
-        config,
+        new Uint8Array(fullConfig.initialBufferLength),
+        fullConfig,
     )
     writePerson(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodePerson(bytes) {
-    const bc = new bare.ByteCursor(bytes, config)
+    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
     const result = readPerson(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

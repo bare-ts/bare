@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-import * as ext from "./ext.js"
+const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 
 export type u8 = number
 
@@ -14,17 +14,18 @@ export function writeMessage(bc: bare.ByteCursor, x: Message): void {
     bare.writeU8(bc, x)
 }
 
-export function encodeMessage(x: Message): Uint8Array {
+export function encodeMessage(x: Message, config?: Partial<bare.Config>): Uint8Array {
+    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
-        new Uint8Array(ext.config.initialBufferLength),
-        ext.config,
+        new Uint8Array(fullConfig.initialBufferLength),
+        fullConfig,
     )
     writeMessage(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeMessage(bytes: Uint8Array): Message {
-    const bc = new bare.ByteCursor(bytes, ext.config)
+    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
     const result = readMessage(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

@@ -1,6 +1,6 @@
 import * as bare from "@bare-ts/lib"
 
-const config = /* @__PURE__ */ bare.Config({})
+const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 
 export class Operation {
     readonly await: string
@@ -41,17 +41,18 @@ export function writeOperation(bc: bare.ByteCursor, x: Operation): void {
     bare.writeString(bc, x.for)
 }
 
-export function encodeOperation(x: Operation): Uint8Array {
+export function encodeOperation(x: Operation, config?: Partial<bare.Config>): Uint8Array {
+    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
-        new Uint8Array(config.initialBufferLength),
-        config,
+        new Uint8Array(fullConfig.initialBufferLength),
+        fullConfig,
     )
     writeOperation(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeOperation(bytes: Uint8Array): Operation {
-    const bc = new bare.ByteCursor(bytes, config)
+    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
     const result = readOperation(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

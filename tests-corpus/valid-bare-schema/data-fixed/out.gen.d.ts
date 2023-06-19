@@ -6,6 +6,6 @@ export function readData(bc: bare.ByteCursor): Data
 
 export function writeData(bc: bare.ByteCursor, x: Data): void
 
-export function encodeData(x: Data): Uint8Array
+export function encodeData(x: Data, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeData(bytes: Uint8Array): Data

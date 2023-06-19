@@ -43,6 +43,6 @@ export function readContacts(bc: bare.ByteCursor): Contacts
 
 export function writeContacts(bc: bare.ByteCursor, x: Contacts): void
 
-export function encodeContacts(x: Contacts): Uint8Array
+export function encodeContacts(x: Contacts, config?: Partial<bare.Config>): Uint8Array
 
 export function decodeContacts(bytes: Uint8Array): Contacts
