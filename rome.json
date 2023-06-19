@@ -9,6 +9,7 @@
     "rules": {
       "all": true,
       "nursery": {
+        "noConfusingArrow": "off",
         "useLiteralKeys": "off"
       }
     }
