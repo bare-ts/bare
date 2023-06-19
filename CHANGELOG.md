@@ -2,7 +2,7 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 0.14.0 (2023-06-19)
 
 -   BREAKING CHANGES: enum member names in `PascalCase` instead of `CONSTANT_CASE`
 
