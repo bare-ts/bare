@@ -86,10 +86,6 @@ program
         "--use-primitive-flat-union",
         "use flat unions instead of tagged unions for unions of primitive types",
     )
-    .option(
-        "--use-quoted-property",
-        "use quoted property instead of unquoted property",
-    )
     .option("--use-safe-int", "use safe integers instead of bigint")
     .option(
         "--use-struct-flat-union",

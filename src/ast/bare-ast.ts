@@ -157,7 +157,7 @@ export type StructField = {
     readonly name: string
     readonly val: null
     readonly comment: string | null
-    readonly extra: { readonly mut: boolean; readonly quoted: boolean } | null
+    readonly extra: { readonly mut: boolean } | null
     readonly loc: Location | null
 }
 

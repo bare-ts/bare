@@ -34,7 +34,6 @@ export type Config = {
     readonly useIntTag: boolean
     readonly useMutable: boolean
     readonly usePrimitiveFlatUnion: boolean
-    readonly useQuotedProperty: boolean
     readonly useSafeInt: boolean
     readonly useStructFlatUnion: boolean
     readonly useUndefined: boolean
@@ -60,7 +59,6 @@ export function Config({
     useIntTag = false,
     useMutable = false,
     usePrimitiveFlatUnion = false,
-    useQuotedProperty = false,
     useSafeInt = false,
     useStructFlatUnion = false,
     useUndefined = false,
@@ -109,7 +107,6 @@ export function Config({
         useIntTag,
         useMutable,
         usePrimitiveFlatUnion,
-        useQuotedProperty,
         useSafeInt,
         useStructFlatUnion,
         useUndefined,

@@ -39,6 +39,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     Previously, _bare-ts_ allowed external factory functions to build struct objects.
     For now, there is no replacement for this feature.
 
+-   BREAKING CHANGES: remove option `--use-quoted-property`
+
+    Previously, _bare-ts_ allowed emitting JavaScript code with all object properties quoted.
+    This feature was under-used and against the JavaScript conventions.
+
 -   Fix name clashes
 
     Previously, _bare-ts_ did not support the use of aliases like `Map` or `Uint8Array`.

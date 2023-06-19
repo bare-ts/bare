@@ -270,8 +270,7 @@ function genStructTypeBody(g: Gen, type: ast.StructType): string {
         const field = type.data[i]
         const doc = jsDoc(field.comment)
         const modifier = field.extra?.mut ? "" : "readonly "
-        const prop = field.extra?.quoted ? `"${field.name}"` : field.name
-        result += `${doc}${modifier}${prop}:${softSpace(
+        result += `${doc}${modifier}${field.name}:${softSpace(
             genType(g, type.types[i]),
         )}\n`
     }
@@ -292,8 +291,6 @@ function genStructTypeClassBody(g: Gen, type: ast.StructType): string {
 }
 
 function genUnionType(g: Gen, type: ast.UnionType): string {
-    const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
-    const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     let result = ""
     for (let i = 0; i < type.types.length; i++) {
         const subtype = type.types[i]
@@ -307,7 +304,7 @@ function genUnionType(g: Gen, type: ast.UnionType): string {
                 : jsRpr(subtype.data)
         result += type.extra?.flat
             ? `\n${doc}| ${valType}`
-            : `\n${doc}| { readonly ${tagProp}: ${tagVal}; readonly ${valProp}: ${valType} }`
+            : `\n${doc}| { readonly tag: ${tagVal}; readonly val: ${valType} }`
     }
     return indent(result)
 }
@@ -611,8 +608,7 @@ function genObjectReader(g: Gen, type: ast.StructType): string {
     let objBody = ""
     for (let i = 0; i < type.types.length; i++) {
         const field = type.data[i]
-        const prop = field.extra?.quoted ? `"${field.name}"` : field.name
-        objBody += `\n${prop}: ${genReading(g, type.types[i])},`
+        objBody += `\n${field.name}: ${genReading(g, type.types[i])},`
     }
     return unindent(`({
         ${indent(objBody.trim(), 2)}
@@ -631,9 +627,6 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
     const tagReader = ast.maxVal(type.data) < 128 ? "readU8" : "readUintSafe"
     const flat = type.extra?.flat
     let switchBody = ""
-    const tagProp = g.config.useQuotedProperty ? '"tag"' : "tag"
-    const tagPropSet = g.config.useQuotedProperty ? '"tag": tag' : "tag"
-    const valProp = g.config.useQuotedProperty ? '"val"' : "val"
     for (let i = 0; i < type.types.length; i++) {
         const subtype = type.types[i]
         const resolvedType = ast.resolveAlias(subtype, g.symbols)
@@ -653,13 +646,14 @@ function genUnionReader(g: Gen, type: ast.UnionType): string {
         ) {
             switchBody += `
             case ${tagEncodedVal}:
-                return { ${tagProp}: ${jsRpr(
-                subtype.data,
-            )}, ${valProp}: ${indent(valExpr, 4)} }`
+                return { tag: ${jsRpr(subtype.data)}, val: ${indent(
+                valExpr,
+                4,
+            )} }`
         } else {
             switchBody += `
             case ${tagEncodedVal}:
-                return { ${tagPropSet}, ${valProp}: ${indent(valExpr, 4)} }`
+                return { tag, val: ${indent(valExpr, 4)} }`
         }
     }
     return unindent(`{
@@ -831,9 +825,8 @@ function genSetWriter(g: Gen, type: ast.ListType): string {
 
 function genStructWriter(g: Gen, type: ast.StructType): string {
     const fieldEncoding = type.data
-        .map(({ extra, name }, i) => {
-            const propAccess = extra?.quoted ? `["${name}"]` : `.${name}`
-            return genWriting(g, type.types[i], `$x${propAccess}`)
+        .map(({ name }, i) => {
+            return genWriting(g, type.types[i], `$x.${name}`)
         })
         .filter((s) => s !== "")
     return unindent(`{
@@ -950,8 +943,6 @@ function genBaseFlatUnionWriter(g: Gen, union: ast.UnionType): string {
 
 function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
     const tagWriter = ast.maxVal(type.data) < 128 ? "writeU8" : "writeUintSafe"
-    const tagPropAccess = g.config.useQuotedProperty ? '["tag"]' : ".tag"
-    const valProp = g.config.useQuotedProperty ? '["val"]' : ".val"
     let switchBody = ""
     let hasStrTags = false
     for (let i = 0; i < type.types.length; i++) {
@@ -964,7 +955,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
                 g.symbols.get(subtype.data)?.internal
                     ? tagEncodedVal
                     : jsRpr(subtype.data)
-            const valWriting = genWriting(g, subtype, `$x${valProp}`)
+            const valWriting = genWriting(g, subtype, "$x.val")
             const maybeTagWriting =
                 typeof tagVal === "string"
                     ? `\nbare.${tagWriter}(bc, ${tagEncodedVal})`
@@ -990,7 +981,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
     }
     const maybeTagWriting = hasStrTags ? "" : `\nbare.${tagWriter}(bc, $x.tag)`
     return unindent(`{${indent(maybeTagWriting, 2)}
-        switch ($x${tagPropAccess}) {
+        switch ($x.tag) {
             ${switchBody.trim()}
         }
     }`)

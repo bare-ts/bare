@@ -30,8 +30,7 @@
                 "val": null,
                 "comment": null,
                 "extra": {
-                  "mut": false,
-                  "quoted": false
+                  "mut": false
                 },
                 "loc": {
                   "filename": "union-flat-struct-anonymous/schema.bare",
@@ -100,8 +99,7 @@
                 "val": null,
                 "comment": null,
                 "extra": {
-                  "mut": false,
-                  "quoted": false
+                  "mut": false
                 },
                 "loc": {
                   "filename": "union-flat-struct-anonymous/schema.bare",

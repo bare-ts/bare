@@ -10,8 +10,7 @@
             "name": "name",
             "val": null,
             "extra": {
-              "mut": true,
-              "quoted": false
+              "mut": true
             },
             "comment": null,
             "loc": {
@@ -25,8 +24,7 @@
             "name": "age",
             "val": null,
             "extra": {
-              "mut": true,
-              "quoted": false
+              "mut": true
             },
             "comment": null,
             "loc": {

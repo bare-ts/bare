@@ -26,7 +26,7 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
             !type.extra?.class
         ) {
             const { alias, internal, comment, loc } = defs[i]
-            type = embeddedTag(c, type, defs[i].alias)
+            type = embeddedTag(type, defs[i].alias)
             defs[i] = { alias, internal, comment, type, loc }
         }
     }
@@ -126,7 +126,7 @@ function configureType(
                         if (subtype.tag === "alias") {
                             c.aliasesInFlatUnion.add(subtype.data)
                         } else if (subtype.tag === "struct") {
-                            subtype = embeddedTag(c, subtype, type.data[i].val)
+                            subtype = embeddedTag(subtype, type.data[i].val)
                         }
                         newTypes.push(subtype)
                     }
@@ -182,16 +182,14 @@ function configureField(
     config: Config,
 ): ast.StructField {
     const mut = config.useMutable
-    const quoted = config.useQuotedProperty
-    if (field.extra === null && (mut || quoted)) {
+    if (field.extra === null && mut) {
         const { name, val, comment, loc } = field
-        return { name, val, extra: { mut, quoted }, comment, loc }
+        return { name, val, extra: { mut }, comment, loc }
     }
     return field
 }
 
 function embeddedTag(
-    n: Configurator,
     type: ast.StructType,
     val: string | number,
 ): ast.StructType {
@@ -201,7 +199,7 @@ function embeddedTag(
         name: "tag",
         val: null,
         comment: null,
-        extra: { mut: false, quoted: n.config.useQuotedProperty },
+        extra: { mut: false },
         loc,
     })
     const literal: ast.Literal =
