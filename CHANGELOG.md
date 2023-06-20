@@ -1,6 +1,10 @@
 # Changelog
 
-This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+All notable changes to this project will be documented in this file.
+
+This project adheres to [Semantic Versioning][semver].
+The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
+New entries must be placed in a section entitled `Unreleased`.
 
 ## Unreleased
 
@@ -72,7 +76,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## 0.13.0 (2023-02-20)
 
-This release introduces several breaking changes that widely **improve the usage of unions and flat unions**.
+This release **widely improves the usage of unions and flat unions**.
 
 -   BREAKING CHANGES: use strings tags for union of aliases
 
@@ -197,7 +201,8 @@ This release introduces several breaking changes that widely **improve the usage
     type Anonymous = { tag: 0, ... } | { tag: 1, ... }
     ```
 
-    Note that the union `XZ` is not flatten, because one of the elements is not a _struct_ or an _aliased struct_.
+    Note that the union `XZ` is not flatten,
+    because one of the elements is not a _struct_ or an _aliased struct_.
     Indeed, `Z` is an _aliased alias_.
 
 -   Support flat unions of _aliased structs_ and _anonymous structs_
@@ -346,7 +351,7 @@ This release introduces several breaking changes that widely **improve the usage
 
 -   BREAKING CHANGES: Remove options `--main` and `--no-main`
 
-    The previous version introduced automatic promotion of _root type_ aliases as _main type_ aliases.
+    The previous version introduced automatic promotion of _root type_ as _main type_.
     _Root type_ aliases are type aliases that are not referred by a type in the schema.
     _Main type_ aliases are types aliases used to decode and encode messages.
 
@@ -672,7 +677,7 @@ This release introduces several breaking changes that widely **improve the usage
 
     The option `--use-quoted-property` enables to output quoted properties instead of unquoted properties.
 
-    This can be useful when using a minifier that differently handles quoted and unquoted properties.
+    This can be useful when using a minifier that differently handles quoted properties.
 
 ## 0.2.0 (2022-02-20)
 
@@ -737,7 +742,7 @@ This release introduces several breaking changes that widely **improve the usage
 
 -   BREAKING CHANGES: Forbid _BARE_ schema with circular references
 
--   BREAKING CHANGE: adapt to _@bare-ts/lib@0.2.0_
+-   BREAKING CHANGES: adapt to _@bare-ts/lib@0.2.0_
 
     _@bare-ts/lib@0.2.0_ introduces several breaking changes.
     As a consequence:
@@ -837,4 +842,6 @@ This release introduces several breaking changes that widely **improve the usage
 
 -   _BARE_ schema compiler supports all types
 
+[keep-changelog]: https://keepachangelog.com/en/1.0.0/
+[lib9-versionning]: https://github.com/lib9/guides/blob/main/lib9-versioning-style-guide.md#keep-a-changelog
 [semver]: https://semver.org/spec/v2.0.0.html
