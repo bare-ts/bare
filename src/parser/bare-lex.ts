@@ -5,7 +5,7 @@ import { CompilerError, type Location } from "../core/compiler-error.js"
 
 const WHITE_SPACE_PATTERN = /\s/
 const PUNCTUATION_PATTERN = /[\{\}\[\]\(\)<>=\|:,;\.!?~+-\\/$@#]/
-const ID_PATTERN = /([A-Za-z0-9_]+)/
+const ID_PATTERN = /\w+/
 
 export class Lex {
     readonly content: string
@@ -14,7 +14,7 @@ export class Lex {
     private line: number
     private col: number
     private _docComment: string
-    private _token: string
+    token: string
 
     constructor(content: string, filename: string | number | null) {
         this.content = content
@@ -23,12 +23,8 @@ export class Lex {
         this.line = 1
         this.col = 1
         this._docComment = ""
-        this._token = ""
+        this.token = ""
         this.forth()
-    }
-
-    token(): string {
-        return this._token
     }
 
     /**
@@ -45,9 +41,9 @@ export class Lex {
     }
 
     location(): Location {
-        let { filename, offset, line, col, _token } = this
-        offset -= _token.length
-        col -= _token.length
+        let { filename, offset, line, col, token } = this
+        offset -= token.length
+        col -= token.length
         return { filename, offset, line, col }
     }
 
@@ -85,16 +81,16 @@ export class Lex {
             } else {
                 if (ID_PATTERN.test(c)) {
                     const suffix = content.slice(this.offset)
-                    this._token = (
+                    this.token = (
                         suffix.match(ID_PATTERN) as RegExpMatchArray
                     )[0]
-                    this.offset += this._token.length
-                    this.col += this._token.length
+                    this.offset += this.token.length
+                    this.col += this.token.length
                     return
                 } else if (PUNCTUATION_PATTERN.test(c)) {
                     this.offset++
                     this.col++
-                    this._token = c
+                    this.token = c
                     return
                 } else {
                     throw new CompilerError(
@@ -104,6 +100,6 @@ export class Lex {
                 }
             }
         }
-        this._token = ""
+        this.token = ""
     }
 }

@@ -4,7 +4,6 @@
 export const ALL_CASE_RE = /^\w+$/
 export const CAMEL_CASE_RE = /^[a-z][A-Za-z\d]*$/
 export const CONSTANT_CASE_RE = /^[A-Z][A-Z\d_]*$/
-export const NUMBER_RE = /^\d+$/
 export const PASCAL_CASE_RE = /^[A-Z][A-Za-z\d]*$/
 
 export function capitalize(s: string): string {

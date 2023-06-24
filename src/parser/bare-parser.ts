@@ -7,7 +7,6 @@ import type { Config } from "../core/config.js"
 import {
     ALL_CASE_RE,
     CONSTANT_CASE_RE,
-    NUMBER_RE,
     toPascalCase,
 } from "../utils/formatting.js"
 import { Lex } from "./bare-lex.js"
@@ -19,7 +18,7 @@ export function parse(content: string, config: Config): ast.Ast {
     }
     const loc = p.lex.location()
     const defs: ast.AliasedType[] = []
-    while (p.lex.token() !== "") {
+    while (p.lex.token !== "") {
         defs.push(parseAliased(p))
     }
     return { defs, loc }
@@ -32,15 +31,15 @@ type Parser = {
 
 function parseAliased(p: Parser): ast.AliasedType {
     const comment = p.lex.consumeDocComment()
-    const keyword = p.lex.token()
+    const keyword = p.lex.token
     const loc = p.lex.location()
     if (keyword !== "enum" && keyword !== "struct" && keyword !== "type") {
         throw new CompilerError("''type' is expected.", loc)
     }
     p.lex.forth()
-    const alias = p.lex.token()
+    const alias = p.lex.token
     p.lex.forth()
-    if (p.lex.token() === "=") {
+    if (p.lex.token === "=") {
         throw new CompilerError(
             "a type definition and its body cannot be separated by '='.",
             p.lex.location(),
@@ -63,7 +62,7 @@ function parseAliased(p: Parser): ast.AliasedType {
 }
 
 function parseType(p: Parser): ast.Type {
-    switch (p.lex.token()) {
+    switch (p.lex.token) {
         case "":
             throw new CompilerError("a type is expected.", p.lex.location())
         case "[": // list (obsolete syntax)
@@ -101,7 +100,7 @@ function parseType(p: Parser): ast.Type {
 
 function parseTypeCheckUnion(p: Parser): ast.Type {
     const result = parseType(p)
-    if (p.lex.token() === "|" || p.lex.token() === "=") {
+    if (p.lex.token === "|" || p.lex.token === "=") {
         throw new CompilerError(
             "a union must be enclosed by 'union {}'.",
             p.lex.location(),
@@ -111,7 +110,7 @@ function parseTypeCheckUnion(p: Parser): ast.Type {
 }
 
 function parseTypeName(p: Parser): ast.Type {
-    const alias = p.lex.token()
+    const alias = p.lex.token
     const loc = p.lex.location()
     p.lex.forth()
     if (alias === "string" && !p.config.legacy) {
@@ -132,7 +131,7 @@ function parseData(p: Parser): ast.Type {
     let len: ast.Length | null
     const loc = p.lex.location()
     expect(p, "data")
-    if (p.lex.token() === "<") {
+    if (p.lex.token === "<") {
         if (!p.config.legacy) {
             throw new CompilerError(
                 "use 'data[n]' or allow 'data<n>' with option '--legacy'.",
@@ -179,7 +178,7 @@ function parseLegacyList(p: Parser): ast.Type {
     let len: ast.Length | null = null
     const loc = p.lex.location()
     expect(p, "[")
-    if (p.lex.token() !== "]") {
+    if (p.lex.token !== "]") {
         const loc = p.lex.location()
         len = {
             name: null,
@@ -218,7 +217,7 @@ function parseMap(p: Parser): ast.Type {
     expect(p, "map")
     let keyType: ast.Type
     let valType: ast.Type
-    if (p.lex.token() === "[") {
+    if (p.lex.token === "[") {
         if (!p.config.legacy) {
             throw new CompilerError(
                 "use 'map<A><B>' or allow 'map[A]B' with option '--legacy'.",
@@ -270,16 +269,16 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
     const types: ast.Type[] = []
     let tagVal = 0
     do {
-        if (p.lex.token() === "|") {
+        if (p.lex.token === "|") {
             p.lex.forth()
         }
-        if (p.lex.token() === ")" || p.lex.token() === "}") {
+        if (p.lex.token === ")" || p.lex.token === "}") {
             break
         }
         const comment = p.lex.consumeDocComment()
         const type = parseType(p)
         let loc: Location | null = null
-        if (p.lex.token() === "=") {
+        if (p.lex.token === "=") {
             p.lex.forth()
             loc = p.lex.location()
             tagVal = parseUnsignedNumber(p)
@@ -298,13 +297,13 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
         })
         types.push(type)
         tagVal++
-        if (p.lex.token() === "," || p.lex.token() === ";") {
+        if (p.lex.token === "," || p.lex.token === ";") {
             throw new CompilerError(
                 "union members must be separated with '|'.",
                 p.lex.location(),
             )
         }
-    } while (p.lex.token() === "|")
+    } while (p.lex.token === "|")
     return { tag: "union", data: tags, types, extra: null, loc }
 }
 
@@ -319,9 +318,9 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
     expect(p, "{")
     const vals: ast.EnumVal[] = []
     let val = 0
-    while (ALL_CASE_RE.test(p.lex.token())) {
+    while (ALL_CASE_RE.test(p.lex.token)) {
         const comment = p.lex.consumeDocComment()
-        let name = p.lex.token()
+        let name = p.lex.token
         if (!CONSTANT_CASE_RE.test(name)) {
             throw new CompilerError(
                 "the name of an enum member must be in CONSTANT_CASE.",
@@ -330,7 +329,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
         }
         const valLoc = p.lex.location()
         p.lex.forth()
-        if (p.lex.token() === "=") {
+        if (p.lex.token === "=") {
             p.lex.forth()
             val = parseUnsignedNumber(p)
         } else if (p.config.pedantic) {
@@ -358,9 +357,9 @@ function parseStructBody(p: Parser): ast.Type {
     expect(p, "{")
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
-    while (ALL_CASE_RE.test(p.lex.token())) {
+    while (ALL_CASE_RE.test(p.lex.token)) {
         const comment = p.lex.consumeDocComment()
-        const name = p.lex.token()
+        const name = p.lex.token
         const fieldLoc = p.lex.location()
         p.lex.forth()
         expect(p, ":")
@@ -374,7 +373,7 @@ function parseStructBody(p: Parser): ast.Type {
 }
 
 function parseOptionalLength(p: Parser): ast.Length | null {
-    if (p.lex.token() === "[") {
+    if (p.lex.token === "[") {
         p.lex.forth()
         const loc = p.lex.location()
         const val = parseUnsignedNumber(p)
@@ -388,7 +387,7 @@ function parseOptionalLength(p: Parser): ast.Length | null {
 function parseTypeParameter(p: Parser): ast.Type {
     expect(p, "<")
     const result = parseType(p)
-    if (p.lex.token() === "," || p.lex.token() === ";") {
+    if (p.lex.token === "," || p.lex.token === ";") {
         throw new CompilerError(
             "every type must be enclosed with '<>'. e.g. 'map<Key><Val>'.",
             p.lex.location(),
@@ -399,28 +398,28 @@ function parseTypeParameter(p: Parser): ast.Type {
 }
 
 function checkSeparator(p: Parser): void {
-    if (p.lex.token() === "," || p.lex.token() === ";") {
+    if (p.lex.token === "," || p.lex.token === ";") {
         throw new CompilerError(
-            `members cannot be separated by '${p.lex.token()}'.`,
+            `members cannot be separated by '${p.lex.token}'.`,
             p.lex.location(),
         )
     }
 }
 
 function parseUnsignedNumber(p: Parser): number {
-    const result = Number.parseInt(p.lex.token(), 10)
-    if (!NUMBER_RE.test(p.lex.token())) {
+    const token = p.lex.token
+    if (!/^\d+$/.test(token)) {
         throw new CompilerError(
             "an unsigned integer is expected.",
             p.lex.location(),
         )
     }
     p.lex.forth()
-    return result
+    return Number.parseInt(token, 10)
 }
 
 function expect(p: Parser, token: string): void {
-    if (p.lex.token() !== token) {
+    if (p.lex.token !== token) {
         throw new CompilerError(`'${token}' is expected.`, p.lex.location())
     }
     p.lex.forth()

@@ -17,7 +17,7 @@ const SAMPLE_TOKENS = "const C = { p1 : 1 , p2 : a , }".split(" ")
 test("valid-tokens", () => {
     const lex = new Lex(SAMPLE, "inline")
     for (let i = 0; i < SAMPLE_TOKENS.length; i++) {
-        assert.deepEqual(lex.token(), SAMPLE_TOKENS[i])
+        assert.deepEqual(lex.token, SAMPLE_TOKENS[i])
         assert.doesNotThrow(() => lex.forth())
     }
 })
