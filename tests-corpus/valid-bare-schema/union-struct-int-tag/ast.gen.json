@@ -3,14 +3,14 @@
     {
       "alias": "BoxedU32",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-struct-int-tag/schema.bare",
@@ -52,14 +52,14 @@
     {
       "alias": "BoxedStr",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-struct-int-tag/schema.bare",
@@ -101,21 +101,21 @@
     {
       "alias": "Boxed",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }

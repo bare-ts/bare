@@ -3,7 +3,7 @@
     {
       "alias": "Alias",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "map",
         "data": null,

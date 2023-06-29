@@ -13,7 +13,16 @@ export class Lex {
     private offset: number
     private line: number
     private col: number
-    private _docComment: string
+
+    /**
+     * Comments preceding `token`.
+     */
+    comment: string
+
+    /**
+     * Current token.
+     * An empty string means that there is no more tokens to process.
+     */
     token: string
 
     constructor(content: string, filename: string | number | null) {
@@ -22,22 +31,9 @@ export class Lex {
         this.offset = 0
         this.line = 1
         this.col = 1
-        this._docComment = ""
+        this.comment = ""
         this.token = ""
         this.forth()
-    }
-
-    /**
-     * Collected comment since the last comment' consumption.
-     * `null` if no collected comment or empty comment.
-     */
-    consumeDocComment(): string | null {
-        const comment = this._docComment
-        if (comment !== "") {
-            this._docComment = ""
-            return comment
-        }
-        return null
     }
 
     location(): Location {
@@ -47,7 +43,14 @@ export class Lex {
         return { filename, offset, line, col }
     }
 
+    /**
+     * Reset `comment` and move to the next `token`.
+     */
     forth(): void {
+        if (this.token !== "") {
+            this.comment = ""
+        }
+        this.token = ""
         const content = this.content
         while (this.offset < content.length) {
             const c = content[this.offset]
@@ -55,6 +58,13 @@ export class Lex {
                 if (c === "\n") {
                     this.line++
                     this.col = 1
+                    if (this.comment !== "") {
+                        this.comment += "\n"
+                        if (this.comment.endsWith("\n\n")) {
+                            // A blank line reset the comment register
+                            this.comment = ""
+                        }
+                    }
                 } else {
                     this.col++
                 }
@@ -66,15 +76,7 @@ export class Lex {
                     // EOF
                     index = content.length
                 }
-                if (
-                    this.offset + 1 < content.length &&
-                    content[this.offset + 1] === "#"
-                ) {
-                    this._docComment += content.slice(
-                        this.offset + 2,
-                        index + 1,
-                    )
-                }
+                this.comment += content.slice(this.offset + 1, index)
                 const len = index - this.offset
                 this.col += len
                 this.offset += len
@@ -100,6 +102,5 @@ export class Lex {
                 }
             }
         }
-        this.token = ""
     }
 }

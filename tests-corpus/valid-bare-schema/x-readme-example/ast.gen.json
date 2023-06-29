@@ -3,14 +3,14 @@
     {
       "alias": "Gender",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "enum",
         "data": [
           {
             "name": "Female",
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -22,7 +22,7 @@
           {
             "name": "Fluid",
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -34,7 +34,7 @@
           {
             "name": "Male",
             "val": 2,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -63,14 +63,14 @@
     {
       "alias": "Person",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -82,7 +82,7 @@
           {
             "name": "email",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -94,7 +94,7 @@
           {
             "name": "gender",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -173,14 +173,14 @@
     {
       "alias": "Organization",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -192,7 +192,7 @@
           {
             "name": "email",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "x-readme-example/schema.bare",
@@ -246,21 +246,21 @@
     {
       "alias": "Contact",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }
@@ -309,7 +309,7 @@
     {
       "alias": "Contacts",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "list",
         "data": null,

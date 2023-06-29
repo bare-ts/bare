@@ -11,14 +11,14 @@
         "extra": null,
         "loc": {
           "filename": "alias-doccomment/schema.bare",
-          "offset": 31,
+          "offset": 30,
           "line": 2,
           "col": 14
         }
       },
       "loc": {
         "filename": "alias-doccomment/schema.bare",
-        "offset": 18,
+        "offset": 17,
         "line": 2,
         "col": 1
       }
@@ -26,7 +26,7 @@
     {
       "alias": "U8Alias2",
       "internal": false,
-      "comment": " Second\n\n multiline\n doctring\n",
+      "comment": " multiline\n doctring\n",
       "type": {
         "tag": "u8",
         "data": null,
@@ -34,14 +34,14 @@
         "extra": null,
         "loc": {
           "filename": "alias-doccomment/schema.bare",
-          "offset": 87,
+          "offset": 82,
           "line": 8,
           "col": 15
         }
       },
       "loc": {
         "filename": "alias-doccomment/schema.bare",
-        "offset": 73,
+        "offset": 68,
         "line": 8,
         "col": 1
       }
@@ -49,7 +49,7 @@
   ],
   "loc": {
     "filename": "alias-doccomment/schema.bare",
-    "offset": 18,
+    "offset": 17,
     "line": 2,
     "col": 1
   }

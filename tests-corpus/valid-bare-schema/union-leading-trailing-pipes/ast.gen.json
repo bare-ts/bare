@@ -3,14 +3,14 @@
     {
       "alias": "LeadingPipe",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }
@@ -47,14 +47,14 @@
     {
       "alias": "TrailingPipe",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }

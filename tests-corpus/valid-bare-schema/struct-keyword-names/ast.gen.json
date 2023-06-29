@@ -3,14 +3,14 @@
     {
       "alias": "Operation",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "type",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
@@ -22,7 +22,7 @@
           {
             "name": "struct",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
@@ -34,7 +34,7 @@
           {
             "name": "enum",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
@@ -46,7 +46,7 @@
           {
             "name": "const",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",
@@ -58,7 +58,7 @@
           {
             "name": "bc",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-keyword-names/schema.bare",

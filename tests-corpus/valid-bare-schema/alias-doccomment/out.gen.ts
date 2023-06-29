@@ -37,8 +37,6 @@ export function decodeU8Alias(bytes: Uint8Array): U8Alias {
 }
 
 /**
- * Second
- *
  * multiline
  * doctring
  */

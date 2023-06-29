@@ -16,8 +16,6 @@ export function encodeU8Alias(x: U8Alias, config?: Partial<bare.Config>): Uint8A
 export function decodeU8Alias(bytes: Uint8Array): U8Alias
 
 /**
- * Second
- *
  * multiline
  * doctring
  */

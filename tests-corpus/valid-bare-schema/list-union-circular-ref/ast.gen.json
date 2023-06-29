@@ -3,7 +3,7 @@
     {
       "alias": "Alias",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "list",
         "data": {
@@ -25,14 +25,14 @@
               {
                 "name": null,
                 "val": 0,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": null
               },
               {
                 "name": null,
                 "val": 1,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": null
               }

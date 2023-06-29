@@ -1,9 +1,9 @@
-## An enum to model Genders
+# An enum to model Genders
 type Gender enum {
-    ## Be inclusive :)
+    # Be inclusive :)
     FLUID
     MALE
-    ## One is not born, but becomes a woman
-    ##                  -- Simone de Beauvoir
+    # One is not born, but becomes a woman
+    #                  -- Simone de Beauvoir
     FEMALE
 }

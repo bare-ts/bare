@@ -1,3 +1,4 @@
+# last tag is Number.MAX_SAFE_INTEGER
 type UnsignedInt union {
     | u8 = 0
     | u16 = 1

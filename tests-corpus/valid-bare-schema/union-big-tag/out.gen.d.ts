@@ -5,6 +5,9 @@ export type u16 = number
 export type u32 = number
 export type u64 = bigint
 
+/**
+ * last tag is Number.MAX_SAFE_INTEGER
+ */
 export type UnsignedInt =
     | { readonly tag: 0; readonly val: u8 }
     | { readonly tag: 1; readonly val: u16 }

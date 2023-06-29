@@ -3,14 +3,14 @@
     {
       "alias": "A",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "field0",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "alias-undef/schema.bare",
@@ -22,7 +22,7 @@
           {
             "name": "field1",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "alias-undef/schema.bare",

@@ -198,7 +198,7 @@ function embeddedTag(
     data.splice(0, 0, {
         name: "tag",
         val: null,
-        comment: null,
+        comment: "",
         extra: { mut: false },
         loc,
     })

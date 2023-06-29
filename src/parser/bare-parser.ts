@@ -30,7 +30,7 @@ type Parser = {
 }
 
 function parseAliased(p: Parser): ast.AliasedType {
-    const comment = p.lex.consumeDocComment()
+    const comment = p.lex.comment
     const keyword = p.lex.token
     const loc = p.lex.location()
     if (keyword !== "enum" && keyword !== "struct" && keyword !== "type") {
@@ -269,13 +269,16 @@ function parseUnionBody(p: Parser, loc: Location): ast.Type {
     const types: ast.Type[] = []
     let tagVal = 0
     do {
+        let comment = p.lex.comment
         if (p.lex.token === "|") {
             p.lex.forth()
+            if (p.lex.comment !== "") {
+                comment = p.lex.comment
+            }
         }
         if (p.lex.token === ")" || p.lex.token === "}") {
             break
         }
-        const comment = p.lex.consumeDocComment()
         const type = parseType(p)
         let loc: Location | null = null
         if (p.lex.token === "=") {
@@ -319,7 +322,7 @@ function parseEnumBody(p: Parser, loc: Location): ast.Type {
     const vals: ast.EnumVal[] = []
     let val = 0
     while (ALL_CASE_RE.test(p.lex.token)) {
-        const comment = p.lex.consumeDocComment()
+        const comment = p.lex.comment
         let name = p.lex.token
         if (!CONSTANT_CASE_RE.test(name)) {
             throw new CompilerError(
@@ -358,7 +361,7 @@ function parseStructBody(p: Parser): ast.Type {
     const fields: ast.StructField[] = []
     const types: ast.Type[] = []
     while (ALL_CASE_RE.test(p.lex.token)) {
-        const comment = p.lex.consumeDocComment()
+        const comment = p.lex.comment
         const name = p.lex.token
         const fieldLoc = p.lex.location()
         p.lex.forth()

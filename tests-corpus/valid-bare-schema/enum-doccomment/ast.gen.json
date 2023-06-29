@@ -14,7 +14,7 @@
             "extra": null,
             "loc": {
               "filename": "enum-doccomment/schema.bare",
-              "offset": 74,
+              "offset": 72,
               "line": 4,
               "col": 5
             }
@@ -22,11 +22,11 @@
           {
             "name": "Male",
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-doccomment/schema.bare",
-              "offset": 84,
+              "offset": 82,
               "line": 5,
               "col": 5
             }
@@ -38,7 +38,7 @@
             "extra": null,
             "loc": {
               "filename": "enum-doccomment/schema.bare",
-              "offset": 183,
+              "offset": 179,
               "line": 8,
               "col": 5
             }
@@ -48,14 +48,14 @@
         "extra": null,
         "loc": {
           "filename": "enum-doccomment/schema.bare",
-          "offset": 40,
+          "offset": 39,
           "line": 2,
           "col": 13
         }
       },
       "loc": {
         "filename": "enum-doccomment/schema.bare",
-        "offset": 28,
+        "offset": 27,
         "line": 2,
         "col": 1
       }
@@ -63,7 +63,7 @@
   ],
   "loc": {
     "filename": "enum-doccomment/schema.bare",
-    "offset": 28,
+    "offset": 27,
     "line": 2,
     "col": 1
   }

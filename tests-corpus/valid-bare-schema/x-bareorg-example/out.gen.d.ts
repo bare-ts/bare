@@ -9,6 +9,9 @@ export function readPublicKey(bc: bare.ByteCursor): PublicKey
 
 export function writePublicKey(bc: bare.ByteCursor, x: PublicKey): void
 
+/**
+ * ISO 8601
+ */
 export type Time = string
 
 export function readTime(bc: bare.ByteCursor): Time
@@ -20,6 +23,9 @@ export declare enum Department {
     Administration = "Administration",
     CustomerService = "CustomerService",
     Development = "Development",
+    /**
+     * Reserved for the CEO
+     */
     Jsmith = "Jsmith",
 }
 

@@ -8,6 +8,58 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## Unreleased
 
+-   BREAKING CHANGES: promote regular comments to doc-comments
+
+    Previously, _bare-ts_ introduced a special syntax for doc-comments:
+
+    ```bare
+    type Gender enum {
+        ## Be inclusive :)
+        FLUID
+        MALE
+        ## One is not born, but becomes a woman
+        ##                  -- Simone de Beauvoir
+        FEMALE
+    }
+
+    ## A Person with:
+    ## - a name
+    ## - a gender
+    type Person {
+        ## person's name
+        name: str
+        ## person's gender
+        gender: optional<Gender>
+    }
+    ```
+
+    This syntax is not part of the _BARE_ specification.
+    Thus, the syntax is not portable between _BARE__ implementations.
+    To avoid this issue, _bare-ts__ now uses regular comments as doc-comments.
+    Every comment that precedes a type definition, an enum value, or a field is a doc-comment.
+    The previous schema can now be written as follows:
+
+    ```bare
+    type Gender enum {
+        # Be inclusive :)
+        FLUID
+        MALE
+        # One is not born, but becomes a woman
+        #                  -- Simone de Beauvoir
+        FEMALE
+    }
+
+    # A Person with:
+    # - a name
+    # - a gender
+    type Person {
+        # person's name
+        name: str
+        # person's gender
+        gender: optional<Gender>
+    }
+    ```
+
 -   BREAKING CHANGES: remove option `--import-config`
 
     Instead of importing a custom config, you can now pass the config through any encode function.

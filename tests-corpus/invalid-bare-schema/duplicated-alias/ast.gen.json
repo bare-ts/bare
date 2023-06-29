@@ -3,7 +3,7 @@
     {
       "alias": "Duplicated",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "u8",
         "data": null,
@@ -26,7 +26,7 @@
     {
       "alias": "Duplicated",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "u8",
         "data": null,

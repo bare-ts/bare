@@ -110,8 +110,8 @@ function generateOptionalLength(length: ast.Length | null): string {
     return length !== null ? `[${length.val}]` : ""
 }
 
-function generateDocComment(comment: string | null): string {
-    return comment !== null
-        ? `##${comment.trimEnd().split("\n").join("\n##")}\n`
+function generateDocComment(comment: string): string {
+    return comment !== ""
+        ? `#${comment.trimEnd().split("\n").join("\n#")}\n`
         : ""
 }

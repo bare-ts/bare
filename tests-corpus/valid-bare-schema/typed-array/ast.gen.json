@@ -32,7 +32,7 @@
           "col": 14
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "typed-array/schema.bare",
         "offset": 0,

@@ -3,7 +3,7 @@
     {
       "alias": "EmptyData",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "data",
         "data": {

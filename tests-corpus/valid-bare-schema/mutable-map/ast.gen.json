@@ -42,7 +42,7 @@
           "col": 11
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "mutable-map/schema.bare",
         "offset": 0,

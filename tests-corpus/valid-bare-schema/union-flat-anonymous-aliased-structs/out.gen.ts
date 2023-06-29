@@ -20,6 +20,9 @@ export function writePerson(bc: bare.ByteCursor, x: Person): void {
 
 export type Entity =
     | Person
+    /**
+     * Anonymous entity
+     */
     | {
         readonly tag: 1
         readonly name: string

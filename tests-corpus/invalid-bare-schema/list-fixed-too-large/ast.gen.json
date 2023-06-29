@@ -43,7 +43,7 @@
           "col": 16
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "list-fixed-too-large/schema.bare",
         "offset": 0,

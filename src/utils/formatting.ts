@@ -22,8 +22,8 @@ export function softSpace(s: string): string {
     return s[0] === "\n" ? s : ` ${s}`
 }
 
-export function jsDoc(content: string | null): string {
-    if (content === null) {
+export function jsDoc(content: string): string {
+    if (content === "") {
         return ""
     }
     const docBody = content.trimEnd().split("\n").join("\n *")

@@ -14,7 +14,7 @@
             "extra": null,
             "loc": {
               "filename": "struct-doccomment/schema.bare",
-              "offset": 75,
+              "offset": 73,
               "line": 4,
               "col": 5
             }
@@ -26,7 +26,7 @@
             "extra": null,
             "loc": {
               "filename": "struct-doccomment/schema.bare",
-              "offset": 109,
+              "offset": 106,
               "line": 6,
               "col": 5
             }
@@ -40,7 +40,7 @@
             "extra": null,
             "loc": {
               "filename": "struct-doccomment/schema.bare",
-              "offset": 81,
+              "offset": 79,
               "line": 4,
               "col": 11
             }
@@ -52,7 +52,7 @@
             "extra": null,
             "loc": {
               "filename": "struct-doccomment/schema.bare",
-              "offset": 114,
+              "offset": 111,
               "line": 6,
               "col": 10
             }
@@ -61,14 +61,14 @@
         "extra": null,
         "loc": {
           "filename": "struct-doccomment/schema.bare",
-          "offset": 48,
+          "offset": 47,
           "line": 2,
           "col": 20
         }
       },
       "loc": {
         "filename": "struct-doccomment/schema.bare",
-        "offset": 29,
+        "offset": 28,
         "line": 2,
         "col": 1
       }
@@ -76,7 +76,7 @@
   ],
   "loc": {
     "filename": "struct-doccomment/schema.bare",
-    "offset": 29,
+    "offset": 28,
     "line": 2,
     "col": 1
   }

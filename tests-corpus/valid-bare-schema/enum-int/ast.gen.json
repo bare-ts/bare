@@ -9,7 +9,7 @@
           {
             "name": "Fluid",
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-int/schema.bare",
@@ -21,7 +21,7 @@
           {
             "name": "Male",
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-int/schema.bare",
@@ -33,7 +33,7 @@
           {
             "name": "Female",
             "val": 2,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-int/schema.bare",
@@ -54,7 +54,7 @@
           "col": 13
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "enum-int/schema.bare",
         "offset": 0,

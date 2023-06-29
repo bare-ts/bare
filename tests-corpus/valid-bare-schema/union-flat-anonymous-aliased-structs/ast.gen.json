@@ -3,14 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "tag",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": {
               "mut": false
             },
@@ -24,7 +24,7 @@
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-flat-anonymous-aliased-structs/schema.bare",
@@ -89,14 +89,14 @@
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": " Anonymous entity\n",
             "extra": null,
             "loc": null
           }
@@ -120,7 +120,7 @@
               {
                 "name": "tag",
                 "val": null,
-                "comment": null,
+                "comment": "",
                 "extra": {
                   "mut": false
                 },
@@ -134,7 +134,7 @@
               {
                 "name": "name",
                 "val": null,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": {
                   "filename": "union-flat-anonymous-aliased-structs/schema.bare",
@@ -194,7 +194,7 @@
           "col": 13
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "union-flat-anonymous-aliased-structs/schema.bare",
         "offset": 34,

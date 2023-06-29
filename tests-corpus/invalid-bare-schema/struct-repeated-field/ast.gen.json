@@ -3,14 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",
@@ -22,7 +22,7 @@
           {
             "name": "age",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",
@@ -34,7 +34,7 @@
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-repeated-field/schema.bare",

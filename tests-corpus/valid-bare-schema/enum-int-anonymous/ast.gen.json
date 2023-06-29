@@ -9,7 +9,7 @@
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-int-anonymous/schema.bare",
@@ -21,7 +21,7 @@
           {
             "name": "gender",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "enum-int-anonymous/schema.bare",
@@ -50,7 +50,7 @@
               {
                 "name": "Fluid",
                 "val": 0,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": {
                   "filename": "enum-int-anonymous/schema.bare",
@@ -62,7 +62,7 @@
               {
                 "name": "Male",
                 "val": 1,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": {
                   "filename": "enum-int-anonymous/schema.bare",
@@ -74,7 +74,7 @@
               {
                 "name": "Female",
                 "val": 2,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": {
                   "filename": "enum-int-anonymous/schema.bare",
@@ -104,7 +104,7 @@
           "col": 20
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "enum-int-anonymous/schema.bare",
         "offset": 0,

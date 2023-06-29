@@ -3,7 +3,7 @@
     {
       "alias": "ReadonlyMap",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "map",
         "data": null,
@@ -80,7 +80,7 @@
           "col": 17
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "name-clash/schema.bare",
         "offset": 31,

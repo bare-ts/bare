@@ -3,7 +3,7 @@
     {
       "alias": "MaybeBool",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "optional",
         "data": null,

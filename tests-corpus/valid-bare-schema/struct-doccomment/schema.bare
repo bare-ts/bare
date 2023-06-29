@@ -1,7 +1,7 @@
-## A struct to model persons
+# A struct to model persons
 type Person struct {
-    ## person's name
+    # person's name
     name: str
-    ## person's age
+    # person's age
     age: u8
 }

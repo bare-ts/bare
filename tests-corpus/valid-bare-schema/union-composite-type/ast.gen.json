@@ -9,21 +9,21 @@
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 2,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }
@@ -177,7 +177,7 @@
           "col": 16
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "union-composite-type/schema.bare",
         "offset": 0,

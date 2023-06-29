@@ -34,7 +34,7 @@
           "col": 14
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "safe-int-list/schema.bare",
         "offset": 0,

@@ -3,14 +3,14 @@
     {
       "alias": "BoxedU32",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "tag",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": {
               "mut": false
             },
@@ -24,7 +24,7 @@
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-flat-struct/schema.bare",
@@ -83,14 +83,14 @@
     {
       "alias": "BoxedStr",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "tag",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": {
               "mut": false
             },
@@ -104,7 +104,7 @@
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-flat-struct/schema.bare",
@@ -169,14 +169,14 @@
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }
@@ -217,7 +217,7 @@
           "col": 12
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "union-flat-struct/schema.bare",
         "offset": 78,

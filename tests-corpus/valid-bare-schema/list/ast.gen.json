@@ -3,7 +3,7 @@
     {
       "alias": "U8List",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "list",
         "data": null,

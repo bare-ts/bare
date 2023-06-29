@@ -9,7 +9,7 @@
           {
             "name": "name",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-class/schema.bare",
@@ -21,7 +21,7 @@
           {
             "name": "age",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-class/schema.bare",
@@ -67,7 +67,7 @@
           "col": 20
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "struct-class/schema.bare",
         "offset": 0,

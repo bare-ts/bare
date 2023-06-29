@@ -3,14 +3,14 @@
     {
       "alias": "Person",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "struct",
         "data": [
           {
             "name": "bestFriend",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
@@ -22,7 +22,7 @@
           {
             "name": "secondBestFriend",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
@@ -34,7 +34,7 @@
           {
             "name": "friends",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
@@ -46,7 +46,7 @@
           {
             "name": "friendNicknames",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-circular-ref-allowed/schema.bare",
@@ -88,14 +88,14 @@
               {
                 "name": null,
                 "val": 0,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": null
               },
               {
                 "name": null,
                 "val": 1,
-                "comment": null,
+                "comment": "",
                 "extra": null,
                 "loc": null
               }

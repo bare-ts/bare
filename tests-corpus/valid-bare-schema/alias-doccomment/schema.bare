@@ -1,8 +1,8 @@
-## First doctring
+# First doctring
 type U8Alias u8
 
-## Second
-##
-## multiline
-## doctring
+# Second
+#
+# multiline
+# doctring
 type U8Alias2 u8

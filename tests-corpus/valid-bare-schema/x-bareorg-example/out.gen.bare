@@ -1,5 +1,6 @@
 type PublicKey data[128]
 
+# ISO 8601
 type Time str
 
 type Department enum {
@@ -7,6 +8,7 @@ type Department enum {
     ADMINISTRATION = 1
     CUSTOMER_SERVICE = 2
     DEVELOPMENT = 3
+    # Reserved for the CEO
     JSMITH = 99
 }
 

@@ -3,7 +3,7 @@
     {
       "alias": "I64",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "i64",
         "data": null,
@@ -26,7 +26,7 @@
     {
       "alias": "U64",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "u64",
         "data": null,

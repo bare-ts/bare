@@ -9,7 +9,7 @@
           {
             "name": "await",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-reserved-js-names/schema.bare",
@@ -21,7 +21,7 @@
           {
             "name": "class",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-reserved-js-names/schema.bare",
@@ -33,7 +33,7 @@
           {
             "name": "extends",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-reserved-js-names/schema.bare",
@@ -45,7 +45,7 @@
           {
             "name": "typeof",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-reserved-js-names/schema.bare",
@@ -57,7 +57,7 @@
           {
             "name": "for",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "struct-reserved-js-names/schema.bare",
@@ -139,7 +139,7 @@
           "col": 23
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "struct-reserved-js-names/schema.bare",
         "offset": 0,

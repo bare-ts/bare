@@ -9,7 +9,7 @@
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-flat-transitive-alias/schema.bare",
@@ -43,7 +43,7 @@
           "col": 22
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "union-flat-transitive-alias/schema.bare",
         "offset": 0,
@@ -60,7 +60,7 @@
           {
             "name": "val",
             "val": null,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": {
               "filename": "union-flat-transitive-alias/schema.bare",
@@ -94,7 +94,7 @@
           "col": 22
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "union-flat-transitive-alias/schema.bare",
         "offset": 39,
@@ -105,7 +105,7 @@
     {
       "alias": "BoxedTransStr",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "alias",
         "data": "BoxedStr",
@@ -128,21 +128,21 @@
     {
       "alias": "Boxed",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           }

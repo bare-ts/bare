@@ -42,7 +42,7 @@
           "col": 10
         }
       },
-      "comment": null,
+      "comment": "",
       "loc": {
         "filename": "name-clash-mutable/schema.bare",
         "offset": 0,

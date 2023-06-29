@@ -33,11 +33,13 @@ test("comment-eof", () => {
     const content = "# comment"
     const lex = new Lex(content, "inline")
     assert.deepEqual(lex.location().col, content.length + 1)
+    assert.deepEqual(lex.comment, " comment")
 })
 
-test("doc-comment", () => {
-    const content = "## doc-comment"
+test("reset-comment", () => {
+    const content = "# first\na\n# second\n\n# third\nb"
     const lex = new Lex(content, "inline")
-    assert.deepEqual(lex.location().col, content.length + 1)
-    assert.deepEqual(lex.consumeDocComment(), " doc-comment")
+    assert.deepEqual(lex.comment, " first\n")
+    lex.forth()
+    assert.deepEqual(lex.comment, " third\n")
 })

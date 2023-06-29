@@ -25,7 +25,7 @@ export type AliasedType = {
     readonly alias: string
     // The normalization phase uses this to create internal-only aliases.
     readonly internal: boolean
-    readonly comment: string | null
+    readonly comment: string
     readonly type: Type
     readonly loc: Location | null
 }
@@ -140,7 +140,7 @@ export type VoidType = {
 export type EnumVal = {
     readonly name: string
     readonly val: number
-    readonly comment: string | null
+    readonly comment: string
     readonly extra: null
     readonly loc: Location | null
 }
@@ -156,7 +156,7 @@ export type Length = {
 export type StructField = {
     readonly name: string
     readonly val: null
-    readonly comment: string | null
+    readonly comment: string
     readonly extra: { readonly mut: boolean } | null
     readonly loc: Location | null
 }
@@ -164,7 +164,7 @@ export type StructField = {
 export type UnionTag = {
     readonly name: null
     readonly val: number
-    readonly comment: string | null
+    readonly comment: string
     readonly extra: null
     readonly loc: Location | null
 }

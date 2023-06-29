@@ -3,35 +3,35 @@
     {
       "alias": "UnsignedInt",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "union",
         "data": [
           {
             "name": null,
             "val": 0,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 1,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 2,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
           {
             "name": null,
             "val": 3,
-            "comment": null,
+            "comment": "",
             "extra": null,
             "loc": null
           },
@@ -51,9 +51,9 @@
             "extra": null,
             "loc": {
               "filename": "union-doccomment/schema.bare",
-              "offset": 31,
+              "offset": 29,
               "line": 2,
-              "col": 7
+              "col": 5
             }
           },
           {
@@ -63,9 +63,9 @@
             "extra": null,
             "loc": {
               "filename": "union-doccomment/schema.bare",
-              "offset": 40,
+              "offset": 38,
               "line": 3,
-              "col": 7
+              "col": 5
             }
           },
           {
@@ -75,9 +75,9 @@
             "extra": null,
             "loc": {
               "filename": "union-doccomment/schema.bare",
-              "offset": 50,
+              "offset": 48,
               "line": 4,
-              "col": 7
+              "col": 5
             }
           },
           {
@@ -87,9 +87,9 @@
             "extra": null,
             "loc": {
               "filename": "union-doccomment/schema.bare",
-              "offset": 60,
+              "offset": 58,
               "line": 5,
-              "col": 7
+              "col": 5
             }
           },
           {
@@ -99,9 +99,9 @@
             "extra": null,
             "loc": {
               "filename": "union-doccomment/schema.bare",
-              "offset": 93,
+              "offset": 90,
               "line": 7,
-              "col": 7
+              "col": 5
             }
           }
         ],

@@ -3,7 +3,7 @@
     {
       "alias": "Name",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "str",
         "data": null,

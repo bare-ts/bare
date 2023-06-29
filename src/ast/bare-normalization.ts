@@ -67,7 +67,7 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
             alias,
             internal: true,
             type: normalized,
-            comment: null,
+            comment: "",
             loc: normalized.loc,
         })
         n.dedup.set(stringifiedType, alias)

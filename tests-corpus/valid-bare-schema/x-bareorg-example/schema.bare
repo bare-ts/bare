@@ -1,5 +1,7 @@
 type PublicKey data[128]
-type Time str # ISO 8601
+
+# ISO 8601
+type Time str
 
 type Department enum {
   ACCOUNTING

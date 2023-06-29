@@ -3,7 +3,7 @@
     {
       "alias": "EmptyArray",
       "internal": false,
-      "comment": null,
+      "comment": "",
       "type": {
         "tag": "list",
         "data": {
