@@ -12,12 +12,7 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 27,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 27
           }
         ],
         "types": [
@@ -26,28 +21,13 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 32,
-              "line": 2,
-              "col": 10
-            }
+            "offset": 32
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "flat-union-undef-alias/schema.bare",
-          "offset": 21,
-          "line": 1,
-          "col": 22
-        }
+        "offset": 21
       },
-      "loc": {
-        "filename": "flat-union-undef-alias/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Boxed",
@@ -61,14 +41,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 67
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 78
           }
         ],
         "types": [
@@ -77,46 +57,22 @@
             "data": "BoxedU32",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 58,
-              "line": 5,
-              "col": 20
-            }
+            "offset": 58
           },
           {
             "tag": "alias",
             "data": "BoxedStr",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "flat-union-undef-alias/schema.bare",
-              "offset": 69,
-              "line": 5,
-              "col": 31
-            }
+            "offset": 69
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "flat-union-undef-alias/schema.bare",
-          "offset": 50,
-          "line": 5,
-          "col": 12
-        }
+        "offset": 50
       },
-      "loc": {
-        "filename": "flat-union-undef-alias/schema.bare",
-        "offset": 39,
-        "line": 5,
-        "col": 1
-      }
+      "offset": 39
     }
   ],
-  "loc": {
-    "filename": "flat-union-undef-alias/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "flat-union-undef-alias/schema.bare",
+  "offset": 0
 }

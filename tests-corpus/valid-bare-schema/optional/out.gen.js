@@ -7,8 +7,8 @@ export function readMaybeBool(bc) {
 }
 
 export function writeMaybeBool(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         bare.writeBool(bc, x)
     }
 }

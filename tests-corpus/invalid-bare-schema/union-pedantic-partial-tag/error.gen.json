@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-pedantic-partial-tag/schema.bare",
-    "offset": 38,
-    "line": 1,
-    "col": 39
-  },
-  "message": "(union-pedantic-partial-tag/schema.bare:1:39) in pedantic mode, all union tags must be set. '=' is expected."
+  "offset": 38,
+  "message": "in pedantic mode, all union tags must be set. '=' is expected."
 }

@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { Lex } from "./bare-lex.js"
+import * as lex from "./bare-lexer.js"
 import { strict as assert } from "node:assert"
 import { default as test } from "oletus"
 
@@ -15,31 +15,31 @@ const SAMPLE = `
 const SAMPLE_TOKENS = "const C = { p1 : 1 , p2 : a , }".split(" ")
 
 test("valid-tokens", () => {
-    const lex = new Lex(SAMPLE, "inline")
+    const l = lex.create(SAMPLE)
     for (let i = 0; i < SAMPLE_TOKENS.length; i++) {
-        assert.deepEqual(lex.token, SAMPLE_TOKENS[i])
-        assert.doesNotThrow(() => lex.forth())
+        assert.deepEqual(l.token, SAMPLE_TOKENS[i])
+        assert.doesNotThrow(() => lex.nextToken(l))
     }
 })
 
 test("invalid-tokens", () => {
-    const lex = new Lex("d ^", "inline")
-    assert.throws(() => lex.forth(), {
+    const l = lex.create("d ^")
+    assert.throws(() => lex.nextToken(l), {
         name: "CompilerError",
     })
 })
 
 test("comment-eof", () => {
     const content = "# comment"
-    const lex = new Lex(content, "inline")
-    assert.deepEqual(lex.location().col, content.length + 1)
-    assert.deepEqual(lex.comment, " comment")
+    const l = lex.create(content)
+    assert.deepEqual(l.offset, content.length)
+    assert.deepEqual(l.comment, " comment")
 })
 
 test("reset-comment", () => {
     const content = "# first\na\n# second\n\n# third\nb"
-    const lex = new Lex(content, "inline")
-    assert.deepEqual(lex.comment, " first\n")
-    lex.forth()
-    assert.deepEqual(lex.comment, " third\n")
+    const l = lex.create(content)
+    assert.deepEqual(l.comment, " first\n")
+    lex.nextToken(l)
+    assert.deepEqual(l.comment, " third\n")
 })

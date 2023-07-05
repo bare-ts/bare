@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "duplicated-alias/schema.bare",
-    "offset": 19,
-    "line": 2,
-    "col": 1
-  },
-  "message": "(duplicated-alias/schema.bare:2:1) alias 'Duplicated' is already defined."
+  "offset": 19,
+  "message": "alias 'Duplicated' is already defined."
 }

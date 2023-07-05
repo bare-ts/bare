@@ -12,9 +12,9 @@ import * as ast from "./bare-ast.js"
 
 export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {
-        throw new CompilerError("a schema cannot be empty.", schema.loc)
+        throw new CompilerError("a schema cannot be empty.", schema.offset)
     }
-    const c = {
+    const c: Checker = {
         config,
         symbols: ast.symbols(schema),
     }
@@ -25,7 +25,7 @@ export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
         if (aliases.has(alias)) {
             throw new CompilerError(
                 `alias '${aliased.alias}' is already defined.`,
-                aliased.loc,
+                aliased.offset,
             )
         }
         checkTypeInvariants(c, type)
@@ -50,19 +50,19 @@ function checkTypeName(aliased: ast.AliasedType): void {
         if (!internal) {
             throw new CompilerError(
                 `the type name '${alias}' must not start with a figure or must be internal.`,
-                aliased.loc,
+                aliased.offset,
             )
         }
     } else if (alias.length === 0 || !PASCAL_CASE_RE.test(alias)) {
         throw new CompilerError(
             `the type name '${alias}' must be in PascalCase.`,
-            aliased.loc,
+            aliased.offset,
         )
     }
 }
 
 function checkTypeInvariants(c: Checker, type: ast.Type): void {
-    if (type.types !== null) {
+    if (type.types != null) {
         for (const subtype of type.types) {
             if (type.tag !== "union") {
                 checkNonVoid(c, subtype)
@@ -108,20 +108,20 @@ function checkMembersInvariants(
     if (data.length === 0) {
         throw new CompilerError(
             `a ${type.tag} must include at least one member.`,
-            type.loc,
+            type.offset,
         )
     }
-    if (type.types !== null && type.types.length !== data.length) {
+    if (type.types != null && type.types.length !== data.length) {
         throw new CompilerError(
             "the number of types is not equal to the number of members. This is likely an internal error.",
-            null,
+            type.offset,
         )
     }
     const names: Set<string> = new Set()
     const tags: Set<number> = new Set()
     let prevVal = -1
     for (const elt of data) {
-        if (elt.name !== null) {
+        if (elt.name != null) {
             if (
                 type.tag === "enum" &&
                 !CONSTANT_CASE_RE.test(elt.name) &&
@@ -129,41 +129,41 @@ function checkMembersInvariants(
             ) {
                 throw new CompilerError(
                     "the name of an enum member must be in CONSTANT_CASE or PascalCase.",
-                    elt.loc,
+                    elt.offset,
                 )
             }
             if (type.tag === "struct" && !CAMEL_CASE_RE.test(elt.name)) {
                 throw new CompilerError(
                     "the name of a field must be in camelCase.",
-                    elt.loc,
+                    elt.offset,
                 )
             }
             if (names.has(elt.name)) {
                 throw new CompilerError(
                     `name of a ${type.tag} member must be unique.`,
-                    elt.loc,
+                    elt.offset,
                 )
             }
             names.add(elt.name)
         }
-        if (elt.val !== null) {
+        if (elt.val != null) {
             if (!Number.isSafeInteger(elt.val)) {
                 throw new CompilerError(
                     "only safe integers are supported.",
-                    elt.loc,
+                    elt.offset,
                 )
             }
             if (tags.has(elt.val)) {
                 throw new CompilerError(
                     `tag '${elt.val}' is assigned to a preceding member.`,
-                    elt.loc,
+                    elt.offset,
                 )
             }
             tags.add(elt.val)
             if (c.config.pedantic && elt.val < prevVal) {
                 throw new CompilerError(
                     `in pedantic mode, all ${type.tag} tags must be in order.`,
-                    elt.loc,
+                    elt.offset,
                 )
             }
             prevVal = elt.val
@@ -172,16 +172,16 @@ function checkMembersInvariants(
 }
 
 function checkLengthInvariants(len: ast.Length | null): void {
-    if (len !== null && len.val <= 0) {
+    if (len != null && len.val <= 0) {
         throw new CompilerError(
             "a fixed list or data must have a length strictly greater than 0.",
-            len.loc,
+            len.offset,
         )
     }
-    if (len !== null && len.val >>> 0 !== len.val) {
+    if (len != null && len.val >>> 0 !== len.val) {
         throw new CompilerError(
             "only length encoded as a u32 are supported.",
-            len.loc,
+            len.offset,
         )
     }
 }
@@ -191,14 +191,14 @@ function checkListInvariants(type: ast.ListType): void {
     if (type.extra?.unique && type.extra.typedArray) {
         throw new CompilerError(
             "A list cannot be both typed (typedArray) and unique (Set).",
-            type.loc,
+            type.offset,
         )
     }
     const valType = type.types[0]
     if (type.extra?.typedArray && !ast.isFixedNumericTag(valType.tag)) {
         throw new CompilerError(
             `value type of a typed array cannot be '${valType.tag}'. This is likely an internal error.`,
-            valType.loc,
+            valType.offset,
         )
     }
 }
@@ -214,7 +214,7 @@ function checkMapInvariants(c: Checker, type: ast.MapType): void {
     ) {
         throw new CompilerError(
             "the key type must be a base type (except f32, f64) or an enum type.",
-            keyType.loc,
+            keyType.offset,
         )
     }
 }
@@ -223,13 +223,13 @@ function checkNonVoid(c: Checker, type: ast.Type): void {
     const resolved = ast.resolveAlias(type, c.symbols)
     if (
         resolved.tag === "void" &&
-        (resolved.extra === null ||
+        (resolved.extra == null ||
             resolved.extra.literal.type === "null" ||
             resolved.extra.literal.type === "undefined")
     ) {
         throw new CompilerError(
             `types that resolve to 'void' are only allowed in unions.`,
-            resolved.loc,
+            resolved.offset,
         )
     }
 }
@@ -239,13 +239,13 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
     // check type uniqueness
     const stringifiedTypes = new Set()
     for (let i = 0; i < tags.length; i++) {
-        const stringifiedType = JSON.stringify(ast.withoutTrivia(type.types[i]))
+        const stringifiedType = JSON.stringify(ast.withoutExtra(type.types[i]))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {
             throw new CompilerError(
                 "a type cannot be repeated in an union.",
-                type.types[i].loc,
+                type.types[i].offset,
             )
         }
         stringifiedTypes.add(stringifiedType)
@@ -270,10 +270,10 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
                     (t): t is ast.StructType => t.tag === "struct",
                 ) &&
                 (resolved.every((t) => t.extra?.class) ||
-                    ast.leadingDiscriminators(resolved) !== null)
+                    ast.leadingDiscriminators(resolved) != null)
         }
         if (!isFlatUnion) {
-            throw new CompilerError("the union cannot be flatten.", type.loc)
+            throw new CompilerError("the union cannot be flatten.", type.offset)
         }
     }
 }
@@ -281,7 +281,7 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
 function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
     if (!c.symbols.has(type.data)) {
         const alias = type.data
-        throw new CompilerError(`alias '${alias}' is not defined.`, type.loc)
+        throw new CompilerError(`alias '${alias}' is not defined.`, type.offset)
     }
 }
 
@@ -293,9 +293,9 @@ function checkUsedBeforeDefined(
     if (type.tag === "alias" && !defined.has(type.data)) {
         throw new CompilerError(
             `Alias '${type.data}' is used before its definition. To allow use-before-definition and recursive types set the option '--legacy'.`,
-            type.loc,
+            type.offset,
         )
-    } else if (type.types !== null) {
+    } else if (type.types != null) {
         for (const subtype of type.types) {
             checkUsedBeforeDefined(c, subtype, defined)
         }
@@ -308,7 +308,7 @@ function checkCircularRef(
     traversed: ReadonlySet<string>,
 ): void {
     if (
-        (type.tag === "list" && type.data === null) ||
+        (type.tag === "list" && type.data == null) ||
         type.tag === "map" ||
         type.tag === "optional"
     ) {
@@ -326,7 +326,7 @@ function checkCircularRef(
                 circularCount++
             }
         }
-        if (circularCount === type.types.length && firstError !== null) {
+        if (circularCount === type.types.length && firstError != null) {
             throw firstError
         }
         return // allowed circular refs
@@ -339,11 +339,11 @@ function checkCircularRef(
         if (traversed.has(alias)) {
             throw new CompilerError(
                 "non-terminable circular references are not allowed.",
-                type.loc,
+                type.offset,
             )
         }
         const aliased = c.symbols.get(alias)
-        if (aliased !== undefined) {
+        if (aliased != null) {
             const subTraversed = new Set(traversed).add(alias)
             checkCircularRef(c, aliased.type, subTraversed)
         }

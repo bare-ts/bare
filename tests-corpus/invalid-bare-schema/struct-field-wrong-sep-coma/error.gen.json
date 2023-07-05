@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-field-wrong-sep-coma/schema.bare",
-    "offset": 34,
-    "line": 2,
-    "col": 14
-  },
-  "message": "(struct-field-wrong-sep-coma/schema.bare:2:14) members cannot be separated by ','."
+  "offset": 34,
+  "message": "members cannot be separated by ','."
 }

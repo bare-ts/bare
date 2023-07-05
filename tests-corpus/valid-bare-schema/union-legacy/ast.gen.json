@@ -12,35 +12,35 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 21
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 27
           },
           {
             "name": null,
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 33
           },
           {
             "name": null,
             "val": 3,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 39
           },
           {
             "name": null,
             "val": 4,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 45
           }
         ],
         "types": [
@@ -49,82 +49,43 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-legacy/schema.bare",
-              "offset": 18,
-              "line": 1,
-              "col": 19
-            }
+            "offset": 18
           },
           {
             "tag": "u16",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-legacy/schema.bare",
-              "offset": 23,
-              "line": 1,
-              "col": 24
-            }
+            "offset": 23
           },
           {
             "tag": "u32",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-legacy/schema.bare",
-              "offset": 29,
-              "line": 1,
-              "col": 30
-            }
+            "offset": 29
           },
           {
             "tag": "u64",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-legacy/schema.bare",
-              "offset": 35,
-              "line": 1,
-              "col": 36
-            }
+            "offset": 35
           },
           {
             "tag": "uint",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-legacy/schema.bare",
-              "offset": 41,
-              "line": 1,
-              "col": 42
-            }
+            "offset": 41
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-legacy/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "union-legacy/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-legacy/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-legacy/schema.bare",
+  "offset": 0
 }

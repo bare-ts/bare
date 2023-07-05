@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-too-big-tag/schema.bare",
-    "offset": 102,
-    "line": 2,
-    "col": 61
-  },
-  "message": "(union-too-big-tag/schema.bare:2:61) only safe integers are supported."
+  "offset": 102,
+  "message": "only safe integers are supported."
 }

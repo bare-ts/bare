@@ -12,36 +12,21 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 25
           },
           {
             "name": "email",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 39,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 39
           },
           {
             "name": "gender",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 54,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 54
           }
         ],
         "types": [
@@ -50,24 +35,14 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 31,
-              "line": 2,
-              "col": 11
-            }
+            "offset": 31
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 46,
-              "line": 3,
-              "col": 12
-            }
+            "offset": 46
           },
           {
             "tag": "optional",
@@ -78,37 +53,17 @@
                 "data": "Gender",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "use-before-defined/schema.bare",
-                  "offset": 71,
-                  "line": 4,
-                  "col": 22
-                }
+                "offset": 71
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 62,
-              "line": 4,
-              "col": 13
-            }
+            "offset": 62
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "use-before-defined/schema.bare",
-          "offset": 19,
-          "line": 1,
-          "col": 20
-        }
+        "offset": 19
       },
-      "loc": {
-        "filename": "use-before-defined/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Gender",
@@ -122,59 +77,30 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 105,
-              "line": 8,
-              "col": 5
-            }
+            "offset": 105
           },
           {
             "name": "Fluid",
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 116,
-              "line": 9,
-              "col": 5
-            }
+            "offset": 116
           },
           {
             "name": "Male",
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "use-before-defined/schema.bare",
-              "offset": 126,
-              "line": 10,
-              "col": 5
-            }
+            "offset": 126
           }
         ],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "use-before-defined/schema.bare",
-          "offset": 94,
-          "line": 7,
-          "col": 13
-        }
+        "offset": 94
       },
-      "loc": {
-        "filename": "use-before-defined/schema.bare",
-        "offset": 82,
-        "line": 7,
-        "col": 1
-      }
+      "offset": 82
     }
   ],
-  "loc": {
-    "filename": "use-before-defined/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "use-before-defined/schema.bare",
+  "offset": 0
 }

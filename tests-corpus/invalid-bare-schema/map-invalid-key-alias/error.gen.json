@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "map-invalid-key-alias/schema.bare",
-    "offset": 33,
-    "line": 3,
-    "col": 15
-  },
-  "message": "(map-invalid-key-alias/schema.bare:3:15) the key type must be a base type (except f32, f64) or an enum type."
+  "offset": 33,
+  "message": "the key type must be a base type (except f32, f64) or an enum type."
 }

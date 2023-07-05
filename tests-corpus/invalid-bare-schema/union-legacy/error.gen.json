@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-legacy/schema.bare",
-    "offset": 17,
-    "line": 1,
-    "col": 18
-  },
-  "message": "(union-legacy/schema.bare:1:18) use 'union { A | B } or allow '( A | B )' with option '--legacy'."
+  "offset": 17,
+  "message": "use 'union { A | B } or allow '( A | B )' with option '--legacy'."
 }

@@ -1,9 +1,5 @@
 {
   "defs": [],
-  "loc": {
-    "filename": "empty-schema/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "empty-schema/schema.bare",
+  "offset": 0
 }

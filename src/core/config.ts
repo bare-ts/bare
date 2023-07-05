@@ -77,16 +77,15 @@ export function Config({
                 : out.endsWith(".js")
                 ? "js"
                 : generator
-            : generator === undefined &&
-              (typeof out === "number" || out === null)
+            : generator == null && (typeof out === "number" || out == null)
             ? DEFAULT_GENERATOR
             : generator
-    if (generator !== undefined && inferredGenerator !== generator) {
+    if (generator != null && inferredGenerator !== generator) {
         throw new ConfigError(
             `the inferred generator '${inferredGenerator}' from out '${out}' does not match the chosen generator '${generator}'.`,
         )
     }
-    if (inferredGenerator === undefined) {
+    if (inferredGenerator == null) {
         throw new ConfigError(
             "the code generator to use cannot be determinate. Please set the option 'generator'.",
         )

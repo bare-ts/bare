@@ -12,12 +12,7 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "list-fixed-circular/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 25
           }
         ],
         "types": [
@@ -28,12 +23,7 @@
               "val": 2,
               "comment": null,
               "extra": null,
-              "loc": {
-                "filename": "list-fixed-circular/schema.bare",
-                "offset": 51,
-                "line": 2,
-                "col": 31
-              }
+              "offset": 51
             },
             "types": [
               {
@@ -41,43 +31,19 @@
                 "data": "Person",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "list-fixed-circular/schema.bare",
-                  "offset": 43,
-                  "line": 2,
-                  "col": 23
-                }
+                "offset": 43
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "list-fixed-circular/schema.bare",
-              "offset": 38,
-              "line": 2,
-              "col": 18
-            }
+            "offset": 38
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "list-fixed-circular/schema.bare",
-          "offset": 19,
-          "line": 1,
-          "col": 20
-        }
+        "offset": 19
       },
-      "loc": {
-        "filename": "list-fixed-circular/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "list-fixed-circular/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "list-fixed-circular/schema.bare",
+  "offset": 0
 }

@@ -12,7 +12,7 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 19
           }
         ],
         "types": [
@@ -21,34 +21,15 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-singleton/schema.bare",
-              "offset": 16,
-              "line": 1,
-              "col": 17
-            }
+            "offset": 16
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-singleton/schema.bare",
-          "offset": 8,
-          "line": 1,
-          "col": 9
-        }
+        "offset": 8
       },
-      "loc": {
-        "filename": "union-singleton/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-singleton/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-singleton/schema.bare",
+  "offset": 0
 }

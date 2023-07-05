@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "alias-missing-type/schema.bare",
-    "offset": 10,
-    "line": 1,
-    "col": 11
-  },
-  "message": "(alias-missing-type/schema.bare:1:11) a type is expected."
+  "offset": 10,
+  "message": "a type is expected."
 }

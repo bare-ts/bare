@@ -12,12 +12,7 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 27,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 27
           }
         ],
         "types": [
@@ -26,28 +21,13 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 32,
-              "line": 2,
-              "col": 10
-            }
+            "offset": 32
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-struct-int-tag/schema.bare",
-          "offset": 21,
-          "line": 1,
-          "col": 22
-        }
+        "offset": 21
       },
-      "loc": {
-        "filename": "union-struct-int-tag/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "BoxedStr",
@@ -61,12 +41,7 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 66,
-              "line": 6,
-              "col": 5
-            }
+            "offset": 66
           }
         ],
         "types": [
@@ -75,28 +50,13 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 71,
-              "line": 6,
-              "col": 10
-            }
+            "offset": 71
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-struct-int-tag/schema.bare",
-          "offset": 60,
-          "line": 5,
-          "col": 22
-        }
+        "offset": 60
       },
-      "loc": {
-        "filename": "union-struct-int-tag/schema.bare",
-        "offset": 39,
-        "line": 5,
-        "col": 1
-      }
+      "offset": 39
     },
     {
       "alias": "Boxed",
@@ -110,14 +70,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 106
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 117
           }
         ],
         "types": [
@@ -126,46 +86,22 @@
             "data": "BoxedU32",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 97,
-              "line": 9,
-              "col": 20
-            }
+            "offset": 97
           },
           {
             "tag": "alias",
             "data": "BoxedStr",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-struct-int-tag/schema.bare",
-              "offset": 108,
-              "line": 9,
-              "col": 31
-            }
+            "offset": 108
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-struct-int-tag/schema.bare",
-          "offset": 89,
-          "line": 9,
-          "col": 12
-        }
+        "offset": 89
       },
-      "loc": {
-        "filename": "union-struct-int-tag/schema.bare",
-        "offset": 78,
-        "line": 9,
-        "col": 1
-      }
+      "offset": 78
     }
   ],
-  "loc": {
-    "filename": "union-struct-int-tag/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-struct-int-tag/schema.bare",
+  "offset": 0
 }

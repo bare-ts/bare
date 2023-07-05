@@ -34,8 +34,8 @@ export function readAlias(bc) {
 }
 
 export function writeAlias(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         write0(bc, x)
     }
 }

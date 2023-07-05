@@ -21,52 +21,23 @@
                     "data": null,
                     "types": null,
                     "extra": null,
-                    "loc": {
-                      "filename": "multi-list-legacy/schema.bare",
-                      "offset": 21,
-                      "line": 1,
-                      "col": 22
-                    }
+                    "offset": 21
                   }
                 ],
                 "extra": null,
-                "loc": {
-                  "filename": "multi-list-legacy/schema.bare",
-                  "offset": 19,
-                  "line": 1,
-                  "col": 20
-                }
+                "offset": 19
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "multi-list-legacy/schema.bare",
-              "offset": 17,
-              "line": 1,
-              "col": 18
-            }
+            "offset": 17
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "multi-list-legacy/schema.bare",
-          "offset": 15,
-          "line": 1,
-          "col": 16
-        }
+        "offset": 15
       },
-      "loc": {
-        "filename": "multi-list-legacy/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "multi-list-legacy/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "multi-list-legacy/schema.bare",
+  "offset": 0
 }

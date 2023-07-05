@@ -12,36 +12,21 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 25
           },
           {
             "name": "age",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 39,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 39
           },
           {
             "name": "address",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 51,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 51
           }
         ],
         "types": [
@@ -50,24 +35,14 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 31,
-              "line": 2,
-              "col": 11
-            }
+            "offset": 31
           },
           {
             "tag": "u8",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 44,
-              "line": 3,
-              "col": 10
-            }
+            "offset": 44
           },
           {
             "tag": "struct",
@@ -77,36 +52,21 @@
                 "val": null,
                 "comment": "",
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 77,
-                  "line": 5,
-                  "col": 9
-                }
+                "offset": 77
               },
               {
                 "name": "city",
                 "val": null,
                 "comment": "",
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 98,
-                  "line": 6,
-                  "col": 9
-                }
+                "offset": 98
               },
               {
                 "name": "street",
                 "val": null,
                 "comment": "",
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 175,
-                  "line": 10,
-                  "col": 9
-                }
+                "offset": 175
               }
             ],
             "types": [
@@ -115,12 +75,7 @@
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 86,
-                  "line": 5,
-                  "col": 18
-                }
+                "offset": 86
               },
               {
                 "tag": "struct",
@@ -130,24 +85,14 @@
                     "val": null,
                     "comment": "",
                     "extra": null,
-                    "loc": {
-                      "filename": "struct-anonymous/schema.bare",
-                      "offset": 125,
-                      "line": 7,
-                      "col": 13
-                    }
+                    "offset": 125
                   },
                   {
                     "name": "code",
                     "val": null,
                     "comment": "",
                     "extra": null,
-                    "loc": {
-                      "filename": "struct-anonymous/schema.bare",
-                      "offset": 147,
-                      "line": 8,
-                      "col": 13
-                    }
+                    "offset": 147
                   }
                 ],
                 "types": [
@@ -156,76 +101,37 @@
                     "data": null,
                     "types": null,
                     "extra": null,
-                    "loc": {
-                      "filename": "struct-anonymous/schema.bare",
-                      "offset": 131,
-                      "line": 7,
-                      "col": 19
-                    }
+                    "offset": 131
                   },
                   {
                     "tag": "u16",
                     "data": null,
                     "types": null,
                     "extra": null,
-                    "loc": {
-                      "filename": "struct-anonymous/schema.bare",
-                      "offset": 153,
-                      "line": 8,
-                      "col": 19
-                    }
+                    "offset": 153
                   }
                 ],
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 111,
-                  "line": 6,
-                  "col": 22
-                }
+                "offset": 111
               },
               {
                 "tag": "str",
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-anonymous/schema.bare",
-                  "offset": 183,
-                  "line": 10,
-                  "col": 17
-                }
+                "offset": 183
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "struct-anonymous/schema.bare",
-              "offset": 67,
-              "line": 4,
-              "col": 21
-            }
+            "offset": 67
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-anonymous/schema.bare",
-          "offset": 19,
-          "line": 1,
-          "col": 20
-        }
+        "offset": 19
       },
-      "loc": {
-        "filename": "struct-anonymous/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "struct-anonymous/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "struct-anonymous/schema.bare",
+  "offset": 0
 }

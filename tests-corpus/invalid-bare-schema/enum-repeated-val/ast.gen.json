@@ -12,71 +12,37 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-repeated-val/schema.bare",
-              "offset": 23,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 23
           },
           {
             "name": "Male",
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-repeated-val/schema.bare",
-              "offset": 33,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 33
           },
           {
             "name": "Female",
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-repeated-val/schema.bare",
-              "offset": 42,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 42
           },
           {
             "name": "Fluid",
             "val": 3,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-repeated-val/schema.bare",
-              "offset": 53,
-              "line": 5,
-              "col": 5
-            }
+            "offset": 53
           }
         ],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "enum-repeated-val/schema.bare",
-          "offset": 12,
-          "line": 1,
-          "col": 13
-        }
+        "offset": 12
       },
-      "loc": {
-        "filename": "enum-repeated-val/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "enum-repeated-val/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "enum-repeated-val/schema.bare",
+  "offset": 0
 }

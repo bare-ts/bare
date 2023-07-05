@@ -20,17 +20,17 @@ export function unrecursive(
     symbols: ast.SymbolTable,
 ): ast.Type {
     const result = innerUnrecursive(type, symbols, new Set())
-    if (result === null) {
+    if (result == null) {
         throw new CompilerError(
             "The recursive type cannot be simplified. This is likely an internal error. The recursive type may be invalid or the symbol table incomplete.",
-            type.loc,
+            type.offset,
         )
     }
     return result
 }
 
 /**
- * @privateRemarks
+ * @remarks
  * `traversed` contains all traversed aliases.
  */
 function innerUnrecursive(
@@ -41,15 +41,15 @@ function innerUnrecursive(
     if (type.tag === "optional") {
         const simplified = innerUnrecursive(type.types[0], symbols, traversed)
         const extra = type.extra
-        if (simplified === null) {
-            return { tag: "void", data: null, types: null, extra, loc: null }
+        if (simplified == null) {
+            return { tag: "void", data: null, types: null, extra, offset: 0 }
         } else if (type.types[0] !== simplified) {
             return simplifyOptional({
                 tag: "optional",
                 data: null,
                 types: [simplified],
                 extra,
-                loc: null,
+                offset: 0,
             })
         }
     } else if (type.tag === "alias") {
@@ -58,7 +58,7 @@ function innerUnrecursive(
             return null
         }
         const aliased = symbols.get(alias)
-        if (aliased !== undefined) {
+        if (aliased != null) {
             const subTraversed = new Set(traversed).add(alias)
             const simplified = innerUnrecursive(
                 aliased.type,
@@ -88,16 +88,16 @@ function simplifyOptional(type: ast.OptionalType): ast.Type {
         const literal2 = subtype.extra?.literal ?? ast.NULL_LITERAL_VAL
         if (literal.type === literal2.type && literal.val === literal2.val) {
             const extra = { literal }
-            if (subtype.types !== null) {
+            if (subtype.types != null) {
                 return simplifyOptional({
                     tag: "optional",
                     data: null,
                     types: subtype.types,
                     extra,
-                    loc: null,
+                    offset: 0,
                 })
             }
-            return { tag: "void", data: null, types: null, extra, loc: null }
+            return { tag: "void", data: null, types: null, extra, offset: 0 }
         }
     }
     return type

@@ -11,60 +11,35 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 28,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 28
           },
           {
             "name": "class",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 43,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 43
           },
           {
             "name": "extends",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 58,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 58
           },
           {
             "name": "typeof",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 75,
-              "line": 5,
-              "col": 5
-            }
+            "offset": 75
           },
           {
             "name": "for",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 91,
-              "line": 6,
-              "col": 5
-            }
+            "offset": 91
           }
         ],
         "types": [
@@ -73,85 +48,46 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 35,
-              "line": 2,
-              "col": 12
-            }
+            "offset": 35
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 50,
-              "line": 3,
-              "col": 12
-            }
+            "offset": 50
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 67,
-              "line": 4,
-              "col": 14
-            }
+            "offset": 67
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 83,
-              "line": 5,
-              "col": 13
-            }
+            "offset": 83
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-reserved-js-names/schema.bare",
-              "offset": 96,
-              "line": 6,
-              "col": 10
-            }
+            "offset": 96
           }
         ],
         "extra": {
           "class": true
         },
-        "loc": {
-          "filename": "struct-reserved-js-names/schema.bare",
-          "offset": 22,
-          "line": 1,
-          "col": 23
-        }
+        "offset": 22
       },
       "comment": "",
-      "loc": {
-        "filename": "struct-reserved-js-names/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "struct-reserved-js-names/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "struct-reserved-js-names/schema.bare",
+  "offset": 0
 }

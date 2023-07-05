@@ -12,49 +12,25 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "mutable-map/schema.bare",
-              "offset": 14,
-              "line": 1,
-              "col": 15
-            }
+            "offset": 14
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "mutable-map/schema.bare",
-              "offset": 19,
-              "line": 1,
-              "col": 20
-            }
+            "offset": 19
           }
         ],
         "extra": {
           "mut": true
         },
-        "loc": {
-          "filename": "mutable-map/schema.bare",
-          "offset": 10,
-          "line": 1,
-          "col": 11
-        }
+        "offset": 10
       },
       "comment": "",
-      "loc": {
-        "filename": "mutable-map/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "mutable-map/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "mutable-map/schema.bare",
+  "offset": 0
 }

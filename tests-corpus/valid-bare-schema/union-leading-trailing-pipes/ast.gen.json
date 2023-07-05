@@ -12,7 +12,7 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 34
           }
         ],
         "types": [
@@ -21,28 +21,13 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-leading-trailing-pipes/schema.bare",
-              "offset": 31,
-              "line": 2,
-              "col": 7
-            }
+            "offset": 31
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-leading-trailing-pipes/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "union-leading-trailing-pipes/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "TrailingPipe",
@@ -56,7 +41,7 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 70
           }
         ],
         "types": [
@@ -65,34 +50,15 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-leading-trailing-pipes/schema.bare",
-              "offset": 67,
-              "line": 6,
-              "col": 5
-            }
+            "offset": 67
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-leading-trailing-pipes/schema.bare",
-          "offset": 55,
-          "line": 5,
-          "col": 19
-        }
+        "offset": 55
       },
-      "loc": {
-        "filename": "union-leading-trailing-pipes/schema.bare",
-        "offset": 37,
-        "line": 5,
-        "col": 1
-      }
+      "offset": 37
     }
   ],
-  "loc": {
-    "filename": "union-leading-trailing-pipes/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-leading-trailing-pipes/schema.bare",
+  "offset": 0
 }

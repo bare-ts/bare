@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-no-prop-type-sep/schema.bare",
-    "offset": 31,
-    "line": 3,
-    "col": 10
-  },
-  "message": "(struct-no-prop-type-sep/schema.bare:3:10) ':' is expected."
+  "offset": 31,
+  "message": "':' is expected."
 }

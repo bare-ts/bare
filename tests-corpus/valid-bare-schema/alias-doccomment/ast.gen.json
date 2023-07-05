@@ -9,19 +9,9 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "alias-doccomment/schema.bare",
-          "offset": 30,
-          "line": 2,
-          "col": 14
-        }
+        "offset": 30
       },
-      "loc": {
-        "filename": "alias-doccomment/schema.bare",
-        "offset": 17,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 17
     },
     {
       "alias": "U8Alias2",
@@ -32,25 +22,11 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "alias-doccomment/schema.bare",
-          "offset": 82,
-          "line": 8,
-          "col": 15
-        }
+        "offset": 82
       },
-      "loc": {
-        "filename": "alias-doccomment/schema.bare",
-        "offset": 68,
-        "line": 8,
-        "col": 1
-      }
+      "offset": 68
     }
   ],
-  "loc": {
-    "filename": "alias-doccomment/schema.bare",
-    "offset": 17,
-    "line": 2,
-    "col": 1
-  }
+  "filename": "alias-doccomment/schema.bare",
+  "offset": 17
 }

@@ -12,24 +12,14 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-field-uppercase/schema.bare",
-              "offset": 26,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 26
           },
           {
             "name": "age",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-field-uppercase/schema.bare",
-              "offset": 40,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 40
           }
         ],
         "types": [
@@ -38,46 +28,22 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-field-uppercase/schema.bare",
-              "offset": 32,
-              "line": 3,
-              "col": 11
-            }
+            "offset": 32
           },
           {
             "tag": "u8",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-field-uppercase/schema.bare",
-              "offset": 45,
-              "line": 4,
-              "col": 10
-            }
+            "offset": 45
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-field-uppercase/schema.bare",
-          "offset": 20,
-          "line": 2,
-          "col": 20
-        }
+        "offset": 20
       },
-      "loc": {
-        "filename": "struct-field-uppercase/schema.bare",
-        "offset": 1,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 1
     }
   ],
-  "loc": {
-    "filename": "struct-field-uppercase/schema.bare",
-    "offset": 1,
-    "line": 2,
-    "col": 1
-  }
+  "filename": "struct-field-uppercase/schema.bare",
+  "offset": 1
 }

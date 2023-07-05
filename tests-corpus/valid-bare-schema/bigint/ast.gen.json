@@ -9,19 +9,9 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "bigint/schema.bare",
-          "offset": 9,
-          "line": 1,
-          "col": 10
-        }
+        "offset": 9
       },
-      "loc": {
-        "filename": "bigint/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "U64",
@@ -32,25 +22,11 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "bigint/schema.bare",
-          "offset": 22,
-          "line": 2,
-          "col": 10
-        }
+        "offset": 22
       },
-      "loc": {
-        "filename": "bigint/schema.bare",
-        "offset": 13,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 13
     }
   ],
-  "loc": {
-    "filename": "bigint/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "bigint/schema.bare",
+  "offset": 0
 }

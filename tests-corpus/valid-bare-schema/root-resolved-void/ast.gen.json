@@ -9,19 +9,9 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "root-resolved-void/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "root-resolved-void/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Main",
@@ -32,25 +22,11 @@
         "data": "AliasedVoid",
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "root-resolved-void/schema.bare",
-          "offset": 32,
-          "line": 2,
-          "col": 11
-        }
+        "offset": 32
       },
-      "loc": {
-        "filename": "root-resolved-void/schema.bare",
-        "offset": 22,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 22
     }
   ],
-  "loc": {
-    "filename": "root-resolved-void/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "root-resolved-void/schema.bare",
+  "offset": 0
 }

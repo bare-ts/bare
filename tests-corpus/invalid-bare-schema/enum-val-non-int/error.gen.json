@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-val-non-int/schema.bare",
-    "offset": 31,
-    "line": 2,
-    "col": 13
-  },
-  "message": "(enum-val-non-int/schema.bare:2:13) an unsigned integer is expected."
+  "offset": 31,
+  "message": "an unsigned integer is expected."
 }

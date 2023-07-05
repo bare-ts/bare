@@ -9,25 +9,11 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "imported-config/schema.bare",
-          "offset": 13,
-          "line": 1,
-          "col": 14
-        }
+        "offset": 13
       },
-      "loc": {
-        "filename": "imported-config/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "imported-config/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "imported-config/schema.bare",
+  "offset": 0
 }

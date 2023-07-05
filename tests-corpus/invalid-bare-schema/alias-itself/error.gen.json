@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "alias-itself/schema.bare",
-    "offset": 11,
-    "line": 1,
-    "col": 12
-  },
-  "message": "(alias-itself/schema.bare:1:12) non-terminable circular references are not allowed."
+  "offset": 11,
+  "message": "non-terminable circular references are not allowed."
 }

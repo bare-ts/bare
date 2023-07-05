@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-pedantic-unsorted/schema.bare",
-    "offset": 37,
-    "line": 3,
-    "col": 5
-  },
-  "message": "(enum-pedantic-unsorted/schema.bare:3:5) in pedantic mode, all enum tags must be in order."
+  "offset": 37,
+  "message": "in pedantic mode, all enum tags must be in order."
 }

@@ -9,25 +9,11 @@
         "data": [],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "enum-empty/schema.bare",
-          "offset": 13,
-          "line": 2,
-          "col": 13
-        }
+        "offset": 13
       },
-      "loc": {
-        "filename": "enum-empty/schema.bare",
-        "offset": 1,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 1
     }
   ],
-  "loc": {
-    "filename": "enum-empty/schema.bare",
-    "offset": 1,
-    "line": 2,
-    "col": 1
-  }
+  "filename": "enum-empty/schema.bare",
+  "offset": 1
 }

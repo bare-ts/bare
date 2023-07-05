@@ -11,28 +11,28 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 30
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 36
           },
           {
             "name": null,
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 42
           },
           {
             "name": null,
             "val": 3,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 49
           }
         ],
         "types": [
@@ -41,73 +41,39 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-flat-typeof/schema.bare",
-              "offset": 25,
-              "line": 1,
-              "col": 26
-            }
+            "offset": 25
           },
           {
             "tag": "u32",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-flat-typeof/schema.bare",
-              "offset": 32,
-              "line": 1,
-              "col": 33
-            }
+            "offset": 32
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-flat-typeof/schema.bare",
-              "offset": 38,
-              "line": 1,
-              "col": 39
-            }
+            "offset": 38
           },
           {
             "tag": "void",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-flat-typeof/schema.bare",
-              "offset": 44,
-              "line": 1,
-              "col": 45
-            }
+            "offset": 44
           }
         ],
         "extra": {
           "flat": true
         },
-        "loc": {
-          "filename": "union-flat-typeof/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
       "comment": "",
-      "loc": {
-        "filename": "union-flat-typeof/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-flat-typeof/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-flat-typeof/schema.bare",
+  "offset": 0
 }

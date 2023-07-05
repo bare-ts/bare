@@ -13,34 +13,15 @@
             "data": "Alias",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "list-circular-ref/schema.bare",
-              "offset": 16,
-              "line": 1,
-              "col": 17
-            }
+            "offset": 16
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "list-circular-ref/schema.bare",
-          "offset": 11,
-          "line": 1,
-          "col": 12
-        }
+        "offset": 11
       },
-      "loc": {
-        "filename": "list-circular-ref/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "list-circular-ref/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "list-circular-ref/schema.bare",
+  "offset": 0
 }

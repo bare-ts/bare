@@ -13,40 +13,20 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "name-clash/schema.bare",
-              "offset": 21,
-              "line": 1,
-              "col": 22
-            }
+            "offset": 21
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "name-clash/schema.bare",
-              "offset": 26,
-              "line": 1,
-              "col": 27
-            }
+            "offset": 26
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "name-clash/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "name-clash/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Uint8Array",
@@ -60,12 +40,7 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "name-clash/schema.bare",
-              "offset": 52,
-              "line": 2,
-              "col": 22
-            }
+            "offset": 52
           }
         ],
         "extra": {
@@ -73,26 +48,12 @@
           "typedArray": true,
           "unique": false
         },
-        "loc": {
-          "filename": "name-clash/schema.bare",
-          "offset": 47,
-          "line": 2,
-          "col": 17
-        }
+        "offset": 47
       },
       "comment": "",
-      "loc": {
-        "filename": "name-clash/schema.bare",
-        "offset": 31,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 31
     }
   ],
-  "loc": {
-    "filename": "name-clash/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "name-clash/schema.bare",
+  "offset": 0
 }

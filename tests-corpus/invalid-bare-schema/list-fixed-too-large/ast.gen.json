@@ -10,12 +10,7 @@
           "val": 4294967296,
           "comment": null,
           "extra": null,
-          "loc": {
-            "filename": "list-fixed-too-large/schema.bare",
-            "offset": 24,
-            "line": 1,
-            "col": 25
-          }
+          "offset": 24
         },
         "types": [
           {
@@ -23,12 +18,7 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "list-fixed-too-large/schema.bare",
-              "offset": 20,
-              "line": 1,
-              "col": 21
-            }
+            "offset": 20
           }
         ],
         "extra": {
@@ -36,26 +26,12 @@
           "typedArray": true,
           "unique": false
         },
-        "loc": {
-          "filename": "list-fixed-too-large/schema.bare",
-          "offset": 15,
-          "line": 1,
-          "col": 16
-        }
+        "offset": 15
       },
       "comment": "",
-      "loc": {
-        "filename": "list-fixed-too-large/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "list-fixed-too-large/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "list-fixed-too-large/schema.bare",
+  "offset": 0
 }

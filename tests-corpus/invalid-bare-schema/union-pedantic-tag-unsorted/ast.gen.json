@@ -12,48 +12,28 @@
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 30,
-              "line": 1,
-              "col": 31
-            }
+            "offset": 30
           },
           {
             "name": null,
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 40,
-              "line": 1,
-              "col": 41
-            }
+            "offset": 40
           },
           {
             "name": null,
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 50,
-              "line": 1,
-              "col": 51
-            }
+            "offset": 50
           },
           {
             "name": null,
             "val": 3,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 60,
-              "line": 1,
-              "col": 61
-            }
+            "offset": 60
           }
         ],
         "types": [
@@ -62,70 +42,36 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 25,
-              "line": 1,
-              "col": 26
-            }
+            "offset": 25
           },
           {
             "tag": "u16",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 34,
-              "line": 1,
-              "col": 35
-            }
+            "offset": 34
           },
           {
             "tag": "u32",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 44,
-              "line": 1,
-              "col": 45
-            }
+            "offset": 44
           },
           {
             "tag": "u64",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-pedantic-tag-unsorted/schema.bare",
-              "offset": 54,
-              "line": 1,
-              "col": 55
-            }
+            "offset": 54
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-pedantic-tag-unsorted/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "union-pedantic-tag-unsorted/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-pedantic-tag-unsorted/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-pedantic-tag-unsorted/schema.bare",
+  "offset": 0
 }

@@ -12,12 +12,7 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "optional-undefined/schema.bare",
-              "offset": 24,
-              "line": 1,
-              "col": 25
-            }
+            "offset": 24
           }
         ],
         "extra": {
@@ -26,26 +21,12 @@
             "val": null
           }
         },
-        "loc": {
-          "filename": "optional-undefined/schema.bare",
-          "offset": 15,
-          "line": 1,
-          "col": 16
-        }
+        "offset": 15
       },
       "comment": "",
-      "loc": {
-        "filename": "optional-undefined/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "optional-undefined/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "optional-undefined/schema.bare",
+  "offset": 0
 }

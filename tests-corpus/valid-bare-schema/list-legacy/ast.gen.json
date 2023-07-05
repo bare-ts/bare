@@ -13,34 +13,15 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "list-legacy/schema.bare",
-              "offset": 14,
-              "line": 1,
-              "col": 15
-            }
+            "offset": 14
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "list-legacy/schema.bare",
-          "offset": 12,
-          "line": 1,
-          "col": 13
-        }
+        "offset": 12
       },
-      "loc": {
-        "filename": "list-legacy/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "list-legacy/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "list-legacy/schema.bare",
+  "offset": 0
 }

@@ -9,25 +9,11 @@
         "data": [],
         "types": [],
         "extra": null,
-        "loc": {
-          "filename": "union-empty/schema.bare",
-          "offset": 16,
-          "line": 1,
-          "col": 17
-        }
+        "offset": 16
       },
-      "loc": {
-        "filename": "union-empty/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-empty/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-empty/schema.bare",
+  "offset": 0
 }

@@ -12,24 +12,14 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "alias-undef/schema.bare",
-              "offset": 20,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 20
           },
           {
             "name": "field1",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "alias-undef/schema.bare",
-              "offset": 35,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 35
           }
         ],
         "types": [
@@ -38,12 +28,7 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "alias-undef/schema.bare",
-              "offset": 28,
-              "line": 2,
-              "col": 13
-            }
+            "offset": 28
           },
           {
             "tag": "list",
@@ -54,43 +39,19 @@
                 "data": "UndefinedAlias",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "alias-undef/schema.bare",
-                  "offset": 48,
-                  "line": 3,
-                  "col": 18
-                }
+                "offset": 48
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "alias-undef/schema.bare",
-              "offset": 43,
-              "line": 3,
-              "col": 13
-            }
+            "offset": 43
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "alias-undef/schema.bare",
-          "offset": 14,
-          "line": 1,
-          "col": 15
-        }
+        "offset": 14
       },
-      "loc": {
-        "filename": "alias-undef/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "alias-undef/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "alias-undef/schema.bare",
+  "offset": 0
 }

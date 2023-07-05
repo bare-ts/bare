@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-repeated-tag/schema.bare",
-    "offset": 50,
-    "line": 1,
-    "col": 51
-  },
-  "message": "(union-repeated-tag/schema.bare:1:51) tag '1' is assigned to a preceding member."
+  "offset": 50,
+  "message": "tag '1' is assigned to a preceding member."
 }

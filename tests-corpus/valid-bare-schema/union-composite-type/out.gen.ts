@@ -8,8 +8,8 @@ function read0(bc: bare.ByteCursor): string | null {
 }
 
 function write0(bc: bare.ByteCursor, x: string | null): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         bare.writeString(bc, x)
     }
 }

@@ -5,8 +5,8 @@ function read0(bc) {
 }
 
 function write0(bc, x) {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         writePerson(bc, x)
     }
 }

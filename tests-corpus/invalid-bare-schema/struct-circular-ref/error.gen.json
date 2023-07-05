@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-circular-ref/schema.bare",
-    "offset": 37,
-    "line": 2,
-    "col": 17
-  },
-  "message": "(struct-circular-ref/schema.bare:2:17) non-terminable circular references are not allowed."
+  "offset": 37,
+  "message": "non-terminable circular references are not allowed."
 }

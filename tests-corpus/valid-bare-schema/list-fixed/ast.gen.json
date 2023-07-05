@@ -11,12 +11,7 @@
           "val": 4,
           "comment": null,
           "extra": null,
-          "loc": {
-            "filename": "list-fixed/schema.bare",
-            "offset": 22,
-            "line": 1,
-            "col": 23
-          }
+          "offset": 22
         },
         "types": [
           {
@@ -24,34 +19,15 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "list-fixed/schema.bare",
-              "offset": 18,
-              "line": 1,
-              "col": 19
-            }
+            "offset": 18
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "list-fixed/schema.bare",
-          "offset": 13,
-          "line": 1,
-          "col": 14
-        }
+        "offset": 13
       },
-      "loc": {
-        "filename": "list-fixed/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "list-fixed/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "list-fixed/schema.bare",
+  "offset": 0
 }

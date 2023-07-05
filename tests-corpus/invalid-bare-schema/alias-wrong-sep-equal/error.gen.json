@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "alias-wrong-sep-equal/schema.bare",
-    "offset": 11,
-    "line": 1,
-    "col": 12
-  },
-  "message": "(alias-wrong-sep-equal/schema.bare:1:12) a type definition and its body cannot be separated by '='."
+  "offset": 11,
+  "message": "a type definition and its body cannot be separated by '='."
 }

@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-val-lowercase/schema.bare",
-    "offset": 23,
-    "line": 2,
-    "col": 5
-  },
-  "message": "(enum-val-lowercase/schema.bare:2:5) the name of an enum member must be in CONSTANT_CASE."
+  "offset": 23,
+  "message": "the name of an enum member must be in CONSTANT_CASE."
 }

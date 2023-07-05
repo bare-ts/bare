@@ -14,12 +14,7 @@
             "extra": {
               "safe": true
             },
-            "loc": {
-              "filename": "safe-int-list/schema.bare",
-              "offset": 18,
-              "line": 1,
-              "col": 19
-            }
+            "offset": 18
           }
         ],
         "extra": {
@@ -27,26 +22,12 @@
           "typedArray": true,
           "unique": false
         },
-        "loc": {
-          "filename": "safe-int-list/schema.bare",
-          "offset": 13,
-          "line": 1,
-          "col": 14
-        }
+        "offset": 13
       },
       "comment": "",
-      "loc": {
-        "filename": "safe-int-list/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "safe-int-list/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "safe-int-list/schema.bare",
+  "offset": 0
 }

@@ -12,33 +12,28 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 28
           },
           {
             "name": null,
             "val": 5,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "union-partial-tag/schema.bare",
-              "offset": 36,
-              "line": 1,
-              "col": 37
-            }
+            "offset": 36
           },
           {
             "name": null,
             "val": 6,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 44
           },
           {
             "name": null,
             "val": 7,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 50
           }
         ],
         "types": [
@@ -47,70 +42,36 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-partial-tag/schema.bare",
-              "offset": 25,
-              "line": 1,
-              "col": 26
-            }
+            "offset": 25
           },
           {
             "tag": "u16",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-partial-tag/schema.bare",
-              "offset": 30,
-              "line": 1,
-              "col": 31
-            }
+            "offset": 30
           },
           {
             "tag": "u32",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-partial-tag/schema.bare",
-              "offset": 40,
-              "line": 1,
-              "col": 41
-            }
+            "offset": 40
           },
           {
             "tag": "u64",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-partial-tag/schema.bare",
-              "offset": 46,
-              "line": 1,
-              "col": 47
-            }
+            "offset": 46
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-partial-tag/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "union-partial-tag/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-partial-tag/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-partial-tag/schema.bare",
+  "offset": 0
 }

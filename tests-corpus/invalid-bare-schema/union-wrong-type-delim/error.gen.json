@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-wrong-type-delim/schema.bare",
-    "offset": 32,
-    "line": 1,
-    "col": 33
-  },
-  "message": "(union-wrong-type-delim/schema.bare:1:33) union members must be separated with '|'."
+  "offset": 32,
+  "message": "union members must be separated with '|'."
 }

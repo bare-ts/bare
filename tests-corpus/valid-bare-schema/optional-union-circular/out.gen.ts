@@ -42,8 +42,8 @@ export function readAlias(bc: bare.ByteCursor): Alias {
 }
 
 export function writeAlias(bc: bare.ByteCursor, x: Alias): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         write0(bc, x)
     }
 }

@@ -16,7 +16,6 @@ export * from "./core/compiler-error.js"
 export * from "./core/config.js"
 export * from "./generator/js-generator.js"
 export * from "./parser/bare-parser.js"
-export * from "./parser/bare-lex.js"
 
 /**
  * Turn the schema `content` into a target language, taking `conf` into account.

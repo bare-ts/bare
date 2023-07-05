@@ -1,8 +1,6 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import type { Location } from "../core/compiler-error.js"
-
 /**
  * The AST is serializable in JSON.
  *
@@ -18,7 +16,8 @@ import type { Location } from "../core/compiler-error.js"
  */
 export type Ast = {
     readonly defs: readonly AliasedType[]
-    readonly loc: Location | null
+    readonly filename: string | number | null
+    readonly offset: number
 }
 
 export type AliasedType = {
@@ -27,17 +26,17 @@ export type AliasedType = {
     readonly internal: boolean
     readonly comment: string
     readonly type: Type
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 /**
- * All types have the same object's shape: { tag, data, types, extra, loc }
+ * All types have the same object's shape: { tag, data, types, extra, offset }
  *
  * - `tag` discriminates the type
  * - `data` contains type-specific info
  * - `types` contains nested types
  * - `extra` contains information that are not part of BARE specification
- * - `loc` is the location of the AST node in the source
+ * - `offset` is the number of the AST node in the source
  */
 export type Type =
     | Alias // Named user type
@@ -56,7 +55,7 @@ export type Alias = {
     readonly data: string
     readonly types: null
     readonly extra: null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type BaseType = {
@@ -64,7 +63,7 @@ export type BaseType = {
     readonly data: null
     readonly types: null
     readonly extra: { readonly safe: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type DataType = {
@@ -72,7 +71,7 @@ export type DataType = {
     readonly data: Length | null
     readonly types: null
     readonly extra: { readonly mut: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type EnumType = {
@@ -80,7 +79,7 @@ export type EnumType = {
     readonly data: readonly EnumVal[]
     readonly types: null
     readonly extra: { readonly intEnum: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type ListType = {
@@ -92,7 +91,7 @@ export type ListType = {
         readonly typedArray: boolean
         readonly unique: boolean
     } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type MapType = {
@@ -100,7 +99,7 @@ export type MapType = {
     readonly data: null
     readonly types: readonly [keyType: Type, valType: Type]
     readonly extra: { readonly mut: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type OptionalType = {
@@ -108,7 +107,7 @@ export type OptionalType = {
     readonly data: null
     readonly types: readonly [type: Type]
     readonly extra: { readonly literal: Literal } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type StructType = {
@@ -116,7 +115,7 @@ export type StructType = {
     readonly data: readonly StructField[]
     readonly types: readonly Type[]
     readonly extra: { readonly class: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type UnionType = {
@@ -124,7 +123,7 @@ export type UnionType = {
     readonly data: readonly UnionTag[]
     readonly types: readonly Type[]
     readonly extra: { readonly flat: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type VoidType = {
@@ -132,17 +131,17 @@ export type VoidType = {
     readonly data: null
     readonly types: null
     readonly extra: { readonly literal: Literal } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
-// All type's data have the same shape: { name, val, comment, extra, loc }
+// All type's data have the same shape: { name, val, comment, extra, offset }
 
 export type EnumVal = {
     readonly name: string
     readonly val: number
     readonly comment: string
     readonly extra: null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type Length = {
@@ -150,7 +149,7 @@ export type Length = {
     readonly val: number
     readonly comment: null
     readonly extra: null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type StructField = {
@@ -158,7 +157,7 @@ export type StructField = {
     readonly val: null
     readonly comment: string
     readonly extra: { readonly mut: boolean } | null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 export type UnionTag = {
@@ -166,7 +165,7 @@ export type UnionTag = {
     readonly val: number
     readonly comment: string
     readonly extra: null
-    readonly loc: Location | null
+    readonly offset: number
 }
 
 // Literals
@@ -184,9 +183,9 @@ export type Literal =
     | { type: "string"; val: string }
     // `type` is the literal value, `val` has no meaning
     | { type: "false"; val: null }
-    | { type: "null"; val: null }
+    | typeof NULL_LITERAL_VAL
     | { type: "true"; val: null }
-    | { type: "undefined"; val: null }
+    | typeof UNDEFINED_LITERAL_VAL
 
 export const NULL_LITERAL_VAL = { type: "null", val: null } as const
 export const UNDEFINED_LITERAL_VAL = { type: "undefined", val: null } as const
@@ -282,7 +281,7 @@ export function symbols(schema: Ast): SymbolTable {
 export function resolveAlias(type: Type, symbols: SymbolTable): Type {
     if (type.tag === "alias") {
         const aliasedType = symbols.get(type.data)
-        if (aliasedType !== undefined) {
+        if (aliasedType != null) {
             return resolveAlias(aliasedType.type, symbols)
         }
     }
@@ -303,7 +302,7 @@ export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
 function referredAliases(type: Type): readonly string[] {
     if (type.tag === "alias") {
         return [type.data]
-    } else if (type.types !== null) {
+    } else if (type.types != null) {
         return type.types.flatMap((t) => referredAliases(t))
     }
     return []
@@ -341,7 +340,7 @@ export function leadingDiscriminators(
                 fields.length === 0 ||
                 fields[0].name !== type0LeadingField.name ||
                 struct.types[0].tag !== "void" ||
-                struct.types[0].extra === null ||
+                struct.types[0].extra == null ||
                 literals.has(literalVal(struct.types[0].extra.literal))
             ) {
                 return null
@@ -364,22 +363,31 @@ export function haveDistinctTypeof(types: readonly Type[]): boolean {
 }
 
 /**
- * Recursively traverse `type` and set `loc` to null.
+ * Recursively traverse `type` and set `offset` to 0.
+ *
+ * This allows comparing types between them regardless their `offset`.
  */
-export function withoutLoc(type: Type): Type {
+export function withoutOffset(type: Type): Type {
     return JSON.parse(
-        JSON.stringify(type, (name, val) => (name === "loc" ? null : val)),
+        JSON.stringify(type, (name, val) => (name === "offset" ? 0 : val)),
     )
 }
 
 /**
- * Recursively traverse `type` and set `comment`, `extra`, `loc` to null.
+ * Recursively traverse `type`,
+ * and set `comment` to the empty string, `extra` to `null`, `offset` to 0.
+ *
+ * This allows comparing types between them considering only their BARE properties.
  */
-export function withoutTrivia(type: Type): Type {
+export function withoutExtra(type: Type): Type {
     return JSON.parse(
         JSON.stringify(type, (name, val) =>
-            name === "comment" || name === "extra" || name === "loc"
+            name === "comment"
+                ? ""
+                : name === "extra"
                 ? null
+                : name === "offset"
+                ? 0
                 : val,
         ),
     )

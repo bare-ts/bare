@@ -12,59 +12,30 @@
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-big-val/schema.bare",
-              "offset": 23,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 23
           },
           {
             "name": "Female",
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-big-val/schema.bare",
-              "offset": 36,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 36
           },
           {
             "name": "Fluid",
             "val": 9007199254740991,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-big-val/schema.bare",
-              "offset": 51,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 51
           }
         ],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "enum-big-val/schema.bare",
-          "offset": 12,
-          "line": 1,
-          "col": 13
-        }
+        "offset": 12
       },
-      "loc": {
-        "filename": "enum-big-val/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "enum-big-val/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "enum-big-val/schema.bare",
+  "offset": 0
 }

@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-not-enclosed/schema.bare",
-    "offset": 14,
-    "line": 1,
-    "col": 15
-  },
-  "message": "(union-not-enclosed/schema.bare:1:15) a union must be enclosed by 'union {}'."
+  "offset": 14,
+  "message": "a union must be enclosed by 'union {}'."
 }

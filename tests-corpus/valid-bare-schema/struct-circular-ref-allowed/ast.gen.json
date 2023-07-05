@@ -12,48 +12,28 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 25
           },
           {
             "name": "secondBestFriend",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 58,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 58
           },
           {
             "name": "friends",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 103,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 103
           },
           {
             "name": "friendNicknames",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 129,
-              "line": 5,
-              "col": 5
-            }
+            "offset": 129
           }
         ],
         "types": [
@@ -66,21 +46,11 @@
                 "data": "Person",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 46,
-                  "line": 2,
-                  "col": 26
-                }
+                "offset": 46
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 37,
-              "line": 2,
-              "col": 17
-            }
+            "offset": 37
           },
           {
             "tag": "union",
@@ -90,14 +60,14 @@
                 "val": 0,
                 "comment": "",
                 "extra": null,
-                "loc": null
+                "offset": 90
               },
               {
                 "name": null,
                 "val": 1,
                 "comment": "",
                 "extra": null,
-                "loc": null
+                "offset": 97
               }
             ],
             "types": [
@@ -106,33 +76,18 @@
                 "data": "Person",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 83,
-                  "line": 3,
-                  "col": 30
-                }
+                "offset": 83
               },
               {
                 "tag": "void",
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 92,
-                  "line": 3,
-                  "col": 39
-                }
+                "offset": 92
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 76,
-              "line": 3,
-              "col": 23
-            }
+            "offset": 76
           },
           {
             "tag": "list",
@@ -143,21 +98,11 @@
                 "data": "Person",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 117,
-                  "line": 4,
-                  "col": 19
-                }
+                "offset": 117
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 112,
-              "line": 4,
-              "col": 14
-            }
+            "offset": 112
           },
           {
             "tag": "map",
@@ -168,55 +113,26 @@
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 150,
-                  "line": 5,
-                  "col": 26
-                }
+                "offset": 150
               },
               {
                 "tag": "alias",
                 "data": "Person",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "struct-circular-ref-allowed/schema.bare",
-                  "offset": 155,
-                  "line": 5,
-                  "col": 31
-                }
+                "offset": 155
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref-allowed/schema.bare",
-              "offset": 146,
-              "line": 5,
-              "col": 22
-            }
+            "offset": 146
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-circular-ref-allowed/schema.bare",
-          "offset": 19,
-          "line": 1,
-          "col": 20
-        }
+        "offset": 19
       },
-      "loc": {
-        "filename": "struct-circular-ref-allowed/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "struct-circular-ref-allowed/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "struct-circular-ref-allowed/schema.bare",
+  "offset": 0
 }

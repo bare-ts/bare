@@ -9,25 +9,11 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "data/schema.bare",
-          "offset": 10,
-          "line": 1,
-          "col": 11
-        }
+        "offset": 10
       },
-      "loc": {
-        "filename": "data/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "data/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "data/schema.bare",
+  "offset": 0
 }

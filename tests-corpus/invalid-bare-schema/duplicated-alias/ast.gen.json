@@ -9,19 +9,9 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "duplicated-alias/schema.bare",
-          "offset": 16,
-          "line": 1,
-          "col": 17
-        }
+        "offset": 16
       },
-      "loc": {
-        "filename": "duplicated-alias/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Duplicated",
@@ -32,25 +22,11 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "duplicated-alias/schema.bare",
-          "offset": 35,
-          "line": 2,
-          "col": 17
-        }
+        "offset": 35
       },
-      "loc": {
-        "filename": "duplicated-alias/schema.bare",
-        "offset": 19,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 19
     }
   ],
-  "loc": {
-    "filename": "duplicated-alias/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "duplicated-alias/schema.bare",
+  "offset": 0
 }

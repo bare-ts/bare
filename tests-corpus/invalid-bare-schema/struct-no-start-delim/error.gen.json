@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-no-start-delim/schema.bare",
-    "offset": 24,
-    "line": 3,
-    "col": 5
-  },
-  "message": "(struct-no-start-delim/schema.bare:3:5) '{' is expected."
+  "offset": 24,
+  "message": "'{' is expected."
 }

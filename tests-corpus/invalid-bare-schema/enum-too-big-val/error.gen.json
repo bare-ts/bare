@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-too-big-val/schema.bare",
-    "offset": 51,
-    "line": 4,
-    "col": 5
-  },
-  "message": "(enum-too-big-val/schema.bare:4:5) only safe integers are supported."
+  "offset": 51,
+  "message": "only safe integers are supported."
 }

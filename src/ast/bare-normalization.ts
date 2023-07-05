@@ -9,13 +9,15 @@ export function normalize(schema: ast.Ast): ast.Ast {
     for (const def of schema.defs) {
         const type = normalizeSubtypes(n, def.type)
         if (def.type !== type) {
-            const { alias, internal, comment, loc } = def
-            defs.push({ alias, internal, type, comment, loc })
+            const { alias, internal, comment, offset } = def
+            defs.push({ alias, internal, type, comment, offset })
         } else {
             defs.push(def)
         }
     }
-    return defs.length > schema.defs.length ? { defs, loc: schema.loc } : schema
+    return defs.length > schema.defs.length
+        ? { defs, filename: schema.filename, offset: schema.offset }
+        : schema
 }
 
 type Context = {
@@ -25,13 +27,13 @@ type Context = {
 }
 
 function normalizeSubtypes(n: Context, type: ast.Type): ast.Type {
-    if (type.types !== null && type.types.length > 0) {
+    if (type.types != null && type.types.length > 0) {
         const types = type.types.map((t) => maybeAlias(n, t))
         if (type.types.some((t, i) => t !== types[i])) {
-            const { tag, data, extra, loc } = type
+            const { tag, data, extra, offset } = type
             // we don't use spread operator to preserve the object's shape
             // Indeed: shapeOf({ x, y }) != shapeOf({ ...{ x, y } })
-            return { tag, data, types, extra, loc } as ast.Type
+            return { tag, data, types, extra, offset } as ast.Type
         }
     }
     return type
@@ -56,9 +58,9 @@ function maybeAlias(n: Context, type: ast.Type): ast.Type {
 function genAlias(n: Context, type: ast.Type): ast.Alias {
     // NOTE: this dirty check is ok because we initialize
     // every object in the same way (properties are in the same order)
-    const stringifiedType = JSON.stringify(ast.withoutLoc(type))
+    const stringifiedType = JSON.stringify(ast.withoutOffset(type))
     let alias = n.dedup.get(stringifiedType)
-    if (alias === undefined) {
+    if (alias == null) {
         const normalized = normalizeSubtypes(n, type)
         // We use an integer as internal alias.
         // This avoids conflicts with user aliases.
@@ -68,10 +70,10 @@ function genAlias(n: Context, type: ast.Type): ast.Alias {
             internal: true,
             type: normalized,
             comment: "",
-            loc: normalized.loc,
+            offset: normalized.offset,
         })
         n.dedup.set(stringifiedType, alias)
     }
-    const loc = type.loc
-    return { tag: "alias", data: alias, types: null, extra: null, loc }
+    const offset = type.offset
+    return { tag: "alias", data: alias, types: null, extra: null, offset }
 }

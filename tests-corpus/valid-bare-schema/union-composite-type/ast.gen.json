@@ -11,21 +11,21 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 51
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 76
           },
           {
             "name": null,
             "val": 2,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 90
           }
         ],
         "types": [
@@ -38,12 +38,7 @@
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "union-composite-type/schema.bare",
-                  "offset": 31,
-                  "line": 2,
-                  "col": 9
-                }
+                "offset": 31
               },
               {
                 "tag": "optional",
@@ -54,30 +49,15 @@
                     "data": null,
                     "types": null,
                     "extra": null,
-                    "loc": {
-                      "filename": "union-composite-type/schema.bare",
-                      "offset": 45,
-                      "line": 2,
-                      "col": 23
-                    }
+                    "offset": 45
                   }
                 ],
                 "extra": null,
-                "loc": {
-                  "filename": "union-composite-type/schema.bare",
-                  "offset": 36,
-                  "line": 2,
-                  "col": 14
-                }
+                "offset": 36
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "union-composite-type/schema.bare",
-              "offset": 27,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 27
           },
           {
             "tag": "list",
@@ -86,12 +66,7 @@
               "val": 4,
               "comment": null,
               "extra": null,
-              "loc": {
-                "filename": "union-composite-type/schema.bare",
-                "offset": 73,
-                "line": 2,
-                "col": 51
-              }
+              "offset": 73
             },
             "types": [
               {
@@ -103,30 +78,15 @@
                     "data": null,
                     "types": null,
                     "extra": null,
-                    "loc": {
-                      "filename": "union-composite-type/schema.bare",
-                      "offset": 67,
-                      "line": 2,
-                      "col": 45
-                    }
+                    "offset": 67
                   }
                 ],
                 "extra": null,
-                "loc": {
-                  "filename": "union-composite-type/schema.bare",
-                  "offset": 58,
-                  "line": 2,
-                  "col": 36
-                }
+                "offset": 58
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "union-composite-type/schema.bare",
-              "offset": 53,
-              "line": 2,
-              "col": 31
-            }
+            "offset": 53
           },
           {
             "tag": "list",
@@ -135,12 +95,7 @@
               "val": 4,
               "comment": null,
               "extra": null,
-              "loc": {
-                "filename": "union-composite-type/schema.bare",
-                "offset": 87,
-                "line": 2,
-                "col": 65
-              }
+              "offset": 87
             },
             "types": [
               {
@@ -148,12 +103,7 @@
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "union-composite-type/schema.bare",
-                  "offset": 83,
-                  "line": 2,
-                  "col": 61
-                }
+                "offset": 83
               }
             ],
             "extra": {
@@ -161,35 +111,16 @@
               "typedArray": true,
               "unique": false
             },
-            "loc": {
-              "filename": "union-composite-type/schema.bare",
-              "offset": 78,
-              "line": 2,
-              "col": 56
-            }
+            "offset": 78
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-composite-type/schema.bare",
-          "offset": 15,
-          "line": 1,
-          "col": 16
-        }
+        "offset": 15
       },
       "comment": "",
-      "loc": {
-        "filename": "union-composite-type/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-composite-type/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-composite-type/schema.bare",
+  "offset": 0
 }

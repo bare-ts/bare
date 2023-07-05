@@ -13,46 +13,22 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "map-circular-ref/schema.bare",
-              "offset": 15,
-              "line": 1,
-              "col": 16
-            }
+            "offset": 15
           },
           {
             "tag": "alias",
             "data": "Alias",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "map-circular-ref/schema.bare",
-              "offset": 20,
-              "line": 1,
-              "col": 21
-            }
+            "offset": 20
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "map-circular-ref/schema.bare",
-          "offset": 11,
-          "line": 1,
-          "col": 12
-        }
+        "offset": 11
       },
-      "loc": {
-        "filename": "map-circular-ref/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "map-circular-ref/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "map-circular-ref/schema.bare",
+  "offset": 0
 }

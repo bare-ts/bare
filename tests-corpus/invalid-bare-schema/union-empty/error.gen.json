@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-empty/schema.bare",
-    "offset": 16,
-    "line": 1,
-    "col": 17
-  },
-  "message": "(union-empty/schema.bare:1:17) a union must include at least one member."
+  "offset": 16,
+  "message": "a union must include at least one member."
 }

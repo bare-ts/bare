@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-missing-type-delim/schema.bare",
-    "offset": 33,
-    "line": 1,
-    "col": 34
-  },
-  "message": "(union-missing-type-delim/schema.bare:1:34) '}' is expected."
+  "offset": 33,
+  "message": "'}' is expected."
 }

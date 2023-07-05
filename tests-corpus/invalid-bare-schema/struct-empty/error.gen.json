@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-empty/schema.bare",
-    "offset": 19,
-    "line": 1,
-    "col": 20
-  },
-  "message": "(struct-empty/schema.bare:1:20) a struct must include at least one member."
+  "offset": 19,
+  "message": "a struct must include at least one member."
 }

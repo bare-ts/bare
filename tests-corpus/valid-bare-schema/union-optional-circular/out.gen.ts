@@ -5,8 +5,8 @@ function read0(bc: bare.ByteCursor): Alias | null {
 }
 
 function write0(bc: bare.ByteCursor, x: Alias | null): void {
-    bare.writeBool(bc, x !== null)
-    if (x !== null) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
         writeAlias(bc, x)
     }
 }

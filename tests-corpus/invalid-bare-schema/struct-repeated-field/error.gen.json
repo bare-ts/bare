@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-repeated-field/schema.bare",
-    "offset": 52,
-    "line": 5,
-    "col": 5
-  },
-  "message": "(struct-repeated-field/schema.bare:5:5) name of a struct member must be unique."
+  "offset": 52,
+  "message": "name of a struct member must be unique."
 }

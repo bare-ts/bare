@@ -12,12 +12,7 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "typed-array/schema.bare",
-              "offset": 18,
-              "line": 1,
-              "col": 19
-            }
+            "offset": 18
           }
         ],
         "extra": {
@@ -25,26 +20,12 @@
           "typedArray": true,
           "unique": false
         },
-        "loc": {
-          "filename": "typed-array/schema.bare",
-          "offset": 13,
-          "line": 1,
-          "col": 14
-        }
+        "offset": 13
       },
       "comment": "",
-      "loc": {
-        "filename": "typed-array/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "typed-array/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "typed-array/schema.bare",
+  "offset": 0
 }

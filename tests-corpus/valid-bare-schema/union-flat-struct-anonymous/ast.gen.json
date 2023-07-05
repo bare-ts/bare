@@ -11,14 +11,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 47
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 71
           }
         ],
         "types": [
@@ -32,24 +32,14 @@
                 "extra": {
                   "mut": false
                 },
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 32,
-                  "line": 1,
-                  "col": 33
-                }
+                "offset": 32
               },
               {
                 "name": "value",
                 "val": null,
                 "comment": "",
                 "extra": null,
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 34,
-                  "line": 1,
-                  "col": 35
-                }
+                "offset": 34
               }
             ],
             "types": [
@@ -63,33 +53,18 @@
                     "val": 0
                   }
                 },
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 32,
-                  "line": 1,
-                  "col": 33
-                }
+                "offset": 32
               },
               {
                 "tag": "str",
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 41,
-                  "line": 1,
-                  "col": 42
-                }
+                "offset": 41
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "union-flat-struct-anonymous/schema.bare",
-              "offset": 32,
-              "line": 1,
-              "col": 33
-            }
+            "offset": 32
           },
           {
             "tag": "struct",
@@ -101,24 +76,14 @@
                 "extra": {
                   "mut": false
                 },
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 56,
-                  "line": 1,
-                  "col": 57
-                }
+                "offset": 56
               },
               {
                 "name": "value",
                 "val": null,
                 "comment": "",
                 "extra": null,
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 58,
-                  "line": 1,
-                  "col": 59
-                }
+                "offset": 58
               }
             ],
             "types": [
@@ -132,58 +97,29 @@
                     "val": 1
                   }
                 },
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 56,
-                  "line": 1,
-                  "col": 57
-                }
+                "offset": 56
               },
               {
                 "tag": "u32",
                 "data": null,
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "union-flat-struct-anonymous/schema.bare",
-                  "offset": 65,
-                  "line": 1,
-                  "col": 66
-                }
+                "offset": 65
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "union-flat-struct-anonymous/schema.bare",
-              "offset": 56,
-              "line": 1,
-              "col": 57
-            }
+            "offset": 56
           }
         ],
         "extra": {
           "flat": true
         },
-        "loc": {
-          "filename": "union-flat-struct-anonymous/schema.bare",
-          "offset": 17,
-          "line": 1,
-          "col": 18
-        }
+        "offset": 17
       },
       "comment": "",
-      "loc": {
-        "filename": "union-flat-struct-anonymous/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-flat-struct-anonymous/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-flat-struct-anonymous/schema.bare",
+  "offset": 0
 }

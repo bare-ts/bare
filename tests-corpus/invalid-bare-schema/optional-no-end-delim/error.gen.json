@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "optional-no-end-delim/schema.bare",
-    "offset": 28,
-    "line": 1,
-    "col": 29
-  },
-  "message": "(optional-no-end-delim/schema.bare:1:29) '>' is expected."
+  "offset": 28,
+  "message": "'>' is expected."
 }

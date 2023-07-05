@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "empty-schema/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  },
-  "message": "(empty-schema/schema.bare:1:1) a schema cannot be empty."
+  "offset": 0,
+  "message": "a schema cannot be empty."
 }

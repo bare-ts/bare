@@ -14,8 +14,8 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
     for (let i = 0; i < defs.length; i++) {
         const type = configureType(c, defs[i].type, true)
         if (defs[i].type !== type) {
-            const { alias, internal, comment, loc } = defs[i]
-            defs[i] = { alias, internal, type, comment, loc }
+            const { alias, internal, comment, offset } = defs[i]
+            defs[i] = { alias, internal, type, comment, offset }
         }
     }
     for (let i = 0; i < defs.length; i++) {
@@ -25,13 +25,13 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
             type.tag === "struct" &&
             !type.extra?.class
         ) {
-            const { alias, internal, comment, loc } = defs[i]
+            const { alias, internal, comment, offset } = defs[i]
             type = embeddedTag(type, defs[i].alias)
-            defs[i] = { alias, internal, comment, type, loc }
+            defs[i] = { alias, internal, comment, type, offset }
         }
     }
     if (schema.defs.some((def, i) => def !== defs[i])) {
-        return { defs, loc: schema.loc }
+        return { defs, filename: schema.filename, offset: schema.offset }
     }
     return schema
 }
@@ -49,10 +49,9 @@ function configureType(
 ): ast.Type {
     const config = c.config
     let { data, extra } = type
-    let types = type.types !== null ? configureTypes(c, type.types) : type.types
-    if (extra === null) {
-        const mut = config.useMutable
-        const undef = config.useUndefined
+    let types = type.types != null ? configureTypes(c, type.types) : type.types
+    if (extra == null) {
+        const { useMutable: mut, useUndefined } = config
         switch (type.tag) {
             case "enum": {
                 if (config.useIntEnum) {
@@ -77,8 +76,8 @@ function configureType(
             }
             case "optional":
             case "void": {
-                if (undef) {
-                    const literal: ast.Literal = undef
+                if (useUndefined) {
+                    const literal: ast.Literal = useUndefined
                         ? ast.UNDEFINED_LITERAL_VAL
                         : ast.NULL_LITERAL_VAL
                     extra = { literal }
@@ -95,14 +94,14 @@ function configureType(
             case "union": {
                 if (
                     config.usePrimitiveFlatUnion &&
-                    types !== null &&
+                    types != null &&
                     types.every(ast.isBaseOrVoidType) &&
                     ast.haveDistinctTypeof(type.types)
                 ) {
                     extra = { flat: true }
                 } else if (
                     config.useStructFlatUnion &&
-                    types !== null &&
+                    types != null &&
                     types.every(
                         (t): t is ast.Alias | ast.StructType =>
                             t.tag === "alias" || t.tag === "struct",
@@ -131,7 +130,7 @@ function configureType(
                         newTypes.push(subtype)
                     }
                     types = newTypes.every(
-                        (t, i) => types !== null && t === types[i],
+                        (t, i) => types != null && t === types[i],
                     )
                         ? types
                         : newTypes
@@ -150,7 +149,13 @@ function configureType(
         }
     }
     if (type.data !== data || type.types !== types || type.extra !== extra) {
-        return { tag: type.tag, data, types, extra, loc: type.loc } as ast.Type
+        return {
+            tag: type.tag,
+            data,
+            types,
+            extra,
+            offset: type.offset,
+        } as ast.Type
     }
     return type
 }
@@ -182,9 +187,9 @@ function configureField(
     config: Config,
 ): ast.StructField {
     const mut = config.useMutable
-    if (field.extra === null && mut) {
-        const { name, val, comment, loc } = field
-        return { name, val, extra: { mut }, comment, loc }
+    if (field.extra == null && mut) {
+        const { name, val, comment, offset } = field
+        return { name, val, extra: { mut }, comment, offset }
     }
     return field
 }
@@ -193,14 +198,14 @@ function embeddedTag(
     type: ast.StructType,
     val: string | number,
 ): ast.StructType {
-    const { extra, loc } = type
+    const { extra, offset } = type
     const data = type.data.slice()
     data.splice(0, 0, {
         name: "tag",
         val: null,
         comment: "",
         extra: { mut: false },
-        loc,
+        offset,
     })
     const literal: ast.Literal =
         typeof val === "string"
@@ -212,7 +217,7 @@ function embeddedTag(
         data: null,
         types: null,
         extra: { literal },
-        loc,
+        offset,
     })
-    return { tag: "struct", data, types, extra, loc }
+    return { tag: "struct", data, types, extra, offset }
 }

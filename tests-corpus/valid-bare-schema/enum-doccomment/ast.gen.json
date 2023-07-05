@@ -12,59 +12,30 @@
             "val": 0,
             "comment": " Be inclusive :)\n",
             "extra": null,
-            "loc": {
-              "filename": "enum-doccomment/schema.bare",
-              "offset": 72,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 72
           },
           {
             "name": "Male",
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-doccomment/schema.bare",
-              "offset": 82,
-              "line": 5,
-              "col": 5
-            }
+            "offset": 82
           },
           {
             "name": "Female",
             "val": 2,
             "comment": " One is not born, but becomes a woman\n                  -- Simone de Beauvoir\n",
             "extra": null,
-            "loc": {
-              "filename": "enum-doccomment/schema.bare",
-              "offset": 179,
-              "line": 8,
-              "col": 5
-            }
+            "offset": 179
           }
         ],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "enum-doccomment/schema.bare",
-          "offset": 39,
-          "line": 2,
-          "col": 13
-        }
+        "offset": 39
       },
-      "loc": {
-        "filename": "enum-doccomment/schema.bare",
-        "offset": 27,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 27
     }
   ],
-  "loc": {
-    "filename": "enum-doccomment/schema.bare",
-    "offset": 27,
-    "line": 2,
-    "col": 1
-  }
+  "filename": "enum-doccomment/schema.bare",
+  "offset": 27
 }

@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "map-legacy/schema.bare",
-    "offset": 13,
-    "line": 1,
-    "col": 14
-  },
-  "message": "(map-legacy/schema.bare:1:14) use 'map<A><B>' or allow 'map[A]B' with option '--legacy'."
+  "offset": 13,
+  "message": "use 'map<A><B>' or allow 'map[A]B' with option '--legacy'."
 }

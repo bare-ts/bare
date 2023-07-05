@@ -9,19 +9,9 @@
         "data": null,
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "union-repeated-aliased-type/schema.bare",
-          "offset": 7,
-          "line": 1,
-          "col": 8
-        }
+        "offset": 7
       },
-      "loc": {
-        "filename": "union-repeated-aliased-type/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "X",
@@ -35,14 +25,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 28
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 32
           }
         ],
         "types": [
@@ -51,46 +41,22 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-repeated-aliased-type/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 16
-            }
+            "offset": 25
           },
           {
             "tag": "alias",
             "data": "Y",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-repeated-aliased-type/schema.bare",
-              "offset": 30,
-              "line": 2,
-              "col": 21
-            }
+            "offset": 30
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-repeated-aliased-type/schema.bare",
-          "offset": 17,
-          "line": 2,
-          "col": 8
-        }
+        "offset": 17
       },
-      "loc": {
-        "filename": "union-repeated-aliased-type/schema.bare",
-        "offset": 10,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 10
     }
   ],
-  "loc": {
-    "filename": "union-repeated-aliased-type/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-repeated-aliased-type/schema.bare",
+  "offset": 0
 }

@@ -12,60 +12,35 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 28,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 28
           },
           {
             "name": "struct",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 42,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 42
           },
           {
             "name": "enum",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 58,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 58
           },
           {
             "name": "const",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 72,
-              "line": 5,
-              "col": 5
-            }
+            "offset": 72
           },
           {
             "name": "bc",
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 88,
-              "line": 6,
-              "col": 5
-            }
+            "offset": 88
           }
         ],
         "types": [
@@ -74,82 +49,43 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 34,
-              "line": 2,
-              "col": 11
-            }
+            "offset": 34
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 50,
-              "line": 3,
-              "col": 13
-            }
+            "offset": 50
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 64,
-              "line": 4,
-              "col": 11
-            }
+            "offset": 64
           },
           {
             "tag": "bool",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 79,
-              "line": 5,
-              "col": 12
-            }
+            "offset": 79
           },
           {
             "tag": "u8",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-keyword-names/schema.bare",
-              "offset": 92,
-              "line": 6,
-              "col": 9
-            }
+            "offset": 92
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-keyword-names/schema.bare",
-          "offset": 22,
-          "line": 1,
-          "col": 23
-        }
+        "offset": 22
       },
-      "loc": {
-        "filename": "struct-keyword-names/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "struct-keyword-names/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "struct-keyword-names/schema.bare",
+  "offset": 0
 }

@@ -79,6 +79,16 @@ New entries must be placed in a section entitled `Unreleased`.
     const payload = encodeContacts(contacts) // use the default config
     ```
 
+-   BREAKING CHANGES: replace locations with offsets
+
+    Previously, every node and compiler errors carried a `loc` or `location` property.
+    A location object contained a `filename`, `line`, `col`, and `offset` properties.
+
+    The `filename` property is now contained in the AST root in the property `filename`.
+    `loc` and `location` are replaced by `offset`.
+
+    The line and column numbers must now be computed using the offset.
+
 ## 0.14.0 (2023-06-19)
 
 -   BREAKING CHANGES: enum member names in `PascalCase` instead of `CONSTANT_CASE`

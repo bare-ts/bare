@@ -12,14 +12,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 35
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 41
           }
         ],
         "types": [
@@ -32,55 +32,26 @@
                 "data": "Alias",
                 "types": null,
                 "extra": null,
-                "loc": {
-                  "filename": "union-optional-circular/schema.bare",
-                  "offset": 28,
-                  "line": 1,
-                  "col": 29
-                }
+                "offset": 28
               }
             ],
             "extra": null,
-            "loc": {
-              "filename": "union-optional-circular/schema.bare",
-              "offset": 19,
-              "line": 1,
-              "col": 20
-            }
+            "offset": 19
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-optional-circular/schema.bare",
-              "offset": 37,
-              "line": 1,
-              "col": 38
-            }
+            "offset": 37
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-optional-circular/schema.bare",
-          "offset": 11,
-          "line": 1,
-          "col": 12
-        }
+        "offset": 11
       },
-      "loc": {
-        "filename": "union-optional-circular/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "union-optional-circular/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-optional-circular/schema.bare",
+  "offset": 0
 }

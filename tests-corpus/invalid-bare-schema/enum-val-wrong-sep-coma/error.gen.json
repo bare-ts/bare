@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-val-wrong-sep-coma/schema.bare",
-    "offset": 28,
-    "line": 2,
-    "col": 10
-  },
-  "message": "(enum-val-wrong-sep-coma/schema.bare:2:10) members cannot be separated by ','."
+  "offset": 28,
+  "message": "members cannot be separated by ','."
 }

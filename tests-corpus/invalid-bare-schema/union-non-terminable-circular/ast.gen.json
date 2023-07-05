@@ -12,14 +12,14 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 26
           },
           {
             "name": null,
             "val": 1,
             "comment": "",
             "extra": null,
-            "loc": null
+            "offset": 35
           }
         ],
         "types": [
@@ -28,40 +28,20 @@
             "data": "Alias1",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-non-terminable-circular/schema.bare",
-              "offset": 19,
-              "line": 1,
-              "col": 20
-            }
+            "offset": 19
           },
           {
             "tag": "alias",
             "data": "Alias2",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "union-non-terminable-circular/schema.bare",
-              "offset": 28,
-              "line": 1,
-              "col": 29
-            }
+            "offset": 28
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "union-non-terminable-circular/schema.bare",
-          "offset": 11,
-          "line": 1,
-          "col": 12
-        }
+        "offset": 11
       },
-      "loc": {
-        "filename": "union-non-terminable-circular/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     },
     {
       "alias": "Alias1",
@@ -72,19 +52,9 @@
         "data": "Alias",
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "union-non-terminable-circular/schema.bare",
-          "offset": 49,
-          "line": 2,
-          "col": 13
-        }
+        "offset": 49
       },
-      "loc": {
-        "filename": "union-non-terminable-circular/schema.bare",
-        "offset": 37,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 37
     },
     {
       "alias": "Alias2",
@@ -95,25 +65,11 @@
         "data": "Alias",
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "union-non-terminable-circular/schema.bare",
-          "offset": 67,
-          "line": 3,
-          "col": 13
-        }
+        "offset": 67
       },
-      "loc": {
-        "filename": "union-non-terminable-circular/schema.bare",
-        "offset": 55,
-        "line": 3,
-        "col": 1
-      }
+      "offset": 55
     }
   ],
-  "loc": {
-    "filename": "union-non-terminable-circular/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "union-non-terminable-circular/schema.bare",
+  "offset": 0
 }

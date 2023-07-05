@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "struct-field-uppercase/schema.bare",
-    "offset": 26,
-    "line": 3,
-    "col": 5
-  },
-  "message": "(struct-field-uppercase/schema.bare:3:5) the name of a field must be in camelCase."
+  "offset": 26,
+  "message": "the name of a field must be in camelCase."
 }

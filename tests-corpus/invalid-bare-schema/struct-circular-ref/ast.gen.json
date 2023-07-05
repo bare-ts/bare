@@ -12,12 +12,7 @@
             "val": null,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref/schema.bare",
-              "offset": 25,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 25
           }
         ],
         "types": [
@@ -26,34 +21,15 @@
             "data": "Person",
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-circular-ref/schema.bare",
-              "offset": 37,
-              "line": 2,
-              "col": 17
-            }
+            "offset": 37
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-circular-ref/schema.bare",
-          "offset": 19,
-          "line": 1,
-          "col": 20
-        }
+        "offset": 19
       },
-      "loc": {
-        "filename": "struct-circular-ref/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "struct-circular-ref/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "struct-circular-ref/schema.bare",
+  "offset": 0
 }

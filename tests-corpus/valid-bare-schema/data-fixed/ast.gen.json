@@ -11,34 +11,15 @@
           "val": 16,
           "comment": null,
           "extra": null,
-          "loc": {
-            "filename": "data-fixed/schema.bare",
-            "offset": 15,
-            "line": 1,
-            "col": 16
-          }
+          "offset": 15
         },
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "data-fixed/schema.bare",
-          "offset": 10,
-          "line": 1,
-          "col": 11
-        }
+        "offset": 10
       },
-      "loc": {
-        "filename": "data-fixed/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "data-fixed/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "data-fixed/schema.bare",
+  "offset": 0
 }

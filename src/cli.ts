@@ -3,7 +3,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { Config, transform } from "./index.js"
+import { CompilerError, Config, transform } from "./index.js"
 import { Argument, Option, program } from "commander"
 import * as fs from "node:fs"
 import * as process from "node:process"
@@ -100,13 +100,52 @@ program
 program.parse()
 
 function compileAction(schema: string | number, opts: Partial<Config>): void {
+    let config: Config | null = null
+    let content = ""
     try {
-        const config = Config({ ...opts, schema })
-        const content = fs.readFileSync(schema).toString()
+        config = Config({ ...opts, schema })
+        content = fs.readFileSync(schema).toString()
         const compiled = transform(content, config)
         fs.writeFileSync(config.out ?? 1, compiled)
     } catch (e) {
-        console.error(`error: ${e instanceof Error ? e.message : e}`)
+        const message = `error: ${
+            e instanceof CompilerError
+                ? `(${formatLocation(
+                      config?.schema,
+                      location(content, e.offset),
+                  )}) `
+                : ""
+        }`
+        console.error(`${message}${e instanceof Error ? e.message : e}`)
         process.exit(1)
     }
+}
+
+export type Location = {
+    /**
+     * 1-based index
+     */
+    readonly line: number
+    /**
+     * 1-based index
+     */
+    readonly col: number
+}
+
+export function location(content: string, offset: number): Location {
+    const normalizedOffset = Math.min(offset, content.length)
+    const substring = content.slice(0, normalizedOffset + 1)
+    const lineOffset = substring.lastIndexOf("\n")
+    // PERF: this is not the most efficient way to compute the line number.
+    // However, this should be enough for our use case (compilation on error).
+    const line = substring.split("\n").length
+    const col = normalizedOffset - lineOffset
+    return { line, col }
+}
+
+function formatLocation(
+    file: string | number | null | undefined,
+    loc: Location,
+): string {
+    return `(${file != null ? file : "<internal>"}:${loc.line}:${loc.col}) `
 }

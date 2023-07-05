@@ -12,24 +12,14 @@
             "val": null,
             "comment": " person's name\n",
             "extra": null,
-            "loc": {
-              "filename": "struct-doccomment/schema.bare",
-              "offset": 73,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 73
           },
           {
             "name": "age",
             "val": null,
             "comment": " person's age\n",
             "extra": null,
-            "loc": {
-              "filename": "struct-doccomment/schema.bare",
-              "offset": 106,
-              "line": 6,
-              "col": 5
-            }
+            "offset": 106
           }
         ],
         "types": [
@@ -38,46 +28,22 @@
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-doccomment/schema.bare",
-              "offset": 79,
-              "line": 4,
-              "col": 11
-            }
+            "offset": 79
           },
           {
             "tag": "u8",
             "data": null,
             "types": null,
             "extra": null,
-            "loc": {
-              "filename": "struct-doccomment/schema.bare",
-              "offset": 111,
-              "line": 6,
-              "col": 10
-            }
+            "offset": 111
           }
         ],
         "extra": null,
-        "loc": {
-          "filename": "struct-doccomment/schema.bare",
-          "offset": 47,
-          "line": 2,
-          "col": 20
-        }
+        "offset": 47
       },
-      "loc": {
-        "filename": "struct-doccomment/schema.bare",
-        "offset": 28,
-        "line": 2,
-        "col": 1
-      }
+      "offset": 28
     }
   ],
-  "loc": {
-    "filename": "struct-doccomment/schema.bare",
-    "offset": 28,
-    "line": 2,
-    "col": 1
-  }
+  "filename": "struct-doccomment/schema.bare",
+  "offset": 28
 }

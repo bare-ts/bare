@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "union-tag-hex/schema.bare",
-    "offset": 30,
-    "line": 1,
-    "col": 31
-  },
-  "message": "(union-tag-hex/schema.bare:1:31) an unsigned integer is expected."
+  "offset": 30,
+  "message": "an unsigned integer is expected."
 }

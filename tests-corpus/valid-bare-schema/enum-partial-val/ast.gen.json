@@ -12,59 +12,30 @@
             "val": 0,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-partial-val/schema.bare",
-              "offset": 23,
-              "line": 2,
-              "col": 5
-            }
+            "offset": 23
           },
           {
             "name": "Male",
             "val": 3,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-partial-val/schema.bare",
-              "offset": 33,
-              "line": 3,
-              "col": 5
-            }
+            "offset": 33
           },
           {
             "name": "Female",
             "val": 4,
             "comment": "",
             "extra": null,
-            "loc": {
-              "filename": "enum-partial-val/schema.bare",
-              "offset": 46,
-              "line": 4,
-              "col": 5
-            }
+            "offset": 46
           }
         ],
         "types": null,
         "extra": null,
-        "loc": {
-          "filename": "enum-partial-val/schema.bare",
-          "offset": 12,
-          "line": 1,
-          "col": 13
-        }
+        "offset": 12
       },
-      "loc": {
-        "filename": "enum-partial-val/schema.bare",
-        "offset": 0,
-        "line": 1,
-        "col": 1
-      }
+      "offset": 0
     }
   ],
-  "loc": {
-    "filename": "enum-partial-val/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  }
+  "filename": "enum-partial-val/schema.bare",
+  "offset": 0
 }

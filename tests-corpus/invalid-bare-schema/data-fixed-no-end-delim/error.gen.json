@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "data-fixed-no-end-delim/schema.bare",
-    "offset": 20,
-    "line": 2,
-    "col": 1
-  },
-  "message": "(data-fixed-no-end-delim/schema.bare:2:1) ']' is expected."
+  "offset": 20,
+  "message": "']' is expected."
 }

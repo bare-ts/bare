@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "enum-repeated-val/schema.bare",
-    "offset": 53,
-    "line": 5,
-    "col": 5
-  },
-  "message": "(enum-repeated-val/schema.bare:5:5) name of a enum member must be unique."
+  "offset": 53,
+  "message": "name of a enum member must be unique."
 }

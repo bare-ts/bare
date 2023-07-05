@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "alias-wrong-sep-semicolon/schema.bare",
-    "offset": 10,
-    "line": 1,
-    "col": 11
-  },
-  "message": "(alias-wrong-sep-semicolon/schema.bare:1:11) members cannot be separated by ','."
+  "offset": 10,
+  "message": "members cannot be separated by ','."
 }

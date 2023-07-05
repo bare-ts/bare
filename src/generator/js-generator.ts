@@ -146,7 +146,7 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
 }
 
 function namespaced(g: Gen, alias: string): string {
-    return g.symbols.get(alias) !== undefined ? "" : "ext."
+    return g.symbols.get(alias) != null ? "" : "ext."
 }
 
 function genType(g: Gen, type: ast.Type): string {
@@ -472,7 +472,7 @@ function genListReader(g: Gen, type: ast.ListType): string {
 
 function genListRawReader(g: Gen, type: ast.ListType): string {
     const lenDecoding =
-        type.data !== null
+        type.data != null
             ? `${type.data.val}`
             : "bare.readUintSafe(bc)\nif (len === 0) {\n    return []\n}"
     const valReading = genReading(g, type.types[0])
@@ -487,7 +487,7 @@ function genListRawReader(g: Gen, type: ast.ListType): string {
 }
 
 function genDataReader(_g: Gen, type: ast.DataType): string {
-    if (type.data !== null) {
+    if (type.data != null) {
         return `(bare.readFixedData(bc, ${type.data.val}))`
     }
     return "(bare.readData(bc))"
@@ -615,7 +615,7 @@ function genObjectReader(g: Gen, type: ast.StructType): string {
 
 function genTypedArrayReader(_g: Gen, type: ast.ListType): string {
     const typeName = capitalize(type.types[0].tag)
-    if (type.data !== null) {
+    if (type.data != null) {
         return `(bare.read${typeName}FixedArray(bc, ${type.data.val}))`
     }
     return `(bare.read${typeName}Array(bc))`
@@ -740,7 +740,7 @@ function genListWriter(g: Gen, type: ast.ListType): string {
 
 function genListRawWriter(g: Gen, type: ast.ListType): string {
     const lenEncoding =
-        type.data !== null
+        type.data != null
             ? `assert($x.length === ${type.data.val}, "Unmatched length")`
             : "bare.writeUintSafe(bc, $x.length)"
     const writingElt = genWriting(g, type.types[0], "$x[i]")
@@ -753,7 +753,7 @@ function genListRawWriter(g: Gen, type: ast.ListType): string {
 }
 
 function genDataWriter(_g: Gen, type: ast.DataType): string {
-    if (type.data === null) {
+    if (type.data == null) {
         return "(bare.writeData(bc, $x))"
     }
     return unindent(`{
@@ -803,7 +803,11 @@ function genMapWriter(g: Gen, type: ast.MapType): string {
 }
 
 function genOptionalWriter(g: Gen, type: ast.OptionalType): string {
-    const cmp = `$x !== ${noneVal(type)}`
+    const none = noneVal(type)
+    const cmp =
+        none === "null" || none === "undefined"
+            ? "$x != null"
+            : `$x !== ${none}`
     return unindent(`{
         bare.writeBool(bc, ${cmp})
         if (${cmp}) {
@@ -834,7 +838,7 @@ function genStructWriter(g: Gen, type: ast.StructType): string {
 
 function genTypedArrayWriter(_g: Gen, type: ast.ListType): string {
     const typeName = capitalize(type.types[0].tag)
-    if (type.data === null) {
+    if (type.data == null) {
         return `(bare.write${typeName}Array(bc, $x))`
     }
     return unindent(`{
@@ -882,7 +886,7 @@ function genStructFlatUnionWriter(g: Gen, union: ast.UnionType): string {
         body = unindent(body.slice(0, -6)) // remove last 'else '
     } else if (
         resolved.every((t) => !t.extra?.class) &&
-        discriminators !== null
+        discriminators != null
     ) {
         const leadingFieldName = resolved[0].data[0].name
         let switchBody = ""
@@ -1023,7 +1027,7 @@ function global(g: Gen, name: string): string {
 }
 
 export function noneVal(type: ast.OptionalType | ast.VoidType): string {
-    return type.extra !== null
+    return type.extra != null
         ? jsRpr(ast.literalVal(type.extra.literal))
         : "null"
 }

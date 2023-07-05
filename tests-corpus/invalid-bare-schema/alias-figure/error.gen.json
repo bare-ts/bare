@@ -1,10 +1,5 @@
 {
   "name": "CompilerError",
-  "location": {
-    "filename": "alias-figure/schema.bare",
-    "offset": 0,
-    "line": 1,
-    "col": 1
-  },
-  "message": "(alias-figure/schema.bare:1:1) the type name '8u' must not start with a figure or must be internal."
+  "offset": 0,
+  "message": "the type name '8u' must not start with a figure or must be internal."
 }

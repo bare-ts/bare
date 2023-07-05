@@ -107,7 +107,7 @@ function generateUnionMember(tag: ast.UnionTag, type: ast.Type): string {
 }
 
 function generateOptionalLength(length: ast.Length | null): string {
-    return length !== null ? `[${length.val}]` : ""
+    return length != null ? `[${length.val}]` : ""
 }
 
 function generateDocComment(comment: string): string {
