@@ -27,7 +27,7 @@
   },
   "type": "module",
   "bin": {
-    "bare": "./dist/cli.js"
+    "bare": "./dist/bin/cli.js"
   },
   "module": "./dist/index.js",
   "main": "./dist/index.cjs",

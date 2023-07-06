@@ -3,6 +3,6 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["./cli.ts", "./**/*.test.ts"],
+  "include": ["./bin/cli.ts", "./**/*.test.ts"],
   "references": [{ "path": "." }]
 }
