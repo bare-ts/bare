@@ -2,116 +2,117 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import type * as ast from "../ast/bare-ast.js"
-import { indent, toConstantCase, unindent } from "../utils/formatting.js"
+import { dent, toConstantCase } from "../utils/formatting.js"
 
 export function generateBare(schema: ast.Ast): string {
     let result = ""
     for (const def of schema.defs) {
         if (!def.internal) {
-            result += generateAliased(def) + "\n\n"
+            result += `${genAliased(def)}\n\n`
         }
     }
     return result.trim()
 }
 
-function generateAliased(aliased: ast.AliasedType): string {
-    const docComment = generateDocComment(aliased.comment)
-    const typedef = generateType(aliased.type)
-    return `${docComment}type ${aliased.alias} ${typedef}`
+function genAliased(type: ast.AliasedType): string {
+    return `${genDoc(type.comment)}type ${type.alias} ${genType(type.type)}`
 }
 
-function generateType(type: ast.Type): string {
+function genType(type: ast.Type): string {
     switch (type.tag) {
         case "alias":
             return type.data
         case "data":
-            return generateData(type)
+            return genData(type)
         case "enum":
-            return generateEnum(type)
+            return genEnum(type)
         case "list":
-            return generateList(type)
+            return genList(type)
         case "map":
-            return generateMap(type)
+            return genMap(type)
         case "optional":
-            return generateOptional(type)
+            return genOptional(type)
         case "struct":
-            return generateStruct(type)
+            return genStruct(type)
         case "union":
-            return generateUnion(type)
+            return genUnion(type)
         default:
             return type.tag
     }
 }
 
-function generateData(type: ast.DataType): string {
-    const len = generateOptionalLength(type.data)
-    return unindent(`data${len}`)
+function genData(type: ast.DataType): string {
+    return `data${genOptionalLength(type.data)}`
 }
 
-function generateEnum(type: ast.EnumType): string {
-    const body = type.data.map(generateEnumVal).join("\n")
-    return unindent(`enum {
-        ${indent(body.trim(), 2)}
-    }`)
+function genEnum(type: ast.EnumType): string {
+    let body = ""
+    for (const enumVal of type.data) {
+        body += `${genEnumVal(enumVal)}\n`
+    }
+    return dent`
+        enum {
+            ${body.trim()}
+        }
+    `
 }
 
-function generateEnumVal(enumVal: ast.EnumVal): string {
-    const docComment = generateDocComment(enumVal.comment)
-    return `${docComment}${toConstantCase(enumVal.name)} = ${enumVal.val}`
+function genEnumVal(type: ast.EnumVal): string {
+    return `${genDoc(type.comment)}${toConstantCase(type.name)} = ${type.val}`
 }
 
-function generateList(type: ast.ListType): string {
-    const valTypedef = generateType(type.types[0])
-    const len = generateOptionalLength(type.data)
-    return unindent(`list<${indent(valTypedef, 1)}>${len}`)
+function genList(type: ast.ListType): string {
+    return `list<${genType(type.types[0])}>${genOptionalLength(type.data)}`
 }
 
-function generateMap(type: ast.MapType): string {
-    const keyTypedef = generateType(type.types[0])
-    const valTypedef = generateType(type.types[1])
-    return unindent(`map<${indent(keyTypedef, 1)}><${indent(valTypedef, 1)}>`)
+function genMap(type: ast.MapType): string {
+    const keyTypedef = genType(type.types[0])
+    const valTypedef = genType(type.types[1])
+    return `map<${keyTypedef}><${valTypedef}>`
 }
 
-function generateOptional(type: ast.OptionalType): string {
-    const valTypedef = generateType(type.types[0])
-    return unindent(`optional<${indent(valTypedef, 1)}>`)
+function genOptional(type: ast.OptionalType): string {
+    return `optional<${genType(type.types[0])}>`
 }
 
-function generateStruct(type: ast.StructType): string {
-    const body = type.data
-        .map((field, i) => generateStructField(field, type.types[i]))
-        .join("\n")
-    return unindent(`struct {
-        ${indent(body.trim(), 2)}
-    }`)
+function genStruct(type: ast.StructType): string {
+    const fields = type.data
+    let body = ""
+    for (let i = 0; i < fields.length; i++) {
+        body += `${genStructField(fields[i], type.types[i])}\n`
+    }
+    return dent`
+        struct {
+            ${body.trim()}
+        }
+    `
 }
 
-function generateStructField(field: ast.StructField, type: ast.Type): string {
-    const docComment = generateDocComment(field.comment)
-    const fieldTypedef = generateType(type)
-    return `${docComment}${field.name}: ${fieldTypedef}`
+function genStructField(field: ast.StructField, type: ast.Type): string {
+    return `${genDoc(field.comment)}${field.name}: ${genType(type)}`
 }
 
-function generateUnion(type: ast.UnionType): string {
-    const body = type.data
-        .map((tag, i) => generateUnionMember(tag, type.types[i]))
-        .join("\n")
-    return unindent(`union {
-        ${indent(body.trim(), 2)}
-    }`)
+function genUnion(type: ast.UnionType): string {
+    const tags = type.data
+    let body = ""
+    for (let i = 0; i < tags.length; i++) {
+        body += `${genUnionMember(tags[i], type.types[i])}\n`
+    }
+    return dent`
+        union {
+            ${body.trim()}
+        }
+    `
 }
 
-function generateUnionMember(tag: ast.UnionTag, type: ast.Type): string {
-    const typedef = generateType(type)
-    return `| ${typedef} = ${tag.val}`
+function genUnionMember(tag: ast.UnionTag, type: ast.Type): string {
+    return `| ${genType(type)} = ${tag.val}`
 }
 
-function generateOptionalLength(length: ast.Length | null): string {
+function genOptionalLength(length: ast.Length | null): string {
     return length != null ? `[${length.val}]` : ""
 }
 
-function generateDocComment(comment: string): string {
-    return comment !== ""
-        ? `#${comment.trimEnd().split("\n").join("\n#")}\n`
-        : ""
+function genDoc(comment: string): string {
+    return comment !== "" ? `#${comment.trimEnd().replace(/\n/g, "\n#")}\n` : ""
 }

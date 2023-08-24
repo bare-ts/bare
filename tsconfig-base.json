@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "lib": ["ES2020"],
+    "lib": ["ES2021"],
     "module": "Node16",
-    "target": "ES2020",
+    "target": "ES2021",
 
     "noEmit": true,
 
@@ -18,7 +18,7 @@
     "allowUnreachableCode": false,
     "checkJs": true,
     "exactOptionalPropertyTypes": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "strict": true
