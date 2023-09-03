@@ -1,9 +1,9 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as lex from "./bare-lexer.js"
 import { strict as assert } from "node:assert"
 import { default as test } from "oletus"
+import * as lex from "./bare-lexer.js"
 
 const SAMPLE = `
     const C = { # struct

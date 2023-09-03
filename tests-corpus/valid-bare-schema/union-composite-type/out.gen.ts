@@ -1,5 +1,5 @@
-import * as bare from "@bare-ts/lib"
 import assert from "node:assert"
+import * as bare from "@bare-ts/lib"
 
 const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
 

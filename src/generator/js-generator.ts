@@ -32,7 +32,7 @@ export function generate(schema: ast.Ast, config: Config): string {
             }
             case "js": {
                 const code = genCode(g, aliased)
-                body += code !== "" ? code + "\n\n" : ""
+                body += code !== "" ? `${code}\n\n` : ""
                 if (!isVoid) {
                     body += `${genAliasedReader(g, aliased)}\n\n`
                     body += `${genAliasedWriter(g, aliased)}\n\n`
@@ -42,10 +42,10 @@ export function generate(schema: ast.Ast, config: Config): string {
             case "ts": {
                 if (!aliased.internal) {
                     const aliasedType = genAliasedType(g, aliased)
-                    body += aliasedType !== "" ? aliasedType + "\n\n" : ""
+                    body += aliasedType !== "" ? `${aliasedType}\n\n` : ""
                 }
                 const code = genCode(g, aliased)
-                body += code !== "" ? code + "\n\n" : ""
+                body += code !== "" ? `${code}\n\n` : ""
                 if (!isVoid) {
                     body += `${genAliasedReader(g, aliased)}\n\n`
                     body += `${genAliasedWriter(g, aliased)}\n\n`
@@ -74,6 +74,9 @@ export function generate(schema: ast.Ast, config: Config): string {
         }
     }
     let head = ""
+    if (/\bassert\(/.test(body)) {
+        head += 'import assert from "node:assert"\n'
+    }
     if (/bare\./.test(body)) {
         head += // Are values imported?
             g.config.generator !== "ts" ||
@@ -81,9 +84,6 @@ export function generate(schema: ast.Ast, config: Config): string {
             hasEncodeDecode
                 ? 'import * as bare from "@bare-ts/lib"\n'
                 : 'import type * as bare from "@bare-ts/lib"\n'
-    }
-    if (/\bassert\(/.test(body)) {
-        head += 'import assert from "node:assert"\n'
     }
     if (/ext\./.test(body)) {
         head += '\nimport * as ext from "./ext.js"\n'
@@ -108,7 +108,7 @@ export function generate(schema: ast.Ast, config: Config): string {
             }
         }
     }
-    return (head.trim() + "\n\n" + body).trim() + "\n"
+    return `${`${head.trim()}\n\n${body}`.trim()}\n`
 }
 
 type Gen = {
@@ -386,7 +386,7 @@ function genAliasedStructCode(
     type: ast.StructType,
 ): string {
     const ts = g.config.generator === "ts"
-    const members = ts ? genStructTypeBody(g, type) + "\n" : ""
+    const members = ts ? `${genStructTypeBody(g, type)}\n` : ""
     let params = ""
     let assignments = ""
     for (let i = 0; i < type.data.length; i++) {

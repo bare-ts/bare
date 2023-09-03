@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { Config, configure, parse, transform } from "@bare-ts/tools"
 import * as fs from "node:fs"
 import * as path from "node:path"
+import { Config, configure, parse, transform } from "@bare-ts/tools"
 
 const CORPUS_DIR = "./tests-corpus"
 

@@ -1,25 +1,27 @@
 {
-	"$schema": "https://docs.rome.tools/schemas/12.1.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.2.0/schema.json",
   "formatter": {
     "indentStyle": "space",
-    "indentSize": 4,
-    "ignore": ["*.json", "tests-corpus/"]
+    "ignore": ["tests-corpus/"]
   },
   "linter": {
     "rules": {
       "all": true,
       "nursery": {
-        "noConfusingArrow": "off"
+        "all": true,
+        "noExcessiveComplexity": "off",
+        "useImportRestrictions": "off"
+      },
+      "style": {
+        "useNamingConvention": "off"
       }
     }
   },
   "javascript": {
     "formatter": {
+      "indentSize": 4,
       "semicolons": "asNeeded"
     }
-  },
-  "organizeImports": {
-    "enabled": true
   },
   "vcs": {
     "enabled": true,

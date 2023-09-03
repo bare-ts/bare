@@ -8,6 +8,8 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## Unreleased
 
+-   BREAKING CHANGES: require node 16.9.0 or above
+
 -   BREAKING CHANGES: promote regular comments to doc-comments
 
     Previously, _bare-ts_ introduced a special syntax for doc-comments:

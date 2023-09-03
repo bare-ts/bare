@@ -6,7 +6,7 @@
 oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
 
 # lint
-rome ci .
+biome ci .
 
 # type check
 tsc --build src/tsconfig-test.json tests-corpus/

@@ -1,6 +1,9 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
+import { strict as assert } from "node:assert"
+import fs from "node:fs"
+import { relative, resolve } from "node:path"
 import {
     CompilerError,
     Config,
@@ -8,9 +11,6 @@ import {
     parse,
     transform,
 } from "@bare-ts/tools"
-import { strict as assert } from "node:assert"
-import fs from "node:fs"
-import { relative, resolve } from "node:path"
 import { default as test } from "oletus"
 
 const CORPUS_DIR = "./tests-corpus"
@@ -41,7 +41,7 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
         try {
             const astComputed = configure(parse(schema, config), config)
             assert.deepEqual(astComputed, astExpected)
-            void transform(schema, config)
+            transform(schema, config)
             assert.ok(false) // must be unreachable
         } catch (e) {
             if (!(e instanceof CompilerError)) {
