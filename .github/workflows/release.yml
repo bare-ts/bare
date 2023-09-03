@@ -7,17 +7,15 @@ jobs:
     test:
         uses: ./.github/workflows/ci.yml
     release:
-        # based on esbuild release script (MIT licensed):
-        # https://github.com/evanw/esbuild/blob/master/.github/workflows/release.yml
         needs: test
         permissions:
             contents: write
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - uses: actions/setup-node@v3
               with:
-                  node-version: "14.18"
+                  node-version: "16.9"
                   cache: npm
             - name: Build
               run: |
@@ -26,14 +24,12 @@ jobs:
             - name: Extract changelog
               run: |
                   VERSION="${GITHUB_REF_NAME#v}"
-                  CHANGELOG="$(awk -v ver="$VERSION" '/^## / { if (p) { exit }; if ($2 == ver) { p=1; next} } p' CHANGELOG.md)"
-                  echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-                  echo "$CHANGELOG" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
+                  sh scripts/print-changelog.sh "$VERSION" >| ${{ github.workspace }}/RELEASE_NOTES
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v1
               with:
-                  body: ${{ env.CHANGELOG }}
+                  body_path: ${{ github.workspace }}/RELEASE_NOTES
                   prerelease: true
+                  fail_on_unmatched_files: true
                   files: |
                     ./dist/bare
