@@ -77,10 +77,11 @@ export function nextToken(lex: Lexer): void {
                 }
             }
             offset++
-        } else if (PUNCTUATION_PATTERN.test(c)) {
-            token = c
-            break
         } else {
+            if (PUNCTUATION_PATTERN.test(c)) {
+                token = c
+                break
+            }
             const suffix = content.slice(offset)
             const match = suffix.match(ID_PATTERN)
             if (match == null) {

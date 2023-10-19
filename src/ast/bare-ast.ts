@@ -302,7 +302,8 @@ export function rootAliases(defs: readonly AliasedType[]): readonly string[] {
 function referredAliases(type: Type): readonly string[] {
     if (type.tag === "alias") {
         return [type.data]
-    } else if (type.types != null) {
+    }
+    if (type.types != null) {
         return type.types.flatMap((t) => referredAliases(t))
     }
     return []

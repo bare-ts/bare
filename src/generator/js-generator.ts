@@ -129,7 +129,8 @@ function genAliasedType(g: Gen, aliased: ast.AliasedType): string {
             if (!isClass) {
                 const structDef = genStructType(g, type)
                 return `${doc}export type ${alias} = ${structDef}`
-            } else if (g.config.generator !== "dts") {
+            }
+            if (g.config.generator !== "dts") {
                 return "" // A non-ambient class will be generated
             }
             return dent`
@@ -174,9 +175,8 @@ function genType(g: Gen, type: ast.Type): string {
     }
     if (type.extra?.safe) {
         return `${type.tag}Safe`
-    } else {
-        return type.tag
     }
+    return type.tag
 }
 
 function genAliasType(g: Gen, type: ast.Alias): string {
@@ -193,11 +193,11 @@ function genListType(g: Gen, type: ast.ListType): string {
     const typedArray = ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY.get(valType.tag)
     if (type.extra?.typedArray && typedArray != null) {
         return global(g, typedArray)
-    } else if (type.extra?.unique) {
-        return genSetType(g, type)
-    } else {
-        return genListRawType(g, type)
     }
+    if (type.extra?.unique) {
+        return genSetType(g, type)
+    }
+    return genListRawType(g, type)
 }
 
 function genListRawType(g: Gen, type: ast.ListType): string {
@@ -242,9 +242,8 @@ function genOptionalType(g: Gen, type: ast.OptionalType): string {
     if (simplified.tag === "optional") {
         const typedef = genType(g, simplified.types[0])
         return `${typedef} | ${noneVal(simplified)}`
-    } else {
-        return genType(g, simplified)
     }
+    return genType(g, simplified)
 }
 
 function genMapType(g: Gen, type: ast.MapType): string {
@@ -467,19 +466,18 @@ function genReader(g: Gen, type: ast.Type, alias = ""): string {
     }
     if (type.extra?.safe) {
         return `(bare.read${capitalize(type.tag)}Safe(bc))`
-    } else {
-        return `(bare.read${capitalize(type.tag)}(bc))`
     }
+    return `(bare.read${capitalize(type.tag)}(bc))`
 }
 
 function genListReader(g: Gen, type: ast.ListType): string {
     if (type.extra?.typedArray) {
         return genTypedArrayReader(g, type)
-    } else if (type.extra?.unique) {
-        return genSetReader(g, type)
-    } else {
-        return genListRawReader(g, type)
     }
+    if (type.extra?.unique) {
+        return genSetReader(g, type)
+    }
+    return genListRawReader(g, type)
 }
 
 function genListRawReader(g: Gen, type: ast.ListType): string {
@@ -767,19 +765,18 @@ function genWriter(g: Gen, type: ast.Type, alias = ""): string {
     }
     if (type.extra?.safe) {
         return `(bare.write${capitalize(type.tag)}Safe(bc, $x))`
-    } else {
-        return `(bare.write${capitalize(type.tag)}(bc, $x))`
     }
+    return `(bare.write${capitalize(type.tag)}(bc, $x))`
 }
 
 function genListWriter(g: Gen, type: ast.ListType): string {
     if (type.extra?.typedArray) {
         return genTypedArrayWriter(g, type)
-    } else if (type.extra?.unique) {
-        return genSetWriter(g, type)
-    } else {
-        return genListRawWriter(g, type)
     }
+    if (type.extra?.unique) {
+        return genSetWriter(g, type)
+    }
+    return genListRawWriter(g, type)
 }
 
 function genListRawWriter(g: Gen, type: ast.ListType): string {

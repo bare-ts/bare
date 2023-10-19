@@ -7,9 +7,12 @@
   "linter": {
     "rules": {
       "all": true,
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "off"
+      },
       "nursery": {
         "all": true,
-        "noExcessiveComplexity": "off",
+        "noUselessLoneBlockStatements": "off",
         "useImportRestrictions": "off"
       },
       "style": {
@@ -19,7 +22,7 @@
   },
   "javascript": {
     "formatter": {
-      "indentSize": 4,
+      "indentWidth": 4,
       "semicolons": "asNeeded"
     }
   },

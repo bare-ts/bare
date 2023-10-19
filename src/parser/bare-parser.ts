@@ -119,9 +119,8 @@ function parseTypeName(p: Parser): ast.Type {
     const tag = alias === "string" ? "str" : alias
     if (ast.isBaseTag(tag) || tag === "void") {
         return { tag, data: null, types: null, extra: null, offset }
-    } else {
-        return { tag: "alias", data: alias, types: null, extra: null, offset }
     }
+    return { tag: "alias", data: alias, types: null, extra: null, offset }
 }
 
 function parseData(p: Parser): ast.Type {
@@ -379,9 +378,8 @@ function parseOptionalLength(p: Parser): ast.Length | null {
         const val = parseUnsignedNumber(p)
         expect(p, "]")
         return { name: null, val, comment: null, extra: null, offset }
-    } else {
-        return null
     }
+    return null
 }
 
 function parseTypeParameter(p: Parser): ast.Type {

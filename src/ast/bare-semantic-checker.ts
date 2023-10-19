@@ -295,7 +295,8 @@ function checkUsedBeforeDefined(
             `Alias '${type.data}' is used before its definition. To allow use-before-definition and recursive types set the option '--legacy'.`,
             type.offset,
         )
-    } else if (type.types != null) {
+    }
+    if (type.types != null) {
         for (const subtype of type.types) {
             checkUsedBeforeDefined(c, subtype, defined)
         }
@@ -313,7 +314,8 @@ function checkCircularRef(
         type.tag === "optional"
     ) {
         return // allowed circular refs
-    } else if (type.tag === "union") {
+    }
+    if (type.tag === "union") {
         let circularCount = 0
         let firstError: CompilerError | null = null
         for (const subtype of type.types) {
@@ -330,7 +332,8 @@ function checkCircularRef(
             throw firstError
         }
         return // allowed circular refs
-    } else if (type.tag === "struct" || type.tag === "list") {
+    }
+    if (type.tag === "struct" || type.tag === "list") {
         for (const subtype of type.types) {
             checkCircularRef(c, subtype, traversed)
         }

@@ -43,7 +43,8 @@ function innerUnrecursive(
         const extra = type.extra
         if (simplified == null) {
             return { tag: "void", data: null, types: null, extra, offset: 0 }
-        } else if (type.types[0] !== simplified) {
+        }
+        if (type.types[0] !== simplified) {
             return simplifyOptional({
                 tag: "optional",
                 data: null,
