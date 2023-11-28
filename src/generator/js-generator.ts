@@ -75,7 +75,7 @@ export function generate(schema: ast.Ast, config: Config): string {
     }
     let head = ""
     if (/\bassert\(/.test(body)) {
-        head += 'import assert from "node:assert"\n'
+        head += 'import assert from "node:assert/strict"\n'
     }
     if (/bare\./.test(body)) {
         head += // Are values imported?
@@ -96,7 +96,7 @@ export function generate(schema: ast.Ast, config: Config): string {
         const predefinedTypes: string[] = ast.NUMERIC_TAG.slice()
         predefinedTypes.push("i64Safe", "intSafe", "u64Safe", "uintSafe")
         for (const tag of predefinedTypes) {
-            if (RegExp(`\\b${tag}\\b`).test(body)) {
+            if (new RegExp(`\\b${tag}\\b`).test(body)) {
                 const typeofVal =
                     tag === "i64" ||
                     tag === "int" ||
@@ -205,8 +205,8 @@ function genListRawType(g: Gen, type: ast.ListType): string {
     return type.extra?.mut
         ? `${valTypedef}[]`
         : /^\w+$/.test(valTypedef)
-        ? `readonly ${valTypedef}[]`
-        : `readonly (${valTypedef})[]` // union types, or readonly arrays, or ..
+          ? `readonly ${valTypedef}[]`
+          : `readonly (${valTypedef})[]` // union types, or readonly arrays, or ..
 }
 
 function genEnumType(_g: Gen, type: ast.EnumType): string {
@@ -340,8 +340,8 @@ function genEncoderHead(g: Gen, alias: string): string {
     return g.config.generator === "js"
         ? `function encode${alias}(x, config = DEFAULT_CONFIG)`
         : g.config.generator === "ts"
-        ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
-        : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+          ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+          : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
 }
 
 // JS/TS code
@@ -425,7 +425,7 @@ function genAliasedReader(g: Gen, aliased: ast.AliasedType): string {
             `
         }
     }
-    throw Error("[internal] invalid reader template")
+    throw new Error("[internal] invalid reader template")
 }
 
 function genReading(g: Gen, type: ast.Type): string {
@@ -436,7 +436,7 @@ function genReading(g: Gen, type: ast.Type): string {
         case "(": // expression
             return body.slice(1, -1) // remove parenthesis
     }
-    throw Error("[internal] invalid reader template")
+    throw new Error("[internal] invalid reader template")
 }
 
 function genReader(g: Gen, type: ast.Type, alias = ""): string {
@@ -724,7 +724,7 @@ function genAliasedWriter(g: Gen, aliased: ast.AliasedType): string {
             `
         }
     }
-    throw Error("[internal] invalid writer template")
+    throw new Error("[internal] invalid writer template")
 }
 
 function genWriting(g: Gen, type: ast.Type, x: string): string {
@@ -735,7 +735,7 @@ function genWriting(g: Gen, type: ast.Type, x: string): string {
         case "(":
             return body.slice(1, -1) // remove parenthesis
     }
-    throw Error("[internal] invalid writer template")
+    throw new Error("[internal] invalid writer template")
 }
 
 function genWriter(g: Gen, type: ast.Type, alias = ""): string {
@@ -926,7 +926,7 @@ function genUnionWriter(g: Gen, union: ast.UnionType): string {
 
 function genStructFlatUnionWriter(g: Gen, union: ast.UnionType): string {
     const resolved = union.types.map((t) => ast.resolveAlias(t, g.symbols))
-    if (!resolved.every((t): t is ast.StructType => t.tag === "struct")) {
+    if (!resolved.every((t) => t.tag === "struct")) {
         throw new Error("all types should be structs.")
     }
     const discriminators = ast.leadingDiscriminators(resolved)

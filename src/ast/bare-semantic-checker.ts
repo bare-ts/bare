@@ -257,13 +257,10 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
             ast.haveDistinctTypeof(type.types)
         if (
             !isFlatUnion &&
-            type.types.every(
-                (t): t is ast.Alias | ast.StructType =>
-                    t.tag === "alias" || t.tag === "struct",
-            )
+            type.types.every((t) => t.tag === "alias" || t.tag === "struct")
         ) {
             const resolved = type.types.map((t) =>
-                t.tag === "alias" ? c.symbols.get(t.data)?.type ?? t : t,
+                t.tag === "alias" ? (c.symbols.get(t.data)?.type ?? t) : t,
             )
             isFlatUnion =
                 resolved.every(

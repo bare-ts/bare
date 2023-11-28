@@ -1,7 +1,8 @@
 {
   "extends": "../tsconfig-base.json",
   "compilerOptions": {
-    "types": ["node"]
+    "types": ["node"],
+    "outDir": "../dist"
   },
   "include": ["./bin/cli.ts", "./**/*.test.ts"],
   "references": [{ "path": "." }]

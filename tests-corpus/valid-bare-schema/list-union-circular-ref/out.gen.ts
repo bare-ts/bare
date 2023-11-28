@@ -1,4 +1,4 @@
-import assert from "node:assert"
+import assert from "node:assert/strict"
 import * as bare from "@bare-ts/lib"
 
 function read0(bc: bare.ByteCursor):

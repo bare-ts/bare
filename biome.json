@@ -1,22 +1,62 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.2.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.2/schema.json",
+  "files": {
+    "ignoreUnknown": true
+  },
   "formatter": {
     "indentStyle": "space",
-    "ignore": ["tests-corpus/"]
+    "ignore": ["tests-corpus"]
   },
   "linter": {
     "rules": {
       "all": true,
+      "correctness": {
+        "noNodejsModules": "off",
+        "noUndeclaredDependencies": "off"
+      },
       "complexity": {
-        "noExcessiveCognitiveComplexity": "off"
+        "noExcessiveCognitiveComplexity": "off",
+        "noUselessLoneBlockStatements": "off"
       },
       "nursery": {
         "all": true,
-        "noUselessLoneBlockStatements": "off",
+        "noEnum": "off",
+        "noSecrets": "off",
         "useImportRestrictions": "off"
       },
+      "performance": {
+        "noBarrelFile": "off",
+        "noReExportAll": "off",
+        "useTopLevelRegex": "off"
+      },
       "style": {
-        "useNamingConvention": "off"
+        "noDoneCallback": "off",
+        "noNamespaceImport": "off",
+        "useDefaultSwitchClause": "off",
+        "useForOf": "off",
+        "useImportType": "off",
+        "useNamingConvention": {
+          "level": "warn",
+          "options": {
+            "conventions": [
+              {
+                "selector": {
+                  "kind": "typeAlias"
+                },
+                "formats": ["PascalCase", "camelCase"]
+              },
+              {
+                "selector": {
+                  "kind": "objectLiteralProperty"
+                },
+                "formats": ["camelCase", "PascalCase"]
+              }
+            ]
+          }
+        }
+      },
+      "suspicious": {
+        "noConsole": "off"
       }
     }
   },

@@ -103,13 +103,12 @@ function configureType(
                     config.useStructFlatUnion &&
                     types != null &&
                     types.every(
-                        (t): t is ast.Alias | ast.StructType =>
-                            t.tag === "alias" || t.tag === "struct",
+                        (t) => t.tag === "alias" || t.tag === "struct",
                     ) &&
                     types
                         .map((t) =>
                             t.tag === "alias"
-                                ? c.symbols.get(t.data)?.type ?? t
+                                ? (c.symbols.get(t.data)?.type ?? t)
                                 : t,
                         )
                         .every(
