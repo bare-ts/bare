@@ -1,10 +1,10 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-export const ALL_CASE_RE = /^\w+$/
-export const CAMEL_CASE_RE = /^[a-z][A-Za-z\d]*$/
-export const CONSTANT_CASE_RE = /^[A-Z][A-Z\d_]*$/
-export const PASCAL_CASE_RE = /^[A-Z][A-Za-z\d]*$/
+export const ALL_CASE_RE: RegExp = /^\w+$/
+export const CAMEL_CASE_RE: RegExp = /^[a-z][A-Za-z\d]*$/
+export const CONSTANT_CASE_RE: RegExp = /^[A-Z][A-Z\d_]*$/
+export const PASCAL_CASE_RE: RegExp = /^[A-Z][A-Za-z\d]*$/
 
 export function capitalize(s: string): string {
     return s.replace(/^./, (c) => c.toUpperCase())
@@ -26,8 +26,8 @@ export function jsRpr(v: unknown): string {
     return typeof v === "string"
         ? `"${v}"`
         : typeof v === "bigint"
-        ? `${v}n`
-        : `${v}`
+          ? `${v}n`
+          : `${v}`
 }
 
 export function toCamelCase(s: string): string {
