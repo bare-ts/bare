@@ -210,7 +210,7 @@ export function literalVal(literal: Literal): LiteralVal {
 
 // Utility functions and types
 
-export type BaseTag = typeof BASE_TAG[number]
+export type BaseTag = (typeof BASE_TAG)[number]
 
 export function isBaseTag(tag: string): tag is BaseTag {
     return BASE_TAG_SET.has(tag)
@@ -224,7 +224,7 @@ export function isBaseOrVoidType(type: Type): type is BaseType | VoidType {
     return isBaseType(type) || type.tag === "void"
 }
 
-export type FixedNumericTag = typeof FIXED_NUMERIC_TAG[number]
+export type FixedNumericTag = (typeof FIXED_NUMERIC_TAG)[number]
 
 export function isFixedNumericTag(tag: string): tag is FixedNumericTag {
     return FIXED_NUMERIC_TAG_SET.has(tag)
@@ -386,10 +386,10 @@ export function withoutExtra(type: Type): Type {
             name === "comment"
                 ? ""
                 : name === "extra"
-                ? null
-                : name === "offset"
-                ? 0
-                : val,
+                  ? null
+                  : name === "offset"
+                      ? 0
+                      : val,
         ),
     )
 }

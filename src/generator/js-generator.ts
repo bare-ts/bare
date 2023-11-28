@@ -205,8 +205,8 @@ function genListRawType(g: Gen, type: ast.ListType): string {
     return type.extra?.mut
         ? `${valTypedef}[]`
         : /^\w+$/.test(valTypedef)
-        ? `readonly ${valTypedef}[]`
-        : `readonly (${valTypedef})[]` // union types, or readonly arrays, or ..
+          ? `readonly ${valTypedef}[]`
+          : `readonly (${valTypedef})[]` // union types, or readonly arrays, or ..
 }
 
 function genEnumType(_g: Gen, type: ast.EnumType): string {
@@ -340,8 +340,8 @@ function genEncoderHead(g: Gen, alias: string): string {
     return g.config.generator === "js"
         ? `function encode${alias}(x, config = DEFAULT_CONFIG)`
         : g.config.generator === "ts"
-        ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
-        : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+          ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+          : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
 }
 
 // JS/TS code

@@ -26,8 +26,8 @@ export function jsRpr(v: unknown): string {
     return typeof v === "string"
         ? `"${v}"`
         : typeof v === "bigint"
-        ? `${v}n`
-        : `${v}`
+          ? `${v}n`
+          : `${v}`
 }
 
 export function toCamelCase(s: string): string {

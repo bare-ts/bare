@@ -52,8 +52,8 @@ function parseAliased(p: Parser): ast.AliasedType {
         keyword === "enum"
             ? parseEnumBody(p, p.lex.offset)
             : keyword === "struct"
-            ? parseStructBody(p)
-            : parseTypeCheckUnion(p)
+              ? parseStructBody(p)
+              : parseTypeCheckUnion(p)
     checkSeparator(p)
     return { alias, internal: false, comment, type, offset }
 }
