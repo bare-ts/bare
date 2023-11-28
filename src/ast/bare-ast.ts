@@ -210,7 +210,7 @@ export function literalVal(literal: Literal): LiteralVal {
 
 // Utility functions and types
 
-export type BaseTag = typeof BASE_TAG[number]
+export type BaseTag = (typeof NUMERIC_TAG)[number] | "bool" | "str"
 
 export function isBaseTag(tag: string): tag is BaseTag {
     return BASE_TAG_SET.has(tag)
@@ -224,13 +224,23 @@ export function isBaseOrVoidType(type: Type): type is BaseType | VoidType {
     return isBaseType(type) || type.tag === "void"
 }
 
-export type FixedNumericTag = typeof FIXED_NUMERIC_TAG[number]
+export type FixedNumericTag =
+    | "f32"
+    | "f64"
+    | "i8"
+    | "i16"
+    | "i32"
+    | "i64"
+    | "u8"
+    | "u16"
+    | "u32"
+    | "u64"
 
 export function isFixedNumericTag(tag: string): tag is FixedNumericTag {
-    return FIXED_NUMERIC_TAG_SET.has(tag)
+    return FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY.has(tag)
 }
 
-export const FIXED_NUMERIC_TAG = [
+export const NUMERIC_TAG = [
     "f32",
     "f64",
     "i8",
@@ -241,15 +251,15 @@ export const FIXED_NUMERIC_TAG = [
     "u16",
     "u32",
     "u64",
+    "int",
+    "uint",
 ] as const
 
-export const NUMERIC_TAG = [...FIXED_NUMERIC_TAG, "int", "uint"] as const
-
-export const BASE_TAG = [...NUMERIC_TAG, "bool", "str"] as const
-
-const FIXED_NUMERIC_TAG_SET: ReadonlySet<string> = new Set(FIXED_NUMERIC_TAG)
-
-const BASE_TAG_SET: ReadonlySet<string> = new Set(BASE_TAG)
+const BASE_TAG_SET: ReadonlySet<string> = new Set([
+    ...NUMERIC_TAG,
+    "bool",
+    "str",
+])
 
 export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY: Map<string, string> = new Map([
     ["f32", "Float32Array"],
@@ -386,10 +396,10 @@ export function withoutExtra(type: Type): Type {
             name === "comment"
                 ? ""
                 : name === "extra"
-                ? null
-                : name === "offset"
-                ? 0
-                : val,
+                  ? null
+                  : name === "offset"
+                    ? 0
+                    : val,
         ),
     )
 }

@@ -71,15 +71,15 @@ export function Config({
             ? out.endsWith(".bare")
                 ? "bare"
                 : out.endsWith(".d.ts")
-                ? "dts"
-                : out.endsWith(".ts")
-                ? "ts"
-                : out.endsWith(".js")
-                ? "js"
-                : generator
+                  ? "dts"
+                  : out.endsWith(".ts")
+                    ? "ts"
+                    : out.endsWith(".js")
+                      ? "js"
+                      : generator
             : generator == null && (typeof out === "number" || out == null)
-            ? DEFAULT_GENERATOR
-            : generator
+              ? DEFAULT_GENERATOR
+              : generator
     if (generator != null && inferredGenerator !== generator) {
         throw new ConfigError(
             `the inferred generator '${inferredGenerator}' from out '${out}' does not match the chosen generator '${generator}'.`,

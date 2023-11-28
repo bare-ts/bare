@@ -6,7 +6,7 @@
 oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
 
 # lint
-biome ci .
+biome ci --error-on-warnings .
 
 # type check
-tsc --build src/tsconfig-test.json tests-corpus/
+tsc --build src/ src/tsconfig-test.json tests-corpus/
