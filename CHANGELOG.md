@@ -6,9 +6,15 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
+## Unreleased
+
+-   BREAKING CHANGES: require NodeJS 16.11.0 or above
+
+    This will allow us to use the `cause` property of `Error`.
+
 ## 0.15.0 (2023-10-19)
 
--   BREAKING CHANGES: require node 16.9.0 or above
+-   BREAKING CHANGES: require NodeJS 16.9.0 or above
 
 -   BREAKING CHANGES: promote regular comments to doc-comments
 
@@ -324,7 +330,7 @@ This release **widely improves the usage of unions and flat unions**.
 
     bare-ts now publishes _ES2020_ builds.
     This outputs smaller builds.
-    This should cause no issue since we require a node version `^14.18` or `>=16`.
+    This should cause no issue since we require a NodeJS version `^14.18` or `>=16`.
 
 -   Add option `--lib` to prevent `decode` and `encode` generation
 
@@ -363,7 +369,7 @@ This release **widely improves the usage of unions and flat unions**.
     type Message union { Person }
     ```
 
--   BREAKING CHANGES: Require Node `>=14.18.0`
+-   BREAKING CHANGES: Require NodeJS `>=14.18.0`
 
     This enables _bare-ts_ to internally use `node:` prefixes for importing nodes' built-ins.
 
@@ -580,7 +586,7 @@ This release **widely improves the usage of unions and flat unions**.
 
 ## 0.7.0 (2022-04-24)
 
--   BREAKING CHANGES: require node versions that support _ESM_
+-   BREAKING CHANGES: require NodeJS versions that support _ESM_
 
     _bare-ts_ requires now a node versions that support _ECMAScript Modules_.
 
