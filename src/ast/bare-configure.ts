@@ -10,13 +10,14 @@ export function configure(schema: ast.Ast, config: Config): ast.Ast {
         aliasesInFlatUnion: new Set(),
         symbols: ast.symbols(schema),
     }
-    const defs = schema.defs.slice()
-    for (let i = 0; i < defs.length; i++) {
-        const type = configureType(c, defs[i].type, true)
-        if (defs[i].type !== type) {
-            const { alias, internal, comment, offset } = defs[i]
-            defs[i] = { alias, internal, type, comment, offset }
+    const defs: ast.AliasedType[] = []
+    for (let def of schema.defs) {
+        const type = configureType(c, def.type, true)
+        if (def.type !== type) {
+            const { alias, internal, comment, offset } = def
+            def = { alias, internal, type, comment, offset }
         }
+        defs.push(def)
     }
     for (let i = 0; i < defs.length; i++) {
         let type = defs[i].type

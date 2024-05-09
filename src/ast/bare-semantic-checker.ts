@@ -46,7 +46,7 @@ type Checker = {
 
 function checkTypeName(aliased: ast.AliasedType): void {
     const { alias, internal } = aliased
-    if (alias.length !== 0 && /^\d/.test(alias[0])) {
+    if (/^\d/.test(alias)) {
         if (!internal) {
             throw new CompilerError(
                 `the type name '${alias}' must not start with a figure or must be internal.`,
@@ -235,17 +235,16 @@ function checkNonVoid(c: Checker, type: ast.Type): void {
 }
 
 function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
-    const tags = type.data
     // check type uniqueness
     const stringifiedTypes = new Set()
-    for (let i = 0; i < tags.length; i++) {
-        const stringifiedType = JSON.stringify(ast.withoutExtra(type.types[i]))
+    for (const ty of type.types) {
+        const stringifiedType = JSON.stringify(ast.withoutExtra(ty))
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {
             throw new CompilerError(
                 "a type cannot be repeated in an union.",
-                type.types[i].offset,
+                ty.offset,
             )
         }
         stringifiedTypes.add(stringifiedType)

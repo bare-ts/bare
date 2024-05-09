@@ -56,7 +56,7 @@ export function nextToken(lex: Lexer): void {
     offset += token.length
     token = ""
     while (offset < content.length) {
-        const c = content[offset]
+        const c = content[offset] as string
         if (c === "#") {
             // comment
             let index = content.indexOf("\n", offset + 1)
