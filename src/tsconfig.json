@@ -8,5 +8,8 @@
     "noEmit": false,
     "outDir": "../dist"
   },
-  "exclude": ["./bin/cli.ts", "./**/*.test.ts"]
+  "exclude": [
+    "./bin/cli.ts",
+    "./**/*.test.ts"
+  ]
 }
