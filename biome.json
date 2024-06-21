@@ -5,7 +5,9 @@
   },
   "formatter": {
     "indentStyle": "space",
-    "ignore": ["tests-corpus"]
+    "ignore": [
+      "tests-corpus"
+    ]
   },
   "linter": {
     "rules": {
@@ -43,13 +45,19 @@
                 "selector": {
                   "kind": "typeAlias"
                 },
-                "formats": ["PascalCase", "camelCase"]
+                "formats": [
+                  "PascalCase",
+                  "camelCase"
+                ]
               },
               {
                 "selector": {
                   "kind": "objectLiteralProperty"
                 },
-                "formats": ["camelCase", "PascalCase"]
+                "formats": [
+                  "camelCase",
+                  "PascalCase"
+                ]
               }
             ]
           }
@@ -64,6 +72,11 @@
     "formatter": {
       "indentWidth": 4,
       "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "formatter": {
+      "lineWidth": 1
     }
   },
   "vcs": {
