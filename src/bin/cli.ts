@@ -5,27 +5,38 @@
 
 import * as fs from "node:fs"
 import * as process from "node:process"
-import { Argument, Option, program } from "commander"
+import * as util from "node:util"
 import { CompilerError, Config, transform } from "../index.js"
 
 // WARNING: This constant MUST be defined at build time.
 declare const VERSION: string
 
-const REPOSITORY_HELP = `Repository:
-  https://github.com/bare-ts/tools`
+const HELP_TEXT = `
+Usage: bare [options] [schema]
 
-const EXTRA_HELP = `
-Examples:
-  # Compile schema.bare into Typescript
-  bare compile schema.bare -o output.ts
+Compile a BARE (Binary Application Record Encoding) schema into a TypeScript or JavaScript file
 
-  # more examples
-  bare <command> --help
+Arguments:
+  schema                      BARE schema file (default: stdin)
 
-${REPOSITORY_HELP}
-`
+Options:
+  -o, --out <file>            destination of output (default: stdout)
+  --generator <generator>     output generator (choices: "bare", "dts", "js", "ts")
+  --legacy                    allow legacy BARE syntax and features
+  --lib                       do not generate decoders and encoders of root types
+  --pedantic                  require enum and union types to set all tags in-order
+  --use-class                 use classes instead of interfaces for structs
+  --use-generic-array         use generic arrays instead of typed arrays
+  --use-int-enum              use integers for enum values instead of strings
+  --use-int-tag               always use integers for union tags instead of strings
+  --use-mutable               use mutable types
+  --use-primitive-flat-union  use flat unions instead of tagged unions for unions of primitive types
+  --use-safe-int              use safe integers instead of bigint
+  --use-struct-flat-union     use flat unions instead of tagged unions for unions of anonymous and aliased structs
+  --use-undefined             use undefined instead of null for optional types
+  --version                   output the version number and exit
+  -h, --help                  display help for command
 
-const COMPILE_EXTRA_HELP = `
 Examples:
   # Compile schema.bare into Typescript, TypeScript Declaration, or JavaScript
   bare compile schema.bare -o output.ts
@@ -37,67 +48,87 @@ Examples:
   bare compile --generator dts < schema.bare > output.d.ts
   bare compile --generator js < schema.bare > output.js
 
-${REPOSITORY_HELP}
+Repository:
+  https://github.com/bare-ts/tools
 `
 
-program
-    .name("bare")
-    .description("Tools for BARE (Binary Application Record Encoding)")
-    .version(VERSION, "--version", "output the version number and exit")
-    .addHelpText("after", EXTRA_HELP)
-    .action(() => program.help())
+const PARSE_CONFIG = {
+    allowPositionals: true,
+    options: {
+        help: { short: "h", type: "boolean" },
+        version: { type: "boolean" },
+        out: { short: "o", type: "string" },
+        generator: { type: "string" },
+        legacy: { type: "boolean" },
+        lib: { type: "boolean" },
+        pedantic: { type: "boolean" },
+        "use-int-tag": { type: "boolean" },
+        "use-class": { type: "boolean" },
+        "use-generic-array": { type: "boolean" },
+        "use-int-enum": { type: "boolean" },
+        "use-mutable": { type: "boolean" },
+        "use-primitive-flat-union": { type: "boolean" },
+        "use-safe-int": { type: "boolean" },
+        "use-struct-flat-union": { type: "boolean" },
+        "use-undefined": { type: "boolean" },
+    },
+} as const
 
-program
-    .command("compile")
-    .description("Compile a BARE schema into a TypeScript or JavaScript file")
-    .addArgument(
-        new Argument("[schema]", "BARE schema file").default(0, "stdin"),
-    )
-    .addOption(
-        new Option("-o, --out <file>", "destination of output").default(
-            1,
-            "stdout",
-        ),
-    )
-    .addOption(
-        new Option("--generator <generator>", "output generator").choices([
-            "bare",
-            "dts",
-            "js",
-            "ts",
-        ]),
-    )
-    .option("--legacy", "allow legacy BARE syntax and features")
-    .option("--lib", "do not generate decoders and encoders of root types")
-    .option(
-        "--pedantic",
-        "require enum and union types to set all tags in-order",
-    )
-    .option("--use-class", "use classes instead of interfaces for structs")
-    .option("--use-generic-array", "use generic arrays instead of typed arrays")
-    .option("--use-int-enum", "use integers for enum values instead of strings")
-    .option(
-        "--use-int-tag",
-        "always use integers for union tags instead of strings",
-    )
-    .option("--use-mutable", "use mutable types")
-    .option(
-        "--use-primitive-flat-union",
-        "use flat unions instead of tagged unions for unions of primitive types",
-    )
-    .option("--use-safe-int", "use safe integers instead of bigint")
-    .option(
-        "--use-struct-flat-union",
-        "use flat unions instead of tagged unions for unions of anonymous and aliased structs",
-    )
-    .option(
-        "--use-undefined",
-        "use undefined instead of null for optional types",
-    )
-    .addHelpText("after", COMPILE_EXTRA_HELP)
-    .action(compileAction)
+main()
 
-program.parse()
+function main(): void {
+    try {
+        const { values, positionals } = util.parseArgs(PARSE_CONFIG)
+        if (values.help) {
+            console.info(HELP_TEXT)
+        } else if (values.version) {
+            console.info(VERSION)
+        } else {
+            if (positionals.length > 1 && positionals[0] === "compile") {
+                positionals.pop()
+            }
+            if (positionals.length > 1) {
+                console.error("only one argument is expected")
+                process.exit(1)
+            }
+            const schema = positionals.length > 0 ? positionals[0] : 0
+            const out = values.out ?? 1
+            const generator = values.generator
+            if (
+                generator != null &&
+                generator !== "bare" &&
+                generator !== "dts" &&
+                generator !== "js" &&
+                generator !== "ts"
+            ) {
+                console.error("Invalid <generator> value")
+                process.exit(1)
+            }
+            compileAction(out, {
+                generator,
+                legacy: values.legacy,
+                lib: values.lib,
+                out: values.out,
+                pedantic: values.pedantic,
+                schema,
+                useClass: values["use-class"],
+                useGenericArray: values["use-generic-array"],
+                useIntEnum: values["use-int-enum"],
+                useIntTag: values["use-int-tag"],
+                useMutable: values["use-mutable"],
+                usePrimitiveFlatUnion: values["use-primitive-flat-union"],
+                useSafeInt: values["use-safe-int"],
+                useStructFlatUnion: values["use-struct-flat-union"],
+                useUndefined: values["use-undefined"],
+            })
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message)
+        }
+        process.exit(1)
+    }
+}
 
 function compileAction(schema: string | number, opts: Partial<Config>): void {
     let config: Config | null = null

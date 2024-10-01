@@ -8,13 +8,14 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## Unreleased
 
--   BREAKING CHANGES: require NodeJS 16.11.0 or above
+-   BREAKING CHANGES: require Node.js 20.0.0 or above
 
-    This will allow us to use the `cause` property of `Error`.
+    This allows us to use the built-in Node.js CLI parser and then to remove the [Commander.js](https://www.npmjs.com/package/commander) dependency.
+    This reduces the standalone binary size from 77KB to 45KB (42%).
 
 ## 0.15.0 (2023-10-19)
 
--   BREAKING CHANGES: require NodeJS 16.9.0 or above
+-   BREAKING CHANGES: require Node.js 16.9.0 or above
 
 -   BREAKING CHANGES: promote regular comments to doc-comments
 
@@ -330,7 +331,7 @@ This release **widely improves the usage of unions and flat unions**.
 
     bare-ts now publishes _ES2020_ builds.
     This outputs smaller builds.
-    This should cause no issue since we require a NodeJS version `^14.18` or `>=16`.
+    This should cause no issue since we require a Node.js version `^14.18` or `>=16`.
 
 -   Add option `--lib` to prevent `decode` and `encode` generation
 
@@ -369,7 +370,7 @@ This release **widely improves the usage of unions and flat unions**.
     type Message union { Person }
     ```
 
--   BREAKING CHANGES: Require NodeJS `>=14.18.0`
+-   BREAKING CHANGES: Require Node.js `>=14.18.0`
 
     This enables _bare-ts_ to internally use `node:` prefixes for importing nodes' built-ins.
 
@@ -586,7 +587,7 @@ This release **widely improves the usage of unions and flat unions**.
 
 ## 0.7.0 (2022-04-24)
 
--   BREAKING CHANGES: require NodeJS versions that support _ESM_
+-   BREAKING CHANGES: require Node.js versions that support _ESM_
 
     _bare-ts_ requires now a node versions that support _ECMAScript Modules_.
 

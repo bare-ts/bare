@@ -23,7 +23,7 @@
     "url": "https://github.com/bare-ts/tools/issues"
   },
   "engines": {
-    "node": ">=16.11.0"
+    "node": ">=20.0.0"
   },
   "type": "module",
   "bin": {
@@ -66,8 +66,7 @@
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
     "@biomejs/biome": "1.9.2",
-    "@types/node": "16.11.68",
-    "commander": "^12.1.0",
+    "@types/node": "20.0.0",
     "esbuild": "0.23.1",
     "oletus": "4.0.0",
     "typescript": "5.6.2",

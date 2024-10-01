@@ -19,7 +19,6 @@
 
     "allowUnreachableCode": false,
     "checkJs": true,
-    "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
