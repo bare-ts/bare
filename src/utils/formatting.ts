@@ -68,7 +68,7 @@ export function dent(
     )
     assert(LEADING_NEWLINE.test(chunks[0]), "must start with an empty newline")
     assert(
-        TRAILING_INDENTATION.test(chunks[chunks.length - 1]),
+        TRAILING_INDENTATION.test(chunks[lastChunkIndex]),
         "must end with a space-only line",
     )
     assert(

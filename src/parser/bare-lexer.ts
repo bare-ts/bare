@@ -67,13 +67,11 @@ export function nextToken(lex: Lexer): void {
             comment += content.slice(offset + 1, index)
             offset = index
         } else if (WHITE_SPACE_PATTERN.test(c)) {
-            if (c === "\n") {
-                if (comment !== "") {
-                    comment += "\n"
-                    if (comment.endsWith("\n\n")) {
-                        // A blank line resets the comment register
-                        comment = ""
-                    }
+            if (c === "\n" && comment !== "") {
+                comment += "\n"
+                if (comment.endsWith("\n\n")) {
+                    // A blank line resets the comment register
+                    comment = ""
                 }
             }
             offset++
