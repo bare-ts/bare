@@ -65,9 +65,9 @@
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
-    "@biomejs/biome": "1.9.2",
+    "@biomejs/biome": "1.9.3",
     "@types/node": "20.0.0",
-    "esbuild": "0.23.1",
+    "esbuild": "0.24.0",
     "oletus": "4.0.0",
     "typescript": "5.6.2",
     "validate-commit-message": "3.2.0"
