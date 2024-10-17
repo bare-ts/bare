@@ -35,6 +35,7 @@
     "./package.json": "./package.json",
     ".": {
       "module": "./dist/index.js",
+      "module-sync": "./dist/index.js",
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"

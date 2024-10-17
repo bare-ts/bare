@@ -13,6 +13,12 @@ New entries must be placed in a section entitled `Unreleased`.
     This allows us to use the built-in Node.js CLI parser and then to remove the [Commander.js](https://www.npmjs.com/package/commander) dependency.
     This reduces the standalone binary size from 77KB to 45KB (42%).
 
+-   Support `require(esm)` in Node.js v22.10 and above
+
+    This package now has the [new exports condition `module-sync`](https://nodejs.org/en/blog/release/v22.10.0#new-module-sync-exports-condition).
+    This allows users of Node.js v22.10 and above to import the ESM version of the package using `require`.
+    This avoids the issues of [dual-package hazard](https://nodejs.org/api/packages.html#dual-package-hazard).
+
 ## 0.15.0 (2023-10-19)
 
 -   BREAKING CHANGES: require Node.js 16.9.0 or above
