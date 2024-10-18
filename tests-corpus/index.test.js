@@ -4,6 +4,7 @@
 import * as assert from "node:assert/strict"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
+import { test } from "node:test"
 import {
     CompilerError,
     Config,
@@ -11,7 +12,6 @@ import {
     parse,
     transform,
 } from "@bare-ts/tools"
-import { default as test } from "oletus"
 
 const CORPUS_DIR = "./tests-corpus"
 const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`

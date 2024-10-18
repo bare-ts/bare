@@ -1,11 +1,12 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { default as test } from "oletus"
+import * as assert from "node:assert/strict"
+import { test } from "node:test"
 
 import { Gender, decodeContacts, encodeContacts } from "./out.gen.js"
 
-test("x-readme-example", (t) => {
+test("x-readme-example", () => {
     const payload = encodeContacts([
         {
             tag: "Person",
@@ -25,7 +26,7 @@ test("x-readme-example", (t) => {
     ])
     const msg = decodeContacts(payload)
 
-    t.deepEqual(msg, [
+    assert.deepEqual(msg, [
         {
             tag: "Person",
             val: {

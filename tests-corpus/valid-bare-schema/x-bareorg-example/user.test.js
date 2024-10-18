@@ -1,11 +1,12 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { default as test } from "oletus"
+import * as assert from "node:assert/strict"
+import { test } from "node:test"
 
 import { Department, decodePerson, encodePerson } from "./out.gen.js"
 
-test("x-readme-example", (t) => {
+test("x-readme-example", () => {
     const payload1 = encodePerson({
         tag: "Customer",
         val: {
@@ -41,7 +42,7 @@ test("x-readme-example", (t) => {
     const msg2 = decodePerson(payload2)
     const msg3 = decodePerson(payload3)
 
-    t.deepEqual(msg1, {
+    assert.deepEqual(msg1, {
         tag: "Customer",
         val: {
             name: "James Smith",
@@ -57,7 +58,7 @@ test("x-readme-example", (t) => {
         },
     })
 
-    t.deepEqual(msg2, {
+    assert.deepEqual(msg2, {
         tag: "Employee",
         val: {
             name: "Tiffany Doe",
@@ -70,7 +71,7 @@ test("x-readme-example", (t) => {
         },
     })
 
-    t.deepEqual(msg3, {
+    assert.deepEqual(msg3, {
         tag: "TerminatedEmployee",
         val: null,
     })

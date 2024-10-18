@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as assert from "node:assert/strict"
-import { default as test } from "oletus"
+import { test } from "node:test"
 import * as lex from "./bare-lexer.js"
 
 const SAMPLE = `

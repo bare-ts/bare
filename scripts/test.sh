@@ -3,7 +3,7 @@
 . scripts/build.sh
 
 # unit tests
-oletus dist/*/*.test.js tests-corpus/*.test.js tests-corpus/*/*/*.test.js
+node --test
 
 # lint
 biome ci --error-on-warnings .
