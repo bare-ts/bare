@@ -127,8 +127,8 @@ You can use dedicated tools such as [unassert](https://github.com/unassert-js) t
 [npm-bare-ts-lib-img]: https://flat.badgen.net/npm/v/@bare-ts/lib?label=npm:@bare-ts/lib
 [npm-bare-ts-lib]: https://www.npmjs.com/package/@bare-ts/lib
 
-[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/tools
-[coveralls]: https://coveralls.io/github/bare-ts/tools?branch=main
+[coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/bare
+[coveralls]: https://coveralls.io/github/bare-ts/bare?branch=main
 
 [bundlejs-img]: https://img.shields.io/badge/dynamic/json?style=flat-square&label=minzipped&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=@bare-ts/tools
 [bundlejs-img]: https://deno.bundlejs.com/?q=@bare-ts/tools&badge-style=flat&badge=
