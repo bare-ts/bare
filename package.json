@@ -1,7 +1,7 @@
 {
   "name": "@bare-ts/tools",
   "version": "0.15.0",
-  "description": "Compiler and tools for BARE schema",
+  "description": "Compiler for Binary Application Record Encoding (BARE) schemas",
   "keywords": [
     "bare",
     "binary format",
@@ -17,10 +17,10 @@
   "homepage": "https://baremessages.org",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bare-ts/tools.git"
+    "url": "git+https://github.com/bare-ts/bare.git"
   },
   "bugs": {
-    "url": "https://github.com/bare-ts/tools/issues"
+    "url": "https://github.com/bare-ts/bare/issues"
   },
   "engines": {
     "node": ">=20.0.0"
