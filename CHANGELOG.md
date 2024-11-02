@@ -19,6 +19,15 @@ New entries must be placed in a section entitled `Unreleased`.
     This allows users of Node.js v22.10 and above to import the ESM version of the package using `require`.
     This avoids the issues of [dual-package hazard](https://nodejs.org/api/packages.html#dual-package-hazard).
 
+-   Remove `package.json` `main` and `module` fields
+
+    The `main` and `module` fields supplemented by the `exports` fields.
+    `exports` is supported since Node.js v12.7.0
+    Since we require Node.js v20.0.0 or above, we can safely remove `main`.
+
+    All major bundlers now support `exports`.
+    Hence, we can also remove the `module` field.
+
 ## 0.15.0 (2023-10-19)
 
 -   BREAKING CHANGES: require Node.js 16.9.0 or above

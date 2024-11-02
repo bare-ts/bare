@@ -29,8 +29,6 @@
   "bin": {
     "bare": "dist/bin/cli.js"
   },
-  "module": "./dist/index.js",
-  "main": "./dist/index.cjs",
   "exports": {
     "./package.json": "./package.json",
     ".": {
