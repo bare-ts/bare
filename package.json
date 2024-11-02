@@ -1,6 +1,6 @@
 {
   "name": "@bare-ts/tools",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "Compiler for Binary Application Record Encoding (BARE) schemas",
   "keywords": [
     "bare",

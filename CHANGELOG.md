@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
-## Unreleased
+## 0.16.0 (2024-11-02)
 
 -   BREAKING CHANGES: require Node.js 20.0.0 or above
 
