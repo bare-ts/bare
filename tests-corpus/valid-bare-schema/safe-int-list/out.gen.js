@@ -10,7 +10,7 @@ export function writeU64List(bc, x) {
     bare.writeU64Array(bc, x)
 }
 
-export function encodeU64List(x, config = DEFAULT_CONFIG) {
+export function encodeU64List(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

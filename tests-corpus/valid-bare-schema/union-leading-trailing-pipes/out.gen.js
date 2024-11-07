@@ -25,7 +25,7 @@ export function writeLeadingPipe(bc, x) {
     }
 }
 
-export function encodeLeadingPipe(x, config = DEFAULT_CONFIG) {
+export function encodeLeadingPipe(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
@@ -67,7 +67,7 @@ export function writeTrailingPipe(bc, x) {
     }
 }
 
-export function encodeTrailingPipe(x, config = DEFAULT_CONFIG) {
+export function encodeTrailingPipe(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

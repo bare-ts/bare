@@ -10,7 +10,7 @@ export function writeName(bc, x) {
     bare.writeString(bc, x)
 }
 
-export function encodeName(x, config = DEFAULT_CONFIG) {
+export function encodeName(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

@@ -10,7 +10,7 @@ export function writeI64(bc, x) {
     bare.writeI64Safe(bc, x)
 }
 
-export function encodeI64(x, config = DEFAULT_CONFIG) {
+export function encodeI64(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
@@ -37,7 +37,7 @@ export function writeU64(bc, x) {
     bare.writeU64Safe(bc, x)
 }
 
-export function encodeU64(x, config = DEFAULT_CONFIG) {
+export function encodeU64(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

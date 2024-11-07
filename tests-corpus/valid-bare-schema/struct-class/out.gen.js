@@ -24,7 +24,7 @@ export function writePerson(bc, x) {
     bare.writeU8(bc, x.age)
 }
 
-export function encodePerson(x, config = DEFAULT_CONFIG) {
+export function encodePerson(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

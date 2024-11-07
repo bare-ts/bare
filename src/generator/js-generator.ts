@@ -338,7 +338,7 @@ function genDecoderHead(g: Gen, alias: string): string {
 
 function genEncoderHead(g: Gen, alias: string): string {
     return g.config.generator === "js"
-        ? `function encode${alias}(x, config = DEFAULT_CONFIG)`
+        ? `function encode${alias}(x, config)`
         : g.config.generator === "ts"
           ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
           : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`

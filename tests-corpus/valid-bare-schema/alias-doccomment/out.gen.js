@@ -10,7 +10,7 @@ export function writeU8Alias(bc, x) {
     bare.writeU8(bc, x)
 }
 
-export function encodeU8Alias(x, config = DEFAULT_CONFIG) {
+export function encodeU8Alias(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
@@ -37,7 +37,7 @@ export function writeU8Alias2(bc, x) {
     bare.writeU8(bc, x)
 }
 
-export function encodeU8Alias2(x, config = DEFAULT_CONFIG) {
+export function encodeU8Alias2(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

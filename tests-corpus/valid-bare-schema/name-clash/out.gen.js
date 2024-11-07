@@ -25,7 +25,7 @@ export function writeReadonlyMap(bc, x) {
     }
 }
 
-export function encodeReadonlyMap(x, config = DEFAULT_CONFIG) {
+export function encodeReadonlyMap(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(fullConfig.initialBufferLength),
@@ -52,7 +52,7 @@ export function writeUint8Array(bc, x) {
     bare.writeU8Array(bc, x)
 }
 
-export function encodeUint8Array(x, config = DEFAULT_CONFIG) {
+export function encodeUint8Array(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(fullConfig.initialBufferLength),

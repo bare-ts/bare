@@ -25,7 +25,7 @@ export function writeU8(bc, x) {
     }
 }
 
-export function encodeU8(x, config = DEFAULT_CONFIG) {
+export function encodeU8(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

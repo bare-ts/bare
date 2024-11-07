@@ -91,7 +91,7 @@ export function writeComposite(bc, x) {
     }
 }
 
-export function encodeComposite(x, config = DEFAULT_CONFIG) {
+export function encodeComposite(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

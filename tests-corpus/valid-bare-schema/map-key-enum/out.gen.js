@@ -65,7 +65,7 @@ export function writeGenderNames(bc, x) {
     }
 }
 
-export function encodeGenderNames(x, config = DEFAULT_CONFIG) {
+export function encodeGenderNames(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

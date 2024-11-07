@@ -13,7 +13,7 @@ export function writeMaybeBool(bc, x) {
     }
 }
 
-export function encodeMaybeBool(x, config = DEFAULT_CONFIG) {
+export function encodeMaybeBool(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

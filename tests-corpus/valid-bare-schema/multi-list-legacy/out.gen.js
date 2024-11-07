@@ -59,7 +59,7 @@ export function writeMultiList(bc, x) {
     }
 }
 
-export function encodeMultiList(x, config = DEFAULT_CONFIG) {
+export function encodeMultiList(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),

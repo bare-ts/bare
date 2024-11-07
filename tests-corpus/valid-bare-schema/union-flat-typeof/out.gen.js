@@ -45,7 +45,7 @@ export function writeTypeOfUnion(bc, x) {
     }
 }
 
-export function encodeTypeOfUnion(x, config = DEFAULT_CONFIG) {
+export function encodeTypeOfUnion(x, config) {
     const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
