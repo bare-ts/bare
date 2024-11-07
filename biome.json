@@ -13,8 +13,7 @@
     "rules": {
       "all": true,
       "correctness": {
-        "noNodejsModules": "off",
-        "noUndeclaredDependencies": "off"
+        "noNodejsModules": "off"
       },
       "complexity": {
         "noExcessiveCognitiveComplexity": "off",
@@ -65,7 +64,16 @@
         }
       },
       "suspicious": {
-        "noConsole": "off"
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": [
+              "info",
+              "warn",
+              "error"
+            ]
+          }
+        }
       }
     }
   },
