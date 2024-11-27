@@ -67,11 +67,11 @@
     "@biomejs/biome": "1.9.4",
     "@types/node": "20.0.0",
     "esbuild": "0.24.0",
-    "typescript": "5.6.3",
+    "typescript": "5.7.2",
     "validate-commit-message": "3.2.0"
   },
   "peerDependencies": {
     "@bare-ts/lib": ">=0.3.0 <=0.4.0"
   },
-  "packageManager": "npm@10.8.1"
+  "packageManager": "npm@10.9.1"
 }

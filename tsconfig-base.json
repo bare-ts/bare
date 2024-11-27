@@ -4,7 +4,7 @@
     "lib": [
       "ES2023"
     ],
-    "module": "Node16",
+    "module": "NodeNext",
     "target": "ES2022",
 
     "noEmit": true,
