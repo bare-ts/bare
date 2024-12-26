@@ -2,7 +2,7 @@
 
 import * as fs from "node:fs"
 import * as path from "node:path"
-import { Config, configure, parse, transform } from "@bare-ts/tools"
+import { Config, configure, parse, transform } from "../src/index.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 
@@ -39,8 +39,7 @@ for (let category of fs.readdirSync(CORPUS_DIR)) {
                 completedConfig,
             )
             fs.writeFileSync(astPath, JSON.stringify(ast, null, 2))
-            let out
-            out = transform(content, { ...config, schema, generator: "ts" })
+            let out = transform(content, { ...config, schema, generator: "ts" })
             fs.writeFileSync(tsPath, out)
             out = transform(content, { ...config, schema, generator: "js" })
             fs.writeFileSync(jsPath, out)

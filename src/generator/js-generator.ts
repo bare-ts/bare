@@ -1,16 +1,16 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "../ast/bare-ast.js"
-import type { Config } from "../core/config.js"
+import * as ast from "../ast/bare-ast.ts"
+import type { Config } from "../core/config.ts"
 import {
     capitalize,
     dent,
     jsDoc,
     jsRpr,
     softSpace,
-} from "../utils/formatting.js"
-import * as utils from "./bare-ast-utils.js"
+} from "../utils/formatting.ts"
+import * as utils from "./bare-ast-utils.ts"
 
 export function generate(schema: ast.Ast, config: Config): string {
     const g: Gen = { config, symbols: ast.symbols(schema) }

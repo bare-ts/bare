@@ -1,15 +1,15 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "../ast/bare-ast.js"
-import { CompilerError } from "../core/compiler-error.js"
-import type { Config } from "../core/config.js"
+import * as ast from "../ast/bare-ast.ts"
+import { CompilerError } from "../core/compiler-error.ts"
+import type { Config } from "../core/config.ts"
 import {
     ALL_CASE_RE,
     CONSTANT_CASE_RE,
     toPascalCase,
-} from "../utils/formatting.js"
-import * as lexer from "./bare-lexer.js"
+} from "../utils/formatting.ts"
+import * as lexer from "./bare-lexer.ts"
 
 export function parse(content: string, config: Config): ast.Ast {
     const p: Parser = { config, lex: lexer.create(content) }

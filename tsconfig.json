@@ -6,11 +6,13 @@
     ],
     "module": "NodeNext",
     "target": "ES2022",
+    "types": [
+      "node"
+    ],
 
     "noEmit": true,
 
-    "types": [],
-
+    "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
@@ -18,7 +20,6 @@
     "verbatimModuleSyntax": true,
 
     "allowUnreachableCode": false,
-    "checkJs": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,

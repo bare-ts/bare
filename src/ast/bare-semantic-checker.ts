@@ -1,14 +1,14 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { CompilerError } from "../core/compiler-error.js"
-import type { Config } from "../core/config.js"
+import { CompilerError } from "../core/compiler-error.ts"
+import type { Config } from "../core/config.ts"
 import {
     CAMEL_CASE_RE,
     CONSTANT_CASE_RE,
     PASCAL_CASE_RE,
-} from "../utils/formatting.js"
-import * as ast from "./bare-ast.js"
+} from "../utils/formatting.ts"
+import * as ast from "./bare-ast.ts"
 
 export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {

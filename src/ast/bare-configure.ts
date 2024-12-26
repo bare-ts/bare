@@ -1,8 +1,8 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import type { Config } from "../core/config.js"
-import * as ast from "./bare-ast.js"
+import type { Config } from "../core/config.ts"
+import * as ast from "./bare-ast.ts"
 
 export function configure(schema: ast.Ast, config: Config): ast.Ast {
     const c: Configurator = {

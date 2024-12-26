@@ -1,8 +1,8 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "../ast/bare-ast.js"
-import { CompilerError } from "../core/compiler-error.js"
+import * as ast from "../ast/bare-ast.ts"
+import { CompilerError } from "../core/compiler-error.ts"
 
 // This file is separated from ast folder because these utils are used for
 // facilitating code generation.

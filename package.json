@@ -27,7 +27,7 @@
   },
   "type": "module",
   "bin": {
-    "bare": "dist/bin/cli.js"
+    "bare": "dist/bin/bare.js"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -53,13 +53,14 @@
   ],
   "scripts": {
     "build": "sh ./scripts/build.sh",
+    "check": "tsc --build && biome ci --error-on-warnings .",
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "prepare": "validate-commit-msg",
-    "prepublishOnly": "npm run clean && npm test",
-    "test": "sh ./scripts/test.sh",
+    "prepublishOnly": "npm run clean && npm run build && npm test",
+    "test": "node --test --experimental-strip-types && npm run check",
     "version": "sh ./scripts/version.sh"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@ import {
     configure,
     parse,
     transform,
-} from "@bare-ts/tools"
+} from "../src/index.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`
