@@ -1,16 +1,17 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    "isolatedDeclarations": true,
     "noEmit": false,
     "rewriteRelativeImportExtensions": true,
-    "types": [],
     "rootDir": ".",
     "outDir": "../dist"
   },
-  "exclude": [
-    "./bin/**",
-    "./**/*.test.ts"
+  "include": [
+    "./bin/*.ts"
+  ],
+  "references": [
+    {
+      "path": "."
+    }
   ]
 }

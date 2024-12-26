@@ -1,21 +1,21 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { configure } from "./ast/bare-configure.js"
-import { normalize } from "./ast/bare-normalization.js"
-import { checkSemantic } from "./ast/bare-semantic-checker.js"
-import { Config } from "./core/config.js"
-import { generateBare } from "./generator/bare-generator.js"
-import { generate } from "./generator/js-generator.js"
-import { parse } from "./parser/bare-parser.js"
+import { configure } from "./ast/bare-configure.ts"
+import { normalize } from "./ast/bare-normalization.ts"
+import { checkSemantic } from "./ast/bare-semantic-checker.ts"
+import { Config } from "./core/config.ts"
+import { generateBare } from "./generator/bare-generator.ts"
+import { generate } from "./generator/js-generator.ts"
+import { parse } from "./parser/bare-parser.ts"
 
-export * from "./ast/bare-ast.js"
-export * from "./ast/bare-configure.js"
-export * from "./ast/bare-normalization.js"
-export * from "./core/compiler-error.js"
-export * from "./core/config.js"
-export * from "./generator/js-generator.js"
-export * from "./parser/bare-parser.js"
+export * from "./ast/bare-ast.ts"
+export * from "./ast/bare-configure.ts"
+export * from "./ast/bare-normalization.ts"
+export * from "./core/compiler-error.ts"
+export * from "./core/config.ts"
+export * from "./generator/js-generator.ts"
+export * from "./parser/bare-parser.ts"
 
 /**
  * Turn the schema `content` into a target language, taking `conf` into account.

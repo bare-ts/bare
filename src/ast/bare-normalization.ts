@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "./bare-ast.js"
+import * as ast from "./bare-ast.ts"
 
 export function normalize(schema: ast.Ast): ast.Ast {
     const n: Context = { defs: [], dedup: new Map(), aliasCount: 0 }
