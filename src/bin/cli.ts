@@ -6,10 +6,8 @@
 import * as fs from "node:fs"
 import * as process from "node:process"
 import * as util from "node:util"
+import packageVersion from "../../VERSION.json" with { type: "json" }
 import { CompilerError, Config, transform } from "../index.js"
-
-// WARNING: This constant MUST be defined at build time.
-declare const VERSION: string
 
 const HELP_TEXT = `
 Usage: bare [options] [schema]
@@ -82,7 +80,7 @@ function main(): void {
         if (values.help) {
             console.info(HELP_TEXT)
         } else if (values.version) {
-            console.info(VERSION)
+            console.info(packageVersion)
         } else {
             if (positionals.length > 1 && positionals[0] === "compile") {
                 positionals.pop()

@@ -9,4 +9,6 @@ DATE="$(date -u +%Y-%m-%d)"
 # set version and current date
 sed -i "s/^## Unreleased$/## $npm_package_version ($DATE)/" CHANGELOG.md
 
-git add CHANGELOG.md
+echo "\"$npm_package_version\"" > VERSION.json
+
+git add CHANGELOG.md VERSION.json
