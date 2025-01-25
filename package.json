@@ -58,7 +58,6 @@
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome format --write .",
     "lint": "biome lint .",
-    "prepare": "validate-commit-msg",
     "prepublishOnly": "npm run clean && npm run build && npm test",
     "test": "node --test --experimental-strip-types && npm run check",
     "version": "sh ./scripts/version.sh"
@@ -68,8 +67,7 @@
     "@biomejs/biome": "1.9.4",
     "@types/node": "20.0.0",
     "esbuild": "0.24.0",
-    "typescript": "5.7.2",
-    "validate-commit-message": "3.2.0"
+    "typescript": "5.7.2"
   },
   "peerDependencies": {
     "@bare-ts/lib": ">=0.3.0 <=0.4.0"
