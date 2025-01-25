@@ -48,8 +48,7 @@
     "dist/**/*.d.cts",
     "dist/**/*.d.ts",
     "dist/**/*.js",
-    "!dist/**/*.test.js",
-    "!dist/**/*.spec.js"
+    "VERSION.json"
   ],
   "scripts": {
     "build": "sh ./scripts/build.sh",
