@@ -1,21 +1,22 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { configure } from "./ast/bare-configure.ts"
-import { normalize } from "./ast/bare-normalization.ts"
-import { checkSemantic } from "./ast/bare-semantic-checker.ts"
-import { Config } from "./core/config.ts"
-import { generateBare } from "./generator/bare-generator.ts"
-import { generate } from "./generator/js-generator.ts"
-import { parse } from "./parser/bare-parser.ts"
+import { check } from "./checker.ts"
+import { configure } from "./configurer.ts"
+import { Config } from "./core.ts"
+import { generateBare } from "./gen-bare.ts"
+import { generateJs } from "./gen-js.ts"
+import { normalize } from "./normalizer.ts"
+import { parse } from "./parser.ts"
 
-export * from "./ast/bare-ast.ts"
-export * from "./ast/bare-configure.ts"
-export * from "./ast/bare-normalization.ts"
-export * from "./core/compiler-error.ts"
-export * from "./core/config.ts"
-export * from "./generator/js-generator.ts"
-export * from "./parser/bare-parser.ts"
+export * from "./ast.ts"
+export { check } from "./checker.ts"
+export { configure } from "./configurer.ts"
+export { Config } from "./core.ts"
+export { generateBare } from "./gen-bare.ts"
+export { generateJs } from "./gen-js.ts"
+export { normalize } from "./normalizer.ts"
+export { parse } from "./parser.ts"
 
 /**
  * Turn the schema `content` into a target language, taking `conf` into account.
@@ -40,10 +41,10 @@ export function transform(content: string, conf: Partial<Config> = {}): string {
     const completedConfig = Config(conf)
     const schema = parse(content, completedConfig)
     const configured = configure(schema, completedConfig)
-    checkSemantic(configured, completedConfig)
+    check(configured, completedConfig)
     if (completedConfig.generator === "bare") {
         return generateBare(schema)
     }
     const normalizedSchema = normalize(configured)
-    return generate(normalizedSchema, completedConfig)
+    return generateJs(normalizedSchema, completedConfig)
 }

@@ -1,9 +1,13 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import type { Config } from "../core/config.ts"
-import * as ast from "./bare-ast.ts"
+import * as ast from "./ast.ts"
+import type { Config } from "./core.ts"
 
+/**
+ * Update `schema` according to `config`.
+ * This function should be called before the semantic checking phase.
+ */
 export function configure(schema: ast.Ast, config: Config): ast.Ast {
     const c: Configurator = {
         config,

@@ -1,7 +1,19 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-const DEFAULT_GENERATOR = "ts"
+/**
+ * @sealed
+ */
+export class CompilerError extends Error {
+    override name = "CompilerError"
+
+    readonly offset: number
+
+    constructor(msg: string, offset: number) {
+        super(msg)
+        this.offset = offset
+    }
+}
 
 /**
  * @sealed
@@ -37,6 +49,8 @@ export type Config = {
     readonly useStructFlatUnion: boolean
     readonly useUndefined: boolean
 }
+
+const DEFAULT_GENERATOR = "ts"
 
 /**
  * Complete the configuration by setting missing fields to their default values.
