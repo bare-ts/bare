@@ -12,11 +12,9 @@
 
     "noEmit": true,
 
-    "allowImportingTsExtensions": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
     "libReplacement": false,
     "resolveJsonModule": true,
+    "rewriteRelativeImportExtensions": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
 

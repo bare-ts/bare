@@ -23,7 +23,7 @@
     "url": "https://github.com/bare-ts/bare/issues"
   },
   "engines": {
-    "node": ">=20.10.0"
+    "node": ">=20.19.0"
   },
   "type": "module",
   "bin": {
@@ -31,41 +31,31 @@
   },
   "exports": {
     "./package.json": "./package.json",
-    ".": {
-      "module": "./dist/index.js",
-      "module-sync": "./dist/index.js",
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      },
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
-    }
+    ".": "./dist/index.js"
   },
   "sideEffects": false,
   "files": [
-    "dist/**/*.cjs",
-    "dist/**/*.d.cts",
     "dist/**/*.d.ts",
     "dist/**/*.js",
     "VERSION.json"
   ],
   "scripts": {
-    "build": "sh ./scripts/build.sh",
-    "check": "tsc --build && biome ci --error-on-warnings .",
+    "build": "tsc --build src/",
+    "bundle": "esbuild dist/bin/bare.js --bundle --target=node20.19.0 --minify --keep-names --platform=node >| ./dist/bin/bare",
+    "check": "tsc --build --noEmit src/ tests-corpus/ && biome ci --error-on-warnings .",
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome format --write .",
     "lint": "biome lint .",
     "prepublishOnly": "npm run clean && npm run build && npm test",
     "test": "node --test --experimental-strip-types && npm run check",
+    "test:gen": "node --experimental-strip-types scripts/generate-tests-corpus.ts",
     "version": "sh ./scripts/version.sh"
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
     "@biomejs/biome": "1.9.4",
     "@types/node": "20.17.24",
-    "esbuild": "0.25.1",
     "typescript": "5.8.2"
   },
   "peerDependencies": {

@@ -8,9 +8,15 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## Unreleased
 
--   BREAKING CHANGES: require Node.js 20.10.0 or above
+-   BREAKING CHANGES: require Node.js 20.19.0 or above
 
     This allows us to use [import attributes](https://nodejs.org/api/esm.html#import-attributes).
+    Their support has been introduced in Node.js 20.10.0.
+
+    Requiring [NodeJs 20.19.0](https://nodejs.org/en/blog/release/v20.19.0/) and above ensures that users may `require` an ESM module.
+    This drastically simplifies our `package.json`'s `exports` conditions,
+    and prevent [dual-package hazard](https://nodejs.org/api/packages.html#dual-package-hazard).
+    As a result, we no longer ship a _CommonJS_ version of the package.
 
 ## 0.16.0 (2024-11-02)
 

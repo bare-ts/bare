@@ -150,7 +150,7 @@ function compileAction(schema: string | number, opts: Partial<Config>): void {
     }
 }
 
-export type Location = {
+type Location = {
     /**
      * 1-based index
      */
@@ -161,7 +161,7 @@ export type Location = {
     readonly col: number
 }
 
-export function location(content: string, offset: number): Location {
+function location(content: string, offset: number): Location {
     const normalizedOffset = Math.min(offset, content.length)
     const substring = content.slice(0, normalizedOffset + 1)
     const lineOffset = substring.lastIndexOf("\n")

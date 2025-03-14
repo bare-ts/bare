@@ -21,6 +21,10 @@ jobs:
               run: |
                   npm ci
                   npm run build
+            - name: Build standalone executable
+              run: |
+                  npm install esbuild@0.25.1
+                  npm run bundle
             - name: Extract changelog
               run: |
                   VERSION="${GITHUB_REF_NAME#v}"
