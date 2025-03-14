@@ -15,6 +15,7 @@
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "libReplacement": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,

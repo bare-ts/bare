@@ -64,9 +64,9 @@
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
     "@biomejs/biome": "1.9.4",
-    "@types/node": "20.0.0",
-    "esbuild": "0.24.0",
-    "typescript": "5.7.2"
+    "@types/node": "20.17.24",
+    "esbuild": "0.25.1",
+    "typescript": "5.8.2"
   },
   "peerDependencies": {
     "@bare-ts/lib": ">=0.3.0 <=0.4.0"
