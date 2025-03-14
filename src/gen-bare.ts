@@ -1,8 +1,8 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import type * as ast from "../ast/bare-ast.ts"
-import { dent, toConstantCase } from "../utils/formatting.ts"
+import type * as ast from "./ast.ts"
+import { dent, toConstantCase } from "./utils/formatting.ts"
 
 export function generateBare(schema: ast.Ast): string {
     let result = ""

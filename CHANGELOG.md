@@ -18,6 +18,13 @@ New entries must be placed in a section entitled `Unreleased`.
     and prevent [dual-package hazard](https://nodejs.org/api/packages.html#dual-package-hazard).
     As a result, we no longer ship a _CommonJS_ version of the package.
 
+-   BREAKING CHANGES: rename `generate` and `checkSemantic` into `generateJs` and `check`.
+
+    ```diff
+    - import { generate, checkSemantic } from "@bare-ts/tools"
+    + import { generateJs, check } from "@bare-ts/tools"
+    ```
+
 ## 0.16.0 (2024-11-02)
 
 -   BREAKING CHANGES: require Node.js 20.0.0 or above

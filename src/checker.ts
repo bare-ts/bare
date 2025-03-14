@@ -1,16 +1,15 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { CompilerError } from "../core/compiler-error.ts"
-import type { Config } from "../core/config.ts"
+import * as ast from "./ast.ts"
+import { CompilerError, Config } from "./core.ts"
 import {
     CAMEL_CASE_RE,
     CONSTANT_CASE_RE,
     PASCAL_CASE_RE,
-} from "../utils/formatting.ts"
-import * as ast from "./bare-ast.ts"
+} from "./utils/formatting.ts"
 
-export function checkSemantic(schema: ast.Ast, config: Config): ast.Ast {
+export function check(schema: ast.Ast, config: Config): ast.Ast {
     if (schema.defs.length === 0) {
         throw new CompilerError("a schema cannot be empty.", schema.offset)
     }
@@ -238,7 +237,16 @@ function checkUnionInvariants(c: Checker, type: ast.UnionType): void {
     // check type uniqueness
     const stringifiedTypes = new Set()
     for (const ty of type.types) {
-        const stringifiedType = JSON.stringify(ast.withoutExtra(ty))
+        // Compare types between them considering only their BARE properties.
+        const stringifiedType = JSON.stringify(ty, (name, val) =>
+            name === "comment"
+                ? ""
+                : name === "extra"
+                  ? null
+                  : name === "offset"
+                    ? 0
+                    : val,
+        )
         // NOTE: this dirty check is ok because we initialize
         // every object in the same way (properties are in the same order)
         if (stringifiedTypes.has(stringifiedType)) {

@@ -54,6 +54,7 @@
                 "selector": {
                   "kind": "objectLiteralProperty"
                 },
+                "match": "__proto__|(.+)",
                 "formats": [
                   "camelCase",
                   "PascalCase"

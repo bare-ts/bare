@@ -1,18 +1,18 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "../ast/bare-ast.ts"
-import type { Config } from "../core/config.ts"
+import * as ast from "./ast.ts"
+import { Config } from "./core.ts"
+import { unrecursive } from "./utils/ast-unrecursive.ts"
 import {
     capitalize,
     dent,
     jsDoc,
     jsRpr,
     softSpace,
-} from "../utils/formatting.ts"
-import * as utils from "./bare-ast-utils.ts"
+} from "./utils/formatting.ts"
 
-export function generate(schema: ast.Ast, config: Config): string {
+export function generateJs(schema: ast.Ast, config: Config): string {
     const g: Gen = { config, symbols: ast.symbols(schema) }
     let body = ""
     const rootAliases = ast.rootAliases(schema.defs)
@@ -190,7 +190,7 @@ function genAliasType(g: Gen, type: ast.Alias): string {
 
 function genListType(g: Gen, type: ast.ListType): string {
     const valType = type.types[0]
-    const typedArray = ast.FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY.get(valType.tag)
+    const typedArray = ast.FIXED_NUMERIC_TAG_TO_TYPED_ARRAY[valType.tag]
     if (type.extra?.typedArray && typedArray != null) {
         return global(g, typedArray)
     }
@@ -238,7 +238,7 @@ function genAliasedEnumType(g: Gen, alias: string, type: ast.EnumType): string {
 }
 
 function genOptionalType(g: Gen, type: ast.OptionalType): string {
-    const simplified = utils.unrecursive(type, g.symbols)
+    const simplified = unrecursive(type, g.symbols)
     if (simplified.tag === "optional") {
         const typedef = genType(g, simplified.types[0])
         return `${typedef} | ${noneVal(simplified)}`
@@ -1118,7 +1118,7 @@ function global(g: Gen, name: string): string {
     return g.symbols.has(name) ? `globalThis.${name}` : name
 }
 
-export function noneVal(type: ast.OptionalType | ast.VoidType): string {
+function noneVal(type: ast.OptionalType | ast.VoidType): string {
     return type.extra != null
         ? jsRpr(ast.literalVal(type.extra.literal))
         : "null"

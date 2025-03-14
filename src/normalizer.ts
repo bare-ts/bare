@@ -1,8 +1,12 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "./bare-ast.ts"
+import * as ast from "./ast.ts"
 
+/**
+ * Normalize `schema`.
+ * This function should be called before code generation.
+ */
 export function normalize(schema: ast.Ast): ast.Ast {
     const n: Context = { defs: [], dedup: new Map(), aliasCount: 0 }
     const defs = n.defs
@@ -58,7 +62,10 @@ function maybeAlias(n: Context, type: ast.Type): ast.Type {
 function genAlias(n: Context, type: ast.Type): ast.Alias {
     // NOTE: this dirty check is ok because we initialize
     // every object in the same way (properties are in the same order)
-    const stringifiedType = JSON.stringify(ast.withoutOffset(type))
+    // Comparing types between them regardless their `offset`.
+    const stringifiedType = JSON.stringify(type, (name, val) =>
+        name === "offset" ? 0 : val,
+    )
     let alias = n.dedup.get(stringifiedType)
     if (alias == null) {
         const normalized = normalizeSubtypes(n, type)

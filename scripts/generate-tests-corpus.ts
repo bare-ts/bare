@@ -2,7 +2,10 @@
 
 import * as fs from "node:fs"
 import * as path from "node:path"
-import { Config, configure, parse, transform } from "../src/index.ts"
+import { configure } from "../src/configure.ts"
+import { Config } from "../src/core.ts"
+import { transform } from "../src/index.ts"
+import { parse } from "../src/parser.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 

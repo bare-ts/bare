@@ -5,13 +5,10 @@ import * as assert from "node:assert/strict"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { test } from "node:test"
-import {
-    CompilerError,
-    Config,
-    configure,
-    parse,
-    transform,
-} from "../src/index.ts"
+import { configure } from "../src/configurer.ts"
+import { CompilerError, Config } from "../src/core.ts"
+import { transform } from "../src/index.ts"
+import { parse } from "../src/parser.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`

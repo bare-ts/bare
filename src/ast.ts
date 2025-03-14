@@ -213,7 +213,7 @@ export function literalVal(literal: Literal): LiteralVal {
 export type BaseTag = (typeof NUMERIC_TAG)[number] | "bool" | "str"
 
 export function isBaseTag(tag: string): tag is BaseTag {
-    return BASE_TAG_SET.has(tag)
+    return (BASE_TAG as readonly string[]).includes(tag)
 }
 
 export function isBaseType(type: Type): type is BaseType {
@@ -237,7 +237,7 @@ export type FixedNumericTag =
     | "u64"
 
 export function isFixedNumericTag(tag: string): tag is FixedNumericTag {
-    return FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY.has(tag)
+    return Object.hasOwn(FIXED_NUMERIC_TAG_TO_TYPED_ARRAY, tag)
 }
 
 export const NUMERIC_TAG = [
@@ -255,24 +255,23 @@ export const NUMERIC_TAG = [
     "uint",
 ] as const
 
-const BASE_TAG_SET: ReadonlySet<string> = new Set([
-    ...NUMERIC_TAG,
-    "bool",
-    "str",
-])
+const BASE_TAG = [...NUMERIC_TAG, "bool", "str"] as const
 
-export const FIXED_NUMERIC_TYPE_TO_TYPED_ARRAY: Map<string, string> = new Map([
-    ["f32", "Float32Array"],
-    ["f64", "Float64Array"],
-    ["i8", "Int8Array"],
-    ["i16", "Int16Array"],
-    ["i32", "Int32Array"],
-    ["i64", "BigInt64Array"],
-    ["u8", "Uint8Array"],
-    ["u16", "Uint16Array"],
-    ["u32", "Uint32Array"],
-    ["u64", "BigUint64Array"],
-])
+export const FIXED_NUMERIC_TAG_TO_TYPED_ARRAY: {
+    readonly [tag: string]: string | undefined | null
+} = {
+    __proto__: null,
+    f32: "Float32Array",
+    f64: "Float64Array",
+    i8: "Int8Array",
+    i16: "Int16Array",
+    i32: "Int32Array",
+    i64: "BigInt64Array",
+    u8: "Uint8Array",
+    u16: "Uint16Array",
+    u32: "Uint32Array",
+    u64: "BigUint64Array",
+}
 
 export function maxVal(data: readonly (EnumVal | UnionTag)[]): number {
     return data.reduce((max, v) => Math.max(max, v.val), 0)
@@ -343,7 +342,7 @@ export function leadingDiscriminators(
     structs: readonly StructType[],
 ): LiteralVal[] | null {
     if (structs.length > 0) {
-        const literals: Set<LiteralVal> = new Set()
+        const literals: LiteralVal[] = []
         const type0LeadingField = structs[0].data[0]
         for (const struct of structs) {
             const fields = struct.data
@@ -352,13 +351,13 @@ export function leadingDiscriminators(
                 fields[0].name !== type0LeadingField.name ||
                 struct.types[0].tag !== "void" ||
                 struct.types[0].extra == null ||
-                literals.has(literalVal(struct.types[0].extra.literal))
+                literals.includes(literalVal(struct.types[0].extra.literal))
             ) {
                 return null
             }
-            literals.add(literalVal(struct.types[0].extra.literal))
+            literals.push(literalVal(struct.types[0].extra.literal))
         }
-        return Array.from(literals.values()) // literals in insertion order
+        return literals
     }
     return null
 }
@@ -371,35 +370,4 @@ export function haveDistinctTypeof(types: readonly Type[]): boolean {
         isBaseType(t) ? typeofValue(t) : null,
     ) // null for 'object' or 'undefined'
     return types.length === new Set(typeofValues).size
-}
-
-/**
- * Recursively traverse `type` and set `offset` to 0.
- *
- * This allows comparing types between them regardless their `offset`.
- */
-export function withoutOffset(type: Type): Type {
-    return JSON.parse(
-        JSON.stringify(type, (name, val) => (name === "offset" ? 0 : val)),
-    )
-}
-
-/**
- * Recursively traverse `type`,
- * and set `comment` to the empty string, `extra` to `null`, `offset` to 0.
- *
- * This allows comparing types between them considering only their BARE properties.
- */
-export function withoutExtra(type: Type): Type {
-    return JSON.parse(
-        JSON.stringify(type, (name, val) =>
-            name === "comment"
-                ? ""
-                : name === "extra"
-                  ? null
-                  : name === "offset"
-                    ? 0
-                    : val,
-        ),
-    )
 }
