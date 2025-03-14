@@ -13,10 +13,10 @@ jobs:
             contents: read
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@v4.2.2
+            - uses: actions/setup-node@v4.2.0
               with:
-                  node-version: "22.10.0"
+                  node-version: "22.14.0"
                   cache: npm
             - name: Build and test coverage
               run: |
