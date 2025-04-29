@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import * as ast from "./ast.ts"
+import type * as ast from "./ast.ts"
 
 /**
  * Normalize `schema`.

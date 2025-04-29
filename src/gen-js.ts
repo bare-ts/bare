@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./ast.ts"
-import { Config } from "./core.ts"
+import type { Config } from "./core.ts"
 import { unrecursive } from "./utils/ast-unrecursive.ts"
 import {
     capitalize,

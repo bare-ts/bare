@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./ast.ts"
-import { CompilerError, Config } from "./core.ts"
+import { CompilerError, type Config } from "./core.ts"
 import {
     CAMEL_CASE_RE,
     CONSTANT_CASE_RE,
