@@ -1,5 +1,5 @@
 {
   "name": "CompilerError",
-  "offset": 50,
+  "offset": 40,
   "message": "All union tags must be in ascending order."
 }

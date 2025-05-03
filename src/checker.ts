@@ -117,7 +117,6 @@ function checkMembersInvariants(
         )
     }
     const names: Set<string> = new Set()
-    const tags: Set<number> = new Set()
     let prevVal = -1
     for (const elt of data) {
         if (elt.name != null) {
@@ -152,16 +151,9 @@ function checkMembersInvariants(
                     elt.offset,
                 )
             }
-            if (tags.has(elt.val)) {
+            if (elt.val <= prevVal) {
                 throw new CompilerError(
-                    `tag '${elt.val}' is assigned to a preceding member.`,
-                    elt.offset,
-                )
-            }
-            tags.add(elt.val)
-            if (c.config.pedantic && elt.val < prevVal) {
-                throw new CompilerError(
-                    `in pedantic mode, all ${type.tag} tags must be in order.`,
+                    `All ${type.tag} tags must be in ascending order.`,
                     elt.offset,
                 )
             }

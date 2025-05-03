@@ -25,6 +25,20 @@ New entries must be placed in a section entitled `Unreleased`.
     + import { generateJs, check } from "@bare-ts/tools"
     ```
 
+-   BREAKING CHANGES: require tags in unions and enum to be declared in ascending order.
+
+    This is a requirement introduced by the [12th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/12/).
+
+    The following BARE schema is now invalid:
+
+    ```bare
+    type Gender enum {
+        FEMALE = 1
+        FLUID = 2
+        MALE = 0
+    }
+    ```
+
 ## 0.16.0 (2024-11-02)
 
 -   BREAKING CHANGES: require Node.js 20.0.0 or above

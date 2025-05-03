@@ -1,0 +1,5 @@
+{
+  "name": "CompilerError",
+  "offset": 37,
+  "message": "All enum tags must be in ascending order."
+}

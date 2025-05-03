@@ -1,5 +1,0 @@
-{
-  "name": "CompilerError",
-  "offset": 37,
-  "message": "in pedantic mode, all enum tags must be in order."
-}

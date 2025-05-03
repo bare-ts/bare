@@ -1,5 +1,0 @@
-{
-  "name": "CompilerError",
-  "offset": 40,
-  "message": "in pedantic mode, all union tags must be in order."
-}

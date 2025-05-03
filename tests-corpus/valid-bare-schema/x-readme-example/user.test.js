@@ -4,7 +4,7 @@
 import * as assert from "node:assert/strict"
 import { test } from "node:test"
 
-import { Gender, decodeContacts, encodeContacts } from "./out.gen.js"
+import { decodeContacts, encodeContacts, Gender } from "./out.gen.js"
 
 test("x-readme-example", () => {
     const payload = encodeContacts([
