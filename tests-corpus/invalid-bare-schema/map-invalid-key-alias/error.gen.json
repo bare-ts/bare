@@ -1,5 +1,5 @@
 {
   "name": "CompilerError",
-  "offset": 33,
+  "offset": 32,
   "message": "the key type must be a base type (except f32, f64) or an enum type."
 }

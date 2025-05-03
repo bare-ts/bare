@@ -5,7 +5,7 @@
       "internal": false,
       "comment": "",
       "type": {
-        "tag": "data",
+        "tag": "f64",
         "data": null,
         "types": null,
         "extra": null,
@@ -26,20 +26,20 @@
             "data": "KeyType",
             "types": null,
             "extra": null,
-            "offset": 33
+            "offset": 32
           },
           {
             "tag": "str",
             "data": null,
             "types": null,
             "extra": null,
-            "offset": 42
+            "offset": 41
           }
         ],
         "extra": null,
-        "offset": 29
+        "offset": 28
       },
-      "offset": 19
+      "offset": 18
     }
   ],
   "filename": "map-invalid-key-alias/schema.bare",

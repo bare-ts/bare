@@ -199,7 +199,8 @@ function checkMapInvariants(c: Checker, type: ast.MapType): void {
     const resolvedKeyType = ast.resolveAlias(keyType, c.symbols)
     if (
         (!ast.isBaseTag(resolvedKeyType.tag) &&
-            resolvedKeyType.tag !== "enum") ||
+            resolvedKeyType.tag !== "enum" &&
+            resolvedKeyType.tag !== "data") ||
         resolvedKeyType.tag === "f32" ||
         resolvedKeyType.tag === "f64"
     ) {

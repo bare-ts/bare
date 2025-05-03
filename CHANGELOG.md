@@ -39,6 +39,16 @@ New entries must be placed in a section entitled `Unreleased`.
     }
     ```
 
+-   Support data (binary blobs) as map keys.
+
+    This is a change introduced by the [13th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/13/).
+
+    The following BARE schema is now valid:
+
+    ```bare
+    type Dict map<data><u32>
+    ```
+
 ## 0.16.0 (2024-11-02)
 
 -   BREAKING CHANGES: require Node.js 20.0.0 or above
