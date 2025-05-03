@@ -1,44 +1,67 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+  "$schema": "https://next.biomejs.dev/schemas/2.0.0-beta.2/schema.json",
   "files": {
     "ignoreUnknown": true
   },
   "formatter": {
+    "includes": [
+      "**",
+      "!tests-corpus/**"
+    ],
     "indentStyle": "space",
-    "ignore": [
-      "tests-corpus"
-    ]
+    "indentWidth": 4
   },
   "linter": {
+    "domains": {
+      "project": "recommended",
+      "test": "recommended"
+    },
     "rules": {
-      "all": true,
       "correctness": {
         "noNodejsModules": "off"
       },
       "complexity": {
-        "noExcessiveCognitiveComplexity": "off",
-        "noUselessLoneBlockStatements": "off"
-      },
-      "nursery": {
-        "all": true,
-        "noEnum": "off",
-        "noNestedTernary": "off",
-        "noSecrets": "off",
-        "useImportRestrictions": "off"
+        "noUselessStringConcat": "on",
+        "noUselessLoneBlockStatements": "off",
+        "noUselessUndefinedInitialization": "on",
+        "noVoid": "on",
+        "useDateNow": "on"
       },
       "performance": {
-        "noBarrelFile": "off",
-        "noReExportAll": "off",
-        "useTopLevelRegex": "off"
+        "noDelete": "on"
       },
       "style": {
-        "noDoneCallback": "off",
-        "noNamespaceImport": "off",
-        "useDefaultSwitchClause": "off",
+        "noArguments": "on",
+        "noCommaOperator": "on",
+        "noDefaultExport": "on",
+        "noDoneCallback": "on",
+        "noImplicitBoolean": "on",
+        "noInferrableTypes": "on",
+        "noNamespace": "on",
+        "noNegationElse": "on",
+        "noNonNullAssertion": "on",
+        "noParameterAssign": "on",
+        "noParameterProperties": "on",
+        "noUnusedTemplateLiteral": "on",
+        "noUselessElse": "on",
+        "noYodaExpression": "on",
+        "useAsConstAssertion": "on",
+        "useBlockStatements": "on",
+        "useCollapsedElseIf": "on",
+        "useConsistentArrayType": "on",
+        "useConsistentBuiltinInstantiation": "on",
+        "useConst": "on",
+        "useDefaultParameterLast": "on",
+        "useEnumInitializers": "on",
+        "useExplicitLengthCheck": "on",
+        "useExponentiationOperator": "on",
+        "useExportType": "on",
+        "useFilenamingConvention": "on",
         "useForOf": "off",
-        "useImportType": "off",
+        "useImportType": "on",
+        "useLiteralEnumMembers": "on",
         "useNamingConvention": {
-          "level": "warn",
+          "level": "on",
           "options": {
             "conventions": [
               {
@@ -62,11 +85,21 @@
               }
             ]
           }
-        }
+        },
+        "useNodeAssertStrict": "on",
+        "useNodejsImportProtocol": "on",
+        "useNumberNamespace": "on",
+        "useNumericLiterals": "on",
+        "useShorthandAssign": "on",
+        "useShorthandFunctionType": "on",
+        "useSingleVarDeclarator": "on",
+        "useTemplate": "on",
+        "useThrowNewError": "on",
+        "useThrowOnlyError": "on"
       },
       "suspicious": {
         "noConsole": {
-          "level": "warn",
+          "level": "on",
           "options": {
             "allow": [
               "info",
@@ -74,19 +107,24 @@
               "error"
             ]
           }
-        }
+        },
+        "noEmptyBlockStatements": "on",
+        "noEvolvingTypes": "on",
+        "noExportsInTest": "on",
+        "useErrorMessage": "on",
+        "useNumberToFixedDigitsArgument": "on"
       }
     }
   },
   "javascript": {
     "formatter": {
-      "indentWidth": 4,
       "semicolons": "asNeeded"
     }
   },
   "json": {
     "formatter": {
-      "lineWidth": 1
+      "expand": "always",
+      "indentWidth": 2
     }
   },
   "vcs": {
