@@ -2,6 +2,7 @@
   "extends": "../tests-corpus/tsconfig.json",
   "compilerOptions": {
     "declaration": true,
+    "exactOptionalPropertyTypes": false,
     "erasableSyntaxOnly": true,
     "isolatedDeclarations": true,
     "noEmit": false,

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://next.biomejs.dev/schemas/2.0.0-beta.2/schema.json",
+  "$schema": "https://next.biomejs.dev/schemas/2.0.0-beta.3/schema.json",
   "files": {
     "ignoreUnknown": true
   },
@@ -17,29 +17,23 @@
       "test": "recommended"
     },
     "rules": {
-      "correctness": {
-        "noNodejsModules": "off"
-      },
       "complexity": {
-        "noUselessStringConcat": "on",
         "noUselessLoneBlockStatements": "off",
-        "noUselessUndefinedInitialization": "on",
-        "noVoid": "on",
-        "useDateNow": "on"
+        "noVoid": "on"
+      },
+      "nursery": {
+        "useExhaustiveSwitchCases": "off"
       },
       "performance": {
         "noDelete": "on"
       },
       "style": {
-        "noArguments": "on",
-        "noCommaOperator": "on",
         "noDefaultExport": "on",
         "noDoneCallback": "on",
         "noImplicitBoolean": "on",
         "noInferrableTypes": "on",
         "noNamespace": "on",
         "noNegationElse": "on",
-        "noNonNullAssertion": "on",
         "noParameterAssign": "on",
         "noParameterProperties": "on",
         "noUnusedTemplateLiteral": "on",
@@ -54,12 +48,15 @@
         "useDefaultParameterLast": "on",
         "useEnumInitializers": "on",
         "useExplicitLengthCheck": "on",
-        "useExponentiationOperator": "on",
-        "useExportType": "on",
-        "useFilenamingConvention": "on",
+        "useFilenamingConvention": {
+          "level": "on",
+          "options": {
+            "filenameCases": [
+              "kebab-case"
+            ]
+          }
+        },
         "useForOf": "off",
-        "useImportType": "on",
-        "useLiteralEnumMembers": "on",
         "useNamingConvention": {
           "level": "on",
           "options": {
@@ -87,13 +84,9 @@
           }
         },
         "useNodeAssertStrict": "on",
-        "useNodejsImportProtocol": "on",
         "useNumberNamespace": "on",
-        "useNumericLiterals": "on",
         "useShorthandAssign": "on",
-        "useShorthandFunctionType": "on",
         "useSingleVarDeclarator": "on",
-        "useTemplate": "on",
         "useThrowNewError": "on",
         "useThrowOnlyError": "on"
       },
@@ -111,6 +104,7 @@
         "noEmptyBlockStatements": "on",
         "noEvolvingTypes": "on",
         "noExportsInTest": "on",
+        "noVar": "on",
         "useErrorMessage": "on",
         "useNumberToFixedDigitsArgument": "on"
       }

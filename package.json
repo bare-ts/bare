@@ -46,7 +46,7 @@
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome format --write .",
-    "lint": "biome lint .",
+    "lint": "biome lint --error-on-warnings .",
     "prepublishOnly": "npm run clean && npm run build && npm test",
     "test": "node --test --experimental-strip-types && npm run check",
     "test:gen": "node --experimental-strip-types scripts/generate-tests-corpus.ts",
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
-    "@biomejs/biome": "2.0.0-beta.2",
+    "@biomejs/biome": "^2.0.0-beta.6",
     "@types/node": "20.17.24",
     "typescript": "5.8.2"
   },

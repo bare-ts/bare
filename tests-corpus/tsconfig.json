@@ -19,6 +19,7 @@
     "verbatimModuleSyntax": true,
 
     "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
