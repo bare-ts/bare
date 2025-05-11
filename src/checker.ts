@@ -88,11 +88,11 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
         }
         case "enum":
         case "struct": {
-            checkMembersInvariants(c, type)
+            checkMembersInvariants(type)
             break
         }
         case "union": {
-            checkMembersInvariants(c, type)
+            checkMembersInvariants(type)
             checkUnionInvariants(c, type)
             break
         }
@@ -100,7 +100,6 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
 }
 
 function checkMembersInvariants(
-    c: Checker,
     type: ast.EnumType | ast.StructType | ast.UnionType,
 ): void {
     const data = type.data
