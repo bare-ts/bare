@@ -31,7 +31,7 @@ export function check(schema: ast.Ast, config: Config): ast.Ast {
         if (c.config.legacy) {
             checkCircularRef(c, type, new Set([alias]))
         } else {
-            checkUsedBeforeDefined(c, type, aliases)
+            checkUsedBeforeDefined(type, aliases)
         }
         aliases.add(alias)
     }
@@ -282,7 +282,6 @@ function checkUndefinedAlias(c: Checker, type: ast.Alias): void {
 }
 
 function checkUsedBeforeDefined(
-    c: Checker,
     type: ast.Type,
     defined: ReadonlySet<string>,
 ): void {
@@ -294,7 +293,7 @@ function checkUsedBeforeDefined(
     }
     if (type.types != null) {
         for (const subtype of type.types) {
-            checkUsedBeforeDefined(c, subtype, defined)
+            checkUsedBeforeDefined(subtype, defined)
         }
     }
 }
