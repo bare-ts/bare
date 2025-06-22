@@ -12,7 +12,8 @@ const SAMPLE = `
     }
     `
 
-const SAMPLE_TOKENS = "const C = { p1 : 1 , p2 : a , }".split(" ")
+const SAMPLE_TOKENS: readonly string[] =
+    /* @__PURE__ */ "const C = { p1 : 1 , p2 : a , }".split(" ")
 
 test("valid-tokens", () => {
     const l = lex.create(SAMPLE)
