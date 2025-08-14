@@ -1,5 +1,5 @@
 {
-  "$schema": "https://next.biomejs.dev/schemas/2.0.0/schema.json",
+  "$schema": "https://next.biomejs.dev/schemas/2.2.0/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
@@ -19,27 +19,15 @@
     },
     "rules": {
       "complexity": {
+        "noImplicitCoercions": "on",
         "noUselessLoneBlockStatements": "off",
         "noVoid": "on"
       },
       "nursery": {
-        "noConstantBinaryExpression": "on",
-        "noImplicitCoercion": "on",
         "noImportCycles": "on",
-        "noUnassignedVariables": "on",
-        "noUselessEscapeInString": "on",
         "noUselessUndefined": "off",
-        "useAdjacentGetterSetter": "on",
-        "useConsistentObjectDefinition": "on",
         "useExhaustiveSwitchCases": "off",
-        "useExplicitType": "off",
-        "useIndexOf": "on",
-        "useJsonImportAttribute": "on",
-        "useNumericSeparators": "off",
-        "useParseIntRadix": "on",
-        "useReadonlyClassProperties": "on",
-        "useSingleJsDocAsterisk": "on",
-        "useUnifiedTypeSignature": "on"
+        "useExplicitType": "off"
       },
       "performance": {
         "noDelete": "on"
@@ -73,6 +61,7 @@
             ]
           }
         },
+        "useGroupedAccessorPairs": "on",
         "useForOf": "off",
         "useNamingConvention": {
           "level": "on",
@@ -102,10 +91,13 @@
         },
         "useNodeAssertStrict": "on",
         "useNumberNamespace": "on",
+        "useNumericSeparators": "off",
+        "useReadonlyClassProperties": "on",
         "useShorthandAssign": "on",
         "useSingleVarDeclarator": "on",
         "useThrowNewError": "on",
-        "useThrowOnlyError": "on"
+        "useThrowOnlyError": "on",
+        "useUnifiedTypeSignatures": "on"
       },
       "suspicious": {
         "noConsole": {
@@ -118,12 +110,18 @@
             ]
           }
         },
+        "noConstantBinaryExpressions": "on",
         "noEmptyBlockStatements": "on",
         "noEvolvingTypes": "on",
         "noExportsInTest": "on",
+        "noUnassignedVariables": "on",
+        "noUselessEscapeInString": "on",
         "noVar": "on",
         "useErrorMessage": "on",
         "useNumberToFixedDigitsArgument": "on"
+      },
+      "correctness": {
+        "useJsonImportAttributes": "on"
       }
     }
   },
