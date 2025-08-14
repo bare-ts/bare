@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@bare-ts/lib": "~0.4.0",
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "2.2.5",
     "@types/node": "20.17.24",
     "typescript": "5.9.3"
   },

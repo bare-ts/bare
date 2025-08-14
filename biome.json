@@ -1,5 +1,5 @@
 {
-  "$schema": "https://next.biomejs.dev/schemas/2.2.0/schema.json",
+  "$schema": "https://next.biomejs.dev/schemas/2.2.5/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
@@ -24,7 +24,10 @@
         "noVoid": "on"
       },
       "nursery": {
+        "noDeprecatedImports": "on",
+        "noDuplicateDependencies": "on",
         "noImportCycles": "on",
+        "noUselessCatchBinding": "on",
         "noUselessUndefined": "off",
         "useExhaustiveSwitchCases": "off",
         "useExplicitType": "off"
