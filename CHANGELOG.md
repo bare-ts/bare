@@ -6,6 +6,11 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
+## Unreleased
+
+### Fixed
+- Correct CLI argument parsing when using `compile` command to properly identify schema files
+
 ## 0.17.0 (2025-05-03)
 
 -   BREAKING CHANGES: require tags in unions and enum to be declared in ascending order.

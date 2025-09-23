@@ -83,15 +83,17 @@ function main(): void {
         } else if (values.version) {
             console.info(packageVersion)
         } else {
-            if (positionals.length > 1 && positionals[0] === "compile") {
-                positionals.pop()
+            let schemaIndex = 0
+
+            if (positionals.length > 0 && positionals[0] === "compile") {
+                schemaIndex = 1
             }
-            if (positionals.length > 1) {
-                console.error("only one argument is expected")
+            if (positionals.length > schemaIndex + 1) {
+                console.error("only one schema argument is expected")
                 process.exit(1)
             }
-            const schema = positionals.length > 0 ? positionals[0] : 0
-            const out = values.out ?? 1
+            const schema =
+                positionals.length > schemaIndex ? positionals[schemaIndex] : 0
             const generator = values.generator
             if (
                 generator != null &&
@@ -103,13 +105,12 @@ function main(): void {
                 console.error("Invalid <generator> value")
                 process.exit(1)
             }
-            compileAction(out, {
+            compileAction(schema, {
                 generator,
                 legacy: values.legacy,
                 lib: values.lib,
                 out: values.out,
                 pedantic: values.pedantic,
-                schema,
                 useClass: values["use-class"],
                 useGenericArray: values["use-generic-array"],
                 useIntEnum: values["use-int-enum"],
