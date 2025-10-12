@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
+## Unreleased
+
+- Fix CLI argument parsing when using `compile` command to properly identify schema files
+
 ## 0.17.0 (2025-05-03)
 
 This version of the CLI has a [bug](https://github.com/bare-ts/bare/issues/2) that causes the CLI to fail.
