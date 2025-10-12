@@ -12,28 +12,29 @@ jobs:
             contents: write
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4.2.2
-            - uses: actions/setup-node@v4.2.0
+            - uses: actions/checkout@v5.0.0
+              with:
+                  persist-credentials: false
+            - uses: actions/setup-node@v5.0.0
               with:
                   node-version: "22.14.0"
-                  cache: npm
             - name: Build
               run: |
                   npm ci
                   npm run build
             - name: Build standalone executable
               run: |
-                  npm install esbuild@0.25.1
+                  npm install esbuild@0.25.10
                   npm run bundle
             - name: Extract changelog
               run: |
                   VERSION="${GITHUB_REF_NAME#v}"
                   sh scripts/print-changelog.sh "$VERSION" >| ${{ github.workspace }}/RELEASE_NOTES
             - name: Create GitHub Release
-              uses: softprops/action-gh-release@v1
+              uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 #v2.4.1
               with:
                   body_path: ${{ github.workspace }}/RELEASE_NOTES
                   prerelease: true
                   fail_on_unmatched_files: true
                   files: |
-                    ./dist/bin/bare
+                      ./dist/bin/bare
