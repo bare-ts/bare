@@ -8,6 +8,9 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## 0.17.0 (2025-05-03)
 
+This version of the CLI has a [bug](https://github.com/bare-ts/bare/issues/2) that causes the CLI to fail.
+As a workaround, use the programmatic API to compile a schema.
+
 -   BREAKING CHANGES: require tags in unions and enum to be declared in ascending order.
 
     This is a requirement introduced by the [12th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/12/).
@@ -51,10 +54,16 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## 0.16.0 (2024-11-02)
 
+This version of the CLI has a [bug](https://github.com/bare-ts/bare/issues/2) that causes the CLI to fail.
+As a workaround, use the programmatic API to compile a schema.
+
 -   BREAKING CHANGES: require Node.js 20.0.0 or above
 
     This allows us to use the built-in Node.js CLI parser and then to remove the [Commander.js](https://www.npmjs.com/package/commander) dependency.
     This reduces the standalone binary size from 77KB to 45KB (42%).
+
+    Additionally, `bare compile schema.bare` can now be shortened to `bare schema.bare`.
+    `compile` is optional.
 
 -   Support `require(esm)` in Node.js v22.10 and above
 
