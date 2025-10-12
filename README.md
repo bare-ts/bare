@@ -91,6 +91,8 @@ const contacts2 = decodeContacts(payload)
 strict.deepEqual(contacts, contacts2)
 ```
 
+Refer to our [`types` documentation page](./docs/types.md) to find the correspondence between BARE types and TypeScript types, as well as how some CLI options affect this.
+
 ## Why BARE?
 
 **Compact messages**: in contrast to _BSON_, _CBOR_, and _MessagePack_, _BARE_ messages do not embed schema information.
