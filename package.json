@@ -61,5 +61,5 @@
   "peerDependencies": {
     "@bare-ts/lib": ">=0.3.0 <=0.4.0"
   },
-  "packageManager": "npm@10.9.1"
+  "packageManager": "npm@10.9.2"
 }
