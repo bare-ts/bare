@@ -13,42 +13,43 @@ import { transform } from "../index.ts"
 const HELP_TEXT = `
 Usage: bare [options] [schema]
 
-Compile a BARE (Binary Application Record Encoding) schema into a TypeScript or JavaScript file
+Compile a BARE schema into a TypeScript or JavaScript file
 
 Arguments:
   schema                      BARE schema file (default: stdin)
 
 Options:
   -o, --out <file>            destination of output (default: stdout)
-  --generator <generator>     output generator (choices: "bare", "dts", "js", "ts")
+  --generator <generator>     output generator (choices: bare, dts, js, ts)
   --legacy                    allow legacy BARE syntax and features
-  --lib                       do not generate decoders and encoders of root types
-  --pedantic                  require enum and union types to set all tags in-order
-  --use-class                 use classes instead of interfaces for structs
-  --use-generic-array         use generic arrays instead of typed arrays
+  --lib                       don't generate decoders and encoders of root types
+  --pedantic                  require enum and union types to set all tag values
+  --use-class                 use classes instead of object types for structs
+  --use-generic-array         don't use typed arrays for lists of numbers
   --use-int-enum              use integers for enum values instead of strings
-  --use-int-tag               always use integers for union tags instead of strings
-  --use-mutable               use mutable types
-  --use-primitive-flat-union  use flat unions instead of tagged unions for unions of primitive types
-  --use-safe-int              use safe integers instead of bigint
-  --use-struct-flat-union     use flat unions instead of tagged unions for unions of anonymous and aliased structs
+  --use-int-tag               use integers for union tags instead of strings
+  --use-mutable               use mutable types and don't use readonly
+  --use-primitive-flat-union  use regular unions for distinct primitive types
+  --use-safe-int              use numbers instead of bigint for u64-like types
+  --use-struct-flat-union     embed tags in structs directly for struct unions
   --use-undefined             use undefined instead of null for optional types
   --version                   output the version number and exit
-  -h, --help                  display help for command
+  -h, --help                  output this help text and exit
 
 Examples:
-  # Compile schema.bare into Typescript, TypeScript Declaration, or JavaScript
-  bare compile schema.bare -o output.ts
-  bare compile schema.bare -o output.d.ts
-  bare compile schema.bare -o output.js
+  # Compile schema.bare into Typescript, TypeScript Declaration, and JavaScript
+  # The output extension determine the chosen generator
+  bare schema.bare -o output.ts
+  bare schema.bare -o output.d.ts
+  bare schema.bare -o output.js
 
   # Provide input via stdin, get output via stdout
-  bare compile < schema.bare > output.ts
-  bare compile --generator dts < schema.bare > output.d.ts
-  bare compile --generator js < schema.bare > output.js
+  bare < schema.bare > output.ts
+  bare --generator dts < schema.bare > output.d.ts
+  bare --generator js < schema.bare > output.js
 
 Repository:
-  https://github.com/bare-ts/tools
+  https://github.com/bare-ts/bare
 `
 
 const PARSE_CONFIG = {

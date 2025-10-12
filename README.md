@@ -65,7 +65,7 @@ type Contacts list<Contact>
 Compile your schema into code:
 
 ```sh
-bare compile schema.bare --out=code.ts
+bare schema.bare --out=code.ts
 ```
 
 Once the code is generated, encode and decode messages:
