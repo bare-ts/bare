@@ -109,14 +109,12 @@ _BARE_ recommends using a tagged union as message type to support backward compa
 **Pragmatic error reporting**: _bare-ts_ distinguishes recoverable errors from API misuses.
 Decoders may emit recoverable errors (`BareError`) and provide enough information to understand why the message is malformed.
 An API misuse emits an `AssertionError`.
-_bare-ts_ assumes the use of TypeScript.
-This assumption reduces the number of API misuses to check.
+`AssertionError` are only emitted when the `development` [exports condition](https://nodejs.org/api/cli.html#-c-condition---conditionscondition) is set or when the `NODE_ENV` environment variable is set to `development`.
+Moreover, _bare-ts_ assumes the use of TypeScript that reduces the number of API misuses to check.
 
 **Optimized bundle size**: _bare-ts_ adopts functional and procedural programming styles.
 This enables to take advantage of modern _dead-code elimination_ techniques, such as _tree-shaking_.
 Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle contains only the functions which are actually used.
-Moreover, _bare-ts_ uses assertions to express preconditions.
-You can use dedicated tools such as [unassert](https://github.com/unassert-js) to remove them.
 
 **Generation of efficient code** _bare-ts_ takes care to generate code that modern JavaScript engines may optimize.
 
