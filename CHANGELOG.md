@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
-## Unreleased
+## 0.17.1 (2025-10-12)
 
 - Fix CLI argument parsing when using `compile` command to properly identify schema files
 
