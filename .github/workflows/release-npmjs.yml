@@ -1,0 +1,26 @@
+name: Release to npmjs
+on:
+    push:
+        tags:
+            - "v*"
+jobs:
+    release:
+        environment: release-npmjs
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write # Required for OIDC
+        steps:
+            - uses: actions/checkout@v5.0.0
+              with:
+                  persist-credentials: false
+            - uses: actions/setup-node@v5.0.0
+              with:
+                  # Use a Node.js version with an NPM version that supports OIDC.
+                  # OIDC is supported since NPM 11.5.1.
+                  node-version: 24.8.0
+                  registry-url: "https://registry.npmjs.org"
+            - name: Install dependencies
+              run: npm ci
+            - name: Publish (build and test in prepublishOnly hook)
+              run: npm publish  --provenance --access public

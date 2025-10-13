@@ -1,4 +1,4 @@
-name: CI
+name: Pull Request test
 on:
     workflow_call:
     pull_request:
@@ -16,7 +16,7 @@ jobs:
             - uses: actions/setup-node@v5.0.0
               with:
                   node-version-file: ".node-version"
-            - name: Build and test
+            - name: Install dependencies and test
               run: |
                   npm ci
                   npm run test

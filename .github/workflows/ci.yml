@@ -16,7 +16,7 @@ jobs:
             - uses: actions/setup-node@v5.0.0
               with:
                   node-version-file: ".node-version"
-            - name: Build and test coverage
+            - name: Install dependencies, run test coverage
               run: |
                   npm ci
                   npm install c8@10.1.3

@@ -1,11 +1,9 @@
-name: Release
+name: Release to GitHub
 on:
     push:
         tags:
             - "v*"
 jobs:
-    test:
-        uses: ./.github/workflows/ci.yml
     release:
         needs: test
         permissions:
@@ -18,7 +16,7 @@ jobs:
             - uses: actions/setup-node@v5.0.0
               with:
                   node-version-file: ".node-version"
-            - name: Build
+            - name: Install dependencies amd build
               run: |
                   npm ci
                   npm run build
