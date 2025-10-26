@@ -39,7 +39,10 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
             const astComputed = configure(parse(schema, config), config)
             assert.deepEqual(astComputed, astExpected)
             transform(schema, config)
-            assert.ok(false) // must be unreachable
+            assert.ok(
+                false,
+                "an invalid BARE schema should raise a compiler exception"
+            ) // must be unreachable
         } catch (e) {
             if (!(e instanceof CompilerError)) {
                 throw e

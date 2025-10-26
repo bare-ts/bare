@@ -6,7 +6,9 @@ import { CompilerError, type Config } from "./core.ts"
 import {
     CAMEL_CASE_RE,
     CONSTANT_CASE_RE,
+    MIXED_CAMEL_SNAKE_CASE_RE,
     PASCAL_CASE_RE,
+    SNAKE_CASE_RE,
 } from "./utils/formatting.ts"
 
 export function check(schema: ast.Ast, config: Config): ast.Ast {
@@ -27,7 +29,7 @@ export function check(schema: ast.Ast, config: Config): ast.Ast {
                 aliased.offset,
             )
         }
-        checkTypeInvariants(c, type)
+        checkTypeInvariants(c, type, config)
         if (c.config.legacy) {
             checkCircularRef(c, type, new Set([alias]))
         } else {
@@ -60,13 +62,13 @@ function checkTypeName(aliased: ast.AliasedType): void {
     }
 }
 
-function checkTypeInvariants(c: Checker, type: ast.Type): void {
+function checkTypeInvariants(c: Checker, type: ast.Type, config: Config): void {
     if (type.types != null) {
         for (const subtype of type.types) {
             if (type.tag !== "union") {
                 checkNonVoid(c, subtype)
             }
-            checkTypeInvariants(c, subtype)
+            checkTypeInvariants(c, subtype, config)
         }
     }
     switch (type.tag) {
@@ -88,11 +90,11 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
         }
         case "enum":
         case "struct": {
-            checkMembersInvariants(type)
+            checkMembersInvariants(type, config)
             break
         }
         case "union": {
-            checkMembersInvariants(type)
+            checkMembersInvariants(type, config)
             checkUnionInvariants(c, type)
             break
         }
@@ -101,6 +103,7 @@ function checkTypeInvariants(c: Checker, type: ast.Type): void {
 
 function checkMembersInvariants(
     type: ast.EnumType | ast.StructType | ast.UnionType,
+    config: Config,
 ): void {
     const data = type.data
     if (data.length === 0) {
@@ -129,11 +132,21 @@ function checkMembersInvariants(
                     elt.offset,
                 )
             }
-            if (type.tag === "struct" && !CAMEL_CASE_RE.test(elt.name)) {
-                throw new CompilerError(
-                    "the name of a field must be in camelCase.",
-                    elt.offset,
-                )
+            if (
+                type.tag === "struct" &&
+                !CAMEL_CASE_RE.test(elt.name) &&
+                !SNAKE_CASE_RE.test(elt.name)
+            ) {
+                if (
+                    config.pedantic ||
+                    // The BARE spec allows mixed cases
+                    !MIXED_CAMEL_SNAKE_CASE_RE.test(elt.name)
+                ) {
+                    throw new CompilerError(
+                        "the name of a field must be in camelCase or snake_case.",
+                        elt.offset,
+                    )
+                }
             }
             if (names.has(elt.name)) {
                 throw new CompilerError(

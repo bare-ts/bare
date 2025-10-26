@@ -1,5 +1,5 @@
 {
   "name": "CompilerError",
   "offset": 26,
-  "message": "the name of a field must be in camelCase."
+  "message": "the name of a field must be in camelCase or snake_case."
 }

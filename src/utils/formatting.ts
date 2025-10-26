@@ -4,7 +4,13 @@
 export const ALL_CASE_RE: RegExp = /^\w+$/
 export const CAMEL_CASE_RE: RegExp = /^[a-z][A-Za-z\d]*$/
 export const CONSTANT_CASE_RE: RegExp = /^[A-Z][A-Z\d_]*$/
+export const MIXED_CAMEL_SNAKE_CASE_RE: RegExp = /^[a-z][A-Za-z\d_]*$/
 export const PASCAL_CASE_RE: RegExp = /^[A-Z][A-Za-z\d]*$/
+export const SNAKE_CASE_RE: RegExp = /^[a-z][a-z\d_]*$/
+
+export const CAMEL_OR_STRICT_SNAKE_CASE_RE: RegExp =
+    /^[a-z][a-z\d]*(?:[a-z\d]*|(?:_[a-z\d]+)*)$/
+export const STRICT_CONSTANT_CASE_RE: RegExp = /^[A-Z][A-Z\d]*(?:_[A-Z\d]+)*$/
 
 export function capitalize(s: string): string {
     return s.replace(/^./, (c) => c.toUpperCase())
@@ -34,6 +40,7 @@ export function toCamelCase(s: string): string {
     return normalize(s)
         .toLowerCase()
         .replace(/_./g, (m0) => m0[1].toUpperCase())
+        .replace(/_*$/g, (_m0) => "")
 }
 
 export function toPascalCase(s: string): string {

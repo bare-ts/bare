@@ -3,6 +3,7 @@
 
 import * as ast from "./ast.ts"
 import type { Config } from "./core.ts"
+import { MIXED_CAMEL_SNAKE_CASE_RE, toCamelCase } from "./utils/formatting.ts"
 
 /**
  * Update `schema` according to `config`.
@@ -190,10 +191,21 @@ function configureField(
     field: ast.StructField,
     config: Config,
 ): ast.StructField {
-    const mut = config.useMutable
-    if (field.extra == null && mut) {
+    if (config.generator !== "bare") {
         const { name, val, comment, offset } = field
-        return { name, val, extra: { mut }, comment, offset }
+        const mut = config.useMutable
+        const normalizedName = MIXED_CAMEL_SNAKE_CASE_RE.test(name)
+            ? toCamelCase(name)
+            : name
+        if ((field.extra == null && mut) || name !== normalizedName) {
+            return {
+                name: normalizedName,
+                val,
+                extra: { mut },
+                comment,
+                offset,
+            }
+        }
     }
     return field
 }

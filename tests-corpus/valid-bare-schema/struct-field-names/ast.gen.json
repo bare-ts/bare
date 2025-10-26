@@ -1,0 +1,83 @@
+{
+  "defs": [
+    {
+      "alias": "FieldNameCases",
+      "internal": false,
+      "type": {
+        "tag": "struct",
+        "data": [
+          {
+            "name": "strictSnakeCase",
+            "val": null,
+            "extra": {
+              "mut": false
+            },
+            "comment": "",
+            "offset": 33
+          },
+          {
+            "name": "strictCamelCase",
+            "val": null,
+            "comment": "",
+            "extra": null,
+            "offset": 59
+          },
+          {
+            "name": "snakeCase",
+            "val": null,
+            "extra": {
+              "mut": false
+            },
+            "comment": "",
+            "offset": 83
+          },
+          {
+            "name": "camelcase",
+            "val": null,
+            "extra": {
+              "mut": false
+            },
+            "comment": "",
+            "offset": 105
+          }
+        ],
+        "types": [
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "offset": 52
+          },
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "offset": 76
+          },
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "offset": 98
+          },
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "offset": 116
+          }
+        ],
+        "extra": null,
+        "offset": 27
+      },
+      "comment": "",
+      "offset": 0
+    }
+  ],
+  "filename": "struct-field-names/schema.bare",
+  "offset": 0
+}

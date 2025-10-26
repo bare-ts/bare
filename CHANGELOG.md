@@ -6,7 +6,16 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
+
 ## Unreleased
+
+- Struct field names can now be in `snake_case`.
+
+  Previously, only field names in `camelCase` were allowed in a BARE schema.
+  The [14th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/14/) allows field names in `camelCase`, `snake_case` or `mixed_Case`.
+  The `--pedantic` option ensures that a field name is either in `camelCase` or `snake_case`.
+
+  `snake_case` and `mixed_Case` are normalized to `camelCase` for JavaScript and TypeScript generators.
 
 - Improve the command line help message.
 

@@ -1,0 +1,6 @@
+type FieldNameCases struct {
+    strict_snake_case: u8
+    strictCamelCase: u8
+    snake__case__: u8
+    camelCASE: u8
+}
