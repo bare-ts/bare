@@ -7,7 +7,7 @@ The format of this changelog is [a variant][lib9-versionning] of [Keep a Changel
 New entries must be placed in a section entitled `Unreleased`.
 
 
-## Unreleased
+## 0.18.0 (2025-10-26)
 
 - Struct field names can now be in `snake_case`.
 
