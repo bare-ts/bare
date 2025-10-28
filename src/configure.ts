@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./ast.ts"
-import type { Config } from "./core.ts"
+import type { Config } from "./config.ts"
 import { MIXED_CAMEL_SNAKE_CASE_RE, toCamelCase } from "./utils/formatting.ts"
 
 /**

@@ -2,8 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./ast.ts"
-import type { Config } from "./core.ts"
-import { unrecursive } from "./utils/ast-unrecursive.ts"
+import type { Config } from "./config.ts"
 import {
     capitalize,
     dent,
@@ -11,6 +10,7 @@ import {
     jsRpr,
     softSpace,
 } from "./utils/formatting.ts"
+import { unrecursive } from "./utils/unrecursive-ast.ts"
 
 export function generateJs(schema: ast.Ast, config: Config): string {
     const g: Gen = { config, symbols: ast.symbols(schema) }

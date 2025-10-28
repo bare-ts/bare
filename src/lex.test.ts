@@ -3,7 +3,7 @@
 
 import * as assert from "node:assert/strict"
 import { test } from "node:test"
-import * as lex from "./lexer.ts"
+import * as lex from "./lex.ts"
 
 const SAMPLE = `
     const C = { # struct

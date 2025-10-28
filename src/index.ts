@@ -1,22 +1,22 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { check } from "./checker.ts"
-import { configure } from "./configurer.ts"
-import { Config } from "./core.ts"
-import { generateBare } from "./gen-bare.ts"
-import { generateJs } from "./gen-js.ts"
-import { normalize } from "./normalizer.ts"
-import { parse } from "./parser.ts"
+import { check } from "./check.ts"
+import { Config } from "./config.ts"
+import { configure } from "./configure.ts"
+import { generateBare } from "./generate-bare.ts"
+import { generateJs } from "./generate-js.ts"
+import { normalize } from "./normalize.ts"
+import { parse } from "./parse.ts"
 
 export * from "./ast.ts"
-export { check } from "./checker.ts"
-export { configure } from "./configurer.ts"
-export { Config } from "./core.ts"
-export { generateBare } from "./gen-bare.ts"
-export { generateJs } from "./gen-js.ts"
-export { normalize } from "./normalizer.ts"
-export { parse } from "./parser.ts"
+export { check } from "./check.ts"
+export { Config } from "./config.ts"
+export { configure } from "./configure.ts"
+export { generateBare } from "./generate-bare.ts"
+export { generateJs } from "./generate-js.ts"
+export { normalize } from "./normalize.ts"
+export { parse } from "./parse.ts"
 
 /**
  * Turn the schema `content` into a target language, taking `conf` into account.

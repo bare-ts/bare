@@ -2,7 +2,7 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "../ast.ts"
-import { CompilerError } from "../core.ts"
+import { CompilerError } from "../errors.ts"
 
 // This file is separated from `ast` folder because these utils are used for
 // facilitating code generation.

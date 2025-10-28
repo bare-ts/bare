@@ -45,7 +45,7 @@
     "check": "tsc --build --noEmit src/ tests-corpus/ && biome ci --error-on-warnings .",
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
-    "format": "biome format --write .",
+    "format": "biome check --linter-enabled=false --write .",
     "lint": "biome lint --error-on-warnings .",
     "prepublishOnly": "npm run clean && npm run build && npm test",
     "test": "node --test --experimental-strip-types && npm run check",

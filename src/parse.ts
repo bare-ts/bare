@@ -2,8 +2,9 @@
 //! Licensed under the MIT License (https://mit-license.org/)
 
 import * as ast from "./ast.ts"
-import { CompilerError, type Config } from "./core.ts"
-import * as lexer from "./lexer.ts"
+import type { Config } from "./config.ts"
+import { CompilerError } from "./errors.ts"
+import * as lexer from "./lex.ts"
 import {
     ALL_CASE_RE,
     CONSTANT_CASE_RE,

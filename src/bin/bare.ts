@@ -7,7 +7,8 @@ import * as fs from "node:fs"
 import * as process from "node:process"
 import * as util from "node:util"
 import packageVersion from "../../VERSION.json" with { type: "json" }
-import { CompilerError, Config } from "../core.ts"
+import { Config } from "../config.ts"
+import { CompilerError } from "../errors.ts"
 import { transform } from "../index.ts"
 
 const HELP_TEXT = `

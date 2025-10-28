@@ -1,7 +1,7 @@
 //! Copyright (c) 2022 Victorien Elvinger
 //! Licensed under the MIT License (https://mit-license.org/)
 
-import { CompilerError } from "./core.ts"
+import { CompilerError } from "./errors.ts"
 
 const WHITE_SPACE_PATTERN = /\s/
 const PUNCTUATION_PATTERN = /[{}[\]()<>=|:,;.!?~+\\/$@#-]/
