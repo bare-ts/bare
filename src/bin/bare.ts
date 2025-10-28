@@ -24,7 +24,8 @@ Options:
   --generator <generator>     output generator (choices: bare, dts, js, ts)
   --legacy                    allow legacy BARE syntax and features
   --lib                       don't generate decoders and encoders of root types
-  --pedantic                  require enum and union types to set all tag values
+  --pedantic                  require enum and union to set all tag values, and
+                              require fields to be in snake_case or camelCase
   --use-class                 use classes instead of object types for structs
   --use-generic-array         don't use typed arrays for lists of numbers
   --use-int-enum              use integers for enum values instead of strings

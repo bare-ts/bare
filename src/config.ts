@@ -4,8 +4,18 @@
 import { ConfigError } from "./errors.ts"
 
 export type Config = {
+    /**
+     * Output generator
+     */
     readonly generator: "bare" | "dts" | "js" | "ts"
+    /**
+     * Allow legacy BARE syntax and features.
+     * This affects the parsing of BARE schema.
+     */
     readonly legacy: boolean
+    /**
+     * Don't generate decoders and encoders of root types.
+     */
     readonly lib: boolean
     /**
      * Output filename.
@@ -15,19 +25,55 @@ export type Config = {
      * to determinate the generator.
      */
     readonly out: string | number | null
+    /**
+     * Enforce the following extra constraints and
+     * raise a CompilerError if they are not followed.
+     *
+     * - Require enum and union types to set all tag values.
+     * - Require struct field names to be in `camelCase` or `snake_case`,
+     *   forbid `mixed_Case`.
+     */
     readonly pedantic: boolean
     /**
      * Input filename.
+     * This is only used for reporting the location of compiler errors.
      */
     readonly schema: string | number | null
+    /**
+     * Use classes instead of object types for structs.
+     */
     readonly useClass: boolean
+    /**
+     * Don't use typed arrays for lists of numbers.
+     */
     readonly useGenericArray: boolean
+    /**
+     * Use integers for enum values instead of strings.
+     */
     readonly useIntEnum: boolean
+    /**
+     * Use integers for union tags instead of strings.
+     */
     readonly useIntTag: boolean
+    /**
+     * Don't use the `readonly` keyword.
+     */
     readonly useMutable: boolean
+    /**
+     * Use regular unions for distinct primitive types.
+     */
     readonly usePrimitiveFlatUnion: boolean
+    /**
+     * Use `number` instead of `bigint` for u64-like types.
+     */
     readonly useSafeInt: boolean
+    /**
+     * Embed tags in structs directly for struct unions.
+     */
     readonly useStructFlatUnion: boolean
+    /**
+     * Use `undefined` instead of `null` for optional types.
+     */
     readonly useUndefined: boolean
 }
 
