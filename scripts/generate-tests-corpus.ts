@@ -2,10 +2,10 @@
 
 import * as fs from "node:fs"
 import * as path from "node:path"
-import { configure } from "../src/configurer.ts"
-import { Config } from "../src/core.ts"
+import { Config } from "../src/config.ts"
+import { configure } from "../src/configure.ts"
 import { transform } from "../src/index.ts"
-import { parse } from "../src/parser.ts"
+import { parse } from "../src/parse.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 

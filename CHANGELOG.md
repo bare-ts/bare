@@ -6,6 +6,17 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
+## Unreleased
+
+-   BREAKING CHANGES: require @bare-ts/lib@0.5.0
+
+    _bare-ts_ no longer emits a default config for its decoders and encoders.
+    It uses the default config exported by @bare-ts/lib@0.5.0 instead.
+
+-   Fix name clashes
+
+    Previously, _bare-ts_ did not support the use the `Partial` alias.
+    Now, it properly handles this alias and uses `globalThis` when necessary.
 
 ## 0.18.0 (2025-10-26)
 

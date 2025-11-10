@@ -1,2 +1,4 @@
 type ReadonlyMap map<str><str>
 type Uint8Array list<u8>
+type ArrayBuffer data
+type Partial optional<u8>

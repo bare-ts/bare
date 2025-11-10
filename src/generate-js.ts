@@ -88,9 +88,6 @@ export function generateJs(schema: ast.Ast, config: Config): string {
     if (/ext\./.test(body)) {
         head += '\nimport * as ext from "./ext.js"\n'
     }
-    if (hasEncodeDecode && g.config.generator !== "dts") {
-        head += "\nconst DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})\n"
-    }
     if (g.config.generator !== "js") {
         head += "\n"
         const predefinedTypes: string[] = ast.NUMERIC_TAG.slice()
@@ -331,17 +328,18 @@ function genWriterHead(g: Gen, aliased: ast.AliasedType): string {
 }
 
 function genDecoderHead(g: Gen, alias: string): string {
+    const uint8Array = global(g, "Uint8Array")
     return g.config.generator === "js"
         ? `function decode${alias}(bytes)`
-        : `function decode${alias}(bytes: Uint8Array): ${alias}`
+        : `function decode${alias}(bytes: ${uint8Array}): ${alias}`
 }
 
 function genEncoderHead(g: Gen, alias: string): string {
+    const partial = global(g, "Partial")
+    const uint8Array = global(g, "Uint8Array")
     return g.config.generator === "js"
         ? `function encode${alias}(x, config)`
-        : g.config.generator === "ts"
-          ? `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
-          : `function encode${alias}(x: ${alias}, config?: Partial<bare.Config>): Uint8Array`
+        : `function encode${alias}(x: ${alias}, config?: ${partial}<bare.Config>): ${uint8Array}`
 }
 
 // JS/TS code
@@ -1082,7 +1080,7 @@ function genTaggedUnionWriter(g: Gen, type: ast.UnionType): string {
 function genDecoder(g: Gen, alias: string): string {
     return dent`
         ${genDecoderHead(g, alias)} {
-            const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+            const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
             const result = read${alias}(bc)
             if (bc.offset < bc.view.byteLength) {
                 throw new bare.BareError(bc.offset, "remaining bytes")
@@ -1098,10 +1096,10 @@ function genEncoder(g: Gen, alias: string): string {
     const uint8Array = global(g, "Uint8Array")
     return dent`
         ${genEncoderHead(g, alias)} {
-            const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+            const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
             const bc = new bare.ByteCursor(
                 new ${uint8Array}(fullConfig.initialBufferLength),
-                fullConfig,
+                fullConfig
             )
             write${alias}(bc, x)
             return new ${uint8Array}(bc.view.buffer, bc.view.byteOffset, bc.offset)
