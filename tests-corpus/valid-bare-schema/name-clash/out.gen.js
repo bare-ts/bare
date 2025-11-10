@@ -1,7 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
-
 export function readReadonlyMap(bc) {
     const len = bare.readUintSafe(bc)
     const result = new Map()
@@ -26,17 +24,17 @@ export function writeReadonlyMap(bc, x) {
 }
 
 export function encodeReadonlyMap(x, config) {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeReadonlyMap(bc, x)
     return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeReadonlyMap(bytes) {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readReadonlyMap(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
@@ -53,18 +51,75 @@ export function writeUint8Array(bc, x) {
 }
 
 export function encodeUint8Array(x, config) {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new globalThis.Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeUint8Array(bc, x)
     return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeUint8Array(bytes) {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readUint8Array(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
+}
+
+export function readArrayBuffer(bc) {
+    return bare.readData(bc)
+}
+
+export function writeArrayBuffer(bc, x) {
+    bare.writeData(bc, x)
+}
+
+export function encodeArrayBuffer(x, config) {
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
+    const bc = new bare.ByteCursor(
+        new globalThis.Uint8Array(fullConfig.initialBufferLength),
+        fullConfig
+    )
+    writeArrayBuffer(bc, x)
+    return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodeArrayBuffer(bytes) {
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
+    const result = readArrayBuffer(bc)
+    if (bc.offset < bc.view.byteLength) {
+        throw new bare.BareError(bc.offset, "remaining bytes")
+    }
+    return result
+}
+
+export function readPartial(bc) {
+    return bare.readBool(bc) ? bare.readU8(bc) : null
+}
+
+export function writePartial(bc, x) {
+    bare.writeBool(bc, x != null)
+    if (x != null) {
+        bare.writeU8(bc, x)
+    }
+}
+
+export function encodePartial(x, config) {
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
+    const bc = new bare.ByteCursor(
+        new globalThis.Uint8Array(fullConfig.initialBufferLength),
+        fullConfig
+    )
+    writePartial(bc, x)
+    return new globalThis.Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
+}
+
+export function decodePartial(bytes) {
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
+    const result = readPartial(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
     }

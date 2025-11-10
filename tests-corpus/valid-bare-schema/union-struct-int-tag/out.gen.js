@@ -1,7 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
-
 export function readBoxedU32(bc) {
     return {
         val: bare.readU32(bc),
@@ -52,17 +50,17 @@ export function writeBoxed(bc, x) {
 }
 
 export function encodeBoxed(x, config) {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeBoxed(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeBoxed(bytes) {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readBoxed(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

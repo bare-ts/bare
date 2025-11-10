@@ -52,6 +52,40 @@
       },
       "comment": "",
       "offset": 31
+    },
+    {
+      "alias": "ArrayBuffer",
+      "internal": false,
+      "comment": "",
+      "type": {
+        "tag": "data",
+        "data": null,
+        "types": null,
+        "extra": null,
+        "offset": 73
+      },
+      "offset": 56
+    },
+    {
+      "alias": "Partial",
+      "internal": false,
+      "comment": "",
+      "type": {
+        "tag": "optional",
+        "data": null,
+        "types": [
+          {
+            "tag": "u8",
+            "data": null,
+            "types": null,
+            "extra": null,
+            "offset": 100
+          }
+        ],
+        "extra": null,
+        "offset": 91
+      },
+      "offset": 78
     }
   ],
   "filename": "name-clash/schema.bare",

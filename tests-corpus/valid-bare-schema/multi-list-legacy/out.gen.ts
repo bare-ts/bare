@@ -1,7 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
-
 function read0(bc: bare.ByteCursor): readonly string[] {
     const len = bare.readUintSafe(bc)
     if (len === 0) {
@@ -62,17 +60,17 @@ export function writeMultiList(bc: bare.ByteCursor, x: MultiList): void {
 }
 
 export function encodeMultiList(x: MultiList, config?: Partial<bare.Config>): Uint8Array {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeMultiList(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeMultiList(bytes: Uint8Array): MultiList {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readMultiList(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

@@ -1,7 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
-
 export type u8 = number
 
 export type LeadingPipe =
@@ -31,17 +29,17 @@ export function writeLeadingPipe(bc: bare.ByteCursor, x: LeadingPipe): void {
 }
 
 export function encodeLeadingPipe(x: LeadingPipe, config?: Partial<bare.Config>): Uint8Array {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeLeadingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeLeadingPipe(bytes: Uint8Array): LeadingPipe {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readLeadingPipe(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
@@ -76,17 +74,17 @@ export function writeTrailingPipe(bc: bare.ByteCursor, x: TrailingPipe): void {
 }
 
 export function encodeTrailingPipe(x: TrailingPipe, config?: Partial<bare.Config>): Uint8Array {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeTrailingPipe(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeTrailingPipe(bytes: Uint8Array): TrailingPipe {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readTrailingPipe(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")

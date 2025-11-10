@@ -1,7 +1,5 @@
 import * as bare from "@bare-ts/lib"
 
-const DEFAULT_CONFIG = /* @__PURE__ */ bare.Config({})
-
 export type u8 = number
 
 export type Y = u8
@@ -48,17 +46,17 @@ export function writeX(bc: bare.ByteCursor, x: X): void {
 }
 
 export function encodeX(x: X, config?: Partial<bare.Config>): Uint8Array {
-    const fullConfig = config != null ? bare.Config(config) : DEFAULT_CONFIG
+    const fullConfig = config != null ? bare.Config(config) : bare.DEFAULT_CONFIG
     const bc = new bare.ByteCursor(
         new Uint8Array(fullConfig.initialBufferLength),
-        fullConfig,
+        fullConfig
     )
     writeX(bc, x)
     return new Uint8Array(bc.view.buffer, bc.view.byteOffset, bc.offset)
 }
 
 export function decodeX(bytes: Uint8Array): X {
-    const bc = new bare.ByteCursor(bytes, DEFAULT_CONFIG)
+    const bc = new bare.ByteCursor(bytes, bare.DEFAULT_CONFIG)
     const result = readX(bc)
     if (bc.offset < bc.view.byteLength) {
         throw new bare.BareError(bc.offset, "remaining bytes")
