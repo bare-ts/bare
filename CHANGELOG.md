@@ -18,6 +18,11 @@ New entries must be placed in a section entitled `Unreleased`.
     Previously, _bare-ts_ did not support the use the `Partial` alias.
     Now, it properly handles this alias and uses `globalThis` when necessary.
 
+-   The BARE generator now emits a trailing newline.
+
+    By convention, text files are often expected to end with a trailing newline.
+    The generator now guarantees it.
+
 ## 0.18.0 (2025-10-26)
 
 - Struct field names can now be in `snake_case`.
