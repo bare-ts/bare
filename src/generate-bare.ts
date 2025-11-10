@@ -11,7 +11,7 @@ export function generateBare(schema: ast.Ast): string {
             result += `${genAliased(def)}\n\n`
         }
     }
-    return result.trim()
+    return `${result.trim()}\n`
 }
 
 function genAliased(type: ast.AliasedType): string {
