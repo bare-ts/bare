@@ -36,7 +36,9 @@
   "sideEffects": false,
   "files": [
     "dist/**/*.d.ts",
+    "!dist/**/*.test.d.ts",
     "dist/**/*.js",
+    "!dist/**/*.test.js",
     "VERSION.json"
   ],
   "scripts": {
