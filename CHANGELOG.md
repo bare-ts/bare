@@ -25,22 +25,22 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## 0.18.0 (2025-10-26)
 
-- Struct field names can now be in `snake_case`.
+-   Struct field names can now be in `snake_case`.
 
-  Previously, only field names in `camelCase` were allowed in a BARE schema.
-  The [14th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/14/) allows field names in `camelCase`, `snake_case` or `mixed_Case`.
-  The `--pedantic` option ensures that a field name is either in `camelCase` or `snake_case`.
+    Previously, only field names in `camelCase` were allowed in a BARE schema.
+    The [14th draft of BARE](https://datatracker.ietf.org/doc/draft-devault-bare/14/) allows field names in `camelCase`, `snake_case` or `mixed_Case`.
+    The `--pedantic` option ensures that a field name is either in `camelCase` or `snake_case`.
 
-  `snake_case` and `mixed_Case` are normalized to `camelCase` for JavaScript and TypeScript generators.
+    `snake_case` and `mixed_Case` are normalized to `camelCase` for JavaScript and TypeScript generators.
 
-- Improve the command line help message.
+-   Improve the command line help message.
 
-  Hopefully, this will make the provided options more explanatory.
-  Also, we improved the [documentation about type correspondence between BARE and TypeScript](./docs/types.md).
+    Hopefully, this will make the provided options more explanatory.
+    Also, we improved the [documentation about type correspondence between BARE and TypeScript](./docs/types.md).
 
 ## 0.17.1 (2025-10-12)
 
-- Fix CLI argument parsing when using `compile` command to properly identify schema files.
+-   Fix CLI argument parsing when using `compile` command to properly identify schema files.
 
 ## 0.17.0 (2025-05-03)
 
@@ -87,7 +87,7 @@ New entries must be placed in a section entitled `Unreleased`.
 
 ## 0.16.1 (2025-10-12)
 
-- Fix CLI argument parsing when using `compile` command to properly identify schema files
+-   Fix CLI argument parsing when using `compile` command to properly identify schema files
 
 ## 0.16.0 (2024-11-02)
 
@@ -144,8 +144,8 @@ New entries must be placed in a section entitled `Unreleased`.
     ```
 
     This syntax is not part of the _BARE_ specification.
-    Thus, the syntax is not portable between _BARE__ implementations.
-    To avoid this issue, _bare-ts__ now uses regular comments as doc-comments.
+    Thus, the syntax is not portable between \_BARE** implementations.
+    To avoid this issue, \_bare-ts** now uses regular comments as doc-comments.
     Every comment that precedes a type definition, an enum value, or a field is a doc-comment.
     The previous schema can now be written as follows:
 
