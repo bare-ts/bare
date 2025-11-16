@@ -36,15 +36,13 @@
   "sideEffects": false,
   "files": [
     "dist/**/*.d.ts",
-    "!dist/**/*.test.d.ts",
     "dist/**/*.js",
-    "!dist/**/*.test.js",
     "VERSION.json"
   ],
   "scripts": {
     "build": "tsc --build src/",
     "bundle": "esbuild dist/bin/bare.js --bundle --target=node20.19.0 --minify --keep-names --platform=node >| ./dist/bin/bare",
-    "check": "tsc --build --noEmit src/ tests-corpus/ && biome ci --error-on-warnings .",
+    "check": "tsc --build src src/tsconfig-test.json src/bin tests-corpus && biome ci --error-on-warnings .",
     "clean": "rm -rf dist coverage",
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome check --linter-enabled=false --write .",

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "lib": [
+      "ES2022"
+    ],
+    "module": "node20",
+    "target": "ES2022",
+    "types": [],
+
+    "noEmit": true,
+    "erasableSyntaxOnly": true,
+    "libReplacement": false,
+    "resolveJsonModule": true,
+    "rewriteRelativeImportExtensions": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "strict": true
+  }
+}

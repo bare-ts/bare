@@ -1,12 +1,16 @@
 {
-  "extends": "../tests-corpus/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../tsconfig-base.json",
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
-    "exactOptionalPropertyTypes": false,
-    "erasableSyntaxOnly": true,
     "isolatedDeclarations": true,
     "noEmit": false,
     "rootDir": ".",
     "outDir": "../dist"
-  }
+  },
+  "exclude": [
+    "**/*.test.ts",
+    "bin/**"
+  ]
 }

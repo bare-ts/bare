@@ -5,8 +5,8 @@ import * as assert from "node:assert/strict"
 import fs from "node:fs"
 import { relative, resolve } from "node:path"
 import { test } from "node:test"
-import { CompilerError } from "../src/errors.ts"
-import { Config, configure, parse, transform } from "../src/index.ts"
+import { CompilerError } from "./errors.ts"
+import { Config, configure, parse, transform } from "./index.ts"
 
 const CORPUS_DIR = "./tests-corpus"
 const INVALID_BARE_DIR = `${CORPUS_DIR}/invalid-bare-schema`
@@ -39,7 +39,7 @@ for (const relDir of fs.readdirSync(INVALID_BARE_DIR)) {
             transform(schema, config)
             assert.ok(
                 false,
-                "an invalid BARE schema should raise a compiler exception"
+                "an invalid BARE schema should raise a compiler exception",
             ) // must be unreachable
         } catch (e) {
             if (!(e instanceof CompilerError)) {
