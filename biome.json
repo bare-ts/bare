@@ -1,5 +1,5 @@
 {
-  "$schema": "https://next.biomejs.dev/schemas/2.2.5/schema.json",
+  "$schema": "https://next.biomejs.dev/schemas/2.3.10/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
@@ -26,11 +26,17 @@
       "nursery": {
         "noDeprecatedImports": "on",
         "noDuplicateDependencies": "on",
+        "noForIn": "on",
         "noImportCycles": "on",
+        "noParametersOnlyUsedInRecursion": "on",
+        "noProto": "on",
         "noUselessCatchBinding": "on",
         "noUselessUndefined": "off",
+        "useArraySortCompare": "on",
         "useExhaustiveSwitchCases": "off",
-        "useExplicitType": "off"
+        "useExplicitType": "off",
+        "useFind": "on",
+        "useRegexpExec": "on"
       },
       "performance": {
         "noDelete": "on"
