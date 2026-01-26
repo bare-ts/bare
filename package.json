@@ -40,7 +40,7 @@
     "VERSION.json"
   ],
   "scripts": {
-    "build": "tsc --build src/",
+    "build": "tsc --build src src/bin",
     "bundle": "esbuild dist/bin/bare.js --bundle --target=node20.19.0 --minify --keep-names --platform=node >| ./dist/bin/bare",
     "check": "tsc --build src src/tsconfig-test.json src/bin tests-corpus && biome ci --error-on-warnings .",
     "clean": "rm -rf dist coverage",
