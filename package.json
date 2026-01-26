@@ -53,13 +53,13 @@
     "version": "sh ./scripts/version.sh"
   },
   "devDependencies": {
-    "@bare-ts/lib": "~0.6.0",
+    "@bare-ts/lib": "~0.7.0",
     "@biomejs/biome": "2.3.13",
     "@types/node": "20.19.21",
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "@bare-ts/lib": "~0.5.0 || ~0.6.0",
+    "@bare-ts/lib": ">=0.5.0",
     "typescript": ">=5.7.0"
   },
   "packageManager": "npm@10.9.2"
