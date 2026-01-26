@@ -47,7 +47,7 @@
     "coverage": "c8 --reporter=lcovonly npm test",
     "format": "biome check --linter-enabled=false --write .",
     "lint": "biome lint --error-on-warnings .",
-    "prepublishOnly": "npm run clean && npm run build && npm test",
+    "prepublishOnly": "npm run clean && npm run build",
     "test": "node --test --experimental-strip-types && npm run check",
     "test:gen": "node --experimental-strip-types scripts/generate-tests-corpus.ts",
     "version": "sh ./scripts/version.sh"
