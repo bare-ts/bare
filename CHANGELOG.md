@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning][semver].
 The format of this changelog is [a variant][lib9-versionning] of [Keep a Changelog][keep-changelog].
 New entries must be placed in a section entitled `Unreleased`.
 
-## Unreleased
+## 0.19.0 (2026-01-26)
 
 -   BREAKING CHANGES: require @bare-ts/lib@0.5.0
 
