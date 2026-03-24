@@ -1,8 +1,13 @@
 {
-  "$schema": "https://next.biomejs.dev/schemas/2.3.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "formatter": {
     "includes": [
@@ -12,30 +17,44 @@
     "indentStyle": "space",
     "indentWidth": 4
   },
+  "javascript": {
+    "formatter": {
+      "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "formatter": {
+      "expand": "always",
+      "indentWidth": 2
+    }
+  },
   "linter": {
     "domains": {
       "project": "recommended",
+      "types": "recommended",
       "test": "recommended"
     },
     "rules": {
       "complexity": {
         "noImplicitCoercions": "on",
+        "noUselessCatchBinding": "on",
         "noUselessLoneBlockStatements": "off",
+        "noUselessUndefined": "off",
         "noVoid": "on"
       },
       "nursery": {
-        "noDeprecatedImports": "on",
-        "noDuplicateDependencies": "on",
         "noForIn": "on",
-        "noImportCycles": "on",
         "noParametersOnlyUsedInRecursion": "on",
         "noProto": "on",
-        "noUselessCatchBinding": "on",
-        "noUselessUndefined": "off",
+        "noUselessReturn": "on",
+        "useArraySome": "on",
         "useArraySortCompare": "on",
+        "useConsistentMethodSignatures": "on",
+        "useErrorCause": "on",
         "useExhaustiveSwitchCases": "off",
         "useExplicitType": "off",
         "useFind": "on",
+        "useGlobalThis": "on",
         "useRegexpExec": "on"
       },
       "performance": {
@@ -47,7 +66,6 @@
         "noImplicitBoolean": "on",
         "noInferrableTypes": "on",
         "noNamespace": "on",
-        "noNegationElse": "on",
         "noParameterAssign": "on",
         "noParameterProperties": "on",
         "noUnusedTemplateLiteral": "on",
@@ -120,9 +138,12 @@
           }
         },
         "noConstantBinaryExpressions": "on",
+        "noDeprecatedImports": "on",
+        "noDuplicateDependencies": "on",
         "noEmptyBlockStatements": "on",
         "noEvolvingTypes": "on",
         "noExportsInTest": "on",
+        "noImportCycles": "on",
         "noUnassignedVariables": "on",
         "noUselessEscapeInString": "on",
         "noVar": "on",
@@ -133,21 +154,5 @@
         "useJsonImportAttributes": "on"
       }
     }
-  },
-  "javascript": {
-    "formatter": {
-      "semicolons": "asNeeded"
-    }
-  },
-  "json": {
-    "formatter": {
-      "expand": "always",
-      "indentWidth": 2
-    }
-  },
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
   }
 }
