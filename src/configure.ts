@@ -100,15 +100,13 @@ function configureType(
             case "union": {
                 if (
                     config.usePrimitiveFlatUnion &&
-                    types != null &&
-                    types.every(ast.isBaseOrVoidType) &&
+                    types?.every(ast.isBaseOrVoidType) &&
                     ast.haveDistinctTypeof(type.types)
                 ) {
                     extra = { flat: true }
                 } else if (
                     config.useStructFlatUnion &&
-                    types != null &&
-                    types.every(
+                    types?.every(
                         (t) => t.tag === "alias" || t.tag === "struct",
                     ) &&
                     types
