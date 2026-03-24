@@ -6,7 +6,6 @@
     "declaration": true,
     "isolatedDeclarations": true,
     "noEmit": false,
-    "rootDir": ".",
     "outDir": "../dist"
   },
   "exclude": [

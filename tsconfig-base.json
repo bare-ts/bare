@@ -6,12 +6,9 @@
     ],
     "module": "node20",
     "target": "ES2022",
-    "types": [],
 
     "noEmit": true,
     "erasableSyntaxOnly": true,
-    "libReplacement": false,
-    "resolveJsonModule": true,
     "rewriteRelativeImportExtensions": true,
     "skipLibCheck": true,
     "verbatimModuleSyntax": true,
@@ -20,7 +17,6 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "strict": true
+    "noImplicitReturns": true
   }
 }
