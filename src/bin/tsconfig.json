@@ -4,7 +4,6 @@
   "compilerOptions": {
     "exactOptionalPropertyTypes": false,
     "noEmit": false,
-    "rootDir": ".",
     "outDir": "../../dist/bin",
     "types": [
       "node"

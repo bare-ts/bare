@@ -4,7 +4,6 @@
   "compilerOptions": {
     "erasableSyntaxOnly": false,
     "outDir": "../dist",
-    "rootDir": ".",
     "types": [
       "node"
     ],
