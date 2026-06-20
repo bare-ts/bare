@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
@@ -40,21 +40,14 @@
         "noUselessCatchBinding": "on",
         "noUselessLoneBlockStatements": "off",
         "noUselessUndefined": "off",
-        "noVoid": "on"
+        "noVoid": "on",
+        "noUselessReturn": "on",
+        "useArrayFind": "on"
       },
       "nursery": {
-        "noForIn": "on",
-        "noParametersOnlyUsedInRecursion": "on",
-        "noProto": "on",
-        "noUselessReturn": "on",
         "useArraySome": "on",
-        "useArraySortCompare": "on",
-        "useConsistentMethodSignatures": "on",
-        "useErrorCause": "on",
         "useExhaustiveSwitchCases": "off",
-        "useExplicitType": "off",
-        "useFind": "on",
-        "useGlobalThis": "on",
+        "useExplicitType": "on",
         "useRegexpExec": "on"
       },
       "performance": {
@@ -124,7 +117,10 @@
         "useSingleVarDeclarator": "on",
         "useThrowNewError": "on",
         "useThrowOnlyError": "on",
-        "useUnifiedTypeSignatures": "on"
+        "useUnifiedTypeSignatures": "on",
+        "useConsistentMethodSignatures": "on",
+        "useErrorCause": "on",
+        "useGlobalThis": "on"
       },
       "suspicious": {
         "noConsole": {
@@ -148,7 +144,11 @@
         "noUselessEscapeInString": "on",
         "noVar": "on",
         "useErrorMessage": "on",
-        "useNumberToFixedDigitsArgument": "on"
+        "useNumberToFixedDigitsArgument": "on",
+        "noForIn": "on",
+        "noParametersOnlyUsedInRecursion": "on",
+        "noProto": "on",
+        "useArraySortCompare": "on"
       },
       "correctness": {
         "useJsonImportAttributes": "on"
