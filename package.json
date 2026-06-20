@@ -55,7 +55,7 @@
   "devDependencies": {
     "@bare-ts/lib": "~0.7.0",
     "@biomejs/biome": "2.5.0",
-    "@types/node": "20.19.37",
+    "@types/node": "20.19.43",
     "typescript": "7.0.1-rc"
   },
   "peerDependencies": {
