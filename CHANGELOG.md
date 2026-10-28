@@ -324,7 +324,6 @@ This release **widely improves the usage of unions and flat unions**.
 -   Flatten unions when possible under `--use-primitive-flat-union` and `--use-struct-flat-union`
 
     _bare-ts_ is able to flatten unions that consist of:
-
     1. basic types (bool, u8, str, ...) that have distinct `typeof` values
     2. aliased structs
     3. (anonymous) structs
@@ -565,7 +564,6 @@ This release **widely improves the usage of unions and flat unions**.
 
     A _BARE_ _doc-comment_ consists in two comment marks `##`.
     Doc-comments can only document:
-
     -   type definitions
     -   enum values
     -   struct fields
@@ -619,7 +617,6 @@ This release **widely improves the usage of unions and flat unions**.
     _NaN_ (Not a Number) is not equal to any value, including itself.
 
     This inequality leads to different implementations:
-
     1.  Implementations that "follows" the standard
 
         An unbounded number of values may be bind to the key _NaN_ and cannot be accessed.
@@ -792,7 +789,6 @@ This release **widely improves the usage of unions and flat unions**.
 
     _bare-ts_ is able to automatically compute the tag of simple flat unions without any help.
     A simple union is either:
-
     -   a union of base or void types that can be discriminated by their
         _typeof value_, or
     -   a union of classes (requires the option `--use-class`).
@@ -918,7 +914,6 @@ This release **widely improves the usage of unions and flat unions**.
 
     _@bare-ts/lib@0.2.0_ introduces several breaking changes.
     As a consequence:
-
     -   all decode/encode are renamed into read/write
     -   all pack/unpack are renamed into encode/decode
     -   decoders (previously unpackers) no longer accept `ArrayBuffer` as type of read buffer
@@ -962,7 +957,6 @@ This release **widely improves the usage of unions and flat unions**.
 
     _bare-ts_ is now able to compute the tag of simple flat unions without
     your help. A simple union is either:
-
     -   a union of types that can be discriminated by their _typeof value_, or
     -   a union of classes (requires the option `--use-class`).
 

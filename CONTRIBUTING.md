@@ -89,7 +89,6 @@ You should also review the licenses of its direct and indirect dependencies.
 
 [dep-madness]: https://medium.com/s/silicon-satire/i-peeked-into-my-node-modules-directory-and-you-wont-believe-what-happened-next-b89f63d21558
 [oss-user-behavior]: https://jacobtomlinson.dev/posts/2022/dont-be-that-open-source-user-dont-be-me/
-
 [conventional-commit]: https://www.conventionalcommits.org/en/v1.0.0/
 [discussions]: https://github.com/bare-ts/tools/discussions
 [issues]: https://github.com/bare-ts/tools/issues

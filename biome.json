@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.3/schema.json",
   "root": true,
   "files": {
     "ignoreUnknown": true
@@ -25,6 +25,7 @@
   "json": {
     "formatter": {
       "expand": "always",
+      "indentStyle": "space",
       "indentWidth": 2
     }
   },
@@ -37,15 +38,17 @@
     "rules": {
       "complexity": {
         "noImplicitCoercions": "on",
+        "noUnnecessaryTemplateExpression": "on",
         "noUselessCatchBinding": "on",
         "noUselessLoneBlockStatements": "off",
         "noUselessUndefined": "off",
         "noVoid": "on",
         "noUselessReturn": "on",
-        "useArrayFind": "on"
+        "useArrayFind": "on",
+        "useArraySome": "on",
+        "useRegexpTest": "on"
       },
       "nursery": {
-        "useArraySome": "on",
         "useExhaustiveSwitchCases": "off",
         "useExplicitType": "on",
         "useRegexpExec": "on"
@@ -81,8 +84,9 @@
             ]
           }
         },
-        "useGroupedAccessorPairs": "on",
         "useForOf": "off",
+        "useGroupedAccessorPairs": "on",
+        "useImportsFirst": "on",
         "useNamingConvention": {
           "level": "on",
           "options": {
@@ -113,6 +117,7 @@
         "useNumberNamespace": "on",
         "useNumericSeparators": "off",
         "useReadonlyClassProperties": "on",
+        "useReduceTypeParameter": "on",
         "useShorthandAssign": "on",
         "useSingleVarDeclarator": "on",
         "useThrowNewError": "on",
@@ -140,6 +145,7 @@
         "noEvolvingTypes": "on",
         "noExportsInTest": "on",
         "noImportCycles": "on",
+        "noLoopFunc": "on",
         "noUnassignedVariables": "on",
         "noUselessEscapeInString": "on",
         "noVar": "on",

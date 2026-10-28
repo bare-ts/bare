@@ -123,12 +123,9 @@ Using bundlers such as _ESbuild_, _Rollup_, or _Webpack_, your bundle contains o
 [npm-img]: https://flat.badgen.net/npm/v/@bare-ts/tools
 [npm-bare-ts-tools-img]: https://flat.badgen.net/npm/v/@bare-ts/tools?label=npm:@bare-ts/tools
 [npm-bare-ts-tools]: https://www.npmjs.com/package/@bare-ts/tools
-
 [npm-bare-ts-lib-img]: https://flat.badgen.net/npm/v/@bare-ts/lib?label=npm:@bare-ts/lib
 [npm-bare-ts-lib]: https://www.npmjs.com/package/@bare-ts/lib
-
 [coveralls-img]: https://flat.badgen.net/coveralls/c/github/bare-ts/bare
 [coveralls]: https://coveralls.io/github/bare-ts/bare?branch=main
-
 [bundlejs-img]: https://img.shields.io/badge/dynamic/json?style=flat-square&label=minzipped&query=$.size.compressedSize&url=https://deno.bundlejs.com/?q=@bare-ts/tools
 [bundlejs]: https://bundlejs.com/?q=%40bare-ts%2Ftools
